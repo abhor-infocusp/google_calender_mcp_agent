@@ -26,7 +26,6 @@ class Event(BaseModel):
     end: datetime
     description: str = ""
     attendees: List[Attendee] = []
-    organizer: User
     optional: bool
     attending: Literal["ACCEPT", "DECLINE", "MAYBE", "NO RESPONSE"] = "ACCEPT"
 

@@ -23,11 +23,6 @@ def sample_event_dict():
         "attendees": [],
         "description": "Test description",
         "optional": False,
-        "organizer": {
-            "id": "1",
-            "name": "John Doe",
-            "email": "john.doe@example.com",
-        },
     }
 
 
