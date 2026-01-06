@@ -22,15 +22,11 @@ class CalendarEnvironment:
             email="john.doe@example.com"
         )
     
-    def initialize(self, events: list[dict], users: list[dict], now: str) -> None:
+    def initialize(self, events: list[dict], now: str) -> None:
         """Initialize the calendar with events."""
         try:
             self.calendar.events += [
                 Event.model_validate(event) for event in events
-            ]
-
-            self.users += [
-                User.model_validate(user) for user in users
             ]
 
             self.now = datetime.strptime(now, "%Y-%m-%d %H:%M:%S")
