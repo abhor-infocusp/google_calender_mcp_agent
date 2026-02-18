@@ -115,7 +115,7 @@ def test_get_event_success(env, sample_event_dict):
 
 def test_get_event_not_found(env):
     result = env.get_event("missing")
-    assert result is None  # Bug: error is not returned
+    assert "error" in result
 
 
 # -------------------------
@@ -140,7 +140,7 @@ def test_create_event_invalid_start(env):
         start="invalid",
         end="2026-01-01 13:00:00",
     )
-    assert result is None  # Bug: error not returned
+    assert "error" in result
 
 
 # -------------------------
@@ -164,9 +164,9 @@ def test_update_event_summary(env, sample_event_dict):
 def test_update_event_invalid_id(env):
     result = env.update_event(
         event_id="missing",
-        updates=[("summary", "X")],
+        updates={"summary": "X"},
     )
-    assert result is None  # Bug: error not returned
+    assert "error" in result
 
 
 # -------------------------
@@ -183,7 +183,7 @@ def test_delete_event_success(env, sample_event_dict):
 
 def test_delete_event_missing(env):
     result = env.delete_event("missing")
-    assert result is None
+    assert "error" in result
 
 
 # -------------------------
@@ -201,7 +201,7 @@ def test_respond_to_event_invalid_value(env, sample_event_dict):
     env.initialize(events=[sample_event_dict], now="2026-01-01 09:00:00")
 
     result = env.respond_to_event("evt_1", "YES")
-    assert result is None  # Bug: error not returned
+    assert "error" in result
 
 
 # -------------------------
