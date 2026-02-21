@@ -15,7 +15,7 @@ TEXT_CALENDER_DIR = "data/calender"
 JSON_CALENDER_DIR = "data/json_calender"
 QUERY_DIR = "data/queries"
 
-DATA_SIZE = 2
+DATA_SIZE = 50
 
 if __name__ == "__main__":
     ########

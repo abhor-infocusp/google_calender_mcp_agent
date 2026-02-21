@@ -1,0 +1,648 @@
+#!/usr/bin/env python3
+"""Run an agent trajectory against a loaded calendar.
+
+Loads a calendar from data/json_calender/<index>.txt and the corresponding
+queries from data/queries/<index>.txt. For each query, runs an agentic loop
+where the model uses calendar tools to fulfill the request.
+
+Usage:
+    python run_trajectory.py 0
+    python run_trajectory.py 0 --query-index 3
+    python run_trajectory.py 0 --model gemini-2.0-flash-001 --max-turns 15
+"""
+
+import argparse
+import json
+import os
+import sys
+import uuid
+import warnings
+warnings.filterwarnings("ignore")
+
+import vertexai
+from vertexai.generative_models import (
+    FunctionDeclaration,
+    GenerativeModel,
+    Tool,
+    Part,
+)
+
+from environment.environment import CalendarEnvironment
+
+
+# ── Paths ────────────────────────────────────────────────────
+
+DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
+JSON_CALENDAR_DIR = os.path.join(DATA_DIR, "json_calender")
+QUERY_DIR = os.path.join(DATA_DIR, "queries")
+
+
+# ── ANSI Colors ──────────────────────────────────────────────
+
+class C:
+    BOLD = "\033[1m"
+    DIM = "\033[2m"
+    RED = "\033[91m"
+    GREEN = "\033[92m"
+    YELLOW = "\033[93m"
+    BLUE = "\033[94m"
+    MAGENTA = "\033[95m"
+    CYAN = "\033[96m"
+    RESET = "\033[0m"
+
+
+# ── Tool Declarations ───────────────────────────────────────
+
+TOOL_DECLARATIONS = [
+    FunctionDeclaration(
+        name="get_current_time",
+        description="Get the current simulated date, time, and day of the week.",
+        parameters={"type": "object", "properties": {}},
+    ),
+    FunctionDeclaration(
+        name="list_events",
+        description=(
+            "List calendar events, optionally filtered by a time range. "
+            "Returns all events if no filters are provided."
+        ),
+        parameters={
+            "type": "object",
+            "properties": {
+                "time_min": {
+                    "type": "string",
+                    "description": "Start of time range filter, in 'YYYY-MM-DD HH:MM:SS' format.",
+                },
+                "time_max": {
+                    "type": "string",
+                    "description": "End of time range filter, in 'YYYY-MM-DD HH:MM:SS' format.",
+                },
+            },
+        },
+    ),
+    FunctionDeclaration(
+        name="get_event",
+        description="Get full details of a specific calendar event by its ID.",
+        parameters={
+            "type": "object",
+            "properties": {
+                "event_id": {
+                    "type": "string",
+                    "description": "The unique identifier of the event.",
+                },
+            },
+            "required": ["event_id"],
+        },
+    ),
+    FunctionDeclaration(
+        name="create_event",
+        description="Create a new calendar event.",
+        parameters={
+            "type": "object",
+            "properties": {
+                "summary": {
+                    "type": "string",
+                    "description": "Title of the event.",
+                },
+                "start": {
+                    "type": "string",
+                    "description": "Start time in 'YYYY-MM-DD HH:MM:SS' format.",
+                },
+                "end": {
+                    "type": "string",
+                    "description": "End time in 'YYYY-MM-DD HH:MM:SS' format.",
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Optional description or notes.",
+                },
+                "attendees": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "List of attendee email addresses.",
+                },
+            },
+            "required": ["summary", "start", "end"],
+        },
+    ),
+    FunctionDeclaration(
+        name="update_event",
+        description="Update fields of an existing calendar event. Only provide the fields you want to change.",
+        parameters={
+            "type": "object",
+            "properties": {
+                "event_id": {
+                    "type": "string",
+                    "description": "The unique identifier of the event to update.",
+                },
+                "summary": {
+                    "type": "string",
+                    "description": "New title for the event.",
+                },
+                "start": {
+                    "type": "string",
+                    "description": "New start time in 'YYYY-MM-DD HH:MM:SS' format.",
+                },
+                "end": {
+                    "type": "string",
+                    "description": "New end time in 'YYYY-MM-DD HH:MM:SS' format.",
+                },
+                "description": {
+                    "type": "string",
+                    "description": "New description for the event.",
+                },
+            },
+            "required": ["event_id"],
+        },
+    ),
+    FunctionDeclaration(
+        name="delete_event",
+        description="Delete a calendar event by its ID.",
+        parameters={
+            "type": "object",
+            "properties": {
+                "event_id": {
+                    "type": "string",
+                    "description": "The unique identifier of the event to delete.",
+                },
+            },
+            "required": ["event_id"],
+        },
+    ),
+    FunctionDeclaration(
+        name="respond_to_event",
+        description="Respond to a calendar event invitation.",
+        parameters={
+            "type": "object",
+            "properties": {
+                "event_id": {
+                    "type": "string",
+                    "description": "The unique identifier of the event.",
+                },
+                "attending": {
+                    "type": "string",
+                    "description": "Your RSVP. Must be one of: ACCEPT, DECLINE, MAYBE, NO RESPONSE.",
+                    "enum": ["ACCEPT", "DECLINE", "MAYBE", "NO RESPONSE"],
+                },
+            },
+            "required": ["event_id", "attending"],
+        },
+    ),
+]
+
+CALENDAR_TOOL = Tool(function_declarations=TOOL_DECLARATIONS)
+
+
+# ── Tool Dispatch ────────────────────────────────────────────
+
+def dispatch_tool_call(env: CalendarEnvironment, name: str, args: dict) -> dict:
+    """Execute a tool call against the calendar environment and return the result."""
+    try:
+        if name == "get_current_time":
+            return env.get_current_time()
+
+        elif name == "list_events":
+            return env.list_events(
+                time_min=args.get("time_min"),
+                time_max=args.get("time_max"),
+            )
+
+        elif name == "get_event":
+            return env.get_event(args["event_id"])
+
+        elif name == "create_event":
+            emails = args.get("attendees", [])
+            attendee_jsons = [
+                json.dumps({
+                    "user": {
+                        "id": f"user_{uuid.uuid4().hex[:8]}",
+                        "name": email.split("@")[0],
+                        "email": email,
+                    },
+                    "attending": "ACCEPT",
+                })
+                for email in emails
+            ]
+            return env.create_event(
+                summary=args["summary"],
+                start=args["start"],
+                end=args["end"],
+                attendees=attendee_jsons,
+                description=args.get("description", ""),
+            )
+
+        elif name == "update_event":
+            updates = {}
+            for field in ("summary", "start", "end", "description"):
+                if field in args:
+                    updates[field] = args[field]
+            return env.update_event(
+                event_id=args["event_id"],
+                updates=updates,
+            )
+
+        elif name == "delete_event":
+            return env.delete_event(args["event_id"])
+
+        elif name == "respond_to_event":
+            result = env.respond_to_event(
+                event_id=args["event_id"],
+                attending=args["attending"],
+            )
+            return result if result else {"status": "ok", "attending": args["attending"]}
+
+        else:
+            return {"error": {"type": "UnknownTool", "message": f"Unknown tool: {name}"}}
+
+    except Exception as e:
+        return {"error": {"type": type(e).__name__, "message": str(e)}}
+
+
+# ── Display Helpers ──────────────────────────────────────────
+
+def fmt_args(args: dict) -> str:
+    parts = []
+    for k, v in args.items():
+        if isinstance(v, str):
+            parts.append(f'{k}="{v}"')
+        else:
+            parts.append(f"{k}={json.dumps(v)}")
+    return ", ".join(parts)
+
+
+DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+
+def snapshot_events(env: CalendarEnvironment) -> dict[str, dict]:
+    """Capture current calendar state as {event_id: {day, summary, start, end, attending, attendees}}."""
+    snap = {}
+    for e in env.calendar.events:
+        snap[e.id] = {
+            "day": DAY_NAMES[e.start.weekday()],
+            "summary": e.summary,
+            "start": e.start.strftime("%Y-%m-%d %H:%M:%S"),
+            "end": e.end.strftime("%Y-%m-%d %H:%M:%S"),
+            "attending": e.attending,
+            "attendees": [a.user.email for a in e.attendees],
+        }
+    return snap
+
+
+def filter_by_days(snap: dict, days: list[str]) -> dict[str, list[dict]]:
+    """Group snapshot events by day name, filtered to only the given days.
+
+    Returns {day_name: [sorted list of event dicts]} for display and data.
+    """
+    days_set = set(days)
+    by_day = {d: [] for d in DAY_NAMES if d in days_set}
+    for eid, e in snap.items():
+        if e["day"] in days_set:
+            by_day[e["day"]].append({**e, "id": eid})
+    # Sort events within each day by start time
+    for d in by_day:
+        by_day[d].sort(key=lambda ev: ev["start"])
+    return by_day
+
+
+def format_day_state(by_day: dict[str, list[dict]]) -> list[str]:
+    """Render a day-grouped snapshot into printable lines."""
+    lines = []
+    for day in DAY_NAMES:
+        if day not in by_day:
+            continue
+        events = by_day[day]
+        lines.append(f"    {day}:")
+        if not events:
+            lines.append("      (no events)")
+        for e in events:
+            start_t = e["start"].split(" ")[1][:5]
+            end_t = e["end"].split(" ")[1][:5]
+            att = f"  [{', '.join(e['attendees'])}]" if e["attendees"] else ""
+            lines.append(f"      {start_t}-{end_t}  {e['summary']}{att}")
+    return lines
+
+
+def diff_snapshots(before: dict, after: dict) -> list[str]:
+    """Compare two event snapshots and return human-readable change lines."""
+    changes = []
+    before_ids = set(before.keys())
+    after_ids = set(after.keys())
+
+    for eid in sorted(after_ids - before_ids):
+        e = after[eid]
+        changes.append(f"  + CREATED  '{e['summary']}' ({e['start']} -> {e['end']})")
+
+    for eid in sorted(before_ids - after_ids):
+        e = before[eid]
+        changes.append(f"  - DELETED  '{e['summary']}' ({e['start']} -> {e['end']})")
+
+    for eid in sorted(before_ids & after_ids):
+        b, a = before[eid], after[eid]
+        for field in ("summary", "start", "end", "attending", "attendees"):
+            if b[field] != a[field]:
+                changes.append(f"  ~ UPDATED  '{b['summary']}' : {field}: {b[field]} -> {a[field]}")
+
+    return changes
+
+
+def print_separator(char="=", width=72):
+    print(char * width)
+
+
+def print_tool_call(name: str, args: dict):
+    print(f"  {C.YELLOW}[TOOL CALL]  {name}({fmt_args(args)}){C.RESET}")
+
+
+def print_tool_result(result: dict):
+    result_str = json.dumps(result, indent=2, default=str)
+    lines = result_str.split("\n")
+    if len(lines) > 20:
+        lines = lines[:18] + [f"  ... ({len(lines) - 18} more lines)"]
+    for i, line in enumerate(lines):
+        prefix = "[RESULT]    " if i == 0 else "            "
+        print(f"  {prefix}{line}")
+
+
+def print_agent_text(text: str, is_final: bool):
+    label = "[RESPONSE] " if is_final else "[THINKING] "
+    color = C.GREEN if is_final else ""
+    reset = C.RESET if color else ""
+    for i, line in enumerate(text.strip().split("\n")):
+        prefix = label if i == 0 else "            "
+        print(f"  {color}{prefix}{line}{reset}")
+
+
+def print_prompt_sent(label: str, content: str):
+    """Print what was sent to the model, in blue."""
+    print(f"  {C.BLUE}[PROMPT -> MODEL] {label}{C.RESET}")
+    for line in content.strip().split("\n"):
+        print(f"  {C.BLUE}  {line}{C.RESET}")
+
+
+# ── Core Agent Loop ──────────────────────────────────────────
+
+def run_query(model, env: CalendarEnvironment, query: str, max_turns: int) -> list[dict]:
+    """Run a single query through the agentic tool-use loop.
+
+    Returns:
+        trajectory: list of dicts recording every step.
+    """
+    trajectory = []
+    chat = model.start_chat()
+
+    print(f"\n  {C.BLUE}[USER]       {query}{C.RESET}")
+    trajectory.append({"role": "user", "content": query})
+
+    # Initial message to model
+    print_prompt_sent("User query", query)
+    try:
+        response = chat.send_message(query)
+    except Exception as e:
+        print(f"  [ERROR]      Model call failed: {e}")
+        trajectory.append({"role": "error", "content": str(e)})
+        return trajectory
+
+    for turn in range(1, max_turns + 1):
+        print(f"\n  -- Turn {turn} --")
+
+        # Parse model response into function calls and text.
+        # The Vertex AI SDK raises AttributeError when accessing .text on a
+        # function_call part (and vice versa), so we must guard each access.
+        function_calls = []
+        text_parts = []
+        for part in response.candidates[0].content.parts:
+            try:
+                if part.function_call.name:
+                    function_calls.append(part.function_call)
+                    continue
+            except AttributeError:
+                pass
+            try:
+                if part.text:
+                    text_parts.append(part.text)
+            except AttributeError:
+                pass
+
+        # Show any text the model produced
+        if text_parts:
+            combined = "\n".join(text_parts)
+            print_agent_text(combined, is_final=not function_calls)
+            trajectory.append({"role": "assistant", "content": combined})
+
+        # If no tool calls, the agent is done
+        if not function_calls:
+            break
+
+        # Execute each tool call and collect responses
+        response_parts = []
+        for fc in function_calls:
+            args = dict(fc.args)
+            print_tool_call(fc.name, args)
+
+            result = dispatch_tool_call(env, fc.name, args)
+            if result is None:
+                result = {"status": "ok"}
+
+            # Ensure JSON-serializable (handles datetime objects etc.)
+            result = json.loads(json.dumps(result, default=str))
+
+            print_tool_result(result)
+            trajectory.append({
+                "role": "tool_call",
+                "name": fc.name,
+                "args": args,
+                "result": result,
+            })
+
+            response_parts.append(
+                Part.from_function_response(name=fc.name, response=result)
+            )
+
+        # Send tool results back to model
+        tool_summary = ", ".join(f"{fc.name}() -> result" for fc in function_calls)
+        print_prompt_sent("Tool results", tool_summary)
+        try:
+            response = chat.send_message(response_parts)
+        except Exception as e:
+            print(f"  [ERROR]      Model call failed: {e}")
+            trajectory.append({"role": "error", "content": str(e)})
+            break
+    else:
+        print(f"\n  [MAX TURNS]  Reached limit of {max_turns} turns.")
+
+    return trajectory
+
+
+# ── Data Loading ─────────────────────────────────────────────
+
+def load_calendar_and_queries(index: int):
+    """Load calendar events and queries for the given index."""
+    cal_path = os.path.join(JSON_CALENDAR_DIR, f"{index}.txt")
+    query_path = os.path.join(QUERY_DIR, f"{index}.txt")
+
+    if not os.path.exists(cal_path):
+        sys.exit(f"Calendar file not found: {cal_path}")
+    if not os.path.exists(query_path):
+        sys.exit(f"Query file not found: {query_path}")
+
+    events = CalendarEnvironment.load_json_calendar(cal_path)
+
+    with open(query_path) as f:
+        queries = json.load(f)
+
+    # Derive 'now' as the start of the week (Monday 08:00) from the data
+    from datetime import datetime
+    earliest = None
+    for evt in events:
+        dt = datetime.fromisoformat(evt["start"])
+        if earliest is None or dt < earliest:
+            earliest = dt
+    # Set to 08:00 on the earliest date
+    now = earliest.replace(hour=8, minute=0, second=0).strftime("%Y-%m-%d %H:%M:%S")
+
+    return events, queries, now
+
+
+# ── System Prompt ────────────────────────────────────────────
+
+SYSTEM_PROMPT = """\
+You are a calendar assistant. You help the user manage their Google Calendar \
+by using the provided tools.
+
+Rules:
+- Always call get_current_time first to know what day it is.
+- Use list_events to see the calendar before making changes.
+- All datetime arguments must be in 'YYYY-MM-DD HH:MM:SS' format.
+- If a request is ambiguous or cannot be fulfilled, explain why clearly.
+- When creating events, choose a reasonable duration if the user doesn't specify one.
+- Confirm what you did after completing an action.
+"""
+
+
+# ── Main ─────────────────────────────────────────────────────
+
+def main():
+    parser = argparse.ArgumentParser(description="Run agent trajectories on calendar data.")
+    parser.add_argument("calendar_index", type=int, help="Index of the calendar/query pair (0-49).")
+    parser.add_argument("--project", default=os.environ.get("GCP_PROJECT", "internal-ml-exp"),
+                        help="GCP project ID (default: $GCP_PROJECT or 'internal-ml-exp').")
+    parser.add_argument("--location", default=os.environ.get("GCP_LOCATION", "us-central1"),
+                        help="GCP location (default: $GCP_LOCATION or 'us-central1').")
+    parser.add_argument("--model", default="gemini-2.0-flash-001",
+                        help="Gemini model name (default: gemini-2.0-flash-001).")
+    parser.add_argument("--max-turns", type=int, default=10,
+                        help="Max tool-use turns per query (default: 10).")
+    parser.add_argument("--query-index", type=int, default=None,
+                        help="Run only a specific query by index (0-based).")
+    parser.add_argument("--save", type=str, default=None,
+                        help="Save full trajectories to this JSON file.")
+    args = parser.parse_args()
+
+    # Load data
+    events, queries, now = load_calendar_and_queries(args.calendar_index)
+
+    # Init Vertex AI
+    vertexai.init(project=args.project, location=args.location)
+    model = GenerativeModel(
+        args.model,
+        tools=[CALENDAR_TOOL],
+        system_instruction=[SYSTEM_PROMPT],
+    )
+
+    # Header
+    print_separator()
+    print(f"  Trajectory Runner | Calendar {args.calendar_index} | Model: {args.model}")
+    print_separator()
+    print(f"  Events loaded : {len(events)}")
+    print(f"  Queries       : {len(queries)}")
+    print(f"  Simulated now : {now}")
+
+    # Print system prompt
+    print()
+    print_prompt_sent("System instruction", SYSTEM_PROMPT)
+
+    # Select queries to run
+    if args.query_index is not None:
+        if args.query_index >= len(queries):
+            sys.exit(f"Query index {args.query_index} out of range (0-{len(queries)-1}).")
+        selected = [(args.query_index, queries[args.query_index])]
+    else:
+        selected = list(enumerate(queries))
+
+    all_trajectories = []
+
+    for qi, q in selected:
+        # Fresh environment for each query
+        env = CalendarEnvironment()
+        env.initialize(events=events, now=now)
+
+        category = q.get("category", "N/A")
+        complexity = q.get("complexity", "N/A")
+        query_text = q["query"]
+        expected = q.get("expected_behavior", "")
+
+        print()
+        print_separator("-")
+        print(f"  QUERY {qi + 1}/{len(queries)} | {category} | Complexity: {complexity}")
+        if expected:
+            print(f"  Expected: {expected}")
+        print_separator("-")
+
+        addressed_days = q.get("addressed_days", [])
+
+        before = snapshot_events(env)
+        before_days = filter_by_days(before, addressed_days)
+
+        # Print BEFORE state for addressed days
+        if addressed_days:
+            print(f"\n  [BEFORE] Calendar state for: {', '.join(addressed_days)}")
+            for line in format_day_state(before_days):
+                print(f"  {line}")
+
+        trajectory = run_query(model, env, query_text, args.max_turns)
+
+        after = snapshot_events(env)
+        after_days = filter_by_days(after, addressed_days)
+
+        # Print AFTER state for addressed days
+        if addressed_days:
+            print(f"\n  [AFTER] Calendar state for: {', '.join(addressed_days)}")
+            for line in format_day_state(after_days):
+                print(f"  {line}")
+
+        # Print diff summary
+        changes = diff_snapshots(before, after)
+        if changes:
+            print(f"\n  [CHANGES]")
+            for line in changes:
+                print(f"  {line}")
+        else:
+            print(f"\n  [CHANGES]  (none)")
+
+        all_trajectories.append({
+            "query_index": qi,
+            "category": category,
+            "complexity": complexity,
+            "query": query_text,
+            "expected_behavior": expected,
+            "addressed_days": addressed_days,
+            "calendar_before": before_days,
+            "calendar_after": after_days,
+            "state_changes": changes,
+            "trajectory": trajectory,
+        })
+
+    # Summary
+    print()
+    print_separator()
+    print(f"  Done. Ran {len(selected)} queries.")
+    print_separator()
+
+    # Save if requested
+    if args.save:
+        with open(args.save, "w") as f:
+            json.dump(all_trajectories, f, indent=2, default=str)
+        print(f"  Trajectories saved to {args.save}")
+
+
+if __name__ == "__main__":
+    main()

@@ -268,6 +268,8 @@ class CalendarEnvironment:
     #         self._raise_error("Exception", str(e))
 
     def get_current_time(self):
+        day_name = self.now.strftime("%A")
         return {
-            "current_time": self.now.strftime("%Y-%m-%d %H:%M:%S")
+            "current_time": self.now.strftime("%Y-%m-%d %H:%M:%S"),
+            "day": day_name,
         }
