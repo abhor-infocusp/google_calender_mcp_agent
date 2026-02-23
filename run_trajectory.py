@@ -505,7 +505,10 @@ Given a user query, the assistant's final response, the expected behavior, \
 and the calendar state before and after the action, determine whether the \
 assistant completed the task correctly.
 
-Respond with ONLY one of these three words (no explanation, no punctuation):
+First, think step by step: check whether the assistant's response matches \
+the expected behavior and whether the calendar state changed as required. \
+Then, on the very last line of your response, output ONLY one of these \
+three words (no punctuation, no extra text on that line):
 Correct
 Incorrect
 Unsure
@@ -562,7 +565,8 @@ Calendar State AFTER (relevant days only):
 {after_text}
 
 Based on the above, did the assistant correctly complete the task?
-Respond with ONLY one word: Correct, Incorrect, or Unsure."""
+Think through your reasoning, then end your response with a single line \
+containing only one word: Correct, Incorrect, or Unsure."""
 
     # Print eval prompt in purple
     print(f"  {C.MAGENTA}[EVAL PROMPT]{C.RESET}")
@@ -572,9 +576,21 @@ Respond with ONLY one word: Correct, Incorrect, or Unsure."""
     try:
         response = eval_model.generate_content(prompt)
         verdict = response.text.strip()
-        for token in ("Correct", "Incorrect", "Unsure"):
-            if token.lower() in verdict.lower():
-                return token
+        print(f"\n\n  {C.MAGENTA}[EVAL RAW]    {verdict}{C.RESET}")
+        # Scan from the last line upward for an exact verdict word.
+        # Incorrect must be checked before Correct to avoid substring false match.
+        lines = [l.strip() for l in verdict.splitlines() if l.strip()]
+        for line in reversed(lines):
+            line_lower = line.lower()
+            for token in ("Incorrect", "Correct", "Unsure"):
+                if line_lower == token.lower():
+                    return token
+        # Fallback: substring scan from end (Incorrect before Correct)
+        for line in reversed(lines):
+            line_lower = line.lower()
+            for token in ("Incorrect", "Correct", "Unsure"):
+                if token.lower() in line_lower:
+                    return token
         return "Unsure"
     except Exception as e:
         print(f"  [EVAL ERROR]  {e}")
