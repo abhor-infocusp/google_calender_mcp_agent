@@ -392,8 +392,6 @@ def run_query(model, env: CalendarEnvironment, query: str, max_turns: int) -> li
     print(f"\n  {C.BLUE}[USER]       {query}{C.RESET}")
     trajectory.append({"role": "user", "content": query})
 
-    # Initial message to model
-    print_prompt_sent("User query", query)
     try:
         response = chat.send_message(query)
     except Exception as e:
@@ -457,9 +455,6 @@ def run_query(model, env: CalendarEnvironment, query: str, max_turns: int) -> li
                 Part.from_function_response(name=fc.name, response=result)
             )
 
-        # Send tool results back to model
-        tool_summary = ", ".join(f"{fc.name}() -> result" for fc in function_calls)
-        print_prompt_sent("Tool results", tool_summary)
         try:
             response = chat.send_message(response_parts)
         except Exception as e:
@@ -500,6 +495,90 @@ def load_calendar_and_queries(index: int):
     now = earliest.replace(hour=8, minute=0, second=0).strftime("%Y-%m-%d %H:%M:%S")
 
     return events, queries, now
+
+
+# ── Evaluation ───────────────────────────────────────────────
+
+EVAL_SYSTEM_PROMPT = """\
+You are an impartial evaluator for a calendar assistant. \
+Given a user query, the assistant's final response, the expected behavior, \
+and the calendar state before and after the action, determine whether the \
+assistant completed the task correctly.
+
+Respond with ONLY one of these three words (no explanation, no punctuation):
+Correct
+Incorrect
+Unsure
+"""
+
+
+def format_day_state_text(by_day: dict) -> str:
+    """Render a day-grouped snapshot as plain text for the eval prompt."""
+    lines = []
+    for day in DAY_NAMES:
+        if day not in by_day:
+            continue
+        events = by_day[day]
+        lines.append(f"{day}:")
+        if not events:
+            lines.append("  (no events)")
+        for e in events:
+            start_t = e["start"].split(" ")[1][:5]
+            end_t = e["end"].split(" ")[1][:5]
+            att = f"  [{', '.join(e['attendees'])}]" if e["attendees"] else ""
+            lines.append(f"  {start_t}-{end_t}  {e['summary']}{att}")
+    return "\n".join(lines) if lines else "(no relevant events)"
+
+
+def evaluate_trajectory(
+    eval_model,
+    query: str,
+    final_output: str,
+    expected: str,
+    before_days: dict,
+    after_days: dict,
+) -> str:
+    """Ask the model to evaluate whether the trajectory was correct.
+
+    Returns one of: 'Correct', 'Incorrect', 'Unsure'.
+    """
+    before_text = format_day_state_text(before_days)
+    after_text = format_day_state_text(after_days)
+
+    prompt = f"""\
+User Query:
+{query}
+
+Assistant's Final Response:
+{final_output if final_output else "(no response)"}
+
+Expected Behavior:
+{expected if expected else "(not specified)"}
+
+Calendar State BEFORE (relevant days only):
+{before_text}
+
+Calendar State AFTER (relevant days only):
+{after_text}
+
+Based on the above, did the assistant correctly complete the task?
+Respond with ONLY one word: Correct, Incorrect, or Unsure."""
+
+    # Print eval prompt in purple
+    print(f"  {C.MAGENTA}[EVAL PROMPT]{C.RESET}")
+    for line in prompt.split("\n"):
+        print(f"  {C.MAGENTA}  {line}{C.RESET}")
+
+    try:
+        response = eval_model.generate_content(prompt)
+        verdict = response.text.strip()
+        for token in ("Correct", "Incorrect", "Unsure"):
+            if token.lower() in verdict.lower():
+                return token
+        return "Unsure"
+    except Exception as e:
+        print(f"  [EVAL ERROR]  {e}")
+        return "Unsure"
 
 
 # ── System Prompt ────────────────────────────────────────────
@@ -547,6 +626,10 @@ def main():
         tools=[CALENDAR_TOOL],
         system_instruction=[SYSTEM_PROMPT],
     )
+    eval_model = GenerativeModel(
+        args.model,
+        system_instruction=[EVAL_SYSTEM_PROMPT],
+    )
 
     # Header
     print_separator()
@@ -556,9 +639,6 @@ def main():
     print(f"  Queries       : {len(queries)}")
     print(f"  Simulated now : {now}")
 
-    # Print system prompt
-    print()
-    print_prompt_sent("System instruction", SYSTEM_PROMPT)
 
     # Select queries to run
     if args.query_index is not None:
@@ -618,6 +698,28 @@ def main():
         else:
             print(f"\n  [CHANGES]  (none)")
 
+        # Evaluation
+        final_output = next(
+            (step["content"] for step in reversed(trajectory) if step["role"] == "assistant"),
+            "",
+        )
+        print()
+        print_separator("·")
+        verdict = evaluate_trajectory(
+            eval_model,
+            query_text,
+            final_output,
+            expected,
+            before_days,
+            after_days,
+        )
+        verdict_color = (
+            C.GREEN if verdict == "Correct" else
+            C.RED if verdict == "Incorrect" else
+            C.YELLOW
+        )
+        print(f"\n  {verdict_color}[EVAL RESULT] {verdict}{C.RESET}")
+
         all_trajectories.append({
             "query_index": qi,
             "category": category,
@@ -629,12 +731,20 @@ def main():
             "calendar_after": after_days,
             "state_changes": changes,
             "trajectory": trajectory,
+            "eval_verdict": verdict,
         })
 
     # Summary
     print()
     print_separator()
     print(f"  Done. Ran {len(selected)} queries.")
+    verdicts = [t["eval_verdict"] for t in all_trajectories]
+    correct = verdicts.count("Correct")
+    incorrect = verdicts.count("Incorrect")
+    unsure = verdicts.count("Unsure")
+    print(f"  Eval results  : {C.GREEN}{correct} Correct{C.RESET}  "
+          f"{C.RED}{incorrect} Incorrect{C.RESET}  "
+          f"{C.YELLOW}{unsure} Unsure{C.RESET}")
     print_separator()
 
     # Save if requested
