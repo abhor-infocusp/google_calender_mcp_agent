@@ -9,6 +9,18 @@ import random
 import glob, os
 import shutil
 import json
+from datetime import date, timedelta
+
+
+def random_monday(start_year: int = 2023, end_year: int = 2026) -> str:
+    """Return a random Monday date string (YYYY-MM-DD) in the given year range."""
+    start = date(start_year, 1, 1)
+    end = date(end_year, 12, 31)
+    days_between = (end - start).days
+    random_date = start + timedelta(days=random.randint(0, days_between))
+    # Shift to the nearest Monday (weekday 0)
+    monday = random_date - timedelta(days=random_date.weekday())
+    return monday.strftime("%Y-%m-%d")
 
 PERSONA_DIR = "data/persona"
 TEXT_CALENDER_DIR = "data/calender"
@@ -79,13 +91,14 @@ if __name__ == "__main__":
             temperature=1.0, # Or your preferred temp
             response_mime_type="application/json"
         )
-        response = model.generate_content(jsonizer_prompt.substitute(calender_text=calender), generation_config=config)
+        monday = random_monday()
+        response = model.generate_content(jsonizer_prompt.substitute(calender_text=calender, monday_date=monday), generation_config=config)
         data = json.loads(response.text)
         with open(file.replace(TEXT_CALENDER_DIR, JSON_CALENDER_DIR), 'w', encoding="utf-8") as f:
             json.dump(data, f, indent=4, ensure_ascii=False)
 
     # 4. Generate queries
-    print("Converting text calenders to json")
+    print("Generating queries")
     for file in tqdm.tqdm(glob.glob(f"{TEXT_CALENDER_DIR}/*")):
         calender = open(file, 'r').read()
 

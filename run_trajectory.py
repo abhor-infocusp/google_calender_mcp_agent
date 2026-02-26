@@ -484,17 +484,27 @@ def load_calendar_and_queries(index: int):
     with open(query_path) as f:
         queries = json.load(f)
 
-    # Derive 'now' as the start of the week (Monday 08:00) from the data
+    # Derive a fallback 'now' from the earliest event (Monday 08:00)
     from datetime import datetime
     earliest = None
     for evt in events:
         dt = datetime.fromisoformat(evt["start"])
         if earliest is None or dt < earliest:
             earliest = dt
-    # Set to 08:00 on the earliest date
-    now = earliest.replace(hour=8, minute=0, second=0).strftime("%Y-%m-%d %H:%M:%S")
+    fallback_now = earliest.replace(hour=8, minute=0, second=0).strftime("%Y-%m-%d %H:%M:%S")
 
-    return events, queries, now
+    return events, queries, fallback_now
+
+
+def get_query_now(query: dict, fallback_now: str) -> str:
+    """Get the simulated 'now' for a query, using its current_time or the fallback.
+
+    Normalises ISO 8601 'T' separator to a space so the environment can parse it.
+    """
+    ct = query.get("current_time")
+    if ct:
+        return ct.replace("T", " ")
+    return fallback_now
 
 
 # ── Evaluation ───────────────────────────────────────────────
@@ -633,7 +643,7 @@ def main():
     args = parser.parse_args()
 
     # Load data
-    events, queries, now = load_calendar_and_queries(args.calendar_index)
+    events, queries, fallback_now = load_calendar_and_queries(args.calendar_index)
 
     # Init Vertex AI
     vertexai.init(project=args.project, location=args.location)
@@ -653,7 +663,7 @@ def main():
     print_separator()
     print(f"  Events loaded : {len(events)}")
     print(f"  Queries       : {len(queries)}")
-    print(f"  Simulated now : {now}")
+    print(f"  Fallback now  : {fallback_now}")
 
 
     # Select queries to run
@@ -667,7 +677,8 @@ def main():
     all_trajectories = []
 
     for qi, q in selected:
-        # Fresh environment for each query
+        # Fresh environment for each query, using per-query current_time
+        now = get_query_now(q, fallback_now)
         env = CalendarEnvironment()
         env.initialize(events=events, now=now)
 
@@ -679,6 +690,7 @@ def main():
         print()
         print_separator("-")
         print(f"  QUERY {qi + 1}/{len(queries)} | {category} | Complexity: {complexity}")
+        print(f"  Simulated now : {now}")
         if expected:
             print(f"  Expected: {expected}")
         print_separator("-")
@@ -741,6 +753,7 @@ def main():
             "category": category,
             "complexity": complexity,
             "query": query_text,
+            "simulated_now": now,
             "expected_behavior": expected,
             "addressed_days": addressed_days,
             "calendar_before": before_days,

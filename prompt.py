@@ -204,9 +204,11 @@ Would you like me to generate a specific email thread regarding the "Emergency D
 
 # Jsonize - only for conver
 jsonizer_prompt = Template('''
-Convert the provided Calendar Blueprint into a strictly valid JSON object. 
+Convert the provided Calendar Blueprint into a strictly valid JSON object.
 You are given the following list of events:
 $calender_text
+
+The week starts on Monday $monday_date. Assign dates sequentially: Monday=$monday_date, Tuesday is the next day, Wednesday the day after, and so on.
 
 Constraints:
 1. Root: Object with days as keys ("Monday", "Tuesday", etc.).
@@ -214,19 +216,27 @@ Constraints:
 3. Attendees: Must be an Array of Strings. If empty, return [].
 4. No Prose: Do not include any text other than the JSON block.
 
-Example:
+Example (if Monday were 2025-03-10):
 {
   "Monday": [
     {
       "summary": "Project Sync",
-      "start": "2024-07-29T10:00:00",
-      "end": "2024-07-29T11:00:00",
+      "start": "2025-03-10T10:00:00",
+      "end": "2025-03-10T11:00:00",
       "attendees": ["dev@company.com", "pm@company.com"]
     },
     {
       "summary": "Deep Work",
-      "start": "2024-07-29T13:00:00",
-      "end": "2024-07-29T15:00:00",
+      "start": "2025-03-10T13:00:00",
+      "end": "2025-03-10T15:00:00",
+      "attendees": []
+    }
+  ],
+  "Tuesday": [
+    {
+      "summary": "Standup",
+      "start": "2025-03-11T09:00:00",
+      "end": "2025-03-11T09:30:00",
       "attendees": []
     }
   ]
@@ -558,6 +568,7 @@ $calender_text
     "complexity": str # "Low|Medium|High",
     "expected_behavior": str # "a small textual description of what the agent should do for this query",
     "addressed_days": List[str] # [list of days where the query is expected to perform],
+    "current_time": YYYY-MM-DDTHH:MM:SS # The current time of querying - gives context for queries with "today", "tomorrow", "yesterday",
   }
 ]
 ''')
