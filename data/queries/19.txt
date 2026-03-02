@@ -1,0 +1,150 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add an event to my calendar for dinner with colleagues this Friday at 7 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for Friday at 7 PM for dinner with colleagues, ensuring the time and date are correct. Default duration is 2 hours.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-24T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a visit to the local park for Sunday at 2 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for Sunday at 2 PM for a visit to the local park, confirming the time and date are correct. Default duration is 2 hours.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-24T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy tomorrow evening?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for any events scheduled for Thursday evening and respond whether the user is busy, listing the events if any.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-24T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the agenda for Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Retrieve and display all calendar entries for Saturday.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-24T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the book club meeting to next Tuesday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the existing 'Book Club Meeting' entry from Monday and move it to next Tuesday at the same time (6:00 PM).",
+        "addressed_days": [
+            "Monday",
+            "Tuesday"
+        ],
+        "current_time": "2024-01-24T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Make brunch with family on Sunday at 11:00 AM instead of 10:00 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Find the existing 'Brunch with Family' entry and update the time to 11:00 AM, keeping the date as Sunday.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-24T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the dinner this Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event 'Dinner with friends' on Friday and extract and list the attendees.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-24T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my call with my son on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Search for 'Call with son' on Wednesday and return the time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-24T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move my museum guard duty on Thursday to Friday morning?",
+        "complexity": "High",
+        "expected_behavior": "Check for conflicts on Friday morning before moving the 'Museum Guard Duty' entry from Thursday. If there is an overlap, alert the user, otherwise, move the entry and maintain details.",
+        "addressed_days": [
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-24T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the book club, what other time this week can it happen?",
+        "complexity": "High",
+        "expected_behavior": "Check for potential conflicts during the remaining weekdays, accounting for events where there may not be availability to reschedule, then propose alternatives that do not overlap or conflict with existing events.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-24T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule that thing with my daughter.",
+        "complexity": "Medium",
+        "expected_behavior": "Identify the meeting with the daughter, and ask to provide a new time to reschedule.",
+        "addressed_days": [
+            "Tuesday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-24T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change the weekend thing.",
+        "complexity": "Medium",
+        "expected_behavior": "Identify the events on Saturday and Sunday and ask which event should be modified.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-24T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What gallery am I guarding tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for the user's museum guard duty on Thursday and respond with the gallery number.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-24T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "How long is my shift this Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Search for the museum guard duty on Saturday, calculate and state the duration of the shift (9:00 AM - 5:30 PM).",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-24T10:00:00"
+    }
+]

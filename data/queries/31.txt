@@ -1,0 +1,145 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please add a reminder for legal research this Wednesday at 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new calendar entry on Wednesday, from 3:00 PM to 5:00 PM, titled 'Legal Research'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me in for a therapy appointment next Wednesday at 7pm",
+        "complexity": "Low",
+        "expected_behavior": "Create a new calendar entry on Wednesday, from 7:00 PM to 8:00 PM, titled 'Therapy Appointment' with attendee therapist@wellness.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I free for lunch with family?",
+        "complexity": "Medium",
+        "expected_behavior": "Check if there is a conflict for lunch with family on Sunday between 12:00 PM and 2:00 PM, and respond 'no' based on the schedule.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "When should I prepare for court?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the Case File Review event and state that Case File Review is scheduled for monday from 8:00 AM to 9:00 AM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the meeting with the investigator to Thursday.",
+        "complexity": "Medium",
+        "expected_behavior": "Move the meeting with Investigator (Case: D. Miller) from Monday to Thursday at the same time (3:00 PM - 5:00 PM).",
+        "addressed_days": [
+            "Monday",
+            "Thursday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change dinner with friends to 7pm this Friday.",
+        "complexity": "Low",
+        "expected_behavior": "Modify dinner with friends this Friday from 6:00 PM to 7:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What am I doing this Wednesday morning?",
+        "complexity": "Low",
+        "expected_behavior": "Return 'Trial - Case: A. Johnson - Courtroom B from 9:00 AM - 12:00 PM'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having dinner with on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "The response should be: You are having dinner with your Partner on Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move my client interview with J. Smith to Friday morning?",
+        "complexity": "High",
+        "expected_behavior": "Check if client interview with J. Smith can be moved to Friday morning. There is a conflict with Client Interview with C. Evans, so ask the user if they want to resolve it, or propose an alternative time.",
+        "addressed_days": [
+            "Monday",
+            "Friday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to have lunch with my mentor on Tuesday. Set it up.",
+        "complexity": "High",
+        "expected_behavior": "Check for free time on Tuesday and then attempt to create a new entry with mentor@pd.org. The response should be: Lunch with Mentor scheduled for Tuesday at 12:30 PM. This may conflict with Trial Prep - Case: R. Davis, confirm if this is OK.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule… uh… the D. Miller thing?",
+        "complexity": "High",
+        "expected_behavior": "Clarify that the user wants to reschedule the 'Meeting with Investigator (Case: D. Miller)' on Monday, and ask for the new date and time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Anything important Friday?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for Friday and list out the events of that day: Client Interview - Jail (Client: C. Evans), Case Preparation, Meeting with Prosecutor, File Organization, Plan next week, Dinner with Friends.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What about two days after preliminary hearings?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for Saturday and return the events: Brunch, Catch up on reading/work, and Relax at home.",
+        "addressed_days": [
+            "Thursday",
+            "Saturday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me to exercise every Sunday.",
+        "complexity": "Medium",
+        "expected_behavior": "Create a recurring event every Sunday at 10:00 AM titled 'Exercise'.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    }
+]

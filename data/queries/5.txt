@@ -1,0 +1,149 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a meeting with Josh from college to my calendar for dinner on Tuesday at 7pm.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for 'Dinner with College Friends' on Tuesday from 7:00 PM to 9:00 PM, including sarah@college.com and josh@college.com as attendees.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me in for the weekly lifeguard training drill for Wednesday.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for 'Weekly Lifeguard Training Drill' on Wednesday from 6:00 PM to 7:00 PM, including alllifeguards@beachpatrol.com as attendees.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy Saturday evening?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for Saturday evening (7:00 PM onwards) and inform the user that they have a party.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the agenda for Sunday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for Sunday morning (10:00 AM - 12:00 PM) and inform the user that they have brunch with family scheduled.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we push the bonfire to 9pm Friday?",
+        "complexity": "Medium",
+        "expected_behavior": "Modify the 'Beach Bonfire with Friends' event on Friday to start at 9:00 PM instead of 8:00 PM, keeping the same attendees.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change my surfing on Saturday to 3pm.",
+        "complexity": "Medium",
+        "expected_behavior": "Modify the 'Surfing - practice' event on Saturday to start at 3:00 PM instead of 2:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the bonfire this Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Retrieve the attendees of the 'Beach Bonfire with Friends' event on Friday and list them (sarah@college.com, josh@college.com, mike@beach.com).",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "When do I have lifeguard duty on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for Wednesday and list the lifeguard duty events: 'Lifeguard Duty - Tower 2' from 8:30 AM to 12:30 PM, and 'Lifeguard Duty - Roving Patrol' from 1:30 PM to 5:30 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to surf with Jack all day Saturday, but I also have lifeguard duty. What's the best I can do?",
+        "complexity": "High",
+        "expected_behavior": "Identify the conflict between 'Lifeguard Duty - Tower 3' (9:00 AM - 1:00 PM) and 'Surfing - practice' (2:00 PM - 4:00 PM) on Saturday. Suggest rescheduling surfing to a different time or day or reducing lifeguard duty if possible. Acknowledge the party that night.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule all lifeguard duties to next week. Also, remind me to prep dinner every Sunday from 5-6pm moving forward.",
+        "complexity": "High",
+        "expected_behavior": "Reschedule all lifeguard duties (all entries with the 'Lifeguard Duty' string on Monday, Tuesday, Wednesday, Thursday, Friday, and Saturday) to the corresponding days of the following week. Create a recurring reminder for 'Dinner Prep' every Sunday from 5:00 PM to 6:00 PM.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "bonfire?",
+        "complexity": "Low",
+        "expected_behavior": "Search the calendar for events containing the word 'bonfire'. Prompt the user to clarify which bonfire they are referring to if multiple exist, or if only one exists then inquire if they want to know the specific time, attendees or wish to modify it.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "family Sunday",
+        "complexity": "Low",
+        "expected_behavior": "Search the calendar for events containing the words 'family' and 'Sunday'. List any relevant events found, such as 'Brunch with Family' and prompt the user to ask a more specific question.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What time is morning check-in tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "Determine that 'tomorrow' is Saturday, then find 'Morning Check-in and Equipment Inspection' and return the time (8:00 AM - 8:30 AM).",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me every Monday and Tuesday to do Morning Check-in.",
+        "complexity": "Medium",
+        "expected_behavior": "Create recurring reminders for 'Morning Check-in and Equipment Inspection' at 8:00 AM every Monday and Tuesday.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    }
+]

@@ -1,0 +1,147 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a dentist appointment next Saturday at 2 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Schedule a dentist appointment on Saturday at 2:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a slot for family dinner next Monday at 7 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Schedule a family dinner on Monday at 7:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Reschedule my meeting with the owner.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the meeting with the restaurant owner on Wednesday at 3 PM and prompt user for new time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Anything happening with the kids tomorrow evening?",
+        "complexity": "Medium",
+        "expected_behavior": "Check if there are any events scheduled for the kids on Saturday evening and respond with event details.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the supplier meeting on Monday to 2 PM instead.",
+        "complexity": "Medium",
+        "expected_behavior": "Reschedule the supplier meeting on Monday from 11:30 AM to 2:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the friend's birthday dinner to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Update the friend's birthday dinner on Friday to start at 7:30 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the budget review?",
+        "complexity": "Low",
+        "expected_behavior": "Search the calendar for 'budget review' and respond with the time on Wednesday at 3 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "When is the meeting with the culinary school placement officer?",
+        "complexity": "Low",
+        "expected_behavior": "Search the calendar for the meeting with the culinary school placement officer and respond with the time on Thursday at 1:30 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can we move the staff training on Tuesday to Wednesday at 10 AM? I need to review the budget then anyway.",
+        "complexity": "High",
+        "expected_behavior": "Check for conflicts on Wednesday at 10 AM. If no conflict, reschedule staff training from Tuesday at 11:30 AM to Wednesday at 10 AM.",
+        "addressed_days": [
+            "Tuesday",
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting with the wine supplier for Monday, but I already have something at that time. Find another time to meet with them.",
+        "complexity": "High",
+        "expected_behavior": "Identify the conflicting event on Monday at 11:30 AM and suggest an alternative time for the wine supplier meeting, avoiding conflicts with existing events. The existing meeting is the meeting with all suppliers",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Soccer... reschedule?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Kid's Soccer Practice' and prompt the user for new time. It occurs on monday",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Grocery…after birthday.",
+        "complexity": "High",
+        "expected_behavior": "Find the Kid's Birthday Party on Saturday at 4 PM and reschedule grocery shopping for after the party.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What does my Sunday look like this week?",
+        "complexity": "Low",
+        "expected_behavior": "Provide all events scheduled for Sunday.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "When does the Morning Family Time happen?",
+        "complexity": "Low",
+        "expected_behavior": "Return all times when the event 'Morning Family Time' occurs. It occurs on all weekdays.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    }
+]

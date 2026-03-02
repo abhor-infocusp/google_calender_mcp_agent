@@ -1,0 +1,164 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a doctor's appointment on Monday at 10 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Creates a new event named 'Doctor's Appointment' on Monday at 10 AM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-14T14:30:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you pencil in a meeting with John next Wednesday at 2 pm?",
+        "complexity": "Low",
+        "expected_behavior": "Creates a new event named 'Meeting with John' on Wednesday at 2 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-14T14:30:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after my run tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "Identifies the 'Morning Run' event on Monday, then finds the next event which is 'Check beach conditions and equipment'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-14T14:30:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy after lifeguard duty on Tuesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Identifies 'Lifeguard Duty' event on Tuesday and confirms the user has 'Online Marine Biology Course' scheduled afterwards.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-14T14:30:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule my lifeguard duty on Saturday to start at 10 AM instead.",
+        "complexity": "Medium",
+        "expected_behavior": "Updates the 'Lifeguard Duty' event on Saturday to start at 10 AM, keeping the end time consistent.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-07-14T14:30:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Make my Thursday equipment check 30 minutes longer.",
+        "complexity": "Medium",
+        "expected_behavior": "Adjusts the duration of 'Check beach conditions and equipment' on Thursday to be 30 minutes longer.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-07-14T14:30:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What team members are doing equipment checks on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Finds the 'Check beach conditions and equipment' event on Friday and returns the team members involved (lifeguard5@beach.com, lifeguard4@beach.com).",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-07-14T14:30:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "When do I have lifeguard duty next week?",
+        "complexity": "Low",
+        "expected_behavior": "Finds all instances of 'Lifeguard Duty' throughout the week and returns them with the day on which they occur.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-07-14T14:30:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Move the morning run on Friday to Wednesday and cancel my swim practice.",
+        "complexity": "High",
+        "expected_behavior": "Moves the 'Morning Run' event from Friday to Wednesday and deletes the 'Morning Swim' event on Wednesday. It should verify that the move to Wednesday does not cause any time conflicts with existing scheduled events.",
+        "addressed_days": [
+            "Friday",
+            "Wednesday"
+        ],
+        "current_time": "2024-07-14T14:30:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to check beach conditions every morning this week, can you schedule that for me and let me know if it conflicts?",
+        "complexity": "High",
+        "expected_behavior": "Schedules 'Check beach conditions and equipment' every morning for Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday. The system should identify that the current 'Check beach conditions and equipment' tasks already fill this requirement for the respective days and should respond accordingly.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-07-14T14:30:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Lifeguard check...Friday?",
+        "complexity": "Medium",
+        "expected_behavior": "Identifies the 'Check beach conditions and equipment' event on Friday and confirms that the event exists.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-07-14T14:30:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... dinner next week.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent asks to clarify which dinner (day and time) the user is referring to and prompts the user to provide a specific date and time to reschedule.",
+        "addressed_days": [
+            "Monday",
+            "Wednesday",
+            "Saturday"
+        ],
+        "current_time": "2024-07-14T14:30:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me about lifeguard duty every day.",
+        "complexity": "High",
+        "expected_behavior": "Sets up daily reminders for all instances of 'Lifeguard Duty' throughout the week.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-07-14T14:30:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Schedule Marine Biology course every Tuesday and Thursday.",
+        "complexity": "Low",
+        "expected_behavior": "Adds an event called 'Marine Biology Course' every Tuesday and Thursday at the specified time of 6:30 PM.",
+        "addressed_days": [
+            "Tuesday",
+            "Thursday"
+        ],
+        "current_time": "2024-07-14T14:30:00"
+    }
+]

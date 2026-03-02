@@ -1,0 +1,154 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please add a meeting to my calendar for this Friday at 3pm named 'urgent patient requests'.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new calendar entry for Friday at 3pm with the title 'Handling urgent patient requests and inquiries'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-25T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a dentist appointment on Saturday at 10am.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new calendar entry for Saturday at 10am with the title 'Dentist Appointment'.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-25T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "When am I picking them up?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for events involving 'pick up kids from school' and respond with the time. It occurs every weekday between 5:30 PM and 6:00 PM.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-22T09:15:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Reschedule the meeting I have scheduled with grandma.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Visit to grandmother's house', get confirmation for the new date and time, and modify the existing entry with the new details. Without further information it is impossible to reschedule, so a follow up is required.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T14:30:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the family movie night to 7:30 PM on Friday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Family movie night' event on Friday and update the time to 7:30 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-24T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the insurance claim processing on Monday to 2pm.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Insurance claim processing' event on Monday and update the time to 2pm.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-22T11:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my training session on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Search for the 'Training session on new healthcare regulations' event on Wednesday and respond with the time, which is 9:00 AM - 10:00 AM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-23T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending my meeting with insurance claims?",
+        "complexity": "Low",
+        "expected_behavior": "Search for the 'Meeting with insurance claim specialist' event on Tuesday and respond with the attendee list. The answer should be claims.specialist@insurance.com.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-23T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you schedule the morning team meeting 30 minutes later on Monday?",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Morning team meeting' event on Monday. Check for conflicts at 9:30 AM - 10:30 AM. If no conflicts, reschedule the event. Otherwise, inform the user about the conflict.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-22T10:30:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Schedule a visit to grandma after 11am on Sunday, but before Lunch.",
+        "complexity": "High",
+        "expected_behavior": "Find the existing 'Visit to grandmother's house' event and make sure that the time respects the constraint of being after 11 am, and before Lunch at 12:00 PM.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule doctor smith meeting.",
+        "complexity": "Medium",
+        "expected_behavior": "Search for the 'Morning team meeting' event on Monday where Dr. Smith is an attendee, get confirmation for the new date and time, and modify the existing entry with the new details. Without further information it is impossible to reschedule, so a follow up is required.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-23T15:45:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Insurance claim...",
+        "complexity": "Low",
+        "expected_behavior": "This query is incomplete. The agent should request more information to clarify the user's intent.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Friday"
+        ],
+        "current_time": "2024-01-24T16:20:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What's on the day after tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "Determine the day after tomorrow (relative to current time) and return all events scheduled for that day.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-22T14:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me to pack lunches every day.",
+        "complexity": "Medium",
+        "expected_behavior": "Set up a recurring reminder to 'pack lunches' every day at 7:30 AM, as that is the current time for lunch preparation.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-22T10:00:00"
+    }
+]

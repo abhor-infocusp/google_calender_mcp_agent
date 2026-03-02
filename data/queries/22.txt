@@ -1,0 +1,152 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a dentist appointment next Thursday at 2 pm.",
+        "complexity": "Low",
+        "expected_behavior": "Schedule a dentist appointment for next Thursday at 2:00 PM. No attendees.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please book a haircut for me this Saturday at 11 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a haircut appointment for this Saturday at 11:00 AM. No attendees.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy tomorrow afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for any events scheduled for tomorrow afternoon and respond with whether there are any conflicts.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the schedule for family this weekend?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for any events scheduled with \"family\" in the title or attendees for Saturday and Sunday and present them to the user.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the court appearance on Wednesday to 2pm",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Court Appearance - Trial Prep' event on Wednesday and move it to 2:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time for the dinner with friends on Friday to 8pm.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Friends' event on Friday and update the time to 8:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the divorce case consultation on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Client Consultation - Divorce Case' event on Monday and list the attendees: client@email.com.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the meeting with my paralegal on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Meeting with Paralegal - Case Updates' event on Tuesday and respond with the time: 8:30 AM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move the court hearing on Monday to Tuesday at the same time?",
+        "complexity": "High",
+        "expected_behavior": "First, find the time of the 'Court Hearing - Status Conference' on Monday (1:00 PM - 3:00 PM). Then, check for conflicts at that time on Tuesday. If no conflicts, move the event. If conflicts, inform the user.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Find me an open slot for 30 minutes with the social worker this week.",
+        "complexity": "High",
+        "expected_behavior": "Check for 30-minute slots between Monday and Friday this week where the calendar is free and propose one. Social worker is social_worker@email.com, so check conflicts with existing appointments that include this user.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner friday",
+        "complexity": "Medium",
+        "expected_behavior": "Looks for event titled 'Dinner' or 'Dinner with friends' on friday and returns the time of the event.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule trial prep.",
+        "complexity": "Medium",
+        "expected_behavior": "Looks for event named 'Trial Prep' and prompts the user to clarify the new date and time.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me to follow up with clients every Friday at 2pm for the next 3 weeks.",
+        "complexity": "High",
+        "expected_behavior": "Create a recurring reminder to 'Follow up with clients' every Friday at 2pm, starting this Friday and repeating for 3 weeks.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Schedule yoga class every wednesday",
+        "complexity": "Medium",
+        "expected_behavior": "Create a recurring event named 'Yoga Class' every Wednesday at 6pm indefinitely.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    }
+]

@@ -1,0 +1,150 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a reminder to check electrical sensors next Friday at 7:30 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for 'Checking and Calibrating Electrical Sensors' on next Friday at 7:30 AM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-07-03T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Set up a meeting with engineer1@industrialplant.com and engineer2@industrialplant.com for Wednesday at 12:30 PM regarding power consumption issues.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for 'Meeting with Plant Engineers Regarding Power Consumption Issues' on Wednesday at 12:30 PM with engineer1@industrialplant.com and engineer2@industrialplant.com as attendees.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-01T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after lunch on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should determine that 'lunch' refers to the default lunch break time, and then retrieve the events scheduled after that time on Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-01T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Anything important happening tomorrow morning?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should check the calendar for the day after the current date and return any events scheduled in the morning.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-01T16:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the meeting with the Plant Manager on Monday to 2:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the meeting with the Plant Manager on Monday and change the time to 2:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-01T09:30:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the 'Installing New Wiring' task on Tuesday back by an hour.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Installing New Wiring' task on Tuesday and adjust the start and end times back by one hour.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-01T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time do I leave for home on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the commute home entry on Friday and return the start time.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-07-03T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I meeting with on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should extract all meetings on Wednesday and return a list of the attendees.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-01T15:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you schedule me to replace motor components between 9 AM and noon Thursday, but make sure it doesn't conflict with anything else?",
+        "complexity": "High",
+        "expected_behavior": "The agent should identify the existing events on Thursday between 9 AM and 12 PM, check if the time slot is available, and then schedule the motor replacement, shifting or declining if necessary.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-07-02T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to go fishing Saturday morning, but also need to do a quick plant check. Schedule both.",
+        "complexity": "High",
+        "expected_behavior": "The agent should schedule both the plant check and the fishing trip on Saturday, and appropriately space them based on reasonable time estimates, resolving any potential overlap.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-07-03T13:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Generator... Monday...",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should attempt to find the relevant event based on keywords provided and ask the user for further clarification. Likely interpret as Preventative Maintenance on Backup Generator on Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-01T10:15:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Welding arm... fix...",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should attempt to relate the keywords to calendar events, ask the user to confirm if they are referring to 'Repairing Faulty Wiring on Robotic Welding Arm' on Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-01T11:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me to perform daily equipment checks every morning.",
+        "complexity": "High",
+        "expected_behavior": "The agent should set up a recurring daily task to 'Daily Equipment Check & Maintenance' every morning between 7:30 AM and 9:00 AM, starting tomorrow, and within the bounds of the week.",
+        "addressed_days": [
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-07-01T15:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Schedule a commute home every weekday.",
+        "complexity": "High",
+        "expected_behavior": "The agent should create a recurring event for 'Commute Home' every weekday (Monday to Friday) at 3:30 PM.",
+        "addressed_days": [
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-07-01T09:00:00"
+    }
+]

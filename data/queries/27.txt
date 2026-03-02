@@ -1,0 +1,149 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a dentist appointment to my calendar next Thursday at 2 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event called 'Dentist Appointment' on Thursday at 2 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Set up a reminder for the family movie night this Friday at 6 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new reminder for 'Family Movie Night' this Friday at 6 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the user's calendar for the next day and respond with a summary of the events, including patient appointments, lunch, and therapy session.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-29T16:30:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing for dinner this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for dinner events in the current week and return the days and times of those events.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-29T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule my therapy session on Tuesday to 5:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the existing therapy session on Tuesday and change the time to 5:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-29T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time for children's activities on Saturday to 10:00 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the existing event 'Children's Activities' on Saturday and update the time to 10:00 AM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-29T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the staff meeting this Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Retrieve the attendees list for the 'Staff Meeting' event on Friday: Sarah, Maria, Tom, Dr. Lee, Dr. Patel, and Karen.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-29T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What kind of appointments do I have on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Return the types of appointments scheduled for Monday: Well-child checks, sick visits, vaccinations, follow-ups.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move my lunch with Dr. Patel on Tuesday to Wednesday and make it a working lunch with the Pharma Rep instead?",
+        "complexity": "High",
+        "expected_behavior": "Delete the 'Lunch with Dr. Patel' event on Tuesday, create a new event 'Working Lunch - Meeting with Pharma Rep' on Wednesday at the same time.",
+        "addressed_days": [
+            "Tuesday",
+            "Wednesday"
+        ],
+        "current_time": "2024-01-29T15:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "If I don't have patient appointments scheduled, pencil in an hour to prep for the week Sunday evening.",
+        "complexity": "High",
+        "expected_behavior": "Check for any patient appointment conflicts on Sunday, and if there are none, then set an hour reminder to 'Prepare for the Week'.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-29T15:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Morning huddle Monday, who's in?",
+        "complexity": "Medium",
+        "expected_behavior": "Retrieve the attendees for the 'Morning Huddle' event on Monday: Sarah, Maria, Tom, Dr. Lee, and Dr. Patel.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-29T09:30:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner Friday?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for any dinner events on Friday and return the details (Family Movie Night)",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-29T14:30:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me about kid's sports again this Wednesday.",
+        "complexity": "Low",
+        "expected_behavior": "Set a reminder for 'Children's sports practice drop off/ pick up' this Wednesday",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What's on the schedule this Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Return the scheduled event 'Children's Activities' and 'Lunch with Family'.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    }
+]

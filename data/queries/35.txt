@@ -1,0 +1,151 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add an event to my calendar for grocery shopping on Saturday at 10 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for grocery shopping on Saturday, scheduled for 10:00 AM to 12:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please schedule a meeting with a social worker for Wednesday at 1 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for a meeting with the social worker on Wednesday at 1:00 PM lasting until 3:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after I drop my son off on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for events scheduled after dropping the son off at school on Monday (8:30 AM - 9:00 AM). The response should indicate a court session: *State vs. Johnson* at 9:00 AM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy tomorrow afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for Tuesday afternoon (12:00 PM - 5:00 PM) and identify the scheduled events including lunch break, training, and case file management. Return a response indicating scheduled activites.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-28T20:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the court session on Monday to start at 9:30 AM instead.",
+        "complexity": "Medium",
+        "expected_behavior": "Modify the existing 'Court Session' entry on Monday to begin at 9:30 AM and adjust the end time accordingly.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change dinner at my mother's house on Saturday to 5 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Update the scheduled 'Dinner at Mother's house' event on Saturday to start at 5:00 PM instead of 6:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time does my son's soccer practice start on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Retrieve the scheduled time for 'Son's Soccer Practice' on Saturday and respond with 1 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the court session on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for 'Court Session' on Wednesday and provide the attendees. The response should include Judge Thompson.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move my meeting with the social worker to Thursday morning?",
+        "complexity": "High",
+        "expected_behavior": "Check Thursday morning for conflicts. If no conflicts, move the social worker meeting from Wednesday to Thursday morning, adjusting time as necessary. If conflicts, inform the user and suggest alternative times.",
+        "addressed_days": [
+            "Wednesday",
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a haircut between dropping my son off and the court session on Monday.",
+        "complexity": "High",
+        "expected_behavior": "Check available time between 9:00 AM and 12:00 PM on Monday. Create a calendar entry for 'haircut', placing it within that timeframe if possible. If no sufficient time, suggest other options.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner Saturday?",
+        "complexity": "Medium",
+        "expected_behavior": "Interpret this as a query about dinner on Saturday. Retrieve the information about dinner at mother's house on Saturday. Respond with the details of the dinner event including time and location.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Judge Thompson Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Search the calendar for entries on Wednesday involving Judge Thompson. Respond with the details of the Court Session: Williams vs. Davis, indicating Judge Thompson is an attendee.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me about dropping my son off every morning this week.",
+        "complexity": "Medium",
+        "expected_behavior": "Create a daily repeating reminder for 'drop off son at school' from Monday through Friday at 8:30 AM.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What cases do I have coming up this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar from Monday through Friday for entries labeled 'Court Session' and list the case names for each day.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    }
+]

@@ -1,0 +1,146 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a doctor's appointment to my calendar next Wednesday.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Doctor's Appointment' on Wednesday at a default time, and prompt the user to confirm or edit the time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me for a yoga class this Saturday at 2 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Yoga Class' on Saturday at 2 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy on Friday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Check Friday's calendar for any events between 12:00 PM and 6:00 PM, then inform the user about the 'Project Status Meeting' and the 'Plan next week' event.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's happening tomorrow morning?",
+        "complexity": "Medium",
+        "expected_behavior": "Check Sunday's calendar for events occurring before 12:00 PM, inform the user about the 'Family Breakfast' event.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move the 'Risk Assessment Meeting' on Monday to 3 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Risk Assessment Meeting' event on Monday and reschedule it to 3:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the meeting with my mentor on Wednesday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Mentor' event on Wednesday and prompt the user for the new time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is coming to Project Alpha Planning Meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Retrieve the attendees of the 'Project Alpha Planning Meeting' scheduled for Monday at 10:00 AM and list the emails.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What am I doing next Thursday afternoon?",
+        "complexity": "Low",
+        "expected_behavior": "Find the activities in the Thursday calendar during afternoon time (12:00 PM - 6:00 PM), then respond Stakeholder Communication, Review upcoming tasks.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is there a conflict if I schedule a meeting with finance on Monday at 11 AM?",
+        "complexity": "High",
+        "expected_behavior": "Check the calendar for Monday at 11:00 AM. Report the 'Review Project Budget' event is a conflict.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Schedule a meeting with the UX team for 30 minutes on Friday, but make sure it doesn't overlap with anything else.",
+        "complexity": "High",
+        "expected_behavior": "Find a 30-minute slot on Friday that doesn't conflict with existing events ('Project Team Daily Stand-up', 'Project Status Meeting', 'Plan next week', 'Professional Development'). Schedule the meeting and name it 'Meeting with UX team'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... no wait, cancel the meeting on Tuesday.",
+        "complexity": "Medium",
+        "expected_behavior": "Prompt user to select which Tuesday meeting to cancel. Wait for user feedback, and remove the specific event when chosen.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting with John, uh, tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "Interpret 'tomorrow' as Sunday. Prompt the user to confirm the time, attendees and name to create a 'Meeting with John' event. As there are no Johns, it is a new event.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me to exercise every Wednesday.",
+        "complexity": "Medium",
+        "expected_behavior": "Schedule a recurring reminder event called 'Exercise' every Wednesday. The agent should clarify the time, and the end date if the user wants it to stop.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Schedule the daily stand-up every day this week.",
+        "complexity": "Medium",
+        "expected_behavior": "Schedule a recurring event called 'Project Team Daily Stand-up' every day (Monday, Tuesday, Wednesday, Thursday, Friday).",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    }
+]

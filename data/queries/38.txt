@@ -1,0 +1,157 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a dentist appointment to my calendar for next Monday at 2 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event called 'Dentist Appointment' on the next Monday at 2 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-25T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you schedule a meeting with the SAR Team Lead for Thursday at 2 PM?",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with sarteamlead@sar.com for Thursday at 2 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-07-25T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I free for lunch with friends?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for the current week and the next week for existing events labeled as 'Lunch with Friends' or similar, or conflicting events during typical lunch hours.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-07-25T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Saturday look like?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for events scheduled on Saturday and summarize the day's activities.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-07-25T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the Aircraft Maintenance Check on Monday to Tuesday at the same time.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Aircraft Maintenance Check' event on Monday and move it to Tuesday, preserving the original time slot.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday"
+        ],
+        "current_time": "2024-07-25T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change my lunch with spouse on Monday to 1 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Find 'Lunch with Spouse' on Monday and change its time to 1 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-25T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Pre-Flight Check & Briefing?",
+        "complexity": "Low",
+        "expected_behavior": "Search for the 'Pre-Flight Check & Briefing' event and extract the attendee list (flightengineer@sar.com).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-25T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the Yoga scheduled for?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event labeled 'Yoga' and retrieve the start time (07:00).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-25T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move my Morning Run to Wednesday and ensure it doesn't overlap with any scheduled meetings or missions?",
+        "complexity": "High",
+        "expected_behavior": "Move 'Morning Run' from Monday to Wednesday. Check for time conflicts with existing events (Mission Briefing, Search and Rescue Mission). If a conflict exists, inform the user and propose alternative times or suggest rescheduling conflicting events.",
+        "addressed_days": [
+            "Monday",
+            "Wednesday"
+        ],
+        "current_time": "2024-07-25T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule another training session like the one on Monday but on Friday morning. Make sure it doesn't interfere with Aircraft Maintenance.",
+        "complexity": "High",
+        "expected_behavior": "Create a new event similar to 'Training Exercise: Mountain Rescue Simulation' on Friday morning. Check for conflicts with the 'Aircraft Maintenance' schedule. Propose an alternative time if necessary.",
+        "addressed_days": [
+            "Monday",
+            "Friday"
+        ],
+        "current_time": "2024-07-25T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... Dinner... Military... Later?",
+        "complexity": "Medium",
+        "expected_behavior": "Identify 'Dinner with Friends from Military Service' on Tuesday. Prompt the user to clarify the desired new time for the event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-25T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Yoga... Cancel?",
+        "complexity": "Low",
+        "expected_behavior": "Find and remove the Yoga event on Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-25T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me about the Aircraft Maintenance again next Friday.",
+        "complexity": "Low",
+        "expected_behavior": "Schedule a reminder notification for the Aircraft Maintenance event on the next Friday.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-07-25T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What meetings do I have this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Check for all events that have other attendees from the current day of the week until Sunday and return the list of events and attendees.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-07-25T10:00:00"
+    }
+]

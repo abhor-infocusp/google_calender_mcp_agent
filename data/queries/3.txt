@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please add a reminder to check emails next Sunday at 4 PM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event for Sunday at 4:00 PM called 'Check Emails/Plan Next Week'.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you schedule a team meeting for next Monday from 8 to 9 AM, for the project kickoff?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event for next Monday from 8:00 AM to 9:00 AM called 'Team Meeting - Project Kickoff'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy next Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should check the calendar for Wednesday between 12:00 PM and 6:00 PM and inform the user about any existing events.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the agenda for the end of the work week?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should look at the calendar events for Friday.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move the meeting with city planners to 4 PM on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should update the existing 'Meeting with City Planners' event on Monday to start at 4:00 PM instead of 3:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change Friday's team meeting to 8:30 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Team Meeting - Progress Updates' event on Friday and change the start time to 8:30 AM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the community stakeholder meeting next Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Community Stakeholder Meeting' event on Wednesday and report that 'Community Representative - community.rep@email.com' is attending.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What am I doing on Tuesday morning?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should check the calendar for Tuesday between 8:00 AM and 12:00 PM and list the scheduled events.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move the site visit on Wednesday to Monday, but I already have an event at that time, what are my options?",
+        "complexity": "High",
+        "expected_behavior": "The agent should recognize the time conflict with the site visit on Monday and list both events, asking the user to resolve the conflict by choosing new times for one or both events.",
+        "addressed_days": [
+            "Monday",
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting with the Junior Engineers for an hour next Friday, but I don't want it to conflict with anything else.",
+        "complexity": "High",
+        "expected_behavior": "The agent should find available time slots on Friday that don't conflict with existing events and offer those slots to the user.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner next Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the dinner event listed and confirm the existing time with the user.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule regulator?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should recognize 'regulator' as a reference to the 'Meeting with Government Regulators' on Tuesday and ask for the new desired time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me to garden every Sunday.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should create a new event for Sunday from 1:00 PM to 3:00 PM called 'Gardening' and set it to recur weekly.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What time is the team meeting this coming Friday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should check the calendar for this Friday and give the time of 'Team Meeting - Progress Updates'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    }
+]

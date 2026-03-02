@@ -1,0 +1,158 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a meeting with John for lunch on Sunday.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event named 'Lunch with John' on Sunday from 12:00 PM to 2:00 PM.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-07-01T08:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Set up an appointment with the accountant for Tuesday at 11 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event named 'Meeting with Accountant' on Tuesday at 11:00 AM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-01T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "When am I busy tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for available time slots on Tuesday, and summarize the times with existing events.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-01T16:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on for dinner this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Checks calendar entries for all dinner events, including which days have dinner service scheduled.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-07-01T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the meeting with the restaurant consultant to next Monday at 3:00 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Restaurant Consultant' event, and if it is currently scheduled, update the event time to next Monday at 3:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-01T17:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my lunch with the children to 1 PM on Sunday.",
+        "complexity": "Medium",
+        "expected_behavior": "Locate the 'Lunch with Children' event, update the time to 1:00 PM on Sunday.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-07-05T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my meeting with the accountant this week?",
+        "complexity": "Low",
+        "expected_behavior": "Search the calendar for 'Meeting with Accountant', and return the day and time the event is scheduled (Tuesday at 11:00 AM).",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-03T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What am I doing Saturday afternoon?",
+        "complexity": "Low",
+        "expected_behavior": "Checks the calendar for the events on Saturday afternoon and returns the name and time.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-07-05T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move dinner service on Wednesday to Thursday, and order ingredients for a different menu on Thursday?",
+        "complexity": "High",
+        "expected_behavior": "Remove dinner service event on Wednesday and create a dinner service event on Thursday. Flag to order new ingredients based on the updated menu for Thursday.",
+        "addressed_days": [
+            "Wednesday",
+            "Thursday"
+        ],
+        "current_time": "2024-07-02T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Am I free to meet my ex-wife on Thursday at 4PM?",
+        "complexity": "High",
+        "expected_behavior": "Check the calendar for existing events on Thursday at 4PM. Determine if that time slot is available. Return the results.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-07-02T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Supplies, order now!",
+        "complexity": "Medium",
+        "expected_behavior": "Initiate the 'Order Supplies' task if it exists as a scheduled task. If not, prompt for clarification or creation of a new supplies order task.",
+        "addressed_days": [
+            "Monday",
+            "Wednesday",
+            "Friday"
+        ],
+        "current_time": "2024-07-03T09:45:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel the account meeting please.",
+        "complexity": "Medium",
+        "expected_behavior": "Locate 'Meeting with Accountant', then remove it.",
+        "addressed_days": [
+            "Tuesday",
+            "Thursday"
+        ],
+        "current_time": "2024-07-03T14:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Schedule staff training every Tuesday and Thursday morning.",
+        "complexity": "High",
+        "expected_behavior": "Set up recurring appointments for 'Staff Training' on Tuesdays and Thursdays at 9:30 AM, lasting 90 minutes.",
+        "addressed_days": [
+            "Tuesday",
+            "Thursday"
+        ],
+        "current_time": "2024-07-01T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me to check inventory every morning at 9 AM.",
+        "complexity": "High",
+        "expected_behavior": "Create recurring events to 'Check Inventory' at 9:00 AM every day.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+        ],
+        "current_time": "2024-07-01T10:00:00"
+    }
+]

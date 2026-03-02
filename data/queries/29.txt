@@ -1,0 +1,150 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a meeting with John on Monday at 10 am.",
+        "complexity": "Low",
+        "expected_behavior": "Schedule a meeting with John on Monday at 10 am. Since there is no John within the contacts provided, the user should be asked to provide their email.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book dinner with the family for Sunday at 6:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Schedule dinner with family on Sunday at 6:30 PM.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy tomorrow morning?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for Tuesday morning to determine if there are any scheduled events.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-29T14:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the agenda this Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Retrieve and list all events scheduled for Saturday.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the meeting with the hospital administrator on Wednesday to 3 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with hospital administrator' event on Wednesday and reschedule it to 3 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Cancel my personal therapist call this Tuesday.",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Call with personal therapist' event on Tuesday and cancel it.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I shadowing on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Retrieve the event details for Thursday and identify the colleague being shadowed.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the anxiety management group session?",
+        "complexity": "Low",
+        "expected_behavior": "Search the calendar for 'Group Therapy Session (Anxiety Management)' and return the time.",
+        "addressed_days": [
+            "Tuesday",
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Move my individual therapy sessions on Wednesday 30 minutes later, but only if it doesn't conflict with my meeting with hospital administrator.",
+        "complexity": "High",
+        "expected_behavior": "Check the calendar for Wednesday, determine the current time of the individual therapy sessions, attempt to move them 30 minutes later, confirm there is no conflict with the hospital administrator meeting, and then reschedule.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to have dinner with friends this Saturday, can you find a time where I am free?",
+        "complexity": "High",
+        "expected_behavior": "Check Saturday's schedule and find a suitable time for dinner with friends.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Wellness…Thursday?",
+        "complexity": "Medium",
+        "expected_behavior": "Interpret 'wellness' as referring to the meeting with the wellness coach and confirm the time on Thursday.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule...Monday...case review?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the case review on Monday, and ask for new time to be rescheduled.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What are my on-call duties this weekend?",
+        "complexity": "Low",
+        "expected_behavior": "Find and retrieve on-call duty on Saturday and Sunday",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What does my week look like?",
+        "complexity": "Medium",
+        "expected_behavior": "Provide a summary view of the week's schedule from Monday to Sunday.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    }
+]

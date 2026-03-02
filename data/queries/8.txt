@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please add a meeting with the UX Designer to my calendar for Tuesday at 11:30 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for Tuesday at 11:30 AM labeled \"Meeting with UX Designer\" with ux_designer@company.com as an attendee.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a yoga class for me on Monday at 6:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for Monday at 6:30 PM labeled \"Yoga Class\".",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Retrieve the calendar entries scheduled for Wednesday afternoon. Return Meeting with SME and Edit and Revise Documentation",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the schedule for the weekend?",
+        "complexity": "Medium",
+        "expected_behavior": "Identify and retrieve the calendar entries for Saturday and Sunday.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move the meeting with the project manager on Tuesday back by one hour?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the meeting with the project manager on Tuesday and reschedule it from 4:00 PM to 5:00 PM to 5:00 PM to 6:00 PM",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time for my hike on Saturday to start at 10:00 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Modify the \"Hiking Trip\" entry on Saturday to start at 10:00 AM instead of 9:00 AM, keeping the same duration. End time should now be 1:00 PM",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending my team stand-up meeting on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Retrieve the attendees for the \"Team Stand-up Meeting\" entry on Friday. Return developer1@company.com and product_manager@company.com.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What documentation work am I doing on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Retrieve the calendar entries for documentation-related tasks on Thursday. Return 'Writing API Documentation - Module Y' and 'Editing Online Help Guide - Module Y'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to go hiking with my friends next Saturday, can you help me find time?",
+        "complexity": "High",
+        "expected_behavior": "Compare the user's existing \"Hiking Trip\" entry next Saturday with the phrase \"with my friends\" to determine if the user wants to change it to a new time. Return a message asking the user if they would like to reschedule/remove the entry that already exists. ",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Schedule a meeting with the UX designer for Tuesday at 11:00 AM, but only if I'm not already busy.",
+        "complexity": "High",
+        "expected_behavior": "Check the calendar for existing entries on Tuesday at 11:00 AM. Note that the 11:30 AM meeting might cause a conflict. Return if there are any conflicts before adding the meeting and give options to the user.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Thursday editor... afternoon, like... 2ish?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the meeting with the editor on Thursday afternoon and move it to 2:00 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Monday phoenix manual thingy.",
+        "complexity": "Medium",
+        "expected_behavior": "Assuming 'phoenix manual thingy' refers to the 'Drafting User Manual Section - Project Phoenix' task, it should confirm this task, and then ask if the user wants to modify, reschedule or delete it.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What do I have planned for next Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Retrieve all calendar entries for the upcoming Monday. Return 'Team Stand-up Meeting', 'Researching New Feature \"Project Phoenix\"', 'Drafting User Manual Section - Project Phoenix', 'Clarification Meeting with Senior Developer', and 'Yoga Class'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me every Friday about the Team Stand-up Meeting.",
+        "complexity": "Medium",
+        "expected_behavior": "Set up a recurring reminder for the 'Team Stand-up Meeting' every Friday at 9:00 AM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    }
+]

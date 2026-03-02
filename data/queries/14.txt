@@ -1,0 +1,148 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a meeting to my calendar for Wednesday at 7:30 AM called Safety Meeting with the safety officer and team electricians.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar event on Wednesday at 7:30 AM with the title 'Safety Meeting' and attendees safety_officer@email.com and team_electricians@email.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event on Saturday for a fishing trip with fishing_buddy1@email.com and fishing_buddy2@email.com starting at 7 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar event on Saturday at 7 AM with the title 'Fishing Trip' and attendees fishing_buddy1@email.com and fishing_buddy2@email.com.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing for lunch today?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for the current day and return the event that occurs during the lunch break timeframe (12:00 PM - 12:30 PM).",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-22T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy this Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for Wednesday afternoon (12:00 PM - 5:00 PM) and determine if there are any events scheduled.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-22T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule my meeting with the plant engineer on Wednesday to 4:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Discuss Project Timeline with Plant Engineer' on Wednesday and change the time to 4:30 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-22T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the electrical wiring repair on Tuesday to 9:00 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Locate 'Repair Electrical Wiring on Packaging Machine' on Tuesday and change its start time to 9:00 AM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-22T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is dinner with my wife on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Search for 'Dinner with Wife' on Friday and return the start and end time.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-22T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is involved in the training session on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the training session on Friday and list all the attendees involved: vendor_rep@email.com, plant_engineer@email.com",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-22T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Schedule a dentist appointment for Wednesday at 8:30 AM for 30 minutes. Does that conflict with anything?",
+        "complexity": "High",
+        "expected_behavior": "Attempt to schedule the dentist appointment, identify the conflict with the 'High-Voltage Equipment Inspection and Maintenance' from 8:00 AM - 12:00 PM. Report the conflict to the user.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-22T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move my lunch break on Thursday to 1:00 PM?",
+        "complexity": "High",
+        "expected_behavior": "Attempt to move the lunch break. Check for any conflicting events between 1:00 PM and 1:30 PM. Report that the 'Continue Installation - Wiring and Connections' occupies that timeframe, ask if the user wants to move that event, too.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-22T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule the conveyor belt thing.",
+        "complexity": "High",
+        "expected_behavior": "Attempt to disambiguate 'conveyor belt thing' by finding an event matching keywords related to conveyor belt. Once identified ask for confirmation to reschedule the 'Troubleshoot Malfunctioning Conveyor Belt Motor'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-22T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel the safety stuff on Wednesday.",
+        "complexity": "High",
+        "expected_behavior": "Attempt to disambiguate 'safety stuff' by identifying events related to safety, such as 'Safety Meeting' with attendees safety_officer@email.com, team_electricians@email.com. Once identified, ask for confirmation to cancel the event.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-22T09:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What am I doing tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for the day immediately following the current day and return all events scheduled for that day.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-22T09:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for the day immediately preceding the current day and return all events scheduled for that day.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-22T09:00:00"
+    }
+]

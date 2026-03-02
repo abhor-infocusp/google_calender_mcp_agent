@@ -1,0 +1,150 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a meeting with my mentor Wednesday at 7 PM about tankless water heater installation.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for Wednesday at 7 PM with the title \"Call with mentor about tankless water heater installation\" and attendees \"mentor@email.com\".",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book an emergency service call for Saturday at 9 AM. It's a pipe burst at a local business.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for Saturday at 9 AM with the title \"Emergency Service Call: Pipe burst at local business\" and customer \"business@email.com\".",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy tomorrow evening?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for Tuesday between 5 PM and 10 PM and respond whether there are any events scheduled.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-21T14:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after picking up my son on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Pick up son from school' event on Monday. Then check the calendar for subsequent events. Return the dinner event.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-20T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the running toilet repair on Monday to 2 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Running Toilet Repair' event on Monday. Change the time of the event to 2 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-20T15:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move dinner with my son on Wednesday to 6 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with son' event on Wednesday. Change the time of the event to 6 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-23T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What customer am I seeing first on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for Friday, find the first service call, and extract the customer's email address.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-25T07:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What am I having for dinner on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for Tuesday and return the name and attendees of the dinner event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-22T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move my 12:30 appointment on Wednesday to Thursday, and does that conflict with anything?",
+        "complexity": "High",
+        "expected_behavior": "Find the 12:30 appointment on Wednesday, attempt to move it to Thursday at the same time. Check for any conflicts on Thursday. If no conflicts exist, move the appointment. Respond with a confirmation including any conflicts.",
+        "addressed_days": [
+            "Wednesday",
+            "Thursday"
+        ],
+        "current_time": "2024-01-23T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule an hour long meeting with my mom this week, but I don't want it to conflict with dinner. What days and times are free?",
+        "complexity": "High",
+        "expected_behavior": "Iterate through Monday to Sunday, check for time slots that are an hour long and not conflicting with dinner with son, dinner at mom's house, visit elderly mother, coffee with neighbor, calculate all possibilities and provide a recommendation.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-21T11:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule leaky... faucet... Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "Recognize the keywords 'Reschedule', 'leaky faucet', and 'Monday'. Find the 'Leaky faucet repair' event on Monday and prompt for the new time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-21T16:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Toilet fix Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Recognize the keywords 'Toilet fix' and 'Thursday'. Find the event on Thursday with 'toilet' in the title. Output that it is scheduled for 2:00PM",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-23T14:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What am I doing the day after fixing the broken hose bib?",
+        "complexity": "Medium",
+        "expected_behavior": "Locate the event 'Fix a broken hose bib' on Wednesday. Determine the date for the next day (Thursday). Return the events for Thursday.",
+        "addressed_days": [
+            "Wednesday",
+            "Thursday"
+        ],
+        "current_time": "2024-01-23T09:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What is my Saturday like?",
+        "complexity": "Low",
+        "expected_behavior": "Agent searches the calendar for Saturday and returns the events for that day.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T14:00:00"
+    }
+]

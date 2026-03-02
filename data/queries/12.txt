@@ -1,0 +1,160 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a follow up service call at 123 Elm Street for AC repair next Monday at 2PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event for AC repair at 123 Elm Street next Monday at 2PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-05T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add thermostat installation to my calendar on Wednesday at 11:00 AM at 456 Oak Avenue.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for thermostat installation on Wednesday at 11:00 AM at 456 Oak Avenue.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-05T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Anything with Sarah this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for any events including Sarah this week, and respond with relevant entries.",
+        "addressed_days": [
+            "Monday",
+            "Wednesday",
+            "Friday"
+        ],
+        "current_time": "2024-07-05T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Reschedule the AC repair at Willow Street.",
+        "complexity": "Medium",
+        "expected_behavior": "Identify the AC repair event at Willow Street, prompt the user to specify a date and time.",
+        "addressed_days": [
+            "Tuesday",
+            "Thursday"
+        ],
+        "current_time": "2024-07-05T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the commercial HVAC diagnostic appointment on Wednesday at Pine Lane to 2PM.",
+        "complexity": "Low",
+        "expected_behavior": "Modify the existing event on Wednesday at Pine Lane, changing the time to 2PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-05T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "I can't make dinner with the family tonight, move it to tomorrow night",
+        "complexity": "Low",
+        "expected_behavior": "Find the dinner event for tonight and move it to tomorrow night at the same time",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-07-01T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the meeting with Sarah on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Search the calendar for Friday events with Sarah, then return the matching entry and time to the user.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-07-05T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Where am I doing routine maintenance this week?",
+        "complexity": "Low",
+        "expected_behavior": "Search the calendar for routine maintenance entries this week, and respond with the address.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-07-05T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Schedule a service call at Elm Street next Friday, but not during the team meeting.",
+        "complexity": "High",
+        "expected_behavior": "Identify the time for the meeting on Friday and schedule the event at Elm Street, making sure it is not during that time.  If there are no openings, ask the user to confirm or allow the agent to modify/move events.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-07-05T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I have family time this Sunday, but it is raining outside. Can you check what else I can do?",
+        "complexity": "High",
+        "expected_behavior": "Since this is a calendar, the agent cannot assist with weather conditions. The agent will return the current activity for Sunday, and inform that it cannot assist with weather related activities.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-07-05T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Elm Street.",
+        "complexity": "Medium",
+        "expected_behavior": "Identify any events at Elm Street and list them to the user for selection and further clarification.",
+        "addressed_days": [
+            "Monday",
+            "Wednesday",
+            "Friday"
+        ],
+        "current_time": "2024-07-05T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "John called.",
+        "complexity": "Low",
+        "expected_behavior": "Log the contact from John and ask the user what action to take.",
+        "addressed_days": [
+            "Tuesday",
+            "Thursday"
+        ],
+        "current_time": "2024-07-05T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Check routine maintenance again next Tuesday.",
+        "complexity": "Low",
+        "expected_behavior": "Confirm routine maintenance for next Tuesday and display the time and address.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-05T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me to pick up supplies with John the day after tomorrow.",
+        "complexity": "Low",
+        "expected_behavior": "Set a reminder for the day after tomorrow for supply pickup with John.",
+        "addressed_days": [
+            "Sunday",
+            "Tuesday",
+            "Thursday"
+        ],
+        "current_time": "2024-07-05T10:00:00"
+    }
+]

@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a dentist appointment on Monday at 2 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new calendar entry for a dentist appointment on Monday at 2 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please book a meeting with John this Friday at 10:30 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new calendar entry for a meeting with John on Friday at 10:30 AM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for Wednesday and respond whether there are any events scheduled.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing this Sunday?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for Sunday and return all events that are scheduled.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my meeting with the social worker on Tuesday to 10 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the meeting with the social worker on Tuesday and change its time to 10 AM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Cancel the group therapy session on Wednesday.",
+        "complexity": "Low",
+        "expected_behavior": "Remove the group therapy session event from the calendar on Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the case conference on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the case conference event on Monday and retrieve the list of attendees.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is dinner with friends on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the dinner with friends event on Saturday and return its time.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Schedule a meeting with David Lee on Monday, but make sure it doesn't overlap with the case conference.",
+        "complexity": "High",
+        "expected_behavior": "Check the calendar for the case conference on Monday, then schedule the meeting with David Lee at a time that does not conflict.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Find a free slot for a 30 minutes meeting with the wellness coach this Friday.",
+        "complexity": "High",
+        "expected_behavior": "Check the calendar for available 30-minute slots on Friday, excluding the current appointment with the wellness coach; suggest times.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... the soccer game. Saturday. Later.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the kids' soccer game on Saturday and prompt the user for a specific new time.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Book... uh... dinner with friends? Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Recognize the request to book dinner with friends on Saturday; confirm time and details with the user.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me to do paperwork one day after discussing difficult cases with the team.",
+        "complexity": "Medium",
+        "expected_behavior": "Identify the 'Discuss difficult cases with team' event on Thursday, and schedule a paperwork reminder for Friday morning.",
+        "addressed_days": [
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Next Sunday, remind me to prepare for the week ahead.",
+        "complexity": "Low",
+        "expected_behavior": "Schedule a reminder for 'Prepare for the week ahead' on the next Sunday.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    }
+]

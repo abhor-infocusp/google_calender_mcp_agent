@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a dentist appointment on Monday at 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should schedule a dentist appointment for Monday at 3:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please schedule a meeting with John this Sunday at 4 PM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should schedule a meeting with John for Sunday at 4:00 PM.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing in the evening on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should identify 'evening' as after 6:00 PM and respond with 'Support group for single mothers'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Anything happening this Saturday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should identify afternoon as between 12:00 PM and 6:00 PM and respond with 'Groceries shopping with kids' and 'Visit to her mother'.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move the dinner with kids on Monday to 7:00 PM instead?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should reschedule the 'Dinner with kids' event on Monday from 6:30 PM to 7:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time for 'Family Movie Night' on Friday to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should update the time of the 'Family Movie Night' event on Friday to 7:30 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is 'Visit to her mother' on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should respond with 'Visit to her mother' is at 5:00 PM on Saturday.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What bus routes do I have on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should respond with 'Bus Route 1' and 'Bus Route 2' on Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule lunch with my sister this Wednesday from 12 PM to 2 PM, but I see that I'm busy, what should I do?",
+        "complexity": "High",
+        "expected_behavior": "The agent should identify conflict with 'Bus Route 2', and ask the user if they'd like to reschedule the event.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move 'Dinner with kids' from Monday to Thursday?",
+        "complexity": "High",
+        "expected_behavior": "The agent should move 'Dinner with kids' from Monday at 6:30 PM to Thursday at 7:30 PM.",
+        "addressed_days": [
+            "Monday",
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Movie on Friday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should interpret 'Movie' as referring to 'Family Movie Night' and respond with the time: 7:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule grocery shopping.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should ask which day to reschedule 'Groceries shopping with kids' to and await further instructions.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What time is my first bus route tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "Assuming today is Sunday, the agent should respond with 'Bus Route 1' is from 6:30 AM to 10:30 AM on Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-28T12:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me to prepare meals for the week every Sunday.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should create a recurring reminder to prepare meals for the week every Sunday at 6:00 PM.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    }
+]

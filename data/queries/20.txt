@@ -1,0 +1,149 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a dentist appointment next Wednesday at 2 PM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new calendar entry for 'Dentist Appointment' on Wednesday at 2:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Set up a meeting with John next Friday at 11:00 AM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new calendar entry for 'Meeting with John' next Friday at 11:00 AM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I free for dinner with anyone this Saturday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent needs to identify that 'this Saturday' refers to the upcoming Saturday, check the schedule for any dinner commitments, and return whether the user is free between 6:00 PM and 8:00 PM including who the dinner is with (if applicable).",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after work on Thursday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should recognize that 'after work' implies after the work shift on Thursday and check for any scheduled events following the work shift on that day.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule my dinner with my son on Monday to 7:00 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent needs to find the 'Dinner with Son' event on Monday and update its time to 7:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change my family visit on Saturday to 4:00 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent needs to locate the 'Visit Family' event on Saturday and change the time to 4:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is on my pharmacy clerk team next Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should retrieve the work shift event for the next Tuesday and identify the team members listed in the team data field.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What am I doing this Sunday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should retrieve and summarize all events scheduled for the upcoming Sunday.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move my dinner with friends on Saturday to Sunday at 6 PM?",
+        "complexity": "High",
+        "expected_behavior": "The agent should move the 'Dinner with Friends' event from Saturday to Sunday at 6 PM. It should also verify for conflicts on Sunday at 6 PM before moving.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I'm unavailable next Wednesday between 7 PM and 9 PM, block it off.",
+        "complexity": "High",
+        "expected_behavior": "The agent must create a new blocked event from 7 PM to 9 PM next Wednesday, and check for any conflicts between this time range and pre-existing events.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Basketball practice?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should identify 'Basketball practice' as the user's son's basketball practice. It should then retrieve the time it occurs on Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule family.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should recognize that the user wants to reschedule the family visit on Saturday, prompt the user for a new date and time.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me to prepare for the week every Sunday.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should create a recurring reminder for 'Prepare for the week' every Sunday at 3:00 PM.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Every day, schedule dinner.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should create a recurring event for 'Dinner' every day at 6:00 PM.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    }
+]

@@ -1,0 +1,146 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a dentist appointment to my calendar for next Sunday at 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event called 'Dentist Appointment' on next Sunday (the one after the existing calendar entry) at 3:00 PM and save to calendar.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a haircut appointment for Tuesday at 11am.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event called 'Haircut Appointment' on Tuesday at 11:00 AM and save to calendar.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I free tomorrow evening?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should check the calendar for events on Saturday evening (tomorrow relative to current time) and respond with whether the user is free, listing conflicting events if any exist.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's happening later on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should check the calendar for events on Wednesday after the current time of day and list any events found.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule my dinner with neighbors to 7 PM on Thursday.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Dinner with Neighbors' event on Thursday and change its time to 7:00 PM, and notify the user of the change.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of my lunch with friends on Saturday to 1 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should locate the 'Lunch with Friends' event on Saturday and modify the time to 1:00 PM, confirming the update with the user.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What am I doing on Monday afternoon?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should check the calendar for events on Monday between 12:00 PM and 6:00 PM and list them to the user.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my book club this week?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should search for an event named 'Book Club' and return the day and time it is scheduled for (Wednesday at 7:00 PM).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to go to the gym on Wednesday evening, but I have book club. What are my options?",
+        "complexity": "High",
+        "expected_behavior": "The agent should identify the conflict between the user's desire to go to the gym and the existing book club event on Wednesday evening. It should suggest alternative times for the gym, either before book club or on a different day.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move my visit with the Grandchildren to next Sunday?",
+        "complexity": "High",
+        "expected_behavior": "The agent should move the existing 'Visit Grandchildren' event from this sunday, to next sunday. The Agent should also notify the user of the change.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... Thursday... Dinner...",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should interpret 'dinner' as a reference to the dinner with neighbors scheduled on Thursday and prompt for clarification on the new desired time.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Gardening?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should recognize the user is asking a question about their gardening and should respond with the current time and date it is scheduled.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me about my bus route every weekday morning.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should create a recurring reminder for the 'Morning Bus Route' event on Monday, Tuesday, Wednesday, Thursday, and Friday at 7:00 AM.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Does my husband have time to see a movie with me next Friday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should see the Movie Night with Husband event scheduled and confirm its existing date and time. If none exist the agent should reply 'No events found.'",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    }
+]

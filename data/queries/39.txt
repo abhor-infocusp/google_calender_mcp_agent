@@ -1,0 +1,147 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a meeting with the environmental consultant to my calendar for Tuesday at 11:30 AM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should schedule a meeting with the environmental consultant for Tuesday at 11:30 AM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please schedule a yoga class for Monday from 6:30 PM to 8:00 PM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should schedule a yoga class for Monday from 6:30 PM to 8:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy on Wednesday during lunch?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should check the calendar for Wednesday during lunch time and identify the Lunch with Mentor event.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing this Saturday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should check the calendar for Saturday morning and identify the Hiking Trip.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the regulatory compliance review to Wednesday at 1 PM instead.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should reschedule the regulatory compliance review from Tuesday at 2:00 PM to Wednesday at 1:00 PM.",
+        "addressed_days": [
+            "Tuesday",
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the team meeting about bridge load capacity to 2 PM on Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should reschedule the team meeting about bridge load capacity from 11:30 AM to 2:00 PM on Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having lunch with on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should identify the lunch event on Wednesday and respond with 'Mentor'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the foundation inspection scheduled for?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should locate the 'Site Visit: Foundation Inspection' event and state it is scheduled for 1:30 PM on Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move my meeting with the geotechnical expert to Wednesday at 2 PM, but only if it doesn't conflict with anything else?",
+        "complexity": "High",
+        "expected_behavior": "The agent should check for conflicts on Wednesday at 2 PM, find the Material Supplier Meeting, and inform the user about the conflict before rescheduling. If there is no conflicts, reschedule the meeting.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to go to the farmers market on Saturday, but only if it's after my hike. What time should I plan to go?",
+        "complexity": "High",
+        "expected_behavior": "The agent should identify the hiking trip is from 9:00 AM to 12:00 PM, and suggest that they can go to the Farmers Market at 2:00 PM",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner Thursday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should interpret the user's intent, find the 'Dinner with Spouse' event on Thursday, and ask if the user wants to know the time.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule something next week about bridges?",
+        "complexity": "High",
+        "expected_behavior": "The agent should recognize the vague intent, prompt the user for more information, such as which bridge-related meeting they would like to reschedule and to what new time.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What day is my next volunteer event?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should identify the volunteer event on Sunday and confirm the date and time with the user.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What am I doing next Monday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should retrieve the calendar entries for Monday and state them to the user. The events are Review Project Blueprints, Structural Analysis Calculations, Team Meeting: Bridge Load Capacity, and Site Visit: Foundation Inspection.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    }
+]

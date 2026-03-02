@@ -1,0 +1,153 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please add a reminder to research front desk supervisor programs to my calendar for Tuesday at 7:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event called 'Research Front Desk Supervisor Training Programs' on Tuesday from 7:30 PM to 8:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you schedule a movie night with my daughter for Friday from 7:30 PM to 9 PM?",
+        "complexity": "Low",
+        "expected_behavior": "Create an event named 'Movie night with Daughter' on Friday from 7:30 PM to 9:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after I put my daughter to bed on Sunday?",
+        "complexity": "Medium",
+        "expected_behavior": "Identify the time after 'Daughter's bath and bedtime routine' on Sunday (7:00 PM - 8:00 PM), and respond with 'Relax, personal time'.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing in the morning before work?",
+        "complexity": "Medium",
+        "expected_behavior": "Determine the user's workdays (Monday through Friday) and identify the activities before the 'Commute to work' events. Provide a summary of those activities like 'Wake up, prepare breakfast, drop off daughter'.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule my call with a friend on Thursday to 8:00 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Call with a Friend' event on Thursday and change its start time to 8:00 PM, making the duration 30 minutes. Confirm the change to the user.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change my daughter's bedtime routine on Saturdays to start an hour later.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Daughter's bath and bedtime routine' event on Saturday and shift its start time to 7:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time do I drop off my daughter at my mother's house on Wednesdays?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Drop off daughter at mother's house for childcare' event on Wednesday and respond with '8:00 AM'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "When am I at church this week?",
+        "complexity": "Low",
+        "expected_behavior": "Search for the 'Church' event during the current week and respond with 'Sunday at 11:00 AM'.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move my movie night to Saturday, but only if it doesn't conflict with my daughter's bedtime routine?",
+        "complexity": "High",
+        "expected_behavior": "Check if moving 'Movie night with Daughter' to Saturday conflicts with the 'Daughter's bath and bedtime routine' which currently takes place from 6:00 PM to 7:00 PM. If there is a conflict, respond that the move is not possible. If there is no conflict, move the event and confirm.",
+        "addressed_days": [
+            "Friday",
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to relax more. Find a free hour on Monday evenings and schedule some personal time.",
+        "complexity": "High",
+        "expected_behavior": "Analyze the Monday schedule and identify any free slots lasting at least one hour in the evening (after work and daughter's routine). Schedule an event called 'Relax, personal time' in the identified slot. If no slot is available, respond that no suitable time was found.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule...dinner?",
+        "complexity": "High",
+        "expected_behavior": "Ask for clarification regarding which 'dinner' event and on what day the user wants to reschedule. Then prompt for a new time. Maintain context for a multi-turn interaction.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Mother's... Sunday?",
+        "complexity": "High",
+        "expected_behavior": "Infer that the user is asking about the 'Visit Mother' event. Clarify if the user is asking about the time or needs to reschedule it, prompting for further instructions.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What's on the schedule for next Saturday?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar events for the upcoming Saturday and provide a summary of the day's activities.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Show me the activities on Sundays this week.",
+        "complexity": "Medium",
+        "expected_behavior": "Display all scheduled events for the upcoming Sunday.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    }
+]

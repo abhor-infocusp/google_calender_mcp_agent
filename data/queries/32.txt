@@ -1,0 +1,149 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a meeting with partner2@email.com Wednesday at 11:30 AM regarding the client audit.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a calendar event for Wednesday at 11:30 AM with partner2@email.com and the description 'Meeting regarding Client Audit'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please schedule Family Dinner for Monday at 6pm.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar event on Monday at 6:00 PM labeled 'Family Dinner'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy tomorrow evening?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should check the calendar for Tuesday evening and respond based on whether there are any scheduled events.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-29T14:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing this Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should retrieve all events scheduled for Saturday and present them to the user.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the Tax Law Update Webinar to 2 PM Thursday.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the Tax Law Update Webinar on Thursday and change its time to 2:00 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change Brunch with Family on Sunday to 11 AM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should locate 'Brunch with Family' on Sunday and update the time to 11:00 AM.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is dinner with friends on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should retrieve the time of the 'Dinner with Friends' event on Friday.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having lunch with on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the lunch event on Saturday, determine if anyone is listed as an attendee, and respond accordingly.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Move my meeting with client2@email.com on Monday to Wednesday at the same time.",
+        "complexity": "High",
+        "expected_behavior": "The agent needs to identify the original meeting time on Monday and move the meeting to Wednesday at that identified time, also deleting the prior event from the original day.",
+        "addressed_days": [
+            "Monday",
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting with my running club, but not during my firm training.",
+        "complexity": "High",
+        "expected_behavior": "The agent needs to first look at when Firm Training is, and then find an opening that doesn't conflict with it. It would ask the user when they were trying to schedule the event, and then place it appropriately.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Monday client1",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should ask which meeting related to client1@email.com the user would like to reschedule, and prompt for a new time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Tax return Tuesday",
+        "complexity": "Low",
+        "expected_behavior": "The agent should ask, 'Regarding which tax return on Tuesday?' since there may be more than one. Then it should confirm with the user to be sure.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me about reviewing financial data every day this week.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent creates a recurring reminder for 'Reviewing financial data' at 8:00 AM on Monday, Tuesday, Wednesday, Thursday, and Friday.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What meetings do I have in the next 3 days?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent lists all meetings scheduled within the next three days (including the current day), extracted from the calendar data.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday"
+        ],
+        "current_time": "2024-01-29T08:00:00"
+    }
+]

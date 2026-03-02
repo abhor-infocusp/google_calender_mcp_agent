@@ -1,0 +1,152 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add an entry to my calendar for dinner with friends this Thursday at 7pm.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for 'Dinner with friends' on Thursday at 7:00 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-22T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you schedule a yoga class for Wednesday at 6pm?",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for 'Yoga Class' on Wednesday at 6:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-22T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after work on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for Monday after 5:00 PM and return the events. Commute is not considered.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-22T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Remind me to bring the release notes tomorrow",
+        "complexity": "Medium",
+        "expected_behavior": "Create a reminder for Incorporating Feedback on Release Notes on Tuesday at 1:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-21T22:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my book club meeting to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Reschedule the existing 'Book Club Meeting' entry on Tuesday from 7:00 PM to 7:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-22T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you set a reminder for Editing and Reviewing API Documentation on Monday 15 minutes before?",
+        "complexity": "Medium",
+        "expected_behavior": "Create a reminder 15 minutes before Editing and Reviewing API Documentation on Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-22T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What meetings do I have on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Return a list of all meetings scheduled for Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-22T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What am I doing Saturday morning?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for Saturday morning and return the scheduled activities. Assume morning is before noon.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-22T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to go to the gym every weekday but I also need to commute, how does that impact my schedule?",
+        "complexity": "High",
+        "expected_behavior": "Identify free time and workout schedule from 6:00 PM to 7:00 PM conflicts with meal prep or dinner plans during the week.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-22T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is there enough time on Thursday to also schedule a quick coffee with the documentation manager?",
+        "complexity": "High",
+        "expected_behavior": "Check the calendar for Thursday and determine any 30-minute gaps, and return the first free time for coffee with the documentation manager.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-22T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... yoga",
+        "complexity": "Medium",
+        "expected_behavior": "Prompt the user to confirm which yoga class they mean (if multiple) and what time to reschedule it to.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-22T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "The meeting... Move it.",
+        "complexity": "Medium",
+        "expected_behavior": "Prompt the user to clarify which meeting and what time to reschedule it to.",
+        "addressed_days": [
+            "Monday",
+            "Wednesday",
+            "Friday"
+        ],
+        "current_time": "2024-01-22T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What does my Thursday look like?",
+        "complexity": "Low",
+        "expected_behavior": "Show all calendar entries for Thursday.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-22T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me to start commuting 15 minutes earlier on work days",
+        "complexity": "High",
+        "expected_behavior": "Create reminder to start commuting earlier for every weekday at 7:45 AM.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-22T10:00:00"
+    }
+]

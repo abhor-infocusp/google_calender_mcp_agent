@@ -1,0 +1,159 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a reminder to order replacement parts on Thursday at 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for 'Order Replacement Parts' on Thursday from 3:00 PM to 4:30 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me for a video call with the grandchildren this Wednesday at 7:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for 'Video call with Grandchildren' on Wednesday from 7:30 PM to 8:30 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after lunch on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "Identify the time after 12:30 PM on Monday and list all events.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the schedule for my day off?",
+        "complexity": "Medium",
+        "expected_behavior": "Identify the events for Saturday or Sunday, depending on the current day and context, and list them.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the meeting with the electrical inspector on Friday to 3:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Electrical Inspector' on Friday, and modify its start time to 3:30 PM. It should end at 4:30 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move Gardening on Saturday to 11:00 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Gardening' entry on Saturday and change its start time to 11:00 AM. It should end at 12:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I meeting with on Tuesday at 3 PM?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for Tuesday at 3:00 PM and return the attendees of the corresponding event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What safety training is scheduled for this week?",
+        "complexity": "Low",
+        "expected_behavior": "Search the calendar for any event with 'Safety' in its name between Monday and Sunday, and list them.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Am I free to have dinner with friends on Friday?",
+        "complexity": "High",
+        "expected_behavior": "Check the calendar for Friday between 6:00 PM and 7:00 PM. If no entries exist, respond positively. Otherwise, indicate a conflict.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I need to move my Thursday appointments back by an hour. Can you help with that?",
+        "complexity": "High",
+        "expected_behavior": "Find all entries on Thursday and adjust their starting times forward by one hour, taking care not to create conflicts with other entries. Adjust the end times too, maintaining duration. Report any conflicts encountered.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Plant manager...",
+        "complexity": "High",
+        "expected_behavior": "Based on the context of the current week, find entries related to the plant manager and ask the user for a more specific request regarding the plant manager. Likely, the user is asking when the scheduled meeting with the plant manager is.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule… the electrician… Friday…",
+        "complexity": "High",
+        "expected_behavior": "Based on the current week, the agent should identify the meeting with the electrical inspector on Friday and ask the user for a more specific query regarding the meeting with the electrician.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What's on the calendar for next Saturday?",
+        "complexity": "Medium",
+        "expected_behavior": "Display events scheduled for the upcoming Saturday.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Show me my dinners for the next week.",
+        "complexity": "Medium",
+        "expected_behavior": "Display all 'Dinner' events scheduled from today until seven days from now.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    }
+]

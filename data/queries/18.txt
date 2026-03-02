@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a meeting with John next Monday at 2 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for a meeting with John on Monday at 2 PM. Since no email is specified, prompt for the email address of John.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you book a session with my therapist this Wednesday at 7 PM?",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for a therapy session on Wednesday at 7 PM with therapist@therapy.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Tuesday look like?",
+        "complexity": "Medium",
+        "expected_behavior": "Retrieve and summarize all calendar events scheduled for Tuesday.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy this Saturday?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for Saturday and respond with whether there are any scheduled events.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule my therapy session on Wednesday to 8 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the existing therapy session on Wednesday at 7 PM and reschedule it to 8 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of dinner with my sister on Tuesday to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the existing dinner with sister on Tuesday at 6 PM and reschedule it to 7:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I meeting with on Monday at 10 AM?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for Monday at 10 AM and return the details of the 'Quick Team Huddle' event, including attendees.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my support group meeting on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the support group meeting on Friday and return the time, which is 6 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Am I free on Saturday morning before lunch to visit my mother?",
+        "complexity": "High",
+        "expected_behavior": "Check calendar, determine if there is time between 9 AM (start of workshop) and 1 PM (lunch) and respond accordingly. Meeting with mother is at 3 PM, so this is an opening to visit mother that could be moved.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Move my therapy session this Wednesday so I can attend the meeting with the Clinic Director.",
+        "complexity": "High",
+        "expected_behavior": "Identify conflicting events (therapy session and meeting with Clinic Director on Wednesday). Offer options to reschedule therapy around the meeting.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Monday... patient?",
+        "complexity": "Medium",
+        "expected_behavior": "Interpret as a query to see a list of patient appointments scheduled for Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Sister Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Interpret as user is asking at what time is the meeting with their sister on Tuesday. Return 6 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What time is my first appointment tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Determine that tomorrow is Saturday. Find the earliest appointment and return its time (9 AM workshop).",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me every Wednesday to call my mother.",
+        "complexity": "Medium",
+        "expected_behavior": "Create a recurring reminder to call mother every Wednesday. It is understood that the current wednesday already has an event, so the AI should remind about the call at a different time than the current event.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T12:00:00"
+    }
+]

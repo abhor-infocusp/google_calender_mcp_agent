@@ -1,0 +1,150 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please add a meeting with the owner to my calendar for Friday at 10 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for 'Meeting with Owner' on Friday at 10:00 AM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T08:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me for dinner with Mateo on Monday from 6 PM to 7 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for 'Dinner with Mateo' on Monday at 6:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-22T07:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy for lunch today?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for the current day around lunchtime (12:00 PM - 1:30 PM) and respond with whether or not there is a conflicting event.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-22T09:15:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "When will I review the sales data?",
+        "complexity": "Medium",
+        "expected_behavior": "Search the calendar for any events containing 'Reviewing Sales Data' and respond with the date and time of the event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-23T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my school meeting to 4:30 PM on Thursday?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Local School Meeting' on Thursday and change its time to 4:30 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-25T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule Team Briefing on Monday. Make it for 9:30.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Team Briefing' on Monday and change its time to 9:30 AM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-22T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What's on my agenda for Wednesday morning?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for Wednesday between 9:00 AM and 12:00 PM and respond with any events found.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-24T07:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me about my Friday afternoon.",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for Friday between 12:00 PM and 6:00 PM and respond with any events found.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I need to push the meeting with the head chef back by an hour on Wednesday but I can't miss lunch supervision.",
+        "complexity": "High",
+        "expected_behavior": "Check if moving 'Meeting with Head Chef' (originally at 10:30 AM) back by one hour conflicts with 'Lunch Service Supervision' (12:30 PM - 1:30 PM). If no conflict, reschedule the meeting. If there is a conflict, inform the user.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-24T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't do the interview on Thursday. Reschedule for Wednesday at the same time, but make sure it doesn't overlap with lunch supervision.",
+        "complexity": "High",
+        "expected_behavior": "Remove the 'Interview - Potential Server' from Thursday at 2:00 PM. Check if scheduling 'Interview - Potential Server' on Wednesday at 2:00 PM conflicts with 'Lunch Service Supervision' (12:30 PM - 1:30 PM). If no conflict, schedule the interview. If there is, suggest alternative times on Wednesday or Thursday.",
+        "addressed_days": [
+            "Thursday",
+            "Wednesday"
+        ],
+        "current_time": "2024-01-24T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Payroll... when?",
+        "complexity": "Low",
+        "expected_behavior": "Search the calendar for 'Payroll' and respond with the date and time.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-25T16:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Owner Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Search the calendar for 'Meeting with Owner' on Friday and respond with the time.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-25T16:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What time is Brunch Service this weekend?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for 'Brunch Service' on Saturday and Sunday and respond with the time for each day.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "When do I have Dinner Service this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for 'Dinner Service' from Monday to Sunday and respond with the time for each day.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-22T10:00:00"
+    }
+]

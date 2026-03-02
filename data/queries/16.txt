@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add an event to my calendar for a farmer's market visit next Sunday at 1 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for Sunday at 1 PM for visiting the local farmer's market.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Set up a meeting with the sous chef this Friday at 8 AM to discuss sauce refinement.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar event this Friday at 8 AM to meet with the sous chef.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I free for lunch next Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for Wednesday to see if there are any conflicting entries during the lunch time block of 12:00 PM - 1:00 PM. Respond with availability.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing for dinner on Saturday?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for Saturday during dinner hours (6:00 PM - 11:00 PM). If any event, inform the user.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my cleaning time on Tuesday to 11:30 PM",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Cleaning' entry on Tuesday and shift it to 11:30 PM, adjusting the duration if necessary to maintain the original cleaning time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the sauce experimentation on Wednesday. Start it an hour later.",
+        "complexity": "Medium",
+        "expected_behavior": "Locate the 'Special Sauce Experimentation' event on Wednesday and shift the start time from 9:00 AM to 10:00 AM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What am I doing on Thursday morning?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for Thursday between 8:00 AM and 12:00 PM, present any events scheduled.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having dinner with this Sunday?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for this Sunday's dinner event and extract the contact associated with it, ChefFriend@email.com. Report who is having dinner.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to work on sauce refinement on Friday from 10 AM to 1 PM, but make sure it doesn't overlap with anything else.",
+        "complexity": "High",
+        "expected_behavior": "Check the calendar for conflicts on Friday between 10 AM and 1 PM. If there is a conflict, inform the user. If not, schedule 'Sauce Refinement'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Schedule stock production for 4 hours next Thursday, but not during service prep.",
+        "complexity": "High",
+        "expected_behavior": "Identify service prep time block on Thursday (1:00 PM - 5:00 PM). Schedule Stock Production for 4 hours on Thursday, avoiding the service prep time.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... Friday... Sous Chef...",
+        "complexity": "Medium",
+        "expected_behavior": "Interpret that the user wants to reschedule the Friday meeting with the Sous Chef. Prompt the user for clarification on new time or reason for rescheduling.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Inventory...Monday...8 AM",
+        "complexity": "Low",
+        "expected_behavior": "Recognize the user is referencing inventory check on Monday at 8 AM. Prompt the user for what action they want to perform regarding that event (e.g., reschedule, cancel).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What time is lunch tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for the event 'Lunch' the day after the current date (Saturday). Report the time (12:00 PM - 1:00 PM).",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "When do I check deliveries?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for 'Check Deliveries' and report the time as Wednesday at 8:00 AM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    }
+]

@@ -1,0 +1,144 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a reminder to visit the comic book store on Wednesday at 7pm.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for Wednesday from 7:00 PM to 9:00 PM labeled 'Comic Book Store Visit'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Set up a meeting with the writer on Tuesday at 1 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for Tuesday from 1:00 PM to 2:00 PM labeled 'Meeting with Writer'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing with Emily this weekend?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for Saturday and Sunday and respond with 'Brunch with Emily on Saturday at 11:00 AM' and 'No events with Emily on Sunday'.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What work meetings do I have next week?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for meetings with the editor and writer and respond with 'Meeting with Writer on Tuesday at 1:00 PM' and 'Meeting with Editor on Thursday at 1:00 PM'.",
+        "addressed_days": [
+            "Tuesday",
+            "Thursday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move dinner with Emily on Monday to 8pm?",
+        "complexity": "Medium",
+        "expected_behavior": "Update the calendar entry for 'Dinner with Emily' on Monday to start at 8:00 PM instead of 7:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the meeting with the writer to Tuesday at 3 pm instead.",
+        "complexity": "Medium",
+        "expected_behavior": "Update the calendar entry for 'Meeting with Writer' on Tuesday to start at 3:00 PM instead of 1:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What am I doing on Thursday afternoon?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for Thursday between 12:00 PM and 6:00 PM and respond with 'Meeting with Editor at 1:00 PM' and 'Sketching/Overcoming Creative Block at 2:00 PM'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is brunch this Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for Saturday and respond with 'Brunch with Emily at 11:00 AM'.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to workout on Monday but I don't want to be late for dinner. Put it in.",
+        "complexity": "High",
+        "expected_behavior": "Given the existing schedule on Monday, find a suitable time for workout (before dinner at 7:00 PM) and schedule it. Schedule a workout from 5:30 PM to 6:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is there time for a quick meeting with the letterer on Friday between lunch and personal project?",
+        "complexity": "High",
+        "expected_behavior": "Check the calendar for Friday between 2:00 PM and 3:00 PM and respond with 'Yes, Send Completed Pages to Letterer at 2:00 PM'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Social media wednesday",
+        "complexity": "Medium",
+        "expected_behavior": "Assuming the user wants to schedule Social Media engagements, find free time on Wednesday and create a 1 hour long event, label it 'Social Media Engagement'. Schedule the event from 9:00 AM to 10:00 AM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Art gallery sunday?",
+        "complexity": "Medium",
+        "expected_behavior": "Check calendar on Sunday, notice there is already a visit to an Art Museum and respond with: 'You are already visiting the Art Museum on Sunday from 1:00 PM to 4:00 PM. Would you like to reschedule?'",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What day after tomorrow is my meeting with the editor?",
+        "complexity": "Medium",
+        "expected_behavior": "Determine the day after tomorrow is Thursday, then check the calendar for Thursday and respond with 'Meeting with Editor at 1:00 PM'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What am I doing next Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for next Saturday and respond with 'Brunch with Emily at 11:00 AM', 'Comic Convention Prep / Portfolio Review at 1:00 PM', and 'Relax/Read Comics at 4:00 PM'.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-27T10:00:00"
+    }
+]

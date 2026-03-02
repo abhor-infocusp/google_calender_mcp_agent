@@ -1,0 +1,150 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a reminder for dinner with my husband on Monday at 8:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for dinner with husband on Monday at 8:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Set up a therapy session with therapist@email.com for Thursday at 8:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry for therapy session on Thursday at 8:30 PM, noting the therapist's email.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy tonight?",
+        "complexity": "Medium",
+        "expected_behavior": "Check for any events scheduled for the current evening (assuming today is the context).",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "When do I see my friends?",
+        "complexity": "Medium",
+        "expected_behavior": "Search the calendar for entries involving 'friends'.",
+        "addressed_days": [
+            "Friday",
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule dinner with my husband on Wednesday to 7:00 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Modify the existing dinner entry on Wednesday to start at 7:00 PM instead of 8:30 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time for hiking this Saturday to 10 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Update the hiking event on Saturday to start at 10:00 AM instead of 9:00 AM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my support group meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Search for 'support group meeting' and return the scheduled time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What am I doing on Sunday morning?",
+        "complexity": "Low",
+        "expected_behavior": "Check Sunday's schedule during the morning hours and return the event (brunch with nieces).",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move my therapy session to Wednesday evening?",
+        "complexity": "High",
+        "expected_behavior": "Check for conflicts on Wednesday evening. If there's a conflict (dinner with husband), ask for confirmation to move the therapy session anyway, or suggest alternatives.",
+        "addressed_days": [
+            "Wednesday",
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to have dinner with my family on Saturday, can you check if I'm free?",
+        "complexity": "High",
+        "expected_behavior": "Check the calendar for existing appointments on Saturday evening. Find 'relax at home' event. Ask to user whether to remove the event, or find an alternative time for dinner.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... nurses meeting...?",
+        "complexity": "Medium",
+        "expected_behavior": "Respond with a clarifying question, such as 'Which nurses meeting are you referring to?'",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Therapy... cancel?",
+        "complexity": "Medium",
+        "expected_behavior": "Ask for confirmation, e.g., 'Are you sure you want to cancel your therapy session on Thursday?'",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me to do meal prep every Sunday.",
+        "complexity": "Medium",
+        "expected_behavior": "Set up a recurring reminder for 'Meal Prep' every Sunday at 6:00 PM.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "What does my week look like?",
+        "complexity": "Low",
+        "expected_behavior": "Read out all calendar events from current day (Friday) to the end of Sunday.",
+        "addressed_days": [
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    }
+]

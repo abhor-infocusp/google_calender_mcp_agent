@@ -1,0 +1,148 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting with the plant engineers for Wednesday at 3 PM to discuss energy efficiency upgrades.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry on Wednesday from 3:00 PM to 4:30 PM with the title 'Discuss Energy Efficiency Upgrades' and attendees: plant engineers.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add 'Bowling League' to my calendar for Thursday at 5 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a calendar entry on Thursday from 5:00 PM to 7:00 PM with the title 'Bowling League'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing tomorrow afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for Tuesday between 12:00 PM and 5:00 PM and return the events scheduled.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on for the weekend?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for Saturday and Sunday and return all the events scheduled.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the meeting with plant engineers on Wednesday to 3:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Discuss Energy Efficiency Upgrades' event on Wednesday and change the start time to 3:30 PM and the end time to 5:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-29T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "I can't make dinner with the family on Monday, can we change it to Tuesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Family' event on Monday and move it to Tuesday at the same time.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the team meeting on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Team Meeting' event on Monday and return its start and end times.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What am I doing on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for Saturday and return all events scheduled.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Am I free Thursday evening? I want to go to a concert.",
+        "complexity": "High",
+        "expected_behavior": "Check the calendar for Thursday between 6:00 PM and 11:00 PM. If there are no conflicts, respond positively. If there are conflicts, list them.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my lunch on Sunday to 4 PM, but make sure it doesn't conflict with visiting my parents.",
+        "complexity": "High",
+        "expected_behavior": "Check for conflicts between 4 PM and 5 PM on Sunday with 'Visit Parents'. If no conflict, move 'Lunch with Family' to 4 PM. If conflict, return a message indicating the conflict.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Monday... maintenance... motor?",
+        "complexity": "High",
+        "expected_behavior": "Attempt to disambiguate based on the context. Assuming contextually 'Monday' refers to the next monday, search for calendar entries on that day related to 'maintenance' and 'motor'. Return the result.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change... Tuesday... Emergency Light... 9 AM?",
+        "complexity": "High",
+        "expected_behavior": "Attempt to find an entry on Tuesday with 'Emergency Light' in the title and change the time to 9 AM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Remind me to submit my maintenance report every Monday at 4:00 PM.",
+        "complexity": "High",
+        "expected_behavior": "Create a recurring reminder for 'Submit Maintenance Report' every Monday at 4:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    },
+    {
+        "category": "Relative & Recurring (within simulation bounds)",
+        "query": "Reschedule my commute to work every weekday by 30 minutes.",
+        "complexity": "High",
+        "expected_behavior": "Find all recurring 'Commute to Work' events between Monday and Friday, and shift each of them to start 30 minutes later.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-26T10:00:00"
+    }
+]
