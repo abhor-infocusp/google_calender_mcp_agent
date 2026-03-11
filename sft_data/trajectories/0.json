@@ -1,0 +1,1593 @@
+[
+  {
+    "query": "Create an event called 'Board Meeting' on Wednesday at 1 PM for an hour with david.lee@firm.com and michael.b@firm.com.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create an event with the summary 'Board Meeting', start time of 13:00 on Wednesday, end time of 14:00 on Wednesday, and attendees david.lee@firm.com and michael.b@firm.com.",
+    "simulated_now": "2024-08-04 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Review Financial Documents",
+          "start": "2024-08-07 09:00:00",
+          "end": "2024-08-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1a017077bed744da802274c85308bc38"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting - Smith Family Taxes",
+          "start": "2024-08-07 10:30:00",
+          "end": "2024-08-07 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "smith.family@email.com"
+          ],
+          "id": "evt_b5494a9090b44327b096684333678e77"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Respond to IRS Inquiries",
+          "start": "2024-08-07 14:00:00",
+          "end": "2024-08-07 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_79e8e3236c584fc8b35acda2b5ae0bd9"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Parent-Teacher Meeting",
+          "start": "2024-08-07 18:00:00",
+          "end": "2024-08-07 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com"
+          ],
+          "id": "evt_cbf4720f77d7439aa59de5c202a5ca1b"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Review Financial Documents",
+          "start": "2024-08-07 09:00:00",
+          "end": "2024-08-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1a017077bed744da802274c85308bc38"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting - Smith Family Taxes",
+          "start": "2024-08-07 10:30:00",
+          "end": "2024-08-07 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "smith.family@email.com"
+          ],
+          "id": "evt_b5494a9090b44327b096684333678e77"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Board Meeting",
+          "start": "2024-08-07 13:00:00",
+          "end": "2024-08-07 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "michael.b@firm.com"
+          ],
+          "id": "evt_d47042242079474db90e735ec8867df2"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Respond to IRS Inquiries",
+          "start": "2024-08-07 14:00:00",
+          "end": "2024-08-07 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_79e8e3236c584fc8b35acda2b5ae0bd9"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Parent-Teacher Meeting",
+          "start": "2024-08-07 18:00:00",
+          "end": "2024-08-07 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com"
+          ],
+          "id": "evt_cbf4720f77d7439aa59de5c202a5ca1b"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Board Meeting' on Wednesday at 1 PM for an hour with david.lee@firm.com and michael.b@firm.com."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-04 10:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "attendees": [
+            "david.lee@firm.com",
+            "michael.b@firm.com"
+          ],
+          "end": "2024-08-07 14:00:00",
+          "start": "2024-08-07 13:00:00",
+          "summary": "Board Meeting"
+        },
+        "result": {
+          "message": "Event created successfully.",
+          "event": {
+            "id": "evt_d47042242079474db90e735ec8867df2",
+            "summary": "Board Meeting",
+            "start": "2024-08-07 13:00:00",
+            "end": "2024-08-07 14:00:00",
+            "description": "",
+            "attendees": [
+              "user=User(id='user_af787def', name='david.lee', email='david.lee@firm.com') attending='ACCEPT'",
+              "user=User(id='user_b95ebf48', name='michael.b', email='michael.b@firm.com') attending='ACCEPT'"
+            ],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "I've created an event called 'Board Meeting' on Wednesday, August 7, 2024, from 1 PM to 2 PM with david.lee@firm.com and michael.b@firm.com.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Schedule a lunch meeting with advisor@email.com this Thursday from 1 PM to 2 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create an event with the summary 'Lunch Meeting', start time of 13:00 on Thursday, end time of 14:00 on Thursday, and attendee advisor@email.com.",
+    "simulated_now": "2024-08-04 10:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Prepare Tax Returns",
+          "start": "2024-08-08 09:00:00",
+          "end": "2024-08-08 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ff2d6509ebcb4d82b89e26c3cd3651bb"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meet with Financial Advisors",
+          "start": "2024-08-08 11:30:00",
+          "end": "2024-08-08 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "advisor@email.com"
+          ],
+          "id": "evt_1980baba6ba74deba46115987c5a5f96"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Review Tax Law Changes",
+          "start": "2024-08-08 14:00:00",
+          "end": "2024-08-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_12c19ce5fe344b21879e4de751d2a483"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with friends",
+          "start": "2024-08-08 18:30:00",
+          "end": "2024-08-08 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_83aa3ce3df7f4be1959005a8ad4427bd"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Prepare Tax Returns",
+          "start": "2024-08-08 09:00:00",
+          "end": "2024-08-08 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ff2d6509ebcb4d82b89e26c3cd3651bb"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meet with Financial Advisors",
+          "start": "2024-08-08 11:30:00",
+          "end": "2024-08-08 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "advisor@email.com"
+          ],
+          "id": "evt_1980baba6ba74deba46115987c5a5f96"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Lunch meeting",
+          "start": "2024-08-08 13:00:00",
+          "end": "2024-08-08 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "advisor@email.com"
+          ],
+          "id": "evt_7ba9749c48f24951892c9c839f8f4743"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Review Tax Law Changes",
+          "start": "2024-08-08 14:00:00",
+          "end": "2024-08-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_12c19ce5fe344b21879e4de751d2a483"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with friends",
+          "start": "2024-08-08 18:30:00",
+          "end": "2024-08-08 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_83aa3ce3df7f4be1959005a8ad4427bd"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Schedule a lunch meeting with advisor@email.com this Thursday from 1 PM to 2 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-04 10:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "attendees": [
+            "advisor@email.com"
+          ],
+          "start": "2024-08-08 13:00:00",
+          "end": "2024-08-08 14:00:00",
+          "summary": "Lunch meeting"
+        },
+        "result": {
+          "message": "Event created successfully.",
+          "event": {
+            "id": "evt_7ba9749c48f24951892c9c839f8f4743",
+            "summary": "Lunch meeting",
+            "start": "2024-08-08 13:00:00",
+            "end": "2024-08-08 14:00:00",
+            "description": "",
+            "attendees": [
+              "user=User(id='user_a2a8b473', name='advisor', email='advisor@email.com') attending='ACCEPT'"
+            ],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "I've scheduled a lunch meeting with advisor@email.com this Thursday from 1 PM to 2 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Am I busy when my kids have soccer practice?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the Kids' Soccer Practice event on Monday, then list events scheduled during that time.",
+    "simulated_now": "2024-08-05 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tax Law Updates",
+          "start": "2024-08-05 09:00:00",
+          "end": "2024-08-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.johnson@firm.com",
+            "michael.b@firm.com"
+          ],
+          "id": "evt_1ad2492df1844b57b330173ef9283c0f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Miller Corp. Tax Planning",
+          "start": "2024-08-05 10:30:00",
+          "end": "2024-08-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "miller.ceo@millercorp.com"
+          ],
+          "id": "evt_96ad6b9878024c0b9f32b7967a85c989"
+        },
+        {
+          "day": "Monday",
+          "summary": "Work on Q2 Tax Filings",
+          "start": "2024-08-05 14:00:00",
+          "end": "2024-08-05 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_058bc8650b8647fb880d86f37fbe0322"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call with IRS Agent - Case #2023-482",
+          "start": "2024-08-05 15:30:00",
+          "end": "2024-08-05 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com"
+          ],
+          "id": "evt_b72d0813d8ff49539caf5e27d1bd50ec"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2024-08-05 18:00:00",
+          "end": "2024-08-05 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9ff287963d5b49b1a7be77d8d346c569"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tax Law Updates",
+          "start": "2024-08-05 09:00:00",
+          "end": "2024-08-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.johnson@firm.com",
+            "michael.b@firm.com"
+          ],
+          "id": "evt_1ad2492df1844b57b330173ef9283c0f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Miller Corp. Tax Planning",
+          "start": "2024-08-05 10:30:00",
+          "end": "2024-08-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "miller.ceo@millercorp.com"
+          ],
+          "id": "evt_96ad6b9878024c0b9f32b7967a85c989"
+        },
+        {
+          "day": "Monday",
+          "summary": "Work on Q2 Tax Filings",
+          "start": "2024-08-05 14:00:00",
+          "end": "2024-08-05 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_058bc8650b8647fb880d86f37fbe0322"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call with IRS Agent - Case #2023-482",
+          "start": "2024-08-05 15:30:00",
+          "end": "2024-08-05 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com"
+          ],
+          "id": "evt_b72d0813d8ff49539caf5e27d1bd50ec"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2024-08-05 18:00:00",
+          "end": "2024-08-05 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9ff287963d5b49b1a7be77d8d346c569"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Am I busy when my kids have soccer practice?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-05 08:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-08-11 23:59:59",
+          "time_min": "2024-08-05 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_1ad2492df1844b57b330173ef9283c0f\",\n  \"summary\": \"Team Meeting - Tax Law Updates\",\n  \"start\": \"2024-08-05T09:00:00\",\n  \"end\": \"2024-08-05T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_6a755793\",\n        \"name\": \"david.lee\",\n        \"email\": \"david.lee@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_2a201cbc\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_add2c3dc\",\n        \"name\": \"michael.b\",\n        \"email\": \"michael.b@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_96ad6b9878024c0b9f32b7967a85c989\",\n  \"summary\": \"Client Meeting - Miller Corp. Tax Planning\",\n  \"start\": \"2024-08-05T10:30:00\",\n  \"end\": \"2024-08-05T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_7434c069\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_db2fc1b7\",\n        \"name\": \"miller.ceo\",\n        \"email\": \"miller.ceo@millercorp.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_058bc8650b8647fb880d86f37fbe0322\",\n  \"summary\": \"Work on Q2 Tax Filings\",\n  \"start\": \"2024-08-05T14:00:00\",\n  \"end\": \"2024-08-05T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_b72d0813d8ff49539caf5e27d1bd50ec\",\n  \"summary\": \"Call with IRS Agent - Case #2023-482\",\n  \"start\": \"2024-08-05T15:30:00\",\n  \"end\": \"2024-08-05T16:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_d752d130\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_9ff287963d5b49b1a7be77d8d346c569\",\n  \"summary\": \"Kids' Soccer Practice\",\n  \"start\": \"2024-08-05T18:00:00\",\n  \"end\": \"2024-08-05T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_41294a52739a4cea8b388e1bcf673832\",\n  \"summary\": \"Individual Tax Return Prep\",\n  \"start\": \"2024-08-06T09:00:00\",\n  \"end\": \"2024-08-06T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_080c0efb203a4fd1883ead25d5641f5d\",\n  \"summary\": \"New Client Consultation\",\n  \"start\": \"2024-08-06T11:30:00\",\n  \"end\": \"2024-08-06T12:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_e2680bcd\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_5627b287\",\n        \"name\": \"potential.client\",\n        \"email\": \"potential.client@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_69f52c12e351487186e87819dd94aa4f\",\n  \"summary\": \"Work on Q2 Tax Filings\",\n  \"start\": \"2024-08-06T14:00:00\",\n  \"end\": \"2024-08-06T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_ee7aea2a8a454b14a9ebbe9d3d0d8618\",\n  \"summary\": \"Dinner with Spouse\",\n  \"start\": \"2024-08-06T17:30:00\",\n  \"end\": \"2024-08-06T18:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_66d5505c\",\n        \"name\": \"spouse\",\n        \"email\": \"spouse@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_0b4da777c40e47d2a3a18da8032be3f2\",\n  \"summary\": \"Review Financial Documents\",\n  \"start\": \"2024-08-07T09:00:00\",\n  \"end\": \"2024-08-07T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_c513abf770f34076a80cbd1bb8cd87d7\",\n  \"summary\": \"Client Meeting - Smith Family Taxes\",\n  \"start\": \"2024-08-07T10:30:00\",\n  \"end\": \"2024-08-07T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_8525e555\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_40c0b72b\",\n        \"name\": \"smith.family\",\n        \"email\": \"smith.family@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_04d57095cbab4767b5c668ad389d2e3b\",\n  \"summary\": \"Respond to IRS Inquiries\",\n  \"start\": \"2024-08-07T14:00:00\",\n  \"end\": \"2024-08-07T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_9e71001001bb4afe87ea3b9efbc00011\",\n  \"summary\": \"Parent-Teacher Meeting\",\n  \"start\": \"2024-08-07T18:00:00\",\n  \"end\": \"2024-08-07T19:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_10646fbf\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_f935c4b09f9541118a1ce28d4306e779\",\n  \"summary\": \"Prepare Tax Returns\",\n  \"start\": \"2024-08-08T09:00:00\",\n  \"end\": \"2024-08-08T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_d0549ae337d3451ea0fc84ba415993e2\",\n  \"summary\": \"Meet with Financial Advisors\",\n  \"start\": \"2024-08-08T11:30:00\",\n  \"end\": \"2024-08-08T12:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_b718bd3e\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_90ce1207\",\n        \"name\": \"advisor\",\n        \"email\": \"advisor@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_29333bc0630b447a92a9200685e091fc\",\n  \"summary\": \"Review Tax Law Changes\",\n  \"start\": \"2024-08-08T14:00:00\",\n  \"end\": \"2024-08-08T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_56eed2e8d8a14e958cee8ae3d6eb8d9d\",\n  \"summary\": \"Dinner with friends\",\n  \"start\": \"2024-08-08T18:30:00\",\n  \"end\": \"2024-08-08T20:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_b2274013\",\n        \"name\": \"friend1\",\n        \"email\": \"friend1@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_fa9b333c\",\n        \"name\": \"friend2\",\n        \"email\": \"friend2@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_35222e9ba95a4d208cba96f2243405ec\",\n  \"summary\": \"Team Meeting - Project Planning\",\n  \"start\": \"2024-08-09T09:00:00\",\n  \"end\": \"2024-08-09T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_351e42d7\",\n        \"name\": \"david.lee\",\n        \"email\": \"david.lee@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_b4eac395\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_e225498a\",\n        \"name\": \"michael.b\",\n        \"email\": \"michael.b@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_e9791cfbf04d4b05bdc4a31b46e72145\",\n  \"summary\": \"Client Meeting - Johnson LLC Tax Strategy\",\n  \"start\": \"2024-08-09T10:30:00\",\n  \"end\": \"2024-08-09T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_ecb36b21\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_e64523c1\",\n        \"name\": \"johnson.ceo\",\n        \"email\": \"johnson.ceo@johnsonllc.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_f420529523d44ff2998263c3b8275fda\",\n  \"summary\": \"Respond to IRS Inquiries\",\n  \"start\": \"2024-08-09T14:00:00\",\n  \"end\": \"2024-08-09T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_72587bd254b14b969705890514784347\",\n  \"summary\": \"Kids' Pizza Night\",\n  \"start\": \"2024-08-09T18:00:00\",\n  \"end\": \"2024-08-09T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_842c284c1526430aa8eb828ca8e3ff89\",\n  \"summary\": \"Kids' Soccer Game\",\n  \"start\": \"2024-08-10T10:00:00\",\n  \"end\": \"2024-08-10T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_8d0b89d6db1a48e1934fdec99ed5cbc3\",\n  \"summary\": \"Grocery Shopping\",\n  \"start\": \"2024-08-10T13:00:00\",\n  \"end\": \"2024-08-10T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_a0aab6bdb8b34fa5a7ec3a6a569da569\",\n  \"summary\": \"Movie Night with Family\",\n  \"start\": \"2024-08-10T19:00:00\",\n  \"end\": \"2024-08-10T21:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_bd44cfaead0d43c09bf8a61980fe33bc\",\n  \"summary\": \"Brunch with Family\",\n  \"start\": \"2024-08-11T10:00:00\",\n  \"end\": \"2024-08-11T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_c6a97067\",\n        \"name\": \"spouse\",\n        \"email\": \"spouse@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_5d79b7c2726a45ce9e7087fd5d6eb022\",\n  \"summary\": \"Visit Family\",\n  \"start\": \"2024-08-11T14:00:00\",\n  \"end\": \"2024-08-11T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, you have 'Kids\\' Soccer Practice' scheduled for today, August 5, from 18:00 to 19:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing when I have dinner with my spouse?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the Dinner with Spouse event on Tuesday, then list events scheduled during that time.",
+    "simulated_now": "2024-08-06 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Individual Tax Return Prep",
+          "start": "2024-08-06 09:00:00",
+          "end": "2024-08-06 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a587566ac858496db6945ba872cb950c"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "New Client Consultation",
+          "start": "2024-08-06 11:30:00",
+          "end": "2024-08-06 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "potential.client@email.com"
+          ],
+          "id": "evt_cac3aac80686464685fd51ece3322885"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work on Q2 Tax Filings",
+          "start": "2024-08-06 14:00:00",
+          "end": "2024-08-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1af35a5fa5904a8385f6044e00d02189"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Spouse",
+          "start": "2024-08-06 17:30:00",
+          "end": "2024-08-06 18:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "spouse@email.com"
+          ],
+          "id": "evt_2962f718f20240b992a15154f2a40b9e"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Individual Tax Return Prep",
+          "start": "2024-08-06 09:00:00",
+          "end": "2024-08-06 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a587566ac858496db6945ba872cb950c"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "New Client Consultation",
+          "start": "2024-08-06 11:30:00",
+          "end": "2024-08-06 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "potential.client@email.com"
+          ],
+          "id": "evt_cac3aac80686464685fd51ece3322885"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work on Q2 Tax Filings",
+          "start": "2024-08-06 14:00:00",
+          "end": "2024-08-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1af35a5fa5904a8385f6044e00d02189"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Spouse",
+          "start": "2024-08-06 17:30:00",
+          "end": "2024-08-06 18:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "spouse@email.com"
+          ],
+          "id": "evt_2962f718f20240b992a15154f2a40b9e"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing when I have dinner with my spouse?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-06 10:00:00",
+          "day": "Tuesday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-08-06 10:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_a587566ac858496db6945ba872cb950c\",\n  \"summary\": \"Individual Tax Return Prep\",\n  \"start\": \"2024-08-06T09:00:00\",\n  \"end\": \"2024-08-06T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_cac3aac80686464685fd51ece3322885\",\n  \"summary\": \"New Client Consultation\",\n  \"start\": \"2024-08-06T11:30:00\",\n  \"end\": \"2024-08-06T12:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_1d210c35\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_2b28cf2c\",\n        \"name\": \"potential.client\",\n        \"email\": \"potential.client@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_1af35a5fa5904a8385f6044e00d02189\",\n  \"summary\": \"Work on Q2 Tax Filings\",\n  \"start\": \"2024-08-06T14:00:00\",\n  \"end\": \"2024-08-06T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_2962f718f20240b992a15154f2a40b9e\",\n  \"summary\": \"Dinner with Spouse\",\n  \"start\": \"2024-08-06T17:30:00\",\n  \"end\": \"2024-08-06T18:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_e6d85121\",\n        \"name\": \"spouse\",\n        \"email\": \"spouse@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_201ee5280ef346c9b5a82b8a50165b93\",\n  \"summary\": \"Review Financial Documents\",\n  \"start\": \"2024-08-07T09:00:00\",\n  \"end\": \"2024-08-07T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_cba461ed391a4527b7bc51532e090ed2\",\n  \"summary\": \"Client Meeting - Smith Family Taxes\",\n  \"start\": \"2024-08-07T10:30:00\",\n  \"end\": \"2024-08-07T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_dd1eb362\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_46ac4275\",\n        \"name\": \"smith.family\",\n        \"email\": \"smith.family@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_debaa1ddbfeb4b7db1a638824b3e5fdc\",\n  \"summary\": \"Respond to IRS Inquiries\",\n  \"start\": \"2024-08-07T14:00:00\",\n  \"end\": \"2024-08-07T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_a47cf8d3d8844457a7e71af06cb1ec52\",\n  \"summary\": \"Parent-Teacher Meeting\",\n  \"start\": \"2024-08-07T18:00:00\",\n  \"end\": \"2024-08-07T19:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_46b71e0d\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_bd9d13ad45524534aacecf53eb102ade\",\n  \"summary\": \"Prepare Tax Returns\",\n  \"start\": \"2024-08-08T09:00:00\",\n  \"end\": \"2024-08-08T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_6cdea75d97444d8c9bbec2e67a5fd24e\",\n  \"summary\": \"Meet with Financial Advisors\",\n  \"start\": \"2024-08-08T11:30:00\",\n  \"end\": \"2024-08-08T12:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_9a5655e8\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_112c16d8\",\n        \"name\": \"advisor\",\n        \"email\": \"advisor@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_66798c9113694d04ad7caa10cbc6d695\",\n  \"summary\": \"Review Tax Law Changes\",\n  \"start\": \"2024-08-08T14:00:00\",\n  \"end\": \"2024-08-08T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_be83a47d51344da89e9c813180bd49b1\",\n  \"summary\": \"Dinner with friends\",\n  \"start\": \"2024-08-08T18:30:00\",\n  \"end\": \"2024-08-08T20:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_74b9a571\",\n        \"name\": \"friend1\",\n        \"email\": \"friend1@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_d4a4588d\",\n        \"name\": \"friend2\",\n        \"email\": \"friend2@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_374a4f8e2b594454bb9ca7b6a2c61053\",\n  \"summary\": \"Team Meeting - Project Planning\",\n  \"start\": \"2024-08-09T09:00:00\",\n  \"end\": \"2024-08-09T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_e6427835\",\n        \"name\": \"david.lee\",\n        \"email\": \"david.lee@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_6733467d\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_e4c3a42e\",\n        \"name\": \"michael.b\",\n        \"email\": \"michael.b@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_e67a2b159dc941e08e044a82a343945c\",\n  \"summary\": \"Client Meeting - Johnson LLC Tax Strategy\",\n  \"start\": \"2024-08-09T10:30:00\",\n  \"end\": \"2024-08-09T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_c24e6b0d\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_465838b9\",\n        \"name\": \"johnson.ceo\",\n        \"email\": \"johnson.ceo@johnsonllc.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_4a2062e83aa549b196e5e0a9b5b47b48\",\n  \"summary\": \"Respond to IRS Inquiries\",\n  \"start\": \"2024-08-09T14:00:00\",\n  \"end\": \"2024-08-09T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_796a5effc7b24140bee1844e712cc59f\",\n  \"summary\": \"Kids' Pizza Night\",\n  \"start\": \"2024-08-09T18:00:00\",\n  \"end\": \"2024-08-09T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_a9a11afdeb5a4e7d983b617e808cd448\",\n  \"summary\": \"Kids' Soccer Game\",\n  \"start\": \"2024-08-10T10:00:00\",\n  \"end\": \"2024-08-10T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_55813c15d0b54e03b59da190eb2f7150\",\n  \"summary\": \"Grocery Shopping\",\n  \"start\": \"2024-08-10T13:00:00\",\n  \"end\": \"2024-08-10T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_15a488649d5847b9ae10acdfc73bed95\",\n  \"summary\": \"Movie Night with Family\",\n  \"start\": \"2024-08-10T19:00:00\",\n  \"end\": \"2024-08-10T21:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_6e81238e775f4d1197724001a2055a20\",\n  \"summary\": \"Brunch with Family\",\n  \"start\": \"2024-08-11T10:00:00\",\n  \"end\": \"2024-08-11T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_8077b15b\",\n        \"name\": \"spouse\",\n        \"email\": \"spouse@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_3c1e1c13fe1347daaa6fd53fa0977839\",\n  \"summary\": \"Visit Family\",\n  \"start\": \"2024-08-11T14:00:00\",\n  \"end\": \"2024-08-11T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "You have dinner with your spouse from 2024-08-06 17:30:00 to 2024-08-06 18:30:00.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule the Miller Corp. Tax Planning meeting to 1 PM on Monday.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the Miller Corp. Tax Planning event on Monday and update its start time to 13:00 and its end time to 14:30.",
+    "simulated_now": "2024-08-05 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tax Law Updates",
+          "start": "2024-08-05 09:00:00",
+          "end": "2024-08-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.johnson@firm.com",
+            "michael.b@firm.com"
+          ],
+          "id": "evt_9e0d43f02f6841fd8909526a594a00db"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Miller Corp. Tax Planning",
+          "start": "2024-08-05 10:30:00",
+          "end": "2024-08-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "miller.ceo@millercorp.com"
+          ],
+          "id": "evt_8311953480fc4196a60a8273b7e4b065"
+        },
+        {
+          "day": "Monday",
+          "summary": "Work on Q2 Tax Filings",
+          "start": "2024-08-05 14:00:00",
+          "end": "2024-08-05 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b788f529606c429d87b7edd1f260e39b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call with IRS Agent - Case #2023-482",
+          "start": "2024-08-05 15:30:00",
+          "end": "2024-08-05 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com"
+          ],
+          "id": "evt_05820500004447068f785d8ea56ae8b3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2024-08-05 18:00:00",
+          "end": "2024-08-05 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_39f57e59d2604e798deae39afd732c46"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tax Law Updates",
+          "start": "2024-08-05 09:00:00",
+          "end": "2024-08-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.johnson@firm.com",
+            "michael.b@firm.com"
+          ],
+          "id": "evt_9e0d43f02f6841fd8909526a594a00db"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Miller Corp. Tax Planning",
+          "start": "2024-08-05 13:00:00",
+          "end": "2024-08-05 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "miller.ceo@millercorp.com"
+          ],
+          "id": "evt_8311953480fc4196a60a8273b7e4b065"
+        },
+        {
+          "day": "Monday",
+          "summary": "Work on Q2 Tax Filings",
+          "start": "2024-08-05 14:00:00",
+          "end": "2024-08-05 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b788f529606c429d87b7edd1f260e39b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call with IRS Agent - Case #2023-482",
+          "start": "2024-08-05 15:30:00",
+          "end": "2024-08-05 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com"
+          ],
+          "id": "evt_05820500004447068f785d8ea56ae8b3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2024-08-05 18:00:00",
+          "end": "2024-08-05 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_39f57e59d2604e798deae39afd732c46"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule the Miller Corp. Tax Planning meeting to 1 PM on Monday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-05 08:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-08-05 23:59:59",
+          "time_min": "2024-08-05 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_9e0d43f02f6841fd8909526a594a00db\",\n  \"summary\": \"Team Meeting - Tax Law Updates\",\n  \"start\": \"2024-08-05T09:00:00\",\n  \"end\": \"2024-08-05T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_ebcfce39\",\n        \"name\": \"david.lee\",\n        \"email\": \"david.lee@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_3067a98f\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_eec5135a\",\n        \"name\": \"michael.b\",\n        \"email\": \"michael.b@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_8311953480fc4196a60a8273b7e4b065\",\n  \"summary\": \"Client Meeting - Miller Corp. Tax Planning\",\n  \"start\": \"2024-08-05T10:30:00\",\n  \"end\": \"2024-08-05T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_3c122db4\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_fdf929f8\",\n        \"name\": \"miller.ceo\",\n        \"email\": \"miller.ceo@millercorp.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_b788f529606c429d87b7edd1f260e39b\",\n  \"summary\": \"Work on Q2 Tax Filings\",\n  \"start\": \"2024-08-05T14:00:00\",\n  \"end\": \"2024-08-05T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_05820500004447068f785d8ea56ae8b3\",\n  \"summary\": \"Call with IRS Agent - Case #2023-482\",\n  \"start\": \"2024-08-05T15:30:00\",\n  \"end\": \"2024-08-05T16:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_a2045096\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_39f57e59d2604e798deae39afd732c46\",\n  \"summary\": \"Kids' Soccer Practice\",\n  \"start\": \"2024-08-05T18:00:00\",\n  \"end\": \"2024-08-05T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2024-08-05 14:30:00",
+          "start": "2024-08-05 13:00:00",
+          "event_id": "evt_8311953480fc4196a60a8273b7e4b065"
+        },
+        "result": {
+          "message": "Event updated successfully.",
+          "event": {
+            "id": "evt_8311953480fc4196a60a8273b7e4b065",
+            "summary": "Client Meeting - Miller Corp. Tax Planning",
+            "start": "2024-08-05 13:00:00",
+            "end": "2024-08-05 14:30:00",
+            "description": "",
+            "attendees": [
+              "user=User(id='user_3c122db4', name='sarah.johnson', email='sarah.johnson@firm.com') attending='ACCEPT'",
+              "user=User(id='user_fdf929f8', name='miller.ceo', email='miller.ceo@millercorp.com') attending='ACCEPT'"
+            ],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've updated the Client Meeting - Miller Corp. Tax Planning to start at 13:00 on August 5, 2024 and end at 14:30 on August 5, 2024."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the Smith Family Taxes meeting?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the Smith Family Taxes event on Wednesday and return the attendees.",
+    "simulated_now": "2024-08-07 08:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Review Financial Documents",
+          "start": "2024-08-07 09:00:00",
+          "end": "2024-08-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5440a34dd60a42aba18fa7c548ab554b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting - Smith Family Taxes",
+          "start": "2024-08-07 10:30:00",
+          "end": "2024-08-07 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "smith.family@email.com"
+          ],
+          "id": "evt_9edda50652194dd7834e4e6bca4afa4f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Respond to IRS Inquiries",
+          "start": "2024-08-07 14:00:00",
+          "end": "2024-08-07 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f093f013fa77417287b2cf524ebc9bff"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Parent-Teacher Meeting",
+          "start": "2024-08-07 18:00:00",
+          "end": "2024-08-07 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com"
+          ],
+          "id": "evt_7aacb2479b114ab390eaf08fc35649d6"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Review Financial Documents",
+          "start": "2024-08-07 09:00:00",
+          "end": "2024-08-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5440a34dd60a42aba18fa7c548ab554b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting - Smith Family Taxes",
+          "start": "2024-08-07 10:30:00",
+          "end": "2024-08-07 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "smith.family@email.com"
+          ],
+          "id": "evt_9edda50652194dd7834e4e6bca4afa4f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Respond to IRS Inquiries",
+          "start": "2024-08-07 14:00:00",
+          "end": "2024-08-07 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f093f013fa77417287b2cf524ebc9bff"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Parent-Teacher Meeting",
+          "start": "2024-08-07 18:00:00",
+          "end": "2024-08-07 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com"
+          ],
+          "id": "evt_7aacb2479b114ab390eaf08fc35649d6"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the Smith Family Taxes meeting?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-07 08:00:00",
+          "day": "Wednesday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-08-07 08:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_5440a34dd60a42aba18fa7c548ab554b\",\n  \"summary\": \"Review Financial Documents\",\n  \"start\": \"2024-08-07T09:00:00\",\n  \"end\": \"2024-08-07T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_9edda50652194dd7834e4e6bca4afa4f\",\n  \"summary\": \"Client Meeting - Smith Family Taxes\",\n  \"start\": \"2024-08-07T10:30:00\",\n  \"end\": \"2024-08-07T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_a59931d9\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_b156f94e\",\n        \"name\": \"smith.family\",\n        \"email\": \"smith.family@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_f093f013fa77417287b2cf524ebc9bff\",\n  \"summary\": \"Respond to IRS Inquiries\",\n  \"start\": \"2024-08-07T14:00:00\",\n  \"end\": \"2024-08-07T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_7aacb2479b114ab390eaf08fc35649d6\",\n  \"summary\": \"Parent-Teacher Meeting\",\n  \"start\": \"2024-08-07T18:00:00\",\n  \"end\": \"2024-08-07T19:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_ef13f1cb\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_9990da16594b489ea920bd3fa7fd41d5\",\n  \"summary\": \"Prepare Tax Returns\",\n  \"start\": \"2024-08-08T09:00:00\",\n  \"end\": \"2024-08-08T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_fb1f523961fe40d78ab767b4138a5d10\",\n  \"summary\": \"Meet with Financial Advisors\",\n  \"start\": \"2024-08-08T11:30:00\",\n  \"end\": \"2024-08-08T12:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_7f1617c4\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_a1fbf705\",\n        \"name\": \"advisor\",\n        \"email\": \"advisor@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_dba0141bd1a74dee9afbd9522a9ce3b6\",\n  \"summary\": \"Review Tax Law Changes\",\n  \"start\": \"2024-08-08T14:00:00\",\n  \"end\": \"2024-08-08T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_e0f32e90b43b4f40be994201e5f54cf2\",\n  \"summary\": \"Dinner with friends\",\n  \"start\": \"2024-08-08T18:30:00\",\n  \"end\": \"2024-08-08T20:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_0e9b8810\",\n        \"name\": \"friend1\",\n        \"email\": \"friend1@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_86bc1e2d\",\n        \"name\": \"friend2\",\n        \"email\": \"friend2@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_734e010093b041df82ea9741a8d5f87c\",\n  \"summary\": \"Team Meeting - Project Planning\",\n  \"start\": \"2024-08-09T09:00:00\",\n  \"end\": \"2024-08-09T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_91dc8741\",\n        \"name\": \"david.lee\",\n        \"email\": \"david.lee@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_2cfbbc7e\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_4f028847\",\n        \"name\": \"michael.b\",\n        \"email\": \"michael.b@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_8de429926a8343abba0938d2b455e62b\",\n  \"summary\": \"Client Meeting - Johnson LLC Tax Strategy\",\n  \"start\": \"2024-08-09T10:30:00\",\n  \"end\": \"2024-08-09T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_9149b0be\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_f8dc91f7\",\n        \"name\": \"johnson.ceo\",\n        \"email\": \"johnson.ceo@johnsonllc.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_3b89a94fd6674cd0b99923e321afd7f8\",\n  \"summary\": \"Respond to IRS Inquiries\",\n  \"start\": \"2024-08-09T14:00:00\",\n  \"end\": \"2024-08-09T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_67042daf1b33417aba7448e27157cbc5\",\n  \"summary\": \"Kids' Pizza Night\",\n  \"start\": \"2024-08-09T18:00:00\",\n  \"end\": \"2024-08-09T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_752d985be8ce42f993298b255e35846e\",\n  \"summary\": \"Kids' Soccer Game\",\n  \"start\": \"2024-08-10T10:00:00\",\n  \"end\": \"2024-08-10T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_aaaf1db3403f46319f1d0d592d0be63d\",\n  \"summary\": \"Grocery Shopping\",\n  \"start\": \"2024-08-10T13:00:00\",\n  \"end\": \"2024-08-10T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_1ff5fae548c24047a7f39c6de8aa8004\",\n  \"summary\": \"Movie Night with Family\",\n  \"start\": \"2024-08-10T19:00:00\",\n  \"end\": \"2024-08-10T21:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_36b71facb7aa40f6af79c69c4d1b4b80\",\n  \"summary\": \"Brunch with Family\",\n  \"start\": \"2024-08-11T10:00:00\",\n  \"end\": \"2024-08-11T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_4df2732c\",\n        \"name\": \"spouse\",\n        \"email\": \"spouse@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_d075ec61a12542c4a5d8d6a0e9f32586\",\n  \"summary\": \"Visit Family\",\n  \"start\": \"2024-08-11T14:00:00\",\n  \"end\": \"2024-08-11T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "Sarah Johnson and smith.family are attending the Client Meeting - Smith Family Taxes."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What is the case number for the call with the IRS agent?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the Call with IRS Agent event on Monday and return the case number.",
+    "simulated_now": "2024-08-05 11:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tax Law Updates",
+          "start": "2024-08-05 09:00:00",
+          "end": "2024-08-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.johnson@firm.com",
+            "michael.b@firm.com"
+          ],
+          "id": "evt_82f3ecd1934c4ab49bcfe2e05292d5fb"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Miller Corp. Tax Planning",
+          "start": "2024-08-05 10:30:00",
+          "end": "2024-08-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "miller.ceo@millercorp.com"
+          ],
+          "id": "evt_1417e12bfbc3450e8f30b01f65065234"
+        },
+        {
+          "day": "Monday",
+          "summary": "Work on Q2 Tax Filings",
+          "start": "2024-08-05 14:00:00",
+          "end": "2024-08-05 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cff8dbc410c04cfc8b7239c8cc85df59"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call with IRS Agent - Case #2023-482",
+          "start": "2024-08-05 15:30:00",
+          "end": "2024-08-05 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com"
+          ],
+          "id": "evt_eb9c56d410154d45a017ea7bd0976f8a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2024-08-05 18:00:00",
+          "end": "2024-08-05 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_70d575d12adb4fecad8d757575ddb6fa"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tax Law Updates",
+          "start": "2024-08-05 09:00:00",
+          "end": "2024-08-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.johnson@firm.com",
+            "michael.b@firm.com"
+          ],
+          "id": "evt_82f3ecd1934c4ab49bcfe2e05292d5fb"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Miller Corp. Tax Planning",
+          "start": "2024-08-05 10:30:00",
+          "end": "2024-08-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "miller.ceo@millercorp.com"
+          ],
+          "id": "evt_1417e12bfbc3450e8f30b01f65065234"
+        },
+        {
+          "day": "Monday",
+          "summary": "Work on Q2 Tax Filings",
+          "start": "2024-08-05 14:00:00",
+          "end": "2024-08-05 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cff8dbc410c04cfc8b7239c8cc85df59"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call with IRS Agent - Case #2023-482",
+          "start": "2024-08-05 15:30:00",
+          "end": "2024-08-05 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com"
+          ],
+          "id": "evt_eb9c56d410154d45a017ea7bd0976f8a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2024-08-05 18:00:00",
+          "end": "2024-08-05 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_70d575d12adb4fecad8d757575ddb6fa"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What is the case number for the call with the IRS agent?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-05 11:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-08-05 11:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_1417e12bfbc3450e8f30b01f65065234\",\n  \"summary\": \"Client Meeting - Miller Corp. Tax Planning\",\n  \"start\": \"2024-08-05T10:30:00\",\n  \"end\": \"2024-08-05T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_00966aec\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_f1c4aa28\",\n        \"name\": \"miller.ceo\",\n        \"email\": \"miller.ceo@millercorp.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_cff8dbc410c04cfc8b7239c8cc85df59\",\n  \"summary\": \"Work on Q2 Tax Filings\",\n  \"start\": \"2024-08-05T14:00:00\",\n  \"end\": \"2024-08-05T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_eb9c56d410154d45a017ea7bd0976f8a\",\n  \"summary\": \"Call with IRS Agent - Case #2023-482\",\n  \"start\": \"2024-08-05T15:30:00\",\n  \"end\": \"2024-08-05T16:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_f886beb5\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_70d575d12adb4fecad8d757575ddb6fa\",\n  \"summary\": \"Kids' Soccer Practice\",\n  \"start\": \"2024-08-05T18:00:00\",\n  \"end\": \"2024-08-05T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_2838d56ab3f147ad818de186b6160851\",\n  \"summary\": \"Individual Tax Return Prep\",\n  \"start\": \"2024-08-06T09:00:00\",\n  \"end\": \"2024-08-06T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_efe41df742be47ada8e8bb3d69014dcf\",\n  \"summary\": \"New Client Consultation\",\n  \"start\": \"2024-08-06T11:30:00\",\n  \"end\": \"2024-08-06T12:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_4efabbdd\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_08eeeb61\",\n        \"name\": \"potential.client\",\n        \"email\": \"potential.client@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_2a6cc48326bb463597cee5cb231b1ae4\",\n  \"summary\": \"Work on Q2 Tax Filings\",\n  \"start\": \"2024-08-06T14:00:00\",\n  \"end\": \"2024-08-06T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_ddde33d2edea42a9990cf78ade222c1d\",\n  \"summary\": \"Dinner with Spouse\",\n  \"start\": \"2024-08-06T17:30:00\",\n  \"end\": \"2024-08-06T18:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_a38d572c\",\n        \"name\": \"spouse\",\n        \"email\": \"spouse@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_a0a6a137b7c442afadb827b6e1eeef2a\",\n  \"summary\": \"Review Financial Documents\",\n  \"start\": \"2024-08-07T09:00:00\",\n  \"end\": \"2024-08-07T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_ffd4572ef3d1481bbb4c8a16f193430f\",\n  \"summary\": \"Client Meeting - Smith Family Taxes\",\n  \"start\": \"2024-08-07T10:30:00\",\n  \"end\": \"2024-08-07T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_b3cb8073\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_a68b9bfa\",\n        \"name\": \"smith.family\",\n        \"email\": \"smith.family@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_df63dcccf5ee4cc8ab8be5e85d41f9e3\",\n  \"summary\": \"Respond to IRS Inquiries\",\n  \"start\": \"2024-08-07T14:00:00\",\n  \"end\": \"2024-08-07T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_8a9a47a22f0246d985edc189eb837c20\",\n  \"summary\": \"Parent-Teacher Meeting\",\n  \"start\": \"2024-08-07T18:00:00\",\n  \"end\": \"2024-08-07T19:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_023083fb\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_73f98acfa69b47539abab18b9aa45b52\",\n  \"summary\": \"Prepare Tax Returns\",\n  \"start\": \"2024-08-08T09:00:00\",\n  \"end\": \"2024-08-08T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_9483362b85124616b4f48d7ea938de5b\",\n  \"summary\": \"Meet with Financial Advisors\",\n  \"start\": \"2024-08-08T11:30:00\",\n  \"end\": \"2024-08-08T12:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_2e06e8cc\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_7c2715c1\",\n        \"name\": \"advisor\",\n        \"email\": \"advisor@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_5f782daae0414dc19595eeb396094016\",\n  \"summary\": \"Review Tax Law Changes\",\n  \"start\": \"2024-08-08T14:00:00\",\n  \"end\": \"2024-08-08T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_bf8e31bb0c5a412db7dbe44061a03c28\",\n  \"summary\": \"Dinner with friends\",\n  \"start\": \"2024-08-08T18:30:00\",\n  \"end\": \"2024-08-08T20:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_9807c4b7\",\n        \"name\": \"friend1\",\n        \"email\": \"friend1@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_1edc7c79\",\n        \"name\": \"friend2\",\n        \"email\": \"friend2@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_2151be16824042f4be49913776d1c6e9\",\n  \"summary\": \"Team Meeting - Project Planning\",\n  \"start\": \"2024-08-09T09:00:00\",\n  \"end\": \"2024-08-09T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_c644aee5\",\n        \"name\": \"david.lee\",\n        \"email\": \"david.lee@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_0c88eb6b\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_415371a5\",\n        \"name\": \"michael.b\",\n        \"email\": \"michael.b@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_47a5ac4b104741eca219939dfb822f86\",\n  \"summary\": \"Client Meeting - Johnson LLC Tax Strategy\",\n  \"start\": \"2024-08-09T10:30:00\",\n  \"end\": \"2024-08-09T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_ed0b288b\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_94eb3a21\",\n        \"name\": \"johnson.ceo\",\n        \"email\": \"johnson.ceo@johnsonllc.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_ed22324cd81d447cb8bab346aefd43e2\",\n  \"summary\": \"Respond to IRS Inquiries\",\n  \"start\": \"2024-08-09T14:00:00\",\n  \"end\": \"2024-08-09T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_5af82776f8ec41b6abd5f8ed6528b94d\",\n  \"summary\": \"Kids' Pizza Night\",\n  \"start\": \"2024-08-09T18:00:00\",\n  \"end\": \"2024-08-09T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_9a705ca95460456b8ba787fa98ccde73\",\n  \"summary\": \"Kids' Soccer Game\",\n  \"start\": \"2024-08-10T10:00:00\",\n  \"end\": \"2024-08-10T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_8f2ca2f0b02e44b1bb05d804d7c517e6\",\n  \"summary\": \"Grocery Shopping\",\n  \"start\": \"2024-08-10T13:00:00\",\n  \"end\": \"2024-08-10T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_adb365d3f6714fdd92000348304b9e00\",\n  \"summary\": \"Movie Night with Family\",\n  \"start\": \"2024-08-10T19:00:00\",\n  \"end\": \"2024-08-10T21:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_03681dd601104330a8af3cb340dfcccc\",\n  \"summary\": \"Brunch with Family\",\n  \"start\": \"2024-08-11T10:00:00\",\n  \"end\": \"2024-08-11T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_e6f74d09\",\n        \"name\": \"spouse\",\n        \"email\": \"spouse@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_098b8424e4f24b5fa79f622a4db80a7f\",\n  \"summary\": \"Visit Family\",\n  \"start\": \"2024-08-11T14:00:00\",\n  \"end\": \"2024-08-11T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "The case number for the call with the IRS agent is 2023-482.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What meetings do I have on Friday and how long are they?",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "List all events on Friday and calculate the duration of each event.",
+    "simulated_now": "2024-08-09 08:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Meeting - Project Planning",
+          "start": "2024-08-09 09:00:00",
+          "end": "2024-08-09 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.johnson@firm.com",
+            "michael.b@firm.com"
+          ],
+          "id": "evt_a017ba2dcf0c4938819db09fb63116ed"
+        },
+        {
+          "day": "Friday",
+          "summary": "Client Meeting - Johnson LLC Tax Strategy",
+          "start": "2024-08-09 10:30:00",
+          "end": "2024-08-09 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "johnson.ceo@johnsonllc.com"
+          ],
+          "id": "evt_48d98d18da9f46cfb6c9a0421fdf2fbe"
+        },
+        {
+          "day": "Friday",
+          "summary": "Respond to IRS Inquiries",
+          "start": "2024-08-09 14:00:00",
+          "end": "2024-08-09 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1908ce1b62414908ab5f3899dd464c78"
+        },
+        {
+          "day": "Friday",
+          "summary": "Kids' Pizza Night",
+          "start": "2024-08-09 18:00:00",
+          "end": "2024-08-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7dbe23ed7c794c8a861fc1b6a1dbf7bd"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Meeting - Project Planning",
+          "start": "2024-08-09 09:00:00",
+          "end": "2024-08-09 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.johnson@firm.com",
+            "michael.b@firm.com"
+          ],
+          "id": "evt_a017ba2dcf0c4938819db09fb63116ed"
+        },
+        {
+          "day": "Friday",
+          "summary": "Client Meeting - Johnson LLC Tax Strategy",
+          "start": "2024-08-09 10:30:00",
+          "end": "2024-08-09 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "johnson.ceo@johnsonllc.com"
+          ],
+          "id": "evt_48d98d18da9f46cfb6c9a0421fdf2fbe"
+        },
+        {
+          "day": "Friday",
+          "summary": "Respond to IRS Inquiries",
+          "start": "2024-08-09 14:00:00",
+          "end": "2024-08-09 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1908ce1b62414908ab5f3899dd464c78"
+        },
+        {
+          "day": "Friday",
+          "summary": "Kids' Pizza Night",
+          "start": "2024-08-09 18:00:00",
+          "end": "2024-08-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7dbe23ed7c794c8a861fc1b6a1dbf7bd"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What meetings do I have on Friday and how long are they?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-09 08:00:00",
+          "day": "Friday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-08-09 23:59:59",
+          "time_min": "2024-08-09 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_a017ba2dcf0c4938819db09fb63116ed\",\n  \"summary\": \"Team Meeting - Project Planning\",\n  \"start\": \"2024-08-09T09:00:00\",\n  \"end\": \"2024-08-09T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_695359be\",\n        \"name\": \"david.lee\",\n        \"email\": \"david.lee@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_8e53bbe3\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_3353ed7c\",\n        \"name\": \"michael.b\",\n        \"email\": \"michael.b@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_48d98d18da9f46cfb6c9a0421fdf2fbe\",\n  \"summary\": \"Client Meeting - Johnson LLC Tax Strategy\",\n  \"start\": \"2024-08-09T10:30:00\",\n  \"end\": \"2024-08-09T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_75b81439\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_a6f00647\",\n        \"name\": \"johnson.ceo\",\n        \"email\": \"johnson.ceo@johnsonllc.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_1908ce1b62414908ab5f3899dd464c78\",\n  \"summary\": \"Respond to IRS Inquiries\",\n  \"start\": \"2024-08-09T14:00:00\",\n  \"end\": \"2024-08-09T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_7dbe23ed7c794c8a861fc1b6a1dbf7bd\",\n  \"summary\": \"Kids' Pizza Night\",\n  \"start\": \"2024-08-09T18:00:00\",\n  \"end\": \"2024-08-09T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. On Friday, August 9, 2024, you have these meetings:\n- From 9:00 AM to 10:00 AM, you have \"Team Meeting - Project Planning\", which lasts 1 hour.\n- From 10:30 AM to 12:00 PM, you have \"Client Meeting - Johnson LLC Tax Strategy\", which lasts 1.5 hours.\n- From 2:00 PM to 3:00 PM, you have \"Respond to IRS Inquiries\", which lasts 1 hour.\n- From 6:00 PM to 7:00 PM, you have \"Kids' Pizza Night\", which lasts 1 hour."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events for today, Wednesday.",
+    "simulated_now": "2024-08-07 08:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Review Financial Documents",
+          "start": "2024-08-07 09:00:00",
+          "end": "2024-08-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f89acb67521a4cc1af57b82ca76c496f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting - Smith Family Taxes",
+          "start": "2024-08-07 10:30:00",
+          "end": "2024-08-07 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "smith.family@email.com"
+          ],
+          "id": "evt_d3b3b9062bc44ac3ab29987e58384898"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Respond to IRS Inquiries",
+          "start": "2024-08-07 14:00:00",
+          "end": "2024-08-07 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ac8343cb02bc4f8496baa2b5d4a9b900"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Parent-Teacher Meeting",
+          "start": "2024-08-07 18:00:00",
+          "end": "2024-08-07 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com"
+          ],
+          "id": "evt_2a36fc0a13dc43dbadb18af4b5906335"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Review Financial Documents",
+          "start": "2024-08-07 09:00:00",
+          "end": "2024-08-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f89acb67521a4cc1af57b82ca76c496f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting - Smith Family Taxes",
+          "start": "2024-08-07 10:30:00",
+          "end": "2024-08-07 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "smith.family@email.com"
+          ],
+          "id": "evt_d3b3b9062bc44ac3ab29987e58384898"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Respond to IRS Inquiries",
+          "start": "2024-08-07 14:00:00",
+          "end": "2024-08-07 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ac8343cb02bc4f8496baa2b5d4a9b900"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Parent-Teacher Meeting",
+          "start": "2024-08-07 18:00:00",
+          "end": "2024-08-07 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com"
+          ],
+          "id": "evt_2a36fc0a13dc43dbadb18af4b5906335"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-07 08:00:00",
+          "day": "Wednesday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-08-07 23:59:59",
+          "time_min": "2024-08-07 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_f89acb67521a4cc1af57b82ca76c496f\",\n  \"summary\": \"Review Financial Documents\",\n  \"start\": \"2024-08-07T09:00:00\",\n  \"end\": \"2024-08-07T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_d3b3b9062bc44ac3ab29987e58384898\",\n  \"summary\": \"Client Meeting - Smith Family Taxes\",\n  \"start\": \"2024-08-07T10:30:00\",\n  \"end\": \"2024-08-07T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_eea05dfb\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_46da1af2\",\n        \"name\": \"smith.family\",\n        \"email\": \"smith.family@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_ac8343cb02bc4f8496baa2b5d4a9b900\",\n  \"summary\": \"Respond to IRS Inquiries\",\n  \"start\": \"2024-08-07T14:00:00\",\n  \"end\": \"2024-08-07T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_2a36fc0a13dc43dbadb18af4b5906335\",\n  \"summary\": \"Parent-Teacher Meeting\",\n  \"start\": \"2024-08-07T18:00:00\",\n  \"end\": \"2024-08-07T19:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_561ef632\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today, August 7, 2024, you have four entries: The first is at 9am for 'Review Financial Documents.' The second is at 10:30am for 'Client Meeting - Smith Family Taxes'. The third is at 2pm for 'Respond to IRS Inquiries', and the final one is at 6pm for 'Parent-Teacher Meeting'."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on tomorrow's schedule?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events for tomorrow, Friday.",
+    "simulated_now": "2024-08-08 15:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Meeting - Project Planning",
+          "start": "2024-08-09 09:00:00",
+          "end": "2024-08-09 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.johnson@firm.com",
+            "michael.b@firm.com"
+          ],
+          "id": "evt_216d7bad19d84f3da91c52aa32551072"
+        },
+        {
+          "day": "Friday",
+          "summary": "Client Meeting - Johnson LLC Tax Strategy",
+          "start": "2024-08-09 10:30:00",
+          "end": "2024-08-09 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "johnson.ceo@johnsonllc.com"
+          ],
+          "id": "evt_e0e58897c02846c9887cb9160508be18"
+        },
+        {
+          "day": "Friday",
+          "summary": "Respond to IRS Inquiries",
+          "start": "2024-08-09 14:00:00",
+          "end": "2024-08-09 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7331393a258e42fc98ea787129f6b62a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Kids' Pizza Night",
+          "start": "2024-08-09 18:00:00",
+          "end": "2024-08-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e7ee3665ac064ec285096e97da9730d5"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Meeting - Project Planning",
+          "start": "2024-08-09 09:00:00",
+          "end": "2024-08-09 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.johnson@firm.com",
+            "michael.b@firm.com"
+          ],
+          "id": "evt_216d7bad19d84f3da91c52aa32551072"
+        },
+        {
+          "day": "Friday",
+          "summary": "Client Meeting - Johnson LLC Tax Strategy",
+          "start": "2024-08-09 10:30:00",
+          "end": "2024-08-09 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@firm.com",
+            "johnson.ceo@johnsonllc.com"
+          ],
+          "id": "evt_e0e58897c02846c9887cb9160508be18"
+        },
+        {
+          "day": "Friday",
+          "summary": "Respond to IRS Inquiries",
+          "start": "2024-08-09 14:00:00",
+          "end": "2024-08-09 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7331393a258e42fc98ea787129f6b62a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Kids' Pizza Night",
+          "start": "2024-08-09 18:00:00",
+          "end": "2024-08-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e7ee3665ac064ec285096e97da9730d5"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on tomorrow's schedule?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-08 15:00:00",
+          "day": "Thursday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-08-09 23:59:59",
+          "time_min": "2024-08-09 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_216d7bad19d84f3da91c52aa32551072\",\n  \"summary\": \"Team Meeting - Project Planning\",\n  \"start\": \"2024-08-09T09:00:00\",\n  \"end\": \"2024-08-09T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_7b466e8b\",\n        \"name\": \"david.lee\",\n        \"email\": \"david.lee@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_095448f1\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_0ac4a43e\",\n        \"name\": \"michael.b\",\n        \"email\": \"michael.b@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_e0e58897c02846c9887cb9160508be18\",\n  \"summary\": \"Client Meeting - Johnson LLC Tax Strategy\",\n  \"start\": \"2024-08-09T10:30:00\",\n  \"end\": \"2024-08-09T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_38b98a55\",\n        \"name\": \"sarah.johnson\",\n        \"email\": \"sarah.johnson@firm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_41b257c4\",\n        \"name\": \"johnson.ceo\",\n        \"email\": \"johnson.ceo@johnsonllc.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_7331393a258e42fc98ea787129f6b62a\",\n  \"summary\": \"Respond to IRS Inquiries\",\n  \"start\": \"2024-08-09T14:00:00\",\n  \"end\": \"2024-08-09T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_e7ee3665ac064ec285096e97da9730d5\",\n  \"summary\": \"Kids' Pizza Night\",\n  \"start\": \"2024-08-09T18:00:00\",\n  \"end\": \"2024-08-09T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Tomorrow, August 9, you have four entries: The first is at 9am for an hour, called \"Team Meeting - Project Planning\". The second is at 10:30am for 1.5 hours, called \"Client Meeting - Johnson LLC Tax Strategy\". The third is at 2pm for an hour, called \"Respond to IRS Inquiries\", and the final one is at 6pm for an hour, called \"Kids' Pizza Night\"."
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

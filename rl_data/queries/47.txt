@@ -1,0 +1,141 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Client Meeting' on Tuesday at 2 PM with client@email.com.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to add 'Client Meeting' on Tuesday, April 23, 2024, at 2 PM with client@email.com as an attendee.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-04-21T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a haircut appointment for Saturday at 9 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to add 'haircut appointment' on Saturday, April 27, 2024, at 9 AM with no attendees.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-04-21T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy Wednesday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for Wednesday, April 24, 2024, from 8:00 AM to 12:00 PM and respond to the user based on the events found.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-04-24T07:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Friday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for Friday, April 26, 2024, from 12:00 PM to 6:00 PM and respond to the user based on the events found.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-04-26T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the team meeting on Monday to 10:30 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for Monday, April 22, 2024, find the 'Team Meeting' event, and call update_event to update its start time to 10:30 AM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-04-22T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the dinner with friends on Thursday to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for Thursday, April 25, 2024, find the 'Dinner with friends' event, and call update_event to update its start time to 7:30 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-04-25T15:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Maintenance on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for Tuesday, April 23, 2024, find the 'Maintenance - Commercial Building HVAC' event, and respond to the user with the attendees' information: buildingmanager@email.com.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-04-23T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my daughter's soccer game on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for Saturday, April 27, 2024, find the 'Daughter's soccer game' event, and respond to the user with the start time: 10:00 AM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-04-27T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Move the service call on Monday to Thursday at the same time.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events for Monday, April 22, 2024, find 'Service Call - Heating System Repair' event, get the start time (1:00 PM). Then call delete_event to delete it. Finally, call create_event to add 'Service Call - Heating System Repair' on Thursday, April 25, 2024, at 1:00 PM with customer@email.com as an attendee.",
+        "addressed_days": [
+            "Monday",
+            "Thursday"
+        ],
+        "current_time": "2024-04-22T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Book another 30 minutes for the Ventilation Problem on Thursday.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events for Thursday, April 25, 2024, find the 'Service Call - Ventilation Problem' event. Call update_event to increase its end time by 30 minutes.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-04-25T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for Monday, April 22, 2024, and respond to the user based on the events found.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-04-22T07:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule AC Failure",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events, find the 'Emergency Call - AC Failure' event. Respond by asking to what date and time the user wants to reschedule the event.",
+        "addressed_days": [],
+        "current_time": "2024-04-23T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for Monday, April 22, 2024, and respond to the user based on the events found.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-04-22T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What is on my schedule tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for Wednesday, April 24, 2024, and respond to the user based on the events found.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-04-23T14:00:00"
+    }
+]

@@ -1,0 +1,154 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Lunch' on Tuesday at 12:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to add 'Team Lunch' to the calendar on March 26, 2024 at 12:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-03-24T18:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for Friday to discuss project updates at 10 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to add a meeting called 'project updates' to the calendar on March 29, 2024 at 10 AM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-03-24T18:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing for dinner this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for the entire week and find the dinner events.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-03-24T18:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What meetings do I have with plant supervisors?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to search for meetings and then filter for attendees including plant_supervisor@email.com",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-03-24T18:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move the PLC training to 2 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the PLC Troubleshooting Training Session event and update its start time to 2 PM on Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-03-24T18:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the safety protocol review; I'm running late",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Review new safety protocols' event and update its start time on Tuesday to a later time, e.g., 11:30 AM + 30 minutes = 12:00 PM",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-03-26T11:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the soccer game on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event 'Attend Kids Soccer Game' on Saturday and return its time: 9:00 AM - 12:00 PM",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-03-24T18:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the pre-shift meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Pre-Shift Safety Meeting' event on Monday and return its attendees: plant_supervisor@email.com, other_electricians@email.com.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-03-24T18:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the equipment vendor call; can you ask my wife to do it instead?",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Call with equipment vendor' on Tuesday, and update attendees to wife@email.com; also, add a note in the description that the user cannot attend.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-03-24T18:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Am I free to go to the movies Wednesday evening?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events for Wednesday between 6 PM and 11 PM to check if the user has any conflicting events.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-03-24T18:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Safety meeting...?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events, find the event 'Pre-Shift Safety Meeting' on Monday and return its details.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-03-24T18:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner Friday...",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events, find the event 'Dinner Out with Wife' on Friday and return its details.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-03-24T18:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to list all events for Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-03-25T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to list all events for Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-03-26T18:00:00"
+    }
+]

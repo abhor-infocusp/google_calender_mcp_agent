@@ -1,0 +1,156 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an appointment on Wednesday called 'Dentist' from 2 PM to 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Dentist', start time '2025-06-18T14:00:00', end time '2025-06-18T15:00:00', and no attendees or description.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-06-15T23:59:59"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for me this Friday to discuss the Q3 budget. Please schedule it for 10 AM, and it should last an hour. Invite clinicmanager@clinic.com.",
+        "complexity": "Medium",
+        "expected_behavior": "Call create_event with summary 'Q3 budget discussion', start time '2025-06-20T10:00:00', end time '2025-06-20T11:00:00', attendee 'clinicmanager@clinic.com', and no description.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-06-15T23:59:59"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing for dinner this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find all events occurring between 2025-06-16 and 2025-06-22. Filter the results for any event containing the word dinner. Show the summary of the event and the day it occurs.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-06-15T23:59:59"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Check my schedule on Thursday.",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find all events occurring on 2025-06-19.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-06-15T23:59:59"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "I can't make it to the meeting with the pharmaceutical representative on Monday. Can we move it to Tuesday at the same time?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find an event with attendees pharmaRep@email.com on 2025-06-16. If found, update the event's start time to 2025-06-17T01:30:00 and end time to 2025-06-17T02:30:00.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday"
+        ],
+        "current_time": "2025-06-15T23:59:59"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "The support group for working mothers on Tuesday is now only 30 minutes. Shorten the event.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find an event with attendees supportgroup@email.com on 2025-06-17. If found, update the event's end time to 2025-06-17T04:30:00.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-06-15T23:59:59"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my dinner with friends on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find an event with attendees friend1@email.com and friend2@email.com on 2025-06-19. Report the start and end time of the event.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-06-15T23:59:59"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is invited to the Lunch on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find event summary 'Lunch with Pediatrician Colleague' on 2025-06-18. Report the attendees of the event.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-06-15T23:59:59"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move my patient appointments on Friday to Thursday?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find all Patient Appointments on Friday (2025-06-20) between 9 AM to 12 PM, and from 1:30 PM to 4:30 PM. Then call update_event on each event found to change the date to Thursday (2025-06-19) while preserving the time.",
+        "addressed_days": [
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2025-06-15T23:59:59"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline the family movie night this Friday and move my weekly meeting with the clinic manager to that slot.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events for event with summary 'Family Movie Night' on Friday (2025-06-20). Call respond_to_event for that event with DECLINE. Then call list_events for event with attendees clinicmanager@clinic.com on Friday (2025-06-20). If found, call update_event to move the event to start at 6:30 PM and end at 7:30 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-06-15T23:59:59"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule dinner",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find event containing the word dinner. Ask clarifying questions: 'Which dinner event would you like to reschedule and to what time/date?'",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-06-15T23:59:59"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel appointment allergist",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find an event with attendees allergist@hospital.com. Delete the event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-06-15T23:59:59"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What is on my schedule today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find all events occurring on 2025-06-17.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-06-17T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any meetings yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find all events occurring on 2025-06-20.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-06-21T08:00:00"
+    }
+]

@@ -1,0 +1,145 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Meet with Jason' on July 16th at 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule 'Meet with Jason' for July 16th at 3 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-14T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting named 'Discuss Project X' for July 19th at 11 AM with Emily and John.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule 'Discuss Project X' for July 19th at 11 AM with Emily and John.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-07-14T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events, filtered to Wednesday afternoon (12 PM to 6 PM), then present the info to the user.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-17T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Anything happening with Tom this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for the week and filter the results to only display events with Tom.",
+        "addressed_days": [
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-07-16T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the presentation to the marketing team to 3 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Presentation to Marketing Team - Q3 Campaign Insights' event, then call update_event to change the start time to 3 PM on Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-15T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the meeting with Susan to 3:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Meeting with Susan (CTO) - Data Science Roadmap' event on Wednesday, then call update_event to change the start time to 3:30 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-17T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the Model Validation Code Review on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Model Validation Code Review' event on Thursday and extract/return the event time to the user.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-07-18T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Project Scope Meeting on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Project Scope Meeting - New Recommendation Engine' event on Tuesday and extract/return the attendees.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-16T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is David free on Thursday at 10 AM?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events for Thursday between 10 AM and 11 AM to check if David has any conflicts during that time. Return the conflict status to the user.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-07-18T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I'd like to schedule a one-hour meeting with Emily on Friday. What times is she available?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events for Friday to determine Emily's availability. Return times where a 1-hour block exists without conflict.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-07-19T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule soccer.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find 'Lily's Soccer Practice' event, then ask user what day and time to reschedule it to. Once the information is given, call update_event to change the start and end time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-15T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Move to Friday?",
+        "complexity": "Medium",
+        "expected_behavior": "Follow-up question from a previous query. Assuming user just asked about scheduling or rescheduling something, list the user's events for Friday to make sure there are no conflicts, then update the requested event to Friday.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-07-19T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find all events for the current day (July 15th).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-15T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find all events for the next day (July 16th).",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-15T16:00:00"
+    }
+]

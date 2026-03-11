@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Board Meeting' on June 10th at 3 PM for 1 hour.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with the summary 'Board Meeting' on Wednesday, June 10th, from 3:00 PM to 4:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-06-07T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me a doctor's appointment this Friday at 10 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with the summary 'Doctor's Appointment' on Friday, June 12th, at 10:00 AM for 1 hour.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-06-07T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Wednesday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events on Wednesday, June 10th, between 9:00 AM and 12:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-06-10T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Who am I having dinner with this Saturday?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event on Saturday, June 13th that matches 'Dinner' and return the attendees: Elena.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-06-13T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule my meeting with the junior associate on Monday to 3 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event on Monday, June 8th, with Emily as an attendee, and update the start time to 3:00 PM and the end time to 4:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-06-08T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of Leo's soccer practice on Thursday to 5:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event with 'Leo's soccer practice' on Thursday, June 11th, and update the start time to 5:30 PM and the end time to 6:30 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-06-11T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my court hearing on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Court Hearing - Child Custody Case' event on Monday, June 8th, and return the start time: 10:30 AM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-06-08T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the trial prep on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Trial Prep with Team' event on Friday, June 12th, and return the attendees: Sarah, David, Emily.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-06-12T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my client meeting about the pre-nuptial agreement on Thursday to 4:00 PM, but only if I'm not busy then.",
+        "complexity": "High",
+        "expected_behavior": "First, list events on Thursday, June 11th, between 4:00 PM and 5:00 PM. If there are no events, update the 'Client Meeting - Pre-nuptial Agreement' event to start at 4:00 PM and end at 5:30 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-06-11T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I'd like to schedule a meeting with Jessica for lunch on Wednesday, but I don't want it to overlap with anything else.",
+        "complexity": "High",
+        "expected_behavior": "List all events on Wednesday, June 10th between 1:00 PM and 2:00 PM. If the result is empty, do nothing. If there are events, do nothing, it means that there is overlap.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-06-10T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner with Leo?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event called 'Dinner with Leo' on the calendar and display the details, including the date and time: Friday, June 12th, from 7:00 PM to 8:30 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-06-12T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule deposition.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event called 'Deposition - Asset Division' and ask for clarification on the new date and time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-06-09T12:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Monday, June 8th.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-06-08T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow's schedule?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Wednesday, June 10th.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-06-09T15:00:00"
+    }
+]

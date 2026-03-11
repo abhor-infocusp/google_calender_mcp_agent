@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please add a dentist appointment to my calendar for Thursday at 10 AM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event called 'Dentist Appointment' on Thursday, October 12, 2023, from 10:00 AM to 11:00 AM. No attendees are provided.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-10-08T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "I need to schedule a meeting with my accountant on Wednesday at 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event called 'Meeting with Accountant' on Wednesday, October 11, 2023, from 3:00 PM to 4:00 PM. No attendees are provided.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-10-08T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's happening at lunchtime on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent needs to determine what time lunchtime is (likely 12:00 PM) and then use list_events to find events on Monday, October 9, 2023, between 12:00 PM and 1:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-10-09T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after the site visit on Tuesday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should first use list_events to find the 'Site Visit: Inspection of Highway Overpass' event on Tuesday, October 10, 2023, and then find any events scheduled after 11:00 AM on the same day.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-10-10T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move the client consultation on Monday back by one hour?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should locate the 'Client Consultation: Discuss Project Timeline and Budget' event on Monday, October 9, 2023, and then update the event's start time to 2:00 PM and end time to 4:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-10-09T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update the location for dinner with neighbors on Saturday. Add neighbor3@email.com as well.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Dinner with Neighbors' event on Saturday, October 14, 2023, and update the attendees to include neighbor3@email.com. No specific location is listed in the calendar so the agent cannot update this.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-10-14T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the mentoring session on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use list_events to find the 'Mentoring Session: Junior Engineer Support' event on Wednesday, October 11, 2023, and return the start time, which is 8:30 AM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-10-11T07:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the meeting with the construction foreman on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use list_events to find the 'Meeting with Construction Foreman' event on Tuesday, October 10, 2023, and then return the attendees, which is frank.thomas@email.com.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-10-10T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to reschedule the bridge design for the Riverview Project on Thursday to Friday morning. Will that interfere with anything else?",
+        "complexity": "High",
+        "expected_behavior": "The agent should first find the 'Bridge Design: Riverview Project Refinements' on Thursday, October 12, 2023. Then, it should list_events on Friday, October 13, 2023, between 9:00 AM and 11:00 AM to check for conflicts. If no conflicts, the agent should update the 'Bridge Design: Riverview Project Refinements' event to Friday from 9:00 AM to 11:00 AM. If there are conflicts, the agent should report those conflicts to the user.",
+        "addressed_days": [
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2023-10-12T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my children's soccer practice on Monday so it starts immediately after the client consultation that day.  Will that work?",
+        "complexity": "High",
+        "expected_behavior": "The agent should first find the 'Client Consultation: Discuss Project Timeline and Budget' on Monday, October 9, 2023, which ends at 3:00 PM. Then, it should find the 'Children's Soccer Practice' event on Monday, October 9, 2023. Then the agent list_events on Monday, October 9, 2023, starting from 3:00PM, checking if anything conflicts with the new event. If no conflicts are found, it will move the soccer practice event to 3:00 PM",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-10-09T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule structural analysis",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should list_events for Structural Analysis, find 'Structural Analysis: Review Overpass Inspection Data' on Tuesday, October 10, 2023, and then prompt the user for the new desired date and time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-10-10T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "cancel inspector1",
+        "complexity": "Medium",
+        "expected_behavior": "The agent must identify the 'Meeting with Government Inspectors' event on Thursday, October 12, 2023, and then remove 'inspector1@email.com' from the attendee list.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-10-12T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use get_current_time to find the current date, then use list_events to find all events on that day. Because addressed days is used, the current date is the same as the addressed day.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-10-11T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have anything scheduled yesterday with Jake?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should determine that 'yesterday' was Tuesday, October 10, 2023. Then, the agent should use list_events for Tuesday, October 10, 2023 and filter for meetings with jake.smith@email.com as an attendee.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-10-11T08:00:00"
+    }
+]

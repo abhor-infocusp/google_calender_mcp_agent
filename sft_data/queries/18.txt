@@ -1,0 +1,146 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create a new event called 'HVAC Maintenance' for Wednesday, June 5th, from 3:30 PM to 5:00 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the provided summary, start time, and end time, without any attendees or description.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-06-02T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you book me in for 'Client Meeting' on Friday at 2 PM for 30 minutes?",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with the summary 'Client Meeting' on Friday, June 7th, starting at 2:00 PM and ending at 2:30 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-06-02T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after picking up Liam on Thursday?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Pick up Liam from school' event on Thursday, June 6th, and then check for any events scheduled immediately after that time. Respond based on whether there is an event afterwards, mentioning dinner with Mom.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-06-06T14:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's happening at the end of the week?",
+        "complexity": "Medium",
+        "expected_behavior": "Look for events on Saturday and Sunday, June 8th and 9th. Respond mentioning Liam's soccer game, checking HVAC system at the neighbor's house, grocery shopping, dinner at a friend's house, Brunch with Mom, and Park with Liam and meal planning.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-06-02T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my 1 PM appointment on Monday to 2 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Install new thermostat at Brown Apartment' event on Monday, June 3rd, and update its start time to 2:00 PM and end time to 4:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-06-03T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time for dinner with Mom on Thursday to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Mom' event on Thursday, June 6th, and update the start time to 7:30 PM and the end time to 8:30 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-06-06T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me who to contact for the routine maintenance on Tuesday.",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Routine maintenance at First National Bank' event on Tuesday, June 4th, and extract the contact information (bankmanager@email.com).",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-06-04T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What is the training about on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Attend HVAC Tech Training: New Refrigerant Handling' event on Wednesday, June 5th, and extract the summary to provide the user with the training topic.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-06-05T07:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you schedule a meeting with leadtech@email.com for one hour on Tuesday at 8:30 AM? Also, what else is on?",
+        "complexity": "High",
+        "expected_behavior": "The agent first checks for conflicts with the existing 'Team meeting' event. Recognizes that there's already an event. Acknowledge the conflict, then end.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-06-03T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to reschedule diagnosing the faulty compressor at Smith Office Building from Friday morning to Thursday morning. Can you do that?",
+        "complexity": "High",
+        "expected_behavior": "Find both 'Diagnose faulty compressor at Smith Office Building' events (one on Monday, one on Friday). Delete the Friday, June 7th event and moves the Thursday, June 6th slot and move diagnose faulty compressor to Thursday, June 6th to 10:30 AM.",
+        "addressed_days": [
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-06-03T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Johnson.",
+        "complexity": "Medium",
+        "expected_behavior": "Find all events related to Johnson (Johnson Residence). Ask user to specify which Johnson Residence event. Then, once clarified, proceed to reschedule that specific event, prompting for the new desired time.",
+        "addressed_days": [
+            "Monday",
+            "Thursday"
+        ],
+        "current_time": "2024-06-03T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change Smith.",
+        "complexity": "Medium",
+        "expected_behavior": "Find all events related to Smith (Smith Office Building). Ask user to specify which Smith Office Building event they mean. Then, once clarified, proceed to reschedule, prompting for the new desired time and date.",
+        "addressed_days": [
+            "Monday",
+            "Friday"
+        ],
+        "current_time": "2024-06-06T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Find the current date (Monday, June 3rd) and list all events scheduled for that day. List dropping off Liam, service call at Johnson Residence, Diagnose faulty compressor at Smith Office Building, Install new thermostat at Brown Apartment, Pick up Liam, and dinner with Liam.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-06-03T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Find the date for tomorrow (Tuesday, June 4th) and list all events scheduled for that day. List dropping off Liam, Team meeting, Routine maintenance, Order parts, Troubleshoot AC unit, Pick up Liam.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-06-03T15:00:00"
+    }
+]

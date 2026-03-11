@@ -1,0 +1,165 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please add a meeting to my calendar for Wednesday to discuss the new marketing strategy. It should be at 3 PM and last for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event on Wednesday, August 21, 2024, from 3:00 PM to 4:00 PM with the summary 'Discuss the new marketing strategy'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-08-18T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me a dentist appointment for this Friday at 11:00 AM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event on Friday, August 23, 2024, at 11:00 AM with the summary 'Dentist appointment'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-08-18T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I meeting with any authors this week?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should list all events that include 'author' in the attendee list between Monday and Sunday. Then, it should inform the user if they have any check-ins with an author scheduled this week.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-08-18T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing for fun this week?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should list all events that indicate leisure activities, such as the Yoga Class on Tuesday, Movie Night on Saturday and Relaxing in the Park on Sunday.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-08-18T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we push the client meeting on Friday back by one hour?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Client Meeting - Project \"The Magical Treehouse\"' event on Friday. It should then update the start time to 10:00 AM and the end time to 11:00 AM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-08-18T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "I need to cancel my dinner with friends on Thursday.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Dinner with friends' event on Thursday and delete it.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-08-18T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my meeting with the accountant on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Meeting with Accountant' event on Wednesday and return the start time, 11:30 AM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-08-18T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having dinner with on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should identify the 'Dinner with Partner' event on Monday and inform the user they are having dinner with their partner.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-08-18T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a workout session every day this week, but only if I am free.",
+        "complexity": "High",
+        "expected_behavior": "The agent should check the calendar for each day (Monday-Sunday). If there are no conflicting events, it should create a 'Workout Session' event at a default time (e.g., 7:00 AM - 8:00 AM). If there are conflicts, the agent should report which days have conflicts.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-08-18T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Check if I have time to meet with bookeditor@publisher.com this week and if not, suggest another time.",
+        "complexity": "High",
+        "expected_behavior": "The agent should find the 'Client Meeting - Project \"The Little Bear's Adventure\"' event on Monday and confirm the time, indicating no conflicts. Then it would search for free blocks on Tuesday, Wednesday, Thursday and Friday and suggest different options if needed.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-08-18T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule meeting with the author...",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should ask for clarification: 'Which author meeting are you referring to? Please provide the date or time of the meeting.' After user provides clarification, reschedule.",
+        "addressed_days": [
+            "Tuesday",
+            "Thursday"
+        ],
+        "current_time": "2024-08-18T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner, maybe Saturday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should ask the user to provide more details. The agent can ask, 'Do you want to schedule a dinner on Saturday? If yes, please provide the time and who you will be having dinner with.'",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-08-18T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "If the current time is Monday, the agent should list the events for Monday, August 19, 2024.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-08-19T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any client meetings yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "If the current time is Tuesday, the agent should check the calendar for Monday, August 19, 2024, and list any events containing 'Client Meeting'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-08-20T08:00:00"
+    }
+]

@@ -1,0 +1,168 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Client Meeting' for Wednesday at 3 PM for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Client Meeting', start time of 2025-12-17T15:00:00, end time of 2025-12-17T16:00:00, no attendees, and no description.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-12-14T23:59:59"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a dentist appointment for Friday at 10 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Dentist Appointment', start time of 2025-12-19T10:00:00, end time of 2025-12-19T11:00:00, no attendees, and no description.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-12-14T23:59:59"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Monday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Monday between 9 AM and 12 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-12-15T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Check my schedule for Saturday afternoon.",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Saturday between 12 PM and 6 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-12-20T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the dinner with friends on Thursday to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Friends' event on Thursday and update its start time to 2025-12-18T19:30:00 and end time to 2025-12-18T20:30:00.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-12-17T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the support group meeting on Wednesday to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Support Group Meeting' event on Wednesday and update its start time to 2025-12-17T19:30:00 and end time to 2025-12-17T21:00:00.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-12-16T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is invited to the team meeting on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Team Meeting - Patient Case Review' event on Tuesday and return the list of attendees (sarah@email.com, cna@email.com, chaplain@email.com).",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-12-15T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my visit with Mr. Johnson on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Patient Home Visit - Mr. Johnson' event on Monday and return the start and end times.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-12-14T20:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can I schedule a meeting with the medical equipment supplier on Friday at 1:30 PM?",
+        "complexity": "High",
+        "expected_behavior": "List events on Friday between 1:30 PM and 2:30 PM. If no conflict, respond that a meeting can be scheduled. Since there is a conflicting event with 'Meeting with Medical Equipment Supplier', respond that it will cause a conflict.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-12-18T16:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Am I free for dinner on Thursday at 6:30 PM?",
+        "complexity": "High",
+        "expected_behavior": "List events on Thursday between 6:30 PM and 7:30 PM. Since there is no event scheduled, respond that the time is free.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-12-17T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Davis.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Patient Home Visit - Mr. Davis' event on Tuesday and ask for a new time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-12-16T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Move my yoga.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Yoga Class' event on Tuesday and ask for a new time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-12-16T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-12-15T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What is on the calendar tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-12-16T22:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Thursday.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-12-19T06:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's happening this week?",
+        "complexity": "Low",
+        "expected_behavior": "List all events between Monday and Sunday.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-12-15T12:00:00"
+    }
+]

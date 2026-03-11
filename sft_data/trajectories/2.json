@@ -1,0 +1,1477 @@
+[
+  {
+    "query": "Please create an event called 'Client Meeting' on Wednesday at 1 PM with attendees client@email.com and a description 'Discuss Q3 goals'.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event with summary 'Client Meeting', start set to Wednesday at 1 PM, end set to Wednesday at 2 PM, attendees set to ['client@email.com'], and description 'Discuss Q3 goals'.",
+    "simulated_now": "2024-05-26 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Data Quality Meeting",
+          "start": "2024-05-29 09:00:00",
+          "end": "2024-05-29 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "data.engineer@company.com",
+            "analyst2@company.com"
+          ],
+          "id": "evt_0558ec36948045e1b0c1d2c1accb0848"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "SQL Query Optimization",
+          "start": "2024-05-29 10:30:00",
+          "end": "2024-05-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_da38c475a4b3485096d955d2d7fada21"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Presentation Practice with Presentation Coach",
+          "start": "2024-05-29 14:00:00",
+          "end": "2024-05-29 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "coach@email.com"
+          ],
+          "id": "evt_f78a91af78af4e5880b0adb992740d10"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2024-05-29 18:00:00",
+          "end": "2024-05-29 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d8f48ccef90e47fa84eadcf2b6947192"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Data Quality Meeting",
+          "start": "2024-05-29 09:00:00",
+          "end": "2024-05-29 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "data.engineer@company.com",
+            "analyst2@company.com"
+          ],
+          "id": "evt_0558ec36948045e1b0c1d2c1accb0848"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "SQL Query Optimization",
+          "start": "2024-05-29 10:30:00",
+          "end": "2024-05-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_da38c475a4b3485096d955d2d7fada21"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting",
+          "start": "2024-05-29 13:00:00",
+          "end": "2024-05-29 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@email.com"
+          ],
+          "id": "evt_d0d938c7a0ce4389874a66a5438b9141"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Presentation Practice with Presentation Coach",
+          "start": "2024-05-29 14:00:00",
+          "end": "2024-05-29 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "coach@email.com"
+          ],
+          "id": "evt_f78a91af78af4e5880b0adb992740d10"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2024-05-29 18:00:00",
+          "end": "2024-05-29 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d8f48ccef90e47fa84eadcf2b6947192"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Please create an event called 'Client Meeting' on Wednesday at 1 PM with attendees client@email.com and a description 'Discuss Q3 goals'."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-05-26 10:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "attendees": [
+            "client@email.com"
+          ],
+          "end": "2024-05-29 14:00:00",
+          "start": "2024-05-29 13:00:00",
+          "description": "Discuss Q3 goals",
+          "summary": "Client Meeting"
+        },
+        "result": {
+          "message": "Event created successfully.",
+          "event": {
+            "id": "evt_d0d938c7a0ce4389874a66a5438b9141",
+            "summary": "Client Meeting",
+            "start": "2024-05-29 13:00:00",
+            "end": "2024-05-29 14:00:00",
+            "description": "Discuss Q3 goals",
+            "attendees": [
+              "user=User(id='user_fa36ca1c', name='client', email='client@email.com') attending='ACCEPT'"
+            ],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "I've created an event called 'Client Meeting' on Wednesday, May 29, 2024 at 1 PM with attendee client@email.com and description 'Discuss Q3 goals'.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Book a yoga session for me this Thursday at 5 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event with summary 'Yoga session', start set to Thursday at 5 PM, end set to Thursday at 6 PM.",
+    "simulated_now": "2024-05-26 10:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Sales Data Analysis",
+          "start": "2024-05-30 09:00:00",
+          "end": "2024-05-30 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ea39263196fd408282a41d828d25cb55"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Sales Director - Quarterly Report Discussion",
+          "start": "2024-05-30 10:30:00",
+          "end": "2024-05-30 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sales.director@company.com"
+          ],
+          "id": "evt_fe588fd4d19a4d31bf1381c8c2f1a4bc"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Tableau Training - Advanced Techniques",
+          "start": "2024-05-30 14:00:00",
+          "end": "2024-05-30 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "analyst2@company.com"
+          ],
+          "id": "evt_8d7a75e07865459f9759fe77ef1f45fe"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Networking Event - Data Analytics Professionals",
+          "start": "2024-05-30 19:00:00",
+          "end": "2024-05-30 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7f06b2e9040f423f8063db3199a61199"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Sales Data Analysis",
+          "start": "2024-05-30 09:00:00",
+          "end": "2024-05-30 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ea39263196fd408282a41d828d25cb55"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Sales Director - Quarterly Report Discussion",
+          "start": "2024-05-30 10:30:00",
+          "end": "2024-05-30 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sales.director@company.com"
+          ],
+          "id": "evt_fe588fd4d19a4d31bf1381c8c2f1a4bc"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Tableau Training - Advanced Techniques",
+          "start": "2024-05-30 14:00:00",
+          "end": "2024-05-30 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "analyst2@company.com"
+          ],
+          "id": "evt_8d7a75e07865459f9759fe77ef1f45fe"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Yoga Session",
+          "start": "2024-05-30 17:00:00",
+          "end": "2024-05-30 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_12a39b199d724563b9970b5f28aab378"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Networking Event - Data Analytics Professionals",
+          "start": "2024-05-30 19:00:00",
+          "end": "2024-05-30 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7f06b2e9040f423f8063db3199a61199"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Book a yoga session for me this Thursday at 5 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-05-26 10:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2024-05-30 17:00:00",
+          "end": "2024-05-30 18:00:00",
+          "summary": "Yoga Session"
+        },
+        "result": {
+          "message": "Event created successfully.",
+          "event": {
+            "id": "evt_12a39b199d724563b9970b5f28aab378",
+            "summary": "Yoga Session",
+            "start": "2024-05-30 17:00:00",
+            "end": "2024-05-30 18:00:00",
+            "description": "",
+            "attendees": [],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've booked a yoga session for you this Thursday, May 30th, at 5 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing Monday morning?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to retrieve all events happening on Monday between 9 AM and 12 PM. Return the event details to the user.",
+    "simulated_now": "2024-05-27 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Sprint Planning",
+          "start": "2024-05-27 09:00:00",
+          "end": "2024-05-27 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "data.engineer@company.com",
+            "analyst2@company.com",
+            "manager@company.com"
+          ],
+          "id": "evt_4ca5d57e79ae416ca4af34cb8fbea192"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Cleaning - Website Data",
+          "start": "2024-05-27 10:30:00",
+          "end": "2024-05-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "data.engineer@company.com"
+          ],
+          "id": "evt_46b720d37ce24ab3bba7d057e4779ea5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Marketing Manager - Campaign Performance Review",
+          "start": "2024-05-27 14:00:00",
+          "end": "2024-05-27 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "marketing.manager@company.com"
+          ],
+          "id": "evt_a9939ddd8ad240d8bef77ab9e47a34ab"
+        },
+        {
+          "day": "Monday",
+          "summary": "Presentation Skills Workshop",
+          "start": "2024-05-27 18:30:00",
+          "end": "2024-05-27 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6ef170a958a443dc9d27b3c4f9dc1ec4"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Sprint Planning",
+          "start": "2024-05-27 09:00:00",
+          "end": "2024-05-27 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "data.engineer@company.com",
+            "analyst2@company.com",
+            "manager@company.com"
+          ],
+          "id": "evt_4ca5d57e79ae416ca4af34cb8fbea192"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Cleaning - Website Data",
+          "start": "2024-05-27 10:30:00",
+          "end": "2024-05-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "data.engineer@company.com"
+          ],
+          "id": "evt_46b720d37ce24ab3bba7d057e4779ea5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Marketing Manager - Campaign Performance Review",
+          "start": "2024-05-27 14:00:00",
+          "end": "2024-05-27 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "marketing.manager@company.com"
+          ],
+          "id": "evt_a9939ddd8ad240d8bef77ab9e47a34ab"
+        },
+        {
+          "day": "Monday",
+          "summary": "Presentation Skills Workshop",
+          "start": "2024-05-27 18:30:00",
+          "end": "2024-05-27 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6ef170a958a443dc9d27b3c4f9dc1ec4"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing Monday morning?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-05-27 08:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-05-27 12:00:00",
+          "time_min": "2024-05-27 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_4ca5d57e79ae416ca4af34cb8fbea192\",\n  \"summary\": \"Team Meeting - Sprint Planning\",\n  \"start\": \"2024-05-27T09:00:00\",\n  \"end\": \"2024-05-27T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_b65a85bc\",\n        \"name\": \"data.engineer\",\n        \"email\": \"data.engineer@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_0d3f03de\",\n        \"name\": \"analyst2\",\n        \"email\": \"analyst2@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_50c0d101\",\n        \"name\": \"manager\",\n        \"email\": \"manager@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_46b720d37ce24ab3bba7d057e4779ea5\",\n  \"summary\": \"Data Cleaning - Website Data\",\n  \"start\": \"2024-05-27T10:30:00\",\n  \"end\": \"2024-05-27T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_da15917e\",\n        \"name\": \"data.engineer\",\n        \"email\": \"data.engineer@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. On Monday morning, May 27, 2024, you have two entries: The first is at 9am for 'Team Meeting - Sprint Planning,' and the second is at 10:30am for 'Data Cleaning - Website Data'.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who am I meeting with on Friday afternoon?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to retrieve all events happening on Friday between 12 PM and 5 PM. Extract the attendees from the events and return them to the user.",
+    "simulated_now": "2024-05-31 11:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Report Generation - Weekly Sales Report",
+          "start": "2024-05-31 09:00:00",
+          "end": "2024-05-31 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1ca27c35af904330954ff71d2af36a44"
+        },
+        {
+          "day": "Friday",
+          "summary": "Team Lunch",
+          "start": "2024-05-31 11:00:00",
+          "end": "2024-05-31 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f875b992c8f74c77b8addb85621bfd48"
+        },
+        {
+          "day": "Friday",
+          "summary": "Insights Presentation to Stakeholders",
+          "start": "2024-05-31 14:00:00",
+          "end": "2024-05-31 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "marketing.manager@company.com",
+            "sales.director@company.com",
+            "product.manager@company.com"
+          ],
+          "id": "evt_c333bb4925e34bc9983dde759dde7fd8"
+        },
+        {
+          "day": "Friday",
+          "summary": "Happy Hour with coworkers",
+          "start": "2024-05-31 19:00:00",
+          "end": "2024-05-31 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a34b53d2ada347fea0b3beb7de7b747f"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Report Generation - Weekly Sales Report",
+          "start": "2024-05-31 09:00:00",
+          "end": "2024-05-31 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1ca27c35af904330954ff71d2af36a44"
+        },
+        {
+          "day": "Friday",
+          "summary": "Team Lunch",
+          "start": "2024-05-31 11:00:00",
+          "end": "2024-05-31 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f875b992c8f74c77b8addb85621bfd48"
+        },
+        {
+          "day": "Friday",
+          "summary": "Insights Presentation to Stakeholders",
+          "start": "2024-05-31 14:00:00",
+          "end": "2024-05-31 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "marketing.manager@company.com",
+            "sales.director@company.com",
+            "product.manager@company.com"
+          ],
+          "id": "evt_c333bb4925e34bc9983dde759dde7fd8"
+        },
+        {
+          "day": "Friday",
+          "summary": "Happy Hour with coworkers",
+          "start": "2024-05-31 19:00:00",
+          "end": "2024-05-31 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a34b53d2ada347fea0b3beb7de7b747f"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who am I meeting with on Friday afternoon?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-05-31 11:00:00",
+          "day": "Friday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-05-31 23:59:59",
+          "time_min": "2024-05-31 12:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_f875b992c8f74c77b8addb85621bfd48\",\n  \"summary\": \"Team Lunch\",\n  \"start\": \"2024-05-31T11:00:00\",\n  \"end\": \"2024-05-31T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_c333bb4925e34bc9983dde759dde7fd8\",\n  \"summary\": \"Insights Presentation to Stakeholders\",\n  \"start\": \"2024-05-31T14:00:00\",\n  \"end\": \"2024-05-31T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_027b084d\",\n        \"name\": \"marketing.manager\",\n        \"email\": \"marketing.manager@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_b02ca3e0\",\n        \"name\": \"sales.director\",\n        \"email\": \"sales.director@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_c8829866\",\n        \"name\": \"product.manager\",\n        \"email\": \"product.manager@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_a34b53d2ada347fea0b3beb7de7b747f\",\n  \"summary\": \"Happy Hour with coworkers\",\n  \"start\": \"2024-05-31T19:00:00\",\n  \"end\": \"2024-05-31T21:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "On Friday afternoon, you are meeting with marketing.manager, sales.director, and product.manager for the Insights Presentation to Stakeholders from 2024-05-31 14:00:00 to 2024-05-31 15:00:00.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can we move the Presentation Practice with Presentation Coach on Wednesday to 4 PM?",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find the event 'Presentation Practice with Presentation Coach' on Wednesday. If found, call update_event with the event ID and update the start time to 4 PM and the end time to 5 PM.",
+    "simulated_now": "2024-05-28 14:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Data Quality Meeting",
+          "start": "2024-05-29 09:00:00",
+          "end": "2024-05-29 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "data.engineer@company.com",
+            "analyst2@company.com"
+          ],
+          "id": "evt_8bb412c64dbd41e699be5391355e62eb"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "SQL Query Optimization",
+          "start": "2024-05-29 10:30:00",
+          "end": "2024-05-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bd372a5dec934ae1a18d5f4aa0c4ad53"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Presentation Practice with Presentation Coach",
+          "start": "2024-05-29 14:00:00",
+          "end": "2024-05-29 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "coach@email.com"
+          ],
+          "id": "evt_d53182864d7744f79375f2aab0596153"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2024-05-29 18:00:00",
+          "end": "2024-05-29 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6f2455b3189e450f8b4778eaa93ac431"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Data Quality Meeting",
+          "start": "2024-05-29 09:00:00",
+          "end": "2024-05-29 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "data.engineer@company.com",
+            "analyst2@company.com"
+          ],
+          "id": "evt_8bb412c64dbd41e699be5391355e62eb"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "SQL Query Optimization",
+          "start": "2024-05-29 10:30:00",
+          "end": "2024-05-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bd372a5dec934ae1a18d5f4aa0c4ad53"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Presentation Practice with Presentation Coach",
+          "start": "2024-05-29 16:00:00",
+          "end": "2024-05-29 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "coach@email.com"
+          ],
+          "id": "evt_d53182864d7744f79375f2aab0596153"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2024-05-29 18:00:00",
+          "end": "2024-05-29 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6f2455b3189e450f8b4778eaa93ac431"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can we move the Presentation Practice with Presentation Coach on Wednesday to 4 PM?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-05-28 14:00:00",
+          "day": "Tuesday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-05-29 23:59:59",
+          "time_min": "2024-05-29 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_8bb412c64dbd41e699be5391355e62eb\",\n  \"summary\": \"Data Quality Meeting\",\n  \"start\": \"2024-05-29T09:00:00\",\n  \"end\": \"2024-05-29T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_ccf46074\",\n        \"name\": \"data.engineer\",\n        \"email\": \"data.engineer@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_45da4491\",\n        \"name\": \"analyst2\",\n        \"email\": \"analyst2@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_bd372a5dec934ae1a18d5f4aa0c4ad53\",\n  \"summary\": \"SQL Query Optimization\",\n  \"start\": \"2024-05-29T10:30:00\",\n  \"end\": \"2024-05-29T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_d53182864d7744f79375f2aab0596153\",\n  \"summary\": \"Presentation Practice with Presentation Coach\",\n  \"start\": \"2024-05-29T14:00:00\",\n  \"end\": \"2024-05-29T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_1da07adc\",\n        \"name\": \"coach\",\n        \"email\": \"coach@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_6f2455b3189e450f8b4778eaa93ac431\",\n  \"summary\": \"Yoga Class\",\n  \"start\": \"2024-05-29T18:00:00\",\n  \"end\": \"2024-05-29T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2024-05-29 16:00:00",
+          "end": "2024-05-29 17:00:00",
+          "event_id": "evt_d53182864d7744f79375f2aab0596153"
+        },
+        "result": {
+          "message": "Event updated successfully.",
+          "event": {
+            "id": "evt_d53182864d7744f79375f2aab0596153",
+            "summary": "Presentation Practice with Presentation Coach",
+            "start": "2024-05-29 16:00:00",
+            "end": "2024-05-29 17:00:00",
+            "description": "",
+            "attendees": [
+              "user=User(id='user_1da07adc', name='coach', email='coach@email.com') attending='ACCEPT'"
+            ],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved the Presentation Practice with Presentation Coach to Wednesday at 4 PM. It will now be from 4 PM to 5 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change the Sales Data Analysis on Thursday to 11 AM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find the event 'Sales Data Analysis' on Thursday. If found, call update_event with the event ID and update the start time to 11 AM and the end time to 12 PM.",
+    "simulated_now": "2024-05-29 08:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Sales Data Analysis",
+          "start": "2024-05-30 09:00:00",
+          "end": "2024-05-30 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_07461d3520c649228fe7277a63e0b699"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Sales Director - Quarterly Report Discussion",
+          "start": "2024-05-30 10:30:00",
+          "end": "2024-05-30 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sales.director@company.com"
+          ],
+          "id": "evt_9bace51d08cb46c0abd2d082ea4fdaac"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Tableau Training - Advanced Techniques",
+          "start": "2024-05-30 14:00:00",
+          "end": "2024-05-30 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "analyst2@company.com"
+          ],
+          "id": "evt_fd8a84ae2d32492c8cea8de1f7931294"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Networking Event - Data Analytics Professionals",
+          "start": "2024-05-30 19:00:00",
+          "end": "2024-05-30 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_11204d1e86e3485caf2f35be200a8f1a"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Sales Director - Quarterly Report Discussion",
+          "start": "2024-05-30 10:30:00",
+          "end": "2024-05-30 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sales.director@company.com"
+          ],
+          "id": "evt_9bace51d08cb46c0abd2d082ea4fdaac"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Sales Data Analysis",
+          "start": "2024-05-30 11:00:00",
+          "end": "2024-05-30 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_07461d3520c649228fe7277a63e0b699"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Tableau Training - Advanced Techniques",
+          "start": "2024-05-30 14:00:00",
+          "end": "2024-05-30 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "analyst2@company.com"
+          ],
+          "id": "evt_fd8a84ae2d32492c8cea8de1f7931294"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Networking Event - Data Analytics Professionals",
+          "start": "2024-05-30 19:00:00",
+          "end": "2024-05-30 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_11204d1e86e3485caf2f35be200a8f1a"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change the Sales Data Analysis on Thursday to 11 AM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-05-29 08:00:00",
+          "day": "Wednesday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-05-30 23:59:59",
+          "time_min": "2024-05-30 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_07461d3520c649228fe7277a63e0b699\",\n  \"summary\": \"Sales Data Analysis\",\n  \"start\": \"2024-05-30T09:00:00\",\n  \"end\": \"2024-05-30T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_9bace51d08cb46c0abd2d082ea4fdaac\",\n  \"summary\": \"Meeting with Sales Director - Quarterly Report Discussion\",\n  \"start\": \"2024-05-30T10:30:00\",\n  \"end\": \"2024-05-30T11:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_f379a6df\",\n        \"name\": \"sales.director\",\n        \"email\": \"sales.director@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_fd8a84ae2d32492c8cea8de1f7931294\",\n  \"summary\": \"Tableau Training - Advanced Techniques\",\n  \"start\": \"2024-05-30T14:00:00\",\n  \"end\": \"2024-05-30T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_4c6d33a2\",\n        \"name\": \"analyst2\",\n        \"email\": \"analyst2@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_11204d1e86e3485caf2f35be200a8f1a\",\n  \"summary\": \"Networking Event - Data Analytics Professionals\",\n  \"start\": \"2024-05-30T19:00:00\",\n  \"end\": \"2024-05-30T21:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2024-05-30 12:00:00",
+          "start": "2024-05-30 11:00:00",
+          "event_id": "evt_07461d3520c649228fe7277a63e0b699"
+        },
+        "result": {
+          "message": "Event updated successfully.",
+          "event": {
+            "id": "evt_07461d3520c649228fe7277a63e0b699",
+            "summary": "Sales Data Analysis",
+            "start": "2024-05-30 11:00:00",
+            "end": "2024-05-30 12:00:00",
+            "description": "",
+            "attendees": [],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've updated the Sales Data Analysis event to start at 11 AM and end at 12 PM on Thursday, May 30."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is the Team Meeting on Monday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to find the event 'Team Meeting' on Monday. If found, extract and return the start time of the event.",
+    "simulated_now": "2024-05-26 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Sprint Planning",
+          "start": "2024-05-27 09:00:00",
+          "end": "2024-05-27 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "data.engineer@company.com",
+            "analyst2@company.com",
+            "manager@company.com"
+          ],
+          "id": "evt_d91230bff4d74895a9d51bd5e25b2226"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Cleaning - Website Data",
+          "start": "2024-05-27 10:30:00",
+          "end": "2024-05-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "data.engineer@company.com"
+          ],
+          "id": "evt_792b81340cb442ceb5112946f0bff400"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Marketing Manager - Campaign Performance Review",
+          "start": "2024-05-27 14:00:00",
+          "end": "2024-05-27 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "marketing.manager@company.com"
+          ],
+          "id": "evt_8961109d030448738a0e7bdd042e6ce8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Presentation Skills Workshop",
+          "start": "2024-05-27 18:30:00",
+          "end": "2024-05-27 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_eda97c1c189a457190fabd0b8dad3751"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Sprint Planning",
+          "start": "2024-05-27 09:00:00",
+          "end": "2024-05-27 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "data.engineer@company.com",
+            "analyst2@company.com",
+            "manager@company.com"
+          ],
+          "id": "evt_d91230bff4d74895a9d51bd5e25b2226"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Cleaning - Website Data",
+          "start": "2024-05-27 10:30:00",
+          "end": "2024-05-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "data.engineer@company.com"
+          ],
+          "id": "evt_792b81340cb442ceb5112946f0bff400"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Marketing Manager - Campaign Performance Review",
+          "start": "2024-05-27 14:00:00",
+          "end": "2024-05-27 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "marketing.manager@company.com"
+          ],
+          "id": "evt_8961109d030448738a0e7bdd042e6ce8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Presentation Skills Workshop",
+          "start": "2024-05-27 18:30:00",
+          "end": "2024-05-27 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_eda97c1c189a457190fabd0b8dad3751"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is the Team Meeting on Monday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-05-26 10:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-05-27 23:59:59",
+          "time_min": "2024-05-27 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_d91230bff4d74895a9d51bd5e25b2226\",\n  \"summary\": \"Team Meeting - Sprint Planning\",\n  \"start\": \"2024-05-27T09:00:00\",\n  \"end\": \"2024-05-27T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_99428a15\",\n        \"name\": \"data.engineer\",\n        \"email\": \"data.engineer@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_79f965ba\",\n        \"name\": \"analyst2\",\n        \"email\": \"analyst2@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_b7ea75d3\",\n        \"name\": \"manager\",\n        \"email\": \"manager@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_792b81340cb442ceb5112946f0bff400\",\n  \"summary\": \"Data Cleaning - Website Data\",\n  \"start\": \"2024-05-27T10:30:00\",\n  \"end\": \"2024-05-27T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_e0f51fc4\",\n        \"name\": \"data.engineer\",\n        \"email\": \"data.engineer@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_8961109d030448738a0e7bdd042e6ce8\",\n  \"summary\": \"Meeting with Marketing Manager - Campaign Performance Review\",\n  \"start\": \"2024-05-27T14:00:00\",\n  \"end\": \"2024-05-27T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_f60f8df2\",\n        \"name\": \"marketing.manager\",\n        \"email\": \"marketing.manager@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_eda97c1c189a457190fabd0b8dad3751\",\n  \"summary\": \"Presentation Skills Workshop\",\n  \"start\": \"2024-05-27T18:30:00\",\n  \"end\": \"2024-05-27T20:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "The \"Team Meeting - Sprint Planning\" is on Monday, May 27, 2024, from 09:00 to 10:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the Tableau Training on Thursday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to find the event 'Tableau Training' on Thursday. If found, extract and return the attendees of the event.",
+    "simulated_now": "2024-05-26 10:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Sales Data Analysis",
+          "start": "2024-05-30 09:00:00",
+          "end": "2024-05-30 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2b55501493c84c2d88fe7dc853aeb621"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Sales Director - Quarterly Report Discussion",
+          "start": "2024-05-30 10:30:00",
+          "end": "2024-05-30 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sales.director@company.com"
+          ],
+          "id": "evt_c1e985583d2e4e3983f9da9e78ddc29f"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Tableau Training - Advanced Techniques",
+          "start": "2024-05-30 14:00:00",
+          "end": "2024-05-30 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "analyst2@company.com"
+          ],
+          "id": "evt_2760717ceb204dbb8ed571aca350cd68"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Networking Event - Data Analytics Professionals",
+          "start": "2024-05-30 19:00:00",
+          "end": "2024-05-30 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3e283105176b40adbe524bf6fe9688c1"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Sales Data Analysis",
+          "start": "2024-05-30 09:00:00",
+          "end": "2024-05-30 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2b55501493c84c2d88fe7dc853aeb621"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Sales Director - Quarterly Report Discussion",
+          "start": "2024-05-30 10:30:00",
+          "end": "2024-05-30 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sales.director@company.com"
+          ],
+          "id": "evt_c1e985583d2e4e3983f9da9e78ddc29f"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Tableau Training - Advanced Techniques",
+          "start": "2024-05-30 14:00:00",
+          "end": "2024-05-30 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "analyst2@company.com"
+          ],
+          "id": "evt_2760717ceb204dbb8ed571aca350cd68"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Networking Event - Data Analytics Professionals",
+          "start": "2024-05-30 19:00:00",
+          "end": "2024-05-30 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3e283105176b40adbe524bf6fe9688c1"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the Tableau Training on Thursday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-05-26 10:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-05-30 23:59:59",
+          "time_min": "2024-05-30 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_2b55501493c84c2d88fe7dc853aeb621\",\n  \"summary\": \"Sales Data Analysis\",\n  \"start\": \"2024-05-30T09:00:00\",\n  \"end\": \"2024-05-30T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_c1e985583d2e4e3983f9da9e78ddc29f\",\n  \"summary\": \"Meeting with Sales Director - Quarterly Report Discussion\",\n  \"start\": \"2024-05-30T10:30:00\",\n  \"end\": \"2024-05-30T11:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_f5fed06e\",\n        \"name\": \"sales.director\",\n        \"email\": \"sales.director@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_2760717ceb204dbb8ed571aca350cd68\",\n  \"summary\": \"Tableau Training - Advanced Techniques\",\n  \"start\": \"2024-05-30T14:00:00\",\n  \"end\": \"2024-05-30T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_d3678315\",\n        \"name\": \"analyst2\",\n        \"email\": \"analyst2@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_3e283105176b40adbe524bf6fe9688c1\",\n  \"summary\": \"Networking Event - Data Analytics Professionals\",\n  \"start\": \"2024-05-30T19:00:00\",\n  \"end\": \"2024-05-30T21:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "analyst2@company.com is attending the Tableau Training - Advanced Techniques on Thursday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule my One-on-One with the Data Science Manager on Tuesday so it's an hour later, but make sure it doesn't conflict with anything else.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Call list_events to find the 'One-on-One with Data Science Manager' on Tuesday. If found, determine its current start time, add one hour. Call list_events to check for conflicts with the new time. If a conflict is found, inform the user. If no conflict, call update_event to update the start time.",
+    "simulated_now": "2024-05-26 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Project Brainstorm - Product Development",
+          "start": "2024-05-28 09:00:00",
+          "end": "2024-05-28 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "product.manager@company.com",
+            "manager@company.com"
+          ],
+          "id": "evt_05306d442ac541e7b1fa30c6093cd0a6"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dashboard Update - Sales Performance",
+          "start": "2024-05-28 10:30:00",
+          "end": "2024-05-28 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_597102c92422450894b3d57600aa99c8"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "One-on-One with Data Science Manager",
+          "start": "2024-05-28 14:00:00",
+          "end": "2024-05-28 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "manager@company.com"
+          ],
+          "id": "evt_e6955db25aa542dbb91422a065fb23ea"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Friends",
+          "start": "2024-05-28 19:00:00",
+          "end": "2024-05-28 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_23df41b07b1349ddac6b76bfabd9c708"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Project Brainstorm - Product Development",
+          "start": "2024-05-28 09:00:00",
+          "end": "2024-05-28 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "product.manager@company.com",
+            "manager@company.com"
+          ],
+          "id": "evt_05306d442ac541e7b1fa30c6093cd0a6"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dashboard Update - Sales Performance",
+          "start": "2024-05-28 10:30:00",
+          "end": "2024-05-28 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_597102c92422450894b3d57600aa99c8"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "One-on-One with Data Science Manager",
+          "start": "2024-05-28 15:00:00",
+          "end": "2024-05-28 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "manager@company.com"
+          ],
+          "id": "evt_e6955db25aa542dbb91422a065fb23ea"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Friends",
+          "start": "2024-05-28 19:00:00",
+          "end": "2024-05-28 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_23df41b07b1349ddac6b76bfabd9c708"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule my One-on-One with the Data Science Manager on Tuesday so it's an hour later, but make sure it doesn't conflict with anything else."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-05-26 10:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-05-28 23:59:59",
+          "time_min": "2024-05-28 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_05306d442ac541e7b1fa30c6093cd0a6\",\n  \"summary\": \"Project Brainstorm - Product Development\",\n  \"start\": \"2024-05-28T09:00:00\",\n  \"end\": \"2024-05-28T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_95115217\",\n        \"name\": \"product.manager\",\n        \"email\": \"product.manager@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_86e7adcb\",\n        \"name\": \"manager\",\n        \"email\": \"manager@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_597102c92422450894b3d57600aa99c8\",\n  \"summary\": \"Dashboard Update - Sales Performance\",\n  \"start\": \"2024-05-28T10:30:00\",\n  \"end\": \"2024-05-28T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_e6955db25aa542dbb91422a065fb23ea\",\n  \"summary\": \"One-on-One with Data Science Manager\",\n  \"start\": \"2024-05-28T14:00:00\",\n  \"end\": \"2024-05-28T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_a306c3d8\",\n        \"name\": \"manager\",\n        \"email\": \"manager@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_23df41b07b1349ddac6b76bfabd9c708\",\n  \"summary\": \"Dinner with Friends\",\n  \"start\": \"2024-05-28T19:00:00\",\n  \"end\": \"2024-05-28T20:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2024-05-28 16:00:00",
+          "start": "2024-05-28 15:00:00",
+          "event_id": "evt_e6955db25aa542dbb91422a065fb23ea"
+        },
+        "result": {
+          "message": "Event updated successfully.",
+          "event": {
+            "id": "evt_e6955db25aa542dbb91422a065fb23ea",
+            "summary": "One-on-One with Data Science Manager",
+            "start": "2024-05-28 15:00:00",
+            "end": "2024-05-28 16:00:00",
+            "description": "",
+            "attendees": [
+              "user=User(id='user_a306c3d8', name='manager', email='manager@company.com') attending='ACCEPT'"
+            ],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved your One-on-One with the Data Science Manager to 3 PM - 4 PM on Tuesday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to retrieve all events happening on the current day. Return the event details to the user.",
+    "simulated_now": "2024-05-27 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Sprint Planning",
+          "start": "2024-05-27 09:00:00",
+          "end": "2024-05-27 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "data.engineer@company.com",
+            "analyst2@company.com",
+            "manager@company.com"
+          ],
+          "id": "evt_5a89b0ab4e0e4d8696e1c4a2b98931f7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Cleaning - Website Data",
+          "start": "2024-05-27 10:30:00",
+          "end": "2024-05-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "data.engineer@company.com"
+          ],
+          "id": "evt_cbaed56cd91946a2b05683e27275306f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Marketing Manager - Campaign Performance Review",
+          "start": "2024-05-27 14:00:00",
+          "end": "2024-05-27 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "marketing.manager@company.com"
+          ],
+          "id": "evt_ce7e3ee4e9c942878acf09ec8aa66cb7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Presentation Skills Workshop",
+          "start": "2024-05-27 18:30:00",
+          "end": "2024-05-27 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_14106d7a535b48b594901d0f25d0b66f"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Sprint Planning",
+          "start": "2024-05-27 09:00:00",
+          "end": "2024-05-27 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "data.engineer@company.com",
+            "analyst2@company.com",
+            "manager@company.com"
+          ],
+          "id": "evt_5a89b0ab4e0e4d8696e1c4a2b98931f7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Cleaning - Website Data",
+          "start": "2024-05-27 10:30:00",
+          "end": "2024-05-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "data.engineer@company.com"
+          ],
+          "id": "evt_cbaed56cd91946a2b05683e27275306f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Marketing Manager - Campaign Performance Review",
+          "start": "2024-05-27 14:00:00",
+          "end": "2024-05-27 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "marketing.manager@company.com"
+          ],
+          "id": "evt_ce7e3ee4e9c942878acf09ec8aa66cb7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Presentation Skills Workshop",
+          "start": "2024-05-27 18:30:00",
+          "end": "2024-05-27 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_14106d7a535b48b594901d0f25d0b66f"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-05-27 08:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-05-27 23:59:59",
+          "time_min": "2024-05-27 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_5a89b0ab4e0e4d8696e1c4a2b98931f7\",\n  \"summary\": \"Team Meeting - Sprint Planning\",\n  \"start\": \"2024-05-27T09:00:00\",\n  \"end\": \"2024-05-27T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_67064c58\",\n        \"name\": \"data.engineer\",\n        \"email\": \"data.engineer@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_97ecabfe\",\n        \"name\": \"analyst2\",\n        \"email\": \"analyst2@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_aa27ae4e\",\n        \"name\": \"manager\",\n        \"email\": \"manager@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_cbaed56cd91946a2b05683e27275306f\",\n  \"summary\": \"Data Cleaning - Website Data\",\n  \"start\": \"2024-05-27T10:30:00\",\n  \"end\": \"2024-05-27T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_1e897118\",\n        \"name\": \"data.engineer\",\n        \"email\": \"data.engineer@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_ce7e3ee4e9c942878acf09ec8aa66cb7\",\n  \"summary\": \"Meeting with Marketing Manager - Campaign Performance Review\",\n  \"start\": \"2024-05-27T14:00:00\",\n  \"end\": \"2024-05-27T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_96ea058f\",\n        \"name\": \"marketing.manager\",\n        \"email\": \"marketing.manager@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_14106d7a535b48b594901d0f25d0b66f\",\n  \"summary\": \"Presentation Skills Workshop\",\n  \"start\": \"2024-05-27T18:30:00\",\n  \"end\": \"2024-05-27T20:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "Today, May 27, 2024, you have four entries: The first is at 9am for 'Team Meeting - Sprint Planning'. The second is at 10:30am for 'Data Cleaning - Website Data'. The third is at 2pm for 'Meeting with Marketing Manager - Campaign Performance Review', and the last is at 6:30pm for 'Presentation Skills Workshop'."
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

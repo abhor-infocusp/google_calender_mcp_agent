@@ -1,0 +1,138 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Board Game Night' for Wednesday from 9 PM to 11 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Board Game Night', start '2024-01-10T21:00:00', end '2024-01-10T23:00:00', and no attendees or description.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting with the school principal this Friday at 10 AM to 11 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Meeting with school principal', start '2024-01-12T10:00:00', end '2024-01-12T11:00:00', and no attendees or description.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I am free after my morning bus route on Tuesday. Schedule a dentist appointment then.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Morning Bus Route' event on Tuesday. Create a new event 'Dentist Appointment' from 08:30 to 09:30 on Tuesday.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "My Saturday is pretty open, can you schedule time for grocery shopping?",
+        "complexity": "Medium",
+        "expected_behavior": "Call create_event with summary 'Grocery Shopping', start '2024-01-13T10:00:00', end '2024-01-13T11:00:00', and no attendees or description.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of my hair appointment on Saturday to 11 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Hair Appointment' event on Saturday and update its start time to 11:00 and end time to 12:00.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update my dinner with my children on Thursday, I have to push it back to 7 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with children' event on Thursday and update its start time to 19:00 and end time to 20:30.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my lunch with fellow drivers on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min as Thursday and time_max as Thursday. Extract the time from the Lunch with fellow drivers event and respond to the user.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time do I have church service on Sunday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min as Sunday and time_max as Sunday. Extract the time from the Church Service event and respond to the user.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my call with my sister on Sunday to 4:30 PM, but I don't want it to overlap with Family Brunch. What time does Family Brunch end?",
+        "complexity": "High",
+        "expected_behavior": "First, find the end time of the Family Brunch event on Sunday. Second, respond to the user with the end time of the Family Brunch event.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule Church Bible Study on Wednesday to start an hour earlier, but make sure it doesn't overlap with my afternoon bus route.",
+        "complexity": "High",
+        "expected_behavior": "Find the Afternoon Bus Route and Church Bible Study events on Wednesday.  Verify if moving Church Bible Study to 6:00 PM conflicts with the Afternoon Bus Route. If there is no conflict, update the Church Bible Study start time to 6:00 PM and end time to 7:30 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel dinner",
+        "complexity": "Medium",
+        "expected_behavior": "Ask clarifying question: 'Which dinner are you referring to?'.",
+        "addressed_days": [],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting with counselor",
+        "complexity": "Low",
+        "expected_behavior": "Assuming there is only 1 meeting event on the calendar today, return the meeting details. If there are multiple meeting events, ask clarifying question: 'Could you specify which meeting you are referring to?'.",
+        "addressed_days": [],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to the current date (2024-01-08) and time_max set to the end of the current date (2024-01-08). Respond to the user with the events for today.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-08T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to tomorrow's date (2024-01-09) and time_max set to the end of tomorrow's date (2024-01-09). Respond to the user with the events for tomorrow.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-08T15:00:00"
+    }
+]

@@ -1,0 +1,1742 @@
+[
+  {
+    "query": "Create a new event called 'HVAC Maintenance' for Wednesday, June 5th, from 3:30 PM to 5:00 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event with the provided summary, start time, and end time, without any attendees or description.",
+    "simulated_now": "2024-06-02 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-05 07:30:00",
+          "end": "2024-06-05 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_67ccb8c5121842819b37df95e6a9b1af"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend HVAC Tech Training: New Refrigerant Handling",
+          "start": "2024-06-05 08:30:00",
+          "end": "2024-06-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "training@techtrain.com"
+          ],
+          "id": "evt_ed34afb6e145424c88410d5de098f074"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Service call: Leaky AC unit at Davis House",
+          "start": "2024-06-05 10:30:00",
+          "end": "2024-06-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "davis@email.com"
+          ],
+          "id": "evt_712751ed205c4e3d9770da23f739ed0e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Install new air duct at Wilson Building",
+          "start": "2024-06-05 13:00:00",
+          "end": "2024-06-05 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_02a24f3c8e864b4bb10cf4acef9a4273"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-05 16:00:00",
+          "end": "2024-06-05 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bdf19fa2c6834e4eb257e22340d40934"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Liam's soccer practice",
+          "start": "2024-06-05 18:00:00",
+          "end": "2024-06-05 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1642ea2c941d4ea887e42b477bbac49e"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-05 07:30:00",
+          "end": "2024-06-05 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_67ccb8c5121842819b37df95e6a9b1af"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend HVAC Tech Training: New Refrigerant Handling",
+          "start": "2024-06-05 08:30:00",
+          "end": "2024-06-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "training@techtrain.com"
+          ],
+          "id": "evt_ed34afb6e145424c88410d5de098f074"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Service call: Leaky AC unit at Davis House",
+          "start": "2024-06-05 10:30:00",
+          "end": "2024-06-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "davis@email.com"
+          ],
+          "id": "evt_712751ed205c4e3d9770da23f739ed0e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Install new air duct at Wilson Building",
+          "start": "2024-06-05 13:00:00",
+          "end": "2024-06-05 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_02a24f3c8e864b4bb10cf4acef9a4273"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "HVAC Maintenance",
+          "start": "2024-06-05 15:30:00",
+          "end": "2024-06-05 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4da28bce342145e09570977ee32b263b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-05 16:00:00",
+          "end": "2024-06-05 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bdf19fa2c6834e4eb257e22340d40934"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Liam's soccer practice",
+          "start": "2024-06-05 18:00:00",
+          "end": "2024-06-05 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1642ea2c941d4ea887e42b477bbac49e"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create a new event called 'HVAC Maintenance' for Wednesday, June 5th, from 3:30 PM to 5:00 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-06-02 10:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2024-06-05 15:30:00",
+          "end": "2024-06-05 17:00:00",
+          "summary": "HVAC Maintenance"
+        },
+        "result": {
+          "message": "Event created successfully.",
+          "event": {
+            "id": "evt_4da28bce342145e09570977ee32b263b",
+            "summary": "HVAC Maintenance",
+            "start": "2024-06-05 15:30:00",
+            "end": "2024-06-05 17:00:00",
+            "description": "",
+            "attendees": [],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've created an event called 'HVAC Maintenance' for June 5th from 3:30 PM to 5:00 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can you book me in for 'Client Meeting' on Friday at 2 PM for 30 minutes?",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create an event with the summary 'Client Meeting' on Friday, June 7th, starting at 2:00 PM and ending at 2:30 PM.",
+    "simulated_now": "2024-06-02 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-07 07:30:00",
+          "end": "2024-06-07 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_90ba99cc385041d6b552d7aea363793e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Inspect HVAC system at New Bakery",
+          "start": "2024-06-07 08:30:00",
+          "end": "2024-06-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d21dc46e785843b0b2c94e67e640fff6"
+        },
+        {
+          "day": "Friday",
+          "summary": "Diagnose faulty compressor at Smith Office Building",
+          "start": "2024-06-07 10:30:00",
+          "end": "2024-06-07 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ab401707d61e4c589668853785bf73d3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Stock service van",
+          "start": "2024-06-07 13:00:00",
+          "end": "2024-06-07 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_65a4eab281cd45cb84cc9ff9be01d49c"
+        },
+        {
+          "day": "Friday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-07 16:00:00",
+          "end": "2024-06-07 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7eb7fa228cb343aaae7b7fa0fd7a153e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie night with Liam",
+          "start": "2024-06-07 19:00:00",
+          "end": "2024-06-07 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1c6c2a5681d04f20b54daacb302a7d5d"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-07 07:30:00",
+          "end": "2024-06-07 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_90ba99cc385041d6b552d7aea363793e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Inspect HVAC system at New Bakery",
+          "start": "2024-06-07 08:30:00",
+          "end": "2024-06-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d21dc46e785843b0b2c94e67e640fff6"
+        },
+        {
+          "day": "Friday",
+          "summary": "Diagnose faulty compressor at Smith Office Building",
+          "start": "2024-06-07 10:30:00",
+          "end": "2024-06-07 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ab401707d61e4c589668853785bf73d3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Stock service van",
+          "start": "2024-06-07 13:00:00",
+          "end": "2024-06-07 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_65a4eab281cd45cb84cc9ff9be01d49c"
+        },
+        {
+          "day": "Friday",
+          "summary": "Client Meeting",
+          "start": "2024-06-07 14:00:00",
+          "end": "2024-06-07 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_379bf939ed2348ea84a53b6f210d5e9f"
+        },
+        {
+          "day": "Friday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-07 16:00:00",
+          "end": "2024-06-07 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7eb7fa228cb343aaae7b7fa0fd7a153e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie night with Liam",
+          "start": "2024-06-07 19:00:00",
+          "end": "2024-06-07 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1c6c2a5681d04f20b54daacb302a7d5d"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can you book me in for 'Client Meeting' on Friday at 2 PM for 30 minutes?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-06-02 10:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "Today is Sunday, June 2nd. Friday is June 7th.\n"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2024-06-07 14:00:00",
+          "end": "2024-06-07 14:30:00",
+          "summary": "Client Meeting"
+        },
+        "result": {
+          "message": "Event created successfully.",
+          "event": {
+            "id": "evt_379bf939ed2348ea84a53b6f210d5e9f",
+            "summary": "Client Meeting",
+            "start": "2024-06-07 14:00:00",
+            "end": "2024-06-07 14:30:00",
+            "description": "",
+            "attendees": [],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've booked you in for 'Client Meeting' on Friday, June 7th at 2 PM for 30 minutes.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing after picking up Liam on Thursday?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Pick up Liam from school' event on Thursday, June 6th, and then check for any events scheduled immediately after that time. Respond based on whether there is an event afterwards, mentioning dinner with Mom.",
+    "simulated_now": "2024-06-06 14:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-06 07:30:00",
+          "end": "2024-06-06 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_77bbca13f4554c9ebb5096a36f3d3fbf"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Diagnose malfunctioning furnace at Thompson Residence",
+          "start": "2024-06-06 08:30:00",
+          "end": "2024-06-06 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_48992b5d8e7e4e8fabd3158b7a5f9d5c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Preventative maintenance at City Library",
+          "start": "2024-06-06 10:30:00",
+          "end": "2024-06-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_102b7cd9d5ee4e26828dcf10dd39c275"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Service call: Broken thermostat at Johnson Residence",
+          "start": "2024-06-06 13:00:00",
+          "end": "2024-06-06 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "johnson@email.com"
+          ],
+          "id": "evt_1e71c72fdc5641708028ce28641e8b4e"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-06 16:00:00",
+          "end": "2024-06-06 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d9a93532860e4016b16217dc13253d1c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Mom",
+          "start": "2024-06-06 18:00:00",
+          "end": "2024-06-06 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "mom@email.com"
+          ],
+          "id": "evt_e166ec605cbe4d89ac179d4d6b5f98c4"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-06 07:30:00",
+          "end": "2024-06-06 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_77bbca13f4554c9ebb5096a36f3d3fbf"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Diagnose malfunctioning furnace at Thompson Residence",
+          "start": "2024-06-06 08:30:00",
+          "end": "2024-06-06 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_48992b5d8e7e4e8fabd3158b7a5f9d5c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Preventative maintenance at City Library",
+          "start": "2024-06-06 10:30:00",
+          "end": "2024-06-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_102b7cd9d5ee4e26828dcf10dd39c275"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Service call: Broken thermostat at Johnson Residence",
+          "start": "2024-06-06 13:00:00",
+          "end": "2024-06-06 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "johnson@email.com"
+          ],
+          "id": "evt_1e71c72fdc5641708028ce28641e8b4e"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-06 16:00:00",
+          "end": "2024-06-06 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d9a93532860e4016b16217dc13253d1c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Mom",
+          "start": "2024-06-06 18:00:00",
+          "end": "2024-06-06 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "mom@email.com"
+          ],
+          "id": "evt_e166ec605cbe4d89ac179d4d6b5f98c4"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing after picking up Liam on Thursday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-06-06 14:00:00",
+          "day": "Thursday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-06-06 23:59:59",
+          "time_min": "2024-06-06 14:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_1e71c72fdc5641708028ce28641e8b4e\",\n  \"summary\": \"Service call: Broken thermostat at Johnson Residence\",\n  \"start\": \"2024-06-06T13:00:00\",\n  \"end\": \"2024-06-06T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_882e2c63\",\n        \"name\": \"johnson\",\n        \"email\": \"johnson@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_d9a93532860e4016b16217dc13253d1c\",\n  \"summary\": \"Pick up Liam from school\",\n  \"start\": \"2024-06-06T16:00:00\",\n  \"end\": \"2024-06-06T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_e166ec605cbe4d89ac179d4d6b5f98c4\",\n  \"summary\": \"Dinner with Mom\",\n  \"start\": \"2024-06-06T18:00:00\",\n  \"end\": \"2024-06-06T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_713d80dc\",\n        \"name\": \"mom\",\n        \"email\": \"mom@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "After picking up Liam from school on Thursday, June 6, 2024, you have dinner with Mom at 6 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move my 1 PM appointment on Monday to 2 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Install new thermostat at Brown Apartment' event on Monday, June 3rd, and update its start time to 2:00 PM and end time to 4:00 PM.",
+    "simulated_now": "2024-06-03 09:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-03 07:30:00",
+          "end": "2024-06-03 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1e2409b9e41b4278816ffef875f254b0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Service call: No heat at Johnson Residence",
+          "start": "2024-06-03 08:30:00",
+          "end": "2024-06-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "johnson@email.com"
+          ],
+          "id": "evt_88869ccdcd224432bc47fa1951a8e15b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Diagnose faulty compressor at Smith Office Building",
+          "start": "2024-06-03 10:30:00",
+          "end": "2024-06-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9f36de344bfe4af0a70bdeac33a03b94"
+        },
+        {
+          "day": "Monday",
+          "summary": "Install new thermostat at Brown Apartment",
+          "start": "2024-06-03 13:00:00",
+          "end": "2024-06-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "brownmanager@email.com"
+          ],
+          "id": "evt_fe0eed65f6454098bf5b06bec6fba5b3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-03 16:00:00",
+          "end": "2024-06-03 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_13e6b3b75a0c4a74afd2c3860b5e0c09"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Liam",
+          "start": "2024-06-03 18:30:00",
+          "end": "2024-06-03 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c88d0b14c1b546638541c5237125fb81"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-03 07:30:00",
+          "end": "2024-06-03 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1e2409b9e41b4278816ffef875f254b0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Service call: No heat at Johnson Residence",
+          "start": "2024-06-03 08:30:00",
+          "end": "2024-06-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "johnson@email.com"
+          ],
+          "id": "evt_88869ccdcd224432bc47fa1951a8e15b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Diagnose faulty compressor at Smith Office Building",
+          "start": "2024-06-03 10:30:00",
+          "end": "2024-06-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9f36de344bfe4af0a70bdeac33a03b94"
+        },
+        {
+          "day": "Monday",
+          "summary": "Install new thermostat at Brown Apartment",
+          "start": "2024-06-03 14:00:00",
+          "end": "2024-06-03 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "brownmanager@email.com"
+          ],
+          "id": "evt_fe0eed65f6454098bf5b06bec6fba5b3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-03 16:00:00",
+          "end": "2024-06-03 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_13e6b3b75a0c4a74afd2c3860b5e0c09"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Liam",
+          "start": "2024-06-03 18:30:00",
+          "end": "2024-06-03 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c88d0b14c1b546638541c5237125fb81"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move my 1 PM appointment on Monday to 2 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-06-03 09:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-06-03 23:59:59",
+          "time_min": "2024-06-03 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_1e2409b9e41b4278816ffef875f254b0\",\n  \"summary\": \"Drop Liam off at school\",\n  \"start\": \"2024-06-03T07:30:00\",\n  \"end\": \"2024-06-03T08:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_88869ccdcd224432bc47fa1951a8e15b\",\n  \"summary\": \"Service call: No heat at Johnson Residence\",\n  \"start\": \"2024-06-03T08:30:00\",\n  \"end\": \"2024-06-03T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_93b3f013\",\n        \"name\": \"johnson\",\n        \"email\": \"johnson@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_9f36de344bfe4af0a70bdeac33a03b94\",\n  \"summary\": \"Diagnose faulty compressor at Smith Office Building\",\n  \"start\": \"2024-06-03T10:30:00\",\n  \"end\": \"2024-06-03T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_fe0eed65f6454098bf5b06bec6fba5b3\",\n  \"summary\": \"Install new thermostat at Brown Apartment\",\n  \"start\": \"2024-06-03T13:00:00\",\n  \"end\": \"2024-06-03T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_5caaeaac\",\n        \"name\": \"brownmanager\",\n        \"email\": \"brownmanager@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_13e6b3b75a0c4a74afd2c3860b5e0c09\",\n  \"summary\": \"Pick up Liam from school\",\n  \"start\": \"2024-06-03T16:00:00\",\n  \"end\": \"2024-06-03T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_c88d0b14c1b546638541c5237125fb81\",\n  \"summary\": \"Dinner with Liam\",\n  \"start\": \"2024-06-03T18:30:00\",\n  \"end\": \"2024-06-03T19:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2024-06-03 14:00:00",
+          "end": "2024-06-03 16:00:00",
+          "event_id": "evt_fe0eed65f6454098bf5b06bec6fba5b3"
+        },
+        "result": {
+          "message": "Event updated successfully.",
+          "event": {
+            "id": "evt_fe0eed65f6454098bf5b06bec6fba5b3",
+            "summary": "Install new thermostat at Brown Apartment",
+            "start": "2024-06-03 14:00:00",
+            "end": "2024-06-03 16:00:00",
+            "description": "",
+            "attendees": [
+              "user=User(id='user_5caaeaac', name='brownmanager', email='brownmanager@email.com') attending='ACCEPT'"
+            ],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved your 'Install new thermostat at Brown Apartment' appointment to 2 PM on Monday, June 3. It will now run from 2 PM to 4 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Tell me who to contact for the routine maintenance on Tuesday.",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Routine maintenance at First National Bank' event on Tuesday, June 4th, and extract the contact information (bankmanager@email.com).",
+    "simulated_now": "2024-06-04 08:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-04 07:30:00",
+          "end": "2024-06-04 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c357a2b40dfd4b0a97e8dc4a5ca336c1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Team meeting",
+          "start": "2024-06-04 08:30:00",
+          "end": "2024-06-04 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "leadtech@email.com"
+          ],
+          "id": "evt_3e758c7ae64a4fa99ea255234119ff80"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Routine maintenance at First National Bank",
+          "start": "2024-06-04 10:00:00",
+          "end": "2024-06-04 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bankmanager@email.com"
+          ],
+          "id": "evt_5a9eb321b147407c825cefd7f1a6e71b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Order parts from supplier",
+          "start": "2024-06-04 13:00:00",
+          "end": "2024-06-04 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "orders@hvacsupply.com"
+          ],
+          "id": "evt_6a960d88750046beafa7b901766ce480"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Troubleshoot AC unit at Miller's Grocery",
+          "start": "2024-06-04 14:30:00",
+          "end": "2024-06-04 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_14d319c9411c4d78aac1cd7a7afccdbd"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-04 16:00:00",
+          "end": "2024-06-04 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e0c1adb8f815450fbeda116cb0027311"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-04 07:30:00",
+          "end": "2024-06-04 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c357a2b40dfd4b0a97e8dc4a5ca336c1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Team meeting",
+          "start": "2024-06-04 08:30:00",
+          "end": "2024-06-04 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "leadtech@email.com"
+          ],
+          "id": "evt_3e758c7ae64a4fa99ea255234119ff80"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Routine maintenance at First National Bank",
+          "start": "2024-06-04 10:00:00",
+          "end": "2024-06-04 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bankmanager@email.com"
+          ],
+          "id": "evt_5a9eb321b147407c825cefd7f1a6e71b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Order parts from supplier",
+          "start": "2024-06-04 13:00:00",
+          "end": "2024-06-04 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "orders@hvacsupply.com"
+          ],
+          "id": "evt_6a960d88750046beafa7b901766ce480"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Troubleshoot AC unit at Miller's Grocery",
+          "start": "2024-06-04 14:30:00",
+          "end": "2024-06-04 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_14d319c9411c4d78aac1cd7a7afccdbd"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-04 16:00:00",
+          "end": "2024-06-04 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e0c1adb8f815450fbeda116cb0027311"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Tell me who to contact for the routine maintenance on Tuesday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-06-04 08:00:00",
+          "day": "Tuesday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-06-04 23:59:59",
+          "time_min": "2024-06-04 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_c357a2b40dfd4b0a97e8dc4a5ca336c1\",\n  \"summary\": \"Drop Liam off at school\",\n  \"start\": \"2024-06-04T07:30:00\",\n  \"end\": \"2024-06-04T08:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_3e758c7ae64a4fa99ea255234119ff80\",\n  \"summary\": \"Team meeting\",\n  \"start\": \"2024-06-04T08:30:00\",\n  \"end\": \"2024-06-04T09:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_75d57aae\",\n        \"name\": \"leadtech\",\n        \"email\": \"leadtech@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_5a9eb321b147407c825cefd7f1a6e71b\",\n  \"summary\": \"Routine maintenance at First National Bank\",\n  \"start\": \"2024-06-04T10:00:00\",\n  \"end\": \"2024-06-04T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_9ee36c2e\",\n        \"name\": \"bankmanager\",\n        \"email\": \"bankmanager@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_6a960d88750046beafa7b901766ce480\",\n  \"summary\": \"Order parts from supplier\",\n  \"start\": \"2024-06-04T13:00:00\",\n  \"end\": \"2024-06-04T14:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_5b2d3f06\",\n        \"name\": \"orders\",\n        \"email\": \"orders@hvacsupply.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_14d319c9411c4d78aac1cd7a7afccdbd\",\n  \"summary\": \"Troubleshoot AC unit at Miller's Grocery\",\n  \"start\": \"2024-06-04T14:30:00\",\n  \"end\": \"2024-06-04T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_e0c1adb8f815450fbeda116cb0027311\",\n  \"summary\": \"Pick up Liam from school\",\n  \"start\": \"2024-06-04T16:00:00\",\n  \"end\": \"2024-06-04T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "For the routine maintenance at First National Bank on Tuesday, June 4, you should contact bankmanager@email.com.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What is the training about on Wednesday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Attend HVAC Tech Training: New Refrigerant Handling' event on Wednesday, June 5th, and extract the summary to provide the user with the training topic.",
+    "simulated_now": "2024-06-05 07:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-05 07:30:00",
+          "end": "2024-06-05 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2689d8f3f2874d68a43fce1a4d765abb"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend HVAC Tech Training: New Refrigerant Handling",
+          "start": "2024-06-05 08:30:00",
+          "end": "2024-06-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "training@techtrain.com"
+          ],
+          "id": "evt_98a120e08ad64c64813b2bf54c42495f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Service call: Leaky AC unit at Davis House",
+          "start": "2024-06-05 10:30:00",
+          "end": "2024-06-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "davis@email.com"
+          ],
+          "id": "evt_15328c01261348dd8edfe1e17358769d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Install new air duct at Wilson Building",
+          "start": "2024-06-05 13:00:00",
+          "end": "2024-06-05 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8b4339e2a7214016a61021ac992b9897"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-05 16:00:00",
+          "end": "2024-06-05 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7dda12e54d87463eae04edf4a6a03cd1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Liam's soccer practice",
+          "start": "2024-06-05 18:00:00",
+          "end": "2024-06-05 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_189e38640bac4527a25fe5ee9e9f1444"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-05 07:30:00",
+          "end": "2024-06-05 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2689d8f3f2874d68a43fce1a4d765abb"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend HVAC Tech Training: New Refrigerant Handling",
+          "start": "2024-06-05 08:30:00",
+          "end": "2024-06-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "training@techtrain.com"
+          ],
+          "id": "evt_98a120e08ad64c64813b2bf54c42495f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Service call: Leaky AC unit at Davis House",
+          "start": "2024-06-05 10:30:00",
+          "end": "2024-06-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "davis@email.com"
+          ],
+          "id": "evt_15328c01261348dd8edfe1e17358769d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Install new air duct at Wilson Building",
+          "start": "2024-06-05 13:00:00",
+          "end": "2024-06-05 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8b4339e2a7214016a61021ac992b9897"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-05 16:00:00",
+          "end": "2024-06-05 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7dda12e54d87463eae04edf4a6a03cd1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Liam's soccer practice",
+          "start": "2024-06-05 18:00:00",
+          "end": "2024-06-05 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_189e38640bac4527a25fe5ee9e9f1444"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What is the training about on Wednesday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-06-05 07:00:00",
+          "day": "Wednesday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-06-05 23:59:59",
+          "time_min": "2024-06-05 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_2689d8f3f2874d68a43fce1a4d765abb\",\n  \"summary\": \"Drop Liam off at school\",\n  \"start\": \"2024-06-05T07:30:00\",\n  \"end\": \"2024-06-05T08:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_98a120e08ad64c64813b2bf54c42495f\",\n  \"summary\": \"Attend HVAC Tech Training: New Refrigerant Handling\",\n  \"start\": \"2024-06-05T08:30:00\",\n  \"end\": \"2024-06-05T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_ed1f4531\",\n        \"name\": \"training\",\n        \"email\": \"training@techtrain.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_15328c01261348dd8edfe1e17358769d\",\n  \"summary\": \"Service call: Leaky AC unit at Davis House\",\n  \"start\": \"2024-06-05T10:30:00\",\n  \"end\": \"2024-06-05T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_9bbab642\",\n        \"name\": \"davis\",\n        \"email\": \"davis@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_8b4339e2a7214016a61021ac992b9897\",\n  \"summary\": \"Install new air duct at Wilson Building\",\n  \"start\": \"2024-06-05T13:00:00\",\n  \"end\": \"2024-06-05T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_7dda12e54d87463eae04edf4a6a03cd1\",\n  \"summary\": \"Pick up Liam from school\",\n  \"start\": \"2024-06-05T16:00:00\",\n  \"end\": \"2024-06-05T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_189e38640bac4527a25fe5ee9e9f1444\",\n  \"summary\": \"Liam's soccer practice\",\n  \"start\": \"2024-06-05T18:00:00\",\n  \"end\": \"2024-06-05T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "On Wednesday, June 5, you are scheduled to attend \"HVAC Tech Training: New Refrigerant Handling\" from 08:30 to 10:00.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "I want to reschedule diagnosing the faulty compressor at Smith Office Building from Friday morning to Thursday morning. Can you do that?",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Find both 'Diagnose faulty compressor at Smith Office Building' events (one on Monday, one on Friday). Delete the Friday, June 7th event and moves the Thursday, June 6th slot and move diagnose faulty compressor to Thursday, June 6th to 10:30 AM.",
+    "simulated_now": "2024-06-03 14:00:00",
+    "addressed_days": [
+      "Thursday",
+      "Friday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-06 07:30:00",
+          "end": "2024-06-06 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3ab146a17fc54c68ae737e0fe46d1b02"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Diagnose malfunctioning furnace at Thompson Residence",
+          "start": "2024-06-06 08:30:00",
+          "end": "2024-06-06 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1e60b87bab9c44d4b92f1a0a30064f55"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Preventative maintenance at City Library",
+          "start": "2024-06-06 10:30:00",
+          "end": "2024-06-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fc01f9cca0a0465886100312262a0ebe"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Service call: Broken thermostat at Johnson Residence",
+          "start": "2024-06-06 13:00:00",
+          "end": "2024-06-06 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "johnson@email.com"
+          ],
+          "id": "evt_9a96977c12ff4c858062177aa9c8c4a7"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-06 16:00:00",
+          "end": "2024-06-06 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_deaf9d312deb401daa24abe76998eafe"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Mom",
+          "start": "2024-06-06 18:00:00",
+          "end": "2024-06-06 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "mom@email.com"
+          ],
+          "id": "evt_031c44c85e944cefa099aedf8fce0b2a"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-07 07:30:00",
+          "end": "2024-06-07 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3855a4822da24f85995fc1de75069a08"
+        },
+        {
+          "day": "Friday",
+          "summary": "Inspect HVAC system at New Bakery",
+          "start": "2024-06-07 08:30:00",
+          "end": "2024-06-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3f3b46f02f8a413a8230c7ae45bb6430"
+        },
+        {
+          "day": "Friday",
+          "summary": "Diagnose faulty compressor at Smith Office Building",
+          "start": "2024-06-07 10:30:00",
+          "end": "2024-06-07 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6b3c7d2e3fc6435b87d37b6616cd3fa5"
+        },
+        {
+          "day": "Friday",
+          "summary": "Stock service van",
+          "start": "2024-06-07 13:00:00",
+          "end": "2024-06-07 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a870060ad9fc485ab53f3b9a6790302a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-07 16:00:00",
+          "end": "2024-06-07 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d1c6745bd9a14abc86c64755bbc25907"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie night with Liam",
+          "start": "2024-06-07 19:00:00",
+          "end": "2024-06-07 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6baa870d987342b3bf6cf91ca199c810"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-06 07:30:00",
+          "end": "2024-06-06 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3ab146a17fc54c68ae737e0fe46d1b02"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Diagnose malfunctioning furnace at Thompson Residence",
+          "start": "2024-06-06 08:30:00",
+          "end": "2024-06-06 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1e60b87bab9c44d4b92f1a0a30064f55"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Preventative maintenance at City Library",
+          "start": "2024-06-06 10:30:00",
+          "end": "2024-06-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fc01f9cca0a0465886100312262a0ebe"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Diagnose faulty compressor at Smith Office Building",
+          "start": "2024-06-06 10:30:00",
+          "end": "2024-06-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6b3c7d2e3fc6435b87d37b6616cd3fa5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Service call: Broken thermostat at Johnson Residence",
+          "start": "2024-06-06 13:00:00",
+          "end": "2024-06-06 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "johnson@email.com"
+          ],
+          "id": "evt_9a96977c12ff4c858062177aa9c8c4a7"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-06 16:00:00",
+          "end": "2024-06-06 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_deaf9d312deb401daa24abe76998eafe"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Mom",
+          "start": "2024-06-06 18:00:00",
+          "end": "2024-06-06 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "mom@email.com"
+          ],
+          "id": "evt_031c44c85e944cefa099aedf8fce0b2a"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-07 07:30:00",
+          "end": "2024-06-07 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3855a4822da24f85995fc1de75069a08"
+        },
+        {
+          "day": "Friday",
+          "summary": "Inspect HVAC system at New Bakery",
+          "start": "2024-06-07 08:30:00",
+          "end": "2024-06-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3f3b46f02f8a413a8230c7ae45bb6430"
+        },
+        {
+          "day": "Friday",
+          "summary": "Stock service van",
+          "start": "2024-06-07 13:00:00",
+          "end": "2024-06-07 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a870060ad9fc485ab53f3b9a6790302a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-07 16:00:00",
+          "end": "2024-06-07 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d1c6745bd9a14abc86c64755bbc25907"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie night with Liam",
+          "start": "2024-06-07 19:00:00",
+          "end": "2024-06-07 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6baa870d987342b3bf6cf91ca199c810"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "I want to reschedule diagnosing the faulty compressor at Smith Office Building from Friday morning to Thursday morning. Can you do that?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-06-03 14:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-06-07 23:59:59",
+          "time_min": "2024-06-06 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_3ab146a17fc54c68ae737e0fe46d1b02\",\n  \"summary\": \"Drop Liam off at school\",\n  \"start\": \"2024-06-06T07:30:00\",\n  \"end\": \"2024-06-06T08:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_1e60b87bab9c44d4b92f1a0a30064f55\",\n  \"summary\": \"Diagnose malfunctioning furnace at Thompson Residence\",\n  \"start\": \"2024-06-06T08:30:00\",\n  \"end\": \"2024-06-06T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_fc01f9cca0a0465886100312262a0ebe\",\n  \"summary\": \"Preventative maintenance at City Library\",\n  \"start\": \"2024-06-06T10:30:00\",\n  \"end\": \"2024-06-06T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_9a96977c12ff4c858062177aa9c8c4a7\",\n  \"summary\": \"Service call: Broken thermostat at Johnson Residence\",\n  \"start\": \"2024-06-06T13:00:00\",\n  \"end\": \"2024-06-06T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_a5c4788f\",\n        \"name\": \"johnson\",\n        \"email\": \"johnson@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_deaf9d312deb401daa24abe76998eafe\",\n  \"summary\": \"Pick up Liam from school\",\n  \"start\": \"2024-06-06T16:00:00\",\n  \"end\": \"2024-06-06T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_031c44c85e944cefa099aedf8fce0b2a\",\n  \"summary\": \"Dinner with Mom\",\n  \"start\": \"2024-06-06T18:00:00\",\n  \"end\": \"2024-06-06T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_60b2bfe6\",\n        \"name\": \"mom\",\n        \"email\": \"mom@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_3855a4822da24f85995fc1de75069a08\",\n  \"summary\": \"Drop Liam off at school\",\n  \"start\": \"2024-06-07T07:30:00\",\n  \"end\": \"2024-06-07T08:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_3f3b46f02f8a413a8230c7ae45bb6430\",\n  \"summary\": \"Inspect HVAC system at New Bakery\",\n  \"start\": \"2024-06-07T08:30:00\",\n  \"end\": \"2024-06-07T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_6b3c7d2e3fc6435b87d37b6616cd3fa5\",\n  \"summary\": \"Diagnose faulty compressor at Smith Office Building\",\n  \"start\": \"2024-06-07T10:30:00\",\n  \"end\": \"2024-06-07T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_a870060ad9fc485ab53f3b9a6790302a\",\n  \"summary\": \"Stock service van\",\n  \"start\": \"2024-06-07T13:00:00\",\n  \"end\": \"2024-06-07T14:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_d1c6745bd9a14abc86c64755bbc25907\",\n  \"summary\": \"Pick up Liam from school\",\n  \"start\": \"2024-06-07T16:00:00\",\n  \"end\": \"2024-06-07T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_6baa870d987342b3bf6cf91ca199c810\",\n  \"summary\": \"Movie night with Liam\",\n  \"start\": \"2024-06-07T19:00:00\",\n  \"end\": \"2024-06-07T21:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2024-06-06 10:30:00",
+          "end": "2024-06-06 12:00:00",
+          "event_id": "evt_6b3c7d2e3fc6435b87d37b6616cd3fa5"
+        },
+        "result": {
+          "message": "Event updated successfully.",
+          "event": {
+            "id": "evt_6b3c7d2e3fc6435b87d37b6616cd3fa5",
+            "summary": "Diagnose faulty compressor at Smith Office Building",
+            "start": "2024-06-06 10:30:00",
+            "end": "2024-06-06 12:00:00",
+            "description": "",
+            "attendees": [],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've rescheduled diagnosing the faulty compressor at Smith Office Building to Thursday, June 6th from 10:30 AM to 12:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Find the current date (Monday, June 3rd) and list all events scheduled for that day. List dropping off Liam, service call at Johnson Residence, Diagnose faulty compressor at Smith Office Building, Install new thermostat at Brown Apartment, Pick up Liam, and dinner with Liam.",
+    "simulated_now": "2024-06-03 09:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-03 07:30:00",
+          "end": "2024-06-03 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1bea2916bcd7426da1cb152a0dfef689"
+        },
+        {
+          "day": "Monday",
+          "summary": "Service call: No heat at Johnson Residence",
+          "start": "2024-06-03 08:30:00",
+          "end": "2024-06-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "johnson@email.com"
+          ],
+          "id": "evt_c66ee254d2e146019d70b983de87fcac"
+        },
+        {
+          "day": "Monday",
+          "summary": "Diagnose faulty compressor at Smith Office Building",
+          "start": "2024-06-03 10:30:00",
+          "end": "2024-06-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0fd66e10e4f04abfb1829d41a2b1c3f1"
+        },
+        {
+          "day": "Monday",
+          "summary": "Install new thermostat at Brown Apartment",
+          "start": "2024-06-03 13:00:00",
+          "end": "2024-06-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "brownmanager@email.com"
+          ],
+          "id": "evt_3851c3af6a3a4741bf17a7966c849570"
+        },
+        {
+          "day": "Monday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-03 16:00:00",
+          "end": "2024-06-03 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_abd597bcdb854ce5b24bf3e5275a4a32"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Liam",
+          "start": "2024-06-03 18:30:00",
+          "end": "2024-06-03 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ee69459731084ee7a2aaa5c1d1f9d675"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-03 07:30:00",
+          "end": "2024-06-03 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1bea2916bcd7426da1cb152a0dfef689"
+        },
+        {
+          "day": "Monday",
+          "summary": "Service call: No heat at Johnson Residence",
+          "start": "2024-06-03 08:30:00",
+          "end": "2024-06-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "johnson@email.com"
+          ],
+          "id": "evt_c66ee254d2e146019d70b983de87fcac"
+        },
+        {
+          "day": "Monday",
+          "summary": "Diagnose faulty compressor at Smith Office Building",
+          "start": "2024-06-03 10:30:00",
+          "end": "2024-06-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0fd66e10e4f04abfb1829d41a2b1c3f1"
+        },
+        {
+          "day": "Monday",
+          "summary": "Install new thermostat at Brown Apartment",
+          "start": "2024-06-03 13:00:00",
+          "end": "2024-06-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "brownmanager@email.com"
+          ],
+          "id": "evt_3851c3af6a3a4741bf17a7966c849570"
+        },
+        {
+          "day": "Monday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-03 16:00:00",
+          "end": "2024-06-03 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_abd597bcdb854ce5b24bf3e5275a4a32"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Liam",
+          "start": "2024-06-03 18:30:00",
+          "end": "2024-06-03 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ee69459731084ee7a2aaa5c1d1f9d675"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-06-03 09:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-06-03 23:59:59",
+          "time_min": "2024-06-03 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_1bea2916bcd7426da1cb152a0dfef689\",\n  \"summary\": \"Drop Liam off at school\",\n  \"start\": \"2024-06-03T07:30:00\",\n  \"end\": \"2024-06-03T08:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_c66ee254d2e146019d70b983de87fcac\",\n  \"summary\": \"Service call: No heat at Johnson Residence\",\n  \"start\": \"2024-06-03T08:30:00\",\n  \"end\": \"2024-06-03T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_7abbf772\",\n        \"name\": \"johnson\",\n        \"email\": \"johnson@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_0fd66e10e4f04abfb1829d41a2b1c3f1\",\n  \"summary\": \"Diagnose faulty compressor at Smith Office Building\",\n  \"start\": \"2024-06-03T10:30:00\",\n  \"end\": \"2024-06-03T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_3851c3af6a3a4741bf17a7966c849570\",\n  \"summary\": \"Install new thermostat at Brown Apartment\",\n  \"start\": \"2024-06-03T13:00:00\",\n  \"end\": \"2024-06-03T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_439aac27\",\n        \"name\": \"brownmanager\",\n        \"email\": \"brownmanager@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_abd597bcdb854ce5b24bf3e5275a4a32\",\n  \"summary\": \"Pick up Liam from school\",\n  \"start\": \"2024-06-03T16:00:00\",\n  \"end\": \"2024-06-03T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_ee69459731084ee7a2aaa5c1d1f9d675\",\n  \"summary\": \"Dinner with Liam\",\n  \"start\": \"2024-06-03T18:30:00\",\n  \"end\": \"2024-06-03T19:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "Today, June 03, 2024, you have the following events: Drop Liam off at school from 07:30 to 08:00, Service call: No heat at Johnson Residence from 08:30 to 10:00, Diagnose faulty compressor at Smith Office Building from 10:30 to 12:00, Install new thermostat at Brown Apartment from 13:00 to 15:00, Pick up Liam from school from 16:00 to 17:00, and Dinner with Liam from 18:30 to 19:30."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Find the date for tomorrow (Tuesday, June 4th) and list all events scheduled for that day. List dropping off Liam, Team meeting, Routine maintenance, Order parts, Troubleshoot AC unit, Pick up Liam.",
+    "simulated_now": "2024-06-03 15:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-04 07:30:00",
+          "end": "2024-06-04 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e7fb48f0f9404f1292b5d276b8b30838"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Team meeting",
+          "start": "2024-06-04 08:30:00",
+          "end": "2024-06-04 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "leadtech@email.com"
+          ],
+          "id": "evt_e28b7d37633f45548c90bd0a906002f2"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Routine maintenance at First National Bank",
+          "start": "2024-06-04 10:00:00",
+          "end": "2024-06-04 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bankmanager@email.com"
+          ],
+          "id": "evt_f5ae37bdb95946dd9054f38e9c03ae3b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Order parts from supplier",
+          "start": "2024-06-04 13:00:00",
+          "end": "2024-06-04 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "orders@hvacsupply.com"
+          ],
+          "id": "evt_452cbc6b402c4c2e97dfed530c93f904"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Troubleshoot AC unit at Miller's Grocery",
+          "start": "2024-06-04 14:30:00",
+          "end": "2024-06-04 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_858e1b567cb446d289c36c16a71b7c08"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-04 16:00:00",
+          "end": "2024-06-04 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d63a278a122c46e182af6bd6ceb92036"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Drop Liam off at school",
+          "start": "2024-06-04 07:30:00",
+          "end": "2024-06-04 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e7fb48f0f9404f1292b5d276b8b30838"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Team meeting",
+          "start": "2024-06-04 08:30:00",
+          "end": "2024-06-04 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "leadtech@email.com"
+          ],
+          "id": "evt_e28b7d37633f45548c90bd0a906002f2"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Routine maintenance at First National Bank",
+          "start": "2024-06-04 10:00:00",
+          "end": "2024-06-04 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bankmanager@email.com"
+          ],
+          "id": "evt_f5ae37bdb95946dd9054f38e9c03ae3b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Order parts from supplier",
+          "start": "2024-06-04 13:00:00",
+          "end": "2024-06-04 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "orders@hvacsupply.com"
+          ],
+          "id": "evt_452cbc6b402c4c2e97dfed530c93f904"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Troubleshoot AC unit at Miller's Grocery",
+          "start": "2024-06-04 14:30:00",
+          "end": "2024-06-04 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_858e1b567cb446d289c36c16a71b7c08"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Pick up Liam from school",
+          "start": "2024-06-04 16:00:00",
+          "end": "2024-06-04 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d63a278a122c46e182af6bd6ceb92036"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on tomorrow?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-06-03 15:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-06-04 23:59:59",
+          "time_min": "2024-06-04 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_e7fb48f0f9404f1292b5d276b8b30838\",\n  \"summary\": \"Drop Liam off at school\",\n  \"start\": \"2024-06-04T07:30:00\",\n  \"end\": \"2024-06-04T08:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_e28b7d37633f45548c90bd0a906002f2\",\n  \"summary\": \"Team meeting\",\n  \"start\": \"2024-06-04T08:30:00\",\n  \"end\": \"2024-06-04T09:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_4c7e49f8\",\n        \"name\": \"leadtech\",\n        \"email\": \"leadtech@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_f5ae37bdb95946dd9054f38e9c03ae3b\",\n  \"summary\": \"Routine maintenance at First National Bank\",\n  \"start\": \"2024-06-04T10:00:00\",\n  \"end\": \"2024-06-04T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_f5b84599\",\n        \"name\": \"bankmanager\",\n        \"email\": \"bankmanager@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_452cbc6b402c4c2e97dfed530c93f904\",\n  \"summary\": \"Order parts from supplier\",\n  \"start\": \"2024-06-04T13:00:00\",\n  \"end\": \"2024-06-04T14:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_48c1d8bb\",\n        \"name\": \"orders\",\n        \"email\": \"orders@hvacsupply.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_858e1b567cb446d289c36c16a71b7c08\",\n  \"summary\": \"Troubleshoot AC unit at Miller's Grocery\",\n  \"start\": \"2024-06-04T14:30:00\",\n  \"end\": \"2024-06-04T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_d63a278a122c46e182af6bd6ceb92036\",\n  \"summary\": \"Pick up Liam from school\",\n  \"start\": \"2024-06-04T16:00:00\",\n  \"end\": \"2024-06-04T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Tomorrow, June 4, you have six entries: Drop Liam off at school at 7:30 AM, Team meeting at 8:30 AM, Routine maintenance at First National Bank at 10:00 AM, Order parts from supplier at 1:00 PM, Troubleshoot AC unit at Miller's Grocery at 2:30 PM, and Pick up Liam from school at 4:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

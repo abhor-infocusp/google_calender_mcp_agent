@@ -1,0 +1,149 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Client Meeting' on Wednesday at 1 PM for an hour with product_manager@company.com.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to create a new event with summary 'Client Meeting', start time 2025-01-08T13:00:00, end time 2025-01-08T14:00:00 and attendees product_manager@company.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-01-05T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a yoga class for me next Tuesday at 5 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to create a new event with summary 'Yoga Class', start time 2025-01-07T17:00:00, and end time 2025-01-07T18:00:00.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-01-05T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Friday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find events on Friday, 2025-01-10, between 12:00:00 and 18:00:00.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-01-10T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What meetings are scheduled for the first day of the week?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find all events on Monday, 2025-01-06.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-01-06T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the usability testing session on Monday to 3 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event 'Usability Testing Session' on Monday. Then call update_event with the event's ID, updating the start time to 2025-01-06T15:00:00 and the end time to 2025-01-06T16:00:00.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-01-06T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the dinner with the hiking group on Thursday to 7 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event 'Dinner with hiking group' on Thursday. Then call update_event with the event's ID, updating the start time to 2025-01-09T19:00:00 and the end time to 2025-01-09T21:00:00.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-01-09T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the sprint planning meeting this week?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find events with summary 'Sprint Planning Meeting' this week, between 2025-01-06 and 2025-01-12.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-01-07T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the documentation strategy meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event 'Documentation Strategy Meeting' on Wednesday. Then call get_event with the event ID to retrieve the attendee list.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-01-08T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is product_manager@company.com free on Wednesday between 2 and 4 PM?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find all events on Wednesday, 2025-01-08, between 14:00:00 and 16:00:00, filtering for events where product_manager@company.com is an attendee. If no events are found, the user is free.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-01-07T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my meeting with Senior Developer to the time I have available for polish documentation.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the event 'Meeting with Senior Developer' on Tuesday. Call list_events to find the event 'Polish Documentation' on Friday. Then call update_event with the meeting's event ID, updating the start time to 2025-01-10T10:30:00 and end time to 2025-01-10T12:30:00.",
+        "addressed_days": [
+            "Tuesday",
+            "Friday"
+        ],
+        "current_time": "2025-01-07T15:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Stand-up.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the next occurrence of an event with the summary 'Daily Stand-up'. Assuming it's on Tuesday, find the event and prompt the user for the new time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-01-07T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel hiking.",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find an event with the summary containing 'Hiking Trip' on Saturday, 2025-01-11. Call delete_event to delete the event.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-01-11T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on my schedule for today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find all events on Monday, 2025-01-06.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-01-06T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any meetings yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find all events on Friday, 2025-01-10.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-01-11T08:00:00"
+    }
+]

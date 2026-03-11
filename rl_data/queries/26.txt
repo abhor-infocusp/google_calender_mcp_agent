@@ -1,0 +1,153 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please create an event called 'Client Meeting' on Tuesday at 10 AM with attendees client@email.com, and a brief description 'Discuss project progress'.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event on Tuesday, February 6th, 2024, at 10:00 AM with the summary 'Client Meeting', attendees client@email.com, and description 'Discuss project progress'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-02-04T18:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you schedule a team lunch for Wednesday at 12:30 PM with the team leads?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event on Wednesday, February 7th, 2024, at 12:30 PM with the summary 'Team Lunch' and including the team leads in the attendees.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-02-04T18:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Monday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should list all events scheduled for Monday morning, between 7:00 AM and 12:00 PM. The agent should look for 'Drop son off at school', 'Review Overnight Shipment Manifests', and 'Stock Audit - Section A'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-02-05T06:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What meetings do I have this week?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should list all events that have 'meeting' in the title and list the results across all days of the week.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-02-04T18:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my dinner with Mom on Monday back by one hour.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Dinner with Mom' event on Monday and update its start time to 7:00 PM and end time to 8:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-02-05T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the New Inventory System Training to 9 AM on Tuesday.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'New Inventory System Training' event on Tuesday and update its start time to 9:00 AM and end time to 10:00 AM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-02-06T07:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my book club meeting?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Book Club Meeting' event and respond with the time: Wednesday at 7:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-02-07T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is invited to the brunch on Sunday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Brunch with Friends' event on Sunday and respond with the list of attendees: sarah@email.com, amy@email.com.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-02-11T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I need to delay the meeting on Wednesday by an hour; will it conflict with anything?",
+        "complexity": "High",
+        "expected_behavior": "The agent should find the meeting scheduled for Wednesday at 8 AM, then check for conflicts if it is moved to 9 AM. It should inform the user about the Stock Audit - Section B.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-02-07T07:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "If I move my basketball pickup on Thursday to 7 PM, what will it conflict with?",
+        "complexity": "High",
+        "expected_behavior": "The agent should determine that the basketball pickup is scheduled for 6:30 PM on Thursday. Then it needs to check if moving the pickup to 7:00 PM conflicts with other events. Since there are no conflicting events, it should confirm the move.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-02-08T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule inventory.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should ask for clarification. For example: 'Which inventory event are you referring to?'",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-02-09T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Move basketball.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should ask for clarification. For example: 'Which basketball event are you referring to? And to which day and time would you like to move it?'",
+        "addressed_days": [
+            "Tuesday",
+            "Thursday"
+        ],
+        "current_time": "2024-02-09T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should list all events scheduled for the current day (in this case, Monday).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-02-05T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on my schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should list all events scheduled for Tuesday.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-02-05T18:00:00"
+    }
+]

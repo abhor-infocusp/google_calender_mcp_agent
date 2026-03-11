@@ -1,0 +1,919 @@
+[
+  {
+    "query": "Create an event called 'Project Brainstorm' for Wednesday at 10 AM with john.smith@email.com attending.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event with summary 'Project Brainstorm', start time '2023-05-24T10:00:00', end time '2023-05-24T11:00:00', attendees 'john.smith@email.com'.",
+    "simulated_now": "2023-05-21 12:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Pre-Shift Briefing",
+          "start": "2023-05-24 07:00:00",
+          "end": "2023-05-24 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@prison.com",
+            "fellowguards@prison.com"
+          ],
+          "id": "evt_34c59274a03244b2b724d189fccd3a5b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Therapy Appointment",
+          "start": "2023-05-24 17:30:00",
+          "end": "2023-05-24 18:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@wellness.com"
+          ],
+          "id": "evt_cff095f592924b619e9dd20aad89746a"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Pre-Shift Briefing",
+          "start": "2023-05-24 07:00:00",
+          "end": "2023-05-24 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@prison.com",
+            "fellowguards@prison.com"
+          ],
+          "id": "evt_34c59274a03244b2b724d189fccd3a5b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Project Brainstorm",
+          "start": "2023-05-24 10:00:00",
+          "end": "2023-05-24 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.smith@email.com"
+          ],
+          "id": "evt_4f47c3b63bc7498988be9e3f2cd4eb86"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Therapy Appointment",
+          "start": "2023-05-24 17:30:00",
+          "end": "2023-05-24 18:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@wellness.com"
+          ],
+          "id": "evt_cff095f592924b619e9dd20aad89746a"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Project Brainstorm' for Wednesday at 10 AM with john.smith@email.com attending."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2023-05-21 12:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today is Sunday, May 21, 2023. I will create an event for Wednesday, May 24, 2023, at 10 AM.\n"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "attendees": [
+            "john.smith@email.com"
+          ],
+          "end": "2023-05-24 11:00:00",
+          "start": "2023-05-24 10:00:00",
+          "summary": "Project Brainstorm"
+        },
+        "result": {
+          "message": "Event created successfully.",
+          "event": {
+            "id": "evt_4f47c3b63bc7498988be9e3f2cd4eb86",
+            "summary": "Project Brainstorm",
+            "start": "2023-05-24 10:00:00",
+            "end": "2023-05-24 11:00:00",
+            "description": "",
+            "attendees": [
+              "user=User(id='user_66498589', name='john.smith', email='john.smith@email.com') attending='ACCEPT'"
+            ],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've created an event called 'Project Brainstorm' for Wednesday, May 24, 2023, at 10 AM with john.smith@email.com attending.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Am I busy tomorrow?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events with time_min set to the beginning of Tuesday (2023-05-23T00:00:00) and time_max set to the end of Tuesday (2023-05-23T23:59:59). If events are returned, respond that the user is busy. Otherwise, respond that they are free.",
+    "simulated_now": "2023-05-22 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Pre-Shift Briefing",
+          "start": "2023-05-23 07:00:00",
+          "end": "2023-05-23 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@prison.com",
+            "fellowguards@prison.com"
+          ],
+          "id": "evt_441575dfe594445eb9c8c03dc79e1e4b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Union Meeting - Contract Negotiations",
+          "start": "2023-05-23 15:00:00",
+          "end": "2023-05-23 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "unionrep@local.org"
+          ],
+          "id": "evt_b87cd43a2e044f2685bf46b14d49d704"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Pre-Shift Briefing",
+          "start": "2023-05-23 07:00:00",
+          "end": "2023-05-23 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@prison.com",
+            "fellowguards@prison.com"
+          ],
+          "id": "evt_441575dfe594445eb9c8c03dc79e1e4b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Union Meeting - Contract Negotiations",
+          "start": "2023-05-23 15:00:00",
+          "end": "2023-05-23 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "unionrep@local.org"
+          ],
+          "id": "evt_b87cd43a2e044f2685bf46b14d49d704"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Am I busy tomorrow?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2023-05-22 10:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-05-23 23:59:59",
+          "time_min": "2023-05-23 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_441575dfe594445eb9c8c03dc79e1e4b\",\n  \"summary\": \"Pre-Shift Briefing\",\n  \"start\": \"2023-05-23T07:00:00\",\n  \"end\": \"2023-05-23T07:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_ce06366e\",\n        \"name\": \"supervisor\",\n        \"email\": \"supervisor@prison.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_90bf1996\",\n        \"name\": \"fellowguards\",\n        \"email\": \"fellowguards@prison.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_b87cd43a2e044f2685bf46b14d49d704\",\n  \"summary\": \"Union Meeting - Contract Negotiations\",\n  \"start\": \"2023-05-23T15:00:00\",\n  \"end\": \"2023-05-23T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_dc061a72\",\n        \"name\": \"unionrep\",\n        \"email\": \"unionrep@local.org\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, tomorrow, May 23, you have two entries: The first is at 7am for 30 minutes, called \"Pre-Shift Briefing\". The second is at 3pm for an hour, called \"Union Meeting - Contract Negotiations\".\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on the agenda for Saturday?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events with time_min set to the beginning of Saturday (2023-05-27T00:00:00) and time_max set to the end of Saturday (2023-05-27T23:59:59). Return the summaries of any events found.",
+    "simulated_now": "2023-05-21 12:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Kids' Soccer Game",
+          "start": "2023-05-27 09:00:00",
+          "end": "2023-05-27 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7291840bcfe2444cb36c2b5300896177"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Lunch with wife",
+          "start": "2023-05-27 12:00:00",
+          "end": "2023-05-27 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_13d0dd70732d400193c7c34ce2a1bd4f"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Home Improvement Project",
+          "start": "2023-05-27 15:00:00",
+          "end": "2023-05-27 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3048ffa0f574440e8b7bd7d57217b172"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Kids' Soccer Game",
+          "start": "2023-05-27 09:00:00",
+          "end": "2023-05-27 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7291840bcfe2444cb36c2b5300896177"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Lunch with wife",
+          "start": "2023-05-27 12:00:00",
+          "end": "2023-05-27 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_13d0dd70732d400193c7c34ce2a1bd4f"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Home Improvement Project",
+          "start": "2023-05-27 15:00:00",
+          "end": "2023-05-27 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3048ffa0f574440e8b7bd7d57217b172"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on the agenda for Saturday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2023-05-21 12:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-05-27 23:59:59",
+          "time_min": "2023-05-27 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_7291840bcfe2444cb36c2b5300896177\",\n  \"summary\": \"Kids' Soccer Game\",\n  \"start\": \"2023-05-27T09:00:00\",\n  \"end\": \"2023-05-27T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_13d0dd70732d400193c7c34ce2a1bd4f\",\n  \"summary\": \"Lunch with wife\",\n  \"start\": \"2023-05-27T12:00:00\",\n  \"end\": \"2023-05-27T13:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_3048ffa0f574440e8b7bd7d57217b172\",\n  \"summary\": \"Home Improvement Project\",\n  \"start\": \"2023-05-27T15:00:00\",\n  \"end\": \"2023-05-27T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. on Saturday, May 27, 2023, you have three entries: The first is at 9am for Kids' Soccer Game. The second is at 12pm for Lunch with wife. The third is at 3pm for Home Improvement Project."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move my therapy appointment to 6 PM on Wednesday.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find event named 'Therapy Appointment' on Wednesday. Call update_event with event_id found and updates setting start to '2023-05-24T18:00:00' and end to '2023-05-24T19:00:00'.",
+    "simulated_now": "2023-05-22 09:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Pre-Shift Briefing",
+          "start": "2023-05-24 07:00:00",
+          "end": "2023-05-24 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@prison.com",
+            "fellowguards@prison.com"
+          ],
+          "id": "evt_dda36bc5e61c4db1af2958ba9a8aacfc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Therapy Appointment",
+          "start": "2023-05-24 17:30:00",
+          "end": "2023-05-24 18:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@wellness.com"
+          ],
+          "id": "evt_9e30cb6a101241e592c6656b79205f8a"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Pre-Shift Briefing",
+          "start": "2023-05-24 07:00:00",
+          "end": "2023-05-24 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@prison.com",
+            "fellowguards@prison.com"
+          ],
+          "id": "evt_dda36bc5e61c4db1af2958ba9a8aacfc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Therapy Appointment",
+          "start": "2023-05-24 18:00:00",
+          "end": "2023-05-24 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@wellness.com"
+          ],
+          "id": "evt_9e30cb6a101241e592c6656b79205f8a"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move my therapy appointment to 6 PM on Wednesday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2023-05-22 09:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-05-24 23:59:59",
+          "time_min": "2023-05-24 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_dda36bc5e61c4db1af2958ba9a8aacfc\",\n  \"summary\": \"Pre-Shift Briefing\",\n  \"start\": \"2023-05-24T07:00:00\",\n  \"end\": \"2023-05-24T07:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_753717be\",\n        \"name\": \"supervisor\",\n        \"email\": \"supervisor@prison.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_0e484df4\",\n        \"name\": \"fellowguards\",\n        \"email\": \"fellowguards@prison.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_9e30cb6a101241e592c6656b79205f8a\",\n  \"summary\": \"Therapy Appointment\",\n  \"start\": \"2023-05-24T17:30:00\",\n  \"end\": \"2023-05-24T18:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_d027dcfd\",\n        \"name\": \"therapist\",\n        \"email\": \"therapist@wellness.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2023-05-24 19:00:00",
+          "start": "2023-05-24 18:00:00",
+          "event_id": "evt_9e30cb6a101241e592c6656b79205f8a"
+        },
+        "result": {
+          "message": "Event updated successfully.",
+          "event": {
+            "id": "evt_9e30cb6a101241e592c6656b79205f8a",
+            "summary": "Therapy Appointment",
+            "start": "2023-05-24 18:00:00",
+            "end": "2023-05-24 19:00:00",
+            "description": "",
+            "attendees": [
+              "user=User(id='user_d027dcfd', name='therapist', email='therapist@wellness.com') attending='ACCEPT'"
+            ],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved your therapy appointment to Wednesday at 6 PM. It will now run from 6 PM to 7 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "I need to push back dinner with friends on Friday by half an hour.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find the event named 'Dinner with friends' on Friday. Call update_event with event_id found, setting the start time to '2023-05-26T20:00:00' and end time to '2023-05-26T21:30:00'.",
+    "simulated_now": "2023-05-26 12:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Pre-Shift Briefing",
+          "start": "2023-05-26 07:00:00",
+          "end": "2023-05-26 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@prison.com",
+            "fellowguards@prison.com"
+          ],
+          "id": "evt_d9f14054b37c4a08872ad0c8707dee8d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with friends",
+          "start": "2023-05-26 19:30:00",
+          "end": "2023-05-26 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@email.com",
+            "jane.doe@email.com"
+          ],
+          "id": "evt_d1223ea7104e45e58df24608a0b4906c"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Pre-Shift Briefing",
+          "start": "2023-05-26 07:00:00",
+          "end": "2023-05-26 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@prison.com",
+            "fellowguards@prison.com"
+          ],
+          "id": "evt_d9f14054b37c4a08872ad0c8707dee8d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with friends",
+          "start": "2023-05-26 20:00:00",
+          "end": "2023-05-26 21:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@email.com",
+            "jane.doe@email.com"
+          ],
+          "id": "evt_d1223ea7104e45e58df24608a0b4906c"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "I need to push back dinner with friends on Friday by half an hour."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2023-05-26 12:00:00",
+          "day": "Friday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-05-26 23:59:59",
+          "time_min": "2023-05-26 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_d9f14054b37c4a08872ad0c8707dee8d\",\n  \"summary\": \"Pre-Shift Briefing\",\n  \"start\": \"2023-05-26T07:00:00\",\n  \"end\": \"2023-05-26T07:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_727918dd\",\n        \"name\": \"supervisor\",\n        \"email\": \"supervisor@prison.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_0c6b0b2d\",\n        \"name\": \"fellowguards\",\n        \"email\": \"fellowguards@prison.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_d1223ea7104e45e58df24608a0b4906c\",\n  \"summary\": \"Dinner with friends\",\n  \"start\": \"2023-05-26T19:30:00\",\n  \"end\": \"2023-05-26T21:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_deec0055\",\n        \"name\": \"john.doe\",\n        \"email\": \"john.doe@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_72f3aac0\",\n        \"name\": \"jane.doe\",\n        \"email\": \"jane.doe@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2023-05-26 21:30:00",
+          "start": "2023-05-26 20:00:00",
+          "event_id": "evt_d1223ea7104e45e58df24608a0b4906c"
+        },
+        "result": {
+          "message": "Event updated successfully.",
+          "event": {
+            "id": "evt_d1223ea7104e45e58df24608a0b4906c",
+            "summary": "Dinner with friends",
+            "start": "2023-05-26 20:00:00",
+            "end": "2023-05-26 21:30:00",
+            "description": "",
+            "attendees": [
+              "user=User(id='user_deec0055', name='john.doe', email='john.doe@email.com') attending='ACCEPT'",
+              "user=User(id='user_72f3aac0', name='jane.doe', email='jane.doe@email.com') attending='ACCEPT'"
+            ],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved dinner with friends to 8 PM to 9:30 PM on Friday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who am I meeting with on Monday at noon?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events with time_min set to '2023-05-22T12:00:00' and time_max set to '2023-05-22T13:00:00'. Return the attendees of the meeting.",
+    "simulated_now": "2023-05-22 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Pre-Shift Briefing",
+          "start": "2023-05-22 07:00:00",
+          "end": "2023-05-22 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@prison.com",
+            "fellowguards@prison.com"
+          ],
+          "id": "evt_3f8b88883b514c7eaeceb2751b6b011a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Warden",
+          "start": "2023-05-22 12:00:00",
+          "end": "2023-05-22 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "warden@prison.com"
+          ],
+          "id": "evt_33f2f92d25704e0ea90d4fc89d79446e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-05-22 18:00:00",
+          "end": "2023-05-22 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_579c916d284a4106ad28849be7337b2a"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Pre-Shift Briefing",
+          "start": "2023-05-22 07:00:00",
+          "end": "2023-05-22 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@prison.com",
+            "fellowguards@prison.com"
+          ],
+          "id": "evt_3f8b88883b514c7eaeceb2751b6b011a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Warden",
+          "start": "2023-05-22 12:00:00",
+          "end": "2023-05-22 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "warden@prison.com"
+          ],
+          "id": "evt_33f2f92d25704e0ea90d4fc89d79446e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-05-22 18:00:00",
+          "end": "2023-05-22 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_579c916d284a4106ad28849be7337b2a"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who am I meeting with on Monday at noon?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2023-05-22 08:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-05-22 12:59:59",
+          "time_min": "2023-05-22 12:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_33f2f92d25704e0ea90d4fc89d79446e\",\n  \"summary\": \"Meeting with Warden\",\n  \"start\": \"2023-05-22T12:00:00\",\n  \"end\": \"2023-05-22T13:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_e0478256\",\n        \"name\": \"warden\",\n        \"email\": \"warden@prison.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "You are meeting with Warden on Monday at noon."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is my kids' soccer game on Saturday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events with time_min set to the beginning of Saturday and time_max set to the end of Saturday.  Filter results to find the 'Kids' Soccer Game' event. Return the start time of the event.",
+    "simulated_now": "2023-05-21 18:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Kids' Soccer Game",
+          "start": "2023-05-27 09:00:00",
+          "end": "2023-05-27 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_79a9d8486b7c4a33bbd93ab42ca0ef7e"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Lunch with wife",
+          "start": "2023-05-27 12:00:00",
+          "end": "2023-05-27 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e8ac30980e2d480f8ca5d15f1a42748d"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Home Improvement Project",
+          "start": "2023-05-27 15:00:00",
+          "end": "2023-05-27 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c9b5b6477f5b4439b4638f27e4a8582a"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Kids' Soccer Game",
+          "start": "2023-05-27 09:00:00",
+          "end": "2023-05-27 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_79a9d8486b7c4a33bbd93ab42ca0ef7e"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Lunch with wife",
+          "start": "2023-05-27 12:00:00",
+          "end": "2023-05-27 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e8ac30980e2d480f8ca5d15f1a42748d"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Home Improvement Project",
+          "start": "2023-05-27 15:00:00",
+          "end": "2023-05-27 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c9b5b6477f5b4439b4638f27e4a8582a"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is my kids' soccer game on Saturday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2023-05-21 18:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-05-27 23:59:59",
+          "time_min": "2023-05-27 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_79a9d8486b7c4a33bbd93ab42ca0ef7e\",\n  \"summary\": \"Kids' Soccer Game\",\n  \"start\": \"2023-05-27T09:00:00\",\n  \"end\": \"2023-05-27T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_e8ac30980e2d480f8ca5d15f1a42748d\",\n  \"summary\": \"Lunch with wife\",\n  \"start\": \"2023-05-27T12:00:00\",\n  \"end\": \"2023-05-27T13:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_c9b5b6477f5b4439b4638f27e4a8582a\",\n  \"summary\": \"Home Improvement Project\",\n  \"start\": \"2023-05-27T15:00:00\",\n  \"end\": \"2023-05-27T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "Your kids' soccer game is on Saturday, May 27th at 9am.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What meetings do I have today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events with time_min set to the beginning of the current day (2023-05-22T00:00:00) and time_max set to the end of the current day (2023-05-22T23:59:59). Return the summaries of any events found.",
+    "simulated_now": "2023-05-22 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Pre-Shift Briefing",
+          "start": "2023-05-22 07:00:00",
+          "end": "2023-05-22 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@prison.com",
+            "fellowguards@prison.com"
+          ],
+          "id": "evt_f2d921732d7d41ceac141b3003a9dc0d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Warden",
+          "start": "2023-05-22 12:00:00",
+          "end": "2023-05-22 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "warden@prison.com"
+          ],
+          "id": "evt_9586442dd7264aaab417d06349405c66"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-05-22 18:00:00",
+          "end": "2023-05-22 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b96a2c8edaae421fba1915a2644e2f78"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Pre-Shift Briefing",
+          "start": "2023-05-22 07:00:00",
+          "end": "2023-05-22 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@prison.com",
+            "fellowguards@prison.com"
+          ],
+          "id": "evt_f2d921732d7d41ceac141b3003a9dc0d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Warden",
+          "start": "2023-05-22 12:00:00",
+          "end": "2023-05-22 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "warden@prison.com"
+          ],
+          "id": "evt_9586442dd7264aaab417d06349405c66"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-05-22 18:00:00",
+          "end": "2023-05-22 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b96a2c8edaae421fba1915a2644e2f78"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What meetings do I have today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2023-05-22 08:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-05-22 23:59:59",
+          "time_min": "2023-05-22 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_f2d921732d7d41ceac141b3003a9dc0d\",\n  \"summary\": \"Pre-Shift Briefing\",\n  \"start\": \"2023-05-22T07:00:00\",\n  \"end\": \"2023-05-22T07:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_64d662b0\",\n        \"name\": \"supervisor\",\n        \"email\": \"supervisor@prison.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_8e7a32ad\",\n        \"name\": \"fellowguards\",\n        \"email\": \"fellowguards@prison.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_9586442dd7264aaab417d06349405c66\",\n  \"summary\": \"Meeting with Warden\",\n  \"start\": \"2023-05-22T12:00:00\",\n  \"end\": \"2023-05-22T13:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_effc2214\",\n        \"name\": \"warden\",\n        \"email\": \"warden@prison.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_b96a2c8edaae421fba1915a2644e2f78\",\n  \"summary\": \"Dinner with Family\",\n  \"start\": \"2023-05-22T18:00:00\",\n  \"end\": \"2023-05-22T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "Today, May 22, 2023, you have three meetings: The first is at 7am for a Pre-Shift Briefing, the second is at 12pm for a meeting with the Warden, and the third is at 6pm for Dinner with Family.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

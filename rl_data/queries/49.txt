@@ -1,0 +1,168 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Project Brainstorm' for Wednesday at 2 PM with Jane Doe at jane.doe@example.com and John Smith at john.smith@example.com.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Project Brainstorm', start set to Wednesday at 2 PM, end set to Wednesday at 3 PM, and attendees containing jane.doe@example.com and john.smith@example.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-16T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting on Friday at 11 AM for a 'Product Demo' with client@example.com.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Product Demo', start set to Friday at 11 AM, end set to Friday at 12 PM, and attendees containing client@example.com.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-07-16T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after the meeting with Delta Inc.?",
+        "complexity": "Medium",
+        "expected_behavior": "First, find the event 'Client Meeting - Delta Inc.' on Wednesday. Then, list events on Wednesday after that meeting. Return the results to the user.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-17T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after my networking event?",
+        "complexity": "Medium",
+        "expected_behavior": "First, find the event 'Networking Event - Tech Industry Mixer' on Monday. Then, list events on Monday after that networking event. Return the results to the user.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-17T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move the proposal review with the sales engineer to 3 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Proposal Review with Sales Engineer' on Monday and update its start time to 3 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-16T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the Client Lunch on Friday to 1 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Client Lunch - Zeta Corp' on Friday and update its start time to 1 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-07-16T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my dinner with friends on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event 'Dinner with Friends' on Tuesday and return its start time to the user.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-16T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having lunch with on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event 'Client Lunch - Zeta Corp' on Friday and return the attendees to the user.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-07-16T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I need to schedule a meeting with the marketing team, but not before 11 AM on Tuesday.",
+        "complexity": "High",
+        "expected_behavior": "Check availability on Tuesday starting at 11 AM. If available, create a meeting called 'Meeting with Marketing Team' with the marketing team as attendees, starting at the first available slot after 11 AM. If there is no availability, inform the user.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-16T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Schedule a follow-up meeting with Beta Industries for Monday, but make sure it's not during the Sales Team Meeting or the Client Demo with Acme Corp.",
+        "complexity": "High",
+        "expected_behavior": "Check for conflicts on Monday between 9 AM and 12 PM. If no conflict exists, schedule the meeting. If there is a conflict, suggest an alternate time or inform the user about the conflict.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-16T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... Zeta Corp... Friday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Client Lunch - Zeta Corp' event on Friday. Check for availability in the afternoon. Suggest moving the meeting to the first available time slot in the afternoon, and ask the user to confirm the new time.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-07-16T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel... Thursday... Epsilon",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Presentation to Potential Client - Epsilon Co.' event on Thursday. Ask the user to confirm if they would like to delete the event. If yes, delete it.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-07-16T12:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the agenda for today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for today (Monday).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-17T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Any meetings scheduled for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for tomorrow (Wednesday).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-18T20:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for yesterday (Wednesday).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-20T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What does the week look like?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for the entire week, from Monday to Sunday.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2023-07-16T12:00:00"
+    }
+]

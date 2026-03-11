@@ -1,3 +1,4 @@
+import json
 import uuid
 
 from datetime import datetime
@@ -22,15 +23,48 @@ class CalendarEnvironment:
             email="john.doe@example.com"
         )
     
-    def initialize(self, events: list[dict], users: list[dict], now: str) -> None:
+    @staticmethod
+    def load_json_calendar(file_path: str) -> list[dict]:
+        """Load a JSON calendar file and transform it into event dicts for initialize().
+
+        The JSON files are keyed by day-of-week with events containing summary,
+        start, end, and attendees (as email strings). This method flattens
+        the structure and adds required fields (id, optional, attendee objects).
+        """
+        with open(file_path, "r") as f:
+            data = json.load(f)
+
+        events = []
+        for day, day_events in data.items():
+            for event in day_events:
+                attendees = [
+                    {
+                        "user": {
+                            "id": f"user_{uuid.uuid4().hex[:8]}",
+                            "name": email.split("@")[0],
+                            "email": email,
+                        },
+                        "attending": "ACCEPT",
+                    }
+                    for email in event.get("attendees", [])
+                ]
+
+                events.append({
+                    "id": f"evt_{uuid.uuid4().hex}",
+                    "summary": event["summary"],
+                    "start": event["start"],
+                    "end": event["end"],
+                    "attendees": attendees,
+                    "optional": False,
+                })
+
+        return events
+
+    def initialize(self, events: list[dict], now: str) -> None:
         """Initialize the calendar with events."""
         try:
             self.calendar.events += [
                 Event.model_validate(event) for event in events
-            ]
-
-            self.users += [
-                User.model_validate(user) for user in users
             ]
 
             self.now = datetime.strptime(now, "%Y-%m-%d %H:%M:%S")
@@ -113,9 +147,9 @@ class CalendarEnvironment:
             event = self._get_event(event_id)
             return {"event": event.model_dump_json(indent=2)}
         except ValueError as e:
-            self._raise_error("ValueError", str(e))
+            return self._raise_error("ValueError", str(e))
         except Exception as e:
-            self._raise_error("Exception", str(e))
+            return self._raise_error("Exception", str(e))
 
     def create_event(
         self,
@@ -149,13 +183,13 @@ class CalendarEnvironment:
             self.calendar.events.append(event)
 
             return {
-                "message": "Event created successfully.", 
+                "message": "Event created successfully.",
                 "event": event.__dict__
             }
         except ValueError as e:
-            self._raise_error("ValueError", str(e))
+            return self._raise_error("ValueError", str(e))
         except Exception as e:
-            self._raise_error("Exception", str(e))
+            return self._raise_error("Exception", str(e))
 
     def update_event(
         self, 
@@ -182,13 +216,13 @@ class CalendarEnvironment:
                     event.optional = value
 
             return {
-                "message": "Event updated successfully.", 
+                "message": "Event updated successfully.",
                 "event": event.__dict__
             }
         except ValueError as e:
-            self._raise_error("ValueError", str(e))
+            return self._raise_error("ValueError", str(e))
         except Exception as e:
-            self._raise_error("Exception", str(e))
+            return self._raise_error("Exception", str(e))
 
     def delete_event(self, event_id: str):
         """Delete a particular event."""
@@ -200,9 +234,9 @@ class CalendarEnvironment:
                 "event": event.__dict__
             }
         except ValueError as e:
-            self._raise_error("ValueError", str(e))
+            return self._raise_error("ValueError", str(e))
         except Exception as e:
-            self._raise_error("Exception", str(e))
+            return self._raise_error("Exception", str(e))
 
     def respond_to_event(self, event_id: str, attending: str):
         """Respond to an event."""
@@ -212,9 +246,9 @@ class CalendarEnvironment:
                 raise ValueError(f"Invalid value for `attending` field, expected ACCEPT, DECLINE, MAYBE, NO RESPONSE got {attending}.")
             event.attending = attending
         except ValueError as e:
-            self._raise_error("ValueError", str(e))
+            return self._raise_error("ValueError", str(e))
         except Exception as e:
-            self._raise_error("Exception", str(e))
+            return self._raise_error("Exception", str(e))
 
     # TODO: Improve Implementation
     # def get_freebusy(self, time_min: str, time_max: str):
@@ -234,6 +268,8 @@ class CalendarEnvironment:
     #         self._raise_error("Exception", str(e))
 
     def get_current_time(self):
+        day_name = self.now.strftime("%A")
         return {
-            "current_time": self.now.strftime("%Y-%m-%d %H:%M:%S")
+            "current_time": self.now.strftime("%Y-%m-%d %H:%M:%S"),
+            "day": day_name,
         }

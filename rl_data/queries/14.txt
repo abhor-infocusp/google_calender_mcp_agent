@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create a new event called 'Project Brainstorm' for Tuesday at 3 PM lasting for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Project Brainstorm', start time '2023-10-10T15:00:00', end time '2023-10-10T16:00:00', and no attendees or description.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-10-08T23:59:59"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for Friday at 10 AM to discuss the Johnson account.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Discuss the Johnson account', start time '2023-10-13T10:00:00', end time unspecified (defaults to 1 hour), and no attendees or description.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-10-08T23:59:59"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Can you schedule a meeting with the building manager?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the meeting with the building manager on Monday and ask user for clarification. If user says yes, confirm the time. If user wants to set up new meeting, schedule a meeting with building manager.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-10-08T23:59:59"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min as Saturday 2023-10-14 00:00:00 and time_max as Sunday 2023-10-15 00:00:00, then respond to user with Saturday events.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-10-14T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule my yoga class for 7 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find yoga class event on Tuesday and update the start time to 7:00 PM, keeping the duration the same. Call update_event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-10-09T15:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "I need to move dinner with my husband on Wednesday to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with husband at new restaurant' event on Wednesday and update the start time to 7:30 PM. Call update_event.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-10-09T15:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me who is attending the meeting with the plumbing code expert.",
+        "complexity": "Low",
+        "expected_behavior": "Find the event 'Work with plumbing code expert' on Tuesday. Extract the attendees list and respond to the user with the attendee email.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-10-10T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "When am I meeting with the supplier?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for this week. Find the 'Visit supplier to pick up parts for next job' event. Respond to user with the day and time of this event.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-10-12T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I need to push back my dinner with my husband on Saturday by one hour.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the dinner with husband event on Saturday. Update the start time to 7 PM. Call update_event.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-10-14T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you schedule another meeting with my apprentice plumber this week?",
+        "complexity": "High",
+        "expected_behavior": "Check calendar for free slots with apprentice plumber. Ask the user for preferred time. Based on the time, create event with apprentice plumber and the user.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-10-11T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule dinner.",
+        "complexity": "Low",
+        "expected_behavior": "Prompt the user to specify which dinner and which day should be rescheduled.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-10-11T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Supplier?",
+        "complexity": "Low",
+        "expected_behavior": "Prompt the user to clarify what they want to know about the supplier.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-10-12T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for the current day (Monday, 2023-10-09). Respond to the user with today's events.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-10-09T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for Tuesday (2023-10-10). Respond to the user with the events on Tuesday.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-10-09T15:00:00"
+    }
+]

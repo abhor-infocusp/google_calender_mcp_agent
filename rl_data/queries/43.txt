@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Project Brainstorm' for this Wednesday at 11 AM, lasting one hour. Invite souschef@email.com.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event with the summary 'Project Brainstorm' on Wednesday, May 3, 2023, from 11:00 AM to 12:00 PM, with souschef@email.com as an attendee.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-30T18:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me in for a doctor's appointment on Friday from 2 PM to 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event with the summary 'Doctor's appointment' on Friday, May 5, 2023, from 2:00 PM to 3:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-04-30T18:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy on Thursday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should check the calendar for events on Thursday, May 4, 2023, between 12:00 PM and 6:00 PM and respond whether there are any events during that time.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-04-30T18:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the schedule for Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should list all events scheduled for Saturday, May 6, 2023.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-04-30T18:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the menu planning session on Monday to 4:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Menu Planning Session with Sous Chef' event on Monday, May 1, 2023, and update its start time to 4:30 PM, keeping the duration the same.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-30T18:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the line cook training on Tuesday to 3:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Line Cook Training: New Pasta Dish' event on Tuesday, May 2, 2023, and update its start time to 3:30 PM, keeping the duration the same.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-04-30T18:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is going to the kitchen staff meeting on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Kitchen Staff Meeting' event on Monday, May 1, 2023, and return the list of attendees: souschef@email.com, linecook1@email.com, and linecook2@email.com.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-30T18:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is dinner with the wife on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Dinner with Wife' event on Wednesday, May 3, 2023, and return the start time: 7:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-30T18:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting with the restaurant owner on Tuesday at 10:30 AM, but I already have something scheduled. Find an available time for a 30-minute meeting that day.",
+        "complexity": "High",
+        "expected_behavior": "The agent should detect the conflict with the existing 'Meeting with Restaurant Owner' event on Tuesday, May 2, 2023 at 10:00 AM. It should then find an alternative 30-minute slot on Tuesday and offer that to the user.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-04-30T18:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Add linecook3@email.com to the Kitchen Staff Meeting on Monday, and make it an hour and a half long.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Kitchen Staff Meeting' event on Monday, May 1, 2023, add linecook3@email.com to the attendees, and extend the meeting duration to 90 minutes, ending at 10:30 AM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-30T18:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Therapy...",
+        "complexity": "Low",
+        "expected_behavior": "The agent should look for the 'Therapy Session' event, confirm the time (Tuesday at 6:30 PM), and ask if the user needs more information or wants to make changes.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-04-30T18:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule basketball.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should look for the 'Son's Basketball Game' event on Thursday, May 4, 2023 at 6:00 PM, and ask the user to what time it should be rescheduled.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-04-30T18:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should list all events scheduled for Monday, May 1, 2023.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-05-01T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I schedule anything for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should check the calendar for events on Wednesday, May 3, 2023 and respond whether there are any events scheduled.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-05-02T14:00:00"
+    }
+]

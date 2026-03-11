@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an appointment for a follow up with a client next Tuesday at 1 PM with client@example.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event named 'Follow up with a client' on Tuesday, April 7, 2026, from 1:00 PM to 2:00 PM with client@example.com as an attendee.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-03-30T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a block on my calendar this Friday at 4:30 PM for drinks with Dave.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event named 'Drinks with Dave' on Friday, April 10, 2026, from 4:30 PM to 5:30 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-03-30T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy Wednesday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events on Wednesday, April 8, 2026 between 9:00 AM and 12:00 PM to determine if the user is busy.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-04-08T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Sunday look like?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Sunday, April 12, 2026, to provide an overview of the user's day.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2026-04-12T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my meeting with Sarah Jones next Monday to 11 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Case Strategy Meeting' event on Monday, April 6, 2026 and update the start time to 11:00 AM and the end time to 12:15 PM, maintaining the 1 hour and 15 minute duration.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-03-30T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time for dinner with friends on Friday to 7 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Friends' event on Friday, April 10, 2026 and update the start time to 7:00 PM and the end time to 9:00 PM, maintaining the 2 hour duration.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-04-06T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me who is attending the court hearing on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Court Appearance - Hearing' event on Tuesday, April 7, 2026 and return the attendees: opposing_counsel@example.com.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-04-07T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What am I doing on Thursday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Thursday, April 9, 2026, between 12:00 PM and 6:00 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-04-09T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the mediation on Friday. Decline, and tell me when partner@example.com is free instead.",
+        "complexity": "High",
+        "expected_behavior": "Decline the 'Mediation - Divorce Settlement' event on Friday, April 10, 2026. Then, list events that include partner@example.com between Friday, April 10, 2026, and Sunday, April 12, 2026 to find available times.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-04-10T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule the court appearance on Wednesday to Thursday at the same time.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Court Appearance - Trial' event on Wednesday, April 8, 2026, and move it to Thursday, April 9, 2026, keeping the same start time (9:00 AM) and duration.",
+        "addressed_days": [
+            "Wednesday",
+            "Thursday"
+        ],
+        "current_time": "2026-04-07T15:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule custody agreement.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Draft Legal Documents - Child Custody Agreement' event on Monday, April 6, 2026, and ask the user for the new desired date and time to reschedule it.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-04-06T15:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel the dinner.",
+        "complexity": "Medium",
+        "expected_behavior": "Ask clarification from the user about which 'dinner' event they would like to cancel. If user specifies 'Dinner with Children', then delete the 'Dinner with Children' event on Monday, April 6, 2026.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-04-06T12:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Monday, April 6, 2026.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-04-06T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Am I free tomorrow evening?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events on Tuesday, April 7, 2026 between 6:00 PM and 11:00 PM to determine if the user is free.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-04-06T15:00:00"
+    }
+]

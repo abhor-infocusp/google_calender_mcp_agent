@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please create an event called 'Client Meeting' on Wednesday at 1 PM with attendees client@email.com and a description 'Discuss Q3 goals'.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Client Meeting', start set to Wednesday at 1 PM, end set to Wednesday at 2 PM, attendees set to ['client@email.com'], and description 'Discuss Q3 goals'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-05-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a yoga session for me this Thursday at 5 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Yoga session', start set to Thursday at 5 PM, end set to Thursday at 6 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-05-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Monday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to retrieve all events happening on Monday between 9 AM and 12 PM. Return the event details to the user.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-05-27T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Who am I meeting with on Friday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to retrieve all events happening on Friday between 12 PM and 5 PM. Extract the attendees from the events and return them to the user.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-05-31T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move the Presentation Practice with Presentation Coach on Wednesday to 4 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event 'Presentation Practice with Presentation Coach' on Wednesday. If found, call update_event with the event ID and update the start time to 4 PM and the end time to 5 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-05-28T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the Sales Data Analysis on Thursday to 11 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event 'Sales Data Analysis' on Thursday. If found, call update_event with the event ID and update the start time to 11 AM and the end time to 12 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-05-29T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the Team Meeting on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event 'Team Meeting' on Monday. If found, extract and return the start time of the event.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-05-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Tableau Training on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event 'Tableau Training' on Thursday. If found, extract and return the attendees of the event.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-05-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting with the Data Science Manager, Marketing Manager and Sales Director on Friday at 2 PM.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find any conflicting events on Friday at 2 PM. If there are conflicts, present the conflicting events to the user and ask for confirmation to proceed anyway. If no conflicts or user confirms, call create_event with summary 'Meeting with Data Science Manager, Marketing Manager, and Sales Director', start at 2 PM, end at 3 PM, and attendees set to 'manager@company.com, marketing.manager@company.com, sales.director@company.com'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-05-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule my One-on-One with the Data Science Manager on Tuesday so it's an hour later, but make sure it doesn't conflict with anything else.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the 'One-on-One with Data Science Manager' on Tuesday. If found, determine its current start time, add one hour. Call list_events to check for conflicts with the new time. If a conflict is found, inform the user. If no conflict, call update_event to update the start time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-05-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting Sales Director...",
+        "complexity": "Medium",
+        "expected_behavior": "Based on the phrase, ask clarifying questions: 'What day and time would you like to meet with Sales Director?'",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-05-29T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Tableau Thursday?",
+        "complexity": "Medium",
+        "expected_behavior": "Based on the phrase, ask clarifying questions: 'Are you asking about the Tableau Training on Thursday, or would you like to create a new event related to Tableau for Thursday?'",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-05-29T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to retrieve all events happening on the current day. Return the event details to the user.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-05-27T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Is Data Engineer busy tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to retrieve all events happening on Tuesday with Data Engineer as an attendee. Return whether Data Engineer has any events scheduled for that day.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-05-27T08:00:00"
+    }
+]

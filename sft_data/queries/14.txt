@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Brainstorm' for Tuesday at 1 PM lasting one hour with project_manager@construction.com.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Team Brainstorm', start set to Tuesday at 1 PM, end set to Tuesday at 2 PM, and attendees set to project_manager@construction.com.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting for Friday at 3 PM to discuss marketing strategies. It should finish at 4 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'discuss marketing strategies', start set to Friday at 3 PM, and end set to Friday at 4 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's happening on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to retrieve events for Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "List my meetings for the first half of Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to 8:00 AM and time_max to 12:00 PM on Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the presentation on Thursday to 10 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event named 'Presentation to Government Regulators' on Thursday. Extract event ID, then call update_event to update start time to 10 AM and end time to 12 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-29T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the attendees for the budget review meeting.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event named 'Budget Review Meeting'. Extract event ID, then call update_event to update attendees field.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is dinner with my spouse?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event named 'Dinner with spouse'. Extract the time and return the time to the user.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me about the meeting with the environmental consultant.",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event named 'Meeting with Environmental Consultant'. Extract the event details and return them to the user.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the site meeting on Wednesday. Decline the invitation.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the event named 'Site Meeting - New Road Construction' on Wednesday. Extract event ID, then call respond_to_event to decline the invitation.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule the site visit for the potential landslide area to start half an hour later.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the event named 'Site Visit - Potential Landslide Area'. Extract the event ID and original start time. Update the event's start time to 10:00 AM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Budget meeting...",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event named 'Budget Review Meeting'. Extract the meeting details and return them to the user.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Presentation regulators",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event named 'Presentation to Government Regulators'. Extract the meeting details and return them to the user.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for all events on the current day.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-29T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Is tomorrow free?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find all events on the day after the current day, and return whether there are any events.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-30T07:00:00"
+    }
+]

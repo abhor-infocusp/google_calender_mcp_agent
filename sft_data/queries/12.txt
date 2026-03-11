@@ -1,0 +1,147 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Project Brainstorm' for Wednesday at 10 AM with john.smith@email.com attending.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Project Brainstorm', start time '2023-05-24T10:00:00', end time '2023-05-24T11:00:00', attendees 'john.smith@email.com'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-05-21T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting with the marketing team this Friday at 2 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Meeting with the marketing team', start time '2023-05-26T14:00:00', end time '2023-05-26T15:00:00', attendees 'marketing@company.com' (assuming the agent can infer the marketing team's email).",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-05-21T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to the beginning of Tuesday (2023-05-23T00:00:00) and time_max set to the end of Tuesday (2023-05-23T23:59:59). If events are returned, respond that the user is busy. Otherwise, respond that they are free.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-05-22T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the agenda for Saturday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to the beginning of Saturday (2023-05-27T00:00:00) and time_max set to the end of Saturday (2023-05-27T23:59:59). Return the summaries of any events found.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-05-21T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my therapy appointment to 6 PM on Wednesday.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find event named 'Therapy Appointment' on Wednesday. Call update_event with event_id found and updates setting start to '2023-05-24T18:00:00' and end to '2023-05-24T19:00:00'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-05-22T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "I need to push back dinner with friends on Friday by half an hour.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event named 'Dinner with friends' on Friday. Call update_event with event_id found, setting the start time to '2023-05-26T20:00:00' and end time to '2023-05-26T21:30:00'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-05-26T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I meeting with on Monday at noon?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to '2023-05-22T12:00:00' and time_max set to '2023-05-22T13:00:00'. Return the attendees of the meeting.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-05-22T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my kids' soccer game on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to the beginning of Saturday and time_max set to the end of Saturday.  Filter results to find the 'Kids' Soccer Game' event. Return the start time of the event.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-05-21T18:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move my lunch with my wife on Saturday to 2 PM and add John as well?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the event named 'Lunch with wife' on Saturday. Call update_event with event_id found, set the start time to '2023-05-27T14:00:00', the end time to '2023-05-27T15:00:00' and add 'john.doe@email.com' to the attendees.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-05-27T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline the Family BBQ on Sunday, but see if I have time to reschedule it for next Saturday instead.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find event named 'Family BBQ' on Sunday. Call respond_to_event with event_id and 'DECLINE'. Because 'next saturday' is outside the valid date range, notify the user that rescheduling outside the specified week is not possible.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2023-05-27T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule the pre shift",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find event named 'Pre-Shift Briefing'. Ask user to clarify the day to reschedule it to. If user specifies a day, then ask the user what time they would like to reschedule it to. Based on the clarification, the agent should then update the event to the newly specified day and time.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2023-05-23T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "cancel dinner",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should ask the user which dinner event they are referring to since there are multiple dinner events during the week. If the user then specifies the day, then call delete_event with event_id corresponding to the 'Dinner with Family' or 'Dinner with friends' event on that day.",
+        "addressed_days": [
+            "Monday",
+            "Friday"
+        ],
+        "current_time": "2023-05-24T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to the beginning of the current day (2023-05-22T00:00:00) and time_max set to the end of the current day (2023-05-22T23:59:59). Return the summaries of any events found.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-05-22T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have anything scheduled yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to the beginning of yesterday (2023-05-21T00:00:00) and time_max set to the end of yesterday (2023-05-21T23:59:59). If events are returned, respond that the user did have things scheduled. Otherwise, respond that they did not.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-05-23T09:00:00"
+    }
+]

@@ -1,0 +1,150 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting called 'Project Alpha Kickoff' for Wednesday at 11 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event titled 'Project Alpha Kickoff' on Wednesday, January 25, 2023, from 11:00 AM to 12:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-01-22T18:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you book me in for a 'Client Onboarding' session on Friday at 3:00 PM?",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event called 'Client Onboarding' on Friday, January 27, 2023, from 3:00 PM to 4:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-01-22T18:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Thursday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List events scheduled for Thursday, January 26, 2023, between 12:00 PM and 6:00 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-01-26T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Anything happening Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Saturday, January 28, 2023.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-01-28T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the proposal review on Monday to 3 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Proposal Review - Acme Corp' event and update its start time to 3:00 PM and end time to 4:00 PM on Monday, January 23, 2023.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-01-23T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the team lunch on Friday to 12 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Team Lunch' event and update its start time to 12:00 PM and end time to 1:00 PM on Friday, January 27, 2023.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-01-27T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Client Presentation on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Client Presentation - SecureData Solutions' event and return the list of attendees: client_cio@securedata.com, salesengineer1@cybersec.com.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-01-23T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What's the Webinar about on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Industry Webinar - Threat Landscape 2024' event and return the title: Threat Landscape 2024.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-01-25T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is salesengineer1@cybersec.com busy on Thursday morning?",
+        "complexity": "High",
+        "expected_behavior": "List events between 9:00 AM and 12:00 PM on Thursday, January 26, 2023 and determine if salesengineer1@cybersec.com is an attendee at any of those events. If attending an event, return 'Yes'. If not, return 'No'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-01-26T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "If I move my yoga class to 7 PM on Wednesday, will it conflict with anything?",
+        "complexity": "High",
+        "expected_behavior": "List events on Wednesday, January 25, 2023 between 7:00 PM and 8:00 PM. If there are any events during that time, return 'Yes'. Otherwise, return 'No'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-01-25T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule dinner.",
+        "complexity": "Medium",
+        "expected_behavior": "Clarify which dinner the user is referring to (options are: Monday - Dinner with Family, Thursday - Dinner with Spouse, Saturday - Dinner at Restaurant).",
+        "addressed_days": [
+            "Monday",
+            "Thursday",
+            "Saturday"
+        ],
+        "current_time": "2023-01-26T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "cancel meeting",
+        "complexity": "Medium",
+        "expected_behavior": "Clarify which meeting the user is referring to by listing the events scheduled for the current day.",
+        "addressed_days": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+        ],
+        "current_time": "2023-01-23T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Sunday, January 29, 2023.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2023-01-29T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Tuesday, January 24, 2023.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-01-23T18:00:00"
+    }
+]

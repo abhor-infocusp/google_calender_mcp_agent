@@ -1,0 +1,150 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Board Game Night' for Saturday at 8 PM with partner@email.com.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the create_event tool to create a new event with the summary 'Board Game Night', start time of 2026-09-26T20:00:00, end time of 2026-09-26T22:00:00, and attendees partner@email.com.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-09-20T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting with the Level Designer next Wednesday from 1 PM to 2 PM to discuss environment art.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the create_event tool to create a new event with the summary 'discuss environment art', start time of 2026-09-23T13:00:00, end time of 2026-09-23T14:00:00, and attendees level_designer@gamestudio.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-09-20T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the schedule for the 22nd?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should use the list_events tool with a time_min of 2026-09-22T00:00:00 and time_max of 2026-09-22T23:59:59 to retrieve all events on Tuesday.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-09-20T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Anything happening with voice actors this week?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should use the list_events tool with a time_min of 2026-09-21T00:00:00 and a time_max of 2026-09-27T23:59:59 and also include voice actors' email in the query.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-09-20T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the Narrative Team Meeting on Monday back by 30 minutes.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should first use the list_events tool to find the event 'Narrative Team Meeting' on Monday, then use the update_event tool to update the start time to 2026-09-21T10:00:00 and the end time to 2026-09-21T11:00:00.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-09-21T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "The QA Testing on Tuesday needs to be an hour longer.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should first use the list_events tool to find the event 'QA Testing - Narrative Issues' on Tuesday, then use the update_event tool to update the end time to 2026-09-22T04:00:00.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-09-22T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having dinner with on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the list_events tool with a time_min of 2026-09-26T00:00:00 and a time_max of 2026-09-26T23:59:59 to find events on Saturday, then extract and return the attendees of the event 'Dinner at New Restaurant'.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-09-20T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the Level Design Brainstorm meeting on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the list_events tool with a time_min of 2026-09-23T00:00:00 and a time_max of 2026-09-23T23:59:59 to find events on Wednesday, then return the start time of the 'Level Design Brainstorm' meeting.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-09-20T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I'm busy during the dialogue revision on Monday. Can you move it to Wednesday at the same time?",
+        "complexity": "High",
+        "expected_behavior": "The agent should first use the list_events tool to find the event 'Dialogue Revision - Act 2, Scene 4' on Monday. Then, use the create_event tool to create an event on Wednesday at the same time and the delete_event tool to remove the Monday event. The new event must have the same attendees.",
+        "addressed_days": [
+            "Monday",
+            "Wednesday"
+        ],
+        "current_time": "2026-09-21T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the sprint planning meeting on Friday. Decline, and find me another block of 90 minutes on either Thursday or Friday.",
+        "complexity": "High",
+        "expected_behavior": "The agent should first find the 'Sprint Planning Meeting' event using the list_events tool on Friday. Then, it should use the respond_to_event tool to decline. Then, it should find an available 90-minute slot on Thursday or Friday, and create a new event with the same attendees as the sprint meeting.",
+        "addressed_days": [
+            "Friday",
+            "Thursday"
+        ],
+        "current_time": "2026-09-24T15:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change Friday game night.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should use list_events to find 'Game Night with Friends' on Friday, then ask the user clarifying questions about what change they would like to make.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-09-25T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting with Level Designer...",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the list_events tool to find 'Level Design Brainstorm' on Wednesday. If found, it should then ask the user what they would like to do with it. If not found, it should ask the user when they'd like to schedule the meeting with the level designer.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-09-23T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the list_events tool with a time_min of 2026-09-21T00:00:00 and time_max of 2026-09-21T23:59:59 to retrieve all events on Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-09-21T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the list_events tool with a time_min of 2026-09-23T00:00:00 and time_max of 2026-09-23T23:59:59 to retrieve all events on Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-09-22T20:00:00"
+    }
+]

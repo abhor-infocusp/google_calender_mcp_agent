@@ -1,0 +1,2057 @@
+[
+  {
+    "query": "Create an event called 'Team Lunch' for this Wednesday at 1 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create an event with summary 'Team Lunch' on 2024-08-21 from 13:00 to 14:00.",
+    "simulated_now": "2024-08-18 12:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Quiz for U.S. History",
+          "start": "2024-08-21 07:30:00",
+          "end": "2024-08-21 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f9a5426c57a94054829844b4ad246ef4"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "U.S. History Class - Chapter 5 Quiz",
+          "start": "2024-08-21 08:15:00",
+          "end": "2024-08-21 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7be581de021e440b8c1ad65304698395"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "AP History - Review test scores",
+          "start": "2024-08-21 09:30:00",
+          "end": "2024-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e3c94a1e9a344cb2878e44aec790b392"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Guidance Counselor - Student Concerns",
+          "start": "2024-08-21 12:30:00",
+          "end": "2024-08-21 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "guidance@school.edu"
+          ],
+          "id": "evt_821f85a051e84db0a08bdd3c868329ac"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Grade Papers",
+          "start": "2024-08-21 16:00:00",
+          "end": "2024-08-21 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_67b5335d0a3345ff963f24ecbdf09471"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Quiz for U.S. History",
+          "start": "2024-08-21 07:30:00",
+          "end": "2024-08-21 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f9a5426c57a94054829844b4ad246ef4"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "U.S. History Class - Chapter 5 Quiz",
+          "start": "2024-08-21 08:15:00",
+          "end": "2024-08-21 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7be581de021e440b8c1ad65304698395"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "AP History - Review test scores",
+          "start": "2024-08-21 09:30:00",
+          "end": "2024-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e3c94a1e9a344cb2878e44aec790b392"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Guidance Counselor - Student Concerns",
+          "start": "2024-08-21 12:30:00",
+          "end": "2024-08-21 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "guidance@school.edu"
+          ],
+          "id": "evt_821f85a051e84db0a08bdd3c868329ac"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Team Lunch",
+          "start": "2024-08-21 13:00:00",
+          "end": "2024-08-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_73b7b7de0eea4ca093f00ec8d9a227d4"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Grade Papers",
+          "start": "2024-08-21 16:00:00",
+          "end": "2024-08-21 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_67b5335d0a3345ff963f24ecbdf09471"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Team Lunch' for this Wednesday at 1 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-18 12:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "end": "2024-08-21 14:00:00",
+          "start": "2024-08-21 13:00:00",
+          "summary": "Team Lunch"
+        },
+        "result": {
+          "message": "Event created successfully.",
+          "event": {
+            "id": "evt_73b7b7de0eea4ca093f00ec8d9a227d4",
+            "summary": "Team Lunch",
+            "start": "2024-08-21 13:00:00",
+            "end": "2024-08-21 14:00:00",
+            "description": "",
+            "attendees": [],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've created an event called 'Team Lunch' for this Wednesday, August 21, at 1 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Schedule a meeting with John Smith next Thursday at 10:00 AM to 11:00 AM",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create an event with summary 'Meeting with John Smith' on 2024-08-22 from 10:00 to 11:00. Attendees unspecified.",
+    "simulated_now": "2024-08-18 12:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Review APUSH essays",
+          "start": "2024-08-22 07:30:00",
+          "end": "2024-08-22 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5adc47b8491446be8503b8ba3c0c03ec"
+        },
+        {
+          "day": "Thursday",
+          "summary": "U.S. History Class - Primary Source Analysis",
+          "start": "2024-08-22 08:15:00",
+          "end": "2024-08-22 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5940759892e44105b212021b95afa5ea"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Debate Team Practice",
+          "start": "2024-08-22 15:30:00",
+          "end": "2024-08-22 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9201318791194450881938e1c85ac87b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "School Board Meeting - Budget Presentation",
+          "start": "2024-08-22 18:30:00",
+          "end": "2024-08-22 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "schoolboard@school.edu",
+            "principal@school.edu"
+          ],
+          "id": "evt_c956467ff0a846e7a6cfa51fbf2a6e78"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Review APUSH essays",
+          "start": "2024-08-22 07:30:00",
+          "end": "2024-08-22 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5adc47b8491446be8503b8ba3c0c03ec"
+        },
+        {
+          "day": "Thursday",
+          "summary": "U.S. History Class - Primary Source Analysis",
+          "start": "2024-08-22 08:15:00",
+          "end": "2024-08-22 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5940759892e44105b212021b95afa5ea"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with John Smith",
+          "start": "2024-08-22 10:00:00",
+          "end": "2024-08-22 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8274375f9bb741ef9ca8c40ec44fd1d9"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Debate Team Practice",
+          "start": "2024-08-22 15:30:00",
+          "end": "2024-08-22 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9201318791194450881938e1c85ac87b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "School Board Meeting - Budget Presentation",
+          "start": "2024-08-22 18:30:00",
+          "end": "2024-08-22 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "schoolboard@school.edu",
+            "principal@school.edu"
+          ],
+          "id": "evt_c956467ff0a846e7a6cfa51fbf2a6e78"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Schedule a meeting with John Smith next Thursday at 10:00 AM to 11:00 AM"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-18 12:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "end": "2024-08-22 11:00:00",
+          "start": "2024-08-22 10:00:00",
+          "summary": "Meeting with John Smith"
+        },
+        "result": {
+          "message": "Event created successfully.",
+          "event": {
+            "id": "evt_8274375f9bb741ef9ca8c40ec44fd1d9",
+            "summary": "Meeting with John Smith",
+            "start": "2024-08-22 10:00:00",
+            "end": "2024-08-22 11:00:00",
+            "description": "",
+            "attendees": [],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "I've scheduled a meeting with John Smith next Thursday, August 22, from 10:00 AM to 11:00 AM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Am I busy tomorrow morning?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List events on Tuesday, 2024-08-20, between 00:00 and 12:00.",
+    "simulated_now": "2024-08-19 12:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Grade U.S. History Homework",
+          "start": "2024-08-20 07:30:00",
+          "end": "2024-08-20 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_78f07cbc532d470fb91553ee7156a079"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "U.S. History Class - Chapter 6 Discussion",
+          "start": "2024-08-20 08:15:00",
+          "end": "2024-08-20 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6c10a52d59634ed98b2ac0a39cf89280"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Faculty Meeting",
+          "start": "2024-08-20 14:30:00",
+          "end": "2024-08-20 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "principal@school.edu",
+            "otherteachers@school.edu"
+          ],
+          "id": "evt_56d908bf22ad4c42878e3b2754ca0945"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Debate Team Practice",
+          "start": "2024-08-20 15:30:00",
+          "end": "2024-08-20 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fdafba5e386f49eebd363cfe94fd665b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Wife - Discuss Kid's Activities",
+          "start": "2024-08-20 19:00:00",
+          "end": "2024-08-20 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b9bc011734ee4f07b3ee5018e53bc33a"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Grade U.S. History Homework",
+          "start": "2024-08-20 07:30:00",
+          "end": "2024-08-20 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_78f07cbc532d470fb91553ee7156a079"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "U.S. History Class - Chapter 6 Discussion",
+          "start": "2024-08-20 08:15:00",
+          "end": "2024-08-20 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6c10a52d59634ed98b2ac0a39cf89280"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Faculty Meeting",
+          "start": "2024-08-20 14:30:00",
+          "end": "2024-08-20 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "principal@school.edu",
+            "otherteachers@school.edu"
+          ],
+          "id": "evt_56d908bf22ad4c42878e3b2754ca0945"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Debate Team Practice",
+          "start": "2024-08-20 15:30:00",
+          "end": "2024-08-20 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fdafba5e386f49eebd363cfe94fd665b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Wife - Discuss Kid's Activities",
+          "start": "2024-08-20 19:00:00",
+          "end": "2024-08-20 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b9bc011734ee4f07b3ee5018e53bc33a"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Am I busy tomorrow morning?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-19 12:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-08-20 12:00:00",
+          "time_min": "2024-08-20 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_78f07cbc532d470fb91553ee7156a079\",\n  \"summary\": \"Grade U.S. History Homework\",\n  \"start\": \"2024-08-20T07:30:00\",\n  \"end\": \"2024-08-20T08:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_6c10a52d59634ed98b2ac0a39cf89280\",\n  \"summary\": \"U.S. History Class - Chapter 6 Discussion\",\n  \"start\": \"2024-08-20T08:15:00\",\n  \"end\": \"2024-08-20T09:15:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, tomorrow morning you have two entries: The first is at 7:30am for 'Grade U.S. History Homework', and the second is at 8:15am for 'U.S. History Class - Chapter 6 Discussion'.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What does my Wednesday look like?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List all events on Wednesday, 2024-08-21.",
+    "simulated_now": "2024-08-21 08:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Quiz for U.S. History",
+          "start": "2024-08-21 07:30:00",
+          "end": "2024-08-21 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_790ffaf4920d498fbaaaac803dcc35cd"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "U.S. History Class - Chapter 5 Quiz",
+          "start": "2024-08-21 08:15:00",
+          "end": "2024-08-21 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_05a4aff2cad04769a397f7785a869c6c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "AP History - Review test scores",
+          "start": "2024-08-21 09:30:00",
+          "end": "2024-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7ae77d8c0c3c4665a033a6be06e913b3"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Guidance Counselor - Student Concerns",
+          "start": "2024-08-21 12:30:00",
+          "end": "2024-08-21 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "guidance@school.edu"
+          ],
+          "id": "evt_7c82b4572af44bf08a61ae81c3d8aa99"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Grade Papers",
+          "start": "2024-08-21 16:00:00",
+          "end": "2024-08-21 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e3e42cb017924afd9fa4aadf77f67110"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Quiz for U.S. History",
+          "start": "2024-08-21 07:30:00",
+          "end": "2024-08-21 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_790ffaf4920d498fbaaaac803dcc35cd"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "U.S. History Class - Chapter 5 Quiz",
+          "start": "2024-08-21 08:15:00",
+          "end": "2024-08-21 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_05a4aff2cad04769a397f7785a869c6c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "AP History - Review test scores",
+          "start": "2024-08-21 09:30:00",
+          "end": "2024-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7ae77d8c0c3c4665a033a6be06e913b3"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Guidance Counselor - Student Concerns",
+          "start": "2024-08-21 12:30:00",
+          "end": "2024-08-21 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "guidance@school.edu"
+          ],
+          "id": "evt_7c82b4572af44bf08a61ae81c3d8aa99"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Grade Papers",
+          "start": "2024-08-21 16:00:00",
+          "end": "2024-08-21 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e3e42cb017924afd9fa4aadf77f67110"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What does my Wednesday look like?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-21 08:00:00",
+          "day": "Wednesday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-08-21 23:59:59",
+          "time_min": "2024-08-21 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_790ffaf4920d498fbaaaac803dcc35cd\",\n  \"summary\": \"Prepare Quiz for U.S. History\",\n  \"start\": \"2024-08-21T07:30:00\",\n  \"end\": \"2024-08-21T08:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_05a4aff2cad04769a397f7785a869c6c\",\n  \"summary\": \"U.S. History Class - Chapter 5 Quiz\",\n  \"start\": \"2024-08-21T08:15:00\",\n  \"end\": \"2024-08-21T09:15:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_7ae77d8c0c3c4665a033a6be06e913b3\",\n  \"summary\": \"AP History - Review test scores\",\n  \"start\": \"2024-08-21T09:30:00\",\n  \"end\": \"2024-08-21T10:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_7c82b4572af44bf08a61ae81c3d8aa99\",\n  \"summary\": \"Meeting with Guidance Counselor - Student Concerns\",\n  \"start\": \"2024-08-21T12:30:00\",\n  \"end\": \"2024-08-21T13:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_2d136b93\",\n        \"name\": \"guidance\",\n        \"email\": \"guidance@school.edu\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_e3e42cb017924afd9fa4aadf77f67110\",\n  \"summary\": \"Grade Papers\",\n  \"start\": \"2024-08-21T16:00:00\",\n  \"end\": \"2024-08-21T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. On Wednesday, August 21, 2024, you have these events: Prepare Quiz for U.S. History from 07:30 to 08:00, U.S. History Class - Chapter 5 Quiz from 08:15 to 09:15, AP History - Review test scores from 09:30 to 10:30, Meeting with Guidance Counselor - Student Concerns from 12:30 to 13:00, and Grade Papers from 16:00 to 17:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move the dinner with family on Monday to 7:00 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Dinner with Family' event on Monday, 2024-08-19 and update the start time to 19:00 and end time to 20:00.",
+    "simulated_now": "2024-08-19 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Review Lesson Plan for U.S. History",
+          "start": "2024-08-19 07:30:00",
+          "end": "2024-08-19 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3c285513cdbe42ce9634c78b84d92043"
+        },
+        {
+          "day": "Monday",
+          "summary": "U.S. History Class - Chapter 5 Lecture",
+          "start": "2024-08-19 08:15:00",
+          "end": "2024-08-19 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3f6d45495a6e41918f4b53a3b2d4e294"
+        },
+        {
+          "day": "Monday",
+          "summary": "AP History Class - DBQ Practice",
+          "start": "2024-08-19 09:30:00",
+          "end": "2024-08-19 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0ef90c274415445d904755e958f81d74"
+        },
+        {
+          "day": "Monday",
+          "summary": "Student Government Meeting",
+          "start": "2024-08-19 15:00:00",
+          "end": "2024-08-19 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "principal@school.edu",
+            "guidance@school.edu"
+          ],
+          "id": "evt_981e75347de64ba9afaa7c122b06d952"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2024-08-19 18:30:00",
+          "end": "2024-08-19 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1eece36825ff4164821c2deb1c1fe139"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Review Lesson Plan for U.S. History",
+          "start": "2024-08-19 07:30:00",
+          "end": "2024-08-19 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3c285513cdbe42ce9634c78b84d92043"
+        },
+        {
+          "day": "Monday",
+          "summary": "U.S. History Class - Chapter 5 Lecture",
+          "start": "2024-08-19 08:15:00",
+          "end": "2024-08-19 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3f6d45495a6e41918f4b53a3b2d4e294"
+        },
+        {
+          "day": "Monday",
+          "summary": "AP History Class - DBQ Practice",
+          "start": "2024-08-19 09:30:00",
+          "end": "2024-08-19 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0ef90c274415445d904755e958f81d74"
+        },
+        {
+          "day": "Monday",
+          "summary": "Student Government Meeting",
+          "start": "2024-08-19 15:00:00",
+          "end": "2024-08-19 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "principal@school.edu",
+            "guidance@school.edu"
+          ],
+          "id": "evt_981e75347de64ba9afaa7c122b06d952"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2024-08-19 19:00:00",
+          "end": "2024-08-19 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1eece36825ff4164821c2deb1c1fe139"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move the dinner with family on Monday to 7:00 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-19 10:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-08-19 23:59:59",
+          "time_min": "2024-08-19 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_3c285513cdbe42ce9634c78b84d92043\",\n  \"summary\": \"Review Lesson Plan for U.S. History\",\n  \"start\": \"2024-08-19T07:30:00\",\n  \"end\": \"2024-08-19T08:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_3f6d45495a6e41918f4b53a3b2d4e294\",\n  \"summary\": \"U.S. History Class - Chapter 5 Lecture\",\n  \"start\": \"2024-08-19T08:15:00\",\n  \"end\": \"2024-08-19T09:15:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_0ef90c274415445d904755e958f81d74\",\n  \"summary\": \"AP History Class - DBQ Practice\",\n  \"start\": \"2024-08-19T09:30:00\",\n  \"end\": \"2024-08-19T10:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_981e75347de64ba9afaa7c122b06d952\",\n  \"summary\": \"Student Government Meeting\",\n  \"start\": \"2024-08-19T15:00:00\",\n  \"end\": \"2024-08-19T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_1ec423f3\",\n        \"name\": \"principal\",\n        \"email\": \"principal@school.edu\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_f74fd185\",\n        \"name\": \"guidance\",\n        \"email\": \"guidance@school.edu\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_1eece36825ff4164821c2deb1c1fe139\",\n  \"summary\": \"Dinner with Family\",\n  \"start\": \"2024-08-19T18:30:00\",\n  \"end\": \"2024-08-19T19:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2024-08-19 20:00:00",
+          "start": "2024-08-19 19:00:00",
+          "event_id": "evt_1eece36825ff4164821c2deb1c1fe139"
+        },
+        "result": {
+          "message": "Event updated successfully.",
+          "event": {
+            "id": "evt_1eece36825ff4164821c2deb1c1fe139",
+            "summary": "Dinner with Family",
+            "start": "2024-08-19 19:00:00",
+            "end": "2024-08-19 20:00:00",
+            "description": "",
+            "attendees": [],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved Dinner with Family to 7:00 PM on Monday, August 19. It will now be from 7:00 PM to 8:00 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change the School Board Meeting time on Thursday to 7:00 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'School Board Meeting' event on Thursday, 2024-08-22, and update the start time to 19:00 and end time to 20:30.",
+    "simulated_now": "2024-08-22 10:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Review APUSH essays",
+          "start": "2024-08-22 07:30:00",
+          "end": "2024-08-22 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_38244b37d87c4209b42ec5958ccc21b0"
+        },
+        {
+          "day": "Thursday",
+          "summary": "U.S. History Class - Primary Source Analysis",
+          "start": "2024-08-22 08:15:00",
+          "end": "2024-08-22 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_863ec3719cd846d2a371b6bf9862354e"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Debate Team Practice",
+          "start": "2024-08-22 15:30:00",
+          "end": "2024-08-22 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e1764c77dbc84cf7933984f1a7c99b14"
+        },
+        {
+          "day": "Thursday",
+          "summary": "School Board Meeting - Budget Presentation",
+          "start": "2024-08-22 18:30:00",
+          "end": "2024-08-22 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "schoolboard@school.edu",
+            "principal@school.edu"
+          ],
+          "id": "evt_afdc30cb8d834fbfa012b057a432ef7b"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Review APUSH essays",
+          "start": "2024-08-22 07:30:00",
+          "end": "2024-08-22 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_38244b37d87c4209b42ec5958ccc21b0"
+        },
+        {
+          "day": "Thursday",
+          "summary": "U.S. History Class - Primary Source Analysis",
+          "start": "2024-08-22 08:15:00",
+          "end": "2024-08-22 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_863ec3719cd846d2a371b6bf9862354e"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Debate Team Practice",
+          "start": "2024-08-22 15:30:00",
+          "end": "2024-08-22 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e1764c77dbc84cf7933984f1a7c99b14"
+        },
+        {
+          "day": "Thursday",
+          "summary": "School Board Meeting - Budget Presentation",
+          "start": "2024-08-22 19:00:00",
+          "end": "2024-08-22 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "schoolboard@school.edu",
+            "principal@school.edu"
+          ],
+          "id": "evt_afdc30cb8d834fbfa012b057a432ef7b"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change the School Board Meeting time on Thursday to 7:00 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-22 10:00:00",
+          "day": "Thursday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-08-22 23:59:59",
+          "time_min": "2024-08-22 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_38244b37d87c4209b42ec5958ccc21b0\",\n  \"summary\": \"Review APUSH essays\",\n  \"start\": \"2024-08-22T07:30:00\",\n  \"end\": \"2024-08-22T08:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_863ec3719cd846d2a371b6bf9862354e\",\n  \"summary\": \"U.S. History Class - Primary Source Analysis\",\n  \"start\": \"2024-08-22T08:15:00\",\n  \"end\": \"2024-08-22T09:15:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_e1764c77dbc84cf7933984f1a7c99b14\",\n  \"summary\": \"Debate Team Practice\",\n  \"start\": \"2024-08-22T15:30:00\",\n  \"end\": \"2024-08-22T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_afdc30cb8d834fbfa012b057a432ef7b\",\n  \"summary\": \"School Board Meeting - Budget Presentation\",\n  \"start\": \"2024-08-22T18:30:00\",\n  \"end\": \"2024-08-22T20:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_a08cea19\",\n        \"name\": \"schoolboard\",\n        \"email\": \"schoolboard@school.edu\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_291df4f5\",\n        \"name\": \"principal\",\n        \"email\": \"principal@school.edu\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2024-08-22 19:00:00",
+          "end": "2024-08-22 20:30:00",
+          "event_id": "evt_afdc30cb8d834fbfa012b057a432ef7b"
+        },
+        "result": {
+          "message": "Event updated successfully.",
+          "event": {
+            "id": "evt_afdc30cb8d834fbfa012b057a432ef7b",
+            "summary": "School Board Meeting - Budget Presentation",
+            "start": "2024-08-22 19:00:00",
+            "end": "2024-08-22 20:30:00",
+            "description": "",
+            "attendees": [
+              "user=User(id='user_a08cea19', name='schoolboard', email='schoolboard@school.edu') attending='ACCEPT'",
+              "user=User(id='user_291df4f5', name='principal', email='principal@school.edu') attending='ACCEPT'"
+            ],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've updated the School Board Meeting to start at 7:00 PM and end at 8:30 PM on Thursday, August 22.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the Faculty Meeting this Tuesday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Faculty Meeting' event on Tuesday, 2024-08-20 and return the attendees.",
+    "simulated_now": "2024-08-20 09:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Grade U.S. History Homework",
+          "start": "2024-08-20 07:30:00",
+          "end": "2024-08-20 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_24875fbd0f4f43598ecc667f8eaffb9b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "U.S. History Class - Chapter 6 Discussion",
+          "start": "2024-08-20 08:15:00",
+          "end": "2024-08-20 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b09377edae3943eea764dd45126f68c1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Faculty Meeting",
+          "start": "2024-08-20 14:30:00",
+          "end": "2024-08-20 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "principal@school.edu",
+            "otherteachers@school.edu"
+          ],
+          "id": "evt_7c08e49fd92e4adba943f9fafe4f41b5"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Debate Team Practice",
+          "start": "2024-08-20 15:30:00",
+          "end": "2024-08-20 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_96e003de08194accb06dc235b246a318"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Wife - Discuss Kid's Activities",
+          "start": "2024-08-20 19:00:00",
+          "end": "2024-08-20 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f3a9d7e07d62423ca6a110c144472993"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Grade U.S. History Homework",
+          "start": "2024-08-20 07:30:00",
+          "end": "2024-08-20 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_24875fbd0f4f43598ecc667f8eaffb9b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "U.S. History Class - Chapter 6 Discussion",
+          "start": "2024-08-20 08:15:00",
+          "end": "2024-08-20 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b09377edae3943eea764dd45126f68c1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Faculty Meeting",
+          "start": "2024-08-20 14:30:00",
+          "end": "2024-08-20 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "principal@school.edu",
+            "otherteachers@school.edu"
+          ],
+          "id": "evt_7c08e49fd92e4adba943f9fafe4f41b5"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Debate Team Practice",
+          "start": "2024-08-20 15:30:00",
+          "end": "2024-08-20 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_96e003de08194accb06dc235b246a318"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Wife - Discuss Kid's Activities",
+          "start": "2024-08-20 19:00:00",
+          "end": "2024-08-20 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f3a9d7e07d62423ca6a110c144472993"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the Faculty Meeting this Tuesday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-20 09:00:00",
+          "day": "Tuesday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-08-20 23:59:59",
+          "time_min": "2024-08-20 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_24875fbd0f4f43598ecc667f8eaffb9b\",\n  \"summary\": \"Grade U.S. History Homework\",\n  \"start\": \"2024-08-20T07:30:00\",\n  \"end\": \"2024-08-20T08:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_b09377edae3943eea764dd45126f68c1\",\n  \"summary\": \"U.S. History Class - Chapter 6 Discussion\",\n  \"start\": \"2024-08-20T08:15:00\",\n  \"end\": \"2024-08-20T09:15:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_7c08e49fd92e4adba943f9fafe4f41b5\",\n  \"summary\": \"Faculty Meeting\",\n  \"start\": \"2024-08-20T14:30:00\",\n  \"end\": \"2024-08-20T15:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_f50889b2\",\n        \"name\": \"principal\",\n        \"email\": \"principal@school.edu\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_fc53eb5c\",\n        \"name\": \"otherteachers\",\n        \"email\": \"otherteachers@school.edu\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_96e003de08194accb06dc235b246a318\",\n  \"summary\": \"Debate Team Practice\",\n  \"start\": \"2024-08-20T15:30:00\",\n  \"end\": \"2024-08-20T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_f3a9d7e07d62423ca6a110c144472993\",\n  \"summary\": \"Call with Wife - Discuss Kid's Activities\",\n  \"start\": \"2024-08-20T19:00:00\",\n  \"end\": \"2024-08-20T20:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "The Faculty Meeting on Tuesday, August 20, 2024, has the following attendees: principal (principal@school.edu) and otherteachers (otherteachers@school.edu)."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What meetings do I have with guidance@school.edu this week?",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "List all events this week (2024-08-19 to 2024-08-25) that include guidance@school.edu as an attendee.",
+    "simulated_now": "2024-08-18 12:00:00",
+    "addressed_days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Review Lesson Plan for U.S. History",
+          "start": "2024-08-19 07:30:00",
+          "end": "2024-08-19 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4925e3e3c2ed403391e86920107e187c"
+        },
+        {
+          "day": "Monday",
+          "summary": "U.S. History Class - Chapter 5 Lecture",
+          "start": "2024-08-19 08:15:00",
+          "end": "2024-08-19 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_aad4b03891d84e878074901efec411e5"
+        },
+        {
+          "day": "Monday",
+          "summary": "AP History Class - DBQ Practice",
+          "start": "2024-08-19 09:30:00",
+          "end": "2024-08-19 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5efedc3498864ba6b7f469f0a6e47538"
+        },
+        {
+          "day": "Monday",
+          "summary": "Student Government Meeting",
+          "start": "2024-08-19 15:00:00",
+          "end": "2024-08-19 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "principal@school.edu",
+            "guidance@school.edu"
+          ],
+          "id": "evt_4ec973dfb13b41fd8e36a537250885a5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2024-08-19 18:30:00",
+          "end": "2024-08-19 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d2a5462f0b7248ebb0c63245ffc06d2a"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Grade U.S. History Homework",
+          "start": "2024-08-20 07:30:00",
+          "end": "2024-08-20 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4546b06a694948da939c6b9d0c171647"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "U.S. History Class - Chapter 6 Discussion",
+          "start": "2024-08-20 08:15:00",
+          "end": "2024-08-20 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_81d523b9ee00411fa87938826bc85280"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Faculty Meeting",
+          "start": "2024-08-20 14:30:00",
+          "end": "2024-08-20 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "principal@school.edu",
+            "otherteachers@school.edu"
+          ],
+          "id": "evt_9222c47e457b4cbfaf687b326e7d78e8"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Debate Team Practice",
+          "start": "2024-08-20 15:30:00",
+          "end": "2024-08-20 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_29599ffda8f549159916bc0d6591f4cb"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Wife - Discuss Kid's Activities",
+          "start": "2024-08-20 19:00:00",
+          "end": "2024-08-20 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_579edc35bd05444c9cdf43f1384975de"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Quiz for U.S. History",
+          "start": "2024-08-21 07:30:00",
+          "end": "2024-08-21 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cf93785c30db403a99d7f89d6ad56586"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "U.S. History Class - Chapter 5 Quiz",
+          "start": "2024-08-21 08:15:00",
+          "end": "2024-08-21 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9ae54d6b18d44950aa6f02cc7b6ff86d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "AP History - Review test scores",
+          "start": "2024-08-21 09:30:00",
+          "end": "2024-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a360299516924470a95d14158de380d9"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Guidance Counselor - Student Concerns",
+          "start": "2024-08-21 12:30:00",
+          "end": "2024-08-21 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "guidance@school.edu"
+          ],
+          "id": "evt_2dcd7d02c39c415fb429d8c7bb8fa056"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Grade Papers",
+          "start": "2024-08-21 16:00:00",
+          "end": "2024-08-21 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3cb2c87281af440ab3d674ebedc12d3c"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Review APUSH essays",
+          "start": "2024-08-22 07:30:00",
+          "end": "2024-08-22 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_284c9979440247169cb8a8db182ff03d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "U.S. History Class - Primary Source Analysis",
+          "start": "2024-08-22 08:15:00",
+          "end": "2024-08-22 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3baaed92b7104959a2991aa8553a4cab"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Debate Team Practice",
+          "start": "2024-08-22 15:30:00",
+          "end": "2024-08-22 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9cd3ea73f25f419f9de10dd20c156dca"
+        },
+        {
+          "day": "Thursday",
+          "summary": "School Board Meeting - Budget Presentation",
+          "start": "2024-08-22 18:30:00",
+          "end": "2024-08-22 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "schoolboard@school.edu",
+            "principal@school.edu"
+          ],
+          "id": "evt_a7a825aa0ad84d5da5e0e99b73da1082"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Finalize Lesson Plans for Next Week",
+          "start": "2024-08-23 07:30:00",
+          "end": "2024-08-23 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c0be5c618eb6464b9ba8c747b3a3e509"
+        },
+        {
+          "day": "Friday",
+          "summary": "U.S. History Class - Current Events Discussion",
+          "start": "2024-08-23 08:15:00",
+          "end": "2024-08-23 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ad5e75f8d7a244fba495dcc489dbf4b0"
+        },
+        {
+          "day": "Friday",
+          "summary": "AP History Class - Review Chapter 1",
+          "start": "2024-08-23 09:30:00",
+          "end": "2024-08-23 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_53f75210257a41c0aec7e23dd495279c"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meet with Grant Writer",
+          "start": "2024-08-23 13:00:00",
+          "end": "2024-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "grants@writer.com"
+          ],
+          "id": "evt_f5efbde9cd1b49ca9a3c43c5e94719ae"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Family - Pizza Night",
+          "start": "2024-08-23 19:00:00",
+          "end": "2024-08-23 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c3feea50836d4a009e92cb81be882b20"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Hike with Hiking Buddies",
+          "start": "2024-08-24 09:00:00",
+          "end": "2024-08-24 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2f2439a2192b4dd68fa522694b87bc32"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Kid's Soccer Game",
+          "start": "2024-08-24 14:00:00",
+          "end": "2024-08-24 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_77456dafe5a24bfc911aaa9a39dec0ae"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Movie Night with Family",
+          "start": "2024-08-24 19:00:00",
+          "end": "2024-08-24 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7c27b547f2674f7db8065e39b59bf346"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Church",
+          "start": "2024-08-25 10:00:00",
+          "end": "2024-08-25 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4cc44e90af644aa592901f12bbb0ba02"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Grade Papers",
+          "start": "2024-08-25 13:00:00",
+          "end": "2024-08-25 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4e3f1a21cd81498a9bf980c7a4c58018"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Dinner with Family",
+          "start": "2024-08-25 18:00:00",
+          "end": "2024-08-25 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_929450fc928740b699aa19ca410d96ca"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Review Lesson Plan for U.S. History",
+          "start": "2024-08-19 07:30:00",
+          "end": "2024-08-19 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4925e3e3c2ed403391e86920107e187c"
+        },
+        {
+          "day": "Monday",
+          "summary": "U.S. History Class - Chapter 5 Lecture",
+          "start": "2024-08-19 08:15:00",
+          "end": "2024-08-19 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_aad4b03891d84e878074901efec411e5"
+        },
+        {
+          "day": "Monday",
+          "summary": "AP History Class - DBQ Practice",
+          "start": "2024-08-19 09:30:00",
+          "end": "2024-08-19 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5efedc3498864ba6b7f469f0a6e47538"
+        },
+        {
+          "day": "Monday",
+          "summary": "Student Government Meeting",
+          "start": "2024-08-19 15:00:00",
+          "end": "2024-08-19 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "principal@school.edu",
+            "guidance@school.edu"
+          ],
+          "id": "evt_4ec973dfb13b41fd8e36a537250885a5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2024-08-19 18:30:00",
+          "end": "2024-08-19 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d2a5462f0b7248ebb0c63245ffc06d2a"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Grade U.S. History Homework",
+          "start": "2024-08-20 07:30:00",
+          "end": "2024-08-20 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4546b06a694948da939c6b9d0c171647"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "U.S. History Class - Chapter 6 Discussion",
+          "start": "2024-08-20 08:15:00",
+          "end": "2024-08-20 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_81d523b9ee00411fa87938826bc85280"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Faculty Meeting",
+          "start": "2024-08-20 14:30:00",
+          "end": "2024-08-20 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "principal@school.edu",
+            "otherteachers@school.edu"
+          ],
+          "id": "evt_9222c47e457b4cbfaf687b326e7d78e8"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Debate Team Practice",
+          "start": "2024-08-20 15:30:00",
+          "end": "2024-08-20 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_29599ffda8f549159916bc0d6591f4cb"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Wife - Discuss Kid's Activities",
+          "start": "2024-08-20 19:00:00",
+          "end": "2024-08-20 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_579edc35bd05444c9cdf43f1384975de"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Quiz for U.S. History",
+          "start": "2024-08-21 07:30:00",
+          "end": "2024-08-21 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cf93785c30db403a99d7f89d6ad56586"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "U.S. History Class - Chapter 5 Quiz",
+          "start": "2024-08-21 08:15:00",
+          "end": "2024-08-21 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9ae54d6b18d44950aa6f02cc7b6ff86d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "AP History - Review test scores",
+          "start": "2024-08-21 09:30:00",
+          "end": "2024-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a360299516924470a95d14158de380d9"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Guidance Counselor - Student Concerns",
+          "start": "2024-08-21 12:30:00",
+          "end": "2024-08-21 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "guidance@school.edu"
+          ],
+          "id": "evt_2dcd7d02c39c415fb429d8c7bb8fa056"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Grade Papers",
+          "start": "2024-08-21 16:00:00",
+          "end": "2024-08-21 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3cb2c87281af440ab3d674ebedc12d3c"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Review APUSH essays",
+          "start": "2024-08-22 07:30:00",
+          "end": "2024-08-22 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_284c9979440247169cb8a8db182ff03d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "U.S. History Class - Primary Source Analysis",
+          "start": "2024-08-22 08:15:00",
+          "end": "2024-08-22 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3baaed92b7104959a2991aa8553a4cab"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Debate Team Practice",
+          "start": "2024-08-22 15:30:00",
+          "end": "2024-08-22 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9cd3ea73f25f419f9de10dd20c156dca"
+        },
+        {
+          "day": "Thursday",
+          "summary": "School Board Meeting - Budget Presentation",
+          "start": "2024-08-22 18:30:00",
+          "end": "2024-08-22 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "schoolboard@school.edu",
+            "principal@school.edu"
+          ],
+          "id": "evt_a7a825aa0ad84d5da5e0e99b73da1082"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Finalize Lesson Plans for Next Week",
+          "start": "2024-08-23 07:30:00",
+          "end": "2024-08-23 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c0be5c618eb6464b9ba8c747b3a3e509"
+        },
+        {
+          "day": "Friday",
+          "summary": "U.S. History Class - Current Events Discussion",
+          "start": "2024-08-23 08:15:00",
+          "end": "2024-08-23 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ad5e75f8d7a244fba495dcc489dbf4b0"
+        },
+        {
+          "day": "Friday",
+          "summary": "AP History Class - Review Chapter 1",
+          "start": "2024-08-23 09:30:00",
+          "end": "2024-08-23 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_53f75210257a41c0aec7e23dd495279c"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meet with Grant Writer",
+          "start": "2024-08-23 13:00:00",
+          "end": "2024-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "grants@writer.com"
+          ],
+          "id": "evt_f5efbde9cd1b49ca9a3c43c5e94719ae"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Family - Pizza Night",
+          "start": "2024-08-23 19:00:00",
+          "end": "2024-08-23 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c3feea50836d4a009e92cb81be882b20"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Hike with Hiking Buddies",
+          "start": "2024-08-24 09:00:00",
+          "end": "2024-08-24 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2f2439a2192b4dd68fa522694b87bc32"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Kid's Soccer Game",
+          "start": "2024-08-24 14:00:00",
+          "end": "2024-08-24 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_77456dafe5a24bfc911aaa9a39dec0ae"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Movie Night with Family",
+          "start": "2024-08-24 19:00:00",
+          "end": "2024-08-24 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7c27b547f2674f7db8065e39b59bf346"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Church",
+          "start": "2024-08-25 10:00:00",
+          "end": "2024-08-25 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4cc44e90af644aa592901f12bbb0ba02"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Grade Papers",
+          "start": "2024-08-25 13:00:00",
+          "end": "2024-08-25 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4e3f1a21cd81498a9bf980c7a4c58018"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Dinner with Family",
+          "start": "2024-08-25 18:00:00",
+          "end": "2024-08-25 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_929450fc928740b699aa19ca410d96ca"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What meetings do I have with guidance@school.edu this week?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-18 12:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-08-24 23:59:59",
+          "time_min": "2024-08-18 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_4925e3e3c2ed403391e86920107e187c\",\n  \"summary\": \"Review Lesson Plan for U.S. History\",\n  \"start\": \"2024-08-19T07:30:00\",\n  \"end\": \"2024-08-19T08:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_aad4b03891d84e878074901efec411e5\",\n  \"summary\": \"U.S. History Class - Chapter 5 Lecture\",\n  \"start\": \"2024-08-19T08:15:00\",\n  \"end\": \"2024-08-19T09:15:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_5efedc3498864ba6b7f469f0a6e47538\",\n  \"summary\": \"AP History Class - DBQ Practice\",\n  \"start\": \"2024-08-19T09:30:00\",\n  \"end\": \"2024-08-19T10:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_4ec973dfb13b41fd8e36a537250885a5\",\n  \"summary\": \"Student Government Meeting\",\n  \"start\": \"2024-08-19T15:00:00\",\n  \"end\": \"2024-08-19T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_e691e584\",\n        \"name\": \"principal\",\n        \"email\": \"principal@school.edu\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_63445ccd\",\n        \"name\": \"guidance\",\n        \"email\": \"guidance@school.edu\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_d2a5462f0b7248ebb0c63245ffc06d2a\",\n  \"summary\": \"Dinner with Family\",\n  \"start\": \"2024-08-19T18:30:00\",\n  \"end\": \"2024-08-19T19:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_4546b06a694948da939c6b9d0c171647\",\n  \"summary\": \"Grade U.S. History Homework\",\n  \"start\": \"2024-08-20T07:30:00\",\n  \"end\": \"2024-08-20T08:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_81d523b9ee00411fa87938826bc85280\",\n  \"summary\": \"U.S. History Class - Chapter 6 Discussion\",\n  \"start\": \"2024-08-20T08:15:00\",\n  \"end\": \"2024-08-20T09:15:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_9222c47e457b4cbfaf687b326e7d78e8\",\n  \"summary\": \"Faculty Meeting\",\n  \"start\": \"2024-08-20T14:30:00\",\n  \"end\": \"2024-08-20T15:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_d64e2389\",\n        \"name\": \"principal\",\n        \"email\": \"principal@school.edu\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_634dd6df\",\n        \"name\": \"otherteachers\",\n        \"email\": \"otherteachers@school.edu\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_29599ffda8f549159916bc0d6591f4cb\",\n  \"summary\": \"Debate Team Practice\",\n  \"start\": \"2024-08-20T15:30:00\",\n  \"end\": \"2024-08-20T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_579edc35bd05444c9cdf43f1384975de\",\n  \"summary\": \"Call with Wife - Discuss Kid's Activities\",\n  \"start\": \"2024-08-20T19:00:00\",\n  \"end\": \"2024-08-20T20:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_cf93785c30db403a99d7f89d6ad56586\",\n  \"summary\": \"Prepare Quiz for U.S. History\",\n  \"start\": \"2024-08-21T07:30:00\",\n  \"end\": \"2024-08-21T08:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_9ae54d6b18d44950aa6f02cc7b6ff86d\",\n  \"summary\": \"U.S. History Class - Chapter 5 Quiz\",\n  \"start\": \"2024-08-21T08:15:00\",\n  \"end\": \"2024-08-21T09:15:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_a360299516924470a95d14158de380d9\",\n  \"summary\": \"AP History - Review test scores\",\n  \"start\": \"2024-08-21T09:30:00\",\n  \"end\": \"2024-08-21T10:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_2dcd7d02c39c415fb429d8c7bb8fa056\",\n  \"summary\": \"Meeting with Guidance Counselor - Student Concerns\",\n  \"start\": \"2024-08-21T12:30:00\",\n  \"end\": \"2024-08-21T13:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_d3189a2f\",\n        \"name\": \"guidance\",\n        \"email\": \"guidance@school.edu\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_3cb2c87281af440ab3d674ebedc12d3c\",\n  \"summary\": \"Grade Papers\",\n  \"start\": \"2024-08-21T16:00:00\",\n  \"end\": \"2024-08-21T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_284c9979440247169cb8a8db182ff03d\",\n  \"summary\": \"Review APUSH essays\",\n  \"start\": \"2024-08-22T07:30:00\",\n  \"end\": \"2024-08-22T08:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_3baaed92b7104959a2991aa8553a4cab\",\n  \"summary\": \"U.S. History Class - Primary Source Analysis\",\n  \"start\": \"2024-08-22T08:15:00\",\n  \"end\": \"2024-08-22T09:15:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_9cd3ea73f25f419f9de10dd20c156dca\",\n  \"summary\": \"Debate Team Practice\",\n  \"start\": \"2024-08-22T15:30:00\",\n  \"end\": \"2024-08-22T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_a7a825aa0ad84d5da5e0e99b73da1082\",\n  \"summary\": \"School Board Meeting - Budget Presentation\",\n  \"start\": \"2024-08-22T18:30:00\",\n  \"end\": \"2024-08-22T20:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_e0043572\",\n        \"name\": \"schoolboard\",\n        \"email\": \"schoolboard@school.edu\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_4cb04e72\",\n        \"name\": \"principal\",\n        \"email\": \"principal@school.edu\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_c0be5c618eb6464b9ba8c747b3a3e509\",\n  \"summary\": \"Finalize Lesson Plans for Next Week\",\n  \"start\": \"2024-08-23T07:30:00\",\n  \"end\": \"2024-08-23T08:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_ad5e75f8d7a244fba495dcc489dbf4b0\",\n  \"summary\": \"U.S. History Class - Current Events Discussion\",\n  \"start\": \"2024-08-23T08:15:00\",\n  \"end\": \"2024-08-23T09:15:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_53f75210257a41c0aec7e23dd495279c\",\n  \"summary\": \"AP History Class - Review Chapter 1\",\n  \"start\": \"2024-08-23T09:30:00\",\n  \"end\": \"2024-08-23T10:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_f5efbde9cd1b49ca9a3c43c5e94719ae\",\n  \"summary\": \"Meet with Grant Writer\",\n  \"start\": \"2024-08-23T13:00:00\",\n  \"end\": \"2024-08-23T14:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_85bc5d28\",\n        \"name\": \"grants\",\n        \"email\": \"grants@writer.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_c3feea50836d4a009e92cb81be882b20\",\n  \"summary\": \"Dinner with Family - Pizza Night\",\n  \"start\": \"2024-08-23T19:00:00\",\n  \"end\": \"2024-08-23T21:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_2f2439a2192b4dd68fa522694b87bc32\",\n  \"summary\": \"Hike with Hiking Buddies\",\n  \"start\": \"2024-08-24T09:00:00\",\n  \"end\": \"2024-08-24T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_77456dafe5a24bfc911aaa9a39dec0ae\",\n  \"summary\": \"Kid's Soccer Game\",\n  \"start\": \"2024-08-24T14:00:00\",\n  \"end\": \"2024-08-24T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_7c27b547f2674f7db8065e39b59bf346\",\n  \"summary\": \"Movie Night with Family\",\n  \"start\": \"2024-08-24T19:00:00\",\n  \"end\": \"2024-08-24T21:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "This week, you have two meetings with guidance@school.edu:\n\n1.  Student Government Meeting on August 19, 2024 from 3:00 PM to 4:00 PM.\n2.  Meeting with Guidance Counselor - Student Concerns on August 21, 2024 from 12:30 PM to 1:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Is there a conflict if I schedule a doctor's appointment for 4 PM on Wednesday?",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "List events on Wednesday, 2024-08-21, between 16:00 and 17:00. Then inform user if a conflict exists.",
+    "simulated_now": "2024-08-21 09:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Quiz for U.S. History",
+          "start": "2024-08-21 07:30:00",
+          "end": "2024-08-21 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_deba2ac72ee94db7ad107fe6f2b1b0b6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "U.S. History Class - Chapter 5 Quiz",
+          "start": "2024-08-21 08:15:00",
+          "end": "2024-08-21 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6ce253f4e028442b8c5c99811f3cc71c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "AP History - Review test scores",
+          "start": "2024-08-21 09:30:00",
+          "end": "2024-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fdc86f4bc5e841b18886cb3b40b7949d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Guidance Counselor - Student Concerns",
+          "start": "2024-08-21 12:30:00",
+          "end": "2024-08-21 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "guidance@school.edu"
+          ],
+          "id": "evt_5c9b150e8c6946919a7e0d941383bb9c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Grade Papers",
+          "start": "2024-08-21 16:00:00",
+          "end": "2024-08-21 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_aec7a9c86b784674bda9a4cd710348dd"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Quiz for U.S. History",
+          "start": "2024-08-21 07:30:00",
+          "end": "2024-08-21 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_deba2ac72ee94db7ad107fe6f2b1b0b6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "U.S. History Class - Chapter 5 Quiz",
+          "start": "2024-08-21 08:15:00",
+          "end": "2024-08-21 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6ce253f4e028442b8c5c99811f3cc71c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "AP History - Review test scores",
+          "start": "2024-08-21 09:30:00",
+          "end": "2024-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fdc86f4bc5e841b18886cb3b40b7949d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Guidance Counselor - Student Concerns",
+          "start": "2024-08-21 12:30:00",
+          "end": "2024-08-21 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "guidance@school.edu"
+          ],
+          "id": "evt_5c9b150e8c6946919a7e0d941383bb9c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Grade Papers",
+          "start": "2024-08-21 16:00:00",
+          "end": "2024-08-21 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_aec7a9c86b784674bda9a4cd710348dd"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Is there a conflict if I schedule a doctor's appointment for 4 PM on Wednesday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-21 09:00:00",
+          "day": "Wednesday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-08-21 17:00:00",
+          "time_min": "2024-08-21 16:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_aec7a9c86b784674bda9a4cd710348dd\",\n  \"summary\": \"Grade Papers\",\n  \"start\": \"2024-08-21T16:00:00\",\n  \"end\": \"2024-08-21T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, scheduling a doctor's appointment for 4 PM on Wednesday would conflict with 'Grade Papers'. It starts at 4 PM and ends at 5 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events on Friday, 2024-08-23.",
+    "simulated_now": "2024-08-23 08:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Finalize Lesson Plans for Next Week",
+          "start": "2024-08-23 07:30:00",
+          "end": "2024-08-23 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_72349db0ea9f48bc9e81e4d4d7dd73d1"
+        },
+        {
+          "day": "Friday",
+          "summary": "U.S. History Class - Current Events Discussion",
+          "start": "2024-08-23 08:15:00",
+          "end": "2024-08-23 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_48877282167344ccb48c5ff0735925b3"
+        },
+        {
+          "day": "Friday",
+          "summary": "AP History Class - Review Chapter 1",
+          "start": "2024-08-23 09:30:00",
+          "end": "2024-08-23 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f3f271e1996448b9a82ceb36cb2f2e7e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meet with Grant Writer",
+          "start": "2024-08-23 13:00:00",
+          "end": "2024-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "grants@writer.com"
+          ],
+          "id": "evt_2e236b33bbf940ac82c37141c87a8c10"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Family - Pizza Night",
+          "start": "2024-08-23 19:00:00",
+          "end": "2024-08-23 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_544583b2360743d79dca87db6284597b"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Finalize Lesson Plans for Next Week",
+          "start": "2024-08-23 07:30:00",
+          "end": "2024-08-23 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_72349db0ea9f48bc9e81e4d4d7dd73d1"
+        },
+        {
+          "day": "Friday",
+          "summary": "U.S. History Class - Current Events Discussion",
+          "start": "2024-08-23 08:15:00",
+          "end": "2024-08-23 09:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_48877282167344ccb48c5ff0735925b3"
+        },
+        {
+          "day": "Friday",
+          "summary": "AP History Class - Review Chapter 1",
+          "start": "2024-08-23 09:30:00",
+          "end": "2024-08-23 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f3f271e1996448b9a82ceb36cb2f2e7e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meet with Grant Writer",
+          "start": "2024-08-23 13:00:00",
+          "end": "2024-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "grants@writer.com"
+          ],
+          "id": "evt_2e236b33bbf940ac82c37141c87a8c10"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Family - Pizza Night",
+          "start": "2024-08-23 19:00:00",
+          "end": "2024-08-23 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_544583b2360743d79dca87db6284597b"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-08-23 08:00:00",
+          "day": "Friday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-08-23 23:59:59",
+          "time_min": "2024-08-23 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_72349db0ea9f48bc9e81e4d4d7dd73d1\",\n  \"summary\": \"Finalize Lesson Plans for Next Week\",\n  \"start\": \"2024-08-23T07:30:00\",\n  \"end\": \"2024-08-23T08:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_48877282167344ccb48c5ff0735925b3\",\n  \"summary\": \"U.S. History Class - Current Events Discussion\",\n  \"start\": \"2024-08-23T08:15:00\",\n  \"end\": \"2024-08-23T09:15:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_f3f271e1996448b9a82ceb36cb2f2e7e\",\n  \"summary\": \"AP History Class - Review Chapter 1\",\n  \"start\": \"2024-08-23T09:30:00\",\n  \"end\": \"2024-08-23T10:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_2e236b33bbf940ac82c37141c87a8c10\",\n  \"summary\": \"Meet with Grant Writer\",\n  \"start\": \"2024-08-23T13:00:00\",\n  \"end\": \"2024-08-23T14:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_3e7f0ca7\",\n        \"name\": \"grants\",\n        \"email\": \"grants@writer.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_544583b2360743d79dca87db6284597b\",\n  \"summary\": \"Dinner with Family - Pizza Night\",\n  \"start\": \"2024-08-23T19:00:00\",\n  \"end\": \"2024-08-23T21:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "Today, August 23, 2024, you have the following events: Finalize Lesson Plans for Next Week at 7:30 AM, U.S. History Class - Current Events Discussion at 8:15 AM, AP History Class - Review Chapter 1 at 9:30 AM, Meet with Grant Writer at 1:00 PM, and Dinner with Family - Pizza Night at 7:00 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

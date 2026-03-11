@@ -1,0 +1,160 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting with John this Wednesday at 3 PM for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with John on Wednesday, April 17, 2024, from 3:00 PM to 4:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-04-14T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me a haircut appointment for Saturday at 10 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event for a haircut appointment on Saturday, April 20, 2024, at 10:00 AM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-04-14T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events on Monday, April 15, 2024, to determine if the user is busy.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-04-15T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on for dinner this week?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events that contain 'dinner' in the summary for the week of April 15, 2024 to April 21, 2024.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-04-14T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my tattoo appointment with David on Monday to 2 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the tattoo appointment with David on Monday, April 15, 2024, and update its start time to 2:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-04-15T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of my dinner with Chris to 7 PM on Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the dinner event with Chris on Monday, April 15, 2024, and update its start time to 7:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-04-15T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my appointment with Sarah on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the appointment with Sarah on Tuesday, April 16, 2024, and return its start time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-04-16T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having drinks with on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event on Wednesday, April 17, 2024, that contains 'drinks' in the summary and return the attendee.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-04-17T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "What events do I have scheduled Saturday?",
+        "complexity": "High",
+        "expected_behavior": "List all events scheduled for Saturday, April 20, 2024.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-04-20T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to invite Mark, Sarah, and Liam to dinner with Chris on Monday.",
+        "complexity": "High",
+        "expected_behavior": "Find dinner with Chris on Monday, April 15, 2024, and add Mark, Sarah, and Liam to the attendee list.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-04-15T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule tattoo.",
+        "complexity": "Medium",
+        "expected_behavior": "List all tattoo appointments this week (April 15, 2024 - April 21, 2024) and ask the user to clarify which one they want to reschedule.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-04-16T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel that.",
+        "complexity": "High",
+        "expected_behavior": "List the most recent event created/modified by the user and ask for confirmation before deleting it.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-04-17T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for today, April 15, 2024.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-04-15T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for tomorrow, April 16, 2024.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-04-15T18:00:00"
+    }
+]

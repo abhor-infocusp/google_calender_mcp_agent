@@ -1,0 +1,1283 @@
+[
+  {
+    "query": "Book me a yoga class for Sunday at 9 AM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create an event with summary 'Yoga Class', start time 2025-02-02T09:00:00, end time 2025-02-02T10:00:00.",
+    "simulated_now": "2025-01-26 12:00:00",
+    "addressed_days": [
+      "Sunday"
+    ],
+    "calendar_before": {
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Yoga Class",
+          "start": "2025-02-02 10:00:00",
+          "end": "2025-02-02 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a98afc446ebe438796fb4c08ed608ca7"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Family",
+          "start": "2025-02-02 13:00:00",
+          "end": "2025-02-02 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fe20b2652d864195a40eb5f81b183e32"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Yoga Class",
+          "start": "2025-01-26 09:00:00",
+          "end": "2025-01-26 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3a6a9edd67524dc6931c08d778395866"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Yoga Class",
+          "start": "2025-02-02 10:00:00",
+          "end": "2025-02-02 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a98afc446ebe438796fb4c08ed608ca7"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Family",
+          "start": "2025-02-02 13:00:00",
+          "end": "2025-02-02 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fe20b2652d864195a40eb5f81b183e32"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Book me a yoga class for Sunday at 9 AM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2025-01-26 12:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2025-01-26 09:00:00",
+          "end": "2025-01-26 10:00:00",
+          "summary": "Yoga Class"
+        },
+        "result": {
+          "message": "Event created successfully.",
+          "event": {
+            "id": "evt_3a6a9edd67524dc6931c08d778395866",
+            "summary": "Yoga Class",
+            "start": "2025-01-26 09:00:00",
+            "end": "2025-01-26 10:00:00",
+            "description": "",
+            "attendees": [],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've created a yoga class for you on Sunday, January 26, 2025 at 9 AM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing after the Acme Corp demo on Monday?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "First, find the 'Acme Corp Demo' event on Monday. Then list events between 12:00 PM and 5:00 PM on Monday to determine what is happening afterward.",
+    "simulated_now": "2025-01-27 09:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Sales Team Meeting",
+          "start": "2025-01-27 09:00:00",
+          "end": "2025-01-27 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sales_manager@company.com"
+          ],
+          "id": "evt_de453ddd39a2475b94b28ab25e2386cf"
+        },
+        {
+          "day": "Monday",
+          "summary": "Product Demo - Acme Corp",
+          "start": "2025-01-27 10:30:00",
+          "end": "2025-01-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@acmecorp.com",
+            "se@company.com"
+          ],
+          "id": "evt_00cb76bd57a44fe9a4bd9b89f4ca939d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Prospecting Calls",
+          "start": "2025-01-27 13:00:00",
+          "end": "2025-01-27 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_adbd80c6e89c41d9b74d0901f0c45e90"
+        },
+        {
+          "day": "Monday",
+          "summary": "Internal Training - New Feature Rollout",
+          "start": "2025-01-27 14:30:00",
+          "end": "2025-01-27 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7fb76c1f783e4e4d84b3b4a923a59e22"
+        },
+        {
+          "day": "Monday",
+          "summary": "Children's Soccer Practice",
+          "start": "2025-01-27 18:00:00",
+          "end": "2025-01-27 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bc7f68b7f3c044f98aebc0e82ee7e3e1"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Sales Team Meeting",
+          "start": "2025-01-27 09:00:00",
+          "end": "2025-01-27 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sales_manager@company.com"
+          ],
+          "id": "evt_de453ddd39a2475b94b28ab25e2386cf"
+        },
+        {
+          "day": "Monday",
+          "summary": "Product Demo - Acme Corp",
+          "start": "2025-01-27 10:30:00",
+          "end": "2025-01-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@acmecorp.com",
+            "se@company.com"
+          ],
+          "id": "evt_00cb76bd57a44fe9a4bd9b89f4ca939d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Prospecting Calls",
+          "start": "2025-01-27 13:00:00",
+          "end": "2025-01-27 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_adbd80c6e89c41d9b74d0901f0c45e90"
+        },
+        {
+          "day": "Monday",
+          "summary": "Internal Training - New Feature Rollout",
+          "start": "2025-01-27 14:30:00",
+          "end": "2025-01-27 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7fb76c1f783e4e4d84b3b4a923a59e22"
+        },
+        {
+          "day": "Monday",
+          "summary": "Children's Soccer Practice",
+          "start": "2025-01-27 18:00:00",
+          "end": "2025-01-27 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bc7f68b7f3c044f98aebc0e82ee7e3e1"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing after the Acme Corp demo on Monday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2025-01-27 09:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-01-27 23:59:59",
+          "time_min": "2025-01-27 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_de453ddd39a2475b94b28ab25e2386cf\",\n  \"summary\": \"Sales Team Meeting\",\n  \"start\": \"2025-01-27T09:00:00\",\n  \"end\": \"2025-01-27T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_dccf8bcd\",\n        \"name\": \"sales_manager\",\n        \"email\": \"sales_manager@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_00cb76bd57a44fe9a4bd9b89f4ca939d\",\n  \"summary\": \"Product Demo - Acme Corp\",\n  \"start\": \"2025-01-27T10:30:00\",\n  \"end\": \"2025-01-27T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_f7995f70\",\n        \"name\": \"client\",\n        \"email\": \"client@acmecorp.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_1e2c0474\",\n        \"name\": \"se\",\n        \"email\": \"se@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_adbd80c6e89c41d9b74d0901f0c45e90\",\n  \"summary\": \"Prospecting Calls\",\n  \"start\": \"2025-01-27T13:00:00\",\n  \"end\": \"2025-01-27T14:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_7fb76c1f783e4e4d84b3b4a923a59e22\",\n  \"summary\": \"Internal Training - New Feature Rollout\",\n  \"start\": \"2025-01-27T14:30:00\",\n  \"end\": \"2025-01-27T15:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_bc7f68b7f3c044f98aebc0e82ee7e3e1\",\n  \"summary\": \"Children's Soccer Practice\",\n  \"start\": \"2025-01-27T18:00:00\",\n  \"end\": \"2025-01-27T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "After the Acme Corp demo on Monday, January 27, 2025, you have Prospecting Calls from 13:00 to 14:00, Internal Training - New Feature Rollout from 14:30 to 15:30, and Children's Soccer Practice from 18:00 to 19:00.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What does my Thursday look like?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List all events scheduled for Thursday, 2025-01-30.",
+    "simulated_now": "2025-01-26 12:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Client Meeting - Contract Negotiation",
+          "start": "2025-01-30 09:30:00",
+          "end": "2025-01-30 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@company.com"
+          ],
+          "id": "evt_1010e9732ab34000b3979534b3af5ccf"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Sales Manager - Performance Review",
+          "start": "2025-01-30 11:30:00",
+          "end": "2025-01-30 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sales_manager@company.com"
+          ],
+          "id": "evt_af50018a2493422da26fbbec87f4ac96"
+        },
+        {
+          "day": "Thursday",
+          "summary": "CRM Update & Lead Review",
+          "start": "2025-01-30 14:00:00",
+          "end": "2025-01-30 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9f8ebdcd5ff34533a63352952daca322"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Parent-Teacher Conference",
+          "start": "2025-01-30 18:30:00",
+          "end": "2025-01-30 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d20e3fe907194dc7aa20229bb35f4545"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Client Meeting - Contract Negotiation",
+          "start": "2025-01-30 09:30:00",
+          "end": "2025-01-30 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@company.com"
+          ],
+          "id": "evt_1010e9732ab34000b3979534b3af5ccf"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Sales Manager - Performance Review",
+          "start": "2025-01-30 11:30:00",
+          "end": "2025-01-30 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sales_manager@company.com"
+          ],
+          "id": "evt_af50018a2493422da26fbbec87f4ac96"
+        },
+        {
+          "day": "Thursday",
+          "summary": "CRM Update & Lead Review",
+          "start": "2025-01-30 14:00:00",
+          "end": "2025-01-30 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9f8ebdcd5ff34533a63352952daca322"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Parent-Teacher Conference",
+          "start": "2025-01-30 18:30:00",
+          "end": "2025-01-30 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d20e3fe907194dc7aa20229bb35f4545"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What does my Thursday look like?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2025-01-26 12:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-01-31 00:00:00",
+          "time_min": "2025-01-30 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_1010e9732ab34000b3979534b3af5ccf\",\n  \"summary\": \"Client Meeting - Contract Negotiation\",\n  \"start\": \"2025-01-30T09:30:00\",\n  \"end\": \"2025-01-30T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_81cda2c3\",\n        \"name\": \"client\",\n        \"email\": \"client@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_af50018a2493422da26fbbec87f4ac96\",\n  \"summary\": \"Meeting with Sales Manager - Performance Review\",\n  \"start\": \"2025-01-30T11:30:00\",\n  \"end\": \"2025-01-30T12:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_73509f1f\",\n        \"name\": \"sales_manager\",\n        \"email\": \"sales_manager@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_9f8ebdcd5ff34533a63352952daca322\",\n  \"summary\": \"CRM Update & Lead Review\",\n  \"start\": \"2025-01-30T14:00:00\",\n  \"end\": \"2025-01-30T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_d20e3fe907194dc7aa20229bb35f4545\",\n  \"summary\": \"Parent-Teacher Conference\",\n  \"start\": \"2025-01-30T18:30:00\",\n  \"end\": \"2025-01-30T19:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. This Thursday, January 30, 2025, you have four entries: The first is at 9:30am for a Client Meeting - Contract Negotiation, the second is at 11:30am for a Meeting with Sales Manager - Performance Review, the third is at 2pm for a CRM Update & Lead Review, and the fourth is at 6:30pm for a Parent-Teacher Conference."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can we move the Sales Team Meeting on Friday to 11 AM?",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Sales Team Meeting' event on Friday, then update its start time to 2025-01-31T11:00:00 and end time to 2025-01-31T12:00:00.",
+    "simulated_now": "2025-01-30 14:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Sales Team Meeting",
+          "start": "2025-01-31 09:00:00",
+          "end": "2025-01-31 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sales_manager@company.com"
+          ],
+          "id": "evt_e94703d39dda4986aaf059c761244987"
+        },
+        {
+          "day": "Friday",
+          "summary": "Follow up calls with potential clients",
+          "start": "2025-01-31 10:30:00",
+          "end": "2025-01-31 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cf6303494c63459c9ce7571219f397e9"
+        },
+        {
+          "day": "Friday",
+          "summary": "Review Sales Pipeline and Strategy",
+          "start": "2025-01-31 13:00:00",
+          "end": "2025-01-31 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7a68b73551ed40599438b0b54874cd45"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2025-01-31 18:00:00",
+          "end": "2025-01-31 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_63a9be155e414087a0e01ebffbb2c8e5"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Follow up calls with potential clients",
+          "start": "2025-01-31 10:30:00",
+          "end": "2025-01-31 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cf6303494c63459c9ce7571219f397e9"
+        },
+        {
+          "day": "Friday",
+          "summary": "Sales Team Meeting",
+          "start": "2025-01-31 11:00:00",
+          "end": "2025-01-31 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sales_manager@company.com"
+          ],
+          "id": "evt_e94703d39dda4986aaf059c761244987"
+        },
+        {
+          "day": "Friday",
+          "summary": "Review Sales Pipeline and Strategy",
+          "start": "2025-01-31 13:00:00",
+          "end": "2025-01-31 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7a68b73551ed40599438b0b54874cd45"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2025-01-31 18:00:00",
+          "end": "2025-01-31 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_63a9be155e414087a0e01ebffbb2c8e5"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can we move the Sales Team Meeting on Friday to 11 AM?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2025-01-30 14:00:00",
+          "day": "Thursday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-01-31 23:59:59",
+          "time_min": "2025-01-31 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_e94703d39dda4986aaf059c761244987\",\n  \"summary\": \"Sales Team Meeting\",\n  \"start\": \"2025-01-31T09:00:00\",\n  \"end\": \"2025-01-31T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_41f8b175\",\n        \"name\": \"sales_manager\",\n        \"email\": \"sales_manager@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_cf6303494c63459c9ce7571219f397e9\",\n  \"summary\": \"Follow up calls with potential clients\",\n  \"start\": \"2025-01-31T10:30:00\",\n  \"end\": \"2025-01-31T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_7a68b73551ed40599438b0b54874cd45\",\n  \"summary\": \"Review Sales Pipeline and Strategy\",\n  \"start\": \"2025-01-31T13:00:00\",\n  \"end\": \"2025-01-31T14:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_63a9be155e414087a0e01ebffbb2c8e5\",\n  \"summary\": \"Dinner with Friends\",\n  \"start\": \"2025-01-31T18:00:00\",\n  \"end\": \"2025-01-31T20:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2025-01-31 12:00:00",
+          "start": "2025-01-31 11:00:00",
+          "event_id": "evt_e94703d39dda4986aaf059c761244987"
+        },
+        "result": {
+          "message": "Event updated successfully.",
+          "event": {
+            "id": "evt_e94703d39dda4986aaf059c761244987",
+            "summary": "Sales Team Meeting",
+            "start": "2025-01-31 11:00:00",
+            "end": "2025-01-31 12:00:00",
+            "description": "",
+            "attendees": [
+              "user=User(id='user_41f8b175', name='sales_manager', email='sales_manager@company.com') attending='ACCEPT'"
+            ],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved the Sales Team Meeting to 11 AM on Friday, January 31, 2025. It will now be from 11:00 AM to 12:00 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the product demo on Wednesday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Product Demo - Beta Solutions' event on Wednesday and extract the list of attendees: Client Contact - client@betasolutions.com, Sales Engineer - se@company.com.",
+    "simulated_now": "2025-01-26 12:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prospecting Calls",
+          "start": "2025-01-29 09:00:00",
+          "end": "2025-01-29 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4ea1ae01649348189eae26d7e36e8cde"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Product Demo - Beta Solutions",
+          "start": "2025-01-29 10:30:00",
+          "end": "2025-01-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@betasolutions.com",
+            "se@company.com"
+          ],
+          "id": "evt_f2e2212feeaf45d593e1b75bafc940e3"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Check in with Customer Success Manager regarding Acme Corp",
+          "start": "2025-01-29 14:00:00",
+          "end": "2025-01-29 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "csm@company.com"
+          ],
+          "id": "evt_5992003aa8a4408790247ff78c6e5eb6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review Sales Pipeline and Strategy",
+          "start": "2025-01-29 15:30:00",
+          "end": "2025-01-29 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2bdc95321b3c4aaabb8f7c8a43ebccba"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prospecting Calls",
+          "start": "2025-01-29 09:00:00",
+          "end": "2025-01-29 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4ea1ae01649348189eae26d7e36e8cde"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Product Demo - Beta Solutions",
+          "start": "2025-01-29 10:30:00",
+          "end": "2025-01-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@betasolutions.com",
+            "se@company.com"
+          ],
+          "id": "evt_f2e2212feeaf45d593e1b75bafc940e3"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Check in with Customer Success Manager regarding Acme Corp",
+          "start": "2025-01-29 14:00:00",
+          "end": "2025-01-29 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "csm@company.com"
+          ],
+          "id": "evt_5992003aa8a4408790247ff78c6e5eb6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review Sales Pipeline and Strategy",
+          "start": "2025-01-29 15:30:00",
+          "end": "2025-01-29 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2bdc95321b3c4aaabb8f7c8a43ebccba"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the product demo on Wednesday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2025-01-26 12:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-01-29 23:59:59",
+          "time_min": "2025-01-29 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_4ea1ae01649348189eae26d7e36e8cde\",\n  \"summary\": \"Prospecting Calls\",\n  \"start\": \"2025-01-29T09:00:00\",\n  \"end\": \"2025-01-29T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_f2e2212feeaf45d593e1b75bafc940e3\",\n  \"summary\": \"Product Demo - Beta Solutions\",\n  \"start\": \"2025-01-29T10:30:00\",\n  \"end\": \"2025-01-29T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_2e329624\",\n        \"name\": \"client\",\n        \"email\": \"client@betasolutions.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_3957c492\",\n        \"name\": \"se\",\n        \"email\": \"se@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_5992003aa8a4408790247ff78c6e5eb6\",\n  \"summary\": \"Check in with Customer Success Manager regarding Acme Corp\",\n  \"start\": \"2025-01-29T14:00:00\",\n  \"end\": \"2025-01-29T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_9b578cff\",\n        \"name\": \"csm\",\n        \"email\": \"csm@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_2bdc95321b3c4aaabb8f7c8a43ebccba\",\n  \"summary\": \"Review Sales Pipeline and Strategy\",\n  \"start\": \"2025-01-29T15:30:00\",\n  \"end\": \"2025-01-29T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "The attendees for the Product Demo - Beta Solutions on Wednesday, January 29, 2025 are client@betasolutions.com and se@company.com."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is the dinner with friends on Friday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Dinner with Friends' event on Friday and return its start time.",
+    "simulated_now": "2025-01-26 12:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Sales Team Meeting",
+          "start": "2025-01-31 09:00:00",
+          "end": "2025-01-31 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sales_manager@company.com"
+          ],
+          "id": "evt_08287bbde6a54eddb7ea854d8d439a3c"
+        },
+        {
+          "day": "Friday",
+          "summary": "Follow up calls with potential clients",
+          "start": "2025-01-31 10:30:00",
+          "end": "2025-01-31 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1f64a5a0d37d489684d005209c949259"
+        },
+        {
+          "day": "Friday",
+          "summary": "Review Sales Pipeline and Strategy",
+          "start": "2025-01-31 13:00:00",
+          "end": "2025-01-31 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bcd8d73e06f1498a9e6a1283b2d458cf"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2025-01-31 18:00:00",
+          "end": "2025-01-31 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1deb3dc1842a4d7fbca52a3c0cf7cdbe"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Sales Team Meeting",
+          "start": "2025-01-31 09:00:00",
+          "end": "2025-01-31 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sales_manager@company.com"
+          ],
+          "id": "evt_08287bbde6a54eddb7ea854d8d439a3c"
+        },
+        {
+          "day": "Friday",
+          "summary": "Follow up calls with potential clients",
+          "start": "2025-01-31 10:30:00",
+          "end": "2025-01-31 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1f64a5a0d37d489684d005209c949259"
+        },
+        {
+          "day": "Friday",
+          "summary": "Review Sales Pipeline and Strategy",
+          "start": "2025-01-31 13:00:00",
+          "end": "2025-01-31 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bcd8d73e06f1498a9e6a1283b2d458cf"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2025-01-31 18:00:00",
+          "end": "2025-01-31 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1deb3dc1842a4d7fbca52a3c0cf7cdbe"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is the dinner with friends on Friday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2025-01-26 12:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-01-31 23:59:59",
+          "time_min": "2025-01-31 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_08287bbde6a54eddb7ea854d8d439a3c\",\n  \"summary\": \"Sales Team Meeting\",\n  \"start\": \"2025-01-31T09:00:00\",\n  \"end\": \"2025-01-31T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_5a576520\",\n        \"name\": \"sales_manager\",\n        \"email\": \"sales_manager@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_1f64a5a0d37d489684d005209c949259\",\n  \"summary\": \"Follow up calls with potential clients\",\n  \"start\": \"2025-01-31T10:30:00\",\n  \"end\": \"2025-01-31T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_bcd8d73e06f1498a9e6a1283b2d458cf\",\n  \"summary\": \"Review Sales Pipeline and Strategy\",\n  \"start\": \"2025-01-31T13:00:00\",\n  \"end\": \"2025-01-31T14:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_1deb3dc1842a4d7fbca52a3c0cf7cdbe\",\n  \"summary\": \"Dinner with Friends\",\n  \"start\": \"2025-01-31T18:00:00\",\n  \"end\": \"2025-01-31T20:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "Your Dinner with Friends is on Friday, January 31, 2025, at 6:00 PM. It ends at 8:00 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "I need to push my meeting with the Marketing Team on Tuesday back by one hour.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Find the 'Meeting with Marketing Team - Lead Generation Strategies' event on Tuesday, then update its start time to 2025-01-28T16:30:00 and end time to 2025-01-28T17:30:00.",
+    "simulated_now": "2025-01-28 09:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Client Meeting - Contract Negotiation",
+          "start": "2025-01-28 09:30:00",
+          "end": "2025-01-28 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@company.com"
+          ],
+          "id": "evt_370a3dc6578644c2b06bf418f60be72f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Follow up with Tech Support Regarding Acme Corp Demo",
+          "start": "2025-01-28 11:30:00",
+          "end": "2025-01-28 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "techsupport@company.com"
+          ],
+          "id": "evt_8805b24d91704773a29d07d6fcc8f5db"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "CRM Update & Lead Review",
+          "start": "2025-01-28 14:00:00",
+          "end": "2025-01-28 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0f6ade8ae72341aba87cfccb8f437368"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Marketing Team - Lead Generation Strategies",
+          "start": "2025-01-28 15:30:00",
+          "end": "2025-01-28 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "marketing@company.com"
+          ],
+          "id": "evt_0280a7a8b816427c9fb21254b5853d44"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Spouse",
+          "start": "2025-01-28 19:00:00",
+          "end": "2025-01-28 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9e4772eb3dcf44b79382ead197bfa2ae"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Client Meeting - Contract Negotiation",
+          "start": "2025-01-28 09:30:00",
+          "end": "2025-01-28 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@company.com"
+          ],
+          "id": "evt_370a3dc6578644c2b06bf418f60be72f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Follow up with Tech Support Regarding Acme Corp Demo",
+          "start": "2025-01-28 11:30:00",
+          "end": "2025-01-28 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "techsupport@company.com"
+          ],
+          "id": "evt_8805b24d91704773a29d07d6fcc8f5db"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "CRM Update & Lead Review",
+          "start": "2025-01-28 14:00:00",
+          "end": "2025-01-28 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0f6ade8ae72341aba87cfccb8f437368"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Marketing Team - Lead Generation Strategies",
+          "start": "2025-01-28 16:30:00",
+          "end": "2025-01-28 17:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "marketing@company.com"
+          ],
+          "id": "evt_0280a7a8b816427c9fb21254b5853d44"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Spouse",
+          "start": "2025-01-28 19:00:00",
+          "end": "2025-01-28 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9e4772eb3dcf44b79382ead197bfa2ae"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "I need to push my meeting with the Marketing Team on Tuesday back by one hour."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2025-01-28 09:00:00",
+          "day": "Tuesday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-01-28 23:59:59",
+          "time_min": "2025-01-28 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_370a3dc6578644c2b06bf418f60be72f\",\n  \"summary\": \"Client Meeting - Contract Negotiation\",\n  \"start\": \"2025-01-28T09:30:00\",\n  \"end\": \"2025-01-28T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_2312ef8a\",\n        \"name\": \"client\",\n        \"email\": \"client@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_8805b24d91704773a29d07d6fcc8f5db\",\n  \"summary\": \"Follow up with Tech Support Regarding Acme Corp Demo\",\n  \"start\": \"2025-01-28T11:30:00\",\n  \"end\": \"2025-01-28T12:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_87a06879\",\n        \"name\": \"techsupport\",\n        \"email\": \"techsupport@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_0f6ade8ae72341aba87cfccb8f437368\",\n  \"summary\": \"CRM Update & Lead Review\",\n  \"start\": \"2025-01-28T14:00:00\",\n  \"end\": \"2025-01-28T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_0280a7a8b816427c9fb21254b5853d44\",\n  \"summary\": \"Meeting with Marketing Team - Lead Generation Strategies\",\n  \"start\": \"2025-01-28T15:30:00\",\n  \"end\": \"2025-01-28T16:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_8abe819d\",\n        \"name\": \"marketing\",\n        \"email\": \"marketing@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_9e4772eb3dcf44b79382ead197bfa2ae\",\n  \"summary\": \"Dinner with Spouse\",\n  \"start\": \"2025-01-28T19:00:00\",\n  \"end\": \"2025-01-28T20:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2025-01-28 16:30:00",
+          "end": "2025-01-28 17:30:00",
+          "event_id": "evt_0280a7a8b816427c9fb21254b5853d44"
+        },
+        "result": {
+          "message": "Event updated successfully.",
+          "event": {
+            "id": "evt_0280a7a8b816427c9fb21254b5853d44",
+            "summary": "Meeting with Marketing Team - Lead Generation Strategies",
+            "start": "2025-01-28 16:30:00",
+            "end": "2025-01-28 17:30:00",
+            "description": "",
+            "attendees": [
+              "user=User(id='user_8abe819d', name='marketing', email='marketing@company.com') attending='ACCEPT'"
+            ],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved the Meeting with Marketing Team - Lead Generation Strategies to start at 16:30:00 and end at 17:30:00 on January 28, 2025.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Am I free between 10 AM and 11 AM on Thursday?",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "List events between 2025-01-30T10:00:00 and 2025-01-30T11:00:00. If there are no events, the user is free.",
+    "simulated_now": "2025-01-26 12:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Client Meeting - Contract Negotiation",
+          "start": "2025-01-30 09:30:00",
+          "end": "2025-01-30 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@company.com"
+          ],
+          "id": "evt_9eff4bacac2d4515b53b620020ae4b0e"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Sales Manager - Performance Review",
+          "start": "2025-01-30 11:30:00",
+          "end": "2025-01-30 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sales_manager@company.com"
+          ],
+          "id": "evt_d5f32e99a0a245029e2eb3c3b949ecb7"
+        },
+        {
+          "day": "Thursday",
+          "summary": "CRM Update & Lead Review",
+          "start": "2025-01-30 14:00:00",
+          "end": "2025-01-30 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b612256e247e4ae1a59cac3f66f8a8d6"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Parent-Teacher Conference",
+          "start": "2025-01-30 18:30:00",
+          "end": "2025-01-30 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0d2259732a2e4596b3f21d8cf54bd1fd"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Client Meeting - Contract Negotiation",
+          "start": "2025-01-30 09:30:00",
+          "end": "2025-01-30 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@company.com"
+          ],
+          "id": "evt_9eff4bacac2d4515b53b620020ae4b0e"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Sales Manager - Performance Review",
+          "start": "2025-01-30 11:30:00",
+          "end": "2025-01-30 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sales_manager@company.com"
+          ],
+          "id": "evt_d5f32e99a0a245029e2eb3c3b949ecb7"
+        },
+        {
+          "day": "Thursday",
+          "summary": "CRM Update & Lead Review",
+          "start": "2025-01-30 14:00:00",
+          "end": "2025-01-30 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b612256e247e4ae1a59cac3f66f8a8d6"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Parent-Teacher Conference",
+          "start": "2025-01-30 18:30:00",
+          "end": "2025-01-30 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0d2259732a2e4596b3f21d8cf54bd1fd"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Am I free between 10 AM and 11 AM on Thursday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2025-01-26 12:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-01-30 11:00:00",
+          "time_min": "2025-01-30 10:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_9eff4bacac2d4515b53b620020ae4b0e\",\n  \"summary\": \"Client Meeting - Contract Negotiation\",\n  \"start\": \"2025-01-30T09:30:00\",\n  \"end\": \"2025-01-30T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_ada356fe\",\n        \"name\": \"client\",\n        \"email\": \"client@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "No, you are not free between 10 AM and 11 AM on Thursday, January 30, 2025. You have an event called \"Client Meeting - Contract Negotiation\" scheduled from 9:30 AM to 11:00 AM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events scheduled for today, Monday 2025-01-27.",
+    "simulated_now": "2025-01-27 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Sales Team Meeting",
+          "start": "2025-01-27 09:00:00",
+          "end": "2025-01-27 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sales_manager@company.com"
+          ],
+          "id": "evt_7710742c32814629b65291363d1397d6"
+        },
+        {
+          "day": "Monday",
+          "summary": "Product Demo - Acme Corp",
+          "start": "2025-01-27 10:30:00",
+          "end": "2025-01-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@acmecorp.com",
+            "se@company.com"
+          ],
+          "id": "evt_fc362e2b7c1b475daa33f04147303d55"
+        },
+        {
+          "day": "Monday",
+          "summary": "Prospecting Calls",
+          "start": "2025-01-27 13:00:00",
+          "end": "2025-01-27 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e40969a3fb694f18bd75c75c1929ae90"
+        },
+        {
+          "day": "Monday",
+          "summary": "Internal Training - New Feature Rollout",
+          "start": "2025-01-27 14:30:00",
+          "end": "2025-01-27 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c6490497319743b48763d665956cfec5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Children's Soccer Practice",
+          "start": "2025-01-27 18:00:00",
+          "end": "2025-01-27 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5d007e77af494196841b50ae095a1277"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Sales Team Meeting",
+          "start": "2025-01-27 09:00:00",
+          "end": "2025-01-27 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sales_manager@company.com"
+          ],
+          "id": "evt_7710742c32814629b65291363d1397d6"
+        },
+        {
+          "day": "Monday",
+          "summary": "Product Demo - Acme Corp",
+          "start": "2025-01-27 10:30:00",
+          "end": "2025-01-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@acmecorp.com",
+            "se@company.com"
+          ],
+          "id": "evt_fc362e2b7c1b475daa33f04147303d55"
+        },
+        {
+          "day": "Monday",
+          "summary": "Prospecting Calls",
+          "start": "2025-01-27 13:00:00",
+          "end": "2025-01-27 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e40969a3fb694f18bd75c75c1929ae90"
+        },
+        {
+          "day": "Monday",
+          "summary": "Internal Training - New Feature Rollout",
+          "start": "2025-01-27 14:30:00",
+          "end": "2025-01-27 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c6490497319743b48763d665956cfec5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Children's Soccer Practice",
+          "start": "2025-01-27 18:00:00",
+          "end": "2025-01-27 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5d007e77af494196841b50ae095a1277"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2025-01-27 08:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-01-27 23:59:59",
+          "time_min": "2025-01-27 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_7710742c32814629b65291363d1397d6\",\n  \"summary\": \"Sales Team Meeting\",\n  \"start\": \"2025-01-27T09:00:00\",\n  \"end\": \"2025-01-27T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_20283355\",\n        \"name\": \"sales_manager\",\n        \"email\": \"sales_manager@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_fc362e2b7c1b475daa33f04147303d55\",\n  \"summary\": \"Product Demo - Acme Corp\",\n  \"start\": \"2025-01-27T10:30:00\",\n  \"end\": \"2025-01-27T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_ee7f2eb7\",\n        \"name\": \"client\",\n        \"email\": \"client@acmecorp.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_f96594f2\",\n        \"name\": \"se\",\n        \"email\": \"se@company.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_e40969a3fb694f18bd75c75c1929ae90\",\n  \"summary\": \"Prospecting Calls\",\n  \"start\": \"2025-01-27T13:00:00\",\n  \"end\": \"2025-01-27T14:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_c6490497319743b48763d665956cfec5\",\n  \"summary\": \"Internal Training - New Feature Rollout\",\n  \"start\": \"2025-01-27T14:30:00\",\n  \"end\": \"2025-01-27T15:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_5d007e77af494196841b50ae095a1277\",\n  \"summary\": \"Children's Soccer Practice\",\n  \"start\": \"2025-01-27T18:00:00\",\n  \"end\": \"2025-01-27T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "Today, January 27, 2025, you have the following events: Sales Team Meeting at 9am, Product Demo - Acme Corp at 10:30am, Prospecting Calls at 1pm, Internal Training - New Feature Rollout at 2:30pm, and Children's Soccer Practice at 6pm."
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

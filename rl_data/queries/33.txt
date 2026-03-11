@@ -1,0 +1,148 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an appointment for a doctor's visit on Friday at 10 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to create an event with the title 'doctor's visit' on Friday, June 23, 2023, from 10:00 AM to 11:00 AM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-06-18T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a dentist appointment for Tuesday at 2:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule a 'dentist appointment' on Tuesday, June 20, 2023, from 2:30 PM to 3:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-06-18T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing for lunch with the team?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for Monday between 12:00 PM and 1:00 PM. Find the event about lunch. Return the event details.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-06-19T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What meetings do I have on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for Wednesday.  Return the details of meetings: 'Hospital Rounds' and 'Vaccine Hesitancy Strategies'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-06-21T07:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move dinner with my parents on Thursday to 7:30 PM instead of 6?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for Thursday between 6:00 PM and 7:00 PM to find 'Dinner with parents'. Call update_event with the event id and update the start time to 7:30 PM and end time to 8:30 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-06-20T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time for the family picnic on Saturday to 1 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for Saturday between 12:00 PM and 2:00 PM to find 'Family picnic at the park'. Call update_event with the event id and update the start time to 1:00 PM and end time to 3:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-06-22T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is soccer practice this week?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for Monday to Sunday. Find 'Kids' soccer practice' and return the time: 5:30 PM - 6:30 PM on Monday.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2023-06-18T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending hospital rounds on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for Wednesday between 8:00 AM and 12:00 PM to find 'Hospital Rounds'.  Return the attendees: pharmacists@hospital.com, lab_technicians@hospital.com, specialists@hospital.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-06-20T16:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting with public_health@gov.com on Wednesday from 2 to 4 PM but I already have something scheduled then. What are my options?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events for Wednesday between 2:00 PM and 4:00 PM. Determine user has 'Meeting: Vaccine Hesitancy Strategies' at 2:00 PM. Suggest rescheduling 'Meeting: Vaccine Hesitancy Strategies' or the new meeting.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-06-20T11:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move the afternoon clinic on Friday so it starts an hour later. Will that cause any conflicts?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events for Friday between 2:00 PM and 5:30 PM (original event shifted one hour later). If no conflicts, call update_event to move the afternoon clinic to 2:00 PM - 5:30 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-06-22T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule swimming.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for Saturday between 9:00 AM and 10:00 AM. Find event with the name 'Kids' swimming lessons'. Ask for the new time.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-06-23T15:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel dinner.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for Thursday between 6:00 PM and 8:00 PM. Find the event with the name 'Dinner with parents'. Then call delete_event for the id of the event.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-06-22T11:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for Tuesday. Return the events scheduled for that day.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-06-19T16:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for Sunday. Return the events scheduled for that day.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2023-06-26T08:00:00"
+    }
+]

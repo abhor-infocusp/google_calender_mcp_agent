@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting called 'Client Onboarding' for Tuesday at 2 PM, with John Doe attending at john.doe@email.com.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Client Onboarding', start as '2023-04-18T14:00:00', end as '2023-04-18T15:00:00', and attendees as 'john.doe@email.com'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-04-16T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event on Friday named 'Project Review' at 10 AM for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Project Review', start as '2023-04-21T10:00:00', end as '2023-04-21T11:00:00'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-04-16T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Thursday with the Finance Director?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min as '2023-04-20T00:00:00' and time_max as '2023-04-21T00:00:00' to find the event with the Finance Director, then call get_event with the event ID to retrieve the event details.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-04-20T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What meetings do I have on Monday about Payroll?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min as '2023-04-17T00:00:00' and time_max as '2023-04-18T00:00:00'. Filter the returned events for those containing 'Payroll'. Call get_event for each relevant event ID to get details.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-17T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my dinner with friends on Thursday to 7:30 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min as '2023-04-20T00:00:00' and time_max as '2023-04-21T00:00:00' to find the 'Dinner with friends' event. Then call update_event with the event ID and updates as {'start': '2023-04-20T19:30:00', 'end': '2023-04-20T20:30:00'}.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-04-20T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the Tax Auditor Meeting on Friday to 1 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min as '2023-04-21T00:00:00' and time_max as '2023-04-22T00:00:00' to find the 'Tax Auditor Meeting' event. Then call update_event with the event ID and updates as {'start': '2023-04-21T13:00:00', 'end': '2023-04-21T15:00:00'}.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-04-21T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my yoga class on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min as '2023-04-17T00:00:00' and time_max as '2023-04-18T00:00:00' to find the 'Yoga Class' event. Call get_event with the event ID to retrieve the event details, including the time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-17T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Team Meeting on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min as '2023-04-17T00:00:00' and time_max as '2023-04-18T00:00:00' to find the 'Team Meeting' event. Call get_event with the event ID to retrieve the attendees.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-17T11:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the tax compliance review on Thursday. Decline it.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min as '2023-04-20T00:00:00' and time_max as '2023-04-21T00:00:00' to find the 'Tax compliance review' event. Call respond_to_event with the event ID and 'DECLINE'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-04-20T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule the Finance Director Check-in on Thursday to 2 PM, but only if Tax compliance review finishes by then. ",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min as '2023-04-20T00:00:00' and time_max as '2023-04-21T00:00:00' to find both 'Finance Director Check-in' and 'Tax compliance review' events. Check the end time of 'Tax compliance review'. If it is before 2 PM, call update_event with the event ID of 'Finance Director Check-in' and updates {'start': '2023-04-20T14:00:00', 'end': '2023-04-20T15:00:00'}.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-04-20T09:30:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Payroll on Wednesday",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min as '2023-04-19T00:00:00' and time_max as '2023-04-20T00:00:00' to find the 'Weekly Payroll Run' event. Call get_event with the event ID to retrieve the event details.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-19T11:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Tax meeting Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min as '2023-04-21T00:00:00' and time_max as '2023-04-22T00:00:00' to find the 'Tax Auditor Meeting' event. Call get_event with the event ID to retrieve the event details.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-04-21T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to the beginning of the current day and time_max set to the end of the current day to find today's events. Call get_event for each event ID to retrieve details.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-19T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to the beginning of the next day and time_max set to the end of the next day to find tomorrow's events. Call get_event for each event ID to retrieve details.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-04-19T15:00:00"
+    }
+]

@@ -1,0 +1,145 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event on Thursday at 4 PM called 'Meet with John' with attendee john@example.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with summary 'Meet with John', start time Thursday at 4 PM, end time Thursday at 5 PM, and attendee john@example.com.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-03-08T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you add a dentist appointment to my calendar for Wednesday at 3:00 PM with attendee dentist@dentalcare.com?",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with summary 'Dentist Appointment', start time Wednesday at 3:00 PM, end time Wednesday at 4:00 PM, and attendee dentist@dentalcare.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-03-08T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I need to talk to my ex-wife this week.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Call with Ex-wife' event on Tuesday at 7:00 PM and display its details.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-03-08T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing with the kids this week?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events that contain 'kids' in the description or summary for the week.",
+        "addressed_days": [
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-03-08T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the chiropractor appointment to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Chiropractor Appointment' event on Monday and update its start time to 7:30 PM and end time to 8:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-03-08T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you change the grease trap cleaning to 3 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Commercial Job: Restaurant Grease Trap Cleaning' event on Monday and update its start time to 3:00 PM and end time to 5:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-03-08T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time am I picking up supplies?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Pick up new hydro-jetting nozzle' event on Monday and display its details.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-03-08T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What's the address of the gym I'm going to on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Clear Clogged Shower Drain: Gym' event on Thursday and display the attendees.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-03-08T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my sewer line inspection to Thursday morning. Is anything scheduled?",
+        "complexity": "High",
+        "expected_behavior": "List all events on Thursday between 8:30 AM and 10:00 AM. If there are no conflicts, update the 'Inspect Sewer Line with Camera' event on Tuesday to Thursday at 8:30 AM.",
+        "addressed_days": [
+            "Tuesday",
+            "Thursday"
+        ],
+        "current_time": "2026-03-08T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to push my appointment with the chiropractor back by an hour, will that work?",
+        "complexity": "High",
+        "expected_behavior": "List all events on Monday between 7:00 PM and 8:00 PM. If there are no conflicts, update the 'Chiropractor Appointment' event on Monday to 7:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-03-08T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Toilet clogged",
+        "complexity": "Medium",
+        "expected_behavior": "List all events with summary containing the words 'toilet' to see if that is what the user is referring to",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-03-08T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Hair clog",
+        "complexity": "Medium",
+        "expected_behavior": "List all events with summary containing the words 'hair clog' to see if that is what the user is referring to.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-03-08T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-03-09T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-03-11T10:00:00"
+    }
+]

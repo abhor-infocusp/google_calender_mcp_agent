@@ -1,0 +1,1243 @@
+[
+  {
+    "query": "Please create an event called 'Volunteer Meeting' for Tuesday at 3 PM for one hour, with programdirector@nonprofit.org as an attendee.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event named 'Volunteer Meeting' on Tuesday, February 13, 2024, from 3 PM to 4 PM, with programdirector@nonprofit.org as an attendee.",
+    "simulated_now": "2024-02-11 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Research New Funding Opportunities",
+          "start": "2024-02-13 09:00:00",
+          "end": "2024-02-13 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b352075d335b4ca2a383df692778a328"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Draft Grant Narrative - Community Development Block Grant",
+          "start": "2024-02-13 10:30:00",
+          "end": "2024-02-13 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6dd322ce212944b9853a6c754621c4e4"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Foundation Program Officer - Smith Foundation",
+          "start": "2024-02-13 13:00:00",
+          "end": "2024-02-13 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "foundationrep@smith.org"
+          ],
+          "id": "evt_0d37330ea92446e2a2c21c80e790a24d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Association Meeting",
+          "start": "2024-02-13 18:30:00",
+          "end": "2024-02-13 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ffc7898b371d45efa0040b46d6f04d8e"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Research New Funding Opportunities",
+          "start": "2024-02-13 09:00:00",
+          "end": "2024-02-13 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b352075d335b4ca2a383df692778a328"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Draft Grant Narrative - Community Development Block Grant",
+          "start": "2024-02-13 10:30:00",
+          "end": "2024-02-13 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6dd322ce212944b9853a6c754621c4e4"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Foundation Program Officer - Smith Foundation",
+          "start": "2024-02-13 13:00:00",
+          "end": "2024-02-13 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "foundationrep@smith.org"
+          ],
+          "id": "evt_0d37330ea92446e2a2c21c80e790a24d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Volunteer Meeting",
+          "start": "2024-02-13 15:00:00",
+          "end": "2024-02-13 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "programdirector@nonprofit.org"
+          ],
+          "id": "evt_8d011342eaf2465bbf75dcce91662870"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Association Meeting",
+          "start": "2024-02-13 18:30:00",
+          "end": "2024-02-13 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ffc7898b371d45efa0040b46d6f04d8e"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Please create an event called 'Volunteer Meeting' for Tuesday at 3 PM for one hour, with programdirector@nonprofit.org as an attendee."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-02-11 10:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "attendees": [
+            "programdirector@nonprofit.org"
+          ],
+          "end": "2024-02-13 16:00:00",
+          "start": "2024-02-13 15:00:00",
+          "summary": "Volunteer Meeting"
+        },
+        "result": {
+          "message": "Event created successfully.",
+          "event": {
+            "id": "evt_8d011342eaf2465bbf75dcce91662870",
+            "summary": "Volunteer Meeting",
+            "start": "2024-02-13 15:00:00",
+            "end": "2024-02-13 16:00:00",
+            "description": "",
+            "attendees": [
+              "user=User(id='user_0f181f1a', name='programdirector', email='programdirector@nonprofit.org') attending='ACCEPT'"
+            ],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've created an event called 'Volunteer Meeting' for Tuesday, February 13, 2024 at 3 PM for one hour, with programdirector@nonprofit.org as an attendee.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Book a slot on Friday for 'Team Lunch' from 12:00 PM to 1:00 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event named 'Team Lunch' on Friday, February 16, 2024, from 12:00 PM to 1:00 PM.",
+    "simulated_now": "2024-02-11 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Finalize Grant Proposal - Community Development Block Grant",
+          "start": "2024-02-16 09:00:00",
+          "end": "2024-02-16 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a9c0e18036524799b07509904d0eaa15"
+        },
+        {
+          "day": "Friday",
+          "summary": "Submit Grant Application",
+          "start": "2024-02-16 11:00:00",
+          "end": "2024-02-16 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b10cfd09c37640bd9f498a021a330da7"
+        },
+        {
+          "day": "Friday",
+          "summary": "Debrief & Planning for Next Week",
+          "start": "2024-02-16 15:00:00",
+          "end": "2024-02-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9e5e6cfe8fe14b7696eeb1b47ead8248"
+        },
+        {
+          "day": "Friday",
+          "summary": "Family Movie Night",
+          "start": "2024-02-16 19:00:00",
+          "end": "2024-02-16 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_232f1138b32345a8ac8fdf08d4b56515"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Finalize Grant Proposal - Community Development Block Grant",
+          "start": "2024-02-16 09:00:00",
+          "end": "2024-02-16 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a9c0e18036524799b07509904d0eaa15"
+        },
+        {
+          "day": "Friday",
+          "summary": "Submit Grant Application",
+          "start": "2024-02-16 11:00:00",
+          "end": "2024-02-16 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b10cfd09c37640bd9f498a021a330da7"
+        },
+        {
+          "day": "Friday",
+          "summary": "Team Lunch",
+          "start": "2024-02-16 12:00:00",
+          "end": "2024-02-16 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2622c3cad8be41c6845902734cd10e08"
+        },
+        {
+          "day": "Friday",
+          "summary": "Debrief & Planning for Next Week",
+          "start": "2024-02-16 15:00:00",
+          "end": "2024-02-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9e5e6cfe8fe14b7696eeb1b47ead8248"
+        },
+        {
+          "day": "Friday",
+          "summary": "Family Movie Night",
+          "start": "2024-02-16 19:00:00",
+          "end": "2024-02-16 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_232f1138b32345a8ac8fdf08d4b56515"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Book a slot on Friday for 'Team Lunch' from 12:00 PM to 1:00 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-02-11 10:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2024-02-16 12:00:00",
+          "end": "2024-02-16 13:00:00",
+          "summary": "Team Lunch"
+        },
+        "result": {
+          "message": "Event created successfully.",
+          "event": {
+            "id": "evt_2622c3cad8be41c6845902734cd10e08",
+            "summary": "Team Lunch",
+            "start": "2024-02-16 12:00:00",
+            "end": "2024-02-16 13:00:00",
+            "description": "",
+            "attendees": [],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've booked 'Team Lunch' for Friday, February 16, 2024 from 12:00 PM to 1:00 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing on Wednesday afternoon?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List events scheduled for Wednesday, February 14, 2024, between 12:00 PM and 6:00 PM.",
+    "simulated_now": "2024-02-14 08:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Executive Director Check-in",
+          "start": "2024-02-14 09:00:00",
+          "end": "2024-02-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "executivedirector@nonprofit.org"
+          ],
+          "id": "evt_ab6a450b861f4dbd8885f3216b71fa05"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Budget Development - Affordable Housing Program",
+          "start": "2024-02-14 10:30:00",
+          "end": "2024-02-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_35e5de56ad4c4e51979d90eb6a203002"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Accountant - Financial Reporting",
+          "start": "2024-02-14 14:00:00",
+          "end": "2024-02-14 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@accountingfirm.com"
+          ],
+          "id": "evt_8dff3c00ab4a4c95a915ae84bdfdef6e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Spouse",
+          "start": "2024-02-14 19:00:00",
+          "end": "2024-02-14 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c24ab8825bf54e5686c91dfc161390f5"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Executive Director Check-in",
+          "start": "2024-02-14 09:00:00",
+          "end": "2024-02-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "executivedirector@nonprofit.org"
+          ],
+          "id": "evt_ab6a450b861f4dbd8885f3216b71fa05"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Budget Development - Affordable Housing Program",
+          "start": "2024-02-14 10:30:00",
+          "end": "2024-02-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_35e5de56ad4c4e51979d90eb6a203002"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Accountant - Financial Reporting",
+          "start": "2024-02-14 14:00:00",
+          "end": "2024-02-14 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@accountingfirm.com"
+          ],
+          "id": "evt_8dff3c00ab4a4c95a915ae84bdfdef6e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Spouse",
+          "start": "2024-02-14 19:00:00",
+          "end": "2024-02-14 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c24ab8825bf54e5686c91dfc161390f5"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing on Wednesday afternoon?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-02-14 08:00:00",
+          "day": "Wednesday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-02-14 17:00:00",
+          "time_min": "2024-02-14 12:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_35e5de56ad4c4e51979d90eb6a203002\",\n  \"summary\": \"Budget Development - Affordable Housing Program\",\n  \"start\": \"2024-02-14T10:30:00\",\n  \"end\": \"2024-02-14T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_8dff3c00ab4a4c95a915ae84bdfdef6e\",\n  \"summary\": \"Meeting with Accountant - Financial Reporting\",\n  \"start\": \"2024-02-14T14:00:00\",\n  \"end\": \"2024-02-14T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_c3048452\",\n        \"name\": \"accountant\",\n        \"email\": \"accountant@accountingfirm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "On Wednesday afternoon, February 14, you have a meeting with an accountant regarding financial reporting from 2 PM to 3 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What does my Friday look like?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List all events scheduled for Friday, February 16, 2024.",
+    "simulated_now": "2024-02-16 08:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Finalize Grant Proposal - Community Development Block Grant",
+          "start": "2024-02-16 09:00:00",
+          "end": "2024-02-16 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_82d601f2c830492a8337cc71d042ce8f"
+        },
+        {
+          "day": "Friday",
+          "summary": "Submit Grant Application",
+          "start": "2024-02-16 11:00:00",
+          "end": "2024-02-16 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cd4925ff6a0c447797656e7ecb32296f"
+        },
+        {
+          "day": "Friday",
+          "summary": "Debrief & Planning for Next Week",
+          "start": "2024-02-16 15:00:00",
+          "end": "2024-02-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0c4b9a197f604507992ec681554a55a1"
+        },
+        {
+          "day": "Friday",
+          "summary": "Family Movie Night",
+          "start": "2024-02-16 19:00:00",
+          "end": "2024-02-16 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_11a47254331147af8a2bfb26d3141c44"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Finalize Grant Proposal - Community Development Block Grant",
+          "start": "2024-02-16 09:00:00",
+          "end": "2024-02-16 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_82d601f2c830492a8337cc71d042ce8f"
+        },
+        {
+          "day": "Friday",
+          "summary": "Submit Grant Application",
+          "start": "2024-02-16 11:00:00",
+          "end": "2024-02-16 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cd4925ff6a0c447797656e7ecb32296f"
+        },
+        {
+          "day": "Friday",
+          "summary": "Debrief & Planning for Next Week",
+          "start": "2024-02-16 15:00:00",
+          "end": "2024-02-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0c4b9a197f604507992ec681554a55a1"
+        },
+        {
+          "day": "Friday",
+          "summary": "Family Movie Night",
+          "start": "2024-02-16 19:00:00",
+          "end": "2024-02-16 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_11a47254331147af8a2bfb26d3141c44"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What does my Friday look like?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-02-16 08:00:00",
+          "day": "Friday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-02-16 23:59:59",
+          "time_min": "2024-02-16 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_82d601f2c830492a8337cc71d042ce8f\",\n  \"summary\": \"Finalize Grant Proposal - Community Development Block Grant\",\n  \"start\": \"2024-02-16T09:00:00\",\n  \"end\": \"2024-02-16T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_cd4925ff6a0c447797656e7ecb32296f\",\n  \"summary\": \"Submit Grant Application\",\n  \"start\": \"2024-02-16T11:00:00\",\n  \"end\": \"2024-02-16T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_0c4b9a197f604507992ec681554a55a1\",\n  \"summary\": \"Debrief & Planning for Next Week\",\n  \"start\": \"2024-02-16T15:00:00\",\n  \"end\": \"2024-02-16T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_11a47254331147af8a2bfb26d3141c44\",\n  \"summary\": \"Family Movie Night\",\n  \"start\": \"2024-02-16T19:00:00\",\n  \"end\": \"2024-02-16T21:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. This Friday, February 16, 2024, you have four entries: The first is at 9am for 'Finalize Grant Proposal - Community Development Block Grant,' which lasts 2 hours. The second is at 11am for 'Submit Grant Application,' which lasts 1 hour. The third is at 3pm for 'Debrief & Planning for Next Week,' which lasts 1 hour. The final one is at 7pm for 'Family Movie Night,' which lasts 2 hours.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move the Data Analysis Meeting on Monday to 4 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Data Analysis Meeting' event on Monday, February 12, 2024, and update its start time to 4:00 PM and end time to 5:00 PM.",
+    "simulated_now": "2024-02-12 11:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Affordable Housing Initiative",
+          "start": "2024-02-12 09:00:00",
+          "end": "2024-02-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "programdirector@nonprofit.org",
+            "financeofficer@nonprofit.org"
+          ],
+          "id": "evt_26f410600e41413592e1c63bc1c3b997"
+        },
+        {
+          "day": "Monday",
+          "summary": "Grant Proposal Writing - HUD Application",
+          "start": "2024-02-12 10:30:00",
+          "end": "2024-02-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_52ce454de6de4c6787d020aa3c18d83b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Analysis Meeting - Program Outcomes",
+          "start": "2024-02-12 14:00:00",
+          "end": "2024-02-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "programdirector@nonprofit.org"
+          ],
+          "id": "evt_eccccad1b8c74fbfba5d6d7151b8a8cd"
+        },
+        {
+          "day": "Monday",
+          "summary": "Children's Soccer Practice",
+          "start": "2024-02-12 18:00:00",
+          "end": "2024-02-12 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e98b7af994c447e09a0e68b2b7b119b1"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Affordable Housing Initiative",
+          "start": "2024-02-12 09:00:00",
+          "end": "2024-02-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "programdirector@nonprofit.org",
+            "financeofficer@nonprofit.org"
+          ],
+          "id": "evt_26f410600e41413592e1c63bc1c3b997"
+        },
+        {
+          "day": "Monday",
+          "summary": "Grant Proposal Writing - HUD Application",
+          "start": "2024-02-12 10:30:00",
+          "end": "2024-02-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_52ce454de6de4c6787d020aa3c18d83b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Analysis Meeting - Program Outcomes",
+          "start": "2024-02-12 16:00:00",
+          "end": "2024-02-12 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "programdirector@nonprofit.org"
+          ],
+          "id": "evt_eccccad1b8c74fbfba5d6d7151b8a8cd"
+        },
+        {
+          "day": "Monday",
+          "summary": "Children's Soccer Practice",
+          "start": "2024-02-12 18:00:00",
+          "end": "2024-02-12 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e98b7af994c447e09a0e68b2b7b119b1"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move the Data Analysis Meeting on Monday to 4 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-02-12 11:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-02-12 23:59:59",
+          "time_min": "2024-02-12 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_26f410600e41413592e1c63bc1c3b997\",\n  \"summary\": \"Team Meeting - Affordable Housing Initiative\",\n  \"start\": \"2024-02-12T09:00:00\",\n  \"end\": \"2024-02-12T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_705826be\",\n        \"name\": \"programdirector\",\n        \"email\": \"programdirector@nonprofit.org\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_90c84034\",\n        \"name\": \"financeofficer\",\n        \"email\": \"financeofficer@nonprofit.org\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_52ce454de6de4c6787d020aa3c18d83b\",\n  \"summary\": \"Grant Proposal Writing - HUD Application\",\n  \"start\": \"2024-02-12T10:30:00\",\n  \"end\": \"2024-02-12T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_eccccad1b8c74fbfba5d6d7151b8a8cd\",\n  \"summary\": \"Data Analysis Meeting - Program Outcomes\",\n  \"start\": \"2024-02-12T14:00:00\",\n  \"end\": \"2024-02-12T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_bb4462dd\",\n        \"name\": \"programdirector\",\n        \"email\": \"programdirector@nonprofit.org\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_e98b7af994c447e09a0e68b2b7b119b1\",\n  \"summary\": \"Children's Soccer Practice\",\n  \"start\": \"2024-02-12T18:00:00\",\n  \"end\": \"2024-02-12T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2024-02-12 17:00:00",
+          "start": "2024-02-12 16:00:00",
+          "event_id": "evt_eccccad1b8c74fbfba5d6d7151b8a8cd"
+        },
+        "result": {
+          "message": "Event updated successfully.",
+          "event": {
+            "id": "evt_eccccad1b8c74fbfba5d6d7151b8a8cd",
+            "summary": "Data Analysis Meeting - Program Outcomes",
+            "start": "2024-02-12 16:00:00",
+            "end": "2024-02-12 17:00:00",
+            "description": "",
+            "attendees": [
+              "user=User(id='user_bb4462dd', name='programdirector', email='programdirector@nonprofit.org') attending='ACCEPT'"
+            ],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved the Data Analysis Meeting - Program Outcomes to 4 PM on Monday, February 12, 2024. It will now be from 4 PM to 5 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is my meeting with the accountant on Wednesday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Meeting with Accountant' event on Wednesday, February 14, 2024, and return the start time of 2:00 PM.",
+    "simulated_now": "2024-02-14 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Executive Director Check-in",
+          "start": "2024-02-14 09:00:00",
+          "end": "2024-02-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "executivedirector@nonprofit.org"
+          ],
+          "id": "evt_2cb93891ea9d4512b0fe2015ff3a655d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Budget Development - Affordable Housing Program",
+          "start": "2024-02-14 10:30:00",
+          "end": "2024-02-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_01ebec26fd6e40638ee7c9d50f5ee960"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Accountant - Financial Reporting",
+          "start": "2024-02-14 14:00:00",
+          "end": "2024-02-14 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@accountingfirm.com"
+          ],
+          "id": "evt_1bce752b60ac402ab2b1bb8c870a9e38"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Spouse",
+          "start": "2024-02-14 19:00:00",
+          "end": "2024-02-14 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8e1cb81db4a6403ba175d732e55c4631"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Executive Director Check-in",
+          "start": "2024-02-14 09:00:00",
+          "end": "2024-02-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "executivedirector@nonprofit.org"
+          ],
+          "id": "evt_2cb93891ea9d4512b0fe2015ff3a655d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Budget Development - Affordable Housing Program",
+          "start": "2024-02-14 10:30:00",
+          "end": "2024-02-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_01ebec26fd6e40638ee7c9d50f5ee960"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Accountant - Financial Reporting",
+          "start": "2024-02-14 14:00:00",
+          "end": "2024-02-14 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@accountingfirm.com"
+          ],
+          "id": "evt_1bce752b60ac402ab2b1bb8c870a9e38"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Spouse",
+          "start": "2024-02-14 19:00:00",
+          "end": "2024-02-14 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8e1cb81db4a6403ba175d732e55c4631"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is my meeting with the accountant on Wednesday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-02-14 10:00:00",
+          "day": "Wednesday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-02-14 23:59:59",
+          "time_min": "2024-02-14 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_2cb93891ea9d4512b0fe2015ff3a655d\",\n  \"summary\": \"Executive Director Check-in\",\n  \"start\": \"2024-02-14T09:00:00\",\n  \"end\": \"2024-02-14T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_e38ee660\",\n        \"name\": \"executivedirector\",\n        \"email\": \"executivedirector@nonprofit.org\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_01ebec26fd6e40638ee7c9d50f5ee960\",\n  \"summary\": \"Budget Development - Affordable Housing Program\",\n  \"start\": \"2024-02-14T10:30:00\",\n  \"end\": \"2024-02-14T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_1bce752b60ac402ab2b1bb8c870a9e38\",\n  \"summary\": \"Meeting with Accountant - Financial Reporting\",\n  \"start\": \"2024-02-14T14:00:00\",\n  \"end\": \"2024-02-14T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_e1acf09d\",\n        \"name\": \"accountant\",\n        \"email\": \"accountant@accountingfirm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_8e1cb81db4a6403ba175d732e55c4631\",\n  \"summary\": \"Dinner with Spouse\",\n  \"start\": \"2024-02-14T19:00:00\",\n  \"end\": \"2024-02-14T20:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "Your meeting with the accountant, titled \"Meeting with Accountant - Financial Reporting\", is today, Wednesday, February 14, 2024, at 2:00 PM. It ends at 3:00 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Is there enough time between finalizing the grant and the debrief on Friday to fit in a meeting that's 90 minutes?",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Find the 'Finalize Grant Proposal' event on Friday, February 16, 2024 and extract the end time (11:00 AM). Find the 'Debrief & Planning for Next Week' event on Friday, February 16, 2024, and extract the start time (3:00 PM). Calculate the time difference. Determine if a 90-minute meeting can fit within that time block.",
+    "simulated_now": "2024-02-16 08:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Finalize Grant Proposal - Community Development Block Grant",
+          "start": "2024-02-16 09:00:00",
+          "end": "2024-02-16 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2aa501b09fd8452683be19f2b9f041c8"
+        },
+        {
+          "day": "Friday",
+          "summary": "Submit Grant Application",
+          "start": "2024-02-16 11:00:00",
+          "end": "2024-02-16 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c74bc628191b4dc9a5551949ba94cb43"
+        },
+        {
+          "day": "Friday",
+          "summary": "Debrief & Planning for Next Week",
+          "start": "2024-02-16 15:00:00",
+          "end": "2024-02-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_34ddded7d2dd48f4a1720372a082758d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Family Movie Night",
+          "start": "2024-02-16 19:00:00",
+          "end": "2024-02-16 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5ef75c776d4b4fe28774f8a88125209d"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Finalize Grant Proposal - Community Development Block Grant",
+          "start": "2024-02-16 09:00:00",
+          "end": "2024-02-16 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2aa501b09fd8452683be19f2b9f041c8"
+        },
+        {
+          "day": "Friday",
+          "summary": "Submit Grant Application",
+          "start": "2024-02-16 11:00:00",
+          "end": "2024-02-16 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c74bc628191b4dc9a5551949ba94cb43"
+        },
+        {
+          "day": "Friday",
+          "summary": "Debrief & Planning for Next Week",
+          "start": "2024-02-16 15:00:00",
+          "end": "2024-02-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_34ddded7d2dd48f4a1720372a082758d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Family Movie Night",
+          "start": "2024-02-16 19:00:00",
+          "end": "2024-02-16 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5ef75c776d4b4fe28774f8a88125209d"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Is there enough time between finalizing the grant and the debrief on Friday to fit in a meeting that's 90 minutes?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-02-16 08:00:00",
+          "day": "Friday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-02-16 23:59:59",
+          "time_min": "2024-02-16 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_2aa501b09fd8452683be19f2b9f041c8\",\n  \"summary\": \"Finalize Grant Proposal - Community Development Block Grant\",\n  \"start\": \"2024-02-16T09:00:00\",\n  \"end\": \"2024-02-16T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_c74bc628191b4dc9a5551949ba94cb43\",\n  \"summary\": \"Submit Grant Application\",\n  \"start\": \"2024-02-16T11:00:00\",\n  \"end\": \"2024-02-16T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_34ddded7d2dd48f4a1720372a082758d\",\n  \"summary\": \"Debrief & Planning for Next Week\",\n  \"start\": \"2024-02-16T15:00:00\",\n  \"end\": \"2024-02-16T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_5ef75c776d4b4fe28774f8a88125209d\",\n  \"summary\": \"Family Movie Night\",\n  \"start\": \"2024-02-16T19:00:00\",\n  \"end\": \"2024-02-16T21:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "The grant finalization is from 09:00 to 11:00, and the debrief is from 15:00 to 16:00. Yes, there is enough time between the events to fit in a 90-minute meeting."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events scheduled for Monday, February 12, 2024.",
+    "simulated_now": "2024-02-12 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Affordable Housing Initiative",
+          "start": "2024-02-12 09:00:00",
+          "end": "2024-02-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "programdirector@nonprofit.org",
+            "financeofficer@nonprofit.org"
+          ],
+          "id": "evt_b6ef864971be4500aeef2cff8e334fc9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Grant Proposal Writing - HUD Application",
+          "start": "2024-02-12 10:30:00",
+          "end": "2024-02-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4e4651febd54460ba9c5b4ed2114b106"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Analysis Meeting - Program Outcomes",
+          "start": "2024-02-12 14:00:00",
+          "end": "2024-02-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "programdirector@nonprofit.org"
+          ],
+          "id": "evt_2028878dc06d4b12b47c25680865d628"
+        },
+        {
+          "day": "Monday",
+          "summary": "Children's Soccer Practice",
+          "start": "2024-02-12 18:00:00",
+          "end": "2024-02-12 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_abfb56887b614a07be9c301df8bd2d57"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Affordable Housing Initiative",
+          "start": "2024-02-12 09:00:00",
+          "end": "2024-02-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "programdirector@nonprofit.org",
+            "financeofficer@nonprofit.org"
+          ],
+          "id": "evt_b6ef864971be4500aeef2cff8e334fc9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Grant Proposal Writing - HUD Application",
+          "start": "2024-02-12 10:30:00",
+          "end": "2024-02-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4e4651febd54460ba9c5b4ed2114b106"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Analysis Meeting - Program Outcomes",
+          "start": "2024-02-12 14:00:00",
+          "end": "2024-02-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "programdirector@nonprofit.org"
+          ],
+          "id": "evt_2028878dc06d4b12b47c25680865d628"
+        },
+        {
+          "day": "Monday",
+          "summary": "Children's Soccer Practice",
+          "start": "2024-02-12 18:00:00",
+          "end": "2024-02-12 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_abfb56887b614a07be9c301df8bd2d57"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-02-12 08:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-02-12 23:59:59",
+          "time_min": "2024-02-12 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_b6ef864971be4500aeef2cff8e334fc9\",\n  \"summary\": \"Team Meeting - Affordable Housing Initiative\",\n  \"start\": \"2024-02-12T09:00:00\",\n  \"end\": \"2024-02-12T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_8276deff\",\n        \"name\": \"programdirector\",\n        \"email\": \"programdirector@nonprofit.org\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_fb35ac17\",\n        \"name\": \"financeofficer\",\n        \"email\": \"financeofficer@nonprofit.org\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_4e4651febd54460ba9c5b4ed2114b106\",\n  \"summary\": \"Grant Proposal Writing - HUD Application\",\n  \"start\": \"2024-02-12T10:30:00\",\n  \"end\": \"2024-02-12T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_2028878dc06d4b12b47c25680865d628\",\n  \"summary\": \"Data Analysis Meeting - Program Outcomes\",\n  \"start\": \"2024-02-12T14:00:00\",\n  \"end\": \"2024-02-12T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_4fc377a9\",\n        \"name\": \"programdirector\",\n        \"email\": \"programdirector@nonprofit.org\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_abfb56887b614a07be9c301df8bd2d57\",\n  \"summary\": \"Children's Soccer Practice\",\n  \"start\": \"2024-02-12T18:00:00\",\n  \"end\": \"2024-02-12T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "Today, February 12, 2024, you have four entries: The first is at 9am for a Team Meeting on the Affordable Housing Initiative. The second is at 10:30am for Grant Proposal Writing for a HUD Application. The third is at 2pm for a Data Analysis Meeting on Program Outcomes. The fourth is at 6pm for Children's Soccer Practice."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Anything on for tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events scheduled for Wednesday, February 14, 2024.",
+    "simulated_now": "2024-02-13 20:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Executive Director Check-in",
+          "start": "2024-02-14 09:00:00",
+          "end": "2024-02-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "executivedirector@nonprofit.org"
+          ],
+          "id": "evt_17ce9e648fb84f4a83793b239894dae1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Budget Development - Affordable Housing Program",
+          "start": "2024-02-14 10:30:00",
+          "end": "2024-02-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_45c6c654051d4cb7b147ef60ec0785ce"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Accountant - Financial Reporting",
+          "start": "2024-02-14 14:00:00",
+          "end": "2024-02-14 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@accountingfirm.com"
+          ],
+          "id": "evt_4eea96ff62974c2e9fb314c6de879bbe"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Spouse",
+          "start": "2024-02-14 19:00:00",
+          "end": "2024-02-14 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c09ff5ca64c942d6992c7a8bfe8a4c44"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Executive Director Check-in",
+          "start": "2024-02-14 09:00:00",
+          "end": "2024-02-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "executivedirector@nonprofit.org"
+          ],
+          "id": "evt_17ce9e648fb84f4a83793b239894dae1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Budget Development - Affordable Housing Program",
+          "start": "2024-02-14 10:30:00",
+          "end": "2024-02-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_45c6c654051d4cb7b147ef60ec0785ce"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Accountant - Financial Reporting",
+          "start": "2024-02-14 14:00:00",
+          "end": "2024-02-14 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@accountingfirm.com"
+          ],
+          "id": "evt_4eea96ff62974c2e9fb314c6de879bbe"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Spouse",
+          "start": "2024-02-14 19:00:00",
+          "end": "2024-02-14 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c09ff5ca64c942d6992c7a8bfe8a4c44"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Anything on for tomorrow?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-02-13 20:00:00",
+          "day": "Tuesday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-02-14 23:59:59",
+          "time_min": "2024-02-14 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_17ce9e648fb84f4a83793b239894dae1\",\n  \"summary\": \"Executive Director Check-in\",\n  \"start\": \"2024-02-14T09:00:00\",\n  \"end\": \"2024-02-14T10:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_86fc6514\",\n        \"name\": \"executivedirector\",\n        \"email\": \"executivedirector@nonprofit.org\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_45c6c654051d4cb7b147ef60ec0785ce\",\n  \"summary\": \"Budget Development - Affordable Housing Program\",\n  \"start\": \"2024-02-14T10:30:00\",\n  \"end\": \"2024-02-14T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_4eea96ff62974c2e9fb314c6de879bbe\",\n  \"summary\": \"Meeting with Accountant - Financial Reporting\",\n  \"start\": \"2024-02-14T14:00:00\",\n  \"end\": \"2024-02-14T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_6dc00961\",\n        \"name\": \"accountant\",\n        \"email\": \"accountant@accountingfirm.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_c09ff5ca64c942d6992c7a8bfe8a4c44\",\n  \"summary\": \"Dinner with Spouse\",\n  \"start\": \"2024-02-14T19:00:00\",\n  \"end\": \"2024-02-14T20:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Tomorrow, February 14, you have four entries: The first is at 9am for an hour, called \"Executive Director Check-in\". The second is at 10:30am for an hour and a half, called \"Budget Development - Affordable Housing Program\". The third is at 2pm for an hour, called \"Meeting with Accountant - Financial Reporting\", and the final one is at 7pm for an hour, called \"Dinner with Spouse\".\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

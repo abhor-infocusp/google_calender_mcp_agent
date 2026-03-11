@@ -1,0 +1,149 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Lunch' for this Wednesday at 1 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with summary 'Team Lunch' on 2024-08-21 from 13:00 to 14:00.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-08-18T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting with John Smith next Thursday at 10:00 AM to 11:00 AM",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with summary 'Meeting with John Smith' on 2024-08-22 from 10:00 to 11:00. Attendees unspecified.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-08-18T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy tomorrow morning?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Tuesday, 2024-08-20, between 00:00 and 12:00.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-08-19T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Wednesday look like?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events on Wednesday, 2024-08-21.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-08-21T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the dinner with family on Monday to 7:00 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Family' event on Monday, 2024-08-19 and update the start time to 19:00 and end time to 20:00.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-08-19T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the School Board Meeting time on Thursday to 7:00 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'School Board Meeting' event on Thursday, 2024-08-22, and update the start time to 19:00 and end time to 20:30.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-08-22T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the Student Government Meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Student Government Meeting' event and return the start and end time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-08-19T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Faculty Meeting this Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Faculty Meeting' event on Tuesday, 2024-08-20 and return the attendees.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-08-20T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "What meetings do I have with guidance@school.edu this week?",
+        "complexity": "High",
+        "expected_behavior": "List all events this week (2024-08-19 to 2024-08-25) that include guidance@school.edu as an attendee.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-08-18T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is there a conflict if I schedule a doctor's appointment for 4 PM on Wednesday?",
+        "complexity": "High",
+        "expected_behavior": "List events on Wednesday, 2024-08-21, between 16:00 and 17:00. Then inform user if a conflict exists.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-08-21T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Debate practice?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events with 'Debate' in the title for the current week.",
+        "addressed_days": [
+            "Tuesday",
+            "Thursday"
+        ],
+        "current_time": "2024-08-20T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Soccer.",
+        "complexity": "Medium",
+        "expected_behavior": "Find Kid's Soccer Game and ask for clarification of when to reschedule it to.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-08-24T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Friday, 2024-08-23.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-08-23T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any meetings yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Wednesday, 2024-08-21.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-08-22T09:00:00"
+    }
+]

@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please create an event called 'Volunteer Meeting' for Tuesday at 3 PM for one hour, with programdirector@nonprofit.org as an attendee.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Volunteer Meeting' on Tuesday, February 13, 2024, from 3 PM to 4 PM, with programdirector@nonprofit.org as an attendee.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-02-11T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a slot on Friday for 'Team Lunch' from 12:00 PM to 1:00 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Team Lunch' on Friday, February 16, 2024, from 12:00 PM to 1:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-02-11T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List events scheduled for Wednesday, February 14, 2024, between 12:00 PM and 6:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-02-14T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Friday look like?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled for Friday, February 16, 2024.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-02-16T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the Data Analysis Meeting on Monday to 4 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Data Analysis Meeting' event on Monday, February 12, 2024, and update its start time to 4:00 PM and end time to 5:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-02-12T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "The dinner with friends on Saturday needs to be at 7 instead of 6.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Friends' event on Saturday, February 17, 2024, and update its start time to 7:00 PM and end time to 9:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-02-17T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Team Meeting on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Team Meeting' event on Monday, February 12, 2024, and return the list of attendees: programdirector@nonprofit.org, financeofficer@nonprofit.org.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-02-12T11:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my meeting with the accountant on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Meeting with Accountant' event on Wednesday, February 14, 2024, and return the start time of 2:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-02-14T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is there enough time between finalizing the grant and the debrief on Friday to fit in a meeting that's 90 minutes?",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Finalize Grant Proposal' event on Friday, February 16, 2024 and extract the end time (11:00 AM). Find the 'Debrief & Planning for Next Week' event on Friday, February 16, 2024, and extract the start time (3:00 PM). Calculate the time difference. Determine if a 90-minute meeting can fit within that time block.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-02-16T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule time to pick up dry cleaning on Thursday, but I need to make sure it doesn't overlap with anything else. Can you find me an open slot in the afternoon?",
+        "complexity": "High",
+        "expected_behavior": "List all events on Thursday, February 15, 2024. Determine available time slots in the afternoon (12:00 PM - 5:30 PM) that don't overlap with existing events. Respond with the available time slots.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-02-15T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule soccer",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Children's Soccer Practice' event on Monday, February 12, 2024 and ask for clarification about the new desired time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-02-12T11:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change Smith Foundation call",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Call with Foundation Program Officer - Smith Foundation' event on Tuesday, February 13, 2024 and ask for clarification about the desired change.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-02-13T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Monday, February 12, 2024.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-02-12T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Anything on for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Wednesday, February 14, 2024.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-02-13T20:00:00"
+    }
+]

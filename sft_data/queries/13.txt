@@ -1,0 +1,140 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create a meeting on Wednesday with John Doe at 4 PM to discuss project updates.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with summary 'Discuss project updates', start time 2025-01-29T16:00:00, end time 2025-01-29T17:00:00, and attendee John Doe.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-01-26T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me a yoga class for Sunday at 9 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with summary 'Yoga Class', start time 2025-02-02T09:00:00, end time 2025-02-02T10:00:00.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2025-01-26T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after the Acme Corp demo on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "First, find the 'Acme Corp Demo' event on Monday. Then list events between 12:00 PM and 5:00 PM on Monday to determine what is happening afterward.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-01-27T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Thursday look like?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled for Thursday, 2025-01-30.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-01-26T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move the Sales Team Meeting on Friday to 11 AM?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Sales Team Meeting' event on Friday, then update its start time to 2025-01-31T11:00:00 and end time to 2025-01-31T12:00:00.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-01-30T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the Prospecting Calls appointment on Wednesday to 11 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Prospecting Calls' event on Wednesday, then update its start time to 2025-01-29T11:00:00 and end time to 2025-01-29T12:00:00.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-01-29T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the product demo on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Product Demo - Beta Solutions' event on Wednesday and extract the list of attendees: Client Contact - client@betasolutions.com, Sales Engineer - se@company.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-01-26T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the dinner with friends on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Dinner with Friends' event on Friday and return its start time.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-01-26T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I need to push my meeting with the Marketing Team on Tuesday back by one hour.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Meeting with Marketing Team - Lead Generation Strategies' event on Tuesday, then update its start time to 2025-01-28T16:30:00 and end time to 2025-01-28T17:30:00.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-01-28T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Am I free between 10 AM and 11 AM on Thursday?",
+        "complexity": "High",
+        "expected_behavior": "List events between 2025-01-30T10:00:00 and 2025-01-30T11:00:00. If there are no events, the user is free.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-01-26T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Acme Corp demo.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Product Demo - Acme Corp' event on Monday and prompt user for the new start time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-01-27T13:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting with John...",
+        "complexity": "Low",
+        "expected_behavior": "Prompt the user for the full details of the meeting they would like to schedule, including the date and time.",
+        "addressed_days": [],
+        "current_time": "2025-01-26T12:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for today, Monday 2025-01-27.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-01-27T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any meetings yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for yesterday, Saturday 2025-02-01.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2025-02-02T08:00:00"
+    }
+]

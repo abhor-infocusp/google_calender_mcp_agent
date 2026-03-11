@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting called 'Project Kickoff' for Wednesday at 2 PM lasting one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with summary 'Project Kickoff', start time 2023-05-03T14:00:00, end time 2023-05-03T15:00:00, no attendees, and no description.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-30T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book time for 'Client Presentation' on Friday at 1 PM for 90 minutes.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with summary 'Client Presentation', start time 2023-05-05T13:00:00, end time 2023-05-05T14:30:00, no attendees, and no description.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-04-30T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy Wednesday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "List events between 2023-05-03T07:00:00 and 2023-05-03T12:00:00 to check for conflicts.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-05-03T06:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Saturday look like?",
+        "complexity": "Medium",
+        "expected_behavior": "List events between 2023-05-06T00:00:00 and 2023-05-06T23:59:59 to provide a summary of the day.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-05-06T00:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the 'Preventative maintenance schedule review' meeting to 11:30 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Preventative maintenance schedule review' event and update its start time to 2023-05-01T11:30:00 and end time to 2023-05-01T12:30:00.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-05-01T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Cancel the 'Testing back-up generator' appointment.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Testing back-up generator' event and delete it.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-05-05T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having dinner with on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Dinner with spouse' event on Friday and return the attendees.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-05-04T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What is the purpose of the meeting on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the meeting on Wednesday, and display the summary 'Update on New Safety Regulations'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-05-02T15:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule my dinner with family to Saturday at 8 PM.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Dinner with family' event on Monday and the 'Cookout with neighbors' event on Saturday. If no conflicts, update the start time of 'Cookout with neighbors' to 2023-05-06T20:00:00, and the end time to 2023-05-06T21:00:00. Move the 'Dinner with family' to Saturday, starting at 2023-05-06T20:00:00 and ending at 2023-05-06T21:30:00. Delete the 'Cookout with neighbors' event. ",
+        "addressed_days": [
+            "Monday",
+            "Saturday"
+        ],
+        "current_time": "2023-05-01T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I cannot make the Update on New Safety Regulations meeting. Decline it and schedule a call with Sam from Automation for the same time.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Update on New Safety Regulations' meeting, RSVP with DECLINE, and create a new event called 'Call with Sam from Automation' on Wednesday at 10:30AM lasting one hour with attendee sam@automation.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-05-02T13:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting Friday?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Friday.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-05-04T16:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change baseball game time.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the baseball game event on Tuesday and ask for the user to provide the time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-05-02T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for 2023-05-01.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-05-01T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for 2023-05-03.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-05-02T14:00:00"
+    }
+]

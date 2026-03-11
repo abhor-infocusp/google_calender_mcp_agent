@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for me on Monday at 1 PM called 'Project Brainstorm'.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event called 'Project Brainstorm' on Monday, October 21, 2024, from 1:00 PM to 2:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-10-20T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please schedule a therapy session with patient named Sarah for this Wednesday at 4 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event called 'Therapy session with Sarah' on Wednesday, October 23, 2024, from 4:00 PM to 5:00 PM with Sarah as attendee.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-10-20T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Can you schedule some time for me to prepare for my yoga class?",
+        "complexity": "Medium",
+        "expected_behavior": "Recognize yoga class is on Wednesday at 6:30 PM. Schedule a new event called 'Prepare for Yoga Class' on Wednesday, October 23, 2024 at 5:30 PM for one hour.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-10-20T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I need to connect with Anya this week.",
+        "complexity": "Medium",
+        "expected_behavior": "Anya is the therapist. Create an event called 'Check-in with Therapist' on Friday, October 25, 2024 at 6:00 PM for one hour with Anya.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-10-20T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my meeting with the pharmaceutical rep to 4 PM on Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Pharmaceutical Rep' event on Monday, October 21, 2024 and update the start time to 4:00 PM and the end time to 5:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-10-20T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update the dinner with friends on Thursday to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Friends' event on Thursday, October 24, 2024 and update the start time to 7:30 PM and the end time to 9:00 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-10-20T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my meeting with the primary care physician this week?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Meeting with Primary Care Physician' event on Thursday, October 24, 2024 and return the start time (2:00 PM).",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-10-20T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What events do I have on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Wednesday, October 23, 2024.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-10-20T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is there time available for a patient appointment on Friday at 1:00 PM?",
+        "complexity": "High",
+        "expected_behavior": "Check for any conflicting events on Friday, October 25, 2024, between 1:00 PM and 2:00 PM. Determine there is time available.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-10-20T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Could you schedule a meeting with the team right after lunch on Monday?",
+        "complexity": "High",
+        "expected_behavior": "Looks for the team meeting on Monday. If there is a meeting, checks whether a new meeting can be scheduled right after lunch. If not, propose an alternative.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-10-20T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule patient 2",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Patient Appointment' event for patient_2@example.com on Monday, October 21, 2024, at 10:15 AM. Ask user for the new time. If user gives time, update.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-10-20T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "pharmaceutical",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Meeting with Pharmaceutical Rep' event on Monday, October 21, 2024, at 3:30 PM. Ask user if they wanted more information.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-10-20T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Monday, October 21, 2024.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-10-21T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What is on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Wednesday, October 23, 2024.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-10-22T15:00:00"
+    }
+]

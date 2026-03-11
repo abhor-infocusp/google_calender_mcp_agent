@@ -1,0 +1,146 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting called 'Project Brainstorm' for tomorrow at 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Project Brainstorm' for Tuesday, March 21st at 3 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-03-20T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add an event to my calendar for Saturday at 6 PM called 'Game Night'.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Game Night' for Saturday, March 25th at 6 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-03-22T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I free for dinner with my partner this week?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events between Monday, March 20th and Sunday, March 26th that contain 'Dinner with Partner' in the summary, then respond to the user with the results.",
+        "addressed_days": [
+            "Monday",
+            "Thursday"
+        ],
+        "current_time": "2023-03-19T14:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing this weekend?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events between Saturday, March 25th and Sunday, March 26th, then respond to the user with the results.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2023-03-24T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my checkup appointment to 10:30 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Checkup Appointment' on Thursday, March 23rd and update its start time to 10:30 AM and end time to 11:30 AM, preserving existing attendees.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-03-23T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you reschedule the dinner party at my partner's friend's house for 7 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner Party at Partner's Friend's House' event on Saturday, March 25th and update its start time to 7 PM and end time to 10 PM, preserving existing attendees.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-03-24T15:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is going to the pre-shift briefing on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Pre-Shift Briefing' event on Monday, March 20th and respond to the user with the attendees: pilot2@flysafe.com, nurse1@hospital.org, medic2@ems.net.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-03-20T06:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the book club meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Book Club Meeting' event and respond to the user with its start time: 7 PM on Tuesday, March 21st.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-03-21T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the therapy session. Decline it.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Therapy Session' event on Thursday, March 23rd and decline the invitation.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-03-23T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Am I working at all this week?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events between Monday, March 20th and Sunday, March 26th that contain 'EMS Helicopter Pilot Shift' in the summary, then respond to the user with the results.",
+        "addressed_days": [
+            "Monday",
+            "Wednesday",
+            "Friday"
+        ],
+        "current_time": "2023-03-19T18:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Flight training?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Weekly Flight Training' event on Tuesday, March 21st and respond to the user with its details.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-03-21T07:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule dinner tomorrow",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Partner' event on Friday, March 24th and ask for a new time.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-03-23T22:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on my calendar today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Monday, March 20th, then respond to the user with the results.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-03-20T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Monday, March 20th, then respond to the user with the results.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-03-21T08:00:00"
+    }
+]

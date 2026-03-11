@@ -1,0 +1,146 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Board Game Night' for this Saturday at 7 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event titled 'Board Game Night' on Saturday, June 10, 2023, at 7:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-06-04T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting with John Smith next Wednesday at 3 PM to discuss the merger.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event titled 'Meeting with John Smith' on Wednesday, June 7, 2023, at 3:00 PM with John Smith as an attendee. The description should include 'discuss the merger'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-06-04T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I'm free for lunch on Friday. Book me a spot with a new client.",
+        "complexity": "Medium",
+        "expected_behavior": "Create an event called 'Lunch with New Client' on Friday, June 9, 2023, at 12:00 PM and set the end time to 1:00 PM. Add susan.r@email.com to the attendees since it is a divorce consultation with a new client at 1:30PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-06-09T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I need to reschedule my meeting. Put it off until Friday.",
+        "complexity": "High",
+        "expected_behavior": "Find the nearest meeting on the calendar and reschedule it to Friday, June 9, 2023, at the same time it was originally scheduled.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday"
+        ],
+        "current_time": "2023-06-05T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my Tuesday meeting with Mark Lee to 2:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Client Meeting - Prenuptial Agreement' event on Tuesday, June 6, 2023, and update the start time to 2:30 PM and end time to 4:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-06-06T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the dinner party on Saturday to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner Party with Friends' event on Saturday, June 10, 2023, and update the start time to 7:30 PM and the end time to 9:30 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-06-10T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What meetings do I have on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Wednesday, June 7, 2023.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-06-07T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having lunch with next Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled for Wednesday, June 7, 2023 and find the one named 'Lunch with Mentor'. Return the attendees for that event.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-06-06T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule the court hearing on Monday so I can have lunch with my paralegal.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Court Hearing - Child Support Modification' event on Monday, June 5, 2023, and the 'Quick Lunch with Paralegal' event. Check if rescheduling the court hearing to another time on Monday conflicts with the lunch. If no conflicts exist, reschedule the court hearing to the earliest available time slot on Monday that doesn't conflict.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-06-05T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the deposition on Thursday. Delete it and schedule a call with the therapist instead.",
+        "complexity": "High",
+        "expected_behavior": "Delete the 'Deposition - Expert Witness' event on Thursday, June 8, 2023, and create a new event titled 'Call with Therapist' on Thursday, June 8, 2023, at 3:30 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-06-08T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting Miller divorce...",
+        "complexity": "Low",
+        "expected_behavior": "Find event with name including 'Miller Divorce' this Monday and present the details.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-06-05T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule soccer.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the next event with a name including 'soccer', then prompt user for the new date and time.",
+        "addressed_days": [
+            "Wednesday",
+            "Saturday"
+        ],
+        "current_time": "2023-06-07T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for today, June 5, 2023.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-06-05T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for tomorrow, June 7, 2023.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-06-06T18:00:00"
+    }
+]

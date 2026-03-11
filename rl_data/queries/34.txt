@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create a meeting on November 10th, 2026, from 3 PM to 4 PM, called 'Team Brainstorming Session'.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Team Brainstorming Session', start '2026-11-10T15:00:00', end '2026-11-10T16:00:00'. Attendees should be empty and description should be empty.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-11-08T23:59:59"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a dentist appointment for me on Friday at 11:00 AM for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Dentist Appointment', start '2026-11-13T11:00:00', end '2026-11-13T12:00:00'. Attendees should be empty and description should be empty.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-11-08T23:59:59"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Monday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to '2026-11-09T08:00:00' and time_max set to '2026-11-09T12:00:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-11-09T07:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What events are planned for Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to '2026-11-11T12:00:00' and time_max set to '2026-11-11T18:00:00'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-11-11T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the Budget Review Meeting on Monday to 2:00 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to '2026-11-09T00:00:00' and time_max set to '2026-11-09T23:59:59' and then call update_event with event_id of the 'Budget Review Meeting' to update start time to '2026-11-09T14:00:00' and end time to '2026-11-09T15:30:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-11-09T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my dinner with family on Monday back by an hour.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to '2026-11-09T00:00:00' and time_max set to '2026-11-09T23:59:59', identify 'Dinner with Family', then call update_event with the event_id and updates setting the start to '2026-11-09T19:30:00' and the end to '2026-11-09T20:30:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-11-09T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the Stakeholder Meeting on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to '2026-11-11T00:00:00' and time_max set to '2026-11-11T23:59:59', identify 'Stakeholder Meeting', then return the start and end time of the event.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-11-11T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What am I doing on Saturday afternoon?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to '2026-11-14T12:00:00' and time_max set to '2026-11-14T18:00:00'.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-11-14T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I'm busy on Thursday from 1 PM to 5 PM. Reschedule the Presentation to Government Officials around that.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min set to '2026-11-12T00:00:00' and time_max set to '2026-11-12T23:59:59', identify 'Presentation to Government Officials', check for conflicts between '2026-11-12T13:00:00' and '2026-11-12T17:00:00', then reschedule the presentation to '2026-11-12T10:30:00'. End time should also be adjusted accordingly.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-11-12T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting with the Environmental Consultants on Wednesday, but only after 3 PM. Can you check my availability?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min set to '2026-11-11T15:00:00' and time_max set to '2026-11-11T23:59:59' to check availability on Wednesday afternoon. If available, create event with summary 'Meeting with Environmental Consultants', setting the start and end times based on the available slot.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-11-10T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change soccer.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to '2026-11-12T00:00:00' and time_max set to '2026-11-12T23:59:59'. If 'Kids Soccer Practice' is identified, ask the user for clarification on what needs to be changed about the event.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-11-12T11:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel Sunday plans.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to '2026-11-15T00:00:00' and time_max set to '2026-11-15T23:59:59'. Identify the events, then ask for specific event to be cancelled.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2026-11-15T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to '2026-11-11T00:00:00' and time_max set to '2026-11-11T23:59:59'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-11-11T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What is on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to '2026-11-10T00:00:00' and time_max set to '2026-11-10T23:59:59'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-11-09T20:00:00"
+    }
+]

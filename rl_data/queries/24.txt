@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please schedule a doctor's appointment for me next Tuesday at 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to create an event named 'Doctor's appointment' on February 11, 2025, from 3:00 PM to 4:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-02-09T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you add a meeting to my calendar for this Friday at 2 PM called 'Project Brainstorm'?",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to create an event named 'Project Brainstorm' on February 14, 2025, from 2:00 PM to 3:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-02-09T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after my morning shift this Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "First, call list_events to find the 'Bus Route 22 - Morning Shift' event on Wednesday, February 12, 2025. Then, call list_events for events between 10:00 AM and 11:00 PM on February 12, 2025.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-02-12T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's happening this Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find events on February 15, 2025.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-02-15T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my dinner with my son on Monday to 7:30 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Dinner with her son' event on February 10, 2025. Then, call update_event with the event ID and update its start time to 7:30 PM and end time to 8:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-02-10T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of my social worker appointment on Wednesday to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Social worker appointment' event on February 12, 2025. Then, call update_event with the event ID and update its start time to 7:30 PM and end time to 8:30 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-02-12T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is supposed to be at my movie night this Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Movie Night' event on February 14, 2025. Then, call get_event with the event ID and respond with the attendees: son, neighbor@email.com.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-02-14T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time does brunch with neighbors start on Sunday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Brunch with Neighbors' event on February 16, 2025. Then, call get_event with the event ID and respond with the start time: 11:00 AM.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2025-02-16T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make brunch this Sunday, but I can make it next week. Can you tell them I can't make it now?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the 'Brunch with Neighbors' event on February 16, 2025. Then, call respond_to_event with the event ID and attending=DECLINE.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2025-02-16T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I need to reschedule my meeting with the union rep to Wednesday at 2 PM because I have a conflicting shift.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the 'Meeting with Union Representative' event on February 10, 2025. Call delete_event to delete the event on Monday. Then, call create_event to create an event named 'Meeting with Union Representative' on February 12, 2025, from 2:00 PM to 3:00 PM with attendee unionrep@transit.com.",
+        "addressed_days": [
+            "Monday",
+            "Wednesday"
+        ],
+        "current_time": "2025-02-10T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner son, change to 8pm",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Dinner with her son' event on February 10, 2025. Then, call update_event with the event ID and update its start time to 8:00 PM and end time to 9:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-02-10T17:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "basketball Tuesday cancel",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Son's basketball practice' event on February 11, 2025. Then, call delete_event with the event ID.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-02-11T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find events on February 11, 2025.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-02-10T18:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find events on February 15, 2025.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2025-02-16T08:00:00"
+    }
+]

@@ -1,0 +1,144 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Orchard Visit' for next Tuesday at 1 PM for 2 hours, with John Doe at john.doe@email.com as an attendee. Describe it as an orchard tour.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with summary 'Orchard Visit', start time 2026-07-01T13:00:00, end time 2026-07-01T15:00:00, attendee john.doe@email.com, and description 'orchard tour'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-06-28T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for this Wednesday at 3 PM to discuss irrigation improvements for 30 minutes.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with summary 'Discuss irrigation improvements', start time 2026-07-01T15:00:00, and end time 2026-07-01T15:30:00.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-06-28T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing tomorrow afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Tuesday, 2026-07-01 between 12:00 PM and 6:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-06-30T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the schedule for Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Saturday, 2026-07-04.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-06-28T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move the 'Review Crop Performance Data' meeting to 10 AM?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Review Crop Performance Data' event and update its start time to 2026-06-29T10:00:00 and end time to 2026-06-29T11:30:00 (assuming it's an 1.5 hour meeting).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-06-29T09:15:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update the pest control meeting on Tuesday to be 90 minutes long.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Pest and Disease Control Strategy' event on Tuesday, and update the end time to 2026-07-01T10:30:00.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-06-28T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my dinner with family on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Dinner with Family' event on Monday, 2026-06-29 and respond with its start time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-06-29T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is the investor I am meeting with on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Walkthrough with Potential Investor' event on Thursday, 2026-07-02, and respond with the attendee's email address (investor@venture.com).",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-06-28T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to free up some time next Wednesday. What meetings do I have, and could I move the one about energy to Thursday?",
+        "complexity": "High",
+        "expected_behavior": "List all events on Wednesday 2026-07-01. Then, find the 'Discuss Energy Consumption Reduction' meeting and update its start time to 2026-07-02T14:00:00 and end time to 2026-07-02T15:00:00.",
+        "addressed_days": [
+            "Wednesday",
+            "Thursday"
+        ],
+        "current_time": "2026-06-28T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I need to reschedule either my yoga class or dinner with family. Which one is longer, and when are they?",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Dinner with Family' event on Monday, 2026-06-29 and the 'Yoga Class' event on Tuesday, 2026-07-01. Determine the duration of each, compare, and respond with the details of both events (name, date, start time, end time).",
+        "addressed_days": [
+            "Monday",
+            "Tuesday"
+        ],
+        "current_time": "2026-06-28T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Pest control?",
+        "complexity": "Low",
+        "expected_behavior": "Check if there's an event named 'Pest and Disease Control Strategy' scheduled this week.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-06-28T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule...seed...",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Call with Seed Supplier' event and ask for more information about rescheduling needs.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-06-28T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for today, Monday 2026-06-29.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-06-29T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for yesterday, Saturday 2026-07-05.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2026-07-06T08:00:00"
+    }
+]

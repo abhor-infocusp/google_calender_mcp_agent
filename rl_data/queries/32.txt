@@ -1,0 +1,141 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Marketing Meeting' for Tuesday at 2 PM, lasting one hour, with Sarah and Jessica as attendees.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule a 'Marketing Meeting' on Tuesday, October 22, 2024, from 2:00 PM to 3:00 PM, with Sarah and Jessica as attendees.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-10-13T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you book me for a dentist appointment this Friday at 11:00 AM?",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule a 'Dentist Appointment' on Friday, October 25, 2024, at 11:00 AM, lasting a reasonable duration (e.g., 1 hour).",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-10-13T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy on Wednesday evening?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to retrieve events on Wednesday, October 23, 2024, between 6:00 PM and 9:00 PM to determine if there are any events.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-10-23T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Saturday look like?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to retrieve all events scheduled for Saturday, October 26, 2024, and then present the event details.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-10-26T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my meeting with the accountant to 4 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "First, call list_events to find the 'Meeting with Accountant' event on Monday, October 21, 2024. Then, call update_event with the event id and update the start time to 4:00 PM and the end time to 5:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-10-21T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "I can't make the book club meeting. Decline it.",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Book Club Meeting' event on Tuesday, October 22, 2024. Then, call respond_to_event with the event id and 'DECLINE'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-10-22T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is dinner with my husband on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Dinner with Husband' event on Thursday, October 24, 2024.  Extract and return the time (6:00 PM - 8:00 PM).",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-10-24T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is invited to the family dinner on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Dinner with Family' event on Saturday, October 26, 2024. Extract and return the attendees. If no attendees are listed, indicate that no attendees were specified.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-10-26T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my lunch service supervision on Wednesday to 3 PM. Is that possible?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the 'Lunch Service Supervision' event on Wednesday, October 23, 2024. Then call list_events to determine if there are any conflicting events between 3:00 PM and 4:00 PM. If no conflicts, call update_event to update the event's start time to 3:00 PM and end time to 4:00 PM. If there are conflicts, respond that the update is not possible due to a conflict.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-10-23T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Please reschedule the meeting with the repair technician to Friday at the same time.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the 'Meet with Repair Technician' event on Tuesday, October 22, 2024. Note the time. Then call list_events to determine if there are any conflicting events on Friday, October 25, 2024, at that time. If no conflicts, call update_event to update the meeting to Friday at the same time. If there are conflicts, respond that the update is not possible due to a conflict.",
+        "addressed_days": [
+            "Tuesday",
+            "Friday"
+        ],
+        "current_time": "2024-10-22T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Pest control",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Call Pest Control' event on Thursday, October 24, 2024, and return the event details.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-10-24T11:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule meeting.",
+        "complexity": "Low",
+        "expected_behavior": "Respond with a clarifying question such as, 'Which meeting would you like to reschedule?'",
+        "addressed_days": [],
+        "current_time": "2024-10-21T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to retrieve events for the current day, October 21, 2024 (Monday).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-10-21T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have anything scheduled yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to retrieve events for the previous day, October 25, 2024 (Thursday).",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-10-26T08:00:00"
+    }
+]

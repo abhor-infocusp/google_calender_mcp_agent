@@ -1,0 +1,141 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Client Meeting' on Wednesday at 1 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule a 'Client Meeting' on Wednesday, December 27, 2023, at 1 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-12-24T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me a doctor's appointment for next Tuesday at 3:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule a 'Doctor's Appointment' on Tuesday, December 26, 2023, at 3:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-12-24T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing for lunch on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to check for events on Monday, December 25, 2023 between 12:30 PM - 1:30 PM and respond with the event details.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-12-25T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Thursday look like?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to check for events on Thursday, December 28, 2023 and respond with the event details.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-12-28T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move my therapy appointment on Monday at 2 PM to 4 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the Therapy appointment on Monday, December 25, 2023 at 2 PM. If found, call update_event to change the start time to 4 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-12-25T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update the soccer game on Saturday to 11 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the Children's Soccer Game event on Saturday, December 30, 2023. If found, call update_event to change the start time to 11 AM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-12-24T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I meeting with on Tuesday at 11:30 AM?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event at 11:30 AM on Tuesday, December 26, 2023, and respond with the attendees.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-12-26T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me the details of my dinner plans on Thursday.",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the Dinner with Friends event on Thursday, December 28, 2023, and respond with the event details.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-12-28T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my Friday 2 PM therapy session to the first available slot before 1 PM that day.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the Therapy appointment on Friday, December 29, 2023 at 2 PM. Then, call list_events to check availability on Friday, December 29, 2023 before 1 PM. If a free slot is found, call update_event to move the Therapy appointment to the earlier time.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-12-24T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule my medication management appointment on Wednesday at 3:15 PM to Thursday at the same time.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the Medication Management appointment on Wednesday, December 27, 2023 at 3:15 PM. If found, call update_event to change the date to Thursday, December 28, 2023, and keep the time at 3:15 PM.",
+        "addressed_days": [
+            "Wednesday",
+            "Thursday"
+        ],
+        "current_time": "2023-12-24T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change Tuesday therapy.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the Therapy appointment on Tuesday, December 26, 2023. Ask for clarification on what the user wants to change about the appointment.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-12-26T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Prompt the user for clarification. For example, 'Which meeting are you referring to?'",
+        "addressed_days": [],
+        "current_time": "2023-12-24T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to check for events on Monday, December 25, 2023, and respond with the event details.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-12-25T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any appointments yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to check for events on Sunday, December 31, 2023, and respond with the event details.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-01T08:00:00"
+    }
+]

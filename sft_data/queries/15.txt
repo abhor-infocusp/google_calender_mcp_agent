@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Client Meeting' for Wednesday at 10 AM with andy@email.com as attendee and set the description to 'Discuss project progress'.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Client Meeting' scheduled for Wednesday, December 27, 2023 at 10:00 AM, ending at 11:00 AM, with andy@email.com as an attendee, and the description 'Discuss project progress'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-12-24T14:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a lunch appointment with joe@email.com for Friday at 12:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Lunch' for Friday, December 29, 2023, at 12:30 PM, ending at 1:30 PM, with joe@email.com as an attendee.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-12-24T14:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after dropping the kids off on Tuesday?",
+        "complexity": "Medium",
+        "expected_behavior": "List events for Tuesday between 8:00 AM and 11:00 AM to find the activity after dropping off the kids.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-12-26T07:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the schedule after dinner with the kids on Thursday?",
+        "complexity": "Medium",
+        "expected_behavior": "List events for Thursday starting from 8:00 PM to find out what's scheduled after dinner.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-12-28T18:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the Baker's Restaurant install on Thursday back by an hour.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'HVAC Install: Baker's Restaurant' event on Thursday and update its start time to 10:00 AM and end time to 1:00 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-12-28T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time for the accountant meeting on Tuesday to 2 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with accountant' event on Tuesday and update the start time to 2:00 PM and end time to 3:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-12-26T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What is the email address for the person in charge of the Smith Office installation?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'New System Installation: Smith Office' event on Monday and extract the email address associated with the building manager.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-12-24T18:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me who I am having brunch with on Sunday.",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Brunch with Mom' event on Sunday and respond that it is 'Mom'.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2023-12-30T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "If I decline the baseball game on Saturday, will I be free to handle the Emergency HVAC repair at the apartment complex?",
+        "complexity": "High",
+        "expected_behavior": "Find both 'Kids' baseball game' and 'Emergency HVAC Repair: Apartment Complex' events on Saturday. The agent should then determine if the baseball game conflicts with the repair job, and decline the baseball game, and confirm there is no overlap with the HVAC repair job.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-12-30T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is the time I set aside on Wednesday to review invoices enough time?",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Review Invoices / Paperwork' event on Wednesday.  Determine the duration is enough time (1.5 hrs) based on average work hours (this is something the agent would know).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-12-27T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Gonzalez House?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Quote - Gonzalez House' event on Tuesday and retrieve its details.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-12-26T11:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Soccer.",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Kids' soccer practice' event on Tuesday and prompt for a new time to reschedule.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-12-26T11:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List events for Tuesday, December 26, 2023, after 12:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-12-25T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "List events for Monday, December 25, 2023, before 12:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-12-26T14:00:00"
+    }
+]

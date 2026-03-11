@@ -1,0 +1,1291 @@
+[
+  {
+    "query": "Create an event called 'Team Lunch' on Tuesday at 1 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event with summary 'Team Lunch', start time '2024-04-09T13:00:00', end time '2024-04-09T14:00:00', attendees as null, and description as null.",
+    "simulated_now": "2024-04-07 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Bus Route 15 (suburbs)",
+          "start": "2024-04-09 09:00:00",
+          "end": "2024-04-09 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5d0414e719524eafa89aa52ddc695558"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Sister, Elena",
+          "start": "2024-04-09 18:00:00",
+          "end": "2024-04-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "elena@email.com"
+          ],
+          "id": "evt_bf0d4b4cddae4e2a9a54e37239b1d432"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Bus Route 15 (suburbs)",
+          "start": "2024-04-09 09:00:00",
+          "end": "2024-04-09 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5d0414e719524eafa89aa52ddc695558"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Team Lunch",
+          "start": "2024-04-09 13:00:00",
+          "end": "2024-04-09 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_84ab8ecc323849c4bec4b68542ae15aa"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Sister, Elena",
+          "start": "2024-04-09 18:00:00",
+          "end": "2024-04-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "elena@email.com"
+          ],
+          "id": "evt_bf0d4b4cddae4e2a9a54e37239b1d432"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Team Lunch' on Tuesday at 1 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-04-07 10:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "end": "2024-04-09 14:00:00",
+          "start": "2024-04-09 13:00:00",
+          "summary": "Team Lunch"
+        },
+        "result": {
+          "message": "Event created successfully.",
+          "event": {
+            "id": "evt_84ab8ecc323849c4bec4b68542ae15aa",
+            "summary": "Team Lunch",
+            "start": "2024-04-09 13:00:00",
+            "end": "2024-04-09 14:00:00",
+            "description": "",
+            "attendees": [],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've created an event called 'Team Lunch' on Tuesday, April 9, 2024 at 1 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can you add a meeting to my calendar for Friday at 3 PM called 'Project Review'?",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event with summary 'Project Review', start time '2024-04-12T15:00:00', end time '2024-04-12T16:00:00', attendees as null, and description as null.",
+    "simulated_now": "2024-04-07 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Bus Route 22 (covering downtown and residential areas)",
+          "start": "2024-04-12 05:30:00",
+          "end": "2024-04-12 13:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_170026e2db754880a38fd1949f74de68"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Friends",
+          "start": "2024-04-12 19:00:00",
+          "end": "2024-04-12 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "miguel@email.com"
+          ],
+          "id": "evt_d8d38142c3e1411eb030c95673021652"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Bus Route 22 (covering downtown and residential areas)",
+          "start": "2024-04-12 05:30:00",
+          "end": "2024-04-12 13:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_170026e2db754880a38fd1949f74de68"
+        },
+        {
+          "day": "Friday",
+          "summary": "Project Review",
+          "start": "2024-04-12 15:00:00",
+          "end": "2024-04-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_615753d0fd76418f8786bdbe6362ff25"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Friends",
+          "start": "2024-04-12 19:00:00",
+          "end": "2024-04-12 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "miguel@email.com"
+          ],
+          "id": "evt_d8d38142c3e1411eb030c95673021652"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can you add a meeting to my calendar for Friday at 3 PM called 'Project Review'?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-04-07 10:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2024-04-12 15:00:00",
+          "end": "2024-04-12 16:00:00",
+          "summary": "Project Review"
+        },
+        "result": {
+          "message": "Event created successfully.",
+          "event": {
+            "id": "evt_615753d0fd76418f8786bdbe6362ff25",
+            "summary": "Project Review",
+            "start": "2024-04-12 15:00:00",
+            "end": "2024-04-12 16:00:00",
+            "description": "",
+            "attendees": [],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've added 'Project Review' to your calendar for Friday, April 12, from 3 PM to 4 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's happening on Saturday evening?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List events on Saturday after 6:00 PM. Then, return the dinner at Mom's House event.",
+    "simulated_now": "2024-04-07 10:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Bus Route 8 (Saturday special route)",
+          "start": "2024-04-13 10:00:00",
+          "end": "2024-04-13 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cb1590e711ff425ca0f795ab63ce6747"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner at Mom's House",
+          "start": "2024-04-13 19:00:00",
+          "end": "2024-04-13 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_45d5dc6cd35e4e98bef332e20aa14480"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Bus Route 8 (Saturday special route)",
+          "start": "2024-04-13 10:00:00",
+          "end": "2024-04-13 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cb1590e711ff425ca0f795ab63ce6747"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner at Mom's House",
+          "start": "2024-04-13 19:00:00",
+          "end": "2024-04-13 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_45d5dc6cd35e4e98bef332e20aa14480"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's happening on Saturday evening?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-04-07 10:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-04-13 23:59:59",
+          "time_min": "2024-04-13 18:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_cb1590e711ff425ca0f795ab63ce6747\",\n  \"summary\": \"Bus Route 8 (Saturday special route)\",\n  \"start\": \"2024-04-13T10:00:00\",\n  \"end\": \"2024-04-13T18:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_45d5dc6cd35e4e98bef332e20aa14480\",\n  \"summary\": \"Dinner at Mom's House\",\n  \"start\": \"2024-04-13T19:00:00\",\n  \"end\": \"2024-04-13T20:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "On Saturday evening, April 13, you have dinner at Mom's House from 7 PM to 8 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move my basketball practice on Monday to 7:00 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Son's Basketball Practice' event on Monday. Then, call update_event to update its start time to '2024-04-08T19:00:00' and end time to '2024-04-08T20:00:00'.",
+    "simulated_now": "2024-04-07 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Bus Route 22 (covering downtown and residential areas)",
+          "start": "2024-04-08 05:30:00",
+          "end": "2024-04-08 13:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4dbb1cf1d11c423584ef690560b3ec6c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Quick Dinner with Son",
+          "start": "2024-04-08 17:00:00",
+          "end": "2024-04-08 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_07979c9f16b343f9aa066d863f3449b4"
+        },
+        {
+          "day": "Monday",
+          "summary": "Son's Basketball Practice",
+          "start": "2024-04-08 18:30:00",
+          "end": "2024-04-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e5bdc9be52644850aeca25cc057ead83"
+        },
+        {
+          "day": "Monday",
+          "summary": "Groceries at SuperMart",
+          "start": "2024-04-08 19:30:00",
+          "end": "2024-04-08 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a4ca42f5f0cd417abdd5d07d5d04f955"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Bus Route 22 (covering downtown and residential areas)",
+          "start": "2024-04-08 05:30:00",
+          "end": "2024-04-08 13:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4dbb1cf1d11c423584ef690560b3ec6c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Quick Dinner with Son",
+          "start": "2024-04-08 17:00:00",
+          "end": "2024-04-08 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_07979c9f16b343f9aa066d863f3449b4"
+        },
+        {
+          "day": "Monday",
+          "summary": "Son's Basketball Practice",
+          "start": "2024-04-08 19:00:00",
+          "end": "2024-04-08 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e5bdc9be52644850aeca25cc057ead83"
+        },
+        {
+          "day": "Monday",
+          "summary": "Groceries at SuperMart",
+          "start": "2024-04-08 19:30:00",
+          "end": "2024-04-08 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a4ca42f5f0cd417abdd5d07d5d04f955"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move my basketball practice on Monday to 7:00 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-04-07 10:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-04-08 23:59:59",
+          "time_min": "2024-04-08 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_4dbb1cf1d11c423584ef690560b3ec6c\",\n  \"summary\": \"Bus Route 22 (covering downtown and residential areas)\",\n  \"start\": \"2024-04-08T05:30:00\",\n  \"end\": \"2024-04-08T13:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_07979c9f16b343f9aa066d863f3449b4\",\n  \"summary\": \"Quick Dinner with Son\",\n  \"start\": \"2024-04-08T17:00:00\",\n  \"end\": \"2024-04-08T18:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_e5bdc9be52644850aeca25cc057ead83\",\n  \"summary\": \"Son's Basketball Practice\",\n  \"start\": \"2024-04-08T18:30:00\",\n  \"end\": \"2024-04-08T19:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_a4ca42f5f0cd417abdd5d07d5d04f955\",\n  \"summary\": \"Groceries at SuperMart\",\n  \"start\": \"2024-04-08T19:30:00\",\n  \"end\": \"2024-04-08T20:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2024-04-08 20:00:00",
+          "start": "2024-04-08 19:00:00",
+          "event_id": "evt_e5bdc9be52644850aeca25cc057ead83"
+        },
+        "result": {
+          "message": "Event updated successfully.",
+          "event": {
+            "id": "evt_e5bdc9be52644850aeca25cc057ead83",
+            "summary": "Son's Basketball Practice",
+            "start": "2024-04-08 19:00:00",
+            "end": "2024-04-08 20:00:00",
+            "description": "",
+            "attendees": [],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved Son's Basketball Practice on Monday, April 8, 2024 to 7:00 PM - 8:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can you push back my call with Elena on Tuesday by one hour?",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Call with Sister, Elena' event on Tuesday. Then, call update_event to update its start time to '2024-04-09T19:00:00' and end time to '2024-04-09T20:00:00'.",
+    "simulated_now": "2024-04-07 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Bus Route 15 (suburbs)",
+          "start": "2024-04-09 09:00:00",
+          "end": "2024-04-09 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_29317c2b6529483a98347a06cddd574e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Sister, Elena",
+          "start": "2024-04-09 18:00:00",
+          "end": "2024-04-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "elena@email.com"
+          ],
+          "id": "evt_70d3e7dadcf44eb0b51ba36f99b5317b"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Bus Route 15 (suburbs)",
+          "start": "2024-04-09 09:00:00",
+          "end": "2024-04-09 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_29317c2b6529483a98347a06cddd574e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Sister, Elena",
+          "start": "2024-04-09 19:00:00",
+          "end": "2024-04-09 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "elena@email.com"
+          ],
+          "id": "evt_70d3e7dadcf44eb0b51ba36f99b5317b"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can you push back my call with Elena on Tuesday by one hour?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-04-07 10:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-04-09 23:59:59",
+          "time_min": "2024-04-09 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_29317c2b6529483a98347a06cddd574e\",\n  \"summary\": \"Bus Route 15 (suburbs)\",\n  \"start\": \"2024-04-09T09:00:00\",\n  \"end\": \"2024-04-09T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_70d3e7dadcf44eb0b51ba36f99b5317b\",\n  \"summary\": \"Call with Sister, Elena\",\n  \"start\": \"2024-04-09T18:00:00\",\n  \"end\": \"2024-04-09T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_d00bed57\",\n        \"name\": \"elena\",\n        \"email\": \"elena@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2024-04-09 19:00:00",
+          "end": "2024-04-09 20:00:00",
+          "event_id": "evt_70d3e7dadcf44eb0b51ba36f99b5317b"
+        },
+        "result": {
+          "message": "Event updated successfully.",
+          "event": {
+            "id": "evt_70d3e7dadcf44eb0b51ba36f99b5317b",
+            "summary": "Call with Sister, Elena",
+            "start": "2024-04-09 19:00:00",
+            "end": "2024-04-09 20:00:00",
+            "description": "",
+            "attendees": [
+              "user=User(id='user_d00bed57', name='elena', email='elena@email.com') attending='ACCEPT'"
+            ],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved your call with Elena to Tuesday at 7 PM. It will now end at 8 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time does my SuperMart trip start on Monday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Groceries at SuperMart' event on Monday. Then, return the start time of '19:30'.",
+    "simulated_now": "2024-04-07 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Bus Route 22 (covering downtown and residential areas)",
+          "start": "2024-04-08 05:30:00",
+          "end": "2024-04-08 13:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_94c8d2f59c4743d798f1abc3e5cafe89"
+        },
+        {
+          "day": "Monday",
+          "summary": "Quick Dinner with Son",
+          "start": "2024-04-08 17:00:00",
+          "end": "2024-04-08 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_352378060ff44db983e9fc127fc3bee3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Son's Basketball Practice",
+          "start": "2024-04-08 18:30:00",
+          "end": "2024-04-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7138a082bffa4d3abd8a405856761c3d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Groceries at SuperMart",
+          "start": "2024-04-08 19:30:00",
+          "end": "2024-04-08 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c607211176244ec6b13139641003a70e"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Bus Route 22 (covering downtown and residential areas)",
+          "start": "2024-04-08 05:30:00",
+          "end": "2024-04-08 13:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_94c8d2f59c4743d798f1abc3e5cafe89"
+        },
+        {
+          "day": "Monday",
+          "summary": "Quick Dinner with Son",
+          "start": "2024-04-08 17:00:00",
+          "end": "2024-04-08 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_352378060ff44db983e9fc127fc3bee3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Son's Basketball Practice",
+          "start": "2024-04-08 18:30:00",
+          "end": "2024-04-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7138a082bffa4d3abd8a405856761c3d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Groceries at SuperMart",
+          "start": "2024-04-08 19:30:00",
+          "end": "2024-04-08 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c607211176244ec6b13139641003a70e"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time does my SuperMart trip start on Monday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-04-07 10:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-04-08 23:59:59",
+          "time_min": "2024-04-08 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_94c8d2f59c4743d798f1abc3e5cafe89\",\n  \"summary\": \"Bus Route 22 (covering downtown and residential areas)\",\n  \"start\": \"2024-04-08T05:30:00\",\n  \"end\": \"2024-04-08T13:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_352378060ff44db983e9fc127fc3bee3\",\n  \"summary\": \"Quick Dinner with Son\",\n  \"start\": \"2024-04-08T17:00:00\",\n  \"end\": \"2024-04-08T18:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_7138a082bffa4d3abd8a405856761c3d\",\n  \"summary\": \"Son's Basketball Practice\",\n  \"start\": \"2024-04-08T18:30:00\",\n  \"end\": \"2024-04-08T19:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_c607211176244ec6b13139641003a70e\",\n  \"summary\": \"Groceries at SuperMart\",\n  \"start\": \"2024-04-08T19:30:00\",\n  \"end\": \"2024-04-08T20:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "Your SuperMart trip starts at 19:30 on Monday.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Am I free between 5 PM and 7 PM on Wednesday?",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "List events on Wednesday between 5 PM and 7 PM. Determine if there are any conflicts. Return that there is a conflict due to the Union Meeting.",
+    "simulated_now": "2024-04-07 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Bus Route 22 (covering downtown and residential areas)",
+          "start": "2024-04-10 05:30:00",
+          "end": "2024-04-10 13:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_135b551acbad48cd8ae57f030f7545e7"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Union Meeting",
+          "start": "2024-04-10 17:00:00",
+          "end": "2024-04-10 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "unionrep@email.com"
+          ],
+          "id": "evt_a14f96288efe4f22be88b6f810b25f40"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Bus Route 22 (covering downtown and residential areas)",
+          "start": "2024-04-10 05:30:00",
+          "end": "2024-04-10 13:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_135b551acbad48cd8ae57f030f7545e7"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Union Meeting",
+          "start": "2024-04-10 17:00:00",
+          "end": "2024-04-10 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "unionrep@email.com"
+          ],
+          "id": "evt_a14f96288efe4f22be88b6f810b25f40"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Am I free between 5 PM and 7 PM on Wednesday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-04-07 10:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-04-10 19:00:00",
+          "time_min": "2024-04-10 17:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_a14f96288efe4f22be88b6f810b25f40\",\n  \"summary\": \"Union Meeting\",\n  \"start\": \"2024-04-10T17:00:00\",\n  \"end\": \"2024-04-10T18:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_40d34836\",\n        \"name\": \"unionrep\",\n        \"email\": \"unionrep@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "No, you have the Union Meeting on Wednesday, April 10, from 5 PM to 6 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule dinner",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "Ask the user 'Which dinner are you referring to?'",
+    "simulated_now": "2024-04-07 10:00:00",
+    "addressed_days": [],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Bus Route 22 (covering downtown and residential areas)",
+          "start": "2024-04-08 05:30:00",
+          "end": "2024-04-08 13:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3929e2c605294d2d8298394bdda80867"
+        },
+        {
+          "day": "Monday",
+          "summary": "Quick Dinner with Son",
+          "start": "2024-04-08 17:00:00",
+          "end": "2024-04-08 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_74a3adc925434f94b54d8414af6037f1"
+        },
+        {
+          "day": "Monday",
+          "summary": "Son's Basketball Practice",
+          "start": "2024-04-08 18:30:00",
+          "end": "2024-04-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1c3b8a03806b4259abc875fed36a351f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Groceries at SuperMart",
+          "start": "2024-04-08 19:30:00",
+          "end": "2024-04-08 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8c18d4b7a4e64dbb9cc1a5dc3e593bb6"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Bus Route 15 (suburbs)",
+          "start": "2024-04-09 09:00:00",
+          "end": "2024-04-09 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d2483147167f433a9fd81d1b3aa2a884"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Sister, Elena",
+          "start": "2024-04-09 18:00:00",
+          "end": "2024-04-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "elena@email.com"
+          ],
+          "id": "evt_e06e8537b23e4e81bfcde2c8dcc18ff2"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Bus Route 22 (covering downtown and residential areas)",
+          "start": "2024-04-10 05:30:00",
+          "end": "2024-04-10 13:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e3675adbc78c4ab489102de07cdda583"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Union Meeting",
+          "start": "2024-04-10 17:00:00",
+          "end": "2024-04-10 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "unionrep@email.com"
+          ],
+          "id": "evt_72d50823d1b24d85aae46afa42353bf7"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Bus Route 15 (suburbs)",
+          "start": "2024-04-11 09:00:00",
+          "end": "2024-04-11 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_097854b3b3ac481bac1a5ce05689f81d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Cook Dinner",
+          "start": "2024-04-11 18:00:00",
+          "end": "2024-04-11 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4058efdae85e42b98dc762744a687084"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Bus Route 22 (covering downtown and residential areas)",
+          "start": "2024-04-12 05:30:00",
+          "end": "2024-04-12 13:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b7ecb91f263341b19ffb4e2f47a340e0"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Friends",
+          "start": "2024-04-12 19:00:00",
+          "end": "2024-04-12 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "miguel@email.com"
+          ],
+          "id": "evt_a4da3ad64b9c4b61b8064642cc8ae1b3"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Bus Route 8 (Saturday special route)",
+          "start": "2024-04-13 10:00:00",
+          "end": "2024-04-13 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6f13d0a509914d0c8efe722129ce9cb5"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner at Mom's House",
+          "start": "2024-04-13 19:00:00",
+          "end": "2024-04-13 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bd95a846c41743579f9b2ece6e9d2eb9"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Church",
+          "start": "2024-04-14 11:00:00",
+          "end": "2024-04-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4cc21878302a45189e0307c892e7f42e"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Visit to the Park with Son",
+          "start": "2024-04-14 13:00:00",
+          "end": "2024-04-14 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_def9b8dfa59549c48067af58e4a636c3"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Laundry",
+          "start": "2024-04-14 15:00:00",
+          "end": "2024-04-14 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7af469184c2640c48d0b86e972af18dc"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Bus Route 22 (covering downtown and residential areas)",
+          "start": "2024-04-08 05:30:00",
+          "end": "2024-04-08 13:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3929e2c605294d2d8298394bdda80867"
+        },
+        {
+          "day": "Monday",
+          "summary": "Quick Dinner with Son",
+          "start": "2024-04-08 17:00:00",
+          "end": "2024-04-08 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_74a3adc925434f94b54d8414af6037f1"
+        },
+        {
+          "day": "Monday",
+          "summary": "Son's Basketball Practice",
+          "start": "2024-04-08 18:30:00",
+          "end": "2024-04-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1c3b8a03806b4259abc875fed36a351f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Groceries at SuperMart",
+          "start": "2024-04-08 19:30:00",
+          "end": "2024-04-08 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8c18d4b7a4e64dbb9cc1a5dc3e593bb6"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Bus Route 15 (suburbs)",
+          "start": "2024-04-09 09:00:00",
+          "end": "2024-04-09 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d2483147167f433a9fd81d1b3aa2a884"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Sister, Elena",
+          "start": "2024-04-09 18:00:00",
+          "end": "2024-04-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "elena@email.com"
+          ],
+          "id": "evt_e06e8537b23e4e81bfcde2c8dcc18ff2"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Bus Route 22 (covering downtown and residential areas)",
+          "start": "2024-04-10 05:30:00",
+          "end": "2024-04-10 13:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e3675adbc78c4ab489102de07cdda583"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Union Meeting",
+          "start": "2024-04-10 17:00:00",
+          "end": "2024-04-10 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "unionrep@email.com"
+          ],
+          "id": "evt_72d50823d1b24d85aae46afa42353bf7"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Bus Route 15 (suburbs)",
+          "start": "2024-04-11 09:00:00",
+          "end": "2024-04-11 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_097854b3b3ac481bac1a5ce05689f81d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Cook Dinner",
+          "start": "2024-04-11 18:00:00",
+          "end": "2024-04-11 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4058efdae85e42b98dc762744a687084"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Bus Route 22 (covering downtown and residential areas)",
+          "start": "2024-04-12 05:30:00",
+          "end": "2024-04-12 13:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b7ecb91f263341b19ffb4e2f47a340e0"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Friends",
+          "start": "2024-04-12 19:00:00",
+          "end": "2024-04-12 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "miguel@email.com"
+          ],
+          "id": "evt_a4da3ad64b9c4b61b8064642cc8ae1b3"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Bus Route 8 (Saturday special route)",
+          "start": "2024-04-13 10:00:00",
+          "end": "2024-04-13 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6f13d0a509914d0c8efe722129ce9cb5"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner at Mom's House",
+          "start": "2024-04-13 19:00:00",
+          "end": "2024-04-13 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bd95a846c41743579f9b2ece6e9d2eb9"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Church",
+          "start": "2024-04-14 11:00:00",
+          "end": "2024-04-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4cc21878302a45189e0307c892e7f42e"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Visit to the Park with Son",
+          "start": "2024-04-14 13:00:00",
+          "end": "2024-04-14 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_def9b8dfa59549c48067af58e4a636c3"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Laundry",
+          "start": "2024-04-14 15:00:00",
+          "end": "2024-04-14 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7af469184c2640c48d0b86e972af18dc"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule dinner"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-04-07 10:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-04-07 10:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_3929e2c605294d2d8298394bdda80867\",\n  \"summary\": \"Bus Route 22 (covering downtown and residential areas)\",\n  \"start\": \"2024-04-08T05:30:00\",\n  \"end\": \"2024-04-08T13:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_74a3adc925434f94b54d8414af6037f1\",\n  \"summary\": \"Quick Dinner with Son\",\n  \"start\": \"2024-04-08T17:00:00\",\n  \"end\": \"2024-04-08T18:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_1c3b8a03806b4259abc875fed36a351f\",\n  \"summary\": \"Son's Basketball Practice\",\n  \"start\": \"2024-04-08T18:30:00\",\n  \"end\": \"2024-04-08T19:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_8c18d4b7a4e64dbb9cc1a5dc3e593bb6\",\n  \"summary\": \"Groceries at SuperMart\",\n  \"start\": \"2024-04-08T19:30:00\",\n  \"end\": \"2024-04-08T20:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_d2483147167f433a9fd81d1b3aa2a884\",\n  \"summary\": \"Bus Route 15 (suburbs)\",\n  \"start\": \"2024-04-09T09:00:00\",\n  \"end\": \"2024-04-09T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_e06e8537b23e4e81bfcde2c8dcc18ff2\",\n  \"summary\": \"Call with Sister, Elena\",\n  \"start\": \"2024-04-09T18:00:00\",\n  \"end\": \"2024-04-09T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_01106e49\",\n        \"name\": \"elena\",\n        \"email\": \"elena@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_e3675adbc78c4ab489102de07cdda583\",\n  \"summary\": \"Bus Route 22 (covering downtown and residential areas)\",\n  \"start\": \"2024-04-10T05:30:00\",\n  \"end\": \"2024-04-10T13:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_72d50823d1b24d85aae46afa42353bf7\",\n  \"summary\": \"Union Meeting\",\n  \"start\": \"2024-04-10T17:00:00\",\n  \"end\": \"2024-04-10T18:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_39aeb240\",\n        \"name\": \"unionrep\",\n        \"email\": \"unionrep@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_097854b3b3ac481bac1a5ce05689f81d\",\n  \"summary\": \"Bus Route 15 (suburbs)\",\n  \"start\": \"2024-04-11T09:00:00\",\n  \"end\": \"2024-04-11T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_4058efdae85e42b98dc762744a687084\",\n  \"summary\": \"Cook Dinner\",\n  \"start\": \"2024-04-11T18:00:00\",\n  \"end\": \"2024-04-11T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_b7ecb91f263341b19ffb4e2f47a340e0\",\n  \"summary\": \"Bus Route 22 (covering downtown and residential areas)\",\n  \"start\": \"2024-04-12T05:30:00\",\n  \"end\": \"2024-04-12T13:30:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_a4da3ad64b9c4b61b8064642cc8ae1b3\",\n  \"summary\": \"Movie Night with Friends\",\n  \"start\": \"2024-04-12T19:00:00\",\n  \"end\": \"2024-04-12T21:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_529a3f4c\",\n        \"name\": \"sarah\",\n        \"email\": \"sarah@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_c9beb5ad\",\n        \"name\": \"miguel\",\n        \"email\": \"miguel@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_6f13d0a509914d0c8efe722129ce9cb5\",\n  \"summary\": \"Bus Route 8 (Saturday special route)\",\n  \"start\": \"2024-04-13T10:00:00\",\n  \"end\": \"2024-04-13T18:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_bd95a846c41743579f9b2ece6e9d2eb9\",\n  \"summary\": \"Dinner at Mom's House\",\n  \"start\": \"2024-04-13T19:00:00\",\n  \"end\": \"2024-04-13T20:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_4cc21878302a45189e0307c892e7f42e\",\n  \"summary\": \"Church\",\n  \"start\": \"2024-04-14T11:00:00\",\n  \"end\": \"2024-04-14T12:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_def9b8dfa59549c48067af58e4a636c3\",\n  \"summary\": \"Visit to the Park with Son\",\n  \"start\": \"2024-04-14T13:00:00\",\n  \"end\": \"2024-04-14T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_7af469184c2640c48d0b86e972af18dc\",\n  \"summary\": \"Laundry\",\n  \"start\": \"2024-04-14T15:00:00\",\n  \"end\": \"2024-04-14T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Which dinner would you like to reschedule?\n- Quick Dinner with Son on 2024-04-08 at 17:00:00\n- Dinner at Mom's House on 2024-04-13 at 19:00:00"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events for Tuesday.",
+    "simulated_now": "2024-04-08 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Bus Route 15 (suburbs)",
+          "start": "2024-04-09 09:00:00",
+          "end": "2024-04-09 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3219b0bf5eeb4bd89b15b8837d5cadc9"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Sister, Elena",
+          "start": "2024-04-09 18:00:00",
+          "end": "2024-04-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "elena@email.com"
+          ],
+          "id": "evt_b938358d59494b7e95e1ba58c6a21cb6"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Bus Route 15 (suburbs)",
+          "start": "2024-04-09 09:00:00",
+          "end": "2024-04-09 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3219b0bf5eeb4bd89b15b8837d5cadc9"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Sister, Elena",
+          "start": "2024-04-09 18:00:00",
+          "end": "2024-04-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "elena@email.com"
+          ],
+          "id": "evt_b938358d59494b7e95e1ba58c6a21cb6"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing tomorrow?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-04-08 10:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-04-09 23:59:59",
+          "time_min": "2024-04-09 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_3219b0bf5eeb4bd89b15b8837d5cadc9\",\n  \"summary\": \"Bus Route 15 (suburbs)\",\n  \"start\": \"2024-04-09T09:00:00\",\n  \"end\": \"2024-04-09T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_b938358d59494b7e95e1ba58c6a21cb6\",\n  \"summary\": \"Call with Sister, Elena\",\n  \"start\": \"2024-04-09T18:00:00\",\n  \"end\": \"2024-04-09T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_479955cc\",\n        \"name\": \"elena\",\n        \"email\": \"elena@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "Tomorrow, April 9, 2024, you have two entries: The first is at 9am for 'Bus Route 15 (suburbs)'. The second is at 6pm for 'Call with Sister, Elena'."
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

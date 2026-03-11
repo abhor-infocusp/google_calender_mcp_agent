@@ -1,0 +1,149 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Doctor Appointment' on Tuesday at 3 PM for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Doctor Appointment', start time 2025-01-14T15:00:00, end time 2025-01-14T16:00:00, attendees as null, and description as null.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-01-12T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting with Bob on Wednesday at 10 AM for 30 minutes.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Meeting with Bob', start time 2025-01-15T10:00:00, end time 2025-01-15T10:30:00, attendees as null, and description as null.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-01-12T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to 2025-01-14T00:00:00 and time_max set to 2025-01-15T00:00:00 to determine if there are any events scheduled.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-01-13T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my weekend look like?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to 2025-01-18T00:00:00 and time_max set to 2025-01-20T00:00:00 to retrieve all events scheduled on Saturday and Sunday.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-01-12T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my dinner with friends on Saturday to 7 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find 'Dinner with Friends' on Saturday. Then call update_event with the event id and the new start time of 2025-01-18T19:00:00 and end time of 2025-01-18T21:00:00.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-01-16T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the kids birthday party to 3 PM on Sunday.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find 'Kids Birthday Party' on Sunday. Then call update_event with the event id and the new start time of 2025-01-19T15:00:00 and end time of 2025-01-19T17:00:00.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2025-01-17T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my call with Therapist on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to 2025-01-13T00:00:00 and time_max set to 2025-01-14T00:00:00 to find the 'Call with Therapist' event and return its start time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-01-12T18:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What is happening on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to 2025-01-16T00:00:00 and time_max set to 2025-01-17T00:00:00 to retrieve all events scheduled on Thursday.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-01-12T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to have dinner with Sarah this week. Please schedule it, but not when I am working.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min set to 2025-01-13T00:00:00 and time_max set to 2025-01-20T00:00:00 to get all events. Then, identify the Air Ambulance Shift schedule, and suggest a free time outside of those shifts (e.g., Saturday at 4PM). Then, call create_event with the free time.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-01-12T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I am busy on Thursday, remind me what I am doing.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min set to 2025-01-16T00:00:00 and time_max set to 2025-01-17T00:00:00. Then return the events that are scheduled.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-01-12T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner Saturday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to 2025-01-18T00:00:00 and time_max set to 2025-01-19T00:00:00 to see if there is an event called Dinner on Saturday.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-01-15T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Therapist Monday...",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to 2025-01-13T00:00:00 and time_max set to 2025-01-14T00:00:00 to retrieve the time of the call with the Therapist.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-01-12T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to 2025-01-16T00:00:00 and time_max set to 2025-01-17T00:00:00 to retrieve all events scheduled for today, Thursday.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-01-16T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to 2025-01-14T00:00:00 and time_max set to 2025-01-15T00:00:00 to retrieve all events scheduled for tomorrow, Tuesday.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-01-13T16:00:00"
+    }
+]

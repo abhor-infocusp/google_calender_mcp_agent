@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Discuss algae control' for Wednesday at 1 PM with Dr. Amy at marine.org",
+        "complexity": "Low",
+        "expected_behavior": "Call the create_event tool with summary 'Discuss algae control', start '2023-04-05T13:00:00', end '2023-04-05T14:00:00', attendees 'Dr.Amy@marine.org' and description 'Discuss algae control'",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-02T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a dinner reservation to my calendar for Saturday at 7 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call the create_event tool with summary 'Dinner Reservation', start '2023-04-08T19:00:00', end '2023-04-08T20:00:00', attendees [], and description 'Dinner Reservation'",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-04-02T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I free to harvest oysters on Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Call the list_events tool with time_min='2023-04-05T12:00:00' and time_max='2023-04-05T18:00:00' to check for conflicts during the afternoon on Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-02T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Thursday when I'm not checking oyster beds?",
+        "complexity": "Medium",
+        "expected_behavior": "Call the list_events tool with time_min='2023-04-06T08:00:00' and time_max='2023-04-06T23:59:59' to find events on Thursday besides Oyster Bed Check & Maintenance.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-04-02T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my meeting with the seafood wholesaler on Monday to 10 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event on Monday with Seafood Wholesaler, then call update_event with the event id and updates to start='2023-04-03T10:00:00' and end='2023-04-03T11:00:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-02T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the book club time on Tuesday to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event on Tuesday called 'Book Club Meeting', then call update_event with the event id and updates to start='2023-04-04T19:30:00' and end='2023-04-04T21:00:00'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-04-02T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my yoga class this week?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event called 'Yoga Class' during the week and respond with the time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-02T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having dinner with on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for Saturday and respond with the names of the attendees for the dinner event.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-04-02T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule the oyster harvest on Wednesday to avoid conflicting with algae control discussions with Dr. Amy.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events for Wednesday. Find the oyster harvest event and the algae control discussion. Reschedule the oyster harvest for Wednesday afternoon after 2 PM to avoid the conflict.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-02T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move the meeting with the restaurant owner on Thursday to 3 PM, but only if it doesn't conflict with farm finances?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events for Thursday. Check if moving the meeting with the restaurant owner to 3 PM would conflict with farm finances. If not, update the meeting.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-04-02T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Oyster beds... Monday",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events on Monday to find the event called Oyster Bed Check & Maintenance.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-03T06:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel Saturday dinner",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event on Saturday called 'Dinner Party'. Then call the delete_event tool with the event ID.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-04-08T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call get_current_time to find out it is Monday. Call list_events for Monday to retrieve all events.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-03T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call get_current_time to find out it is Monday. Call list_events for Tuesday to retrieve all events.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-04-03T09:00:00"
+    }
+]

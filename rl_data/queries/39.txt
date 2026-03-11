@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Project Meeting' for Tuesday at 10 AM with Sarah from sarah@email.com, and describe it as 'Discuss project progress'.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Project Meeting', start '2023-04-04T10:00:00', end '2023-04-04T11:00:00', attendees 'sarah@email.com', and description 'Discuss project progress'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-04-02T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a dentist appointment for me on Wednesday at 9 am.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Dentist Appointment', start '2023-04-05T09:00:00', and end '2023-04-05T10:00:00'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-02T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing with the kids this weekend?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min as '2023-04-08T00:00:00' and time_max as '2023-04-09T23:59:59'.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2023-04-02T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Tuesday look like?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min as '2023-04-04T00:00:00' and time_max as '2023-04-04T23:59:59'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-04-02T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my dinner with the kids on Monday to 6:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event 'Dinner with kids' on '2023-04-03'. Call update_event with the event ID and updates to start time as '2023-04-03T18:30:00' and end time as '2023-04-03T19:30:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-02T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the kids' soccer game on Saturday to 11:00 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event 'Kids' soccer game' on '2023-04-08'. Call update_event with the event ID and updates to start time as '2023-04-08T11:00:00' and end time as '2023-04-08T13:00:00'.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-04-02T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "When is my therapy appointment this week, and who is the therapist?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min as '2023-04-03T00:00:00' and time_max as '2023-04-09T23:59:59'. If the event 'Therapy appointment' is found, call get_event with the event ID to retrieve the therapist's email 'dr.jones@email.com'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-04-02T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time do I need to pick up the kids from school on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min as '2023-04-05T00:00:00' and time_max as '2023-04-05T23:59:59'. If the event 'Pick up kids from school' is found, the agent provides the event time '2:30 PM'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-02T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting with my supervisor at facility.com on Thursday at 4 PM, but I see I have evening shift that day. Find me an available time instead.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min as '2023-04-06T00:00:00' and time_max as '2023-04-06T23:59:59'. Identify the conflict with 'Evening Shift - Control Room'. Determine a free time and call create_event for 'Meeting with Supervisor' at a different time. The agent cannot automatically resolve the conflict, it can only highlight the conflict.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-04-02T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Cancel my lunch with parents on Saturday and instead have lunch with Sarah at 1 PM.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the event 'Lunch with parents' on '2023-04-08'. Call delete_event with the event ID. Then, call create_event with summary 'Lunch with Sarah', start '2023-04-08T13:00:00', end '2023-04-08T14:00:00'.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-04-02T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule soccer.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min as '2023-04-03T00:00:00' and time_max as '2023-04-09T23:59:59' and try to find the 'Kids' soccer game'. Ask user for the new date and time. The function can only reschedule an identified event.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-04-02T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Grocery store...",
+        "complexity": "Low",
+        "expected_behavior": "The agent should check the user's calendar and respond with a message asking for clarification. For example: \"I see you have 'Errands - Grocery shopping, dry cleaning' scheduled for Saturday. Would you like me to do something with that event?\"",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-04-02T12:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min as '2023-04-04T00:00:00' and time_max as '2023-04-04T23:59:59'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-04-03T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min as '2023-04-02T00:00:00' and time_max as '2023-04-02T23:59:59'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-03T10:00:00"
+    }
+]

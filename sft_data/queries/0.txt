@@ -1,0 +1,144 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Board Meeting' on Wednesday at 1 PM for an hour with david.lee@firm.com and michael.b@firm.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with the summary 'Board Meeting', start time of 13:00 on Wednesday, end time of 14:00 on Wednesday, and attendees david.lee@firm.com and michael.b@firm.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-08-04T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a lunch meeting with advisor@email.com this Thursday from 1 PM to 2 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with the summary 'Lunch Meeting', start time of 13:00 on Thursday, end time of 14:00 on Thursday, and attendee advisor@email.com.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-08-04T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy when my kids have soccer practice?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the Kids' Soccer Practice event on Monday, then list events scheduled during that time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-08-05T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing when I have dinner with my spouse?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the Dinner with Spouse event on Tuesday, then list events scheduled during that time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-08-06T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the Miller Corp. Tax Planning meeting to 1 PM on Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the Miller Corp. Tax Planning event on Monday and update its start time to 13:00 and its end time to 14:30.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-08-05T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my dinner with friends back by half an hour.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the Dinner with friends event on Thursday and update its start time to 7:00 PM and end time to 8:30 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-08-08T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Smith Family Taxes meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Find the Smith Family Taxes event on Wednesday and return the attendees.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-08-07T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What is the case number for the call with the IRS agent?",
+        "complexity": "Low",
+        "expected_behavior": "Find the Call with IRS Agent event on Monday and return the case number.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-08-05T11:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline the parent-teacher meeting and schedule a meeting with potential.client@email.com for the same time.",
+        "complexity": "High",
+        "expected_behavior": "Decline the Parent-Teacher Meeting on Wednesday. Then create a new event with potential.client@email.com for 6:00 PM to 7:30 PM on Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-08-07T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "What meetings do I have on Friday and how long are they?",
+        "complexity": "High",
+        "expected_behavior": "List all events on Friday and calculate the duration of each event.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-08-09T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "IRS Inquiry?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events that contain the phrase 'IRS Inquiry'.",
+        "addressed_days": [
+            "Wednesday",
+            "Friday"
+        ],
+        "current_time": "2024-08-07T15:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "soccer?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events that contain the phrase 'soccer'.",
+        "addressed_days": [
+            "Monday",
+            "Saturday"
+        ],
+        "current_time": "2024-08-05T15:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for today, Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-08-07T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow's schedule?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for tomorrow, Friday.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-08-08T15:00:00"
+    }
+]

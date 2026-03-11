@@ -1,0 +1,1356 @@
+[
+  {
+    "query": "Schedule a meeting named 'Discuss Project X' for July 19th at 11 AM with Emily and John.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event to schedule 'Discuss Project X' for July 19th at 11 AM with Emily and John.",
+    "simulated_now": "2024-07-14 12:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Data Science Team Stand-up",
+          "start": "2024-07-19 09:00:00",
+          "end": "2024-07-19 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com",
+            "ben@email.com"
+          ],
+          "id": "evt_e60b3496475f45b2ab07add58d249e9f"
+        },
+        {
+          "day": "Friday",
+          "summary": "One-on-One with David",
+          "start": "2024-07-19 10:00:00",
+          "end": "2024-07-19 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david@email.com"
+          ],
+          "id": "evt_b761ce258c2149e888c7bdc880b72f84"
+        },
+        {
+          "day": "Friday",
+          "summary": "Project Review Meeting - Current Timeline",
+          "start": "2024-07-19 13:00:00",
+          "end": "2024-07-19 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily@email.com"
+          ],
+          "id": "evt_b8d39ac96de7445399c550b43f64ff36"
+        },
+        {
+          "day": "Friday",
+          "summary": "Pizza Night with Lily and Friends",
+          "start": "2024-07-19 17:00:00",
+          "end": "2024-07-19 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e77f0a4a524c44f58ac30a3f1b46c00c"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Data Science Team Stand-up",
+          "start": "2024-07-19 09:00:00",
+          "end": "2024-07-19 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com",
+            "ben@email.com"
+          ],
+          "id": "evt_e60b3496475f45b2ab07add58d249e9f"
+        },
+        {
+          "day": "Friday",
+          "summary": "One-on-One with David",
+          "start": "2024-07-19 10:00:00",
+          "end": "2024-07-19 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david@email.com"
+          ],
+          "id": "evt_b761ce258c2149e888c7bdc880b72f84"
+        },
+        {
+          "day": "Friday",
+          "summary": "Discuss Project X",
+          "start": "2024-07-19 11:00:00",
+          "end": "2024-07-19 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily@email.com",
+            "john@email.com"
+          ],
+          "id": "evt_6f18fea1bf2140f49c6fcbccf8fe9293"
+        },
+        {
+          "day": "Friday",
+          "summary": "Project Review Meeting - Current Timeline",
+          "start": "2024-07-19 13:00:00",
+          "end": "2024-07-19 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily@email.com"
+          ],
+          "id": "evt_b8d39ac96de7445399c550b43f64ff36"
+        },
+        {
+          "day": "Friday",
+          "summary": "Pizza Night with Lily and Friends",
+          "start": "2024-07-19 17:00:00",
+          "end": "2024-07-19 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e77f0a4a524c44f58ac30a3f1b46c00c"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Schedule a meeting named 'Discuss Project X' for July 19th at 11 AM with Emily and John."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-07-14 12:00:00",
+          "day": "Sunday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-07-19 23:59:59",
+          "time_min": "2024-07-19 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_e60b3496475f45b2ab07add58d249e9f\",\n  \"summary\": \"Data Science Team Stand-up\",\n  \"start\": \"2024-07-19T09:00:00\",\n  \"end\": \"2024-07-19T09:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_80d42ade\",\n        \"name\": \"sarah\",\n        \"email\": \"sarah@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_b55f2fbc\",\n        \"name\": \"david\",\n        \"email\": \"david@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_637babc2\",\n        \"name\": \"maria\",\n        \"email\": \"maria@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_3a7cf13b\",\n        \"name\": \"ben\",\n        \"email\": \"ben@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_b761ce258c2149e888c7bdc880b72f84\",\n  \"summary\": \"One-on-One with David\",\n  \"start\": \"2024-07-19T10:00:00\",\n  \"end\": \"2024-07-19T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_1a38c3e7\",\n        \"name\": \"david\",\n        \"email\": \"david@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_b8d39ac96de7445399c550b43f64ff36\",\n  \"summary\": \"Project Review Meeting - Current Timeline\",\n  \"start\": \"2024-07-19T13:00:00\",\n  \"end\": \"2024-07-19T14:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_3e3c65ce\",\n        \"name\": \"emily\",\n        \"email\": \"emily@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_e77f0a4a524c44f58ac30a3f1b46c00c\",\n  \"summary\": \"Pizza Night with Lily and Friends\",\n  \"start\": \"2024-07-19T17:00:00\",\n  \"end\": \"2024-07-19T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "attendees": [
+            "emily@email.com",
+            "john@email.com"
+          ],
+          "start": "2024-07-19 11:00:00",
+          "end": "2024-07-19 12:00:00",
+          "summary": "Discuss Project X"
+        },
+        "result": {
+          "message": "Event created successfully.",
+          "event": {
+            "id": "evt_6f18fea1bf2140f49c6fcbccf8fe9293",
+            "summary": "Discuss Project X",
+            "start": "2024-07-19 11:00:00",
+            "end": "2024-07-19 12:00:00",
+            "description": "",
+            "attendees": [
+              "user=User(id='user_7d0d41fe', name='emily', email='emily@email.com') attending='ACCEPT'",
+              "user=User(id='user_aa090912', name='john', email='john@email.com') attending='ACCEPT'"
+            ],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've scheduled a meeting named 'Discuss Project X' for July 19th at 11 AM with Emily and John.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing on Wednesday afternoon?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events, filtered to Wednesday afternoon (12 PM to 6 PM), then present the info to the user.",
+    "simulated_now": "2024-07-17 08:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Data Science Team Stand-up",
+          "start": "2024-07-17 09:00:00",
+          "end": "2024-07-17 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com",
+            "ben@email.com"
+          ],
+          "id": "evt_0aa7596f555746658024c6db1c4cd137"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Brainstorming Session - Improving Customer Segmentation",
+          "start": "2024-07-17 10:00:00",
+          "end": "2024-07-17 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com"
+          ],
+          "id": "evt_d804075a2e6c4f1abb00b8f33a07d53f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Susan (CTO) - Data Science Roadmap",
+          "start": "2024-07-17 14:00:00",
+          "end": "2024-07-17 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "susan@email.com"
+          ],
+          "id": "evt_14d1d73d65814110aa4ea02ae5a5fc78"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Mom",
+          "start": "2024-07-17 18:30:00",
+          "end": "2024-07-17 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "carol@email.com"
+          ],
+          "id": "evt_1601cc928d784ab2930ba6d7e611a6cc"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Data Science Team Stand-up",
+          "start": "2024-07-17 09:00:00",
+          "end": "2024-07-17 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com",
+            "ben@email.com"
+          ],
+          "id": "evt_0aa7596f555746658024c6db1c4cd137"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Brainstorming Session - Improving Customer Segmentation",
+          "start": "2024-07-17 10:00:00",
+          "end": "2024-07-17 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com"
+          ],
+          "id": "evt_d804075a2e6c4f1abb00b8f33a07d53f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Susan (CTO) - Data Science Roadmap",
+          "start": "2024-07-17 14:00:00",
+          "end": "2024-07-17 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "susan@email.com"
+          ],
+          "id": "evt_14d1d73d65814110aa4ea02ae5a5fc78"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Mom",
+          "start": "2024-07-17 18:30:00",
+          "end": "2024-07-17 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "carol@email.com"
+          ],
+          "id": "evt_1601cc928d784ab2930ba6d7e611a6cc"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing on Wednesday afternoon?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-07-17 08:00:00",
+          "day": "Wednesday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-07-17 17:00:00",
+          "time_min": "2024-07-17 12:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_14d1d73d65814110aa4ea02ae5a5fc78\",\n  \"summary\": \"Meeting with Susan (CTO) - Data Science Roadmap\",\n  \"start\": \"2024-07-17T14:00:00\",\n  \"end\": \"2024-07-17T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_9a01f237\",\n        \"name\": \"susan\",\n        \"email\": \"susan@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "This Wednesday afternoon, July 17, you have a meeting with Susan (CTO) about the Data Science Roadmap from 2 PM to 3 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move the presentation to the marketing team to 3 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find the 'Presentation to Marketing Team - Q3 Campaign Insights' event, then call update_event to change the start time to 3 PM on Monday.",
+    "simulated_now": "2024-07-15 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Data Science Team Stand-up",
+          "start": "2024-07-15 09:00:00",
+          "end": "2024-07-15 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com",
+            "ben@email.com"
+          ],
+          "id": "evt_8015b8eb89484e58aa7e0035b3c5788b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Model Validation Code Review",
+          "start": "2024-07-15 10:00:00",
+          "end": "2024-07-15 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david@email.com",
+            "maria@email.com"
+          ],
+          "id": "evt_4d1d691c64a64e1bb6add012388a4728"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Tom (Head of Data Governance) - Data Quality Issues",
+          "start": "2024-07-15 11:30:00",
+          "end": "2024-07-15 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom@email.com"
+          ],
+          "id": "evt_61a9247d131c4a87bae9279e0a856d83"
+        },
+        {
+          "day": "Monday",
+          "summary": "Presentation to Marketing Team - Q3 Campaign Insights",
+          "start": "2024-07-15 14:00:00",
+          "end": "2024-07-15 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john@email.com"
+          ],
+          "id": "evt_e194c4c7714a4f448cb5d9ec0f44b5bb"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lily's Soccer Practice",
+          "start": "2024-07-15 18:00:00",
+          "end": "2024-07-15 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f5f8356e3f5f47a3a72702aba18b5d12"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Data Science Team Stand-up",
+          "start": "2024-07-15 09:00:00",
+          "end": "2024-07-15 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com",
+            "ben@email.com"
+          ],
+          "id": "evt_8015b8eb89484e58aa7e0035b3c5788b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Model Validation Code Review",
+          "start": "2024-07-15 10:00:00",
+          "end": "2024-07-15 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david@email.com",
+            "maria@email.com"
+          ],
+          "id": "evt_4d1d691c64a64e1bb6add012388a4728"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Tom (Head of Data Governance) - Data Quality Issues",
+          "start": "2024-07-15 11:30:00",
+          "end": "2024-07-15 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom@email.com"
+          ],
+          "id": "evt_61a9247d131c4a87bae9279e0a856d83"
+        },
+        {
+          "day": "Monday",
+          "summary": "Presentation to Marketing Team - Q3 Campaign Insights",
+          "start": "2024-07-15 15:00:00",
+          "end": "2024-07-15 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john@email.com"
+          ],
+          "id": "evt_e194c4c7714a4f448cb5d9ec0f44b5bb"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lily's Soccer Practice",
+          "start": "2024-07-15 18:00:00",
+          "end": "2024-07-15 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f5f8356e3f5f47a3a72702aba18b5d12"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move the presentation to the marketing team to 3 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-07-15 10:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-07-15 23:59:59",
+          "time_min": "2024-07-15 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_8015b8eb89484e58aa7e0035b3c5788b\",\n  \"summary\": \"Data Science Team Stand-up\",\n  \"start\": \"2024-07-15T09:00:00\",\n  \"end\": \"2024-07-15T09:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_89000079\",\n        \"name\": \"sarah\",\n        \"email\": \"sarah@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_15dce3d9\",\n        \"name\": \"david\",\n        \"email\": \"david@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_7673cfa2\",\n        \"name\": \"maria\",\n        \"email\": \"maria@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_2ccfd23f\",\n        \"name\": \"ben\",\n        \"email\": \"ben@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_4d1d691c64a64e1bb6add012388a4728\",\n  \"summary\": \"Model Validation Code Review\",\n  \"start\": \"2024-07-15T10:00:00\",\n  \"end\": \"2024-07-15T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_57e2bc07\",\n        \"name\": \"david\",\n        \"email\": \"david@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_a496dd66\",\n        \"name\": \"maria\",\n        \"email\": \"maria@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_61a9247d131c4a87bae9279e0a856d83\",\n  \"summary\": \"Meeting with Tom (Head of Data Governance) - Data Quality Issues\",\n  \"start\": \"2024-07-15T11:30:00\",\n  \"end\": \"2024-07-15T12:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_d3a855ef\",\n        \"name\": \"tom\",\n        \"email\": \"tom@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_e194c4c7714a4f448cb5d9ec0f44b5bb\",\n  \"summary\": \"Presentation to Marketing Team - Q3 Campaign Insights\",\n  \"start\": \"2024-07-15T14:00:00\",\n  \"end\": \"2024-07-15T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_7c9165b4\",\n        \"name\": \"john\",\n        \"email\": \"john@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_f5f8356e3f5f47a3a72702aba18b5d12\",\n  \"summary\": \"Lily's Soccer Practice\",\n  \"start\": \"2024-07-15T18:00:00\",\n  \"end\": \"2024-07-15T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2024-07-15 15:00:00",
+          "end": "2024-07-15 16:00:00",
+          "event_id": "evt_e194c4c7714a4f448cb5d9ec0f44b5bb"
+        },
+        "result": {
+          "message": "Event updated successfully.",
+          "event": {
+            "id": "evt_e194c4c7714a4f448cb5d9ec0f44b5bb",
+            "summary": "Presentation to Marketing Team - Q3 Campaign Insights",
+            "start": "2024-07-15 15:00:00",
+            "end": "2024-07-15 16:00:00",
+            "description": "",
+            "attendees": [
+              "user=User(id='user_7c9165b4', name='john', email='john@email.com') attending='ACCEPT'"
+            ],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved the \"Presentation to Marketing Team - Q3 Campaign Insights\" to 3 PM today. It will now run from 3 PM to 4 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change the meeting with Susan to 3:30 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find the 'Meeting with Susan (CTO) - Data Science Roadmap' event on Wednesday, then call update_event to change the start time to 3:30 PM.",
+    "simulated_now": "2024-07-17 09:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Data Science Team Stand-up",
+          "start": "2024-07-17 09:00:00",
+          "end": "2024-07-17 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com",
+            "ben@email.com"
+          ],
+          "id": "evt_e808ce69762444278d0b3e22dbe32077"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Brainstorming Session - Improving Customer Segmentation",
+          "start": "2024-07-17 10:00:00",
+          "end": "2024-07-17 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com"
+          ],
+          "id": "evt_9d3563c59bdf41b09d648ce2c82f4c57"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Susan (CTO) - Data Science Roadmap",
+          "start": "2024-07-17 14:00:00",
+          "end": "2024-07-17 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "susan@email.com"
+          ],
+          "id": "evt_39d755e231ff4f17aa3e1148dd3944a9"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Mom",
+          "start": "2024-07-17 18:30:00",
+          "end": "2024-07-17 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "carol@email.com"
+          ],
+          "id": "evt_faa1dfb12efc4331af6a9d2786ea1519"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Data Science Team Stand-up",
+          "start": "2024-07-17 09:00:00",
+          "end": "2024-07-17 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com",
+            "ben@email.com"
+          ],
+          "id": "evt_e808ce69762444278d0b3e22dbe32077"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Brainstorming Session - Improving Customer Segmentation",
+          "start": "2024-07-17 10:00:00",
+          "end": "2024-07-17 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com"
+          ],
+          "id": "evt_9d3563c59bdf41b09d648ce2c82f4c57"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Susan (CTO) - Data Science Roadmap",
+          "start": "2024-07-17 15:30:00",
+          "end": "2024-07-17 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "susan@email.com"
+          ],
+          "id": "evt_39d755e231ff4f17aa3e1148dd3944a9"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Mom",
+          "start": "2024-07-17 18:30:00",
+          "end": "2024-07-17 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "carol@email.com"
+          ],
+          "id": "evt_faa1dfb12efc4331af6a9d2786ea1519"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change the meeting with Susan to 3:30 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-07-17 09:00:00",
+          "day": "Wednesday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-07-17 23:59:59",
+          "time_min": "2024-07-17 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_e808ce69762444278d0b3e22dbe32077\",\n  \"summary\": \"Data Science Team Stand-up\",\n  \"start\": \"2024-07-17T09:00:00\",\n  \"end\": \"2024-07-17T09:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_a136382a\",\n        \"name\": \"sarah\",\n        \"email\": \"sarah@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_d5d9ee8c\",\n        \"name\": \"david\",\n        \"email\": \"david@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_c598a9a4\",\n        \"name\": \"maria\",\n        \"email\": \"maria@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_b0f9e6f7\",\n        \"name\": \"ben\",\n        \"email\": \"ben@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_9d3563c59bdf41b09d648ce2c82f4c57\",\n  \"summary\": \"Brainstorming Session - Improving Customer Segmentation\",\n  \"start\": \"2024-07-17T10:00:00\",\n  \"end\": \"2024-07-17T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_58081e19\",\n        \"name\": \"sarah\",\n        \"email\": \"sarah@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_8da71628\",\n        \"name\": \"david\",\n        \"email\": \"david@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_121df3e0\",\n        \"name\": \"maria\",\n        \"email\": \"maria@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_39d755e231ff4f17aa3e1148dd3944a9\",\n  \"summary\": \"Meeting with Susan (CTO) - Data Science Roadmap\",\n  \"start\": \"2024-07-17T14:00:00\",\n  \"end\": \"2024-07-17T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_243b8bad\",\n        \"name\": \"susan\",\n        \"email\": \"susan@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_faa1dfb12efc4331af6a9d2786ea1519\",\n  \"summary\": \"Dinner with Mom\",\n  \"start\": \"2024-07-17T18:30:00\",\n  \"end\": \"2024-07-17T19:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_fa9c6b63\",\n        \"name\": \"carol\",\n        \"email\": \"carol@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2024-07-17 15:30:00",
+          "end": "2024-07-17 16:30:00",
+          "event_id": "evt_39d755e231ff4f17aa3e1148dd3944a9"
+        },
+        "result": {
+          "message": "Event updated successfully.",
+          "event": {
+            "id": "evt_39d755e231ff4f17aa3e1148dd3944a9",
+            "summary": "Meeting with Susan (CTO) - Data Science Roadmap",
+            "start": "2024-07-17 15:30:00",
+            "end": "2024-07-17 16:30:00",
+            "description": "",
+            "attendees": [
+              "user=User(id='user_243b8bad', name='susan', email='susan@email.com') attending='ACCEPT'"
+            ],
+            "optional": false,
+            "attending": "ACCEPT"
+          }
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've changed the meeting with Susan to 3:30 PM. It will now end at 4:30 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is the Model Validation Code Review on Thursday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to find the 'Model Validation Code Review' event on Thursday and extract/return the event time to the user.",
+    "simulated_now": "2024-07-18 08:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Data Science Team Stand-up",
+          "start": "2024-07-18 09:00:00",
+          "end": "2024-07-18 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com",
+            "ben@email.com"
+          ],
+          "id": "evt_eee88d07331945f6bc5704735a59b0d8"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Model Validation Code Review",
+          "start": "2024-07-18 10:00:00",
+          "end": "2024-07-18 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david@email.com"
+          ],
+          "id": "evt_d8a7d8720c4849e19f5a0a57a3839913"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Tom (Head of Data Governance) - Data Quality Issues",
+          "start": "2024-07-18 11:30:00",
+          "end": "2024-07-18 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom@email.com"
+          ],
+          "id": "evt_36715c83fea748e3be1105ef36af34bd"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Presentation to Product Team - A/B test results",
+          "start": "2024-07-18 14:00:00",
+          "end": "2024-07-18 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily@email.com"
+          ],
+          "id": "evt_8ee542a54d004d0db1b0ce632f5da9a4"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Quick Sync on Project - Ben",
+          "start": "2024-07-18 16:00:00",
+          "end": "2024-07-18 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ben@email.com"
+          ],
+          "id": "evt_7041b4efae1c4727a55bc9e5c48580b8"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Data Science Team Stand-up",
+          "start": "2024-07-18 09:00:00",
+          "end": "2024-07-18 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com",
+            "ben@email.com"
+          ],
+          "id": "evt_eee88d07331945f6bc5704735a59b0d8"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Model Validation Code Review",
+          "start": "2024-07-18 10:00:00",
+          "end": "2024-07-18 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david@email.com"
+          ],
+          "id": "evt_d8a7d8720c4849e19f5a0a57a3839913"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Tom (Head of Data Governance) - Data Quality Issues",
+          "start": "2024-07-18 11:30:00",
+          "end": "2024-07-18 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom@email.com"
+          ],
+          "id": "evt_36715c83fea748e3be1105ef36af34bd"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Presentation to Product Team - A/B test results",
+          "start": "2024-07-18 14:00:00",
+          "end": "2024-07-18 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily@email.com"
+          ],
+          "id": "evt_8ee542a54d004d0db1b0ce632f5da9a4"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Quick Sync on Project - Ben",
+          "start": "2024-07-18 16:00:00",
+          "end": "2024-07-18 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ben@email.com"
+          ],
+          "id": "evt_7041b4efae1c4727a55bc9e5c48580b8"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is the Model Validation Code Review on Thursday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-07-18 08:00:00",
+          "day": "Thursday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-07-18 23:59:59",
+          "time_min": "2024-07-18 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_eee88d07331945f6bc5704735a59b0d8\",\n  \"summary\": \"Data Science Team Stand-up\",\n  \"start\": \"2024-07-18T09:00:00\",\n  \"end\": \"2024-07-18T09:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_a2b5631e\",\n        \"name\": \"sarah\",\n        \"email\": \"sarah@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_88449358\",\n        \"name\": \"david\",\n        \"email\": \"david@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_2766ad07\",\n        \"name\": \"maria\",\n        \"email\": \"maria@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_92c8152e\",\n        \"name\": \"ben\",\n        \"email\": \"ben@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_d8a7d8720c4849e19f5a0a57a3839913\",\n  \"summary\": \"Model Validation Code Review\",\n  \"start\": \"2024-07-18T10:00:00\",\n  \"end\": \"2024-07-18T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_6157b3c9\",\n        \"name\": \"david\",\n        \"email\": \"david@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_36715c83fea748e3be1105ef36af34bd\",\n  \"summary\": \"Meeting with Tom (Head of Data Governance) - Data Quality Issues\",\n  \"start\": \"2024-07-18T11:30:00\",\n  \"end\": \"2024-07-18T12:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_150a054c\",\n        \"name\": \"tom\",\n        \"email\": \"tom@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_8ee542a54d004d0db1b0ce632f5da9a4\",\n  \"summary\": \"Presentation to Product Team - A/B test results\",\n  \"start\": \"2024-07-18T14:00:00\",\n  \"end\": \"2024-07-18T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_8b241b1f\",\n        \"name\": \"emily\",\n        \"email\": \"emily@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_7041b4efae1c4727a55bc9e5c48580b8\",\n  \"summary\": \"Quick Sync on Project - Ben\",\n  \"start\": \"2024-07-18T16:00:00\",\n  \"end\": \"2024-07-18T17:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_33e07b32\",\n        \"name\": \"ben\",\n        \"email\": \"ben@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "The Model Validation Code Review is on Thursday at 10:00 AM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Is David free on Thursday at 10 AM?",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Call list_events for Thursday between 10 AM and 11 AM to check if David has any conflicts during that time. Return the conflict status to the user.",
+    "simulated_now": "2024-07-18 08:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Data Science Team Stand-up",
+          "start": "2024-07-18 09:00:00",
+          "end": "2024-07-18 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com",
+            "ben@email.com"
+          ],
+          "id": "evt_805ccdef2e8a467a922560adb98853b2"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Model Validation Code Review",
+          "start": "2024-07-18 10:00:00",
+          "end": "2024-07-18 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david@email.com"
+          ],
+          "id": "evt_8e9031b919664ac9bdb7cb48d56e4640"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Tom (Head of Data Governance) - Data Quality Issues",
+          "start": "2024-07-18 11:30:00",
+          "end": "2024-07-18 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom@email.com"
+          ],
+          "id": "evt_b9c406384b85429b979164fe717ea226"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Presentation to Product Team - A/B test results",
+          "start": "2024-07-18 14:00:00",
+          "end": "2024-07-18 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily@email.com"
+          ],
+          "id": "evt_2a489588e8fe4742ab8fd59b2cd0058b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Quick Sync on Project - Ben",
+          "start": "2024-07-18 16:00:00",
+          "end": "2024-07-18 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ben@email.com"
+          ],
+          "id": "evt_43c7546c434341ccb75d7065e7ef0ed8"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Data Science Team Stand-up",
+          "start": "2024-07-18 09:00:00",
+          "end": "2024-07-18 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com",
+            "ben@email.com"
+          ],
+          "id": "evt_805ccdef2e8a467a922560adb98853b2"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Model Validation Code Review",
+          "start": "2024-07-18 10:00:00",
+          "end": "2024-07-18 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david@email.com"
+          ],
+          "id": "evt_8e9031b919664ac9bdb7cb48d56e4640"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Tom (Head of Data Governance) - Data Quality Issues",
+          "start": "2024-07-18 11:30:00",
+          "end": "2024-07-18 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom@email.com"
+          ],
+          "id": "evt_b9c406384b85429b979164fe717ea226"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Presentation to Product Team - A/B test results",
+          "start": "2024-07-18 14:00:00",
+          "end": "2024-07-18 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily@email.com"
+          ],
+          "id": "evt_2a489588e8fe4742ab8fd59b2cd0058b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Quick Sync on Project - Ben",
+          "start": "2024-07-18 16:00:00",
+          "end": "2024-07-18 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ben@email.com"
+          ],
+          "id": "evt_43c7546c434341ccb75d7065e7ef0ed8"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Is David free on Thursday at 10 AM?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-07-18 08:00:00",
+          "day": "Thursday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-07-18 11:00:00",
+          "time_min": "2024-07-18 10:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_8e9031b919664ac9bdb7cb48d56e4640\",\n  \"summary\": \"Model Validation Code Review\",\n  \"start\": \"2024-07-18T10:00:00\",\n  \"end\": \"2024-07-18T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_7581b490\",\n        \"name\": \"david\",\n        \"email\": \"david@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "David has \"Model Validation Code Review\" on Thursday from 10 AM to 11 AM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What meetings do I have today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to find all events for the current day (July 15th).",
+    "simulated_now": "2024-07-15 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Data Science Team Stand-up",
+          "start": "2024-07-15 09:00:00",
+          "end": "2024-07-15 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com",
+            "ben@email.com"
+          ],
+          "id": "evt_5e1e6809ccb54b7dbc6bd27d269986c4"
+        },
+        {
+          "day": "Monday",
+          "summary": "Model Validation Code Review",
+          "start": "2024-07-15 10:00:00",
+          "end": "2024-07-15 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david@email.com",
+            "maria@email.com"
+          ],
+          "id": "evt_b085003179144038b9c71b5878bbd365"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Tom (Head of Data Governance) - Data Quality Issues",
+          "start": "2024-07-15 11:30:00",
+          "end": "2024-07-15 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom@email.com"
+          ],
+          "id": "evt_bde452852c5f48fdb2804cab604d5604"
+        },
+        {
+          "day": "Monday",
+          "summary": "Presentation to Marketing Team - Q3 Campaign Insights",
+          "start": "2024-07-15 14:00:00",
+          "end": "2024-07-15 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john@email.com"
+          ],
+          "id": "evt_d407c2d6d02d4087b8d4ac96c5a1c1b9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lily's Soccer Practice",
+          "start": "2024-07-15 18:00:00",
+          "end": "2024-07-15 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3af11bf8e7394518b55c64952ab34e08"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Data Science Team Stand-up",
+          "start": "2024-07-15 09:00:00",
+          "end": "2024-07-15 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com",
+            "ben@email.com"
+          ],
+          "id": "evt_5e1e6809ccb54b7dbc6bd27d269986c4"
+        },
+        {
+          "day": "Monday",
+          "summary": "Model Validation Code Review",
+          "start": "2024-07-15 10:00:00",
+          "end": "2024-07-15 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david@email.com",
+            "maria@email.com"
+          ],
+          "id": "evt_b085003179144038b9c71b5878bbd365"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Tom (Head of Data Governance) - Data Quality Issues",
+          "start": "2024-07-15 11:30:00",
+          "end": "2024-07-15 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom@email.com"
+          ],
+          "id": "evt_bde452852c5f48fdb2804cab604d5604"
+        },
+        {
+          "day": "Monday",
+          "summary": "Presentation to Marketing Team - Q3 Campaign Insights",
+          "start": "2024-07-15 14:00:00",
+          "end": "2024-07-15 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john@email.com"
+          ],
+          "id": "evt_d407c2d6d02d4087b8d4ac96c5a1c1b9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lily's Soccer Practice",
+          "start": "2024-07-15 18:00:00",
+          "end": "2024-07-15 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3af11bf8e7394518b55c64952ab34e08"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What meetings do I have today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-07-15 08:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-07-15 23:59:59",
+          "time_min": "2024-07-15 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_5e1e6809ccb54b7dbc6bd27d269986c4\",\n  \"summary\": \"Data Science Team Stand-up\",\n  \"start\": \"2024-07-15T09:00:00\",\n  \"end\": \"2024-07-15T09:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_fb188cea\",\n        \"name\": \"sarah\",\n        \"email\": \"sarah@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_69e42dd2\",\n        \"name\": \"david\",\n        \"email\": \"david@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_3289b5cc\",\n        \"name\": \"maria\",\n        \"email\": \"maria@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_dd9079a1\",\n        \"name\": \"ben\",\n        \"email\": \"ben@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_b085003179144038b9c71b5878bbd365\",\n  \"summary\": \"Model Validation Code Review\",\n  \"start\": \"2024-07-15T10:00:00\",\n  \"end\": \"2024-07-15T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_dc75763b\",\n        \"name\": \"david\",\n        \"email\": \"david@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_e6debd3c\",\n        \"name\": \"maria\",\n        \"email\": \"maria@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_bde452852c5f48fdb2804cab604d5604\",\n  \"summary\": \"Meeting with Tom (Head of Data Governance) - Data Quality Issues\",\n  \"start\": \"2024-07-15T11:30:00\",\n  \"end\": \"2024-07-15T12:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_6f089f3a\",\n        \"name\": \"tom\",\n        \"email\": \"tom@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_d407c2d6d02d4087b8d4ac96c5a1c1b9\",\n  \"summary\": \"Presentation to Marketing Team - Q3 Campaign Insights\",\n  \"start\": \"2024-07-15T14:00:00\",\n  \"end\": \"2024-07-15T15:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_31931bc3\",\n        \"name\": \"john\",\n        \"email\": \"john@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_3af11bf8e7394518b55c64952ab34e08\",\n  \"summary\": \"Lily's Soccer Practice\",\n  \"start\": \"2024-07-15T18:00:00\",\n  \"end\": \"2024-07-15T19:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "Today, July 15, 2024, you have five meetings: The first is at 9am for the Data Science Team Stand-up, the second is at 10am for the Model Validation Code Review, the third is at 11:30am with Tom (Head of Data Governance) to discuss Data Quality Issues, the fourth is at 2pm for the Presentation to Marketing Team - Q3 Campaign Insights, and the final one is at 6pm for Lily's Soccer Practice.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to find all events for the next day (July 16th).",
+    "simulated_now": "2024-07-15 16:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Data Science Team Stand-up",
+          "start": "2024-07-16 09:00:00",
+          "end": "2024-07-16 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com",
+            "ben@email.com"
+          ],
+          "id": "evt_8f0df4062e6a4ed484299ba729668cee"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "One-on-One with Sarah",
+          "start": "2024-07-16 10:00:00",
+          "end": "2024-07-16 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com"
+          ],
+          "id": "evt_d838f54977b045b495381182532db024"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Project Scope Meeting - New Recommendation Engine",
+          "start": "2024-07-16 13:00:00",
+          "end": "2024-07-16 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily@email.com"
+          ],
+          "id": "evt_be65270ebc264c8bb66ce9bc75d87b26"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Industry Trends Research - AI Conference Webinar",
+          "start": "2024-07-16 15:00:00",
+          "end": "2024-07-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_56703eb5519b49409871d9a7bebfcf97"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Data Science Team Stand-up",
+          "start": "2024-07-16 09:00:00",
+          "end": "2024-07-16 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com",
+            "david@email.com",
+            "maria@email.com",
+            "ben@email.com"
+          ],
+          "id": "evt_8f0df4062e6a4ed484299ba729668cee"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "One-on-One with Sarah",
+          "start": "2024-07-16 10:00:00",
+          "end": "2024-07-16 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com"
+          ],
+          "id": "evt_d838f54977b045b495381182532db024"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Project Scope Meeting - New Recommendation Engine",
+          "start": "2024-07-16 13:00:00",
+          "end": "2024-07-16 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily@email.com"
+          ],
+          "id": "evt_be65270ebc264c8bb66ce9bc75d87b26"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Industry Trends Research - AI Conference Webinar",
+          "start": "2024-07-16 15:00:00",
+          "end": "2024-07-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_56703eb5519b49409871d9a7bebfcf97"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on tomorrow?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": {
+          "current_time": "2024-07-15 16:00:00",
+          "day": "Monday"
+        }
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-07-16 23:59:59",
+          "time_min": "2024-07-16 00:00:00"
+        },
+        "result": {
+          "events": [
+            "{\n  \"id\": \"evt_8f0df4062e6a4ed484299ba729668cee\",\n  \"summary\": \"Data Science Team Stand-up\",\n  \"start\": \"2024-07-16T09:00:00\",\n  \"end\": \"2024-07-16T09:30:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_13f0327b\",\n        \"name\": \"sarah\",\n        \"email\": \"sarah@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_ab0c4ffe\",\n        \"name\": \"david\",\n        \"email\": \"david@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_8303cd09\",\n        \"name\": \"maria\",\n        \"email\": \"maria@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    },\n    {\n      \"user\": {\n        \"id\": \"user_f77c1afb\",\n        \"name\": \"ben\",\n        \"email\": \"ben@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_d838f54977b045b495381182532db024\",\n  \"summary\": \"One-on-One with Sarah\",\n  \"start\": \"2024-07-16T10:00:00\",\n  \"end\": \"2024-07-16T11:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_6450a9de\",\n        \"name\": \"sarah\",\n        \"email\": \"sarah@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_be65270ebc264c8bb66ce9bc75d87b26\",\n  \"summary\": \"Project Scope Meeting - New Recommendation Engine\",\n  \"start\": \"2024-07-16T13:00:00\",\n  \"end\": \"2024-07-16T14:00:00\",\n  \"description\": \"\",\n  \"attendees\": [\n    {\n      \"user\": {\n        \"id\": \"user_835048ec\",\n        \"name\": \"emily\",\n        \"email\": \"emily@email.com\"\n      },\n      \"attending\": \"ACCEPT\"\n    }\n  ],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}",
+            "{\n  \"id\": \"evt_56703eb5519b49409871d9a7bebfcf97\",\n  \"summary\": \"Industry Trends Research - AI Conference Webinar\",\n  \"start\": \"2024-07-16T15:00:00\",\n  \"end\": \"2024-07-16T16:00:00\",\n  \"description\": \"\",\n  \"attendees\": [],\n  \"optional\": false,\n  \"attending\": \"ACCEPT\"\n}"
+          ]
+        }
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Tomorrow, July 16, you have four entries: The first is at 9am for the Data Science Team Stand-up. The second is at 10am for One-on-One with Sarah. The third is at 1pm for Project Scope Meeting - New Recommendation Engine. The fourth is at 3pm for Industry Trends Research - AI Conference Webinar.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

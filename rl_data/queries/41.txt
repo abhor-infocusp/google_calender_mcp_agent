@@ -1,0 +1,146 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Seed delivery' for December 3rd at 10 am, lasting for an hour.",
+        "complexity": "Low",
+        "expected_behavior": "Call the create_event tool with summary 'Seed delivery', start time '2026-12-03T10:00:00', end time '2026-12-03T11:00:00'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-11-29T18:30:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting with my accountant, Sam Wilson, for this Tuesday at 3:00 PM to discuss Q4 taxes.",
+        "complexity": "Low",
+        "expected_behavior": "Call the create_event tool with summary 'Meeting with Sam Wilson', start time '2026-12-01T15:00:00', end time '2026-12-01T16:00:00', and attendees 'Sam Wilson'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-11-29T18:30:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Reschedule my restaurant deliveries for later this week.",
+        "complexity": "Medium",
+        "expected_behavior": "Assuming 'later this week' implies pushing the deliveries to Friday, call the list_events tool for Tuesday to find the 'Delivery to Restaurant A' and 'Delivery to Restaurant B' events, then update each event with update_event to Friday afternoon.",
+        "addressed_days": [
+            "Tuesday",
+            "Friday"
+        ],
+        "current_time": "2026-12-01T07:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing for fun this weekend?",
+        "complexity": "Medium",
+        "expected_behavior": "Call the list_events tool, filtering for Saturday and Sunday, to identify events categorized as leisure or social, such as 'Visit local brewery', 'Dinner with friends', and 'Relax/Read'.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-12-04T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my meeting with the Energy Consultant to 10:30 AM?",
+        "complexity": "Low",
+        "expected_behavior": "Call the list_events tool for Monday to find the 'Meeting with Energy Consultant' event, then call the update_event tool with the event ID to update the start time to '2026-11-30T10:30:00' and end time to '2026-11-30T12:00:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-11-30T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "I need to cancel my dinner with friends on Thursday.",
+        "complexity": "Low",
+        "expected_behavior": "Call the list_events tool for Thursday to find the 'Dinner with Friends from previous job' event, then call the delete_event tool with the event ID to remove it from the calendar.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-12-03T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my meeting with the grocery store manager on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Call the list_events tool for Thursday to find the 'Meeting with Grocery Store Manager' event, then use the get_event tool to retrieve the event's details, including the start time.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-12-02T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I talking to on Wednesday about pest control?",
+        "complexity": "Low",
+        "expected_behavior": "Call the list_events tool to find an event on Wednesday that includes the keywords 'pest control'. Then, extract the attendees or summary of the event to identify the person the user is talking to.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-12-01T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my farm maintenance to Saturday evening, but I have dinner plans already.  Can you tell me what time my dinner is?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to identify the Saturday evening event to determine its time. The query assumes Saturday evening refers to 'Dinner with friends'. If that's the case and there are no time conflicts with moving farm maintenance, respond to the user that it is ok.  If there is a conflict, respond that it is not ok, and offer alternative times on Sunday.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-12-04T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can I push my basil planting to the time when I usually check the hydroponics on Monday?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the basil planting time (Friday 9:30 AM - 11:00 AM) and the hydroponics check on Monday (8:00 AM - 9:00 AM). Since they are on different days, inform the user that you can move it to the 8:00 AM - 9:00 AM slot on Monday. Then, use update_event to move it.",
+        "addressed_days": [
+            "Friday",
+            "Monday"
+        ],
+        "current_time": "2026-12-04T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... the kale... thing?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for Tuesday to find the 'Harvesting mature kale' event. Then, prompt the user for a new time and date to reschedule the event.  Once specified, use update_event to update the event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-12-01T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "The... meeting... with the energy... no, hydroponics supplier",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for Monday to find the 'Call with Hydroponics Equipment Supplier' event. Then, wait for the user's next instruction regarding this event.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-11-30T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow morning?",
+        "complexity": "Low",
+        "expected_behavior": "Using current time, recognize that 'tomorrow' is Tuesday. Call the list_events tool for Tuesday morning (8AM-12PM) to list all events scheduled during that time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-11-30T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Using current time, recognize that 'yesterday' was Saturday. Call the list_events tool for Saturday to list all events scheduled for that day.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-12-06T07:00:00"
+    }
+]

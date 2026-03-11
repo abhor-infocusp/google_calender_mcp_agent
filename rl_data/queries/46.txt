@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting for Thursday at 2 PM about project updates.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'project updates' scheduled for Thursday, April 25, 2024 at 2:00 PM to 3:00 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-04-21T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add an event to my calendar for Tuesday to discuss the welding station issue. Make it at 3:00 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with the summary 'discuss the welding station issue' for Tuesday, April 23, 2024 from 3:00 PM to 4:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-04-21T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List events between 1:00 PM and 5:00 PM on Wednesday, April 24, 2024.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-04-24T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy Saturday?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Saturday, April 27, 2024.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-04-27T07:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my dinner with my wife on Monday to 8:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Dinner with Wife' on Monday, April 22, 2024 and update the start time to 8:30 PM and end time to 9:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-04-22T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the equipment team meeting on Thursday to 9 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Team meeting on equipment installation' on Thursday, April 25, 2024 and update the start time to 9:00 AM and end time to 10:00 AM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-04-24T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I meeting with on Wednesday morning to discuss solutions?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event on Wednesday, April 24, 2024 between 10:00 AM and 12:00 PM and return the attendees.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-04-24T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What's on my schedule for Sunday afternoon?",
+        "complexity": "Low",
+        "expected_behavior": "List events on Sunday, April 28, 2024 between 2:00 PM and 6:00 PM.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-04-28T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I need to move the robotic arm repair on Wednesday. Can you move it to Friday morning instead?",
+        "complexity": "High",
+        "expected_behavior": "Find the event 'Repair of robotic arm' on Wednesday, April 24, 2024 and delete it. Then, create a new event with the summary 'Repair of robotic arm' scheduled for Friday, April 26, 2024 from 7:00 AM to 10:00 AM.",
+        "addressed_days": [
+            "Wednesday",
+            "Friday"
+        ],
+        "current_time": "2024-04-23T15:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Cancel my baseball game on Tuesday and instead book time to inspect the emergency backup generators.",
+        "complexity": "High",
+        "expected_behavior": "Delete the event 'Watch Baseball Game on TV' on Tuesday, April 23, 2024. Then, find the event 'Inspect Emergency Backup Generators' and update it's start time to 7:00 PM, setting the end time to 8:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-04-23T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule safety... inspectors?",
+        "complexity": "High",
+        "expected_behavior": "Find the event 'Safety Regulation Compliance Review' on Thursday, April 25, 2024 and prompt the user with a clarification question. If the user confirms the event, ask for the new time. A follow up query will be required with the new time.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-04-25T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner... Friday?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Friday, April 26, 2024 that contain the word 'Dinner'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-04-26T11:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List events on Monday, April 22, 2024.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-04-22T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Is vendor_1@email.com available tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Thursday, April 25, 2024 and check to see if vendor_1@email.com is listed as an attendee to any event.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-04-24T14:00:00"
+    }
+]

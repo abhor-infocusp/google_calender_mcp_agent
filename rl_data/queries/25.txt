@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please create an event called 'Marketing Meeting' on December 18th at 1 PM for 30 minutes.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event titled 'Marketing Meeting' on December 18th, 2024, at 1:00 PM for 30 minutes. No attendees or description needed.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-12-15T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you schedule a doctor's appointment for me this Friday at 10:00 AM?",
+        "complexity": "Low",
+        "expected_behavior": "Create an event titled 'Doctor's Appointment' on December 20th, 2024, at 10:00 AM. No attendees or description needed.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-12-15T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing tomorrow evening?",
+        "complexity": "Medium",
+        "expected_behavior": "List events occurring on Tuesday, December 17th, 2024, between 6:00 PM and 11:59 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-12-16T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the agenda for Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Thursday, December 19th, 2024.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-12-15T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my client consultation on Monday back by one hour.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Client Consultation - Divorce Case' on Monday, December 16th, 2024, and update its start time to 10:00 AM and end time to 11:30 AM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-12-16T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the dinner with friends on Thursday to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Dinner with friends' on Thursday, December 19th, 2024, and update its start time to 7:30 PM and end time to 8:30 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-12-19T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having dinner with on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event 'Dinner with friends' on Thursday, December 19th, 2024, and return the attendees: olivia.green@email.com.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-12-15T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my court appearance this week?",
+        "complexity": "Medium",
+        "expected_behavior": "List events with 'Court Appearance' in the title between December 16th and December 22nd, 2024. Return the start time of the event.",
+        "addressed_days": [
+            "Monday",
+            "Thursday"
+        ],
+        "current_time": "2024-12-15T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting with Amy and David on Wednesday at 11, but only if it doesn't overlap with anything else.",
+        "complexity": "High",
+        "expected_behavior": "List events on Wednesday, December 18th, 2024 between 11:00 AM and 11:30 AM. If no conflicts are found, create an event called 'Meeting with Amy and David' on December 18th, 2024, at 11:00 AM with attendees amy.lee@email.com and david.jones@email.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-12-15T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule the meeting with Michael Brown on Tuesday. I want to push it back 30 minutes, but make sure it doesn't conflict with anything else.",
+        "complexity": "High",
+        "expected_behavior": "Find the event 'Meeting with Mediator' on Tuesday, December 17th, 2024. Check for conflicts between 12:00 PM and 1:30 PM. If no conflicts exist, update the start time to 12:00 PM and end time to 1:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-12-16T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Client meeting Thursday regarding finances?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Client Meeting - Discuss financial options with client' on Thursday, December 19th, 2024. Display the event details, including time and attendees.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-12-19T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule custody hearing",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Court Appearance - Child Custody Hearing' on Monday, December 16th, 2024. Ask for the new date and time to reschedule the meeting.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-12-16T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Monday, December 16th, 2024.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-12-16T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any meetings yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Saturday, December 21st, 2024.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-12-22T08:00:00"
+    }
+]

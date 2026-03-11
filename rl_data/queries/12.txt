@@ -1,0 +1,150 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create a new event called 'Team Meeting' for Wednesday at 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with the title 'Team Meeting' on Wednesday, June 7th, at 3 PM and ending at 4 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-06-04T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me a yoga session for Tuesday at 7 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event named 'Yoga Class' for Tuesday, June 6th, at 7 PM and ending at 8 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-06-04T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing with Maria and David this week?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events that include Maria and David as attendees. Then respond to the user with the events found.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-06-05T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the schedule for healthy meals this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the schedule for 'Meal Prep' events that contain the word 'dietary' or 'specialized dietary' in their name or description and respond with a summary of these events.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2023-06-05T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the dinner with friends to 7 PM on Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Friends from Culinary School' event and update its start time to 7 PM and end time to 8:30 PM on Monday, June 5th.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-06-05T15:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you add Dr. Lee to the call on Tuesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Call with Dietitian' event on Tuesday and add 'lee.d@email.com' to the attendees list.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-06-06T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the yoga class?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Yoga Class' event and respond with its start time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-06-06T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What's happening on Friday morning?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Friday between 9:00 AM and 12:00 PM and respond with the summary of each event found.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-06-05T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my visit to the butchers to be before my language class on Wednesday.",
+        "complexity": "High",
+        "expected_behavior": "Find 'Visit Local Butchers/Fishmongers' and 'Language Class' events on Wednesday. Check if 'Visit Local Butchers/Fishmongers' is scheduled after 'Language Class'. If so, swap the times of these two events so that 'Visit Local Butchers/Fishmongers' occurs before 'Language Class'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-06-07T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is there a conflict if I schedule a meeting with John for 11 AM on Saturday?",
+        "complexity": "High",
+        "expected_behavior": "List any events scheduled on Saturday between 11:00 AM and 12:00 PM. Report whether there is an existing conflict or not.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-06-07T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Family A feedback?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Client Feedback Call - Family A' and list the details. Provide any feedback listed in the description.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-06-09T11:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Grocery shopping!",
+        "complexity": "Low",
+        "expected_behavior": "List all events containing 'Grocery Shopping' in the event's title. Return details for each found event.",
+        "addressed_days": [
+            "Monday",
+            "Friday",
+            "Saturday"
+        ],
+        "current_time": "2023-06-05T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for the current day (Monday, June 5th) and respond with the summaries.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-06-05T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow's agenda?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for the next day (Tuesday, June 6th) and respond with the summaries.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-06-05T20:00:00"
+    }
+]
