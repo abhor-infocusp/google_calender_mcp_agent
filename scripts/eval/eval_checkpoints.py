@@ -18,9 +18,10 @@ import subprocess
 import sys
 import time
 
-PYTHON = "/home/abhor_gupta/miniconda3/envs/agentic/bin/python"
-PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-SFT_OUTPUT = os.path.join(PROJECT_DIR, "sft_output")
+PYTHON = os.environ.get("CONDA_PYTHON", "/home/abhor/miniconda3/envs/agentic/bin/python")
+from calendar_agent.paths import PROJECT_ROOT, SFT_OUTPUT_DIR
+PROJECT_DIR = str(PROJECT_ROOT)
+SFT_OUTPUT = str(SFT_OUTPUT_DIR)
 MERGED_DIR = os.path.join(SFT_OUTPUT, "merged_eval")
 RESULTS_DIR = os.path.join(PROJECT_DIR, "checkpoint_eval_results")
 VLLM_LOG = os.path.join(PROJECT_DIR, "vllm_eval.log")
@@ -132,7 +133,7 @@ def run_eval(cal_idx: int, save_path: str):
     """Run eval_qwen.py on a calendar."""
     result = subprocess.run(
         [
-            PYTHON, "eval_qwen.py", str(cal_idx),
+            PYTHON, str(PROJECT_ROOT / "scripts" / "eval" / "eval_qwen.py"), str(cal_idx),
             "--model", MODEL_NAME,
             "--sft-data",
             "--with-final-answer",

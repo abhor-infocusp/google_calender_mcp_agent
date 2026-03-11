@@ -14,8 +14,9 @@ os.environ["VLLM_WORKER_MULTIPROC_METHOD"] = "spawn"
 
 from unsloth import FastLanguageModel
 
-LORA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sft_output", "final")
-OUTPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sft_output", "merged")
+from calendar_agent.paths import SFT_OUTPUT_DIR
+LORA_PATH = str(SFT_OUTPUT_DIR / "final")
+OUTPUT_PATH = str(SFT_OUTPUT_DIR / "merged")
 
 print(f"Loading base model + LoRA adapter from: {LORA_PATH}")
 model, tokenizer = FastLanguageModel.from_pretrained(

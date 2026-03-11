@@ -12,9 +12,10 @@ import sys
 import time
 import urllib.request
 
-PYTHON = "/home/abhor_gupta/miniconda3/envs/agentic/bin/python"
-PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-SFT_OUTPUT = os.path.join(PROJECT_DIR, "sft_output")
+PYTHON = os.environ.get("CONDA_PYTHON", "/home/abhor/miniconda3/envs/agentic/bin/python")
+from calendar_agent.paths import PROJECT_ROOT, SFT_OUTPUT_DIR
+PROJECT_DIR = str(PROJECT_ROOT)
+SFT_OUTPUT = str(SFT_OUTPUT_DIR)
 MERGED_DIR = os.path.join(SFT_OUTPUT, "merged_eval")
 RESULTS_DIR = os.path.join(PROJECT_DIR, "checkpoint_eval_results", "rl_validation")
 VLLM_LOG = os.path.join(PROJECT_DIR, "vllm_rl_eval.log")
@@ -99,7 +100,7 @@ def kill_vllm(proc):
 
 def run_eval(cal_idx, save_path):
     result = subprocess.run(
-        [PYTHON, "eval_qwen.py", str(cal_idx),
+        [PYTHON, str(PROJECT_ROOT / "scripts" / "eval" / "eval_qwen.py"), str(cal_idx),
          "--model", MODEL_NAME, "--rl-data", "--with-final-answer", "--save", save_path],
         capture_output=True, text=True, timeout=600, cwd=PROJECT_DIR,
     )

@@ -4,7 +4,7 @@ import uuid
 from datetime import datetime
 from typing import List
 
-from environment.models import Attendee, Calendar, Event, User
+from calendar_agent.environment.models import Attendee, Calendar, Event, User
 
 class CalendarEnvironment:
     """The primary calendar environment."""

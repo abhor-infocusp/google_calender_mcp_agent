@@ -2,7 +2,7 @@ import pytest
 
 from datetime import datetime
 
-from environment.environment import CalendarEnvironment
+from calendar_agent.environment import CalendarEnvironment
 
 @pytest.fixture
 def env():

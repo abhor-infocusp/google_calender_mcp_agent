@@ -14,7 +14,8 @@ import vertexai
 from google.oauth2.credentials import Credentials as OAuth2Credentials
 from vertexai.generative_models import GenerationConfig, GenerativeModel
 
-from prompt import architect_prompt, jsonizer_prompt, persona_prompt, query_prompt
+from calendar_agent.prompts import architect_prompt, jsonizer_prompt, persona_prompt, query_prompt
+from calendar_agent.paths import PROJECT_ROOT, CREDENTIALS_PATH
 
 
 def random_monday(start_year: int = 2023, end_year: int = 2026) -> str:
@@ -28,10 +29,10 @@ def random_monday(start_year: int = 2023, end_year: int = 2026) -> str:
     return monday.strftime("%Y-%m-%d")
 
 
-PERSONA_DIR = "data/persona"
-TEXT_CALENDER_DIR = "data/calender"
-JSON_CALENDER_DIR = "data/json_calender"
-QUERY_DIR = "data/queries"
+PERSONA_DIR = str(PROJECT_ROOT / "data" / "persona")
+TEXT_CALENDER_DIR = str(PROJECT_ROOT / "data" / "calender")
+JSON_CALENDER_DIR = str(PROJECT_ROOT / "data" / "json_calender")
+QUERY_DIR = str(PROJECT_ROOT / "data" / "queries")
 
 DATA_SIZE = 50
 
@@ -47,7 +48,7 @@ if __name__ == "__main__":
         os.makedirs(dir, exist_ok=True)
 
     # Init genai model
-    with open("gcloud_credentials.json") as f:
+    with open(CREDENTIALS_PATH) as f:
         cd = json.load(f)
     creds = OAuth2Credentials(
         token=None,

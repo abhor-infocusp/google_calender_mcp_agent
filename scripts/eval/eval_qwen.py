@@ -30,16 +30,14 @@ warnings.filterwarnings("ignore")
 
 from openai import OpenAI
 
-from environment.environment import CalendarEnvironment
-from run_trajectory import (
+from calendar_agent.environment import CalendarEnvironment
+from calendar_agent.core import (
     DAY_NAMES,
-    EVAL_SYSTEM_PROMPT,
     SYSTEM_PROMPT,
     TOOL_DECLARATIONS,
     C,
     diff_snapshots,
     dispatch_tool_call,
-    evaluate_trajectory,
     filter_by_days,
     format_day_state,
     get_query_now,
@@ -49,12 +47,14 @@ from run_trajectory import (
     print_tool_result,
     snapshot_events,
 )
+from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, evaluate_trajectory
+from calendar_agent.paths import SFT_DATA_DIR, DATA_DIR, RL_DATA_DIR, CREDENTIALS_PATH
 
 # ── Data Loading (supports both data/ and sft_data/) ──────
 
-SFT_DATA_DIR = os.path.join(os.path.dirname(__file__), "sft_data")
-DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
-RL_DATA_DIR = os.path.join(os.path.dirname(__file__), "rl_data")
+SFT_DATA_DIR = str(SFT_DATA_DIR)
+DATA_DIR = str(DATA_DIR)
+RL_DATA_DIR = str(RL_DATA_DIR)
 
 
 def load_calendar_and_queries(index: int, use_sft_data: bool = False, use_rl_data: bool = False):
@@ -359,9 +359,7 @@ def main():
     from vertexai.generative_models import GenerativeModel
 
     _gcp_credentials = None
-    _creds_path = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), "gcloud_credentials.json"
-    )
+    _creds_path = str(CREDENTIALS_PATH)
     if os.path.exists(_creds_path):
         from google.oauth2.credentials import Credentials as OAuth2Credentials
 

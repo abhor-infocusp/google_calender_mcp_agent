@@ -16,7 +16,8 @@ import json
 import sys
 from pathlib import Path
 
-ART_DIR = Path(__file__).parent / ".art" / "calendar-agent" / "models" / "calendar-agent-001"
+from calendar_agent.paths import PROJECT_ROOT
+ART_DIR = PROJECT_ROOT / ".art" / "calendar-agent" / "models" / "calendar-agent-001"
 HISTORY_FILE = ART_DIR / "history.jsonl"
 TRAJECTORIES_DIR = ART_DIR / "trajectories"
 

@@ -7,7 +7,8 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-TRAJ_DIR = ".art/calendar-agent/models/calendar-agent-001/trajectories"
+from calendar_agent.paths import PROJECT_ROOT
+TRAJ_DIR = str(PROJECT_ROOT / ".art" / "calendar-agent" / "models" / "calendar-agent-001" / "trajectories")
 
 
 def load_step_rewards(subdir):

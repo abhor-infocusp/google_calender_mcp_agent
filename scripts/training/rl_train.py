@@ -51,22 +51,22 @@ from pydantic import BaseModel
 from tenacity import retry, stop_after_attempt
 from vertexai.generative_models import GenerativeModel
 
-from environment.environment import CalendarEnvironment
-from run_trajectory import (
-    EVAL_SYSTEM_PROMPT,
+from calendar_agent.environment import CalendarEnvironment
+from calendar_agent.core import (
     SYSTEM_PROMPT,
     TOOL_DECLARATIONS,
     dispatch_tool_call,
     filter_by_days,
-    format_day_state_text,
     snapshot_events,
 )
+from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, format_day_state_text
+from calendar_agent.paths import RL_DATA_DIR as _RL_DATA_DIR, CREDENTIALS_PATH
 
 random.seed(42)
 
 # ── Paths ──────────────────────────────────────────────────
 
-DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "rl_data")
+DATA_DIR = str(_RL_DATA_DIR)
 JSON_CALENDAR_DIR = os.path.join(DATA_DIR, "json_calender")
 QUERY_DIR = os.path.join(DATA_DIR, "queries")
 
@@ -241,9 +241,7 @@ def _truncate(text: str, limit: int = MAX_TOOL_OUTPUT_CHARS) -> str:
 # ── Evaluation (uses Gemini judge via Vertex AI) ──────────
 
 # Load Google credentials from file
-CREDENTIALS_PATH = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), "gcloud_credentials.json"
-)
+CREDENTIALS_PATH = str(CREDENTIALS_PATH)
 
 _gcp_credentials = None
 if os.path.exists(CREDENTIALS_PATH):

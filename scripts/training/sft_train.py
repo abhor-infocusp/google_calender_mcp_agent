@@ -30,15 +30,16 @@ from unsloth import FastLanguageModel
 from trl import SFTTrainer, SFTConfig
 from datasets import Dataset
 
-from run_trajectory import SYSTEM_PROMPT, TOOL_DECLARATIONS
+from calendar_agent.core import SYSTEM_PROMPT, TOOL_DECLARATIONS
+from calendar_agent.paths import SFT_DATA_DIR as _SFT_DATA_DIR, SFT_OUTPUT_DIR as _SFT_OUTPUT_DIR
 
 random.seed(42)
 
 # ── Paths ──────────────────────────────────────────────────
 
-SFT_DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sft_data")
-TRAJ_DIR = os.path.join(SFT_DATA_DIR, "trajectories")
-OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sft_output")
+SFT_DATA_DIR = str(_SFT_DATA_DIR)
+TRAJ_DIR = str(_SFT_DATA_DIR / "trajectories")
+OUTPUT_DIR = str(_SFT_OUTPUT_DIR)
 
 # ── Model Config ───────────────────────────────────────────
 

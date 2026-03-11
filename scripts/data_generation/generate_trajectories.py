@@ -19,23 +19,23 @@ import vertexai
 from google.oauth2.credentials import Credentials as OAuth2Credentials
 from vertexai.generative_models import GenerativeModel, Part
 
-from environment.environment import CalendarEnvironment
-from run_trajectory import (
+from calendar_agent.environment import CalendarEnvironment
+from calendar_agent.core import (
     CALENDAR_TOOL,
     SYSTEM_PROMPT,
-    EVAL_SYSTEM_PROMPT,
     dispatch_tool_call,
     snapshot_events,
     filter_by_days,
-    evaluate_trajectory,
     get_query_now,
     DAY_NAMES,
 )
+from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, evaluate_trajectory
+from calendar_agent.paths import SFT_DATA_DIR as _SFT_DATA_DIR, CREDENTIALS_PATH
 
 MODEL_NAME = "gemini-2.0-flash-001"
 MAX_TURNS = 10
 
-SFT_DATA_DIR = os.path.join(os.path.dirname(__file__), "sft_data")
+SFT_DATA_DIR = str(_SFT_DATA_DIR)
 JSON_CALENDAR_DIR = os.path.join(SFT_DATA_DIR, "json_calender")
 QUERY_DIR = os.path.join(SFT_DATA_DIR, "queries")
 TRAJ_DIR = os.path.join(SFT_DATA_DIR, "trajectories")
@@ -153,7 +153,7 @@ def main():
     os.makedirs(TRAJ_DIR, exist_ok=True)
 
     # Init credentials
-    creds_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gcloud_credentials.json")
+    creds_path = str(CREDENTIALS_PATH)
     with open(creds_path) as f:
         cd = json.load(f)
     creds = OAuth2Credentials(

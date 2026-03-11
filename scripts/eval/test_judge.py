@@ -2,9 +2,10 @@
 import vertexai, json, sys
 from google.oauth2.credentials import Credentials as OAuth2Credentials
 from vertexai.generative_models import GenerativeModel
-from run_trajectory import EVAL_SYSTEM_PROMPT
+from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT
+from calendar_agent.paths import CREDENTIALS_PATH
 
-with open("gcloud_credentials.json") as f:
+with open(CREDENTIALS_PATH) as f:
     cd = json.load(f)
 creds = OAuth2Credentials(
     token=None, refresh_token=cd["refresh_token"],
