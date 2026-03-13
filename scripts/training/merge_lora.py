@@ -16,7 +16,7 @@ from unsloth import FastLanguageModel
 
 from calendar_agent.paths import SFT_OUTPUT_DIR
 LORA_PATH = str(SFT_OUTPUT_DIR / "final")
-OUTPUT_PATH = str(SFT_OUTPUT_DIR / "merged")
+OUTPUT_PATH = str(SFT_OUTPUT_DIR / "merged_instruct")
 
 print(f"Loading base model + LoRA adapter from: {LORA_PATH}")
 model, tokenizer = FastLanguageModel.from_pretrained(

@@ -72,7 +72,7 @@ QUERY_DIR = os.path.join(DATA_DIR, "queries")
 
 # ── Configuration ──────────────────────────────────────────
 
-MAX_TURNS = 6  # cap agent turns to bound trajectory length
+MAX_TURNS = 5  # cap agent turns to bound trajectory length
 MAX_TOOL_OUTPUT_CHARS = 500  # aggressive truncation for memory
 
 
@@ -180,7 +180,7 @@ def _convert_params(params: dict) -> dict:
     for key, value in params.items():
         if key == "property_ordering":
             continue
-        if key == "type" and isinstance(value, str):
+        if key in ("type", "type_") and isinstance(value, str):
             result["type"] = VERTEX_TO_OPENAI_TYPES.get(value, value.lower())
         elif key == "items" and isinstance(value, dict):
             result["items"] = _convert_params(value)
@@ -379,7 +379,6 @@ async def rollout(
                 temperature=1,
                 messages=traj.messages(),
                 tools=traj.tools,
-                extra_body={"chat_template_kwargs": {"enable_thinking": False}},
             )
         except Exception as e:
             print(f"[ROLLOUT ERROR] LLM call failed: {e}")
@@ -448,26 +447,12 @@ async def rollout(
             if name and name != "return_final_answer":
                 tool_names_used.append(name)
 
-    # Shaped reward: create variance even among failed trajectories so GRPO
-    # always has advantage signal (avoids "Skipping tuning" steps).
-    #   0.0  — no final answer (model broke / didn't finish)
-    #   0.1  — produced a final answer but used zero tools
-    #   0.2  — used get_current_time (learned the first-step pattern)
-    #   0.3  — used get_current_time AND a data tool (list/get/create/update/delete)
-    #   1.0  — fully correct per Gemini judge
-    shaped_reward = 0.0
+    # Binary reward: 0.0 or 1.0 only. No shaped intermediates — forces the
+    # model to optimise for correctness rather than gaming tool-use patterns.
+    reward = 0.0
     verdict = "NoAnswer"
 
     if final_answer_text is not None:
-        shaped_reward = 0.1  # at least produced an answer
-
-        if "get_current_time" in tool_names_used:
-            shaped_reward = 0.2
-            data_tools = {"list_events", "get_event", "create_event",
-                          "update_event", "delete_event", "respond_to_event"}
-            if data_tools & set(tool_names_used):
-                shaped_reward = 0.3
-
         # Run Gemini judge for full correctness
         after_snap = snapshot_events(env)
         before_days = filter_by_days(before_snap, scenario.addressed_days)
@@ -482,15 +467,15 @@ async def rollout(
         )
 
         if verdict == "Correct":
-            shaped_reward = 1.0
+            reward = 1.0
 
-    traj.reward = shaped_reward
+    traj.reward = reward
     traj.metrics["correct"] = 1.0 if verdict == "Correct" else 0.0
     traj.metrics["verdict"] = {"Correct": 1, "Incorrect": 0}.get(verdict, -1)
-    traj.metrics["shaped_reward"] = shaped_reward
+    traj.metrics["shaped_reward"] = reward
     traj.final_answer_text = final_answer_text
     print(
-        f"  [DEBUG {scenario.id}] verdict={verdict} reward={shaped_reward} "
+        f"  [DEBUG {scenario.id}] verdict={verdict} reward={reward} "
         f"tools={tool_names_used} final_answer='{(final_answer_text or '')[:100]}'"
     )
 
@@ -522,20 +507,28 @@ async def main():
         # Must be the MERGED fp16 model from serialized SFT training.
         # Create with: merge_lora.py or Unsloth save_pretrained_merged()
         # from the best SFT checkpoint (e.g. sft_output/checkpoint-144).
-        base_model="sft_output/merged_for_rl",
+        base_model="sft_output/merged_instruct",
         _internal_config=dev.InternalModelConfig(
             init_args=dev.InitArgs(
                 load_in_4bit=True,
+                use_bitsandbytes=False,
                 max_lora_rank=32,
             ),
             engine_args=dev.EngineArgs(
                 max_model_len=2048,
+                max_num_batched_tokens=2048,
+                max_num_seqs=4,
                 gpu_memory_utilization=0.55,
                 enforce_eager=True,
+                swap_space=2,
+                enable_sleep_mode=False,
             ),
             trainer_args=dev.TrainerArgs(
                 per_device_train_batch_size=1,
-                generation_batch_size=4,
+                gradient_accumulation_steps=4,
+                num_generations=2,
+                max_completion_length=512,
+                max_grad_norm=0.1,
                 optim="paged_adamw_8bit",
                 bf16=False,
                 fp16=True,
@@ -545,7 +538,10 @@ async def main():
 
     # in_process=True runs vLLM in the main process so errors are visible
     backend = LocalBackend(in_process=True)
-    await model.register(backend)
+    from art.dev.openai_server import OpenAIServerConfig, ServerArgs
+    await model.register(backend, _openai_client_config=OpenAIServerConfig(
+        server_args=ServerArgs(port=8005),
+    ))
 
     # ── Load Data ──
     all_scenarios = load_all_scenarios()
@@ -563,12 +559,12 @@ async def main():
 
     # ── Training Config ──
     training_config = {
-        "groups_per_step": 2,
-        "num_epochs": 10,
-        "rollouts_per_group": 4,
-        "learning_rate": 1e-5,
-        "max_steps": 1000,
-        "validation_step_interval": 10,
+        "groups_per_step": 8,
+        "num_epochs": 3,
+        "rollouts_per_group": 4,  # Need >=4 for binary rewards at ~10% correct rate
+        "learning_rate": 5e-6,
+        "max_steps": 500,
+        "validation_step_interval": 15,
     }
 
     training_iterator = iterate_dataset(
@@ -643,11 +639,13 @@ async def main():
             print_gpu_usage("after validation")
 
         await model.delete_checkpoints()
-        await backend.train(
-            model,
+        await model.train(
             finished_train_groups,
-            learning_rate=training_config["learning_rate"],
-            logprob_calculation_chunk_size=128,
+            config=art.TrainConfig(
+                learning_rate=training_config["learning_rate"],
+                beta=0.0,
+            ),
+            _config=dev.TrainConfig(logprob_calculation_chunk_size=128),
         )
         print_gpu_usage("after train")
 

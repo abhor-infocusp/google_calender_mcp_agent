@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""SFT training script for Qwen3-4B on solved calendar agent trajectories.
+"""SFT training for 100 epochs with per-epoch checkpoints and loss logging.
 
-Uses Unsloth for efficient 4-bit LoRA fine-tuning with TRL's SFTTrainer.
-Loads solved trajectories from sft_data/trajectories/ and converts them
-to Qwen3 tool-calling chat format for supervised fine-tuning.
+Trains Qwen2.5-1.5B-Instruct on calendar agent trajectories using Unsloth + TRL.
+Saves a checkpoint every epoch and writes training/validation loss to a CSV.
 
 Usage:
-    python sft_training.py
+    PYTHONPATH=src python scripts/training/sft_train_100ep.py
 """
 
+import csv
 import json
 import glob
 import os
@@ -17,7 +17,6 @@ import re
 
 os.environ["VLLM_WORKER_MULTIPROC_METHOD"] = "spawn"
 
-# Ensure cusparseLt library is findable
 _cusparselt_path = os.path.expanduser(
     "~/.local/lib/python3.10/site-packages/cusparselt/lib"
 )
@@ -29,34 +28,29 @@ if os.path.isdir(_cusparselt_path):
 from unsloth import FastLanguageModel
 from trl import SFTTrainer, SFTConfig
 from datasets import Dataset
+from transformers import TrainerCallback
 
 from calendar_agent.core import SYSTEM_PROMPT, TOOL_DECLARATIONS
-from calendar_agent.paths import SFT_DATA_DIR as _SFT_DATA_DIR, SFT_OUTPUT_DIR as _SFT_OUTPUT_DIR
+from calendar_agent.paths import SFT_DATA_DIR as _SFT_DATA_DIR
 
 random.seed(42)
 
 # ── Paths ──────────────────────────────────────────────────
-
 SFT_DATA_DIR = str(_SFT_DATA_DIR)
 TRAJ_DIR = str(_SFT_DATA_DIR / "trajectories")
-OUTPUT_DIR = str(_SFT_OUTPUT_DIR)
+OUTPUT_DIR = "/home/abhor/google_calender_mcp_agent/sft_output_100ep"
+LOSS_CSV = os.path.join(OUTPUT_DIR, "epoch_losses.csv")
 
 # ── Model Config ───────────────────────────────────────────
-
 MODEL_NAME = "Qwen/Qwen2.5-1.5B-Instruct"
-MAX_SEQ_LENGTH = 4096  # 160/161 trajectories fit after result compaction; 1 outlier dropped
+MAX_SEQ_LENGTH = 4096
 LORA_RANK = 32
+NUM_EPOCHS = 100
 
-
-# ── Convert Vertex AI tool declarations to Qwen3 format ───
-
+# ── Convert Vertex AI tool declarations to OpenAI format ───
 VERTEX_TO_OPENAI_TYPES = {
-    "STRING": "string",
-    "OBJECT": "object",
-    "ARRAY": "array",
-    "INTEGER": "integer",
-    "NUMBER": "number",
-    "BOOLEAN": "boolean",
+    "STRING": "string", "OBJECT": "object", "ARRAY": "array",
+    "INTEGER": "integer", "NUMBER": "number", "BOOLEAN": "boolean",
 }
 
 
@@ -65,7 +59,6 @@ def _convert_params(params: dict) -> dict:
     for key, value in params.items():
         if key == "property_ordering":
             continue
-        # Vertex SDK serializes "type" as "type_"
         if key in ("type", "type_") and isinstance(value, str):
             result["type"] = VERTEX_TO_OPENAI_TYPES.get(value, value.lower())
         elif key == "items" and isinstance(value, dict):
@@ -78,7 +71,6 @@ def _convert_params(params: dict) -> dict:
 
 
 def get_openai_tools() -> list[dict]:
-    """Convert Vertex AI FunctionDeclarations to OpenAI/Qwen3 tool format."""
     tools = []
     for fd in TOOL_DECLARATIONS:
         d = fd.to_dict()
@@ -98,9 +90,7 @@ TOOLS = get_openai_tools()
 
 # ── Compact Tool Results ──────────────────────────────────
 
-
 def _extract_emails(attendees: list) -> list[str]:
-    """Extract email addresses from attendee objects or repr strings."""
     emails = []
     for a in attendees:
         if isinstance(a, dict) and "user" in a:
@@ -113,14 +103,8 @@ def _extract_emails(attendees: list) -> list[str]:
 
 
 def _compact_event(evt_raw) -> dict:
-    """Strip redundant fields from an event, flatten attendees to emails."""
     evt = json.loads(evt_raw) if isinstance(evt_raw, str) else evt_raw
-    ce = {
-        "id": evt["id"],
-        "summary": evt["summary"],
-        "start": evt["start"],
-        "end": evt["end"],
-    }
+    ce = {"id": evt["id"], "summary": evt["summary"], "start": evt["start"], "end": evt["end"]}
     attendees = evt.get("attendees", [])
     if attendees:
         emails = _extract_emails(attendees)
@@ -130,7 +114,6 @@ def _compact_event(evt_raw) -> dict:
 
 
 def compact_tool_result(name: str, result):
-    """Compact a tool call result to reduce token count for training."""
     if name == "list_events":
         return [_compact_event(e) for e in result.get("events", [])]
     if name in ("create_event", "update_event", "delete_event", "get_event"):
@@ -144,82 +127,44 @@ def compact_tool_result(name: str, result):
 
 # ── Trajectory to Chat Conversion ─────────────────────────
 
-
 def trajectory_to_messages(traj: dict) -> list[dict]:
-    """Convert a solved trajectory to Qwen3 chat messages with tool calling.
-
-    The raw trajectory format has steps like:
-        {"role": "user", "content": "..."}
-        {"role": "tool_call", "name": "...", "args": {...}, "result": {...}}
-        {"role": "tool_call", "name": "...", "args": {...}, "result": {...}}
-        {"role": "assistant", "content": "..."}
-
-    Each tool_call is serialized into its own assistant turn (single tool_call)
-    followed by the tool response. This teaches the model to read each result
-    before deciding the next call, rather than batching calls in parallel.
-    """
     messages = [{"role": "system", "content": SYSTEM_PROMPT}]
     steps = traj["trajectory"]
-
     i = 0
     while i < len(steps):
         step = steps[i]
-
         if step["role"] == "user":
             messages.append({"role": "user", "content": step["content"]})
             i += 1
-
         elif step["role"] == "tool_call":
-            # Serialize: each tool_call gets its own assistant turn so the
-            # model learns to read each result before deciding the next call.
             call_index = 0
             while i < len(steps) and steps[i]["role"] == "tool_call":
                 tc = steps[i]
                 tool_call_id = f"call_{call_index}"
-                tool_call_obj = {
-                    "type": "function",
-                    "id": tool_call_id,
-                    "function": {
-                        "name": tc["name"],
-                        "arguments": tc["args"],
-                    },
-                }
-
-                # One assistant message with a single tool_call
                 messages.append({
-                    "role": "assistant",
-                    "content": "",
-                    "tool_calls": [tool_call_obj],
+                    "role": "assistant", "content": "",
+                    "tool_calls": [{
+                        "type": "function", "id": tool_call_id,
+                        "function": {"name": tc["name"], "arguments": tc["args"]},
+                    }],
                 })
-
-                # Corresponding tool response
                 compacted = compact_tool_result(tc["name"], tc["result"])
-                result_str = json.dumps(compacted, default=str)
                 messages.append({
                     "role": "tool",
-                    "content": result_str,
+                    "content": json.dumps(compacted, default=str),
                     "tool_call_id": tool_call_id,
                 })
-
                 call_index += 1
                 i += 1
-
         elif step["role"] == "assistant":
             messages.append({"role": "assistant", "content": step["content"]})
             i += 1
-
-        elif step["role"] == "error":
-            # Skip error steps
-            i += 1
-
         else:
             i += 1
-
     return messages
 
 
 def load_trajectories() -> list[dict]:
-    """Load all solved trajectories from sft_data/trajectories/."""
     all_trajs = []
     for f in sorted(glob.glob(os.path.join(TRAJ_DIR, "*.json"))):
         data = json.load(open(f))
@@ -228,7 +173,6 @@ def load_trajectories() -> list[dict]:
 
 
 def build_dataset(tokenizer) -> Dataset:
-    """Load trajectories, convert to chat format, and tokenize."""
     trajs = load_trajectories()
     random.shuffle(trajs)
     print(f"Loaded {len(trajs)} solved trajectories")
@@ -239,10 +183,7 @@ def build_dataset(tokenizer) -> Dataset:
         messages = trajectory_to_messages(traj)
         try:
             text = tokenizer.apply_chat_template(
-                messages,
-                tools=TOOLS,
-                tokenize=False,
-                add_generation_prompt=False,
+                messages, tools=TOOLS, tokenize=False, add_generation_prompt=False,
             )
             texts.append(text)
         except Exception as e:
@@ -252,7 +193,6 @@ def build_dataset(tokenizer) -> Dataset:
 
     print(f"Converted {len(texts)} trajectories ({skipped} skipped)")
 
-    # Filter by token length
     before = len(texts)
     filtered_texts = []
     for text in texts:
@@ -264,16 +204,58 @@ def build_dataset(tokenizer) -> Dataset:
     return Dataset.from_dict({"text": filtered_texts})
 
 
+# ── Epoch Loss Logger Callback ─────────────────────────────
+
+class EpochLossLogger(TrainerCallback):
+    """Log training and eval loss per epoch to a CSV file.
+
+    Uses on_evaluate (fires after eval) to capture eval_loss reliably.
+    """
+
+    def __init__(self, csv_path):
+        self.csv_path = csv_path
+        self.epoch_train_losses = []
+        self.pending_train_loss = None
+        # Write CSV header
+        with open(csv_path, "w", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(["epoch", "train_loss", "eval_loss"])
+
+    def on_log(self, args, state, control, logs=None, **kwargs):
+        if logs and "loss" in logs:
+            self.epoch_train_losses.append(logs["loss"])
+
+    def on_epoch_end(self, args, state, control, **kwargs):
+        # Compute and stash average training loss for this epoch
+        if self.epoch_train_losses:
+            self.pending_train_loss = sum(self.epoch_train_losses) / len(self.epoch_train_losses)
+        else:
+            self.pending_train_loss = float("nan")
+        self.epoch_train_losses = []
+
+    def on_evaluate(self, args, state, control, metrics=None, **kwargs):
+        epoch = int(state.epoch)
+        train_loss = self.pending_train_loss if self.pending_train_loss is not None else float("nan")
+        eval_loss = metrics.get("eval_loss", float("nan")) if metrics else float("nan")
+
+        with open(self.csv_path, "a", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow([epoch, f"{train_loss:.6f}", f"{eval_loss:.6f}"])
+
+        print(f"\n>>> Epoch {epoch}: train_loss={train_loss:.4f}, eval_loss={eval_loss:.4f}")
+        self.pending_train_loss = None
+
+
 # ── Main ───────────────────────────────────────────────────
 
-
 def main():
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
     print("=" * 60)
-    print("SFT Training: Qwen2.5-1.5B-Instruct on Calendar Agent Trajectories")
+    print(f"SFT Training: {MODEL_NAME} — {NUM_EPOCHS} epochs")
+    print(f"Output: {OUTPUT_DIR}")
     print("=" * 60)
 
     # Load model with Unsloth
-    print(f"\nLoading model: {MODEL_NAME}")
     model, tokenizer = FastLanguageModel.from_pretrained(
         model_name=MODEL_NAME,
         max_seq_length=MAX_SEQ_LENGTH,
@@ -303,52 +285,56 @@ def main():
     # Build dataset
     dataset = build_dataset(tokenizer)
 
-    # Train/val split
+    # Train/val split (same seed as original)
     split = dataset.train_test_split(test_size=0.1, seed=42)
     train_dataset = split["train"]
     val_dataset = split["test"]
     print(f"Train: {len(train_dataset)}, Val: {len(val_dataset)}")
 
-    # Training config
-    num_epochs = 5
-    # ~36 steps/epoch with 145 train samples, batch=1, grad_accum=4
-    steps_per_epoch = max(1, len(train_dataset) // 4)
+    steps_per_epoch = max(1, len(train_dataset) // 4)  # batch=1, grad_accum=4
+    print(f"Steps per epoch: ~{steps_per_epoch}")
+    print(f"Total steps: ~{steps_per_epoch * NUM_EPOCHS}")
+
     training_args = SFTConfig(
         output_dir=OUTPUT_DIR,
         per_device_train_batch_size=1,
         gradient_accumulation_steps=4,
-        num_train_epochs=num_epochs,
+        num_train_epochs=NUM_EPOCHS,
         learning_rate=2e-4,
         lr_scheduler_type="cosine",
-        warmup_ratio=0.05,
+        warmup_ratio=0.03,
         logging_steps=5,
-        eval_strategy="no",
+        eval_strategy="epoch",
         save_strategy="epoch",
-        save_total_limit=num_epochs,
+        save_total_limit=NUM_EPOCHS,
         fp16=True,
         bf16=False,
+        fp16_full_eval=True,
+        per_device_eval_batch_size=1,
+        eval_accumulation_steps=1,
         optim="paged_adamw_8bit",
         max_seq_length=MAX_SEQ_LENGTH,
         dataset_text_field="text",
         packing=False,
         seed=42,
         report_to="none",
+        load_best_model_at_end=False,
     )
+
+    # Loss logger callback
+    loss_logger = EpochLossLogger(LOSS_CSV)
 
     trainer = SFTTrainer(
         model=model,
         tokenizer=tokenizer,
         train_dataset=train_dataset,
+        eval_dataset=val_dataset,
         args=training_args,
+        callbacks=[loss_logger],
     )
 
-    print(f"\nStarting training...")
-    print(f"  Output dir: {OUTPUT_DIR}")
-    print(f"  Epochs: {num_epochs}")
-    print(f"  Steps/epoch: ~{steps_per_epoch}")
-    print(f"  Effective batch size: {training_args.per_device_train_batch_size * training_args.gradient_accumulation_steps}")
-    print(f"  Learning rate: {training_args.learning_rate}")
-    print(f"  Save strategy: per-epoch")
+    print(f"\nStarting training: {NUM_EPOCHS} epochs, ~{steps_per_epoch} steps/epoch")
+    print(f"Loss CSV: {LOSS_CSV}")
     print()
 
     trainer.train()
@@ -358,6 +344,13 @@ def main():
     model.save_pretrained(final_dir)
     tokenizer.save_pretrained(final_dir)
     print(f"\nModel saved to {final_dir}")
+
+    # Also save the full training history
+    history_path = os.path.join(OUTPUT_DIR, "training_history.json")
+    with open(history_path, "w") as f:
+        json.dump(trainer.state.log_history, f, indent=2)
+    print(f"Training history saved to {history_path}")
+
     print("Training complete.")
 
 
