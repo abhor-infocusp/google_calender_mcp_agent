@@ -22,6 +22,25 @@ class CalendarEnvironment:
             name="John Doe",
             email="john.doe@example.com"
         )
+
+    @staticmethod
+    def _compact_event(event: "Event") -> dict:
+        """Return a compact dict representation of an Event.
+
+        Drops: optional, attending (top-level), per-attendee attending/user.id/user.name,
+        empty description. Flattens attendees to a list of email strings.
+        """
+        ce = {
+            "id": event.id,
+            "summary": event.summary,
+            "start": event.start.strftime("%Y-%m-%dT%H:%M:%S"),
+            "end": event.end.strftime("%Y-%m-%dT%H:%M:%S"),
+        }
+        if event.description:
+            ce["description"] = event.description
+        if event.attendees:
+            ce["attendees"] = [a.user.email for a in event.attendees]
+        return ce
     
     @staticmethod
     def load_json_calendar(file_path: str) -> list[dict]:
@@ -121,7 +140,7 @@ class CalendarEnvironment:
 
     def list_events(self, time_min: str = None, time_max: str = None) -> dict:
         """Function that will be exposed to the LLM.
-        
+
         Args:
             time_min: Minimum time value to filter events.
             time_max: Maximum time value to filter events.
@@ -131,12 +150,7 @@ class CalendarEnvironment:
             time_min = self._parse_datetime_str(time_min) if time_min else time_min
             time_max = self._parse_datetime_str(time_max) if time_max else time_max
             events = self._list_events(time_min, time_max)
-            return {
-                "events": [
-                    e.model_dump_json(indent=2)
-                    for e in events
-                ]
-            }
+            return [self._compact_event(e) for e in events]
         except ValueError as e:
             return self._raise_error("ValueError", str(e))
         except Exception as e:
@@ -145,7 +159,7 @@ class CalendarEnvironment:
     def get_event(self, event_id: str):
         try:
             event = self._get_event(event_id)
-            return {"event": event.model_dump_json(indent=2)}
+            return self._compact_event(event)
         except ValueError as e:
             return self._raise_error("ValueError", str(e))
         except Exception as e:
@@ -182,10 +196,9 @@ class CalendarEnvironment:
 
             self.calendar.events.append(event)
 
-            return {
-                "message": "Event created successfully.",
-                "event": event.__dict__
-            }
+            result = {"message": "Event created successfully."}
+            result.update(self._compact_event(event))
+            return result
         except ValueError as e:
             return self._raise_error("ValueError", str(e))
         except Exception as e:
@@ -215,10 +228,9 @@ class CalendarEnvironment:
                 if field == "organizer":
                     event.optional = value
 
-            return {
-                "message": "Event updated successfully.",
-                "event": event.__dict__
-            }
+            result = {"message": "Event updated successfully."}
+            result.update(self._compact_event(event))
+            return result
         except ValueError as e:
             return self._raise_error("ValueError", str(e))
         except Exception as e:
@@ -229,10 +241,9 @@ class CalendarEnvironment:
         try:
             event = self._get_event(event_id)
             self.calendar.events.remove(event)
-            return {
-                "message": "Event deleted successfully.",
-                "event": event.__dict__
-            }
+            result = {"message": "Event deleted successfully."}
+            result.update(self._compact_event(event))
+            return result
         except ValueError as e:
             return self._raise_error("ValueError", str(e))
         except Exception as e:
