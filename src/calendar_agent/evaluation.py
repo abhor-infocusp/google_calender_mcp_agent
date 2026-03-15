@@ -70,14 +70,20 @@ After:
 
 Was the task completed correctly? End with one word: Correct or Incorrect."""
 
-    print(f"  {C.MAGENTA}[EVAL PROMPT]{C.RESET}")
-    for line in prompt.split("\n"):
-        print(f"  {C.MAGENTA}  {line}{C.RESET}")
-
     try:
-        response = eval_model.generate_content(prompt)
-        verdict = response.text.strip()
-        print(f"\n\n  {C.MAGENTA}[EVAL RAW]    {verdict}{C.RESET}")
+        import signal
+
+        def _timeout_handler(signum, frame):
+            raise TimeoutError("Gemini eval timed out")
+
+        old_handler = signal.signal(signal.SIGALRM, _timeout_handler)
+        signal.alarm(30)
+        try:
+            response = eval_model.generate_content(prompt)
+            verdict = response.text.strip()
+        finally:
+            signal.alarm(0)
+            signal.signal(signal.SIGALRM, old_handler)
         lines = [l.strip() for l in verdict.splitlines() if l.strip()]
         for line in reversed(lines):
             line_lower = line.lower()
