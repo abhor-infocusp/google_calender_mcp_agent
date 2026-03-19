@@ -51,16 +51,15 @@ from calendar_agent.core import (
     snapshot_events,
 )
 from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, format_day_state_text
-from calendar_agent.paths import RL_DATA_DIR as _RL_DATA_DIR, CREDENTIALS_PATH
+from calendar_agent.paths import RL_DATA_DIR as _RL_DATA_DIR, RL_JSON_CALENDAR_DIR, RL_QUERY_DIR, CREDENTIALS_PATH
 from calendar_agent.tools import get_openai_tools
 
 random.seed(42)
 
 # ── Paths ──────────────────────────────────────────────────
 
-DATA_DIR = str(_RL_DATA_DIR)
-JSON_CALENDAR_DIR = os.path.join(DATA_DIR, "json_calender")
-QUERY_DIR = os.path.join(DATA_DIR, "queries")
+JSON_CALENDAR_DIR = str(RL_JSON_CALENDAR_DIR)
+QUERY_DIR = str(RL_QUERY_DIR)
 
 # ── Configuration ──────────────────────────────────────────
 

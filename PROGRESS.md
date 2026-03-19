@@ -1,7 +1,7 @@
 # Training Pipeline Progress
 
-> **Last updated:** 2026-03-16
-> **Current phase:** SFT Training v3 in progress (~30-34h, started 2026-03-16)
+> **Last updated:** 2026-03-19
+> **Current phase:** SFT v3 training stopped (epoch 7/10) — NEEDS INVESTIGATION
 
 ---
 
@@ -9,7 +9,9 @@
 
 ```
 Compact Data → Re-Augment → SFT Training v3 → Merge LoRA → Evaluate → RL Training
-   DONE         DONE         IN PROGRESS                                PAUSED
+   DONE         DONE         NEEDS INVESTIGATION                        PAUSED
+
+Code Cleanup → DONE (fdf0ea6, 5df60cf, + polish 2026-03-19)
 ```
 
 ## Phase Status
@@ -71,14 +73,17 @@ Reduced token usage by 41% across all training data:
 - Trained on verbose format, now superseded by compact format
 - Epoch 2 eval: SFT 46.6%, RL 28.6% (old checkpoints deleted)
 
-### 6. SFT Training v3 (compact format) — IN PROGRESS
+### 6. SFT Training v3 (compact format) — NEEDS INVESTIGATION
 
-- Started: 2026-03-16, ~30-34h expected
+- Started: 2026-03-16, stopped at epoch 7/10 (last checkpoint: 2026-03-18 09:04)
 - 935 train / 104 val trajectories, all 1,039 fit (0 skipped)
 - Config: 10 epochs, LoRA rank 64, loss masking (10.6% assistant tokens), cosine_with_restarts
 - MAX_SEQ_LENGTH=3076, batch=1, grad_accum=4, 2,330 total steps
 - Output: `sft_output/`, loss CSV: `sft_output/epoch_losses.csv`
-- Script fixes applied: `sft_train_100ep.py` (OUTPUT_DIR, MAX_SEQ_LENGTH), `eval_all_checkpoints.py` (SFT_OUTPUT, max-model-len 3076, cleared stale checkpoint data)
+- **7 checkpoints saved:** 234, 468, 699, 933, 1167, 1401, 1635
+- **Loss:** train 0.18→0.02, eval 0.10→0.10 (eval plateaued/rising after epoch 2)
+- **Eval results very poor:** checkpoint-234 1.2% SFT / 0% RL, checkpoint-468 1.2% / 0%, checkpoint-699 0.6% / 0%
+- Results far worse than v1's 30% — needs investigation before continuing
 
 ### 7. Eval Pipeline — DONE
 
@@ -123,9 +128,11 @@ New evaluation scripts with Gemini judge:
 ## Next Steps
 
 1. ~~Re-augment trajectories~~ — DONE (1,039 trajectories)
-2. ~~Retrain SFT~~ — IN PROGRESS (started 2026-03-16)
-3. **Evaluate** — update `eval_all_checkpoints.py` with new checkpoint numbers, run eval
-4. **RL training** — if SFT baseline is strong enough
+2. ~~Retrain SFT v3~~ — STOPPED at epoch 7/10
+3. ~~Evaluate v3 checkpoints~~ — DONE (results very poor: 0-1.2%)
+4. ~~Code cleanup~~ — DONE (centralized ~1300 LOC, fixed bugs, removed dead code)
+5. **Investigate SFT v3 regression** — why 0-1.2% vs v1's 30%? (loss masking? augmentation quality? tokenization?)
+6. **RL training** — blocked on SFT baseline
 
 ## Hardware Constraints
 - GPU: NVIDIA TITAN X Pascal, 12 GiB VRAM, compute 6.1

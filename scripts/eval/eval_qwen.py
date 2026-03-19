@@ -49,7 +49,11 @@ from calendar_agent.core import (
 )
 from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, evaluate_trajectory
 from calendar_agent.paths import SFT_DATA_DIR, DATA_DIR, RL_DATA_DIR, CREDENTIALS_PATH
-from calendar_agent.tools import get_openai_tools, RETURN_FINAL_ANSWER_TOOL
+from calendar_agent.tools import get_openai_tools, RETURN_FINAL_ANSWER_TOOL, serialize_tool_result
+
+import vertexai
+from vertexai.generative_models import GenerativeModel
+from google.oauth2.credentials import Credentials as OAuth2Credentials
 
 # ── Data Loading (supports both data/ and sft_data/) ──────
 
@@ -179,7 +183,7 @@ def run_query_openai(
             result = dispatch_tool_call(env, tool_name, args)
             if result is None:
                 result = {"status": "ok"}
-            result = json.loads(json.dumps(result, default=str))
+            result = serialize_tool_result(result)
 
             print_tool_result(result)
             trajectory.append(
@@ -285,14 +289,9 @@ def main():
         )
 
     # Init Vertex AI for the Gemini eval judge
-    import vertexai
-    from vertexai.generative_models import GenerativeModel
-
     _gcp_credentials = None
     _creds_path = str(CREDENTIALS_PATH)
     if os.path.exists(_creds_path):
-        from google.oauth2.credentials import Credentials as OAuth2Credentials
-
         with open(_creds_path) as _f:
             _cred_data = json.load(_f)
         _gcp_credentials = OAuth2Credentials(

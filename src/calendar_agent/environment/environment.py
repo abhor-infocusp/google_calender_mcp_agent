@@ -159,14 +159,12 @@ class CalendarEnvironment:
         attendees: list[dict] | None = None,
         description: str = "",
         optional=False,
-        organizer=None
     ):
         """Create a calendar event."""
         try:
             start = self._parse_datetime_str(start)
             end = self._parse_datetime_str(end)
             attendees = [Attendee.model_validate_json(a) for a in (attendees or [])]
-            organizer = User.model_validate_json(organizer) if organizer else self.user
 
             event_id = f"evt_{uuid.uuid4().hex}"
             event = Event(
@@ -177,7 +175,6 @@ class CalendarEnvironment:
                 attendees=attendees,
                 description=description,
                 optional=optional,
-                organizer=organizer
             )
 
             self.calendar.events.append(event)
@@ -211,9 +208,6 @@ class CalendarEnvironment:
                     event.description = value
                 elif field == "optional":
                     event.optional = value
-                elif field == "organizer":
-                    event.organizer = value
-
             result = {"message": "Event updated successfully."}
             result.update(self._compact_event(event))
             return result

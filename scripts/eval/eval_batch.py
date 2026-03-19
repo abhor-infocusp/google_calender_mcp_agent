@@ -11,9 +11,11 @@ import argparse
 import json
 import glob
 import os
+import signal
 import sys
 import time
 import warnings
+from collections import defaultdict
 
 warnings.filterwarnings("ignore")
 
@@ -26,7 +28,7 @@ from calendar_agent.core import (
 )
 from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, evaluate_trajectory
 from calendar_agent.paths import SFT_DATA_DIR, RL_DATA_DIR, CREDENTIALS_PATH
-from calendar_agent.tools import get_openai_tools
+from calendar_agent.tools import get_openai_tools, serialize_tool_result
 
 OPENAI_TOOLS = get_openai_tools()
 
@@ -77,7 +79,7 @@ def run_query(client, model_name, tools, system_prompt, env, query, max_turns=4)
             result = dispatch_tool_call(env, tool_name, args)
             if result is None:
                 result = {"status": "ok"}
-            result = json.loads(json.dumps(result, default=str))
+            result = serialize_tool_result(result)
             trajectory.append({"role": "tool_call", "name": tool_name, "args": args, "result": result})
             messages.append({"role": "tool", "tool_call_id": tc.id, "content": json.dumps(result, default=str)})
 
@@ -149,7 +151,6 @@ def eval_tasks(client, model_name, eval_model, tasks, base_dir, label):
     incorrect = 0
     error = 0
 
-    from collections import defaultdict
     cat_results = defaultdict(lambda: {"correct": 0, "total": 0})
 
     for i, (cal_idx, qi, q) in enumerate(tasks):
@@ -169,8 +170,6 @@ def eval_tasks(client, model_name, eval_model, tasks, base_dir, label):
 
         print(f"  [{i+1}/{len(tasks)}] cal={cal_idx} q={qi} [{category[:30]}] {query_text[:50]}...",
               end=" ", flush=True)
-
-        import signal
 
         def _alarm_handler(signum, frame):
             raise TimeoutError("Query timed out")

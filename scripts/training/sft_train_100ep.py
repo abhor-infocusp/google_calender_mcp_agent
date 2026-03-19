@@ -26,14 +26,14 @@ from transformers import TrainerCallback
 
 from calendar_agent.core import SYSTEM_PROMPT
 from calendar_agent.tools import get_openai_tools, compact_tool_result
-from calendar_agent.paths import SFT_DATA_DIR as _SFT_DATA_DIR
+from calendar_agent.paths import SFT_DATA_DIR as _SFT_DATA_DIR, SFT_OUTPUT_DIR as _SFT_OUTPUT_DIR
 
 random.seed(42)
 
 # ── Paths ──────────────────────────────────────────────────
 SFT_DATA_DIR = str(_SFT_DATA_DIR)
 TRAJ_DIR = str(_SFT_DATA_DIR / "trajectories_augmented")
-OUTPUT_DIR = "/home/abhor/google_calender_mcp_agent/sft_output"
+OUTPUT_DIR = str(_SFT_OUTPUT_DIR)
 LOSS_CSV = os.path.join(OUTPUT_DIR, "epoch_losses.csv")
 
 # ── Model Config ───────────────────────────────────────────

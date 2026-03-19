@@ -24,4 +24,5 @@ from calendar_agent.tools import (
     VERTEX_TO_OPENAI_TYPES,
     compact_tool_result,
     get_openai_tools,
+    serialize_tool_result,
 )

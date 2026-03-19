@@ -10,6 +10,11 @@ import re
 from calendar_agent.core import TOOL_DECLARATIONS
 
 
+def serialize_tool_result(result: dict) -> dict:
+    """Serialize tool result, converting datetimes to strings."""
+    return json.loads(json.dumps(result, default=str))
+
+
 # ── Vertex AI -> OpenAI type mapping ──────────────────────
 
 VERTEX_TO_OPENAI_TYPES = {

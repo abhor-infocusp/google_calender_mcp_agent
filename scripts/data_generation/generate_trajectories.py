@@ -23,6 +23,7 @@ from calendar_agent.environment import CalendarEnvironment
 from calendar_agent.core import (
     CALENDAR_TOOL,
     SYSTEM_PROMPT,
+    compute_fallback_now,
     dispatch_tool_call,
     snapshot_events,
     filter_by_days,
@@ -30,30 +31,23 @@ from calendar_agent.core import (
     DAY_NAMES,
 )
 from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, evaluate_trajectory
-from calendar_agent.paths import SFT_DATA_DIR as _SFT_DATA_DIR, CREDENTIALS_PATH
+from calendar_agent.paths import SFT_DATA_DIR as _SFT_DATA_DIR, SFT_JSON_CALENDAR_DIR, SFT_QUERY_DIR, CREDENTIALS_PATH
+from calendar_agent.tools import serialize_tool_result
 
 MODEL_NAME = "gemini-2.0-flash-001"
 MAX_TURNS = 10
 
 SFT_DATA_DIR = str(_SFT_DATA_DIR)
-JSON_CALENDAR_DIR = os.path.join(SFT_DATA_DIR, "json_calender")
-QUERY_DIR = os.path.join(SFT_DATA_DIR, "queries")
+JSON_CALENDAR_DIR = str(SFT_JSON_CALENDAR_DIR)
+QUERY_DIR = str(SFT_QUERY_DIR)
 TRAJ_DIR = os.path.join(SFT_DATA_DIR, "trajectories")
 
 
 def run_single_trajectory(model, eval_model, cal_path, query_dict, max_turns=MAX_TURNS):
     """Run a single query, evaluate it, and return (verdict, trajectory_data)."""
-    from datetime import datetime
-
     events = CalendarEnvironment.load_json_calendar(cal_path)
 
-    earliest = None
-    for evt in events:
-        dt = datetime.fromisoformat(evt["start"])
-        if earliest is None or dt < earliest:
-            earliest = dt
-    fallback_now = earliest.replace(hour=8, minute=0, second=0).strftime("%Y-%m-%d %H:%M:%S")
-
+    fallback_now = compute_fallback_now(cal_path)
     now = get_query_now(query_dict, fallback_now)
     env = CalendarEnvironment()
     env.initialize(events=events, now=now)
@@ -103,7 +97,7 @@ def run_single_trajectory(model, eval_model, cal_path, query_dict, max_turns=MAX
             result = dispatch_tool_call(env, fc.name, args)
             if result is None:
                 result = {"status": "ok"}
-            result = json.loads(json.dumps(result, default=str))
+            result = serialize_tool_result(result)
             trajectory.append({
                 "role": "tool_call",
                 "name": fc.name,

@@ -13,7 +13,7 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'scripts', 'training'))
 
-from sft_train import trajectory_to_messages, load_trajectories
+from sft_train_100ep import trajectory_to_messages, load_trajectories
 
 
 def test_all_tool_calls_are_serialized():
