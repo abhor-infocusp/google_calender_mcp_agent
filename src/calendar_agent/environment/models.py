@@ -2,7 +2,7 @@ import uuid
 
 from datetime import datetime
 from pydantic import BaseModel
-from typing import Dict, List, Optional, Literal
+from typing import List, Literal
 
 
 class User(BaseModel):

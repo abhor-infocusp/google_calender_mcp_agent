@@ -16,24 +16,16 @@ import json
 import glob
 import os
 import random
-import re
 
 os.environ["VLLM_WORKER_MULTIPROC_METHOD"] = "spawn"
-
-_cusparselt_path = os.path.expanduser(
-    "~/.local/lib/python3.10/site-packages/cusparselt/lib"
-)
-if os.path.isdir(_cusparselt_path):
-    os.environ["LD_LIBRARY_PATH"] = (
-        _cusparselt_path + ":" + os.environ.get("LD_LIBRARY_PATH", "")
-    )
 
 from unsloth import FastLanguageModel
 from trl import SFTTrainer, SFTConfig, DataCollatorForCompletionOnlyLM
 from datasets import Dataset
 from transformers import TrainerCallback
 
-from calendar_agent.core import SYSTEM_PROMPT, TOOL_DECLARATIONS
+from calendar_agent.core import SYSTEM_PROMPT
+from calendar_agent.tools import get_openai_tools, compact_tool_result
 from calendar_agent.paths import SFT_DATA_DIR as _SFT_DATA_DIR
 
 random.seed(42)
@@ -50,102 +42,7 @@ MAX_SEQ_LENGTH = 3076
 LORA_RANK = 64
 NUM_EPOCHS = 10
 
-# ── Convert Vertex AI tool declarations to OpenAI format ───
-VERTEX_TO_OPENAI_TYPES = {
-    "STRING": "string", "OBJECT": "object", "ARRAY": "array",
-    "INTEGER": "integer", "NUMBER": "number", "BOOLEAN": "boolean",
-}
-
-
-def _convert_params(params: dict) -> dict:
-    result = {}
-    for key, value in params.items():
-        if key == "property_ordering":
-            continue
-        if key in ("type", "type_") and isinstance(value, str):
-            result["type"] = VERTEX_TO_OPENAI_TYPES.get(value, value.lower())
-        elif key == "items" and isinstance(value, dict):
-            result["items"] = _convert_params(value)
-        elif key == "properties" and isinstance(value, dict):
-            result["properties"] = {k: _convert_params(v) for k, v in value.items()}
-        else:
-            result[key] = value
-    return result
-
-
-def get_openai_tools() -> list[dict]:
-    tools = []
-    for fd in TOOL_DECLARATIONS:
-        d = fd.to_dict()
-        tools.append({
-            "type": "function",
-            "function": {
-                "name": d["name"],
-                "description": d.get("description", ""),
-                "parameters": _convert_params(d.get("parameters", {})),
-            },
-        })
-    return tools
-
-
 TOOLS = get_openai_tools()
-
-
-# ── Compact Tool Results ──────────────────────────────────
-
-def _extract_emails(attendees: list) -> list[str]:
-    emails = []
-    for a in attendees:
-        if isinstance(a, dict) and "user" in a:
-            emails.append(a["user"]["email"])
-        elif isinstance(a, str):
-            m = re.search(r"email='([^']+)'", a)
-            if m:
-                emails.append(m.group(1))
-    return emails
-
-
-def _compact_event(evt_raw) -> dict:
-    evt = json.loads(evt_raw) if isinstance(evt_raw, str) else evt_raw
-    start = str(evt["start"]).replace(" ", "T")
-    end = str(evt["end"]).replace(" ", "T")
-    ce = {"id": evt["id"], "summary": evt["summary"], "start": start, "end": end}
-    desc = evt.get("description")
-    if desc:
-        ce["description"] = desc
-    attendees = evt.get("attendees", [])
-    if attendees:
-        emails = _extract_emails(attendees)
-        if emails:
-            ce["attendees"] = emails
-    return ce
-
-
-def compact_tool_result(name: str, result):
-    """Compact tool results to match environment output format.
-
-    list_events  -> flat list of compact event dicts
-    get_event    -> single compact event dict
-    create/update/delete -> {"message": ..., **compact_event_fields}
-    """
-    if name == "list_events":
-        events = result.get("events", result) if isinstance(result, dict) else result
-        if isinstance(events, list):
-            return [_compact_event(e) for e in events]
-        return result
-    if name == "get_event":
-        evt = result.get("event", result) if isinstance(result, dict) else result
-        return _compact_event(evt)
-    if name in ("create_event", "update_event", "delete_event"):
-        ce = {"message": result.get("message", "")}
-        evt = result.get("event")
-        if evt:
-            ce.update(_compact_event(evt))
-        else:
-            # Result may already be flat (compact format)
-            ce.update(_compact_event(result))
-        return ce
-    return result
 
 
 # ── Trajectory to Chat Conversion ─────────────────────────

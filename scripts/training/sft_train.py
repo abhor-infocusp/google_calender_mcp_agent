@@ -13,24 +13,15 @@ import json
 import glob
 import os
 import random
-import re
 
 os.environ["VLLM_WORKER_MULTIPROC_METHOD"] = "spawn"
-
-# Ensure cusparseLt library is findable
-_cusparselt_path = os.path.expanduser(
-    "~/.local/lib/python3.10/site-packages/cusparselt/lib"
-)
-if os.path.isdir(_cusparselt_path):
-    os.environ["LD_LIBRARY_PATH"] = (
-        _cusparselt_path + ":" + os.environ.get("LD_LIBRARY_PATH", "")
-    )
 
 from unsloth import FastLanguageModel
 from trl import SFTTrainer, SFTConfig
 from datasets import Dataset
 
-from calendar_agent.core import SYSTEM_PROMPT, TOOL_DECLARATIONS
+from calendar_agent.core import SYSTEM_PROMPT
+from calendar_agent.tools import get_openai_tools, compact_tool_result
 from calendar_agent.paths import SFT_DATA_DIR as _SFT_DATA_DIR, SFT_OUTPUT_DIR as _SFT_OUTPUT_DIR
 
 random.seed(42)
@@ -47,99 +38,7 @@ MODEL_NAME = "Qwen/Qwen2.5-1.5B-Instruct"
 MAX_SEQ_LENGTH = 4096  # 160/161 trajectories fit after result compaction; 1 outlier dropped
 LORA_RANK = 32
 
-
-# ── Convert Vertex AI tool declarations to Qwen3 format ───
-
-VERTEX_TO_OPENAI_TYPES = {
-    "STRING": "string",
-    "OBJECT": "object",
-    "ARRAY": "array",
-    "INTEGER": "integer",
-    "NUMBER": "number",
-    "BOOLEAN": "boolean",
-}
-
-
-def _convert_params(params: dict) -> dict:
-    result = {}
-    for key, value in params.items():
-        if key == "property_ordering":
-            continue
-        # Vertex SDK serializes "type" as "type_"
-        if key in ("type", "type_") and isinstance(value, str):
-            result["type"] = VERTEX_TO_OPENAI_TYPES.get(value, value.lower())
-        elif key == "items" and isinstance(value, dict):
-            result["items"] = _convert_params(value)
-        elif key == "properties" and isinstance(value, dict):
-            result["properties"] = {k: _convert_params(v) for k, v in value.items()}
-        else:
-            result[key] = value
-    return result
-
-
-def get_openai_tools() -> list[dict]:
-    """Convert Vertex AI FunctionDeclarations to OpenAI/Qwen3 tool format."""
-    tools = []
-    for fd in TOOL_DECLARATIONS:
-        d = fd.to_dict()
-        tools.append({
-            "type": "function",
-            "function": {
-                "name": d["name"],
-                "description": d.get("description", ""),
-                "parameters": _convert_params(d.get("parameters", {})),
-            },
-        })
-    return tools
-
-
 TOOLS = get_openai_tools()
-
-
-# ── Compact Tool Results ──────────────────────────────────
-
-
-def _extract_emails(attendees: list) -> list[str]:
-    """Extract email addresses from attendee objects or repr strings."""
-    emails = []
-    for a in attendees:
-        if isinstance(a, dict) and "user" in a:
-            emails.append(a["user"]["email"])
-        elif isinstance(a, str):
-            m = re.search(r"email='([^']+)'", a)
-            if m:
-                emails.append(m.group(1))
-    return emails
-
-
-def _compact_event(evt_raw) -> dict:
-    """Strip redundant fields from an event, flatten attendees to emails."""
-    evt = json.loads(evt_raw) if isinstance(evt_raw, str) else evt_raw
-    ce = {
-        "id": evt["id"],
-        "summary": evt["summary"],
-        "start": evt["start"],
-        "end": evt["end"],
-    }
-    attendees = evt.get("attendees", [])
-    if attendees:
-        emails = _extract_emails(attendees)
-        if emails:
-            ce["attendees"] = emails
-    return ce
-
-
-def compact_tool_result(name: str, result):
-    """Compact a tool call result to reduce token count for training."""
-    if name == "list_events":
-        return [_compact_event(e) for e in result.get("events", [])]
-    if name in ("create_event", "update_event", "delete_event", "get_event"):
-        ce = {"message": result.get("message", "")}
-        evt = result.get("event")
-        if evt:
-            ce.update(_compact_event(evt))
-        return ce
-    return result
 
 
 # ── Trajectory to Chat Conversion ─────────────────────────

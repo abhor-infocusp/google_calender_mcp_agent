@@ -17,15 +17,6 @@ os.environ["VLLM_WORKER_MULTIPROC_METHOD"] = "spawn"
 os.environ["CC"] = "/usr/bin/gcc"  # Triton needs this in spawned subprocesses
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
-# Ensure cusparseLt library is findable
-_cusparselt_path = os.path.expanduser(
-    "~/.local/lib/python3.10/site-packages/cusparselt/lib"
-)
-if os.path.isdir(_cusparselt_path):
-    os.environ["LD_LIBRARY_PATH"] = (
-        _cusparselt_path + ":" + os.environ.get("LD_LIBRARY_PATH", "")
-    )
-
 try:
     import ipykernel.iostream as _io
 
@@ -54,13 +45,14 @@ from vertexai.generative_models import GenerativeModel
 from calendar_agent.environment import CalendarEnvironment
 from calendar_agent.core import (
     SYSTEM_PROMPT,
-    TOOL_DECLARATIONS,
+    compute_fallback_now,
     dispatch_tool_call,
     filter_by_days,
     snapshot_events,
 )
 from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, format_day_state_text
 from calendar_agent.paths import RL_DATA_DIR as _RL_DATA_DIR, CREDENTIALS_PATH
+from calendar_agent.tools import get_openai_tools
 
 random.seed(42)
 
@@ -105,21 +97,6 @@ class CalendarRolloutInput(BaseModel):
 # ── Data Loading ───────────────────────────────────────────
 
 
-def _compute_fallback_now(cal_path: str) -> str:
-    """Compute a fallback 'now' from the earliest event in the calendar."""
-    events = CalendarEnvironment.load_json_calendar(cal_path)
-    earliest = None
-    for evt in events:
-        dt = datetime.fromisoformat(evt["start"])
-        if earliest is None or dt < earliest:
-            earliest = dt
-    if earliest:
-        return earliest.replace(hour=8, minute=0, second=0).strftime(
-            "%Y-%m-%d %H:%M:%S"
-        )
-    return "2024-01-01 08:00:00"
-
-
 def load_all_scenarios() -> list[CalendarScenario]:
     """Load all 50 calendar/query pairs and flatten into individual scenarios."""
     scenarios = []
@@ -131,7 +108,7 @@ def load_all_scenarios() -> list[CalendarScenario]:
         if not os.path.exists(cal_path) or not os.path.exists(query_path):
             continue
 
-        fallback_now = _compute_fallback_now(cal_path)
+        fallback_now = compute_fallback_now(cal_path)
 
         with open(query_path) as f:
             queries = json.load(f)
@@ -161,76 +138,7 @@ def load_all_scenarios() -> list[CalendarScenario]:
     return scenarios
 
 
-# ── Convert Vertex AI tool declarations to OpenAI format ──
-
-VERTEX_TO_OPENAI_TYPES = {
-    "STRING": "string",
-    "OBJECT": "object",
-    "ARRAY": "array",
-    "INTEGER": "integer",
-    "NUMBER": "number",
-    "BOOLEAN": "boolean",
-}
-
-
-def _convert_params(params: dict) -> dict:
-    """Recursively convert Vertex AI parameter schema to OpenAI JSON Schema."""
-    result = {}
-    for key, value in params.items():
-        if key == "property_ordering":
-            continue
-        if key in ("type", "type_") and isinstance(value, str):
-            result["type"] = VERTEX_TO_OPENAI_TYPES.get(value, value.lower())
-        elif key == "items" and isinstance(value, dict):
-            result["items"] = _convert_params(value)
-        elif key == "properties" and isinstance(value, dict):
-            result["properties"] = {k: _convert_params(v) for k, v in value.items()}
-        else:
-            result[key] = value
-    return result
-
-
-def _vertex_to_openai_tools(declarations) -> list[dict]:
-    """Convert Vertex AI FunctionDeclarations to OpenAI tool format."""
-    tools = []
-    for fd in declarations:
-        d = fd.to_dict()
-        tools.append(
-            {
-                "type": "function",
-                "function": {
-                    "name": d["name"],
-                    "description": d.get("description", ""),
-                    "parameters": _convert_params(d.get("parameters", {})),
-                },
-            }
-        )
-    return tools
-
-
-# 7 calendar tools from run_trajectory.py + return_final_answer
-OPENAI_TOOLS = _vertex_to_openai_tools(TOOL_DECLARATIONS) + [
-    {
-        "type": "function",
-        "function": {
-            "name": "return_final_answer",
-            "description": "Return the final answer or confirmation after completing the calendar task.",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "answer": {
-                        "type": "string",
-                        "description": "The final response to the user's query, summarizing what was done or the requested information.",
-                    },
-                },
-                "required": ["answer"],
-            },
-        },
-    }
-]
-
-
-
+OPENAI_TOOLS = get_openai_tools(include_final_answer=True)
 
 # ── Evaluation (uses Gemini judge via Vertex AI) ──────────
 

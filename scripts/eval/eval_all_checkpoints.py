@@ -16,15 +16,16 @@ import time
 sys.stdout.reconfigure(line_buffering=True)
 sys.stderr.reconfigure(line_buffering=True)
 
-PYTHON = "/home/abhor/miniconda3/envs/agentic/bin/python"
-PROJECT = "/home/abhor/google_calender_mcp_agent"
-SFT_OUTPUT = os.path.join(PROJECT, "sft_output")
+from calendar_agent.paths import PROJECT_ROOT, SFT_OUTPUT_DIR
+
+PYTHON = sys.executable
+PROJECT = str(PROJECT_ROOT)
+SFT_OUTPUT = str(SFT_OUTPUT_DIR)
 MERGED_DIR = os.path.join(SFT_OUTPUT, "merged_tmp")
 RESULTS_CSV = os.path.join(SFT_OUTPUT, "checkpoint_eval_results.csv")
 PORT = 8005
 
 CHECKPOINTS = [234, 468, 699, 933, 1167, 1401, 1635]
-EVAL_SUBSET = [234, 468, 699, 933, 1167, 1401, 1635]
 
 # Loss data: checkpoint -> (epoch, train_loss, eval_loss)
 LOSS_DATA = {
@@ -174,7 +175,7 @@ def main():
 
     all_rows = []
 
-    for ckpt in EVAL_SUBSET:
+    for ckpt in CHECKPOINTS:
         epoch, train_loss, eval_loss = LOSS_DATA[ckpt]
 
         # Check if already done

@@ -377,6 +377,21 @@ def print_prompt_sent(label: str, content: str):
 # ── Data Loading ─────────────────────────────────────────────
 
 
+def compute_fallback_now(cal_path: str) -> str:
+    """Compute a fallback 'now' from the earliest event in a calendar file."""
+    events = CalendarEnvironment.load_json_calendar(cal_path)
+    earliest = None
+    for evt in events:
+        dt = datetime.fromisoformat(evt["start"])
+        if earliest is None or dt < earliest:
+            earliest = dt
+    if earliest:
+        return earliest.replace(hour=8, minute=0, second=0).strftime(
+            "%Y-%m-%d %H:%M:%S"
+        )
+    return "2024-01-01 08:00:00"
+
+
 def load_calendar_and_queries(index: int, data_dir=None):
     """Load calendar events and queries for the given index."""
     if data_dir is None:
@@ -400,14 +415,7 @@ def load_calendar_and_queries(index: int, data_dir=None):
     with open(query_path) as f:
         queries = json.load(f)
 
-    earliest = None
-    for evt in events:
-        dt = datetime.fromisoformat(evt["start"])
-        if earliest is None or dt < earliest:
-            earliest = dt
-    fallback_now = earliest.replace(hour=8, minute=0, second=0).strftime(
-        "%Y-%m-%d %H:%M:%S"
-    )
+    fallback_now = compute_fallback_now(str(cal_path))
 
     return events, queries, fallback_now
 

@@ -112,20 +112,6 @@ class CalendarEnvironment:
             }
         }
 
-    def list_calendars(self):
-        raise NotImplementedError
-        # TODO: Will be added when we start supporting multiple calendars.
-        # return {
-        #     "calendars": [
-        #         {
-        #             "id": cal.id,
-        #             "summary": cal.summary,
-        #             "primary": cal.primary
-        #         }
-        #         for cal in self.calendars.values()
-        #     ]
-        # }
-    
     def _list_events(self, time_min: datetime = None, time_max: datetime = None):
         """Internal function for listing all events within a provided time range."""
         events = [e for e in self.calendar.events]
@@ -170,16 +156,16 @@ class CalendarEnvironment:
         summary: str,
         start: str,
         end: str,
-        attendees: list[dict] = [],
+        attendees: list[dict] | None = None,
         description: str = "",
         optional=False,
         organizer=None
     ):
-        """Create a calendar event."""        
+        """Create a calendar event."""
         try:
             start = self._parse_datetime_str(start)
             end = self._parse_datetime_str(end)
-            attendees = [Attendee.model_validate_json(a) for a in attendees]
+            attendees = [Attendee.model_validate_json(a) for a in (attendees or [])]
             organizer = User.model_validate_json(organizer) if organizer else self.user
 
             event_id = f"evt_{uuid.uuid4().hex}"
@@ -215,18 +201,18 @@ class CalendarEnvironment:
             for field, value in updates.items():
                 if field == "start":
                     event.start = self._parse_datetime_str(value)
-                if field == "end":
+                elif field == "end":
                     event.end = self._parse_datetime_str(value)
-                if field == "attendees":
+                elif field == "attendees":
                     event.attendees = [Attendee.model_validate_json(v) for v in value]
-                if field == "summary":
+                elif field == "summary":
                     event.summary = value
-                if field == "description":
+                elif field == "description":
                     event.description = value
-                if field == "optional":
+                elif field == "optional":
                     event.optional = value
-                if field == "organizer":
-                    event.optional = value
+                elif field == "organizer":
+                    event.organizer = value
 
             result = {"message": "Event updated successfully."}
             result.update(self._compact_event(event))
@@ -260,23 +246,6 @@ class CalendarEnvironment:
             return self._raise_error("ValueError", str(e))
         except Exception as e:
             return self._raise_error("Exception", str(e))
-
-    # TODO: Improve Implementation
-    # def get_freebusy(self, time_min: str, time_max: str):
-    #     """Get free and busy slots for the user."""
-    #     try:
-    #         time_min = self._parse_datetime_str(time_min)
-    #         time_max = self._parse_datetime_str(time_max)
-
-    #         busy = []
-
-    #         for event in self.calendar.events:
-    #             if not(event.end <= time_min or event.start >= time_max):
-    #                 busy.append()
-    #     except ValueError as e:
-    #         self._raise_error("ValueError", str(e))
-    #     except Exception as e:
-    #         self._raise_error("Exception", str(e))
 
     def get_current_time(self):
         day_name = self.now.strftime("%A")

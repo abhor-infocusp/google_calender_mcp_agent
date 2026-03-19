@@ -34,8 +34,8 @@ from calendar_agent.environment import CalendarEnvironment
 from calendar_agent.core import (
     DAY_NAMES,
     SYSTEM_PROMPT,
-    TOOL_DECLARATIONS,
     C,
+    compute_fallback_now,
     diff_snapshots,
     dispatch_tool_call,
     filter_by_days,
@@ -49,6 +49,7 @@ from calendar_agent.core import (
 )
 from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, evaluate_trajectory
 from calendar_agent.paths import SFT_DATA_DIR, DATA_DIR, RL_DATA_DIR, CREDENTIALS_PATH
+from calendar_agent.tools import get_openai_tools, RETURN_FINAL_ANSWER_TOOL
 
 # ── Data Loading (supports both data/ and sft_data/) ──────
 
@@ -73,82 +74,11 @@ def load_calendar_and_queries(index: int, use_sft_data: bool = False, use_rl_dat
     with open(query_path) as f:
         queries = json.load(f)
 
-    from datetime import datetime
-    earliest = None
-    for evt in events:
-        dt = datetime.fromisoformat(evt["start"])
-        if earliest is None or dt < earliest:
-            earliest = dt
-    fallback_now = earliest.replace(hour=8, minute=0, second=0).strftime("%Y-%m-%d %H:%M:%S")
+    fallback_now = compute_fallback_now(cal_path)
 
     return events, queries, fallback_now
 
-# ── Convert Vertex AI tool declarations to OpenAI format ──
-
-VERTEX_TO_OPENAI_TYPES = {
-    "STRING": "string",
-    "OBJECT": "object",
-    "ARRAY": "array",
-    "INTEGER": "integer",
-    "NUMBER": "number",
-    "BOOLEAN": "boolean",
-}
-
-
-def _convert_params(params: dict) -> dict:
-    """Recursively convert Vertex AI parameter schema to OpenAI JSON Schema."""
-    result = {}
-    for key, value in params.items():
-        if key == "property_ordering":
-            continue
-        if key in ("type", "type_") and isinstance(value, str):
-            result["type"] = VERTEX_TO_OPENAI_TYPES.get(value, value.lower())
-        elif key == "items" and isinstance(value, dict):
-            result["items"] = _convert_params(value)
-        elif key == "properties" and isinstance(value, dict):
-            result["properties"] = {k: _convert_params(v) for k, v in value.items()}
-        else:
-            result[key] = value
-    return result
-
-
-def _vertex_to_openai_tools(declarations) -> list[dict]:
-    """Convert Vertex AI FunctionDeclarations to OpenAI tool format."""
-    tools = []
-    for fd in declarations:
-        d = fd.to_dict()
-        tools.append(
-            {
-                "type": "function",
-                "function": {
-                    "name": d["name"],
-                    "description": d.get("description", ""),
-                    "parameters": _convert_params(d.get("parameters", {})),
-                },
-            }
-        )
-    return tools
-
-
-OPENAI_TOOLS = _vertex_to_openai_tools(TOOL_DECLARATIONS)
-
-RETURN_FINAL_ANSWER_TOOL = {
-    "type": "function",
-    "function": {
-        "name": "return_final_answer",
-        "description": "Return the final answer or confirmation after completing the calendar task.",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "answer": {
-                    "type": "string",
-                    "description": "The final response to the user's query, summarizing what was done or the requested information.",
-                },
-            },
-            "required": ["answer"],
-        },
-    },
-}
+OPENAI_TOOLS = get_openai_tools()
 
 
 # ── OpenAI Agent Loop ────────────────────────────────────────

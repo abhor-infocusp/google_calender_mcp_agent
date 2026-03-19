@@ -21,46 +21,14 @@ from openai import OpenAI
 
 from calendar_agent.environment import CalendarEnvironment
 from calendar_agent.core import (
-    DAY_NAMES, SYSTEM_PROMPT, TOOL_DECLARATIONS,
+    DAY_NAMES, SYSTEM_PROMPT, compute_fallback_now,
     dispatch_tool_call, filter_by_days, get_query_now, snapshot_events,
 )
 from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, evaluate_trajectory
 from calendar_agent.paths import SFT_DATA_DIR, RL_DATA_DIR, CREDENTIALS_PATH
+from calendar_agent.tools import get_openai_tools
 
-
-# ── Tool conversion ──────────────────────────────────────────
-
-VERTEX_TO_OPENAI_TYPES = {
-    "STRING": "string", "OBJECT": "object", "ARRAY": "array",
-    "INTEGER": "integer", "NUMBER": "number", "BOOLEAN": "boolean",
-}
-
-def _convert_params(params):
-    result = {}
-    for key, value in params.items():
-        if key == "property_ordering":
-            continue
-        if key in ("type", "type_") and isinstance(value, str):
-            result["type"] = VERTEX_TO_OPENAI_TYPES.get(value, value.lower())
-        elif key == "items" and isinstance(value, dict):
-            result["items"] = _convert_params(value)
-        elif key == "properties" and isinstance(value, dict):
-            result["properties"] = {k: _convert_params(v) for k, v in value.items()}
-        else:
-            result[key] = value
-    return result
-
-OPENAI_TOOLS = []
-for fd in TOOL_DECLARATIONS:
-    d = fd.to_dict()
-    OPENAI_TOOLS.append({
-        "type": "function",
-        "function": {
-            "name": d["name"],
-            "description": d.get("description", ""),
-            "parameters": _convert_params(d.get("parameters", {})),
-        },
-    })
+OPENAI_TOOLS = get_openai_tools()
 
 
 # ── Agent loop ───────────────────────────────────────────────
@@ -99,7 +67,6 @@ def run_query(client, model_name, tools, system_prompt, env, query, max_turns=4)
         if not msg.tool_calls:
             break
 
-        hit_final = False
         for tc in msg.tool_calls:
             tool_name = tc.function.name
             try:
@@ -107,22 +74,12 @@ def run_query(client, model_name, tools, system_prompt, env, query, max_turns=4)
             except json.JSONDecodeError:
                 args = {}
 
-            if tool_name == "return_final_answer":
-                answer = args.get("answer", "")
-                trajectory.append({"role": "assistant", "content": answer})
-                messages.append({"role": "tool", "tool_call_id": tc.id, "content": answer})
-                hit_final = True
-                break
-
             result = dispatch_tool_call(env, tool_name, args)
             if result is None:
                 result = {"status": "ok"}
             result = json.loads(json.dumps(result, default=str))
             trajectory.append({"role": "tool_call", "name": tool_name, "args": args, "result": result})
             messages.append({"role": "tool", "tool_call_id": tc.id, "content": json.dumps(result, default=str)})
-
-        if hit_final:
-            break
 
     return trajectory
 
@@ -178,13 +135,7 @@ def load_calendar(base_dir, cal_idx):
     """Load calendar events."""
     cal_path = os.path.join(base_dir, "json_calender", f"{cal_idx}.txt")
     events = CalendarEnvironment.load_json_calendar(cal_path)
-    from datetime import datetime
-    earliest = None
-    for evt in events:
-        dt = datetime.fromisoformat(evt["start"])
-        if earliest is None or dt < earliest:
-            earliest = dt
-    fallback_now = earliest.replace(hour=8, minute=0, second=0).strftime("%Y-%m-%d %H:%M:%S")
+    fallback_now = compute_fallback_now(cal_path)
     return events, fallback_now
 
 
