@@ -18,25 +18,23 @@ sys.stderr.reconfigure(line_buffering=True)
 
 PYTHON = "/home/abhor/miniconda3/envs/agentic/bin/python"
 PROJECT = "/home/abhor/google_calender_mcp_agent"
-SFT_OUTPUT = os.path.join(PROJECT, "sft_output_100ep")
+SFT_OUTPUT = os.path.join(PROJECT, "sft_output")
 MERGED_DIR = os.path.join(SFT_OUTPUT, "merged_tmp")
 RESULTS_CSV = os.path.join(SFT_OUTPUT, "checkpoint_eval_results.csv")
 PORT = 8005
 
-CHECKPOINTS = [234, 468, 702, 936, 1170, 1404, 1638, 1872]
-# Evaluate a subset for speed — we already have epoch 2 (468)
-EVAL_SUBSET = [702, 1170, 1872]  # epochs 3, 5, 8 (have 2)
+CHECKPOINTS = [234, 468, 699, 933, 1167, 1401, 1635]
+EVAL_SUBSET = [234, 468, 699, 933, 1167, 1401, 1635]
 
-# Loss data from epoch_losses.csv
+# Loss data: checkpoint -> (epoch, train_loss, eval_loss)
 LOSS_DATA = {
-    234: (1, 0.187148, 0.108880),
-    468: (2, 0.071636, 0.085107),
-    702: (3, 0.065668, 0.093209),
-    936: (4, 0.037634, 0.087986),
-    1170: (5, 0.039072, 0.091938),
-    1404: (6, 0.019867, 0.088733),
-    1638: (7, 0.024657, 0.105463),
-    1872: (8, 0.010872, 0.100726),
+    234:  (1, 0.1835, 0.1009),
+    468:  (2, 0.0685, 0.0818),
+    699:  (3, 0.0615, 0.0999),
+    933:  (4, 0.0400, 0.0865),
+    1167: (5, 0.0413, 0.0970),
+    1401: (6, 0.0200, 0.0970),
+    1635: (7, 0.0264, 0.1042),
 }
 
 
@@ -109,7 +107,7 @@ def start_vllm():
          "--served-model-name", "sft-v2",
          "--enable-auto-tool-choice",
          "--tool-call-parser", "hermes",
-         "--max-model-len", "2048",
+         "--max-model-len", "3076",
          "--gpu-memory-utilization", "0.80",
          "--port", str(PORT)],
         env={**os.environ, "VLLM_WORKER_MULTIPROC_METHOD": "spawn"},
@@ -152,7 +150,7 @@ def run_eval(mode, num_calendars=10, max_queries=40):
         cmd,
         env={**os.environ, "PYTHONPATH": os.path.join(PROJECT, "src"),
              "PYTHONUNBUFFERED": "1"},
-        timeout=3600,
+        timeout=14400,
     )
     if os.path.exists(save_path):
         with open(save_path) as f:

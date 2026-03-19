@@ -41,12 +41,12 @@ random.seed(42)
 # ── Paths ──────────────────────────────────────────────────
 SFT_DATA_DIR = str(_SFT_DATA_DIR)
 TRAJ_DIR = str(_SFT_DATA_DIR / "trajectories_augmented")
-OUTPUT_DIR = "/home/abhor/google_calender_mcp_agent/sft_output_100ep"
+OUTPUT_DIR = "/home/abhor/google_calender_mcp_agent/sft_output"
 LOSS_CSV = os.path.join(OUTPUT_DIR, "epoch_losses.csv")
 
 # ── Model Config ───────────────────────────────────────────
 MODEL_NAME = "Qwen/Qwen2.5-1.5B-Instruct"
-MAX_SEQ_LENGTH = 4096
+MAX_SEQ_LENGTH = 3076
 LORA_RANK = 64
 NUM_EPOCHS = 10
 
@@ -276,13 +276,14 @@ def verify_loss_masking(collator, tokenizer, dataset):
 class EpochLossLogger(TrainerCallback):
     """Log training and eval loss per epoch to a CSV file."""
 
-    def __init__(self, csv_path):
+    def __init__(self, csv_path, resume=False):
         self.csv_path = csv_path
         self.epoch_train_losses = []
         self.pending_train_loss = None
-        with open(csv_path, "w", newline="") as f:
-            writer = csv.writer(f)
-            writer.writerow(["epoch", "train_loss", "eval_loss"])
+        if not resume or not os.path.exists(csv_path):
+            with open(csv_path, "w", newline="") as f:
+                writer = csv.writer(f)
+                writer.writerow(["epoch", "train_loss", "eval_loss"])
 
     def on_log(self, args, state, control, logs=None, **kwargs):
         if logs and "loss" in logs:
@@ -312,12 +313,22 @@ class EpochLossLogger(TrainerCallback):
 
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+    # Check for existing checkpoints to resume from
+    from transformers.trainer_utils import get_last_checkpoint
+    last_checkpoint = get_last_checkpoint(OUTPUT_DIR)
+    resume = last_checkpoint is not None
+    if resume:
+        print(f"Resuming from checkpoint: {last_checkpoint}")
+
     print("=" * 60)
     print(f"SFT Training: {MODEL_NAME} — {NUM_EPOCHS} epochs")
     print(f"  Loss masking: assistant-only (DataCollatorForCompletionOnlyLM)")
     print(f"  LR schedule:  cosine_with_restarts (10 cycles)")
     print(f"  LoRA rank:    {LORA_RANK}")
     print(f"  Output:       {OUTPUT_DIR}")
+    if resume:
+        print(f"  RESUMING from: {last_checkpoint}")
     print("=" * 60)
 
     # Load model with Unsloth
@@ -408,7 +419,7 @@ def main():
     )
 
     # Loss logger callback
-    loss_logger = EpochLossLogger(LOSS_CSV)
+    loss_logger = EpochLossLogger(LOSS_CSV, resume=resume)
 
     trainer = SFTTrainer(
         model=model,
@@ -424,7 +435,7 @@ def main():
     print(f"Loss CSV: {LOSS_CSV}")
     print()
 
-    trainer.train()
+    trainer.train(resume_from_checkpoint=last_checkpoint)
 
     # Save final model
     final_dir = os.path.join(OUTPUT_DIR, "final")

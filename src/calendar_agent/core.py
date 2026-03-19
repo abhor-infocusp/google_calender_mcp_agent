@@ -180,16 +180,16 @@ def dispatch_tool_call(env: CalendarEnvironment, name: str, args: dict) -> dict:
     """Execute a tool call against the calendar environment and return the result."""
     try:
         if name == "get_current_time":
-            return env.get_current_time()
+            result = env.get_current_time()
 
         elif name == "list_events":
-            return env.list_events(
+            result = env.list_events(
                 time_min=args.get("time_min"),
                 time_max=args.get("time_max"),
             )
 
         elif name == "get_event":
-            return env.get_event(args["event_id"])
+            result = env.get_event(args["event_id"])
 
         elif name == "create_event":
             emails = args.get("attendees", [])
@@ -206,7 +206,7 @@ def dispatch_tool_call(env: CalendarEnvironment, name: str, args: dict) -> dict:
                 )
                 for email in emails
             ]
-            return env.create_event(
+            result = env.create_event(
                 summary=args["summary"],
                 start=args["start"],
                 end=args["end"],
@@ -219,27 +219,28 @@ def dispatch_tool_call(env: CalendarEnvironment, name: str, args: dict) -> dict:
             for field in ("summary", "start", "end", "description"):
                 if field in args:
                     updates[field] = args[field]
-            return env.update_event(
+            result = env.update_event(
                 event_id=args["event_id"],
                 updates=updates,
             )
 
         elif name == "delete_event":
-            return env.delete_event(args["event_id"])
+            result = env.delete_event(args["event_id"])
 
         elif name == "respond_to_event":
             result = env.respond_to_event(
                 event_id=args["event_id"],
                 attending=args["attending"],
             )
-            return (
-                result if result else {"status": "ok", "attending": args["attending"]}
-            )
+            if not result:
+                result = {"status": "ok", "attending": args["attending"]}
 
         else:
-            return {
+            result = {
                 "error": {"type": "UnknownTool", "message": f"Unknown tool: {name}"}
             }
+
+        return result
 
     except Exception as e:
         return {"error": {"type": type(e).__name__, "message": str(e)}}

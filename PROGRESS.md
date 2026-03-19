@@ -1,15 +1,15 @@
 # Training Pipeline Progress
 
-> **Last updated:** 2026-03-15
-> **Current phase:** Compact tool results done, need to re-augment and retrain SFT
+> **Last updated:** 2026-03-16
+> **Current phase:** SFT Training v3 in progress (~30-34h, started 2026-03-16)
 
 ---
 
 ## Pipeline Overview
 
 ```
-Compact Data → Re-Augment → SFT Training v2 → Merge LoRA → Evaluate → RL Training
-   DONE        TODO          TODO                                       PAUSED
+Compact Data → Re-Augment → SFT Training v3 → Merge LoRA → Evaluate → RL Training
+   DONE         DONE         IN PROGRESS                                PAUSED
 ```
 
 ## Phase Status
@@ -21,9 +21,9 @@ Compact Data → Re-Augment → SFT Training v2 → Merge LoRA → Evaluate → 
 - 159/161 fit within 3076 tokens (up from 4096 needed for verbose)
 - Script: `scripts/data_generation/compact_tool_results.py`
 
-**Augmented data:** DELETED (was generated from verbose format, now stale)
-- Must regenerate from compact trajectories using `scripts/data_generation/augment_trajectories.py`
-- Augmentation plan still valid: paraphrase + entity substitution
+**Augmented data:** `sft_data/trajectories_augmented/` — 1,039 trajectories (DONE 2026-03-16)
+- 161 original + 556 paraphrased + 322 entity-substituted
+- 18 JSON files, compact format preserved throughout
 
 **RL data:** `rl_data/` — 622 scenarios across 50 calendars (unchanged)
 
@@ -66,20 +66,21 @@ Reduced token usage by 41% across all training data:
 |----------|-----------------|-------------------|
 | Correct | 17/72 (24%) | 0/40 (0%) |
 
-### 5. SFT Training v2 (verbose format) — STALE
+### 5. SFT Training v2 (verbose format) — STALE (historical)
 
-**Old checkpoints in `sft_output_100ep/` have been deleted.** Trained on verbose format data which is now superseded by compact format. Results below are historical only.
+- Trained on verbose format, now superseded by compact format
+- Epoch 2 eval: SFT 46.6%, RL 28.6% (old checkpoints deleted)
 
-- Epoch 2 eval (Gemini judge): SFT 75/161 = 46.6%, RL 80/280 = 28.6%
-- max_model_len 2048 was too tight; 3076 needed for reliable eval
+### 6. SFT Training v3 (compact format) — IN PROGRESS
 
-**Improvements to carry forward to v3:**
-1. Loss masking (assistant-only via DataCollatorForCompletionOnlyLM)
-2. Data augmentation (6.5x more data)
-3. LR schedule: cosine_with_restarts
-4. LoRA rank 64
+- Started: 2026-03-16, ~30-34h expected
+- 935 train / 104 val trajectories, all 1,039 fit (0 skipped)
+- Config: 10 epochs, LoRA rank 64, loss masking (10.6% assistant tokens), cosine_with_restarts
+- MAX_SEQ_LENGTH=3076, batch=1, grad_accum=4, 2,330 total steps
+- Output: `sft_output/`, loss CSV: `sft_output/epoch_losses.csv`
+- Script fixes applied: `sft_train_100ep.py` (OUTPUT_DIR, MAX_SEQ_LENGTH), `eval_all_checkpoints.py` (SFT_OUTPUT, max-model-len 3076, cleared stale checkpoint data)
 
-### 6. Eval Pipeline — DONE
+### 7. Eval Pipeline — DONE
 
 New evaluation scripts with Gemini judge:
 - `scripts/eval/eval_batch.py` — batch eval on SFT and/or RL data
@@ -87,7 +88,7 @@ New evaluation scripts with Gemini judge:
 - `src/calendar_agent/evaluation.py` — SIGALRM 30s timeout per eval, 60s per query
 - vLLM must use `--max-model-len 3076` (not 2048) for reliable eval
 
-### 7. RL Training — PAUSED (focus on SFT first)
+### 8. RL Training — PAUSED (focus on SFT first)
 
 #### Run 1 (shaped rewards → reward hacking)
 - Shaped rewards caused model to optimize for 0.3 tier
@@ -121,9 +122,9 @@ New evaluation scripts with Gemini judge:
 
 ## Next Steps
 
-1. **Re-augment trajectories** — run augmentation on compact format data
-2. **Retrain SFT** — with compact data, loss masking, LoRA rank 64
-3. **Evaluate** — using eval pipeline with Gemini judge
+1. ~~Re-augment trajectories~~ — DONE (1,039 trajectories)
+2. ~~Retrain SFT~~ — IN PROGRESS (started 2026-03-16)
+3. **Evaluate** — update `eval_all_checkpoints.py` with new checkpoint numbers, run eval
 4. **RL training** — if SFT baseline is strong enough
 
 ## Hardware Constraints

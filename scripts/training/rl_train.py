@@ -73,7 +73,6 @@ QUERY_DIR = os.path.join(DATA_DIR, "queries")
 # ── Configuration ──────────────────────────────────────────
 
 MAX_TURNS = 5  # cap agent turns to bound trajectory length
-MAX_TOOL_OUTPUT_CHARS = 500  # aggressive truncation for memory
 
 
 # ── Data Models ────────────────────────────────────────────
@@ -231,11 +230,6 @@ OPENAI_TOOLS = _vertex_to_openai_tools(TOOL_DECLARATIONS) + [
 ]
 
 
-def _truncate(text: str, limit: int = MAX_TOOL_OUTPUT_CHARS) -> str:
-    """Truncate tool output to keep trajectory sequences short for training."""
-    if len(text) <= limit:
-        return text
-    return text[:limit] + "\n...(truncated)"
 
 
 # ── Evaluation (uses Gemini judge via Vertex AI) ──────────
@@ -422,7 +416,7 @@ async def rollout(
 
                 # Dispatch to CalendarEnvironment via run_trajectory helper
                 result = dispatch_tool_call(env, tool_name, tool_args)
-                result_str = _truncate(json.dumps(result, default=str))
+                result_str = json.dumps(result, default=str)
                 traj.messages_and_choices.append(
                     {
                         "role": "tool",
