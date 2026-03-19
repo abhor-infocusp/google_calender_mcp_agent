@@ -79,22 +79,24 @@ def test_list_events_no_filters(env, sample_event_dict):
     env.initialize(events=[sample_event_dict], now="2026-01-01 09:00:00")
 
     result = env.list_events()
-    assert "events" in result
-    assert len(result["events"]) == 1
+    assert isinstance(result, list)
+    assert len(result) == 1
 
 
 def test_list_events_with_time_min(env, sample_event_dict):
     env.initialize(events=[sample_event_dict], now="2026-01-01 09:00:00")
 
     result = env.list_events(time_min="2026-01-01 10:30:00")
-    assert len(result["events"]) == 1
+    assert isinstance(result, list)
+    assert len(result) == 1
 
 
 def test_list_events_with_time_max(env, sample_event_dict):
     env.initialize(events=[sample_event_dict], now="2026-01-01 09:00:00")
 
     result = env.list_events(time_max="2026-01-01 09:30:00")
-    assert len(result["events"]) == 0
+    assert isinstance(result, list)
+    assert len(result) == 0
 
 
 def test_list_events_invalid_time(env):
@@ -110,7 +112,9 @@ def test_get_event_success(env, sample_event_dict):
     env.initialize(events=[sample_event_dict], now="2026-01-01 09:00:00")
 
     result = env.get_event("evt_1")
-    assert "event" in result
+    assert isinstance(result, dict)
+    assert result["id"] == "evt_1"
+    assert result["summary"] == "Test Event"
 
 
 def test_get_event_not_found(env):

@@ -155,8 +155,8 @@ class TestOperationsWithData:
 
     def test_list_events_returns_all(self, loaded_env):
         result = loaded_env.list_events()
-        assert "events" in result
-        assert len(result["events"]) == len(loaded_env.calendar.events)
+        assert isinstance(result, list)
+        assert len(result) == len(loaded_env.calendar.events)
 
     def test_list_events_filter_by_day(self, loaded_env):
         # Filter to just the first event's day
@@ -167,15 +167,16 @@ class TestOperationsWithData:
             time_min=day_start,
             time_max=day_end,
         )
-        assert "events" in result
-        assert len(result["events"]) > 0
+        assert isinstance(result, list)
+        assert len(result) > 0
         # Should be fewer than total events
-        assert len(result["events"]) < len(loaded_env.calendar.events)
+        assert len(result) < len(loaded_env.calendar.events)
 
     def test_get_event_by_id(self, loaded_env):
         event_id = loaded_env.calendar.events[0].id
         result = loaded_env.get_event(event_id)
-        assert "event" in result
+        assert isinstance(result, dict)
+        assert result["id"] == event_id
 
     def test_get_event_invalid_id(self, loaded_env):
         result = loaded_env.get_event("nonexistent_id")
@@ -241,8 +242,8 @@ class TestMultipleDataFiles:
 
         # Verify list_events works
         result = env.list_events()
-        assert "events" in result
-        assert len(result["events"]) == len(events)
+        assert isinstance(result, list)
+        assert len(result) == len(events)
 
     @pytest.mark.parametrize("file_index", range(5))
     def test_all_events_have_valid_times(self, file_index):
