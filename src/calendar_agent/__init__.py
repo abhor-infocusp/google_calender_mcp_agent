@@ -21,8 +21,10 @@ from calendar_agent.evaluation import (
 )
 from calendar_agent.tools import (
     RETURN_FINAL_ANSWER_TOOL,
+    RETURN_FINAL_ANSWER_TOOL_MINIMAL,
     VERTEX_TO_OPENAI_TYPES,
     compact_tool_result,
     get_openai_tools,
+    get_openai_tools_minimal,
     serialize_tool_result,
 )

@@ -1,4 +1,5 @@
 import asyncio
+import gc
 import json
 import logging
 import os
@@ -31,6 +32,8 @@ try:
 except ImportError:
     pass
 
+import calendar_agent.art_patches  # noqa: F401 — must be before art imports
+
 import art
 import torch
 import vertexai
@@ -44,7 +47,6 @@ from vertexai.generative_models import GenerativeModel
 
 from calendar_agent.environment import CalendarEnvironment
 from calendar_agent.core import (
-    SYSTEM_PROMPT,
     compute_fallback_now,
     dispatch_tool_call,
     filter_by_days,
@@ -52,7 +54,7 @@ from calendar_agent.core import (
 )
 from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, format_day_state_text
 from calendar_agent.paths import RL_DATA_DIR as _RL_DATA_DIR, RL_JSON_CALENDAR_DIR, RL_QUERY_DIR, CREDENTIALS_PATH
-from calendar_agent.tools import get_openai_tools
+from calendar_agent.tools import get_openai_tools_minimal
 
 random.seed(42)
 
@@ -137,7 +139,7 @@ def load_all_scenarios() -> list[CalendarScenario]:
     return scenarios
 
 
-OPENAI_TOOLS = get_openai_tools(include_final_answer=True)
+OPENAI_TOOLS = get_openai_tools_minimal(include_final_answer=True)
 
 # ── Evaluation (uses Gemini judge via Vertex AI) ──────────
 
@@ -225,13 +227,6 @@ Was the task completed correctly? End with one word: Correct or Incorrect."""
 
 # ── Rollout ────────────────────────────────────────────────
 
-SYSTEM_PROMPT_TEMPLATE = (
-    SYSTEM_PROMPT
-    + "- When you are done, call return_final_answer with a summary of what you did.\n\n"
-    + "You may take up to {max_turns} turns to complete the task.\n"
-)
-
-
 async def rollout(
     model: art.Model, calendar_input: CalendarRolloutInput
 ) -> ProjectTrajectory:
@@ -256,10 +251,8 @@ async def rollout(
         },
     )
 
-    system_prompt = SYSTEM_PROMPT_TEMPLATE.format(max_turns=MAX_TURNS)
-
+    # No system prompt — model learns behavior from SFT data
     traj.messages_and_choices = [
-        {"role": "system", "content": system_prompt},
         {"role": "user", "content": scenario.query},
     ]
 
@@ -271,9 +264,16 @@ async def rollout(
     )
 
     final_answer_text = None
+    num_turns = 0
+    num_tool_calls = 0
+    had_error = False
+    tool_names_list = []
+    total_prompt_tokens = 0
+    total_completion_tokens = 0
 
     # ── Agent loop ──
     for _ in range(MAX_TURNS):
+        num_turns += 1
         try:
             response = await client.chat.completions.create(
                 model=model.get_inference_name(),
@@ -282,9 +282,20 @@ async def rollout(
                 tools=traj.tools,
             )
         except Exception as e:
-            print(f"[ROLLOUT ERROR] LLM call failed: {e}")
-            traceback.print_exc()
+            err_str = str(e)
+            if "maximum context length" in err_str:
+                print(f"  [ROLLOUT {scenario.id}] Context overflow at turn {_}, ending trajectory")
+                traj.metrics["context_overflow"] = 1.0
+            else:
+                print(f"[ROLLOUT ERROR] LLM call failed: {e}")
+                traceback.print_exc()
+            had_error = True
             break
+
+        # Track token usage
+        if response.usage:
+            total_prompt_tokens += response.usage.prompt_tokens or 0
+            total_completion_tokens += response.usage.completion_tokens or 0
 
         response_message = response.choices[0].message
         traj.messages_and_choices.append(response.choices[0])
@@ -321,6 +332,9 @@ async def rollout(
                     hit_final_answer = True
                     break
 
+                num_tool_calls += 1
+                tool_names_list.append(tool_name)
+
                 # Dispatch to CalendarEnvironment via run_trajectory helper
                 result = dispatch_tool_call(env, tool_name, tool_args)
                 result_str = json.dumps(result, default=str)
@@ -334,6 +348,7 @@ async def rollout(
                 )
         except Exception as e:
             print(f"Error executing tool call: {e}")
+            had_error = True
             break
 
         if hit_final_answer:
@@ -353,12 +368,14 @@ async def rollout(
     reward = 0.0
     verdict = "NoAnswer"
 
+    judge_latency_s = 0.0
     if final_answer_text is not None:
         # Run Gemini judge for full correctness
         after_snap = snapshot_events(env)
         before_days = filter_by_days(before_snap, scenario.addressed_days)
         after_days = filter_by_days(after_snap, scenario.addressed_days)
 
+        judge_start = time.monotonic()
         verdict = await evaluate_trajectory(
             query=scenario.query,
             final_output=final_answer_text,
@@ -366,6 +383,7 @@ async def rollout(
             before_days=before_days,
             after_days=after_days,
         )
+        judge_latency_s = round(time.monotonic() - judge_start, 2)
 
         if verdict == "Correct":
             reward = 1.0
@@ -374,6 +392,14 @@ async def rollout(
     traj.metrics["correct"] = 1.0 if verdict == "Correct" else 0.0
     traj.metrics["verdict"] = {"Correct": 1, "Incorrect": 0}.get(verdict, -1)
     traj.metrics["shaped_reward"] = reward
+    traj.metrics["num_turns"] = float(num_turns)
+    traj.metrics["num_tool_calls"] = float(num_tool_calls)
+    traj.metrics["had_error"] = 1.0 if had_error else 0.0
+    traj.metrics["no_final_answer"] = 1.0 if final_answer_text is None else 0.0
+    traj.metadata["tool_names"] = ",".join(tool_names_list) if tool_names_list else ""
+    traj.metrics["judge_latency_s"] = judge_latency_s
+    traj.metrics["prompt_tokens"] = float(total_prompt_tokens)
+    traj.metrics["completion_tokens"] = float(total_completion_tokens)
     traj.final_answer_text = final_answer_text
     print(
         f"  [DEBUG {scenario.id}] verdict={verdict} reward={reward} "
@@ -397,6 +423,52 @@ def print_gpu_usage(label: str = ""):
         )
 
 
+def gpu_snapshot(label: str = "") -> dict:
+    """Return GPU memory stats as a dict and print them."""
+    if not torch.cuda.is_available():
+        return {}
+    allocated = torch.cuda.memory_allocated() / 1024**3
+    reserved = torch.cuda.memory_reserved() / 1024**3
+    max_allocated = torch.cuda.max_memory_allocated() / 1024**3
+    total = torch.cuda.get_device_properties(0).total_memory / 1024**3
+    free, total_mem = torch.cuda.mem_get_info()
+    free_gib = free / 1024**3
+    snap = {
+        "allocated_gb": round(allocated, 3),
+        "reserved_gb": round(reserved, 3),
+        "max_allocated_gb": round(max_allocated, 3),
+        "total_gb": round(total, 3),
+        "free_gb": round(free_gib, 3),
+    }
+    if label:
+        print(f"  [GPU {label}] alloc={allocated:.2f} res={reserved:.2f} free={free_gib:.2f} max_alloc={max_allocated:.2f} total={total:.2f}")
+    return snap
+
+
+class StepTimer:
+    """Simple wall-clock timer for named phases within a training step."""
+
+    def __init__(self):
+        self.records: dict[str, float] = {}
+        self._current_phase: str | None = None
+        self._phase_start: float = 0.0
+
+    def start(self, phase: str):
+        self.stop()
+        self._current_phase = phase
+        self._phase_start = time.monotonic()
+
+    def stop(self):
+        if self._current_phase is not None:
+            elapsed = time.monotonic() - self._phase_start
+            self.records[self._current_phase] = round(elapsed, 2)
+            self._current_phase = None
+
+    def get(self) -> dict[str, float]:
+        self.stop()
+        return dict(self.records)
+
+
 # ── Main ───────────────────────────────────────────────────
 
 
@@ -408,7 +480,7 @@ async def main():
         # Must be the MERGED fp16 model from serialized SFT training.
         # Create with: merge_lora.py or Unsloth save_pretrained_merged()
         # from the best SFT checkpoint (e.g. sft_output/checkpoint-144).
-        base_model="sft_output/merged_instruct",
+        base_model="sft_output/merged_tmp",
         _internal_config=dev.InternalModelConfig(
             init_args=dev.InitArgs(
                 load_in_4bit=True,
@@ -416,17 +488,18 @@ async def main():
                 max_lora_rank=32,
             ),
             engine_args=dev.EngineArgs(
-                max_model_len=2048,
-                max_num_batched_tokens=2048,
+                max_model_len=3076,
+                max_num_batched_tokens=3076,
                 max_num_seqs=4,
-                gpu_memory_utilization=0.55,
+                gpu_memory_utilization=0.85,
                 enforce_eager=True,
                 swap_space=2,
-                enable_sleep_mode=False,
+                enable_sleep_mode=True,
             ),
             trainer_args=dev.TrainerArgs(
                 per_device_train_batch_size=1,
-                gradient_accumulation_steps=4,
+                gradient_accumulation_steps=1,
+                logging_steps=1,
                 num_generations=2,
                 max_completion_length=512,
                 max_grad_norm=0.1,
@@ -446,6 +519,13 @@ async def main():
 
     # ── Load Data ──
     all_scenarios = load_all_scenarios()
+
+    # Filter to single category for focused training
+    CATEGORY_FILTER = "Modifier & Correction"  # Set to "" to use all categories
+    if CATEGORY_FILTER:
+        all_scenarios = [s for s in all_scenarios if CATEGORY_FILTER in s.category]
+        print(f"Filtered to '{CATEGORY_FILTER}': {len(all_scenarios)} scenarios")
+
     random.shuffle(all_scenarios)
 
     # 90/10 train/val split
@@ -460,12 +540,12 @@ async def main():
 
     # ── Training Config ──
     training_config = {
-        "groups_per_step": 8,
-        "num_epochs": 3,
-        "rollouts_per_group": 4,  # Need >=4 for binary rewards at ~10% correct rate
+        "groups_per_step": 1,
+        "num_epochs": 5,
+        "rollouts_per_group": 8,  # More rollouts = lower skip rate with binary rewards
         "learning_rate": 5e-6,
-        "max_steps": 500,
-        "validation_step_interval": 15,
+        "max_steps": 0,  # 0 = no limit (run all epochs)
+        "validation_step_interval": 20,  # validate every 20 steps
     }
 
     training_iterator = iterate_dataset(
@@ -475,15 +555,29 @@ async def main():
         initial_step=await model.get_step(),
     )
 
+    # ── Diagnostic Log ──
+    diagnostic_log: list[dict] = []
+    from collections import Counter
+
     # ── Training Loop ──
     for batch in training_iterator:
-        print(
-            f"Training step {batch.step}, epoch {batch.epoch}, epoch step {batch.epoch_step}"
-        )
-        print(f"Batch contains {len(batch.items)} scenarios")
-        print_gpu_usage("before rollouts")
+        step_timer = StepTimer()
+        step_timer.start("step_total")
 
-        # Create trajectory groups for this batch
+        torch.cuda.reset_peak_memory_stats()
+
+        print(
+            f"\n{'='*60}\n"
+            f"Training step {batch.step}, epoch {batch.epoch}, epoch step {batch.epoch_step}\n"
+            f"Batch contains {len(batch.items)} scenarios\n"
+            f"{'='*60}"
+        )
+
+        gpu_before_rollouts = gpu_snapshot("before rollouts")
+
+        # ── Rollouts ──
+        step_timer.start("rollout_generation_s")
+
         train_groups = []
         for scenario in batch.items:
             train_groups.append(
@@ -498,17 +592,84 @@ async def main():
                 )
             )
 
-        # Gather all trajectory groups
         finished_train_groups = await art.gather_trajectory_groups(
             train_groups,
             pbar_desc="gather",
             max_exceptions=training_config["rollouts_per_group"] * len(batch.items),
         )
-        print_gpu_usage("after rollouts")
+        step_timer.stop()
 
-        # Validation
-        if batch.step % training_config["validation_step_interval"] == 0:
-            print("Running validation at step", batch.step)
+        gpu_after_rollouts = gpu_snapshot("after rollouts")
+
+        # ── Collect per-group and per-trajectory stats ──
+        all_rewards = []
+        group_details = []
+        all_traj_metrics = []
+        skip_count = 0
+
+        for group in finished_train_groups:
+            group_rewards = [t.reward for t in group.trajectories]
+            group_verdicts = [
+                t.metrics.get("verdict", -1) for t in group.trajectories
+            ]
+            scenario_id = group.trajectories[0].metadata.get("scenario_id", "?") if group.trajectories else "?"
+            category = group.trajectories[0].metadata.get("category", "?") if group.trajectories else "?"
+
+            # GRPO skip: all rewards identical → zero gradient
+            skipped = len(set(group_rewards)) <= 1
+            if skipped:
+                skip_count += 1
+
+            group_details.append({
+                "scenario_id": scenario_id,
+                "category": category,
+                "rewards": group_rewards,
+                "skipped": skipped,
+                "verdicts": group_verdicts,
+            })
+
+            all_rewards.extend(group_rewards)
+            for t in group.trajectories:
+                all_traj_metrics.append(t.metrics)
+
+        correct_count = sum(1 for r in all_rewards if r == 1.0)
+        total_count = len(all_rewards)
+        mean_reward = sum(all_rewards) / total_count if total_count else 0.0
+        std_reward = (sum((r - mean_reward) ** 2 for r in all_rewards) / total_count) ** 0.5 if total_count else 0.0
+
+        # Trajectory-level stats
+        mean_turns = sum(m.get("num_turns", 0) for m in all_traj_metrics) / len(all_traj_metrics) if all_traj_metrics else 0
+        no_answer_count = sum(1 for m in all_traj_metrics if m.get("no_final_answer", 0) > 0)
+        tool_call_errors = sum(1 for m in all_traj_metrics if m.get("had_error", 0) > 0)
+        mean_tool_calls = sum(m.get("num_tool_calls", 0) for m in all_traj_metrics) / len(all_traj_metrics) if all_traj_metrics else 0
+        mean_judge_latency = sum(m.get("judge_latency_s", 0) for m in all_traj_metrics) / len(all_traj_metrics) if all_traj_metrics else 0
+        total_prompt_tok = sum(m.get("prompt_tokens", 0) for m in all_traj_metrics)
+        total_completion_tok = sum(m.get("completion_tokens", 0) for m in all_traj_metrics)
+
+        # Tool name distribution (stored in metadata, not metrics)
+        tool_counter: Counter = Counter()
+        for group in finished_train_groups:
+            for t in group.trajectories:
+                names_str = t.metadata.get("tool_names", "")
+                if isinstance(names_str, str) and names_str:
+                    for n in names_str.split(","):
+                        tool_counter[n.strip()] += 1
+
+        # Compute inference tokens/sec from rollout time
+        rollout_time = step_timer.records.get("rollout_generation_s", 1.0)
+        inference_tps = round((total_prompt_tok + total_completion_tok) / rollout_time, 1) if rollout_time > 0 else 0
+
+        print(f"\n  [STEP {batch.step} SUMMARY] reward={mean_reward:.3f}±{std_reward:.3f} "
+              f"acc={correct_count}/{total_count} ({correct_count/total_count*100:.1f}%) "
+              f"skip={skip_count}/{len(finished_train_groups)} ({skip_count/len(finished_train_groups)*100:.0f}%) "
+              f"errors={tool_call_errors} no_answer={no_answer_count} "
+              f"tokens={total_prompt_tok+total_completion_tok} tps={inference_tps}")
+
+        # ── Validation ──
+        validation_record = None
+        if training_config["validation_step_interval"] > 0 and batch.step % training_config["validation_step_interval"] == 0:
+            step_timer.start("validation_s")
+            print(f"\n  Running validation at step {batch.step}...")
             validation_groups = []
             val_sample = random.sample(
                 validation_scenarios, min(5, len(validation_scenarios))
@@ -537,9 +698,29 @@ async def main():
                 finished_validation_groups,
                 split="val",
             )
-            print_gpu_usage("after validation")
+            step_timer.stop()
 
+            val_rewards = [t.reward for g in finished_validation_groups for t in g.trajectories]
+            val_correct = sum(1 for r in val_rewards if r == 1.0)
+            validation_record = {
+                "accuracy": round(val_correct / len(val_rewards), 3) if val_rewards else 0,
+                "correct_count": val_correct,
+                "total_count": len(val_rewards),
+            }
+            print(f"  [VAL {batch.step}] acc={val_correct}/{len(val_rewards)} ({validation_record['accuracy']*100:.1f}%)")
+            gpu_snapshot("after validation")
+
+        # ── Checkpoint delete + Train ──
+        step_timer.start("checkpoint_delete_s")
         await model.delete_checkpoints()
+        step_timer.stop()
+
+        gpu_before_train = gpu_snapshot("before train (pre-gc)")
+        gc.collect()
+        torch.cuda.empty_cache()
+        gpu_snapshot("before train (post-gc+empty_cache)")
+
+        step_timer.start("train_step_s")
         await model.train(
             finished_train_groups,
             config=art.TrainConfig(
@@ -548,13 +729,68 @@ async def main():
             ),
             _config=dev.TrainConfig(logprob_calculation_chunk_size=128),
         )
-        print_gpu_usage("after train")
+        step_timer.stop()
 
-        print(f"Completed training step {batch.step}")
+        gpu_after_train = gpu_snapshot("after train")
+        peak_allocated = round(torch.cuda.max_memory_allocated() / 1024**3, 3) if torch.cuda.is_available() else 0
 
-        if batch.step >= training_config["max_steps"]:
+        # Stop total timer
+        step_timer.start("_dummy")
+        step_timer.stop()
+        timing = step_timer.get()
+        # Compute step_total from all phases
+        timing["step_total_s"] = round(sum(v for k, v in timing.items() if k != "_dummy"), 2)
+        timing.pop("_dummy", None)
+        timing.pop("step_total", None)
+
+        # ── Build step record ──
+        step_record = {
+            "step": batch.step,
+            "epoch": batch.epoch,
+            "timestamp": datetime.now().isoformat(),
+            "timing": timing,
+            "gpu": {
+                "before_rollouts": gpu_before_rollouts,
+                "after_rollouts": gpu_after_rollouts,
+                "before_train": gpu_before_train,
+                "after_train": gpu_after_train,
+                "peak_allocated_gb": peak_allocated,
+            },
+            "rewards": {
+                "mean": round(mean_reward, 4),
+                "std": round(std_reward, 4),
+                "correct_count": correct_count,
+                "total_count": total_count,
+                "accuracy": round(correct_count / total_count, 4) if total_count else 0,
+                "skip_count": skip_count,
+                "skip_rate": round(skip_count / len(finished_train_groups), 4) if finished_train_groups else 0,
+            },
+            "groups": group_details,
+            "trajectory_stats": {
+                "mean_turns": round(mean_turns, 2),
+                "no_answer_count": no_answer_count,
+                "tool_call_errors": tool_call_errors,
+                "mean_tool_calls": round(mean_tool_calls, 2),
+                "tool_name_distribution": dict(tool_counter),
+                "mean_judge_latency_s": round(mean_judge_latency, 2),
+                "total_prompt_tokens": int(total_prompt_tok),
+                "total_completion_tokens": int(total_completion_tok),
+                "inference_tokens_per_sec": inference_tps,
+            },
+            "validation": validation_record,
+        }
+        diagnostic_log.append(step_record)
+
+        print(f"\n  Completed training step {batch.step} in {timing.get('step_total_s', '?')}s")
+
+        if training_config["max_steps"] > 0 and batch.step >= training_config["max_steps"]:
             break
 
+    # ── Save diagnostic log ──
+    diag_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "rl_diagnostic.json")
+    with open(diag_path, "w") as f:
+        json.dump(diagnostic_log, f, indent=2, default=str)
+    print(f"\nDiagnostic log saved to {diag_path}")
     print("Training complete.")
 
 

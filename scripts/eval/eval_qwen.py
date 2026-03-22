@@ -33,7 +33,6 @@ from openai import OpenAI
 from calendar_agent.environment import CalendarEnvironment
 from calendar_agent.core import (
     DAY_NAMES,
-    SYSTEM_PROMPT,
     C,
     compute_fallback_now,
     diff_snapshots,
@@ -49,7 +48,7 @@ from calendar_agent.core import (
 )
 from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, evaluate_trajectory
 from calendar_agent.paths import SFT_DATA_DIR, DATA_DIR, RL_DATA_DIR, CREDENTIALS_PATH
-from calendar_agent.tools import get_openai_tools, RETURN_FINAL_ANSWER_TOOL, serialize_tool_result
+from calendar_agent.tools import get_openai_tools_minimal, RETURN_FINAL_ANSWER_TOOL_MINIMAL, serialize_tool_result
 
 import vertexai
 from vertexai.generative_models import GenerativeModel
@@ -82,7 +81,7 @@ def load_calendar_and_queries(index: int, use_sft_data: bool = False, use_rl_dat
 
     return events, queries, fallback_now
 
-OPENAI_TOOLS = get_openai_tools()
+OPENAI_TOOLS = get_openai_tools_minimal()
 
 
 # ── OpenAI Agent Loop ────────────────────────────────────────
@@ -102,10 +101,10 @@ def run_query_openai(
     Returns the same trajectory format as run_trajectory.run_query().
     """
     trajectory = []
-    messages = [
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": query},
-    ]
+    messages = []
+    if system_prompt:
+        messages.append({"role": "system", "content": system_prompt})
+    messages.append({"role": "user", "content": query})
 
     print(f"\n  {C.BLUE}[USER]       {query}{C.RESET}")
     trajectory.append({"role": "user", "content": query})
@@ -279,14 +278,11 @@ def main():
     # OpenAI client for the agent model
     client = OpenAI(base_url=args.base_url, api_key=args.api_key)
 
-    # Build tools and system prompt
+    # Build tools (no system prompt — model learns behavior from SFT)
     tools = list(OPENAI_TOOLS)
-    system_prompt = SYSTEM_PROMPT
+    system_prompt = ""
     if args.with_final_answer:
-        tools.append(RETURN_FINAL_ANSWER_TOOL)
-        system_prompt += (
-            "- When you are done, call return_final_answer with a summary of what you did.\n"
-        )
+        tools.append(RETURN_FINAL_ANSWER_TOOL_MINIMAL)
 
     # Init Vertex AI for the Gemini eval judge
     _gcp_credentials = None

@@ -87,6 +87,57 @@ def get_openai_tools(include_final_answer: bool = False) -> list[dict]:
     return tools
 
 
+def _strip_descriptions(params: dict) -> dict:
+    """Strip descriptions from parameter schema, keeping only structure."""
+    result = {}
+    for key, value in params.items():
+        if key == "description":
+            continue
+        if key == "properties" and isinstance(value, dict):
+            result["properties"] = {k: _strip_descriptions(v) for k, v in value.items()}
+        elif key == "items" and isinstance(value, dict):
+            result["items"] = _strip_descriptions(value)
+        else:
+            result[key] = value
+    return result
+
+
+RETURN_FINAL_ANSWER_TOOL_MINIMAL = {
+    "type": "function",
+    "function": {
+        "name": "return_final_answer",
+        "parameters": {
+            "type": "object",
+            "properties": {"answer": {"type": "string"}},
+            "required": ["answer"],
+        },
+    },
+}
+
+
+def get_openai_tools_minimal(include_final_answer: bool = False) -> list[dict]:
+    """Minimal tool definitions: names + parameter names/types only, no descriptions.
+
+    Saves ~950 tokens per trajectory. The model learns tool semantics from SFT
+    trajectories, not from runtime definitions. vLLM's hermes parser only needs
+    tools present to activate the parsing path.
+    """
+    tools = []
+    for fd in TOOL_DECLARATIONS:
+        d = fd.to_dict()
+        params = _convert_params(d.get("parameters", {}))
+        tools.append({
+            "type": "function",
+            "function": {
+                "name": d["name"],
+                "parameters": _strip_descriptions(params),
+            },
+        })
+    if include_final_answer:
+        tools.append(RETURN_FINAL_ANSWER_TOOL_MINIMAL)
+    return tools
+
+
 # ── Compact tool results ─────────────────────────────────
 
 

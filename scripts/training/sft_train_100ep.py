@@ -24,8 +24,7 @@ from trl import SFTTrainer, SFTConfig, DataCollatorForCompletionOnlyLM
 from datasets import Dataset
 from transformers import TrainerCallback
 
-from calendar_agent.core import SYSTEM_PROMPT
-from calendar_agent.tools import get_openai_tools, compact_tool_result
+from calendar_agent.tools import get_openai_tools_minimal, compact_tool_result
 from calendar_agent.paths import SFT_DATA_DIR as _SFT_DATA_DIR, SFT_OUTPUT_DIR as _SFT_OUTPUT_DIR
 
 random.seed(42)
@@ -42,13 +41,13 @@ MAX_SEQ_LENGTH = 3076
 LORA_RANK = 64
 NUM_EPOCHS = 10
 
-TOOLS = get_openai_tools()
+TOOLS = get_openai_tools_minimal()
 
 
 # ── Trajectory to Chat Conversion ─────────────────────────
 
 def trajectory_to_messages(traj: dict) -> list[dict]:
-    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+    messages = []
     steps = traj["trajectory"]
     i = 0
     while i < len(steps):

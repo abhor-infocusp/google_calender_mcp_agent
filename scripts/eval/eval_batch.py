@@ -23,14 +23,14 @@ from openai import OpenAI
 
 from calendar_agent.environment import CalendarEnvironment
 from calendar_agent.core import (
-    DAY_NAMES, SYSTEM_PROMPT, compute_fallback_now,
+    DAY_NAMES, compute_fallback_now,
     dispatch_tool_call, filter_by_days, get_query_now, snapshot_events,
 )
 from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, evaluate_trajectory
 from calendar_agent.paths import SFT_DATA_DIR, RL_DATA_DIR, CREDENTIALS_PATH
-from calendar_agent.tools import get_openai_tools, serialize_tool_result
+from calendar_agent.tools import get_openai_tools_minimal, serialize_tool_result
 
-OPENAI_TOOLS = get_openai_tools()
+OPENAI_TOOLS = get_openai_tools_minimal()
 
 
 # ── Agent loop ───────────────────────────────────────────────
@@ -38,10 +38,10 @@ OPENAI_TOOLS = get_openai_tools()
 def run_query(client, model_name, tools, system_prompt, env, query, max_turns=4):
     """Run a single query, return trajectory."""
     trajectory = []
-    messages = [
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": query},
-    ]
+    messages = []
+    if system_prompt:
+        messages.append({"role": "system", "content": system_prompt})
+    messages.append({"role": "user", "content": query})
     trajectory.append({"role": "user", "content": query})
 
     for turn in range(1, max_turns + 1):
@@ -144,7 +144,7 @@ def load_calendar(base_dir, cal_idx):
 def eval_tasks(client, model_name, eval_model, tasks, base_dir, label):
     """Evaluate a list of (cal_idx, query_idx, query_dict) tasks."""
     tools = list(OPENAI_TOOLS)
-    system_prompt = SYSTEM_PROMPT
+    system_prompt = ""
 
     results = []
     correct = 0
