@@ -1,7 +1,7 @@
 # Training Pipeline Progress
 
 > **Last updated:** 2026-03-22
-> **Current phase:** RL Training — Modifier & Correction run COMPLETE (5 epochs, 25.5% → 41.3%), next: evaluation
+> **Current phase:** RL Training — Modifier & Correction run showed 25.5%→41.3% but checkpoint lost; next: re-train with dynamic grouping
 
 ---
 
