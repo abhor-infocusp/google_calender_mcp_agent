@@ -1,7 +1,7 @@
 # Training Pipeline Progress
 
-> **Last updated:** 2026-03-22
-> **Current phase:** RL Training — Modifier & Correction run showed 25.5%→41.3% but checkpoint lost; next: re-train with dynamic grouping
+> **Last updated:** 2026-03-26
+> **Current phase:** RL Training — Single-category (Modifier & Correction) complete; planning next category or dynamic grouping
 
 ---
 
@@ -9,7 +9,7 @@
 
 ```
 Compact Data → Re-Augment → SFT Training v3 → Merge LoRA → Evaluate → RL Training
-   DONE         DONE         DONE (ckpt 933)    DONE         DONE       IN PROGRESS
+   DONE         DONE         DONE (ckpt 933)    DONE         DONE       MILESTONE
 ```
 
 ## Phase Status
@@ -47,9 +47,17 @@ Compact Data → Re-Augment → SFT Training v3 → Merge LoRA → Evaluate → 
 | Complex Logic & Conflict | 73.7% | 12.5% |
 | **Overall** | **131/161 (81.4%)** | **119/280 (42.5%)** |
 
-Source: `/tmp/eval_ckpt933_rl.json`, `/tmp/eval_ckpt933_sft.json`
+Source: `rl_runs/single_category_modifier_correction/eval/eval_sft_baseline_rl.json`
 
 ### 4. RL Training — IN PROGRESS
+
+#### Curriculum Sampler — ABANDONED
+
+- Curriculum learning approach did not produce improvement (+0.006 overall after 266 steps)
+- Single-category rerun without proper per-scenario multi-rollout grouping also failed (22% avg after 40 steps, below 32.5% SFT baseline)
+- Root cause: GRPO needs multiple rollouts of the *same* query per group to learn from reward contrast. Without this, comparing different queries provides weak/noisy signal.
+- Files removed: `curriculum_learning.md`, `src/calendar_agent/curriculum.py`
+- **Next:** fix rl_train.py to use proper per-scenario grouping (1 TrajectoryGroup per scenario, N rollouts each) before attempting any further training
 
 #### Infrastructure Fixes (2026-03-19/20)
 
@@ -93,7 +101,27 @@ Validation (n=5, noisy): oscillates 0-40%, no clear trend due to small sample.
 - Improvement plateauing in later epochs (~1pp/epoch vs ~7pp in early epochs)
 - Entropy low (~0.02-0.05) — model is very deterministic, limited exploration
 - Loss pattern: mix of positive (0.5-1.0) and negative (-0.5 to -2.0), healthy for GRPO
-- Next step: formal eval on full RL data to measure generalization
+
+#### Eval: RL checkpoint 395 vs SFT baseline (full RL data, 280 queries)
+
+| Category | SFT Baseline | After RL | Delta |
+|---|---|---|---|
+| Relative Time References | 29/40 (72.5%) | 29/40 (72.5%) | 0 |
+| Information Retrieval | 25/40 (62.5%) | 29/40 (72.5%) | **+10.0%** |
+| Schedule a Single Event | 21/40 (52.5%) | 27/40 (67.5%) | **+15.0%** |
+| Vague & Contextual | 20/40 (50.0%) | 17/40 (42.5%) | -7.5% |
+| Modifier & Correction | 13/40 (32.5%) | 18/40 (45.0%) | **+12.5%** |
+| Human Chaos (Edge Cases) | 6/40 (15.0%) | 5/40 (12.5%) | -2.5% |
+| Complex Logic & Conflict | 5/40 (12.5%) | 9/40 (22.5%) | **+10.0%** |
+| **Overall** | **119/280 (42.5%)** | **134/280 (47.9%)** | **+5.4%** |
+
+**Key findings:**
+- Target category improved 32.5% → 45.0% (+12.5pp)
+- Positive transfer to 3 other categories (Info Retrieval, Schedule, Complex Logic)
+- Small regression on Vague & Contextual (-7.5pp) and Human Chaos (-2.5pp)
+- **LoRA merge issue:** merging LoRA to fp16 produces garbage output; must serve via `--enable-lora`
+
+**Archive:** `rl_runs/single_category_modifier_correction/` (checkpoint, eval JSONs, diagnostics, README)
 
 ---
 
@@ -143,5 +171,5 @@ rollouts_per_group=8, learning_rate=5e-6, beta=0.0
 - RL training: `scripts/training/rl_train.py`
 - Dashboard plot: `scripts/utils/plot_rl_dashboard.py` → `rl_dashboard.png`
 - Reward plot: `scripts/utils/plot_rewards.py` → `reward_curve.png`
-- SFT eval results: `/tmp/eval_ckpt933_rl.json`, `/tmp/eval_ckpt933_sft.json`
+- SFT eval results: `rl_runs/single_category_modifier_correction/eval/eval_sft_baseline_rl.json`
 - Training log: task `bjuyq5ida`
