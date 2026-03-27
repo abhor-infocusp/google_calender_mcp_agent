@@ -34,6 +34,9 @@ except ImportError:
 
 import calendar_agent.art_patches  # noqa: F401 — must be before art imports
 
+# Inject RL LoRA weights from previous run into the fresh adapter
+calendar_agent.art_patches.INJECT_LORA_CHECKPOINT = "rl_runs/single_category_modifier_correction/checkpoint"
+
 import art
 import torch
 import vertexai
@@ -477,9 +480,8 @@ async def main():
     model = art.TrainableModel(
         name="calendar-agent-001",
         project="calendar-agent",
-        # Must be the MERGED fp16 model from serialized SFT training.
-        # Create with: merge_lora.py or Unsloth save_pretrained_merged()
-        # from the best SFT checkpoint (e.g. sft_output/checkpoint-144).
+        # SFT base model. RL LoRA weights from M&C run are injected via
+        # art_patches.INJECT_LORA_CHECKPOINT after fresh LoRA creation.
         base_model="sft_output/merged_tmp",
         _internal_config=dev.InternalModelConfig(
             init_args=dev.InitArgs(
@@ -521,22 +523,15 @@ async def main():
     all_scenarios = load_all_scenarios()
 
     # Filter to single category for focused training
-    CATEGORY_FILTER = "Modifier & Correction"  # Set to "" to use all categories
+    CATEGORY_FILTER = "Information Retrieval"  # Set to "" to use all categories
     if CATEGORY_FILTER:
         all_scenarios = [s for s in all_scenarios if CATEGORY_FILTER in s.category]
         print(f"Filtered to '{CATEGORY_FILTER}': {len(all_scenarios)} scenarios")
 
     random.shuffle(all_scenarios)
+    training_scenarios = all_scenarios
 
-    # 90/10 train/val split
-    split_point = int(len(all_scenarios) * 0.9)
-    training_scenarios = all_scenarios[:split_point]
-    validation_scenarios = all_scenarios[split_point:]
-
-    print(f"Total scenarios: {len(all_scenarios)}")
-    print(
-        f"Training: {len(training_scenarios)}, Validation: {len(validation_scenarios)}"
-    )
+    print(f"Total scenarios: {len(all_scenarios)} (all used for training, no val split)")
 
     # ── Training Config ──
     training_config = {
@@ -545,7 +540,6 @@ async def main():
         "rollouts_per_group": 8,  # More rollouts = lower skip rate with binary rewards
         "learning_rate": 5e-6,
         "max_steps": 0,  # 0 = no limit (run all epochs)
-        "validation_step_interval": 20,  # validate every 20 steps
     }
 
     training_iterator = iterate_dataset(
@@ -665,51 +659,6 @@ async def main():
               f"errors={tool_call_errors} no_answer={no_answer_count} "
               f"tokens={total_prompt_tok+total_completion_tok} tps={inference_tps}")
 
-        # ── Validation ──
-        validation_record = None
-        if training_config["validation_step_interval"] > 0 and batch.step % training_config["validation_step_interval"] == 0:
-            step_timer.start("validation_s")
-            print(f"\n  Running validation at step {batch.step}...")
-            validation_groups = []
-            val_sample = random.sample(
-                validation_scenarios, min(5, len(validation_scenarios))
-            )
-            for scenario in val_sample:
-                validation_groups.append(
-                    art.TrajectoryGroup(
-                        [
-                            rollout(
-                                model,
-                                CalendarRolloutInput(
-                                    step=batch.step, scenario=scenario
-                                ),
-                            )
-                        ]
-                    )
-                )
-
-            finished_validation_groups = await art.gather_trajectory_groups(
-                validation_groups,
-                pbar_desc="validation",
-                max_exceptions=len(validation_scenarios),
-            )
-
-            await model.log(
-                finished_validation_groups,
-                split="val",
-            )
-            step_timer.stop()
-
-            val_rewards = [t.reward for g in finished_validation_groups for t in g.trajectories]
-            val_correct = sum(1 for r in val_rewards if r == 1.0)
-            validation_record = {
-                "accuracy": round(val_correct / len(val_rewards), 3) if val_rewards else 0,
-                "correct_count": val_correct,
-                "total_count": len(val_rewards),
-            }
-            print(f"  [VAL {batch.step}] acc={val_correct}/{len(val_rewards)} ({validation_record['accuracy']*100:.1f}%)")
-            gpu_snapshot("after validation")
-
         # ── Checkpoint delete + Train ──
         step_timer.start("checkpoint_delete_s")
         await model.delete_checkpoints()
@@ -777,7 +726,6 @@ async def main():
                 "total_completion_tokens": int(total_completion_tok),
                 "inference_tokens_per_sec": inference_tps,
             },
-            "validation": validation_record,
         }
         diagnostic_log.append(step_record)
 

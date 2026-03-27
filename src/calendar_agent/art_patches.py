@@ -26,6 +26,10 @@ if TYPE_CHECKING:
 
 _APPLIED: set[str] = set()
 
+# Set this before importing art to inject RL LoRA weights into the fresh adapter.
+# Path should point to a directory with adapter_model.safetensors.
+INJECT_LORA_CHECKPOINT: str | None = None
+
 
 def _log(name: str) -> None:
     _APPLIED.add(name)
@@ -50,6 +54,27 @@ def _patch_model_state_init():
     @functools.wraps(_orig_init)
     def _patched_init(self, config):
         _orig_init(self, config)
+
+        # Inject LoRA weights from a previous checkpoint if configured
+        if INJECT_LORA_CHECKPOINT is not None:
+            import os
+            from safetensors.torch import load_file
+
+            adapter_path = os.path.join(INJECT_LORA_CHECKPOINT, "adapter_model.safetensors")
+            print(f"[art_patches] Injecting LoRA weights from {adapter_path}")
+            saved_weights = load_file(adapter_path)
+            # Remap keys: PEFT adds ".default." namespace for the default adapter
+            remapped = {}
+            for key, tensor in saved_weights.items():
+                model_key = key.replace(".lora_A.weight", ".lora_A.default.weight").replace(".lora_B.weight", ".lora_B.default.weight")
+                remapped[model_key] = tensor
+            # Use load_state_dict with strict=False to inject LoRA weights
+            result = self.peft_model.load_state_dict(remapped, strict=False)
+            n_injected = len(remapped) - len(result.unexpected_keys)
+            if result.unexpected_keys:
+                print(f"[art_patches] WARNING: {len(result.unexpected_keys)} unexpected keys")
+            print(f"[art_patches] Injected {n_injected}/{len(saved_weights)} LoRA weights (missing: {len(result.missing_keys)})")
+
         # Override asyncio.Queue with thread-safe queue.Queue
         self.inputs_queue = queue.Queue()
 

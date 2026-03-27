@@ -18,7 +18,7 @@
 | **GPU memory utilization** | 0.85 |
 | **Max model len** | 3076 |
 | **Max LoRA rank** | 32 |
-| **LoRA rank** | 64 (training), 32 (vLLM serving limit) |
+| **LoRA rank** | 8 (ART default peft_args.r), vLLM max_lora_rank=32 |
 
 ## Training Results (Epoch-by-Epoch)
 

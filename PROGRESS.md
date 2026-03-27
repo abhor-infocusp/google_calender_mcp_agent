@@ -1,7 +1,7 @@
 # Training Pipeline Progress
 
-> **Last updated:** 2026-03-26
-> **Current phase:** RL Training — Single-category (Modifier & Correction) complete; planning next category or dynamic grouping
+> **Last updated:** 2026-03-27
+> **Current phase:** RL Training — Two single-category runs complete (Modifier & Correction + Information Retrieval); overall accuracy plateaued at ~47.5%
 
 ---
 
@@ -79,7 +79,8 @@ Three critical bugs fixed to get RL training working:
 #### Run: Modifier & Correction focused — COMPLETE
 
 - **88 scenarios** (79 train / 9 val), 5 epochs, 395 steps
-- Config: `gpu_memory_utilization=0.85`, `max_lora_rank=32`, `rollouts_per_group=8`, `lr=5e-6`, `beta=0.0`
+- Config: `gpu_memory_utilization=0.85`, LoRA r=8 (ART default), `rollouts_per_group=8`, `lr=5e-6`, `beta=0.0`
+- LoRA rank: 8, alpha 16 (ART peft_args defaults — rank 64 OOMs during vLLM profiling)
 - KV cache: 2.06 GiB (was 0.87), concurrency 25x (was 10.5x)
 - Inference: ~110-165 tps
 
@@ -123,6 +124,58 @@ Validation (n=5, noisy): oscillates 0-40%, no clear trend due to small sample.
 
 **Archive:** `rl_runs/single_category_modifier_correction/` (checkpoint, eval JSONs, diagnostics, README)
 
+#### Run: Information Retrieval focused — COMPLETE
+
+- **~90 scenarios** (all IR from 50 calendars, no val split), seeded from RL1 Modifier checkpoint
+- **234 steps**, same hyperparams as RL1
+- Config: `INJECT_LORA_CHECKPOINT = "rl_runs/single_category_modifier_correction/checkpoint"`
+
+**3-Way Per-Category Comparison (280 queries):**
+
+| Category | SFT Baseline | RL1 Modifier (395) | RL2 IR (234) | RL1→RL2 |
+|---|---|---|---|---|
+| Complex Logic & Conflict | 5/40 (12%) | 9/40 (22%) | 7/40 (18%) | -5% |
+| Human Chaos (Edge Cases) | 6/40 (15%) | 5/40 (12%) | 6/40 (15%) | +2% |
+| Information Retrieval | 25/40 (62%) | 29/40 (72%) | 30/40 (75%) | +2% |
+| Modifier & Correction | 13/40 (32%) | 18/40 (45%) | 20/40 (50%) | +5% |
+| Relative Time References | 29/40 (72%) | 29/40 (72%) | 32/40 (80%) | +8% |
+| Schedule a Single Event | 21/40 (52%) | 27/40 (68%) | 24/40 (60%) | -8% |
+| Vague & Contextual | 20/40 (50%) | 17/40 (42%) | 14/40 (35%) | -8% |
+| **Overall** | **119/280 (42.5%)** | **134/280 (47.9%)** | **133/280 (47.5%)** | **-0.4%** |
+
+**Key findings:**
+- Overall flat (47.5% vs 47.9%) — no net gain from second RL run
+- IR target category: 72% → 75% (+2pp marginal improvement)
+- Modifier & Correction retained/extended: 45% → 50% (+5pp)
+- Relative Time improved unexpectedly: 72% → 80% (+8pp)
+- **Vague & Contextual regressing steadily**: 50% → 42% → 35% across checkpoints
+- Schedule a Single Event regressed: 68% → 60% (-8pp)
+- Pattern: gains in trained categories offset by regressions elsewhere (catastrophic forgetting)
+
+**Archive:** `rl_runs/single_category_ir/` (checkpoint, eval JSONs, diagnostics, logs, README)
+
+#### Experiment: SFT Recovery on RL1 — FAILED
+
+- 1 epoch SFT on top of RL1 Modifier checkpoint (merged to fp16, then 4-bit + fresh rank-64 LoRA)
+- Used full 1,039 augmented SFT trajectories, same config as SFT v3
+- Train loss: 0.113, eval loss: 0.102
+
+**Result: 39.3% (110/280) — worse than SFT baseline (42.5%)**
+
+| Category | SFT Baseline | RL1 (47.9%) | SFT-on-RL (39.3%) |
+|---|---|---|---|
+| Complex Logic & Conflict | 5/40 (12%) | 9/40 (22%) | 7/40 (18%) |
+| Human Chaos | 6/40 (15%) | 5/40 (12%) | 5/40 (12%) |
+| Information Retrieval | 25/40 (62%) | 29/40 (72%) | 23/40 (57%) |
+| Modifier & Correction | 13/40 (32%) | 18/40 (45%) | 10/40 (25%) |
+| Relative Time References | 29/40 (72%) | 29/40 (72%) | 30/40 (75%) |
+| Schedule a Single Event | 21/40 (52%) | 27/40 (68%) | 21/40 (52%) |
+| Vague & Contextual | 20/40 (50%) | 17/40 (42%) | 14/40 (35%) |
+
+**Conclusion:** SFT overwrites RL-learned behaviors. Modifier dropped 45% → 25%, IR dropped 72% → 57%. SFT recovery is not a viable approach for combating catastrophic forgetting in this setup.
+
+**Archive:** `sft_on_rl_output/` (merged model, LoRA, eval JSON, training history)
+
 ---
 
 ## Key Technical Details
@@ -143,7 +196,7 @@ site-packages edits needed — just `import calendar_agent.art_patches` before `
 ### RL Config (current)
 ```python
 gpu_memory_utilization=0.85, max_model_len=3076, max_num_seqs=4
-max_lora_rank=32, enforce_eager=True, swap_space=2, enable_sleep_mode=True
+LoRA r=8 alpha=16 (ART default), enforce_eager=True, swap_space=2, enable_sleep_mode=True
 gradient_accumulation_steps=1, logging_steps=1, num_generations=2
 per_device_train_batch_size=1, max_grad_norm=0.1, optim="paged_adamw_8bit"
 rollouts_per_group=8, learning_rate=5e-6, beta=0.0
@@ -157,7 +210,7 @@ rollouts_per_group=8, learning_rate=5e-6, beta=0.0
 - Stable across steps, no memory leak
 
 ### Constraints
-- `max_lora_rank=64` OOMs during vLLM profiling (6.57 GiB peak vs 5.1 GiB free)
+- LoRA rank 64 OOMs during vLLM profiling (6.57 GiB peak vs 5.1 GiB free); RL uses rank 8 (ART default)
 - `gpu_memory_utilization=0.95` OOMs during profiling
 - Context overflow on calendars with many events (e.g., cal_47)
 
