@@ -79,29 +79,32 @@ def test_list_events_no_filters(env, sample_event_dict):
     env.initialize(events=[sample_event_dict], now="2026-01-01 09:00:00")
 
     result = env.list_events()
-    assert isinstance(result, list)
-    assert len(result) == 1
+    assert isinstance(result, str)
+    assert "Found 1 events:" in result
+    assert "evt_1" in result
+    assert "Test Event" in result
 
 
 def test_list_events_with_time_min(env, sample_event_dict):
     env.initialize(events=[sample_event_dict], now="2026-01-01 09:00:00")
 
     result = env.list_events(time_min="2026-01-01 10:30:00")
-    assert isinstance(result, list)
-    assert len(result) == 1
+    assert isinstance(result, str)
+    assert "Found 1 events:" in result
 
 
 def test_list_events_with_time_max(env, sample_event_dict):
     env.initialize(events=[sample_event_dict], now="2026-01-01 09:00:00")
 
     result = env.list_events(time_max="2026-01-01 09:30:00")
-    assert isinstance(result, list)
-    assert len(result) == 0
+    assert isinstance(result, str)
+    assert "Found 0 events:" in result
 
 
 def test_list_events_invalid_time(env):
     result = env.list_events(time_min="bad-input")
-    assert "error" in result
+    assert isinstance(result, str)
+    assert "Error:" in result
 
 
 # -------------------------
@@ -112,14 +115,16 @@ def test_get_event_success(env, sample_event_dict):
     env.initialize(events=[sample_event_dict], now="2026-01-01 09:00:00")
 
     result = env.get_event("evt_1")
-    assert isinstance(result, dict)
-    assert result["id"] == "evt_1"
-    assert result["summary"] == "Test Event"
+    assert isinstance(result, str)
+    assert "evt_1" in result
+    assert "Test Event" in result
+    assert "RSVP:" in result
 
 
 def test_get_event_not_found(env):
     result = env.get_event("missing")
-    assert "error" in result
+    assert isinstance(result, str)
+    assert "Error:" in result
 
 
 # -------------------------
@@ -134,7 +139,8 @@ def test_create_event_success(env):
         attendees=[],
     )
 
-    assert result["message"] == "Event created successfully."
+    assert isinstance(result, str)
+    assert "Event created successfully." in result
     assert len(env.calendar.events) == 1
 
 
@@ -144,7 +150,8 @@ def test_create_event_invalid_start(env):
         start="invalid",
         end="2026-01-01 13:00:00",
     )
-    assert "error" in result
+    assert isinstance(result, str)
+    assert "Error:" in result
 
 
 # -------------------------
@@ -161,7 +168,8 @@ def test_update_event_summary(env, sample_event_dict):
         },
     )
 
-    assert result["message"] == "Event updated successfully."
+    assert isinstance(result, str)
+    assert "Event updated successfully." in result
     assert env.calendar.events[0].summary == "Updated summary"
 
 
@@ -170,7 +178,8 @@ def test_update_event_invalid_id(env):
         event_id="missing",
         updates={"summary": "X"},
     )
-    assert "error" in result
+    assert isinstance(result, str)
+    assert "Error:" in result
 
 
 # -------------------------
@@ -181,13 +190,15 @@ def test_delete_event_success(env, sample_event_dict):
     env.initialize(events=[sample_event_dict], now="2026-01-01 09:00:00")
 
     result = env.delete_event("evt_1")
-    assert result["message"] == "Event deleted successfully."
+    assert isinstance(result, str)
+    assert "Event deleted:" in result
     assert len(env.calendar.events) == 0
 
 
 def test_delete_event_missing(env):
     result = env.delete_event("missing")
-    assert "error" in result
+    assert isinstance(result, str)
+    assert "Error:" in result
 
 
 # -------------------------
@@ -197,7 +208,9 @@ def test_delete_event_missing(env):
 def test_respond_to_event_success(env, sample_event_dict):
     env.initialize(events=[sample_event_dict], now="2026-01-01 09:00:00")
 
-    env.respond_to_event("evt_1", "ACCEPT")
+    result = env.respond_to_event("evt_1", "ACCEPT")
+    assert isinstance(result, str)
+    assert "RSVP updated to ACCEPT" in result
     assert env.calendar.events[0].attending == "ACCEPT"
 
 
@@ -205,7 +218,8 @@ def test_respond_to_event_invalid_value(env, sample_event_dict):
     env.initialize(events=[sample_event_dict], now="2026-01-01 09:00:00")
 
     result = env.respond_to_event("evt_1", "YES")
-    assert "error" in result
+    assert isinstance(result, str)
+    assert "Error:" in result
 
 
 # -------------------------
@@ -215,4 +229,6 @@ def test_respond_to_event_invalid_value(env, sample_event_dict):
 def test_get_current_time(env):
     env.now = datetime(2026, 1, 1, 9, 0, 0)
     result = env.get_current_time()
-    assert result["current_time"] == "2026-01-01 09:00:00"
+    assert isinstance(result, str)
+    assert "2026-01-01 09:00:00" in result
+    assert "Thursday" in result

@@ -1,7 +1,7 @@
 # SFT Data Enhancement Plan
 
 > **Created:** 2026-03-28
-> **Status:** Phase 1 complete (2.5-pro + tuned prompt = 72.9%), Phase 2 next
+> **Status:** Phase 1 complete (2.5-pro + v11 prompt + 3-attempt retry = 84.3%), Phase 2 next
 
 ---
 
@@ -92,22 +92,47 @@ Tested gemini-2.5-flash with baseline, v1 (structured), and v4 (chaos) prompts. 
 - Flash models prefer shorter prompts; pro benefits from longer structured guidance
 - 2.5-flash not competitive as teacher model
 
+### Phase 1d: Compact Tool Returns + v11 Prompt + Retry
+
+Refactored tool returns from JSON dicts to human-readable strings. list_events returns only id+summary lines; get_event returns full detail block with RSVP. This saves tokens and forces the model to call get_event for details.
+
+Prompt v11 ("plan once, then execute") replaced v4 ("step-by-step workflow"). Key changes:
+- Removed verbose workflow steps; simplified to "write out your plan, then execute"
+- Added "search YOUR calendar" instruction (fixes "can't access other calendars" failures)
+- Added tool return format examples so model knows what to expect
+- Removed fragment handling rules (over-engineering for Human Chaos)
+
+Added 3-attempt retry: each query gets up to 3 tries, counted as Correct if any attempt passes. This absorbs Gemini's stochasticity and judge inconsistency.
+
+**v11 + retry results (70 queries):**
+
+| Category | v4 (single) | v11 + retry |
+|---|---|---|
+| Schedule a Single Event | 8/10 | **10/10 (100%)** |
+| Vague & Contextual | 10/10 | **10/10 (100%)** |
+| Modifier & Correction | 7/10 | **10/10 (100%)** |
+| Information Retrieval | 8/10 | **9/10 (90%)** |
+| Complex Logic & Conflict | 6/10 | **8/10 (80%)** |
+| Relative Time References | 7/10 | **7/10 (70%)** |
+| Human Chaos | 5/10 | **5/10 (50%)** |
+| **Overall** | **51/70 (72.9%)** | **59/70 (84.3%)** |
+
 ### Decision
 
-**gemini-2.5-pro with v4 prompt (`prompts/best_25pro.txt`) is the teacher model for trajectory generation.**
-- 72.9% solve rate — best across all model+prompt combinations tested
-- Dominates on Vague & Contextual (100%), Human Chaos (50%), Info Retrieval (80%)
-- Competitive on Schedule (80% vs 90%) and Modifier (70% vs 80%)
-- Use the v4 prompt as system_instruction for trajectory generation (NOT the default SYSTEM_PROMPT)
+**gemini-2.5-pro with v11 prompt (`prompts/v11_reason_act.txt`) + 3-attempt retry is the teacher config for trajectory generation.**
+- 84.3% solve rate — best across all configurations tested
+- 3 categories at 100% (Schedule, Vague, Modifier)
+- Remaining failures concentrated in Human Chaos (50%) and Relative Time (70%)
+- Retry absorbs ~30% of judge errors and model stochasticity
 
 ### Artifacts
 
 - Tuning script: `scripts/data_generation/tune_prompt.py`
-- Comparison script: `scripts/data_generation/compare_teachers.py`
-- Winning prompt: `prompts/best_25pro.txt` (= `prompts/v4_chaos_refined.txt`)
-- All prompts: `prompts/baseline.txt`, `v1_structured.txt`, `v2_chaos.txt`, `v3_concise.txt`, `v4_chaos_refined.txt`, `v5_refined.txt`
+- Trajectory generation: `scripts/data_generation/generate_trajectories.py`
+- Winning prompt: `prompts/v11_reason_act.txt`
+- Legacy prompt: `prompts/best_25pro.txt` (v4, 72.9%)
 - Results log: `sft_data/prompt_tuning_log.jsonl`
-- Original comparison: `sft_data/teacher_comparison.json`
+- Best run: `sft_data/tuning_runs/v11_retry3/`
 
 ---
 
@@ -143,36 +168,30 @@ Tested gemini-2.5-flash with baseline, v1 (structured), and v4 (chaos) prompts. 
 
 Qwen training uses `MAX_SEQ_LENGTH=3076`. Trajectories exceeding this are dropped.
 
-**Problem discovered:** 2.5-pro with v4 prompt calls `list_events` unfiltered, returning all 20-45 events (~3,700-6,700 chars). This causes **71% of trajectories to exceed 3076 tokens** (avg 2,658 vs original 1,389).
+Tool returns are now human-readable strings (not JSON dicts), which significantly reduces token count:
+- `list_events`: one line per event (`id: evt_x | Summary — Day HH:MM-HH:MM`)
+- `get_event`: compact multi-line block (ID, Time, Description, Attendees, RSVP)
+- Other tools return similar compact strings
 
-**Solution — post-process trajectories after generation:**
-1. Generate with the v4/best prompt (unfiltered `list_events` → 73% accuracy)
-2. After saving, replace unfiltered `list_events` results with filtered versions containing only events on `addressed_days`
-3. Filtering a single day: ~600 chars vs ~3,900 chars (6x reduction)
-4. Also add "Keep your final response to 1-2 sentences" to the prompt to control response length
-5. This preserves the model's correct decisions while making trajectories fit the token budget
-
-**Alternative tested and rejected:** Forcing filtered `list_events` in the prompt (v6_compact) — drops accuracy from 72.9% to 62.9% because the model can't see the full calendar for keyword searches and conflict checks.
+**Post-processing may still be needed** for calendars with 30+ events where unfiltered `list_events` produces long output. Solution: replace unfiltered `list_events` results with filtered versions containing only events on `addressed_days`.
 
 ### Steps
 
 1. **Run trajectory generation** (`generate_trajectories.py`)
-   - Model: **gemini-2.5-pro** with custom prompt (`prompts/best_25pro.txt`)
+   - Model: **gemini-2.5-pro** with v11 prompt (`prompts/v11_reason_act.txt`)
+   - 3-attempt retry per query (correct on any attempt = saved)
    - 1,400 queries, rate limited at 0.5s between queries
-   - Expected: ~1,020 correct trajectories (at ~73% solve rate)
+   - Expected: ~1,180 correct trajectories (at ~84% solve rate)
    - Output: `sft_data/trajectories/`
 
-2. **Post-process: filter list_events results**
-   - For each trajectory, find `list_events` tool_call steps with no `time_min`/`time_max` args
-   - Replace the result with a re-executed filtered call using the query's `addressed_days`
-   - Verify token count fits within 3076 after filtering
-   - If still over, truncate the assistant's final response
+2. **Post-process: filter list_events results (if needed)**
+   - For trajectories exceeding 3076 tokens, replace unfiltered `list_events` results with filtered versions
+   - Tool returns are already compact strings, so this may not be needed for most trajectories
 
 3. **Analyze solve rates** per category
-   - For categories below 40%: retry failed queries with temperature variation
-   - For Human Chaos specifically: may still have ~50% solve rate — retry failures with varied temperature
+   - Human Chaos (~50%) and Relative Time (~70%) are expected weak spots
 
-**Files:** `scripts/data_generation/generate_trajectories.py` (needs update to accept custom prompt file + post-processing)
+**Files:** `scripts/data_generation/generate_trajectories.py`
 
 ---
 

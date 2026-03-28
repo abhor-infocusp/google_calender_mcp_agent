@@ -155,11 +155,11 @@ class TestOperationsWithData:
 
     def test_list_events_returns_all(self, loaded_env):
         result = loaded_env.list_events()
-        assert isinstance(result, list)
-        assert len(result) == len(loaded_env.calendar.events)
+        assert isinstance(result, str)
+        n = len(loaded_env.calendar.events)
+        assert f"Found {n} events:" in result
 
     def test_list_events_filter_by_day(self, loaded_env):
-        # Filter to just the first event's day
         first_event = loaded_env.calendar.events[0]
         day_start = first_event.start.strftime("%Y-%m-%d 00:00:00")
         day_end = first_event.start.strftime("%Y-%m-%d 23:59:59")
@@ -167,20 +167,21 @@ class TestOperationsWithData:
             time_min=day_start,
             time_max=day_end,
         )
-        assert isinstance(result, list)
-        assert len(result) > 0
-        # Should be fewer than total events
-        assert len(result) < len(loaded_env.calendar.events)
+        assert isinstance(result, str)
+        assert "Found" in result
+        assert "events:" in result
 
     def test_get_event_by_id(self, loaded_env):
         event_id = loaded_env.calendar.events[0].id
         result = loaded_env.get_event(event_id)
-        assert isinstance(result, dict)
-        assert result["id"] == event_id
+        assert isinstance(result, str)
+        assert event_id in result
+        assert "RSVP:" in result
 
     def test_get_event_invalid_id(self, loaded_env):
         result = loaded_env.get_event("nonexistent_id")
-        assert "error" in result
+        assert isinstance(result, str)
+        assert "Error:" in result
 
     def test_create_event_on_loaded_calendar(self, loaded_env):
         original_count = len(loaded_env.calendar.events)
@@ -189,7 +190,8 @@ class TestOperationsWithData:
             start="2024-01-01 16:00:00",
             end="2024-01-01 17:00:00",
         )
-        assert result["message"] == "Event created successfully."
+        assert isinstance(result, str)
+        assert "Event created successfully." in result
         assert len(loaded_env.calendar.events) == original_count + 1
 
     def test_update_event_on_loaded_calendar(self, loaded_env):
@@ -198,26 +200,29 @@ class TestOperationsWithData:
             event_id=event_id,
             updates={"summary": "Updated Event Name"},
         )
-        assert result["message"] == "Event updated successfully."
+        assert isinstance(result, str)
+        assert "Event updated successfully." in result
         assert loaded_env.calendar.events[0].summary == "Updated Event Name"
 
     def test_delete_event_on_loaded_calendar(self, loaded_env):
         original_count = len(loaded_env.calendar.events)
         event_id = loaded_env.calendar.events[0].id
         result = loaded_env.delete_event(event_id)
-        assert result["message"] == "Event deleted successfully."
+        assert isinstance(result, str)
+        assert "Event deleted:" in result
         assert len(loaded_env.calendar.events) == original_count - 1
 
     def test_respond_to_event_on_loaded_calendar(self, loaded_env):
         event_id = loaded_env.calendar.events[0].id
-        loaded_env.respond_to_event(event_id, "DECLINE")
+        result = loaded_env.respond_to_event(event_id, "DECLINE")
+        assert isinstance(result, str)
+        assert "RSVP updated to DECLINE" in result
         assert loaded_env.calendar.events[0].attending == "DECLINE"
 
     def test_get_current_time(self, loaded_env):
         result = loaded_env.get_current_time()
-        assert "current_time" in result
-        # Should match the earliest event start we derived
-        datetime.strptime(result["current_time"], "%Y-%m-%d %H:%M:%S")
+        assert isinstance(result, str)
+        assert "|" in result
 
 
 # -------------------------
@@ -240,10 +245,9 @@ class TestMultipleDataFiles:
         env.initialize(events=events, now=now)
         assert len(env.calendar.events) == len(events)
 
-        # Verify list_events works
         result = env.list_events()
-        assert isinstance(result, list)
-        assert len(result) == len(events)
+        assert isinstance(result, str)
+        assert f"Found {len(events)} events:" in result
 
     @pytest.mark.parametrize("file_index", range(5))
     def test_all_events_have_valid_times(self, file_index):

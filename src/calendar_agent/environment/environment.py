@@ -24,23 +24,31 @@ class CalendarEnvironment:
         )
 
     @staticmethod
-    def _compact_event(event: "Event") -> dict:
-        """Return a compact dict representation of an Event.
+    def _format_summary(event: "Event") -> str:
+        """One-line summary: id: <id> | <summary> — <Day> <HH:MM>-<HH:MM>"""
+        day = event.start.strftime("%a")
+        start_t = event.start.strftime("%H:%M")
+        end_t = event.end.strftime("%H:%M")
+        return f"id: {event.id} | {event.summary} — {day} {start_t}-{end_t}"
 
-        Drops: optional, attending (top-level), per-attendee attending/user.id/user.name,
-        empty description. Flattens attendees to a list of email strings.
-        """
-        ce = {
-            "id": event.id,
-            "summary": event.summary,
-            "start": event.start.strftime("%Y-%m-%dT%H:%M:%S"),
-            "end": event.end.strftime("%Y-%m-%dT%H:%M:%S"),
-        }
+    @staticmethod
+    def _format_detail(event: "Event") -> str:
+        """Multi-line detail block with all fields including RSVP."""
+        day_date = event.start.strftime("%a %b %d")
+        start_t = event.start.strftime("%H:%M")
+        end_t = event.end.strftime("%H:%M")
+        lines = [
+            event.summary,
+            f"  ID: {event.id}",
+            f"  Time: {day_date}, {start_t} - {end_t}",
+        ]
         if event.description:
-            ce["description"] = event.description
+            lines.append(f"  Description: {event.description}")
         if event.attendees:
-            ce["attendees"] = [a.user.email for a in event.attendees]
-        return ce
+            emails = ", ".join(a.user.email for a in event.attendees)
+            lines.append(f"  Attendees: {emails}")
+        lines.append(f"  RSVP: {event.attending}")
+        return "\n".join(lines)
     
     @staticmethod
     def load_json_calendar(file_path: str) -> list[dict]:
@@ -104,14 +112,6 @@ class CalendarEnvironment:
                 return e
         raise ValueError(f"Could not find event with id {event_id}")
 
-    def _raise_error(self, type: str, message: str):
-        return {
-            "error": {
-                "type": type,
-                "message": message
-            }
-        }
-
     def _list_events(self, time_min: datetime = None, time_max: datetime = None):
         """Internal function for listing all events within a provided time range."""
         events = [e for e in self.calendar.events]
@@ -136,20 +136,23 @@ class CalendarEnvironment:
             time_min = self._parse_datetime_str(time_min) if time_min else time_min
             time_max = self._parse_datetime_str(time_max) if time_max else time_max
             events = self._list_events(time_min, time_max)
-            return [self._compact_event(e) for e in events]
+            lines = [f"Found {len(events)} events:"]
+            for e in events:
+                lines.append(self._format_summary(e))
+            return "\n".join(lines)
         except ValueError as e:
-            return self._raise_error("ValueError", str(e))
+            return f"Error: {e}"
         except Exception as e:
-            return self._raise_error("Exception", str(e))
+            return f"Error: {e}"
 
     def get_event(self, event_id: str):
         try:
             event = self._get_event(event_id)
-            return self._compact_event(event)
+            return self._format_detail(event)
         except ValueError as e:
-            return self._raise_error("ValueError", str(e))
+            return f"Error: {e}"
         except Exception as e:
-            return self._raise_error("Exception", str(e))
+            return f"Error: {e}"
 
     def create_event(
         self,
@@ -179,13 +182,11 @@ class CalendarEnvironment:
 
             self.calendar.events.append(event)
 
-            result = {"message": "Event created successfully."}
-            result.update(self._compact_event(event))
-            return result
+            return f"Event created successfully.\n{self._format_detail(event)}"
         except ValueError as e:
-            return self._raise_error("ValueError", str(e))
+            return f"Error: {e}"
         except Exception as e:
-            return self._raise_error("Exception", str(e))
+            return f"Error: {e}"
 
     def update_event(
         self, 
@@ -208,26 +209,23 @@ class CalendarEnvironment:
                     event.description = value
                 elif field == "optional":
                     event.optional = value
-            result = {"message": "Event updated successfully."}
-            result.update(self._compact_event(event))
-            return result
+            return f"Event updated successfully.\n{self._format_detail(event)}"
         except ValueError as e:
-            return self._raise_error("ValueError", str(e))
+            return f"Error: {e}"
         except Exception as e:
-            return self._raise_error("Exception", str(e))
+            return f"Error: {e}"
 
     def delete_event(self, event_id: str):
         """Delete a particular event."""
         try:
             event = self._get_event(event_id)
+            summary = self._format_summary(event)
             self.calendar.events.remove(event)
-            result = {"message": "Event deleted successfully."}
-            result.update(self._compact_event(event))
-            return result
+            return f"Event deleted: {summary}"
         except ValueError as e:
-            return self._raise_error("ValueError", str(e))
+            return f"Error: {e}"
         except Exception as e:
-            return self._raise_error("Exception", str(e))
+            return f"Error: {e}"
 
     def respond_to_event(self, event_id: str, attending: str):
         """Respond to an event."""
@@ -236,14 +234,11 @@ class CalendarEnvironment:
             if attending not in ["ACCEPT", "DECLINE", "MAYBE", "NO RESPONSE"]:
                 raise ValueError(f"Invalid value for `attending` field, expected ACCEPT, DECLINE, MAYBE, NO RESPONSE got {attending}.")
             event.attending = attending
+            return f"RSVP updated to {attending}.\n{self._format_detail(event)}"
         except ValueError as e:
-            return self._raise_error("ValueError", str(e))
+            return f"Error: {e}"
         except Exception as e:
-            return self._raise_error("Exception", str(e))
+            return f"Error: {e}"
 
     def get_current_time(self):
-        day_name = self.now.strftime("%A")
-        return {
-            "current_time": self.now.strftime("%Y-%m-%d %H:%M:%S"),
-            "day": day_name,
-        }
+        return f"{self.now.strftime('%Y-%m-%d %H:%M:%S')} | {self.now.strftime('%A')}"

@@ -10,8 +10,10 @@ import re
 from calendar_agent.core import TOOL_DECLARATIONS
 
 
-def serialize_tool_result(result: dict) -> dict:
-    """Serialize tool result, converting datetimes to strings."""
+def serialize_tool_result(result):
+    """Serialize tool result. Strings pass through; dicts get datetime conversion."""
+    if isinstance(result, str):
+        return result
     return json.loads(json.dumps(result, default=str))
 
 
@@ -174,10 +176,12 @@ def _compact_event(evt_raw) -> dict:
 def compact_tool_result(name: str, result):
     """Compact a tool call result to reduce token count for training.
 
-    list_events  -> flat list of compact event dicts
-    get_event    -> single compact event dict
-    create/update/delete -> {"message": ..., **compact_event_fields}
+    New-format results are already strings — pass through.
+    Old-format dict results get compacted for backward compatibility.
     """
+    if isinstance(result, str):
+        return result
+    # Legacy dict format
     if name == "list_events":
         events = result.get("events", result) if isinstance(result, dict) else result
         if isinstance(events, list):

@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
-"""Generate SFT trajectories for all queries using gemini-2.0-flash-001.
+"""Generate SFT trajectories using gemini-2.5-pro with tuned prompt.
 
-Runs each query through the agent loop, evaluates correctness, and saves
-only solved (Correct) trajectories to sft_data/trajectories/.
+Runs each query through the agent loop (up to 3 attempts), evaluates
+correctness, and saves solved (Correct) trajectories to sft_data/trajectories/.
+
+Usage:
+    PYTHONPATH=src python scripts/data_generation/generate_trajectories.py
+    PYTHONPATH=src python scripts/data_generation/generate_trajectories.py --prompt-file prompts/v11_reason_act.txt
 """
 
+import argparse
 import json
 import glob
 import os
@@ -17,6 +22,7 @@ warnings.filterwarnings("ignore")
 
 import vertexai
 from google.oauth2.credentials import Credentials as OAuth2Credentials
+import google.auth.transport.requests
 from vertexai.generative_models import GenerativeModel, Part
 
 from calendar_agent.environment import CalendarEnvironment
@@ -34,8 +40,12 @@ from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, evaluate_trajectory
 from calendar_agent.paths import SFT_DATA_DIR as _SFT_DATA_DIR, SFT_JSON_CALENDAR_DIR, SFT_QUERY_DIR, CREDENTIALS_PATH
 from calendar_agent.tools import serialize_tool_result
 
-MODEL_NAME = "gemini-2.0-flash-001"
+sys.stdout.reconfigure(line_buffering=True)
+
+DEFAULT_MODEL = "gemini-2.5-pro"
+DEFAULT_PROMPT = os.path.join(os.path.dirname(__file__), "../../prompts/v11_reason_act.txt")
 MAX_TURNS = 10
+MAX_ATTEMPTS = 3
 
 SFT_DATA_DIR = str(_SFT_DATA_DIR)
 JSON_CALENDAR_DIR = str(SFT_JSON_CALENDAR_DIR)
@@ -146,11 +156,22 @@ def run_single_trajectory(model, eval_model, cal_path, query_dict, max_turns=MAX
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Generate SFT trajectories")
+    parser.add_argument("--model", default=DEFAULT_MODEL, help=f"Teacher model (default: {DEFAULT_MODEL})")
+    parser.add_argument("--prompt-file", default=DEFAULT_PROMPT, help="System prompt file")
+    parser.add_argument("--max-attempts", type=int, default=MAX_ATTEMPTS, help="Max retry attempts per query (default: 3)")
+    args = parser.parse_args()
+
     os.makedirs(TRAJ_DIR, exist_ok=True)
 
+    # Load system prompt
+    prompt_path = os.path.abspath(args.prompt_file)
+    with open(prompt_path) as f:
+        system_prompt = f.read().strip()
+    print(f"Prompt: {prompt_path} ({len(system_prompt)} chars)")
+
     # Init credentials
-    creds_path = str(CREDENTIALS_PATH)
-    with open(creds_path) as f:
+    with open(str(CREDENTIALS_PATH)) as f:
         cd = json.load(f)
     creds = OAuth2Credentials(
         token=None,
@@ -159,17 +180,16 @@ def main():
         client_secret=cd["client_secret"],
         token_uri="https://oauth2.googleapis.com/token",
     )
+    creds.refresh(google.auth.transport.requests.Request())
     vertexai.init(project="internal-ml-exp", location="us-central1", credentials=creds)
+    refresh_req = google.auth.transport.requests.Request()
 
-    model = GenerativeModel(
-        MODEL_NAME,
-        tools=[CALENDAR_TOOL],
-        system_instruction=[SYSTEM_PROMPT],
-    )
-    eval_model = GenerativeModel(
-        MODEL_NAME,
-        system_instruction=[EVAL_SYSTEM_PROMPT],
-    )
+    def make_models():
+        gen = GenerativeModel(args.model, tools=[CALENDAR_TOOL], system_instruction=[system_prompt])
+        ev = GenerativeModel("gemini-2.0-flash-001", system_instruction=[EVAL_SYSTEM_PROMPT])
+        return gen, ev
+
+    model, eval_model = make_models()
 
     # Collect all queries
     all_tasks = []
@@ -189,7 +209,8 @@ def main():
             })
 
     print(f"Total queries to process: {len(all_tasks)}")
-    print(f"Model: {MODEL_NAME}")
+    print(f"Model: {args.model}")
+    print(f"Max attempts: {args.max_attempts}")
     print(f"Output: {TRAJ_DIR}/")
     print()
 
@@ -224,26 +245,46 @@ def main():
             total_processed += 1
             print(f"  [{total_processed}/{len(all_tasks)}] q={qi} [{complexity}] {query_text}...", end=" ", flush=True)
 
-            try:
-                verdict, traj_data = run_single_trajectory(
-                    model, eval_model, task["cal_path"], q
-                )
+            # Refresh token if needed
+            if not creds.valid or creds.expired:
+                creds.refresh(refresh_req)
+                vertexai.init(project="internal-ml-exp", location="us-central1", credentials=creds)
+                model, eval_model = make_models()
+                print("[TOKEN REFRESHED] ", end="", flush=True)
 
-                if verdict == "Correct":
-                    correct_count += 1
-                    solved_trajectories.append(traj_data)
-                    print(f"Correct (saved)")
-                elif verdict == "Error":
-                    error_count += 1
-                    print(f"Error")
+            # Retry loop: up to max_attempts, stop on first Correct
+            verdict = "Incorrect"
+            traj_data = None
+            for attempt in range(1, args.max_attempts + 1):
+                try:
+                    attempt_verdict, attempt_traj = run_single_trajectory(
+                        model, eval_model, task["cal_path"], q
+                    )
+                except Exception as e:
+                    attempt_verdict = "Error"
+                    attempt_traj = None
+
+                if attempt_verdict == "Correct":
+                    verdict = "Correct"
+                    traj_data = attempt_traj
+                    if attempt > 1:
+                        print(f"Correct (attempt {attempt}, saved)", flush=True)
+                    else:
+                        print("Correct (saved)", flush=True)
+                    break
                 else:
-                    print(f"{verdict}")
+                    if attempt < args.max_attempts:
+                        print(f"retry {attempt}...", end=" ", flush=True)
+                        time.sleep(0.3)
+                    else:
+                        print(f"Incorrect ({args.max_attempts}/{args.max_attempts})", flush=True)
 
-            except Exception as e:
+            if verdict == "Correct":
+                correct_count += 1
+                solved_trajectories.append(traj_data)
+            elif verdict == "Error":
                 error_count += 1
-                print(f"EXCEPTION: {e}")
 
-            # Rate limiting - avoid hitting quota
             time.sleep(0.5)
 
         # Save solved trajectories for this calendar

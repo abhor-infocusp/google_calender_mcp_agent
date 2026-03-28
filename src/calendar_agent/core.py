@@ -232,18 +232,14 @@ def dispatch_tool_call(env: CalendarEnvironment, name: str, args: dict) -> dict:
                 event_id=args["event_id"],
                 attending=args["attending"],
             )
-            if not result:
-                result = {"status": "ok", "attending": args["attending"]}
 
         else:
-            result = {
-                "error": {"type": "UnknownTool", "message": f"Unknown tool: {name}"}
-            }
+            result = f"Error: Unknown tool: {name}"
 
         return result
 
     except Exception as e:
-        return {"error": {"type": type(e).__name__, "message": str(e)}}
+        return f"Error: {type(e).__name__}: {e}"
 
 
 # ── Display Helpers ──────────────────────────────────────────

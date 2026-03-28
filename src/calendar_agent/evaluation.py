@@ -36,7 +36,8 @@ def format_day_state_text(by_day: dict) -> str:
             start_t = e["start"].split(" ")[1][:5]
             end_t = e["end"].split(" ")[1][:5]
             att = f"  [{', '.join(e['attendees'])}]" if e["attendees"] else ""
-            lines.append(f"  {start_t}-{end_t}  {e['summary']}{att}")
+            rsvp = f"  (RSVP: {e['attending']})" if e.get("attending", "ACCEPT") != "ACCEPT" else ""
+            lines.append(f"  {start_t}-{end_t}  {e['summary']}{att}{rsvp}")
     return "\n".join(lines) if lines else "(no relevant events)"
 
 

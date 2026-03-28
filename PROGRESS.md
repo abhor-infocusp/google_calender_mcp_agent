@@ -1,7 +1,7 @@
 # Training Pipeline Progress
 
-> **Last updated:** 2026-03-27
-> **Current phase:** RL Training — Two single-category runs complete (Modifier & Correction + Information Retrieval); overall accuracy plateaued at ~47.5%
+> **Last updated:** 2026-03-28
+> **Current phase:** SFT Enhancement — Teacher model tuned (gemini-2.5-pro + v11 prompt + retry = 84.3%); compact tool returns implemented; ready for Phase 2 (100 new calendars)
 
 ---
 
@@ -175,6 +175,32 @@ Validation (n=5, noisy): oscillates 0-40%, no clear trend due to small sample.
 **Conclusion:** SFT overwrites RL-learned behaviors. Modifier dropped 45% → 25%, IR dropped 72% → 57%. SFT recovery is not a viable approach for combating catastrophic forgetting in this setup.
 
 **Archive:** `sft_on_rl_output/` (merged model, LoRA, eval JSON, training history)
+
+---
+
+### 5. SFT Enhancement — Teacher Model Tuning — COMPLETE
+
+Tuned the teacher model configuration for higher-quality trajectory generation.
+
+**Changes:**
+- Compact tool returns: JSON dicts → human-readable strings (list_events = summary lines, get_event = detail block with RSVP)
+- Prompt v11 ("plan once, execute"): simpler than v4, with "search YOUR calendar" instruction and tool return format examples
+- 3-attempt retry: absorbs Gemini stochasticity and judge inconsistency
+
+**Results (70-query benchmark, 5 calendars × 14 queries):**
+
+| Category | v4 single (72.9%) | v11 + retry (84.3%) |
+|---|---|---|
+| Schedule a Single Event | 8/10 | **10/10 (100%)** |
+| Vague & Contextual | 10/10 | **10/10 (100%)** |
+| Modifier & Correction | 7/10 | **10/10 (100%)** |
+| Information Retrieval | 8/10 | **9/10 (90%)** |
+| Complex Logic & Conflict | 6/10 | **8/10 (80%)** |
+| Relative Time References | 7/10 | **7/10 (70%)** |
+| Human Chaos | 5/10 | **5/10 (50%)** |
+
+**Config:** gemini-2.5-pro, prompt `prompts/v11_reason_act.txt`, eval judge gemini-2.0-flash-001
+**Next:** Phase 2 — generate 100 new calendars, then run trajectory generation with this config
 
 ---
 
