@@ -70,10 +70,32 @@ Iterated through 5 prompt variants (baseline, v1_structured, v2_chaos, v3_concis
 - v5 (even longer prompt) regressed to 44/70 — prompt length has diminishing/negative returns
 - Remaining failures are model-level limits: cal 4 absolute dates (July 16/19), "yesterday" queries, multi-step Complex Logic
 
+### Phase 1c: Gemini 2.5-Flash Comparison
+
+Tested gemini-2.5-flash with baseline, v1 (structured), and v4 (chaos) prompts. Gemini 3 Flash (`gemini-3.0-flash`) not available on this Vertex AI project.
+
+| Category | 2.0-flash (orig) | 2.5-flash (base) | 2.5-flash (v1) | 2.5-flash (v4) | **2.5-pro (v4)** |
+|---|---|---|---|---|---|
+| Schedule | 9/10 | 8/10 | 8/10 | 7/10 | **8/10** |
+| Vague & Contextual | 8/10 | 6/10 | 9/10 | 7/10 | **10/10** |
+| Modifier | 8/10 | 8/10 | 8/10 | 7/10 | 7/10 |
+| Info Retrieval | 7/10 | 6/10 | 7/10 | 7/10 | **8/10** |
+| Complex Logic | 6/10 | 4/10 | 5/10 | 6/10 | **6/10** |
+| Human Chaos | 0/10 | 1/10 | 1/10 | 3/10 | **5/10** |
+| Relative Time | 8/10 | 7/10 | 7/10 | 7/10 | 7/10 |
+| **Overall** | **46/70 (65.7%)** | **40/70 (57.1%)** | **45/70 (64.3%)** | **44/70 (62.9%)** | **51/70 (72.9%)** |
+
+**Findings:**
+- 2.5-flash baseline (40/70) is worse than 2.0-flash (46/70)
+- v1 (shorter, structured) is best for 2.5-flash at 45/70 — roughly ties 2.0-flash
+- v4 (longer, chaos rules) slightly hurts 2.5-flash (44/70 vs 45/70 with v1)
+- Flash models prefer shorter prompts; pro benefits from longer structured guidance
+- 2.5-flash not competitive as teacher model
+
 ### Decision
 
 **gemini-2.5-pro with v4 prompt (`prompts/best_25pro.txt`) is the teacher model for trajectory generation.**
-- 72.9% solve rate vs flash's 65.7% (+7.2pp)
+- 72.9% solve rate — best across all model+prompt combinations tested
 - Dominates on Vague & Contextual (100%), Human Chaos (50%), Info Retrieval (80%)
 - Competitive on Schedule (80% vs 90%) and Modifier (70% vs 80%)
 - Use the v4 prompt as system_instruction for trajectory generation (NOT the default SYSTEM_PROMPT)
