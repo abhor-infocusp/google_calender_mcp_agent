@@ -139,6 +139,21 @@ Tested gemini-2.5-flash with baseline, v1 (structured), and v4 (chaos) prompts. 
 
 **Goal:** Run the winning teacher model on all 1,400 queries.
 
+### Token Budget Constraint
+
+Qwen training uses `MAX_SEQ_LENGTH=3076`. Trajectories exceeding this are dropped.
+
+**Problem discovered:** 2.5-pro with v4 prompt calls `list_events` unfiltered, returning all 20-45 events (~3,700-6,700 chars). This causes **71% of trajectories to exceed 3076 tokens** (avg 2,658 vs original 1,389).
+
+**Solution — post-process trajectories after generation:**
+1. Generate with the v4/best prompt (unfiltered `list_events` → 73% accuracy)
+2. After saving, replace unfiltered `list_events` results with filtered versions containing only events on `addressed_days`
+3. Filtering a single day: ~600 chars vs ~3,900 chars (6x reduction)
+4. Also add "Keep your final response to 1-2 sentences" to the prompt to control response length
+5. This preserves the model's correct decisions while making trajectories fit the token budget
+
+**Alternative tested and rejected:** Forcing filtered `list_events` in the prompt (v6_compact) — drops accuracy from 72.9% to 62.9% because the model can't see the full calendar for keyword searches and conflict checks.
+
 ### Steps
 
 1. **Run trajectory generation** (`generate_trajectories.py`)
@@ -147,11 +162,17 @@ Tested gemini-2.5-flash with baseline, v1 (structured), and v4 (chaos) prompts. 
    - Expected: ~1,020 correct trajectories (at ~73% solve rate)
    - Output: `sft_data/trajectories/`
 
-2. **Analyze solve rates** per category
+2. **Post-process: filter list_events results**
+   - For each trajectory, find `list_events` tool_call steps with no `time_min`/`time_max` args
+   - Replace the result with a re-executed filtered call using the query's `addressed_days`
+   - Verify token count fits within 3076 after filtering
+   - If still over, truncate the assistant's final response
+
+3. **Analyze solve rates** per category
    - For categories below 40%: retry failed queries with temperature variation
    - For Human Chaos specifically: may still have ~50% solve rate — retry failures with varied temperature
 
-**Files:** `scripts/data_generation/generate_trajectories.py` (needs update to accept custom prompt file)
+**Files:** `scripts/data_generation/generate_trajectories.py` (needs update to accept custom prompt file + post-processing)
 
 ---
 
