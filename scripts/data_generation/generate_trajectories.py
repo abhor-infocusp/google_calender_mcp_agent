@@ -104,8 +104,10 @@ def run_single_trajectory(model, eval_model, cal_path, query_dict, max_turns=MAX
                 "args": args,
                 "result": result,
             })
+            # Vertex AI requires dict for function responses; wrap lists
+            resp_for_vertex = result if isinstance(result, dict) else {"result": result}
             response_parts.append(
-                Part.from_function_response(name=fc.name, response=result)
+                Part.from_function_response(name=fc.name, response=resp_for_vertex)
             )
 
         try:
