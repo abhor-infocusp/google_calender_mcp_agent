@@ -1,0 +1,2199 @@
+[
+  {
+    "query": "Create an event called 'Team Lunch' for Wednesday from 12:30 PM to 1:30 PM and include david.lee@email.com as an attendee.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event with the summary 'Team Lunch', start time 2024-06-05T12:30:00, end time 2024-06-05T13:30:00, and david.lee@email.com in the attendees list.",
+    "simulated_now": "2024-06-02 20:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Review Case Files",
+          "start": "2024-06-05 09:00:00",
+          "end": "2024-06-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6cee751f1d8a4a8fbc604e68d3762121"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Settlement Negotiation",
+          "start": "2024-06-05 10:30:00",
+          "end": "2024-06-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - a.johnson@email.com"
+          ],
+          "id": "evt_fad392cfb52c4166a08ec08557d618c6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting - Adoption Case",
+          "start": "2024-06-05 14:00:00",
+          "end": "2024-06-05 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "couple - couple@email.com"
+          ],
+          "id": "evt_eef5a78fba8f42169ee52770b08c7c50"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2024-06-05 19:00:00",
+          "end": "2024-06-05 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9ffb2de574334b5ea6494eea84491020"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Review Case Files",
+          "start": "2024-06-05 09:00:00",
+          "end": "2024-06-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6cee751f1d8a4a8fbc604e68d3762121"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Settlement Negotiation",
+          "start": "2024-06-05 10:30:00",
+          "end": "2024-06-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - a.johnson@email.com"
+          ],
+          "id": "evt_fad392cfb52c4166a08ec08557d618c6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Team Lunch",
+          "start": "2024-06-05 12:30:00",
+          "end": "2024-06-05 13:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@email.com"
+          ],
+          "id": "evt_8ddc0e689f954fd5b00c0bd2d506370d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting - Adoption Case",
+          "start": "2024-06-05 14:00:00",
+          "end": "2024-06-05 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "couple - couple@email.com"
+          ],
+          "id": "evt_eef5a78fba8f42169ee52770b08c7c50"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2024-06-05 19:00:00",
+          "end": "2024-06-05 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9ffb2de574334b5ea6494eea84491020"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Team Lunch' for Wednesday from 12:30 PM to 1:30 PM and include david.lee@email.com as an attendee."
+      },
+      {
+        "role": "assistant",
+        "content": "My plan is to first get the current time to know the date and day of the week. Then, I will create the event for Wednesday from 12:30 PM to 1:30 PM with the title 'Team Lunch' and invite 'david.lee@email.com'."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-02 20:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I will create an event for Wednesday, June 5, 2024, from 12:30 PM to 1:30 PM called \"Team Lunch,\" and I will invite david.lee@email.com."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2024-06-05 12:30:00",
+          "attendees": [
+            "david.lee@email.com"
+          ],
+          "summary": "Team Lunch",
+          "end": "2024-06-05 13:30:00"
+        },
+        "result": "Event created successfully.\nTeam Lunch\n  ID: evt_8ddc0e689f954fd5b00c0bd2d506370d\n  Time: Wed Jun 05, 12:30 - 13:30\n  Attendees: david.lee@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have created the event \"Team Lunch\" for Wednesday, June 5, from 12:30 PM to 1:30 PM, with david.lee@email.com as an attendee."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Schedule a meeting named 'Marketing Review' on Friday at 11:00 AM lasting one hour.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event with the summary 'Marketing Review', start time 2024-06-07T11:00:00, and end time 2024-06-07T12:00:00.",
+    "simulated_now": "2024-06-02 20:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Partner Meeting",
+          "start": "2024-06-07 09:00:00",
+          "end": "2024-06-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1c1ae54dbab34fab8e98d0ed40998edc"
+        },
+        {
+          "day": "Friday",
+          "summary": "Draft Legal Documents",
+          "start": "2024-06-07 10:30:00",
+          "end": "2024-06-07 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_05303e282651414eac2915a171f7af36"
+        },
+        {
+          "day": "Friday",
+          "summary": "Client Consultation - Pre-Nuptial Agreement",
+          "start": "2024-06-07 14:00:00",
+          "end": "2024-06-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client - b.roberts@email.com"
+          ],
+          "id": "evt_04607a17cfad438aa401d612f2f4ff08"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2024-06-07 18:00:00",
+          "end": "2024-06-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c6931492ef8f49e186b7fb8e3e455d28"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Partner Meeting",
+          "start": "2024-06-07 09:00:00",
+          "end": "2024-06-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1c1ae54dbab34fab8e98d0ed40998edc"
+        },
+        {
+          "day": "Friday",
+          "summary": "Draft Legal Documents",
+          "start": "2024-06-07 10:30:00",
+          "end": "2024-06-07 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_05303e282651414eac2915a171f7af36"
+        },
+        {
+          "day": "Friday",
+          "summary": "Marketing Review",
+          "start": "2024-06-07 11:00:00",
+          "end": "2024-06-07 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_78794da70b4c419d9f03f690a1b940f5"
+        },
+        {
+          "day": "Friday",
+          "summary": "Client Consultation - Pre-Nuptial Agreement",
+          "start": "2024-06-07 14:00:00",
+          "end": "2024-06-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client - b.roberts@email.com"
+          ],
+          "id": "evt_04607a17cfad438aa401d612f2f4ff08"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2024-06-07 18:00:00",
+          "end": "2024-06-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c6931492ef8f49e186b7fb8e3e455d28"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Schedule a meeting named 'Marketing Review' on Friday at 11:00 AM lasting one hour."
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to determine the date of the upcoming Friday. Then, I will create a one-hour event titled \"Marketing Review\" for Friday at 11:00 AM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-02 20:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "end": "2024-06-07 12:00:00",
+          "summary": "Marketing Review",
+          "start": "2024-06-07 11:00:00"
+        },
+        "result": "Event created successfully.\nMarketing Review\n  ID: evt_78794da70b4c419d9f03f690a1b940f5\n  Time: Fri Jun 07, 11:00 - 12:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've scheduled the \"Marketing Review\" for this Friday, June 7th, from 11:00 AM to 12:00 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing during lunch on Tuesday?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List events on Tuesday between 12:00 PM and 2:00 PM to identify any events scheduled during the typical lunch period.",
+    "simulated_now": "2024-06-04 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Court Appearance - Child Custody Case",
+          "start": "2024-06-04 09:30:00",
+          "end": "2024-06-04 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - j.smith@email.com",
+            "judge - judge.b@email.com"
+          ],
+          "id": "evt_7ce59c0d4554486397781da28481929b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lunch with Partners",
+          "start": "2024-06-04 13:00:00",
+          "end": "2024-06-04 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5d81cbe08b9f41d2a8c1a42a351daea2"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Therapist",
+          "start": "2024-06-04 15:00:00",
+          "end": "2024-06-04 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e29d759f49d147b0a4475bd81e9f6bf4"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Call - Case Update",
+          "start": "2024-06-04 16:30:00",
+          "end": "2024-06-04 17:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "John Davis - j.davis@email.com"
+          ],
+          "id": "evt_488d362a65b74cbd9c5a6d95d83fbd34"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Court Appearance - Child Custody Case",
+          "start": "2024-06-04 09:30:00",
+          "end": "2024-06-04 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - j.smith@email.com",
+            "judge - judge.b@email.com"
+          ],
+          "id": "evt_7ce59c0d4554486397781da28481929b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lunch with Partners",
+          "start": "2024-06-04 13:00:00",
+          "end": "2024-06-04 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5d81cbe08b9f41d2a8c1a42a351daea2"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Therapist",
+          "start": "2024-06-04 15:00:00",
+          "end": "2024-06-04 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e29d759f49d147b0a4475bd81e9f6bf4"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Call - Case Update",
+          "start": "2024-06-04 16:30:00",
+          "end": "2024-06-04 17:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "John Davis - j.davis@email.com"
+          ],
+          "id": "evt_488d362a65b74cbd9c5a6d95d83fbd34"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing during lunch on Tuesday?"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can check that for you. First, I need to know today's date."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-04 10:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-06-04 14:00:00",
+          "time_min": "2024-06-04 12:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_7ce59c0d4554486397781da28481929b | Court Appearance - Child Custody Case \u2014 Tue 09:30-12:00\nid: evt_5d81cbe08b9f41d2a8c1a42a351daea2 | Lunch with Partners \u2014 Tue 13:00-14:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Your court appearance is scheduled to end at 12:00 PM, and you have a \"Lunch with Partners\" from 1:00 PM to 2:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Check my schedule for Saturday afternoon.",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List events on Saturday between 12:00 PM and 6:00 PM to identify afternoon activities.",
+    "simulated_now": "2024-06-06 15:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Kids Soccer Game",
+          "start": "2024-06-08 10:00:00",
+          "end": "2024-06-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8394b455eb0c4c25952f016773dc40c1"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2024-06-08 13:00:00",
+          "end": "2024-06-08 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9108d8227e8b4b11bca57eec04fae3e3"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Movie Night with Family",
+          "start": "2024-06-08 19:00:00",
+          "end": "2024-06-08 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d6b34da848c449309d66bffcb619c4ac"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Kids Soccer Game",
+          "start": "2024-06-08 10:00:00",
+          "end": "2024-06-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8394b455eb0c4c25952f016773dc40c1"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2024-06-08 13:00:00",
+          "end": "2024-06-08 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9108d8227e8b4b11bca57eec04fae3e3"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Movie Night with Family",
+          "start": "2024-06-08 19:00:00",
+          "end": "2024-06-08 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d6b34da848c449309d66bffcb619c4ac"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Check my schedule for Saturday afternoon."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-06 15:00:00 | Thursday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-06-08 17:00:00",
+          "time_min": "2024-06-08 12:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_8394b455eb0c4c25952f016773dc40c1 | Kids Soccer Game \u2014 Sat 10:00-12:00\nid: evt_9108d8227e8b4b11bca57eec04fae3e3 | Grocery Shopping \u2014 Sat 13:00-15:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have one event on Saturday afternoon: Grocery Shopping from 1:00 PM to 3:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule the Client Consultation on Monday to 1:00 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Client Consultation - Divorce Case' event on Monday and update its start time to 2024-06-03T13:00:00 and end time to 2024-06-03T15:00:00 (assuming it's a 2 hour meeting).",
+    "simulated_now": "2024-06-03 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Divorce Case",
+          "start": "2024-06-03 09:00:00",
+          "end": "2024-06-03 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Sarah Miller - sarah.miller@email.com"
+          ],
+          "id": "evt_71c9dbd8922442f1b74ca6811210e7c4"
+        },
+        {
+          "day": "Monday",
+          "summary": "Draft Legal Documents",
+          "start": "2024-06-03 11:30:00",
+          "end": "2024-06-03 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "paralegal - paralegal@email.com"
+          ],
+          "id": "evt_0fcb861660024e9ab0918bc7b7561f2e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Junior Associate",
+          "start": "2024-06-03 14:00:00",
+          "end": "2024-06-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "David Lee - david.lee@email.com"
+          ],
+          "id": "evt_c9fbff717da549479cab7ba1464445f2"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Husband",
+          "start": "2024-06-03 18:30:00",
+          "end": "2024-06-03 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_21babab61de94cc3bb5915b04a8ac675"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Draft Legal Documents",
+          "start": "2024-06-03 11:30:00",
+          "end": "2024-06-03 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "paralegal - paralegal@email.com"
+          ],
+          "id": "evt_0fcb861660024e9ab0918bc7b7561f2e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Divorce Case",
+          "start": "2024-06-03 13:00:00",
+          "end": "2024-06-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Sarah Miller - sarah.miller@email.com"
+          ],
+          "id": "evt_71c9dbd8922442f1b74ca6811210e7c4"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Junior Associate",
+          "start": "2024-06-03 14:00:00",
+          "end": "2024-06-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "David Lee - david.lee@email.com"
+          ],
+          "id": "evt_c9fbff717da549479cab7ba1464445f2"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Husband",
+          "start": "2024-06-03 18:30:00",
+          "end": "2024-06-03 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_21babab61de94cc3bb5915b04a8ac675"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule the Client Consultation on Monday to 1:00 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify the upcoming Monday. Then, I will search for the \"Client Consultation\" event on that day to get its ID. Finally, I will update the event to the new time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-03 08:00:00 | Monday"
+      },
+      {
+        "role": "assistant",
+        "content": "I have the current date. Now I will list today's events to find the \"Client Consultation\" and reschedule it."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-06-03 00:00:00",
+          "time_max": "2024-06-03 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_71c9dbd8922442f1b74ca6811210e7c4 | Client Consultation - Divorce Case \u2014 Mon 09:00-11:00\nid: evt_0fcb861660024e9ab0918bc7b7561f2e | Draft Legal Documents \u2014 Mon 11:30-13:00\nid: evt_c9fbff717da549479cab7ba1464445f2 | Meeting with Junior Associate \u2014 Mon 14:00-15:00\nid: evt_21babab61de94cc3bb5915b04a8ac675 | Dinner with Husband \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I've got the event ID for the \"Client Consultation\": `evt_71c9dbd8922442f1b74ca6811210e7c4`. It's a 2-hour meeting, so I'll move it to 1:00 PM - 3:00 PM using the `update_event` tool."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_71c9dbd8922442f1b74ca6811210e7c4",
+          "end": "2024-06-03 15:00:00",
+          "start": "2024-06-03 13:00:00"
+        },
+        "result": "Event updated successfully.\nClient Consultation - Divorce Case\n  ID: evt_71c9dbd8922442f1b74ca6811210e7c4\n  Time: Mon Jun 03, 13:00 - 15:00\n  Attendees: Sarah Miller - sarah.miller@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "error",
+        "content": "The model response did not complete successfully.\nFinish reason: 9.\nFinish message: Malformed function call: OK. I've rescheduled the \"Client Consultation - Divorce Case\" for Monday from 1:00 PM to 3:00 PM..\nSafety ratings: [].\nTo protect the integrity of the chat session, the request and response were not added to chat history.\nTo skip the response validation, specify `model.start_chat(response_validation=False)`.\nNote that letting blocked or otherwise incomplete responses into chat history might lead to future interactions being blocked by the service."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move my dinner with friends on Friday to 7:30 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Dinner with Friends' event on Friday and update its start time to 2024-06-07T19:30:00 and end time to 2024-06-07T21:30:00 (assuming it's a 2 hour dinner).",
+    "simulated_now": "2024-06-07 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Partner Meeting",
+          "start": "2024-06-07 09:00:00",
+          "end": "2024-06-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e899d73dbcf145cdbdbc28ea1322bab0"
+        },
+        {
+          "day": "Friday",
+          "summary": "Draft Legal Documents",
+          "start": "2024-06-07 10:30:00",
+          "end": "2024-06-07 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4bc7d3cf3b654c748dfa00933e31d9d6"
+        },
+        {
+          "day": "Friday",
+          "summary": "Client Consultation - Pre-Nuptial Agreement",
+          "start": "2024-06-07 14:00:00",
+          "end": "2024-06-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client - b.roberts@email.com"
+          ],
+          "id": "evt_4157b2203a36414b8db16cce0d7ca9c6"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2024-06-07 18:00:00",
+          "end": "2024-06-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_af83a043d3114e2589e916b3baf7c810"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Partner Meeting",
+          "start": "2024-06-07 09:00:00",
+          "end": "2024-06-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e899d73dbcf145cdbdbc28ea1322bab0"
+        },
+        {
+          "day": "Friday",
+          "summary": "Draft Legal Documents",
+          "start": "2024-06-07 10:30:00",
+          "end": "2024-06-07 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4bc7d3cf3b654c748dfa00933e31d9d6"
+        },
+        {
+          "day": "Friday",
+          "summary": "Client Consultation - Pre-Nuptial Agreement",
+          "start": "2024-06-07 14:00:00",
+          "end": "2024-06-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client - b.roberts@email.com"
+          ],
+          "id": "evt_4157b2203a36414b8db16cce0d7ca9c6"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2024-06-07 19:30:00",
+          "end": "2024-06-07 21:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_af83a043d3114e2589e916b3baf7c810"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move my dinner with friends on Friday to 7:30 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. First, I need to know the current date to identify which Friday you're referring to. Then, I'll find the \"Dinner with Friends\" event and move it to 7:30 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-07 10:00:00 | Friday"
+      },
+      {
+        "role": "assistant",
+        "content": "I see that today is Friday, June 7th. I will now search for the \"Dinner with Friends\" event on this date and reschedule it to 7:30 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-06-07 10:00:00",
+          "time_max": "2024-06-07 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_e899d73dbcf145cdbdbc28ea1322bab0 | Partner Meeting \u2014 Fri 09:00-10:00\nid: evt_4bc7d3cf3b654c748dfa00933e31d9d6 | Draft Legal Documents \u2014 Fri 10:30-12:00\nid: evt_4157b2203a36414b8db16cce0d7ca9c6 | Client Consultation - Pre-Nuptial Agreement \u2014 Fri 14:00-15:00\nid: evt_af83a043d3114e2589e916b3baf7c810 | Dinner with Friends \u2014 Fri 18:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've found \"Dinner with Friends\" scheduled for 6:00 PM today. I will move it to 7:30 PM, and the event will now end at 9:30 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2024-06-07 21:30:00",
+          "event_id": "evt_af83a043d3114e2589e916b3baf7c810",
+          "start": "2024-06-07 19:30:00"
+        },
+        "result": "Event updated successfully.\nDinner with Friends\n  ID: evt_af83a043d3114e2589e916b3baf7c810\n  Time: Fri Jun 07, 19:30 - 21:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have moved your \"Dinner with Friends\" to 7:30 PM. It will now end at 9:30 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is my meeting with the Junior Associate on Monday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Meeting with Junior Associate' event on Monday and respond with its start time.",
+    "simulated_now": "2024-06-03 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Divorce Case",
+          "start": "2024-06-03 09:00:00",
+          "end": "2024-06-03 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Sarah Miller - sarah.miller@email.com"
+          ],
+          "id": "evt_bc889da4867c42a4a3a8dcdf37134376"
+        },
+        {
+          "day": "Monday",
+          "summary": "Draft Legal Documents",
+          "start": "2024-06-03 11:30:00",
+          "end": "2024-06-03 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "paralegal - paralegal@email.com"
+          ],
+          "id": "evt_432905744f0d46e790fd5d2fbedd894c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Junior Associate",
+          "start": "2024-06-03 14:00:00",
+          "end": "2024-06-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "David Lee - david.lee@email.com"
+          ],
+          "id": "evt_b0a5acb2859e4d059b3c4147fad33b42"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Husband",
+          "start": "2024-06-03 18:30:00",
+          "end": "2024-06-03 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_574e494c2c65405896b41d347adc2d20"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Divorce Case",
+          "start": "2024-06-03 09:00:00",
+          "end": "2024-06-03 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Sarah Miller - sarah.miller@email.com"
+          ],
+          "id": "evt_bc889da4867c42a4a3a8dcdf37134376"
+        },
+        {
+          "day": "Monday",
+          "summary": "Draft Legal Documents",
+          "start": "2024-06-03 11:30:00",
+          "end": "2024-06-03 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "paralegal - paralegal@email.com"
+          ],
+          "id": "evt_432905744f0d46e790fd5d2fbedd894c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Junior Associate",
+          "start": "2024-06-03 14:00:00",
+          "end": "2024-06-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "David Lee - david.lee@email.com"
+          ],
+          "id": "evt_b0a5acb2859e4d059b3c4147fad33b42"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Husband",
+          "start": "2024-06-03 18:30:00",
+          "end": "2024-06-03 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_574e494c2c65405896b41d347adc2d20"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is my meeting with the Junior Associate on Monday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-03 10:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-06-03 23:59:59",
+          "time_min": "2024-06-03 10:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_bc889da4867c42a4a3a8dcdf37134376 | Client Consultation - Divorce Case \u2014 Mon 09:00-11:00\nid: evt_432905744f0d46e790fd5d2fbedd894c | Draft Legal Documents \u2014 Mon 11:30-13:00\nid: evt_b0a5acb2859e4d059b3c4147fad33b42 | Meeting with Junior Associate \u2014 Mon 14:00-15:00\nid: evt_574e494c2c65405896b41d347adc2d20 | Dinner with Husband \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Your meeting with the Junior Associate is scheduled for 14:00 to 15:00 on Monday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the Client Call on Tuesday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Client Call - Case Update' event on Tuesday and respond with the attendees.",
+    "simulated_now": "2024-06-04 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Court Appearance - Child Custody Case",
+          "start": "2024-06-04 09:30:00",
+          "end": "2024-06-04 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - j.smith@email.com",
+            "judge - judge.b@email.com"
+          ],
+          "id": "evt_801454d2b5b84386838906744d4d8ac4"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lunch with Partners",
+          "start": "2024-06-04 13:00:00",
+          "end": "2024-06-04 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9c4f4e2206fc4017af4d636cdf01585f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Therapist",
+          "start": "2024-06-04 15:00:00",
+          "end": "2024-06-04 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_540d0d97470347e9b10bc160deec077d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Call - Case Update",
+          "start": "2024-06-04 16:30:00",
+          "end": "2024-06-04 17:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "John Davis - j.davis@email.com"
+          ],
+          "id": "evt_a7a0032b90ef47e8aec1cf4130642e89"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Court Appearance - Child Custody Case",
+          "start": "2024-06-04 09:30:00",
+          "end": "2024-06-04 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - j.smith@email.com",
+            "judge - judge.b@email.com"
+          ],
+          "id": "evt_801454d2b5b84386838906744d4d8ac4"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lunch with Partners",
+          "start": "2024-06-04 13:00:00",
+          "end": "2024-06-04 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9c4f4e2206fc4017af4d636cdf01585f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Therapist",
+          "start": "2024-06-04 15:00:00",
+          "end": "2024-06-04 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_540d0d97470347e9b10bc160deec077d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Call - Case Update",
+          "start": "2024-06-04 16:30:00",
+          "end": "2024-06-04 17:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "John Davis - j.davis@email.com"
+          ],
+          "id": "evt_a7a0032b90ef47e8aec1cf4130642e89"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the Client Call on Tuesday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out who is attending the Client Call on Tuesday. First, I will get the current time to determine the date of the upcoming Tuesday. Then, I will list all the events on that Tuesday to find the Client Call. Finally, I will get the event details to identify the attendees."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-04 10:00:00 | Tuesday"
+      },
+      {
+        "role": "assistant",
+        "content": "Now that I know today is Tuesday, June 4th, I will search for the \"Client Call\" event on this day."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-06-04 00:00:00",
+          "time_max": "2024-06-04 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_801454d2b5b84386838906744d4d8ac4 | Court Appearance - Child Custody Case \u2014 Tue 09:30-12:00\nid: evt_9c4f4e2206fc4017af4d636cdf01585f | Lunch with Partners \u2014 Tue 13:00-14:00\nid: evt_540d0d97470347e9b10bc160deec077d | Call with Therapist \u2014 Tue 15:00-16:00\nid: evt_a7a0032b90ef47e8aec1cf4130642e89 | Client Call - Case Update \u2014 Tue 16:30-17:30"
+      },
+      {
+        "role": "assistant",
+        "content": "I have found the event, \"Client Call - Case Update\". Now I will get the event details to see who is attending."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_a7a0032b90ef47e8aec1cf4130642e89"
+        },
+        "result": "Client Call - Case Update\n  ID: evt_a7a0032b90ef47e8aec1cf4130642e89\n  Time: Tue Jun 04, 16:30 - 17:30\n  Attendees: John Davis - j.davis@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "John Davis (j.davis@email.com) is attending the Client Call - Case Update."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "I can't make the Mediation Session on Thursday. Decline it.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Mediation Session' event on Thursday and respond with DECLINE.",
+    "simulated_now": "2024-06-06 10:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Court Appearance - Child Support Case",
+          "start": "2024-06-06 09:00:00",
+          "end": "2024-06-06 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - m.williams@email.com",
+            "judge - judge.p@email.com"
+          ],
+          "id": "evt_800e2c44e22b4070a4b19dbae06a7635"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Mediation Session",
+          "start": "2024-06-06 13:00:00",
+          "end": "2024-06-06 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - l.jones@email.com",
+            "mediator - mediator@email.com"
+          ],
+          "id": "evt_15866a08248b450c900c8fffeb9289cb"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Support Group for Family Lawyers",
+          "start": "2024-06-06 15:00:00",
+          "end": "2024-06-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7ba97f80cc7e4343b62069c05e0cf7ca"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Court Appearance - Child Support Case",
+          "start": "2024-06-06 09:00:00",
+          "end": "2024-06-06 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - m.williams@email.com",
+            "judge - judge.p@email.com"
+          ],
+          "id": "evt_800e2c44e22b4070a4b19dbae06a7635"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Mediation Session",
+          "start": "2024-06-06 13:00:00",
+          "end": "2024-06-06 14:30:00",
+          "attending": "DECLINE",
+          "attendees": [
+            "opposing counsel - l.jones@email.com",
+            "mediator - mediator@email.com"
+          ],
+          "id": "evt_15866a08248b450c900c8fffeb9289cb"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Support Group for Family Lawyers",
+          "start": "2024-06-06 15:00:00",
+          "end": "2024-06-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7ba97f80cc7e4343b62069c05e0cf7ca"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "I can't make the Mediation Session on Thursday. Decline it."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I'll decline the Mediation Session on Thursday. First, I need to get the current time to determine which Thursday you're referring to."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-06 10:00:00 | Thursday"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, searching for a \"Mediation Session\" on Thursday, June 6th."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-06-06 00:00:00",
+          "time_max": "2024-06-06 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_800e2c44e22b4070a4b19dbae06a7635 | Court Appearance - Child Support Case \u2014 Thu 09:00-11:30\nid: evt_15866a08248b450c900c8fffeb9289cb | Mediation Session \u2014 Thu 13:00-14:30\nid: evt_7ba97f80cc7e4343b62069c05e0cf7ca | Support Group for Family Lawyers \u2014 Thu 15:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Found it. Now, declining the \"Mediation Session\"."
+      },
+      {
+        "role": "tool_call",
+        "name": "respond_to_event",
+        "args": {
+          "attending": "DECLINE",
+          "event_id": "evt_15866a08248b450c900c8fffeb9289cb"
+        },
+        "result": "RSVP updated to DECLINE.\nMediation Session\n  ID: evt_15866a08248b450c900c8fffeb9289cb\n  Time: Thu Jun 06, 13:00 - 14:30\n  Attendees: opposing counsel - l.jones@email.com, mediator - mediator@email.com\n  RSVP: DECLINE"
+      },
+      {
+        "role": "assistant",
+        "content": "I have declined the \"Mediation Session\" scheduled for 1:00 PM to 2:30 PM on Thursday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "I want to move the settlement negotiation on Wednesday back by 30 minutes.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Settlement Negotiation' event on Wednesday and update its start time to 2024-06-05T11:00:00 and end time to 2024-06-05T12:30:00.",
+    "simulated_now": "2024-06-05 09:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Review Case Files",
+          "start": "2024-06-05 09:00:00",
+          "end": "2024-06-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_aefde2abbadc4875b67893042b9589f9"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Settlement Negotiation",
+          "start": "2024-06-05 10:30:00",
+          "end": "2024-06-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - a.johnson@email.com"
+          ],
+          "id": "evt_802eb347d2a84cf38e67d9f5f8e60b03"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting - Adoption Case",
+          "start": "2024-06-05 14:00:00",
+          "end": "2024-06-05 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "couple - couple@email.com"
+          ],
+          "id": "evt_d606b3c92ac44f1ca3b7abe7e6164df1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2024-06-05 19:00:00",
+          "end": "2024-06-05 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_80e1f6e4bb914d0e80a29f3c198e2524"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Review Case Files",
+          "start": "2024-06-05 09:00:00",
+          "end": "2024-06-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_aefde2abbadc4875b67893042b9589f9"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Settlement Negotiation",
+          "start": "2024-06-05 11:00:00",
+          "end": "2024-06-05 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - a.johnson@email.com"
+          ],
+          "id": "evt_802eb347d2a84cf38e67d9f5f8e60b03"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting - Adoption Case",
+          "start": "2024-06-05 14:00:00",
+          "end": "2024-06-05 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "couple - couple@email.com"
+          ],
+          "id": "evt_d606b3c92ac44f1ca3b7abe7e6164df1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2024-06-05 19:00:00",
+          "end": "2024-06-05 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_80e1f6e4bb914d0e80a29f3c198e2524"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "I want to move the settlement negotiation on Wednesday back by 30 minutes."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. Let me find the event and move it for you."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-05 09:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-06-05 23:59:59",
+          "time_min": "2024-06-05 00:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_aefde2abbadc4875b67893042b9589f9 | Review Case Files \u2014 Wed 09:00-10:00\nid: evt_802eb347d2a84cf38e67d9f5f8e60b03 | Settlement Negotiation \u2014 Wed 10:30-12:00\nid: evt_d606b3c92ac44f1ca3b7abe7e6164df1 | Client Meeting - Adoption Case \u2014 Wed 14:00-16:00\nid: evt_80e1f6e4bb914d0e80a29f3c198e2524 | Book Club Meeting \u2014 Wed 19:00-21:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_802eb347d2a84cf38e67d9f5f8e60b03",
+          "start": "2024-06-05 11:00:00",
+          "end": "2024-06-05 12:30:00"
+        },
+        "result": "Event updated successfully.\nSettlement Negotiation\n  ID: evt_802eb347d2a84cf38e67d9f5f8e60b03\n  Time: Wed Jun 05, 11:00 - 12:30\n  Attendees: opposing counsel - a.johnson@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have moved the Settlement Negotiation meeting to 11:00 AM for you."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Dinner Friday?",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "List events on Friday that include 'Dinner' in the summary.",
+    "simulated_now": "2024-06-07 12:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Partner Meeting",
+          "start": "2024-06-07 09:00:00",
+          "end": "2024-06-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ac62215cc94b4d84aa600108bd044896"
+        },
+        {
+          "day": "Friday",
+          "summary": "Draft Legal Documents",
+          "start": "2024-06-07 10:30:00",
+          "end": "2024-06-07 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ab29178e6ec94c5ca2224a6d81ace057"
+        },
+        {
+          "day": "Friday",
+          "summary": "Client Consultation - Pre-Nuptial Agreement",
+          "start": "2024-06-07 14:00:00",
+          "end": "2024-06-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client - b.roberts@email.com"
+          ],
+          "id": "evt_22e2f4ef2f5a416b834e55eaf25d141a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2024-06-07 18:00:00",
+          "end": "2024-06-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_868ee874afc0449eae8574fbe512f87f"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Partner Meeting",
+          "start": "2024-06-07 09:00:00",
+          "end": "2024-06-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ac62215cc94b4d84aa600108bd044896"
+        },
+        {
+          "day": "Friday",
+          "summary": "Draft Legal Documents",
+          "start": "2024-06-07 10:30:00",
+          "end": "2024-06-07 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ab29178e6ec94c5ca2224a6d81ace057"
+        },
+        {
+          "day": "Friday",
+          "summary": "Client Consultation - Pre-Nuptial Agreement",
+          "start": "2024-06-07 14:00:00",
+          "end": "2024-06-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client - b.roberts@email.com"
+          ],
+          "id": "evt_22e2f4ef2f5a416b834e55eaf25d141a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2024-06-07 18:00:00",
+          "end": "2024-06-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_868ee874afc0449eae8574fbe512f87f"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Dinner Friday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can help with that. First, I'll check your calendar for this coming Friday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-07 12:00:00 | Friday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-06-07 18:00:00",
+          "time_max": "2024-06-07 23:59:59"
+        },
+        "result": "Found 1 events:\nid: evt_868ee874afc0449eae8574fbe512f87f | Dinner with Friends \u2014 Fri 18:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have one dinner scheduled for this Friday: \"Dinner with Friends\" from 18:00 to 20:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule custody.",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "Search for any events that include 'custody' in the summary and ask for clarification if multiple events are found. If only one event is found, ask what date/time to reschedule it to.",
+    "simulated_now": "2024-06-03 14:00:00",
+    "addressed_days": [],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Divorce Case",
+          "start": "2024-06-03 09:00:00",
+          "end": "2024-06-03 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Sarah Miller - sarah.miller@email.com"
+          ],
+          "id": "evt_04b487ee2e4e428bab7bcf1bee358445"
+        },
+        {
+          "day": "Monday",
+          "summary": "Draft Legal Documents",
+          "start": "2024-06-03 11:30:00",
+          "end": "2024-06-03 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "paralegal - paralegal@email.com"
+          ],
+          "id": "evt_608683061a7d48bf9bb696edc5d58e82"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Junior Associate",
+          "start": "2024-06-03 14:00:00",
+          "end": "2024-06-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "David Lee - david.lee@email.com"
+          ],
+          "id": "evt_229fcc0b8b234c55882bb21802e08365"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Husband",
+          "start": "2024-06-03 18:30:00",
+          "end": "2024-06-03 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e81a100427c64a6fac08fb22dfdc269f"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Court Appearance - Child Custody Case",
+          "start": "2024-06-04 09:30:00",
+          "end": "2024-06-04 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - j.smith@email.com",
+            "judge - judge.b@email.com"
+          ],
+          "id": "evt_c884b25b1ca04f86b69bbab0b6618f75"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lunch with Partners",
+          "start": "2024-06-04 13:00:00",
+          "end": "2024-06-04 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_21d6911b1eb7403bae9a1727e6f6d2f7"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Therapist",
+          "start": "2024-06-04 15:00:00",
+          "end": "2024-06-04 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9ec638c3f1714194af56f1f53d73f6d7"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Call - Case Update",
+          "start": "2024-06-04 16:30:00",
+          "end": "2024-06-04 17:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "John Davis - j.davis@email.com"
+          ],
+          "id": "evt_a4ec9c0d42b24d15a89ccab2740746f6"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Review Case Files",
+          "start": "2024-06-05 09:00:00",
+          "end": "2024-06-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_eae6adb6bc894935ad9733fe17837f71"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Settlement Negotiation",
+          "start": "2024-06-05 10:30:00",
+          "end": "2024-06-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - a.johnson@email.com"
+          ],
+          "id": "evt_9932478681ba4624b6bea35a350bf722"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting - Adoption Case",
+          "start": "2024-06-05 14:00:00",
+          "end": "2024-06-05 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "couple - couple@email.com"
+          ],
+          "id": "evt_d2f9a646f75c4d8588ae1617b59e466a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2024-06-05 19:00:00",
+          "end": "2024-06-05 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2872c124403641408e2d6ffe4e8eb8a9"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Court Appearance - Child Support Case",
+          "start": "2024-06-06 09:00:00",
+          "end": "2024-06-06 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - m.williams@email.com",
+            "judge - judge.p@email.com"
+          ],
+          "id": "evt_cf428b1b38b74f688a413f22c1c29712"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Mediation Session",
+          "start": "2024-06-06 13:00:00",
+          "end": "2024-06-06 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - l.jones@email.com",
+            "mediator - mediator@email.com"
+          ],
+          "id": "evt_05e821ecc7c34e809ca712464983b70d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Support Group for Family Lawyers",
+          "start": "2024-06-06 15:00:00",
+          "end": "2024-06-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a3616c685b1e4805a6a08eb87c114424"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Partner Meeting",
+          "start": "2024-06-07 09:00:00",
+          "end": "2024-06-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fb91737f910d46539d0fc02b1b91c876"
+        },
+        {
+          "day": "Friday",
+          "summary": "Draft Legal Documents",
+          "start": "2024-06-07 10:30:00",
+          "end": "2024-06-07 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_73b0c1be75e643a8a77ab7314f24f2b9"
+        },
+        {
+          "day": "Friday",
+          "summary": "Client Consultation - Pre-Nuptial Agreement",
+          "start": "2024-06-07 14:00:00",
+          "end": "2024-06-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client - b.roberts@email.com"
+          ],
+          "id": "evt_2f2d30732085486ab553f2173e404d57"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2024-06-07 18:00:00",
+          "end": "2024-06-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a69b7033433a44b797f33ab4cb7c5099"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Kids Soccer Game",
+          "start": "2024-06-08 10:00:00",
+          "end": "2024-06-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5096e51b78964aa3aa9670c1ff74af46"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2024-06-08 13:00:00",
+          "end": "2024-06-08 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cbfeb6d8462d42029676c820cffc5914"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Movie Night with Family",
+          "start": "2024-06-08 19:00:00",
+          "end": "2024-06-08 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_654a69b584e8457282f97a10f418eb0d"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Yoga Class",
+          "start": "2024-06-09 10:00:00",
+          "end": "2024-06-09 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_eb905820d6fb49ae8678f4a2279fd697"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Family Brunch",
+          "start": "2024-06-09 13:00:00",
+          "end": "2024-06-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_95a1ba52efb543a1a9331c98f21f93ec"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Divorce Case",
+          "start": "2024-06-03 09:00:00",
+          "end": "2024-06-03 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Sarah Miller - sarah.miller@email.com"
+          ],
+          "id": "evt_04b487ee2e4e428bab7bcf1bee358445"
+        },
+        {
+          "day": "Monday",
+          "summary": "Draft Legal Documents",
+          "start": "2024-06-03 11:30:00",
+          "end": "2024-06-03 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "paralegal - paralegal@email.com"
+          ],
+          "id": "evt_608683061a7d48bf9bb696edc5d58e82"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Junior Associate",
+          "start": "2024-06-03 14:00:00",
+          "end": "2024-06-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "David Lee - david.lee@email.com"
+          ],
+          "id": "evt_229fcc0b8b234c55882bb21802e08365"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Husband",
+          "start": "2024-06-03 18:30:00",
+          "end": "2024-06-03 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e81a100427c64a6fac08fb22dfdc269f"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Court Appearance - Child Custody Case",
+          "start": "2024-06-04 09:30:00",
+          "end": "2024-06-04 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - j.smith@email.com",
+            "judge - judge.b@email.com"
+          ],
+          "id": "evt_c884b25b1ca04f86b69bbab0b6618f75"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lunch with Partners",
+          "start": "2024-06-04 13:00:00",
+          "end": "2024-06-04 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_21d6911b1eb7403bae9a1727e6f6d2f7"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Therapist",
+          "start": "2024-06-04 15:00:00",
+          "end": "2024-06-04 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9ec638c3f1714194af56f1f53d73f6d7"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Call - Case Update",
+          "start": "2024-06-04 16:30:00",
+          "end": "2024-06-04 17:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "John Davis - j.davis@email.com"
+          ],
+          "id": "evt_a4ec9c0d42b24d15a89ccab2740746f6"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Review Case Files",
+          "start": "2024-06-05 09:00:00",
+          "end": "2024-06-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_eae6adb6bc894935ad9733fe17837f71"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Settlement Negotiation",
+          "start": "2024-06-05 10:30:00",
+          "end": "2024-06-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - a.johnson@email.com"
+          ],
+          "id": "evt_9932478681ba4624b6bea35a350bf722"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting - Adoption Case",
+          "start": "2024-06-05 14:00:00",
+          "end": "2024-06-05 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "couple - couple@email.com"
+          ],
+          "id": "evt_d2f9a646f75c4d8588ae1617b59e466a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2024-06-05 19:00:00",
+          "end": "2024-06-05 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2872c124403641408e2d6ffe4e8eb8a9"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Court Appearance - Child Support Case",
+          "start": "2024-06-06 09:00:00",
+          "end": "2024-06-06 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - m.williams@email.com",
+            "judge - judge.p@email.com"
+          ],
+          "id": "evt_cf428b1b38b74f688a413f22c1c29712"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Mediation Session",
+          "start": "2024-06-06 13:00:00",
+          "end": "2024-06-06 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - l.jones@email.com",
+            "mediator - mediator@email.com"
+          ],
+          "id": "evt_05e821ecc7c34e809ca712464983b70d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Support Group for Family Lawyers",
+          "start": "2024-06-06 15:00:00",
+          "end": "2024-06-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a3616c685b1e4805a6a08eb87c114424"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Partner Meeting",
+          "start": "2024-06-07 09:00:00",
+          "end": "2024-06-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fb91737f910d46539d0fc02b1b91c876"
+        },
+        {
+          "day": "Friday",
+          "summary": "Draft Legal Documents",
+          "start": "2024-06-07 10:30:00",
+          "end": "2024-06-07 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_73b0c1be75e643a8a77ab7314f24f2b9"
+        },
+        {
+          "day": "Friday",
+          "summary": "Client Consultation - Pre-Nuptial Agreement",
+          "start": "2024-06-07 14:00:00",
+          "end": "2024-06-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client - b.roberts@email.com"
+          ],
+          "id": "evt_2f2d30732085486ab553f2173e404d57"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2024-06-07 18:00:00",
+          "end": "2024-06-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a69b7033433a44b797f33ab4cb7c5099"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Kids Soccer Game",
+          "start": "2024-06-08 10:00:00",
+          "end": "2024-06-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5096e51b78964aa3aa9670c1ff74af46"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2024-06-08 13:00:00",
+          "end": "2024-06-08 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cbfeb6d8462d42029676c820cffc5914"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Movie Night with Family",
+          "start": "2024-06-08 19:00:00",
+          "end": "2024-06-08 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_654a69b584e8457282f97a10f418eb0d"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Yoga Class",
+          "start": "2024-06-09 10:00:00",
+          "end": "2024-06-09 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_eb905820d6fb49ae8678f4a2279fd697"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Family Brunch",
+          "start": "2024-06-09 13:00:00",
+          "end": "2024-06-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_95a1ba52efb543a1a9331c98f21f93ec"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule custody."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I need to find the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 24 events:\nid: evt_04b487ee2e4e428bab7bcf1bee358445 | Client Consultation - Divorce Case \u2014 Mon 09:00-11:00\nid: evt_608683061a7d48bf9bb696edc5d58e82 | Draft Legal Documents \u2014 Mon 11:30-13:00\nid: evt_229fcc0b8b234c55882bb21802e08365 | Meeting with Junior Associate \u2014 Mon 14:00-15:00\nid: evt_e81a100427c64a6fac08fb22dfdc269f | Dinner with Husband \u2014 Mon 18:30-20:00\nid: evt_c884b25b1ca04f86b69bbab0b6618f75 | Court Appearance - Child Custody Case \u2014 Tue 09:30-12:00\nid: evt_21d6911b1eb7403bae9a1727e6f6d2f7 | Lunch with Partners \u2014 Tue 13:00-14:00\nid: evt_9ec638c3f1714194af56f1f53d73f6d7 | Call with Therapist \u2014 Tue 15:00-16:00\nid: evt_a4ec9c0d42b24d15a89ccab2740746f6 | Client Call - Case Update \u2014 Tue 16:30-17:30\nid: evt_eae6adb6bc894935ad9733fe17837f71 | Review Case Files \u2014 Wed 09:00-10:00\nid: evt_9932478681ba4624b6bea35a350bf722 | Settlement Negotiation \u2014 Wed 10:30-12:00\nid: evt_d2f9a646f75c4d8588ae1617b59e466a | Client Meeting - Adoption Case \u2014 Wed 14:00-16:00\nid: evt_2872c124403641408e2d6ffe4e8eb8a9 | Book Club Meeting \u2014 Wed 19:00-21:00\nid: evt_cf428b1b38b74f688a413f22c1c29712 | Court Appearance - Child Support Case \u2014 Thu 09:00-11:30\nid: evt_05e821ecc7c34e809ca712464983b70d | Mediation Session \u2014 Thu 13:00-14:30\nid: evt_a3616c685b1e4805a6a08eb87c114424 | Support Group for Family Lawyers \u2014 Thu 15:00-16:00\nid: evt_fb91737f910d46539d0fc02b1b91c876 | Partner Meeting \u2014 Fri 09:00-10:00\nid: evt_73b0c1be75e643a8a77ab7314f24f2b9 | Draft Legal Documents \u2014 Fri 10:30-12:00\nid: evt_2f2d30732085486ab553f2173e404d57 | Client Consultation - Pre-Nuptial Agreement \u2014 Fri 14:00-15:00\nid: evt_a69b7033433a44b797f33ab4cb7c5099 | Dinner with Friends \u2014 Fri 18:00-20:00\nid: evt_5096e51b78964aa3aa9670c1ff74af46 | Kids Soccer Game \u2014 Sat 10:00-12:00\nid: evt_cbfeb6d8462d42029676c820cffc5914 | Grocery Shopping \u2014 Sat 13:00-15:00\nid: evt_654a69b584e8457282f97a10f418eb0d | Movie Night with Family \u2014 Sat 19:00-21:00\nid: evt_eb905820d6fb49ae8678f4a2279fd697 | Yoga Class \u2014 Sun 10:00-11:00\nid: evt_95a1ba52efb543a1a9331c98f21f93ec | Family Brunch \u2014 Sun 13:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found two events related to custody: \"Court Appearance - Child Custody Case\" on Tuesday from 9:30 to 12:00 and \"Court Appearance - Child Support Case\" on Thursday from 9:00 to 11:30. Which one would you like to reschedule and what is the new time you would like to move it to?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events for the current day.",
+    "simulated_now": "2024-06-09 08:00:00",
+    "addressed_days": [
+      "Sunday"
+    ],
+    "calendar_before": {
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Yoga Class",
+          "start": "2024-06-09 10:00:00",
+          "end": "2024-06-09 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0e90fcc0a4204025b8bb84a616b8a04a"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Family Brunch",
+          "start": "2024-06-09 13:00:00",
+          "end": "2024-06-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1c48b05f96b14b1aaa02d72d33fe39e9"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Yoga Class",
+          "start": "2024-06-09 10:00:00",
+          "end": "2024-06-09 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0e90fcc0a4204025b8bb84a616b8a04a"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Family Brunch",
+          "start": "2024-06-09 13:00:00",
+          "end": "2024-06-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1c48b05f96b14b1aaa02d72d33fe39e9"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-09 08:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-06-09 00:00:00",
+          "time_max": "2024-06-09 23:59:59"
+        },
+        "result": "Found 2 events:\nid: evt_0e90fcc0a4204025b8bb84a616b8a04a | Yoga Class \u2014 Sun 10:00-11:00\nid: evt_1c48b05f96b14b1aaa02d72d33fe39e9 | Family Brunch \u2014 Sun 13:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today, Sunday, June 9, 2024, you have two events:\n\n- Yoga Class from 10:00 to 11:00.\n- Family Brunch from 13:00 to 16:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on the schedule for tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events for the day after the current day.",
+    "simulated_now": "2024-06-05 23:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Court Appearance - Child Support Case",
+          "start": "2024-06-06 09:00:00",
+          "end": "2024-06-06 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - m.williams@email.com",
+            "judge - judge.p@email.com"
+          ],
+          "id": "evt_6b4ed162386d46b0b0333922aac77f19"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Mediation Session",
+          "start": "2024-06-06 13:00:00",
+          "end": "2024-06-06 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - l.jones@email.com",
+            "mediator - mediator@email.com"
+          ],
+          "id": "evt_8fb7ab6a741d4053a03876242673575d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Support Group for Family Lawyers",
+          "start": "2024-06-06 15:00:00",
+          "end": "2024-06-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_55d15ffc683c43f6b20dca49a7524b8e"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Court Appearance - Child Support Case",
+          "start": "2024-06-06 09:00:00",
+          "end": "2024-06-06 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - m.williams@email.com",
+            "judge - judge.p@email.com"
+          ],
+          "id": "evt_6b4ed162386d46b0b0333922aac77f19"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Mediation Session",
+          "start": "2024-06-06 13:00:00",
+          "end": "2024-06-06 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "opposing counsel - l.jones@email.com",
+            "mediator - mediator@email.com"
+          ],
+          "id": "evt_8fb7ab6a741d4053a03876242673575d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Support Group for Family Lawyers",
+          "start": "2024-06-06 15:00:00",
+          "end": "2024-06-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_55d15ffc683c43f6b20dca49a7524b8e"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on the schedule for tomorrow?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-05 23:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-06-06 00:00:00",
+          "time_max": "2024-06-06 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_6b4ed162386d46b0b0333922aac77f19 | Court Appearance - Child Support Case \u2014 Thu 09:00-11:30\nid: evt_8fb7ab6a741d4053a03876242673575d | Mediation Session \u2014 Thu 13:00-14:30\nid: evt_55d15ffc683c43f6b20dca49a7524b8e | Support Group for Family Lawyers \u2014 Thu 15:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Here is your schedule for tomorrow, June 6th, 2024:\n\n*   **9:00 AM - 11:30 AM:** Court Appearance - Child Support Case\n*   **1:00 PM - 2:30 PM:** Mediation Session\n*   **3:00 PM - 4:00 PM:** Support Group for Family Lawyers"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

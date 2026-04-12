@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Trip to the Zoo' on July 15th at 10 AM, ending at 4 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Trip to the Zoo', start time '2023-07-15T10:00:00', end time '2023-07-15T16:00:00'.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-07-09T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please schedule a dentist appointment for me on July 12th from 2 PM to 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Dentist Appointment', start time '2023-07-12T14:00:00', and end time '2023-07-12T15:00:00'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-09T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after my morning consult on Thursday?",
+        "complexity": "Medium",
+        "expected_behavior": "First, find the 'Consult with School Psychologist' event on Thursday. Then, find events after '2023-07-13T09:30:00'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-07-13T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's happening after my meeting with the grant writer this week?",
+        "complexity": "Medium",
+        "expected_behavior": "First, find the 'Meeting with Grant Writer' event on Wednesday. Then, find events after '2023-07-12T11:00:00'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-12T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my IEP meeting on Monday back by an hour?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'IEP Meeting' event on Monday and update the start time to '2023-07-10T14:00:00' and end time to '2023-07-10T15:00:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-10T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change my meeting with the community mental health provider on Thursday to 2:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Community Mental Health Provider' event on Thursday and update the start time to '2023-07-13T14:30:00' and end time to '2023-07-13T15:30:00'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-07-13T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my soccer game on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Children's Soccer Game' event on Saturday and return the start and end times.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-07-14T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having dinner with on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Dinner with Family' event on Monday and return the attendees.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-10T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the lunch with extended family on Saturday, delete it and schedule a haircut for the same time instead.",
+        "complexity": "High",
+        "expected_behavior": "Delete the 'Lunch with Extended Family' event on Saturday. Then, create a new event with the summary 'Haircut', start time '2023-07-15T12:30:00', and end time '2023-07-15T14:00:00'.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-07-14T16:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline the IEP meeting on Monday, and instead schedule a meeting with the school psychologist for the same time.",
+        "complexity": "High",
+        "expected_behavior": "Decline the 'IEP Meeting' event on Monday. Then, create a new event with the summary 'Meeting with School Psychologist', start time '2023-07-10T13:00:00', and end time '2023-07-10T14:00:00', attendees: 'psychologist@highschool.edu'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-09T18:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... Thursday... psychologist...",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Consult with School Psychologist' event on Thursday and ask for clarification on what to reschedule it to.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-07-12T15:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change... Meeting... Friday... Charity...",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Local Charity Representative' event on Friday and ask for clarification on what the user wants to change.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-07-14T13:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow morning?",
+        "complexity": "Low",
+        "expected_behavior": "List all events between '2023-07-11T00:00:00' and '2023-07-11T12:00:00'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-10T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on '2023-07-09'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-10T08:00:00"
+    }
+]

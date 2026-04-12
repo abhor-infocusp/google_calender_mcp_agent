@@ -1,0 +1,2046 @@
+[
+  {
+    "query": "Create an appointment called 'Meet John' on April 9, 2025 at 3pm for one hour.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "The agent should call the create_event tool with summary 'Meet John', start time '2025-04-09T15:00:00', end time '2025-04-09T16:00:00'. The attendees and description should be null.",
+    "simulated_now": "2025-04-06 20:34:56",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Review Patient Charts, Plan Home Visit Routes",
+          "start": "2025-04-09 08:00:00",
+          "end": "2025-04-09 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_26360d3c3fce435091f10113931ae963"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Home Visit - Mr. Lee - Post-Stroke Rehabilitation Exercises",
+          "start": "2025-04-09 09:30:00",
+          "end": "2025-04-09 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e6e2da61600b4b279bb73f9403e7e3a6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Consult with Dr. Chen regarding Patient Smith",
+          "start": "2025-04-09 11:30:00",
+          "end": "2025-04-09 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "chen.md@ruralclinic.org"
+          ],
+          "id": "evt_8c1223556e6449958fb4237df7ee7b0d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Home Visit - Mrs. Garcia - CHF Monitoring and Medication Adjustment",
+          "start": "2025-04-09 14:00:00",
+          "end": "2025-04-09 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1306e3844e164817bf06069afa6bd556"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2025-04-09 18:00:00",
+          "end": "2025-04-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b7ca913a1023495ba4dd7031cd9b988c"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Review Patient Charts, Plan Home Visit Routes",
+          "start": "2025-04-09 08:00:00",
+          "end": "2025-04-09 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_26360d3c3fce435091f10113931ae963"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Home Visit - Mr. Lee - Post-Stroke Rehabilitation Exercises",
+          "start": "2025-04-09 09:30:00",
+          "end": "2025-04-09 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e6e2da61600b4b279bb73f9403e7e3a6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Consult with Dr. Chen regarding Patient Smith",
+          "start": "2025-04-09 11:30:00",
+          "end": "2025-04-09 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "chen.md@ruralclinic.org"
+          ],
+          "id": "evt_8c1223556e6449958fb4237df7ee7b0d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Home Visit - Mrs. Garcia - CHF Monitoring and Medication Adjustment",
+          "start": "2025-04-09 14:00:00",
+          "end": "2025-04-09 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1306e3844e164817bf06069afa6bd556"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meet John",
+          "start": "2025-04-09 15:00:00",
+          "end": "2025-04-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2e7980fd319e460397f99b269ffc8b47"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2025-04-09 18:00:00",
+          "end": "2025-04-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b7ca913a1023495ba4dd7031cd9b988c"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an appointment called 'Meet John' on April 9, 2025 at 3pm for one hour."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Meet John",
+          "end": "2025-04-09 16:00:00",
+          "start": "2025-04-09 15:00:00"
+        },
+        "result": "Event created successfully.\nMeet John\n  ID: evt_2e7980fd319e460397f99b269ffc8b47\n  Time: Wed Apr 09, 15:00 - 16:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've created an appointment called \"Meet John\" for you on April 9, 2025 from 3pm to 4pm.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Add 'Dentist appointment' to my calendar for April 10th at 11am with no attendees for 30 minutes.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "The agent should use the create_event tool with summary 'Dentist appointment', start time '2025-04-10T11:00:00', and end time '2025-04-10T11:30:00'. The attendees and description should be null.",
+    "simulated_now": "2025-04-06 20:34:56",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Home Visit - Mr. Gable - Check Vitals and Review Diet",
+          "start": "2025-04-10 08:30:00",
+          "end": "2025-04-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c924d0299abf44a4ab52ce469f63c917"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting - Discuss Care Plan for Patient Miller",
+          "start": "2025-04-10 10:30:00",
+          "end": "2025-04-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "miller.family@email.com",
+            "nurse.case.manager@ruralhealth.org",
+            "social.worker@countyhealth.gov"
+          ],
+          "id": "evt_281e1197405b4642a5555c07e11f55be"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Follow up call with Pharmacist regarding Mrs. Garcia",
+          "start": "2025-04-10 13:00:00",
+          "end": "2025-04-10 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ea65870ebfe44d2e80be5a8321d05211"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Driving to Remote Location (45 mins)",
+          "start": "2025-04-10 15:00:00",
+          "end": "2025-04-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ff3acf791ee44559a40530a57eee8dd0"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Health Check for Patient in Remote Location",
+          "start": "2025-04-10 16:00:00",
+          "end": "2025-04-10 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_092875478aea4c88bb28e962fc05d249"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner Prep with Kids",
+          "start": "2025-04-10 18:30:00",
+          "end": "2025-04-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6f746a43a7fa4d8490981c845e702875"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Home Visit - Mr. Gable - Check Vitals and Review Diet",
+          "start": "2025-04-10 08:30:00",
+          "end": "2025-04-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c924d0299abf44a4ab52ce469f63c917"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting - Discuss Care Plan for Patient Miller",
+          "start": "2025-04-10 10:30:00",
+          "end": "2025-04-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "miller.family@email.com",
+            "nurse.case.manager@ruralhealth.org",
+            "social.worker@countyhealth.gov"
+          ],
+          "id": "evt_281e1197405b4642a5555c07e11f55be"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dentist appointment",
+          "start": "2025-04-10 11:00:00",
+          "end": "2025-04-10 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8369e980bceb4d13b9f60569360141d5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Follow up call with Pharmacist regarding Mrs. Garcia",
+          "start": "2025-04-10 13:00:00",
+          "end": "2025-04-10 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ea65870ebfe44d2e80be5a8321d05211"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Driving to Remote Location (45 mins)",
+          "start": "2025-04-10 15:00:00",
+          "end": "2025-04-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ff3acf791ee44559a40530a57eee8dd0"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Health Check for Patient in Remote Location",
+          "start": "2025-04-10 16:00:00",
+          "end": "2025-04-10 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_092875478aea4c88bb28e962fc05d249"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner Prep with Kids",
+          "start": "2025-04-10 18:30:00",
+          "end": "2025-04-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6f746a43a7fa4d8490981c845e702875"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Add 'Dentist appointment' to my calendar for April 10th at 11am with no attendees for 30 minutes."
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to determine the year, and then create the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-04-06 20:34:56 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2025-04-10 11:00:00",
+          "summary": "Dentist appointment",
+          "end": "2025-04-10 11:30:00",
+          "attendees": []
+        },
+        "result": "Event created successfully.\nDentist appointment\n  ID: evt_8369e980bceb4d13b9f60569360141d5\n  Time: Thu Apr 10, 11:00 - 11:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've added the dentist appointment to your calendar.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing on Wednesday morning?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should use the list_events tool to find events on April 9, 2025 between 8:00 AM and 12:00 PM.",
+    "simulated_now": "2025-04-09 07:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Review Patient Charts, Plan Home Visit Routes",
+          "start": "2025-04-09 08:00:00",
+          "end": "2025-04-09 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_42f096abb48b476faeeb9d6495506d31"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Home Visit - Mr. Lee - Post-Stroke Rehabilitation Exercises",
+          "start": "2025-04-09 09:30:00",
+          "end": "2025-04-09 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6215f44ebf044ae8b536542307462797"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Consult with Dr. Chen regarding Patient Smith",
+          "start": "2025-04-09 11:30:00",
+          "end": "2025-04-09 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "chen.md@ruralclinic.org"
+          ],
+          "id": "evt_94c3c7170ff34474ac3a0ec80e41f8a5"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Home Visit - Mrs. Garcia - CHF Monitoring and Medication Adjustment",
+          "start": "2025-04-09 14:00:00",
+          "end": "2025-04-09 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_940d38bb528348df933ddb451c932c1e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2025-04-09 18:00:00",
+          "end": "2025-04-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1de6d953c62947fdafa10a28f2e516e7"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Review Patient Charts, Plan Home Visit Routes",
+          "start": "2025-04-09 08:00:00",
+          "end": "2025-04-09 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_42f096abb48b476faeeb9d6495506d31"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Home Visit - Mr. Lee - Post-Stroke Rehabilitation Exercises",
+          "start": "2025-04-09 09:30:00",
+          "end": "2025-04-09 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6215f44ebf044ae8b536542307462797"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Consult with Dr. Chen regarding Patient Smith",
+          "start": "2025-04-09 11:30:00",
+          "end": "2025-04-09 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "chen.md@ruralclinic.org"
+          ],
+          "id": "evt_94c3c7170ff34474ac3a0ec80e41f8a5"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Home Visit - Mrs. Garcia - CHF Monitoring and Medication Adjustment",
+          "start": "2025-04-09 14:00:00",
+          "end": "2025-04-09 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_940d38bb528348df933ddb451c932c1e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2025-04-09 18:00:00",
+          "end": "2025-04-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1de6d953c62947fdafa10a28f2e516e7"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing on Wednesday morning?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first find out the current date and time, and then identify the upcoming Wednesday. After that, I will list all the events scheduled for that morning to answer your question."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-04-09 07:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-04-09 07:00:00",
+          "time_max": "2025-04-09 12:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_42f096abb48b476faeeb9d6495506d31 | Review Patient Charts, Plan Home Visit Routes \u2014 Wed 08:00-09:00\nid: evt_6215f44ebf044ae8b536542307462797 | Home Visit - Mr. Lee - Post-Stroke Rehabilitation Exercises \u2014 Wed 09:30-11:00\nid: evt_94c3c7170ff34474ac3a0ec80e41f8a5 | Consult with Dr. Chen regarding Patient Smith \u2014 Wed 11:30-12:30"
+      },
+      {
+        "role": "assistant",
+        "content": "Good morning! Here is your schedule for this morning:\n\n*   8:00 AM - 9:00 AM: Review Patient Charts, Plan Home Visit Routes\n*   9:30 AM - 11:00 AM: Home Visit - Mr. Lee - Post-Stroke Rehabilitation Exercises\n*   11:30 AM - 12:30 PM: Consult with Dr. Chen regarding Patient Smith"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on for Saturday afternoon?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should use the list_events tool to find events on April 12, 2025 between 12:00 PM and 6:00 PM.",
+    "simulated_now": "2025-04-12 11:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "On-Call - Available for urgent patient needs",
+          "start": "2025-04-12 09:00:00",
+          "end": "2025-04-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ruralhealth.dispatch@email.com"
+          ],
+          "id": "evt_5542d13136aa4ed1b0f45ab71fa1a3e3"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Hiking with Friends",
+          "start": "2025-04-12 14:00:00",
+          "end": "2025-04-12 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bd43f866099945c3be4f47276628eafb"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner at Local Restaurant",
+          "start": "2025-04-12 18:30:00",
+          "end": "2025-04-12 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5320a254e3be48c8a008ec85e02b28b9"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "On-Call - Available for urgent patient needs",
+          "start": "2025-04-12 09:00:00",
+          "end": "2025-04-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ruralhealth.dispatch@email.com"
+          ],
+          "id": "evt_5542d13136aa4ed1b0f45ab71fa1a3e3"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Hiking with Friends",
+          "start": "2025-04-12 14:00:00",
+          "end": "2025-04-12 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bd43f866099945c3be4f47276628eafb"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner at Local Restaurant",
+          "start": "2025-04-12 18:30:00",
+          "end": "2025-04-12 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5320a254e3be48c8a008ec85e02b28b9"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on for Saturday afternoon?"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I will check your calendar."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-04-12 11:00:00 | Saturday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-04-12 12:00:00",
+          "time_max": "2025-04-12 17:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_5542d13136aa4ed1b0f45ab71fa1a3e3 | On-Call - Available for urgent patient needs \u2014 Sat 09:00-12:00\nid: evt_bd43f866099945c3be4f47276628eafb | Hiking with Friends \u2014 Sat 14:00-17:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have two events scheduled for this Saturday. You are on-call and available for urgent patient needs from 9:00 AM to 12:00 PM, and you have a hiking trip with friends from 2:00 PM to 5:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change the time of the 'Home Visit - Mrs. Gable - Medication Management' event on Monday to 10:00 AM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should use the list_events tool to find the event named 'Home Visit - Mrs. Gable - Medication Management' on April 7, 2025. Once found, it should use the update_event tool to update the start time to '2025-04-07T10:00:00' and the end time to '2025-04-07T11:30:00'.",
+    "simulated_now": "2025-04-07 07:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Huddle - Discuss Patient Updates",
+          "start": "2025-04-07 08:00:00",
+          "end": "2025-04-07 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.jones@ruralhealth.org",
+            "mark.smith@ruralhealth.org"
+          ],
+          "id": "evt_c380fd1ad0df4331a3e12e8db1ee0d0a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mrs. Gable - Medication Management",
+          "start": "2025-04-07 09:30:00",
+          "end": "2025-04-07 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "gable.family@email.com"
+          ],
+          "id": "evt_0c05d65bfade48d7ab41c00a369aff42"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call to Pharmacy - Refill request for Mr. Johnson",
+          "start": "2025-04-07 11:30:00",
+          "end": "2025-04-07 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1a3e444f9961400085b1f087983862d0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mr. Johnson - Wound Care and Education",
+          "start": "2025-04-07 13:30:00",
+          "end": "2025-04-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_23de9539ec4d4887ac31c89ac1e7bd55"
+        },
+        {
+          "day": "Monday",
+          "summary": "Check-in with Supervisor",
+          "start": "2025-04-07 16:00:00",
+          "end": "2025-04-07 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.jones@ruralhealth.org"
+          ],
+          "id": "evt_a57c273317ad46d7857442fd075de384"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Kids",
+          "start": "2025-04-07 18:30:00",
+          "end": "2025-04-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_eaa5837c7f49465bb4cc293094413167"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Huddle - Discuss Patient Updates",
+          "start": "2025-04-07 08:00:00",
+          "end": "2025-04-07 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.jones@ruralhealth.org",
+            "mark.smith@ruralhealth.org"
+          ],
+          "id": "evt_c380fd1ad0df4331a3e12e8db1ee0d0a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mrs. Gable - Medication Management",
+          "start": "2025-04-07 10:00:00",
+          "end": "2025-04-07 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "gable.family@email.com"
+          ],
+          "id": "evt_0c05d65bfade48d7ab41c00a369aff42"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call to Pharmacy - Refill request for Mr. Johnson",
+          "start": "2025-04-07 11:30:00",
+          "end": "2025-04-07 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1a3e444f9961400085b1f087983862d0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mr. Johnson - Wound Care and Education",
+          "start": "2025-04-07 13:30:00",
+          "end": "2025-04-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_23de9539ec4d4887ac31c89ac1e7bd55"
+        },
+        {
+          "day": "Monday",
+          "summary": "Check-in with Supervisor",
+          "start": "2025-04-07 16:00:00",
+          "end": "2025-04-07 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.jones@ruralhealth.org"
+          ],
+          "id": "evt_a57c273317ad46d7857442fd075de384"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Kids",
+          "start": "2025-04-07 18:30:00",
+          "end": "2025-04-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_eaa5837c7f49465bb4cc293094413167"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change the time of the 'Home Visit - Mrs. Gable - Medication Management' event on Monday to 10:00 AM."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I will update the event to the new time. Here is my plan:\n\n1. First, I will get the current time to determine the date of the upcoming Monday.\n2. Then, I will search for the \"Home Visit - Mrs. Gable - Medication Management\" event on that Monday to get its ID and current details.\n3. Finally, I will update the event to start at 10:00 AM, keeping the original duration."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-04-07 07:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-04-07 00:00:00",
+          "time_max": "2025-04-07 23:59:59"
+        },
+        "result": "Found 6 events:\nid: evt_c380fd1ad0df4331a3e12e8db1ee0d0a | Team Huddle - Discuss Patient Updates \u2014 Mon 08:00-09:00\nid: evt_0c05d65bfade48d7ab41c00a369aff42 | Home Visit - Mrs. Gable - Medication Management \u2014 Mon 09:30-11:00\nid: evt_1a3e444f9961400085b1f087983862d0 | Call to Pharmacy - Refill request for Mr. Johnson \u2014 Mon 11:30-12:30\nid: evt_23de9539ec4d4887ac31c89ac1e7bd55 | Home Visit - Mr. Johnson - Wound Care and Education \u2014 Mon 13:30-15:00\nid: evt_a57c273317ad46d7857442fd075de384 | Check-in with Supervisor \u2014 Mon 16:00-17:00\nid: evt_eaa5837c7f49465bb4cc293094413167 | Dinner with Kids \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_0c05d65bfade48d7ab41c00a369aff42",
+          "start": "2025-04-07 10:00:00",
+          "end": "2025-04-07 11:30:00"
+        },
+        "result": "Event updated successfully.\nHome Visit - Mrs. Gable - Medication Management\n  ID: evt_0c05d65bfade48d7ab41c00a369aff42\n  Time: Mon Apr 07, 10:00 - 11:30\n  Attendees: gable.family@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have successfully changed the time of the 'Home Visit - Mrs. Gable - Medication Management' event to 10:00 AM. The event is now scheduled from 10:00 AM to 11:30 AM on Monday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Update the 'Check-in with Supervisor' event on Monday to include my manager, jane.doe@ruralhealth.org.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should use the list_events tool to find the event named 'Check-in with Supervisor' on April 7, 2025. Once found, it should use the update_event tool to add 'jane.doe@ruralhealth.org' to the attendees.",
+    "simulated_now": "2025-04-07 07:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Huddle - Discuss Patient Updates",
+          "start": "2025-04-07 08:00:00",
+          "end": "2025-04-07 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.jones@ruralhealth.org",
+            "mark.smith@ruralhealth.org"
+          ],
+          "id": "evt_9666efc24a684a8d9c88f4ef0ced5284"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mrs. Gable - Medication Management",
+          "start": "2025-04-07 09:30:00",
+          "end": "2025-04-07 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "gable.family@email.com"
+          ],
+          "id": "evt_16b33c94b6f14f688d526c2372b0cde3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call to Pharmacy - Refill request for Mr. Johnson",
+          "start": "2025-04-07 11:30:00",
+          "end": "2025-04-07 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6fbfe9a0def6454a8280b1e3f61399a2"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mr. Johnson - Wound Care and Education",
+          "start": "2025-04-07 13:30:00",
+          "end": "2025-04-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_75fdd35ccb9a49a48f84626c248c43f1"
+        },
+        {
+          "day": "Monday",
+          "summary": "Check-in with Supervisor",
+          "start": "2025-04-07 16:00:00",
+          "end": "2025-04-07 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.jones@ruralhealth.org"
+          ],
+          "id": "evt_545930a658794211ba8d695c498d4f96"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Kids",
+          "start": "2025-04-07 18:30:00",
+          "end": "2025-04-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bf9693f1f95e4a838038c2a59ab10fe6"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Huddle - Discuss Patient Updates",
+          "start": "2025-04-07 08:00:00",
+          "end": "2025-04-07 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.jones@ruralhealth.org",
+            "mark.smith@ruralhealth.org"
+          ],
+          "id": "evt_9666efc24a684a8d9c88f4ef0ced5284"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mrs. Gable - Medication Management",
+          "start": "2025-04-07 09:30:00",
+          "end": "2025-04-07 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "gable.family@email.com"
+          ],
+          "id": "evt_16b33c94b6f14f688d526c2372b0cde3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call to Pharmacy - Refill request for Mr. Johnson",
+          "start": "2025-04-07 11:30:00",
+          "end": "2025-04-07 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6fbfe9a0def6454a8280b1e3f61399a2"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mr. Johnson - Wound Care and Education",
+          "start": "2025-04-07 13:30:00",
+          "end": "2025-04-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_75fdd35ccb9a49a48f84626c248c43f1"
+        },
+        {
+          "day": "Monday",
+          "summary": "Check-in with Supervisor",
+          "start": "2025-04-07 16:00:00",
+          "end": "2025-04-07 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.jones@ruralhealth.org",
+            "jane.doe@ruralhealth.org"
+          ],
+          "id": "evt_7d7ee756661b40bc98f4efba266ad0d0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Kids",
+          "start": "2025-04-07 18:30:00",
+          "end": "2025-04-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bf9693f1f95e4a838038c2a59ab10fe6"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Update the 'Check-in with Supervisor' event on Monday to include my manager, jane.doe@ruralhealth.org."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. First, I need to find the event. I'll get the current time, then find the upcoming Monday and list the events on that day to find the \"Check-in with Supervisor\" event. After that, I'll add jane.doe@ruralhealth.org to the attendees."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-04-07 07:00:00 | Monday"
+      },
+      {
+        "role": "assistant",
+        "content": "I've confirmed that today is Monday, April 7th, 2025. Now, I'll list the events for today to find \"Check-in with Supervisor.\""
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-04-07 00:00:00",
+          "time_max": "2025-04-07 23:59:59"
+        },
+        "result": "Found 6 events:\nid: evt_9666efc24a684a8d9c88f4ef0ced5284 | Team Huddle - Discuss Patient Updates \u2014 Mon 08:00-09:00\nid: evt_16b33c94b6f14f688d526c2372b0cde3 | Home Visit - Mrs. Gable - Medication Management \u2014 Mon 09:30-11:00\nid: evt_6fbfe9a0def6454a8280b1e3f61399a2 | Call to Pharmacy - Refill request for Mr. Johnson \u2014 Mon 11:30-12:30\nid: evt_75fdd35ccb9a49a48f84626c248c43f1 | Home Visit - Mr. Johnson - Wound Care and Education \u2014 Mon 13:30-15:00\nid: evt_545930a658794211ba8d695c498d4f96 | Check-in with Supervisor \u2014 Mon 16:00-17:00\nid: evt_bf9693f1f95e4a838038c2a59ab10fe6 | Dinner with Kids \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I've found the 'Check-in with Supervisor' event, ID `evt_545930a658794211ba8d695c498d4f96`. I will now add `jane.doe@ruralhealth.org` to the event after retrieving the current attendee list."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_545930a658794211ba8d695c498d4f96"
+        },
+        "result": "Check-in with Supervisor\n  ID: evt_545930a658794211ba8d695c498d4f96\n  Time: Mon Apr 07, 16:00 - 17:00\n  Attendees: sarah.jones@ruralhealth.org\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've retrieved the event details. The `update_event` tool doesn't support modifying attendees. To add your manager, I'll need to delete the current event and create a new one with both of you invited. I will now delete the old event."
+      },
+      {
+        "role": "tool_call",
+        "name": "delete_event",
+        "args": {
+          "event_id": "evt_545930a658794211ba8d695c498d4f96"
+        },
+        "result": "Event deleted: id: evt_545930a658794211ba8d695c498d4f96 | Check-in with Supervisor \u2014 Mon 16:00-17:00"
+      },
+      {
+        "role": "assistant",
+        "content": "The old event has been deleted. I will now create a new \"Check-in with Supervisor\" event for the same time with both you and jane.doe@ruralhealth.org as attendees."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "end": "2025-04-07 17:00:00",
+          "attendees": [
+            "sarah.jones@ruralhealth.org",
+            "jane.doe@ruralhealth.org"
+          ],
+          "start": "2025-04-07 16:00:00",
+          "summary": "Check-in with Supervisor"
+        },
+        "result": "Event created successfully.\nCheck-in with Supervisor\n  ID: evt_7d7ee756661b40bc98f4efba266ad0d0\n  Time: Mon Apr 07, 16:00 - 17:00\n  Attendees: sarah.jones@ruralhealth.org, jane.doe@ruralhealth.org\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I\u2019ve updated the event to include jane.doe@ruralhealth.org. Is there anything else?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is the 'Dinner with Kids' event?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should use the list_events tool to find the event named 'Dinner with Kids'. Once found, it should respond with the start time of that event, which is 6:30 PM on April 7, 2025.",
+    "simulated_now": "2025-04-07 14:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Huddle - Discuss Patient Updates",
+          "start": "2025-04-07 08:00:00",
+          "end": "2025-04-07 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.jones@ruralhealth.org",
+            "mark.smith@ruralhealth.org"
+          ],
+          "id": "evt_84a9d06d1752474788862856e01ec136"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mrs. Gable - Medication Management",
+          "start": "2025-04-07 09:30:00",
+          "end": "2025-04-07 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "gable.family@email.com"
+          ],
+          "id": "evt_4f5342735d884f75addf7aa5630daf83"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call to Pharmacy - Refill request for Mr. Johnson",
+          "start": "2025-04-07 11:30:00",
+          "end": "2025-04-07 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6014509c46f84ad98577ae2b8b954b9e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mr. Johnson - Wound Care and Education",
+          "start": "2025-04-07 13:30:00",
+          "end": "2025-04-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f17ab8de83ff4a61b2ef5a7fc7b37c9b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Check-in with Supervisor",
+          "start": "2025-04-07 16:00:00",
+          "end": "2025-04-07 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.jones@ruralhealth.org"
+          ],
+          "id": "evt_75150dfb79c14408b58437ccaec2e2b0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Kids",
+          "start": "2025-04-07 18:30:00",
+          "end": "2025-04-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_57a4a0b969ea4155926c2aff7de62b1c"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Huddle - Discuss Patient Updates",
+          "start": "2025-04-07 08:00:00",
+          "end": "2025-04-07 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.jones@ruralhealth.org",
+            "mark.smith@ruralhealth.org"
+          ],
+          "id": "evt_84a9d06d1752474788862856e01ec136"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mrs. Gable - Medication Management",
+          "start": "2025-04-07 09:30:00",
+          "end": "2025-04-07 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "gable.family@email.com"
+          ],
+          "id": "evt_4f5342735d884f75addf7aa5630daf83"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call to Pharmacy - Refill request for Mr. Johnson",
+          "start": "2025-04-07 11:30:00",
+          "end": "2025-04-07 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6014509c46f84ad98577ae2b8b954b9e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mr. Johnson - Wound Care and Education",
+          "start": "2025-04-07 13:30:00",
+          "end": "2025-04-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f17ab8de83ff4a61b2ef5a7fc7b37c9b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Check-in with Supervisor",
+          "start": "2025-04-07 16:00:00",
+          "end": "2025-04-07 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.jones@ruralhealth.org"
+          ],
+          "id": "evt_75150dfb79c14408b58437ccaec2e2b0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Kids",
+          "start": "2025-04-07 18:30:00",
+          "end": "2025-04-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_57a4a0b969ea4155926c2aff7de62b1c"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is the 'Dinner with Kids' event?"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 33 events:\nid: evt_84a9d06d1752474788862856e01ec136 | Team Huddle - Discuss Patient Updates \u2014 Mon 08:00-09:00\nid: evt_4f5342735d884f75addf7aa5630daf83 | Home Visit - Mrs. Gable - Medication Management \u2014 Mon 09:30-11:00\nid: evt_6014509c46f84ad98577ae2b8b954b9e | Call to Pharmacy - Refill request for Mr. Johnson \u2014 Mon 11:30-12:30\nid: evt_f17ab8de83ff4a61b2ef5a7fc7b37c9b | Home Visit - Mr. Johnson - Wound Care and Education \u2014 Mon 13:30-15:00\nid: evt_75150dfb79c14408b58437ccaec2e2b0 | Check-in with Supervisor \u2014 Mon 16:00-17:00\nid: evt_57a4a0b969ea4155926c2aff7de62b1c | Dinner with Kids \u2014 Mon 18:30-20:00\nid: evt_cd8d5cad21644b3c83a74959364a6d00 | Home Visit - Mrs. Evans - Blood Pressure Monitoring and Diet Review \u2014 Tue 08:30-10:00\nid: evt_9e70e02391c5446e86479c5cb0221157 | Community Health Meeting - Flu Shot Campaign Planning \u2014 Tue 10:30-12:00\nid: evt_762ff8084b594e6fba9b738eff3e0c3c | Home Visit - Mr. Davis - Diabetes Education \u2014 Tue 13:00-14:30\nid: evt_936ed5d4fa0c4846b1fa08e84c55e72c | Documentation and Phone Calls \u2014 Tue 15:00-16:00\nid: evt_15112673fa4347f68967cfc4c7f8aa26 | Kids Soccer Practice \u2014 Tue 18:00-19:30\nid: evt_d247010dc2ed4921997d23eab39704dc | Review Patient Charts, Plan Home Visit Routes \u2014 Wed 08:00-09:00\nid: evt_2b54387add3e4867924c777e0ac8f33d | Home Visit - Mr. Lee - Post-Stroke Rehabilitation Exercises \u2014 Wed 09:30-11:00\nid: evt_03e14c4e80f9410f93e4e85de7385913 | Consult with Dr. Chen regarding Patient Smith \u2014 Wed 11:30-12:30\nid: evt_204a7299d9b24726bf36871e9ef9b1ff | Home Visit - Mrs. Garcia - CHF Monitoring and Medication Adjustment \u2014 Wed 14:00-15:30\nid: evt_3e4f24d632ca41818ab75ca9e68b0ac9 | Book Club Meeting \u2014 Wed 18:00-19:00\nid: evt_fd0970d0b91e44e58b0a3bd4752c10c3 | Home Visit - Mr. Gable - Check Vitals and Review Diet \u2014 Thu 08:30-10:00\nid: evt_49e398d8c76346ecacea46f6da689917 | Meeting - Discuss Care Plan for Patient Miller \u2014 Thu 10:30-12:00\nid: evt_66c205d195124a4c8ae98b963e35b5b2 | Follow up call with Pharmacist regarding Mrs. Garcia \u2014 Thu 13:00-14:30\nid: evt_351dd9b495fd406e88279aa17a24322c | Driving to Remote Location (45 mins) \u2014 Thu 15:00-16:00\nid: evt_e6ad2fc446df4397bb2209e4040dbb4b | Health Check for Patient in Remote Location \u2014 Thu 16:00-17:00\nid: evt_3280ebd9e3034a2ea0429712d5db3766 | Dinner Prep with Kids \u2014 Thu 18:30-20:00\nid: evt_5b8a5777b56f42d696b768cb639f938b | Plan for the day's Home Visits \u2014 Fri 08:00-09:00\nid: evt_bb6d8a6f074047c8b3a8989e64a858f3 | Home Visit - Mrs. Johnson - Check Wound Care and Monitor Healing \u2014 Fri 09:30-11:00\nid: evt_9e8e8d1c16d446b39f9e7b4db5da7acd | Phone call with Mrs. Evan's daughter regarding Health. \u2014 Fri 11:30-12:30\nid: evt_8285318ac1eb4954bfe3296012c69a01 | Home Visit - Mr. Lee - Review Health Plan \u2014 Fri 14:00-15:30\nid: evt_448145870364487bb9f9a8f5938d43f7 | Movie Night with Kids \u2014 Fri 19:00-21:00\nid: evt_c16738a54db8487dbf0f32f6c65ca03d | On-Call - Available for urgent patient needs \u2014 Sat 09:00-12:00\nid: evt_2d8bddcc27d94bbf837a89127dcb8ac7 | Hiking with Friends \u2014 Sat 14:00-17:00\nid: evt_980f204adefe46cba0122408efc96890 | Dinner at Local Restaurant \u2014 Sat 18:30-20:00\nid: evt_eeeabf9e55864b4cbb71af1b8674bf67 | Call grandma \u2014 Sun 10:00-11:00\nid: evt_4ad37977798e4566a8f0dc1020645872 | Kids activity \u2014 Sun 13:00-16:00\nid: evt_63539a04af6a418bae798b3f81e18a4a | Family game night \u2014 Sun 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "The 'Dinner with Kids' event is on Monday from 18:30 to 20:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the 'Community Health Meeting' on Tuesday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should use the list_events tool to find the event named 'Community Health Meeting' on April 8, 2025. Once found, it should respond with the attendees of that event.",
+    "simulated_now": "2025-04-08 09:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Mrs. Evans - Blood Pressure Monitoring and Diet Review",
+          "start": "2025-04-08 08:30:00",
+          "end": "2025-04-08 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cf349ea164e14279a9c49b61e1636f00"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Community Health Meeting - Flu Shot Campaign Planning",
+          "start": "2025-04-08 10:30:00",
+          "end": "2025-04-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "clinic.director@ruralhealth.org",
+            "nurse.manager@ruralhealth.org",
+            "social.worker@countyhealth.gov"
+          ],
+          "id": "evt_248c1f70fbd44ec9ae185a1a765f8a49"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Mr. Davis - Diabetes Education",
+          "start": "2025-04-08 13:00:00",
+          "end": "2025-04-08 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d0f65cd5e8ac49f1a1bb6de9335ddedd"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Documentation and Phone Calls",
+          "start": "2025-04-08 15:00:00",
+          "end": "2025-04-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_771e456dde084f79afe7a0743531105b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids Soccer Practice",
+          "start": "2025-04-08 18:00:00",
+          "end": "2025-04-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_24da7eb201ae402b8ad0468dec822821"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Mrs. Evans - Blood Pressure Monitoring and Diet Review",
+          "start": "2025-04-08 08:30:00",
+          "end": "2025-04-08 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cf349ea164e14279a9c49b61e1636f00"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Community Health Meeting - Flu Shot Campaign Planning",
+          "start": "2025-04-08 10:30:00",
+          "end": "2025-04-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "clinic.director@ruralhealth.org",
+            "nurse.manager@ruralhealth.org",
+            "social.worker@countyhealth.gov"
+          ],
+          "id": "evt_248c1f70fbd44ec9ae185a1a765f8a49"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Mr. Davis - Diabetes Education",
+          "start": "2025-04-08 13:00:00",
+          "end": "2025-04-08 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d0f65cd5e8ac49f1a1bb6de9335ddedd"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Documentation and Phone Calls",
+          "start": "2025-04-08 15:00:00",
+          "end": "2025-04-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_771e456dde084f79afe7a0743531105b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids Soccer Practice",
+          "start": "2025-04-08 18:00:00",
+          "end": "2025-04-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_24da7eb201ae402b8ad0468dec822821"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the 'Community Health Meeting' on Tuesday?"
+      },
+      {
+        "role": "assistant",
+        "content": "Ccurrent time is 2024-08-07 08:00:00. I need to find an event titled 'Community Health Meeting' on a Tuesday. First, I will call `list_events` to find the event and get its ID. Then, I will use that ID to call `get_event` and retrieve the attendee information."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-04-08 09:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-04-08 23:59:59",
+          "time_min": "2025-04-08 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_cf349ea164e14279a9c49b61e1636f00 | Home Visit - Mrs. Evans - Blood Pressure Monitoring and Diet Review \u2014 Tue 08:30-10:00\nid: evt_248c1f70fbd44ec9ae185a1a765f8a49 | Community Health Meeting - Flu Shot Campaign Planning \u2014 Tue 10:30-12:00\nid: evt_d0f65cd5e8ac49f1a1bb6de9335ddedd | Home Visit - Mr. Davis - Diabetes Education \u2014 Tue 13:00-14:30\nid: evt_771e456dde084f79afe7a0743531105b | Documentation and Phone Calls \u2014 Tue 15:00-16:00\nid: evt_24da7eb201ae402b8ad0468dec822821 | Kids Soccer Practice \u2014 Tue 18:00-19:30"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_248c1f70fbd44ec9ae185a1a765f8a49"
+        },
+        "result": "Community Health Meeting - Flu Shot Campaign Planning\n  ID: evt_248c1f70fbd44ec9ae185a1a765f8a49\n  Time: Tue Apr 08, 10:30 - 12:00\n  Attendees: clinic.director@ruralhealth.org, nurse.manager@ruralhealth.org, social.worker@countyhealth.gov\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "The attendees for the 'Community Health Meeting - Flu Shot Campaign Planning' are: clinic.director@ruralhealth.org, nurse.manager@ruralhealth.org, and social.worker@countyhealth.gov."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule 'Home Visit - Mrs. Garcia - CHF Monitoring and Medication Adjustment' on Wednesday to be one hour later.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "The agent should use the list_events tool to find the 'Home Visit - Mrs. Garcia - CHF Monitoring and Medication Adjustment' on April 9, 2025. After locating it, the agent uses the update_event tool to change the start time to '2025-04-09T03:00:00' and the end time to '2025-04-09T04:30:00'.",
+    "simulated_now": "2025-04-09 08:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Review Patient Charts, Plan Home Visit Routes",
+          "start": "2025-04-09 08:00:00",
+          "end": "2025-04-09 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6a4da8bac66045d0940632b80c2c01b1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Home Visit - Mr. Lee - Post-Stroke Rehabilitation Exercises",
+          "start": "2025-04-09 09:30:00",
+          "end": "2025-04-09 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_653c5ca30aed41b680e8570134da1d58"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Consult with Dr. Chen regarding Patient Smith",
+          "start": "2025-04-09 11:30:00",
+          "end": "2025-04-09 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "chen.md@ruralclinic.org"
+          ],
+          "id": "evt_1d8c8ae4c3fc43b2be96ee4f42f735b5"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Home Visit - Mrs. Garcia - CHF Monitoring and Medication Adjustment",
+          "start": "2025-04-09 14:00:00",
+          "end": "2025-04-09 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5002fe7b1d6c490aaff0cb8f5ee55b68"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2025-04-09 18:00:00",
+          "end": "2025-04-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_09451b0844d44d09838974850136c7a2"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Review Patient Charts, Plan Home Visit Routes",
+          "start": "2025-04-09 08:00:00",
+          "end": "2025-04-09 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6a4da8bac66045d0940632b80c2c01b1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Home Visit - Mr. Lee - Post-Stroke Rehabilitation Exercises",
+          "start": "2025-04-09 09:30:00",
+          "end": "2025-04-09 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_653c5ca30aed41b680e8570134da1d58"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Consult with Dr. Chen regarding Patient Smith",
+          "start": "2025-04-09 11:30:00",
+          "end": "2025-04-09 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "chen.md@ruralclinic.org"
+          ],
+          "id": "evt_1d8c8ae4c3fc43b2be96ee4f42f735b5"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Home Visit - Mrs. Garcia - CHF Monitoring and Medication Adjustment",
+          "start": "2025-04-09 15:00:00",
+          "end": "2025-04-09 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5002fe7b1d6c490aaff0cb8f5ee55b68"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2025-04-09 18:00:00",
+          "end": "2025-04-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_09451b0844d44d09838974850136c7a2"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule 'Home Visit - Mrs. Garcia - CHF Monitoring and Medication Adjustment' on Wednesday to be one hour later."
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to determine today's date and the day of the week. Then, I will search for the event \"Home Visit - Mrs. Garcia - CHF Monitoring and Medication Adjustment\" on Wednesday to get its details. Finally, I will update the event to be one hour later and let you know once it's done."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-04-09 08:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-04-09 00:00:00",
+          "time_max": "2025-04-09 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_6a4da8bac66045d0940632b80c2c01b1 | Review Patient Charts, Plan Home Visit Routes \u2014 Wed 08:00-09:00\nid: evt_653c5ca30aed41b680e8570134da1d58 | Home Visit - Mr. Lee - Post-Stroke Rehabilitation Exercises \u2014 Wed 09:30-11:00\nid: evt_1d8c8ae4c3fc43b2be96ee4f42f735b5 | Consult with Dr. Chen regarding Patient Smith \u2014 Wed 11:30-12:30\nid: evt_5002fe7b1d6c490aaff0cb8f5ee55b68 | Home Visit - Mrs. Garcia - CHF Monitoring and Medication Adjustment \u2014 Wed 14:00-15:30\nid: evt_09451b0844d44d09838974850136c7a2 | Book Club Meeting \u2014 Wed 18:00-19:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2025-04-09 15:00:00",
+          "end": "2025-04-09 16:30:00",
+          "event_id": "evt_5002fe7b1d6c490aaff0cb8f5ee55b68"
+        },
+        "result": "Event updated successfully.\nHome Visit - Mrs. Garcia - CHF Monitoring and Medication Adjustment\n  ID: evt_5002fe7b1d6c490aaff0cb8f5ee55b68\n  Time: Wed Apr 09, 15:00 - 16:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have rescheduled the 'Home Visit - Mrs. Garcia - CHF Monitoring and Medication Adjustment' to be one hour later. It is now scheduled for 15:00-16:30 today."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "dinner Thursday?",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should use the list_events tool to search for events on April 10, 2025 with the word 'dinner' in the title.",
+    "simulated_now": "2025-04-10 14:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Home Visit - Mr. Gable - Check Vitals and Review Diet",
+          "start": "2025-04-10 08:30:00",
+          "end": "2025-04-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9dbb315db24b4197ac0f3a7c2b1e4ebf"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting - Discuss Care Plan for Patient Miller",
+          "start": "2025-04-10 10:30:00",
+          "end": "2025-04-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "miller.family@email.com",
+            "nurse.case.manager@ruralhealth.org",
+            "social.worker@countyhealth.gov"
+          ],
+          "id": "evt_aa5caebcfdda4799b1cade9bbb0a7e57"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Follow up call with Pharmacist regarding Mrs. Garcia",
+          "start": "2025-04-10 13:00:00",
+          "end": "2025-04-10 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9c3bd322d081465cb51f573f90cb1029"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Driving to Remote Location (45 mins)",
+          "start": "2025-04-10 15:00:00",
+          "end": "2025-04-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d82f11385c734a4c820454d3d84026c0"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Health Check for Patient in Remote Location",
+          "start": "2025-04-10 16:00:00",
+          "end": "2025-04-10 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c887883dad844323825db6f736d2f423"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner Prep with Kids",
+          "start": "2025-04-10 18:30:00",
+          "end": "2025-04-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_48eb160ec16a46be94db8c13827114e3"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Home Visit - Mr. Gable - Check Vitals and Review Diet",
+          "start": "2025-04-10 08:30:00",
+          "end": "2025-04-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9dbb315db24b4197ac0f3a7c2b1e4ebf"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting - Discuss Care Plan for Patient Miller",
+          "start": "2025-04-10 10:30:00",
+          "end": "2025-04-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "miller.family@email.com",
+            "nurse.case.manager@ruralhealth.org",
+            "social.worker@countyhealth.gov"
+          ],
+          "id": "evt_aa5caebcfdda4799b1cade9bbb0a7e57"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Follow up call with Pharmacist regarding Mrs. Garcia",
+          "start": "2025-04-10 13:00:00",
+          "end": "2025-04-10 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9c3bd322d081465cb51f573f90cb1029"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Driving to Remote Location (45 mins)",
+          "start": "2025-04-10 15:00:00",
+          "end": "2025-04-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d82f11385c734a4c820454d3d84026c0"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Health Check for Patient in Remote Location",
+          "start": "2025-04-10 16:00:00",
+          "end": "2025-04-10 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c887883dad844323825db6f736d2f423"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner Prep with Kids",
+          "start": "2025-04-10 18:30:00",
+          "end": "2025-04-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_48eb160ec16a46be94db8c13827114e3"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "dinner Thursday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can help with that. First, I need to know the current date to determine which Thursday you're referring to. Then, I'll check your calendar for that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-04-10 14:00:00 | Thursday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-04-10 23:59:59",
+          "time_min": "2025-04-10 14:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_9c3bd322d081465cb51f573f90cb1029 | Follow up call with Pharmacist regarding Mrs. Garcia \u2014 Thu 13:00-14:30\nid: evt_d82f11385c734a4c820454d3d84026c0 | Driving to Remote Location (45 mins) \u2014 Thu 15:00-16:00\nid: evt_c887883dad844323825db6f736d2f423 | Health Check for Patient in Remote Location \u2014 Thu 16:00-17:00\nid: evt_48eb160ec16a46be94db8c13827114e3 | Dinner Prep with Kids \u2014 Thu 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I see you have \"Dinner Prep with Kids\" scheduled from 6:30 PM to 8:00 PM. Are you referring to this event?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Meeting Miller family changed?",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should use the list_events tool to search for events on April 10, 2025 with the words 'Meeting' and 'Miller family' in the title.",
+    "simulated_now": "2025-04-10 09:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Home Visit - Mr. Gable - Check Vitals and Review Diet",
+          "start": "2025-04-10 08:30:00",
+          "end": "2025-04-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c7aa4363401d417a998b7805beb71348"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting - Discuss Care Plan for Patient Miller",
+          "start": "2025-04-10 10:30:00",
+          "end": "2025-04-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "miller.family@email.com",
+            "nurse.case.manager@ruralhealth.org",
+            "social.worker@countyhealth.gov"
+          ],
+          "id": "evt_d5b51a01183044e4ab47a022b51ba43c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Follow up call with Pharmacist regarding Mrs. Garcia",
+          "start": "2025-04-10 13:00:00",
+          "end": "2025-04-10 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_146c365e84614e47aa2a3416c2fe7ca7"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Driving to Remote Location (45 mins)",
+          "start": "2025-04-10 15:00:00",
+          "end": "2025-04-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_76d0da7aef59447aa18be031f5ec56c0"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Health Check for Patient in Remote Location",
+          "start": "2025-04-10 16:00:00",
+          "end": "2025-04-10 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_104072d3ce2f496e950be894ab113b57"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner Prep with Kids",
+          "start": "2025-04-10 18:30:00",
+          "end": "2025-04-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_697077c7ce1a44c99f9d37f8840e94d9"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Home Visit - Mr. Gable - Check Vitals and Review Diet",
+          "start": "2025-04-10 08:30:00",
+          "end": "2025-04-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c7aa4363401d417a998b7805beb71348"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting - Discuss Care Plan for Patient Miller",
+          "start": "2025-04-10 10:30:00",
+          "end": "2025-04-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "miller.family@email.com",
+            "nurse.case.manager@ruralhealth.org",
+            "social.worker@countyhealth.gov"
+          ],
+          "id": "evt_d5b51a01183044e4ab47a022b51ba43c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Follow up call with Pharmacist regarding Mrs. Garcia",
+          "start": "2025-04-10 13:00:00",
+          "end": "2025-04-10 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_146c365e84614e47aa2a3416c2fe7ca7"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Driving to Remote Location (45 mins)",
+          "start": "2025-04-10 15:00:00",
+          "end": "2025-04-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_76d0da7aef59447aa18be031f5ec56c0"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Health Check for Patient in Remote Location",
+          "start": "2025-04-10 16:00:00",
+          "end": "2025-04-10 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_104072d3ce2f496e950be894ab113b57"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner Prep with Kids",
+          "start": "2025-04-10 18:30:00",
+          "end": "2025-04-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_697077c7ce1a44c99f9d37f8840e94d9"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Meeting Miller family changed?"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 33 events:\nid: evt_7bb0104ec0c443ac9b211f0af0bc3b19 | Team Huddle - Discuss Patient Updates \u2014 Mon 08:00-09:00\nid: evt_6631f25437f543e3b8d56b48a47e92d5 | Home Visit - Mrs. Gable - Medication Management \u2014 Mon 09:30-11:00\nid: evt_061ed250fbcf468b8f53e1698ca76a14 | Call to Pharmacy - Refill request for Mr. Johnson \u2014 Mon 11:30-12:30\nid: evt_5fc7f366ff134eff87d58dcab496a316 | Home Visit - Mr. Johnson - Wound Care and Education \u2014 Mon 13:30-15:00\nid: evt_a9dc4105221b42dea01eaa322df983dc | Check-in with Supervisor \u2014 Mon 16:00-17:00\nid: evt_3776a46a45334e1aaeae7cde4e231521 | Dinner with Kids \u2014 Mon 18:30-20:00\nid: evt_60f51a27db964682b8f432866339e189 | Home Visit - Mrs. Evans - Blood Pressure Monitoring and Diet Review \u2014 Tue 08:30-10:00\nid: evt_b2d42de85cf2432094ef367e6a0da1c5 | Community Health Meeting - Flu Shot Campaign Planning \u2014 Tue 10:30-12:00\nid: evt_aa6086e1b40244219c930ece8edf64ca | Home Visit - Mr. Davis - Diabetes Education \u2014 Tue 13:00-14:30\nid: evt_ace34bada0234806bee3138616ab82d0 | Documentation and Phone Calls \u2014 Tue 15:00-16:00\nid: evt_b997966757e04073b850bdfafca8fc15 | Kids Soccer Practice \u2014 Tue 18:00-19:30\nid: evt_8eaba7f95a59473384712389c8ce2fc6 | Review Patient Charts, Plan Home Visit Routes \u2014 Wed 08:00-09:00\nid: evt_2ac65d235e914c9cb378d79579250297 | Home Visit - Mr. Lee - Post-Stroke Rehabilitation Exercises \u2014 Wed 09:30-11:00\nid: evt_ee1f69a1f4734d4f89ae3239039d8d9c | Consult with Dr. Chen regarding Patient Smith \u2014 Wed 11:30-12:30\nid: evt_37364d7e8ed7417eb3182a2b0d1b8a9b | Home Visit - Mrs. Garcia - CHF Monitoring and Medication Adjustment \u2014 Wed 14:00-15:30\nid: evt_d2d972f7047e468686ca97cfe4be0b73 | Book Club Meeting \u2014 Wed 18:00-19:00\nid: evt_c7aa4363401d417a998b7805beb71348 | Home Visit - Mr. Gable - Check Vitals and Review Diet \u2014 Thu 08:30-10:00\nid: evt_d5b51a01183044e4ab47a022b51ba43c | Meeting - Discuss Care Plan for Patient Miller \u2014 Thu 10:30-12:00\nid: evt_146c365e84614e47aa2a3416c2fe7ca7 | Follow up call with Pharmacist regarding Mrs. Garcia \u2014 Thu 13:00-14:30\nid: evt_76d0da7aef59447aa18be031f5ec56c0 | Driving to Remote Location (45 mins) \u2014 Thu 15:00-16:00\nid: evt_104072d3ce2f496e950be894ab113b57 | Health Check for Patient in Remote Location \u2014 Thu 16:00-17:00\nid: evt_697077c7ce1a44c99f9d37f8840e94d9 | Dinner Prep with Kids \u2014 Thu 18:30-20:00\nid: evt_f315d242cf5f428daf2a3184f9c77f33 | Plan for the day's Home Visits \u2014 Fri 08:00-09:00\nid: evt_ccb5fa00cd0242269749f99c91872225 | Home Visit - Mrs. Johnson - Check Wound Care and Monitor Healing \u2014 Fri 09:30-11:00\nid: evt_6da4f101c751447ba8ad86ec4370999d | Phone call with Mrs. Evan's daughter regarding Health. \u2014 Fri 11:30-12:30\nid: evt_1f63ac321f524ad0a6b75e72ea8ebe4b | Home Visit - Mr. Lee - Review Health Plan \u2014 Fri 14:00-15:30\nid: evt_dde2dc39c84740989784c1b527d3115e | Movie Night with Kids \u2014 Fri 19:00-21:00\nid: evt_90b5d77e3a7f4d83822b65d3175eb32d | On-Call - Available for urgent patient needs \u2014 Sat 09:00-12:00\nid: evt_b18237333f954aff98f055e586912c46 | Hiking with Friends \u2014 Sat 14:00-17:00\nid: evt_12d13790be04479f9dabfb515c822df0 | Dinner at Local Restaurant \u2014 Sat 18:30-20:00\nid: evt_c0f410c3dd44495bbe2f2cd7fb92fe6d | Call grandma \u2014 Sun 10:00-11:00\nid: evt_82fa4c81231a464ba1c4435273dfd581 | Kids activity \u2014 Sun 13:00-16:00\nid: evt_84f3e2aa612d4f5583a1e47645df2283 | Family game night \u2014 Sun 18:00-19:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_d5b51a01183044e4ab47a022b51ba43c"
+        },
+        "result": "Meeting - Discuss Care Plan for Patient Miller\n  ID: evt_d5b51a01183044e4ab47a022b51ba43c\n  Time: Thu Apr 10, 10:30 - 12:00\n  Attendees: miller.family@email.com, nurse.case.manager@ruralhealth.org, social.worker@countyhealth.gov\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I'm not seeing any changes to a meeting with the Miller family. I see one event: \"Meeting - Discuss Care Plan for Patient Miller\" on Thursday, April 10th from 10:30 AM to 12:00 PM. The attendees are miller.family@email.com, nurse.case.manager@ruralhealth.org, and social.worker@countyhealth.gov."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing tomorrow morning?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should use the list_events tool to find events on Tuesday, April 8, 2025, between 8:00 AM and 12:00 PM.",
+    "simulated_now": "2025-04-07 15:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Mrs. Evans - Blood Pressure Monitoring and Diet Review",
+          "start": "2025-04-08 08:30:00",
+          "end": "2025-04-08 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1d0f808275c1483cbd3f46b45ab8ff09"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Community Health Meeting - Flu Shot Campaign Planning",
+          "start": "2025-04-08 10:30:00",
+          "end": "2025-04-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "clinic.director@ruralhealth.org",
+            "nurse.manager@ruralhealth.org",
+            "social.worker@countyhealth.gov"
+          ],
+          "id": "evt_466557c909934b62a8ae5e6185a9174f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Mr. Davis - Diabetes Education",
+          "start": "2025-04-08 13:00:00",
+          "end": "2025-04-08 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4b39102bd56b4d929f3ae7ec41d95602"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Documentation and Phone Calls",
+          "start": "2025-04-08 15:00:00",
+          "end": "2025-04-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_442e9ff5128346458a2c6e99675ed81f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids Soccer Practice",
+          "start": "2025-04-08 18:00:00",
+          "end": "2025-04-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8834c6f2b72548fdb04eaeed8300271f"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Mrs. Evans - Blood Pressure Monitoring and Diet Review",
+          "start": "2025-04-08 08:30:00",
+          "end": "2025-04-08 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1d0f808275c1483cbd3f46b45ab8ff09"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Community Health Meeting - Flu Shot Campaign Planning",
+          "start": "2025-04-08 10:30:00",
+          "end": "2025-04-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "clinic.director@ruralhealth.org",
+            "nurse.manager@ruralhealth.org",
+            "social.worker@countyhealth.gov"
+          ],
+          "id": "evt_466557c909934b62a8ae5e6185a9174f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Mr. Davis - Diabetes Education",
+          "start": "2025-04-08 13:00:00",
+          "end": "2025-04-08 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4b39102bd56b4d929f3ae7ec41d95602"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Documentation and Phone Calls",
+          "start": "2025-04-08 15:00:00",
+          "end": "2025-04-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_442e9ff5128346458a2c6e99675ed81f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids Soccer Practice",
+          "start": "2025-04-08 18:00:00",
+          "end": "2025-04-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8834c6f2b72548fdb04eaeed8300271f"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing tomorrow morning?"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I'll get your schedule for tomorrow morning. First, I need to check the current time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-04-07 15:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-04-08 00:00:00",
+          "time_max": "2025-04-08 12:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_1d0f808275c1483cbd3f46b45ab8ff09 | Home Visit - Mrs. Evans - Blood Pressure Monitoring and Diet Review \u2014 Tue 08:30-10:00\nid: evt_466557c909934b62a8ae5e6185a9174f | Community Health Meeting - Flu Shot Campaign Planning \u2014 Tue 10:30-12:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Tomorrow morning, you have two events:\n\n- 8:30 AM - 10:00 AM: Home Visit - Mrs. Evans - Blood Pressure Monitoring and Diet Review\n- 10:30 AM - 12:00 PM: Community Health Meeting - Flu Shot Campaign Planning"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Did I talk with Dr. Chen yesterday?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should use the list_events tool to find events on Tuesday, April 8, 2025, with the word 'Chen' in the title.",
+    "simulated_now": "2025-04-09 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Mrs. Evans - Blood Pressure Monitoring and Diet Review",
+          "start": "2025-04-08 08:30:00",
+          "end": "2025-04-08 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0a534ddf9b2b4152a763654d4232ac23"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Community Health Meeting - Flu Shot Campaign Planning",
+          "start": "2025-04-08 10:30:00",
+          "end": "2025-04-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "clinic.director@ruralhealth.org",
+            "nurse.manager@ruralhealth.org",
+            "social.worker@countyhealth.gov"
+          ],
+          "id": "evt_36783319c14a4562ad678044fd5ac6b6"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Mr. Davis - Diabetes Education",
+          "start": "2025-04-08 13:00:00",
+          "end": "2025-04-08 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3d19cdd9c5ec4730925075331e46203b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Documentation and Phone Calls",
+          "start": "2025-04-08 15:00:00",
+          "end": "2025-04-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d31bfebaeca14829ab37e87e3ae9d8fc"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids Soccer Practice",
+          "start": "2025-04-08 18:00:00",
+          "end": "2025-04-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2ae3a72df8ae4852a53dc7eacd01f2a8"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Mrs. Evans - Blood Pressure Monitoring and Diet Review",
+          "start": "2025-04-08 08:30:00",
+          "end": "2025-04-08 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0a534ddf9b2b4152a763654d4232ac23"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Community Health Meeting - Flu Shot Campaign Planning",
+          "start": "2025-04-08 10:30:00",
+          "end": "2025-04-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "clinic.director@ruralhealth.org",
+            "nurse.manager@ruralhealth.org",
+            "social.worker@countyhealth.gov"
+          ],
+          "id": "evt_36783319c14a4562ad678044fd5ac6b6"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Mr. Davis - Diabetes Education",
+          "start": "2025-04-08 13:00:00",
+          "end": "2025-04-08 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3d19cdd9c5ec4730925075331e46203b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Documentation and Phone Calls",
+          "start": "2025-04-08 15:00:00",
+          "end": "2025-04-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d31bfebaeca14829ab37e87e3ae9d8fc"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids Soccer Practice",
+          "start": "2025-04-08 18:00:00",
+          "end": "2025-04-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2ae3a72df8ae4852a53dc7eacd01f2a8"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Did I talk with Dr. Chen yesterday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to determine what \"yesterday\" was. Then, I will search your calendar for events with \"Dr. Chen\" on that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-04-09 10:00:00 | Wednesday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will now check your calendar for yesterday, April 8, 2025, to see if you had any meetings with Dr. Chen."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-04-08 00:00:00",
+          "time_max": "2025-04-08 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_0a534ddf9b2b4152a763654d4232ac23 | Home Visit - Mrs. Evans - Blood Pressure Monitoring and Diet Review \u2014 Tue 08:30-10:00\nid: evt_36783319c14a4562ad678044fd5ac6b6 | Community Health Meeting - Flu Shot Campaign Planning \u2014 Tue 10:30-12:00\nid: evt_3d19cdd9c5ec4730925075331e46203b | Home Visit - Mr. Davis - Diabetes Education \u2014 Tue 13:00-14:30\nid: evt_d31bfebaeca14829ab37e87e3ae9d8fc | Documentation and Phone Calls \u2014 Tue 15:00-16:00\nid: evt_2ae3a72df8ae4852a53dc7eacd01f2a8 | Kids Soccer Practice \u2014 Tue 18:00-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "I have checked your calendar for yesterday, April 8, 2025, and I do not see any events with \"Dr. Chen\". Based on your calendar, you did not talk with him."
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

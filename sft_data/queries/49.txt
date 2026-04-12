@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a doctor's appointment to my calendar for Thursday at 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event with the summary 'Doctor's Appointment' on 2025-03-06 from 3:00 PM to 4:00 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-03-02T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Networking Lunch' for next Tuesday at 12:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event with the summary 'Networking Lunch' on 2025-03-04 from 12:30 PM to 1:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-03-02T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy Wednesday evening?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should check the user's calendar for Wednesday between 6:00 PM and 9:00 PM and respond based on the events found (Book Club Meeting).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-03-02T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Saturday look like?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should retrieve all events scheduled for Saturday and present them to the user (Private Party Catering Event, Grocery Shopping, Dinner with Friends).",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-03-02T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the meeting with the event planner.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Meeting with Event Planner' event on Wednesday and ask for the new time. After the user provides a new time (e.g., 3:30 PM), the agent updates the event to that time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-03-02T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my son's soccer practice to 7 PM on Monday.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Son's Soccer Practice' event on Monday and update its start time to 7:00 PM and end time to 8:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-03-02T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having dinner with on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Dinner with Friends' event on Saturday and return the attendees: bob@email.com, carol@email.com.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-03-02T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What's on the menu for the wedding?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Call with Client Regarding Wedding Menu' on Tuesday and return the client's email: jane.client@email.com.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-03-02T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my dinner with friends to Saturday at 7 PM, but only if I'm not busy.",
+        "complexity": "High",
+        "expected_behavior": "The agent should check for conflicts at 7 PM on Saturday. If no conflicts, it updates the 'Dinner with Friends' event to start at 7:00 PM. If there's a conflict (Private Party Catering Event overlaps), it should inform the user and ask for an alternative time.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-03-02T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline Thursday's event invite for the corporate catering, and find an alternative for Souschef and Bartender.",
+        "complexity": "High",
+        "expected_behavior": "The agent declines the Corporate Catering Event, lists the times when the Souschef and Bartender are available on Thursday, and asks the user for a new preferred schedule.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-03-02T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Soccer?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent searches for 'soccer' in the event summaries. It finds 'Son's Soccer Practice' on Monday and asks if the user is referring to that event.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-03-02T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change Friday movie",
+        "complexity": "Medium",
+        "expected_behavior": "The agent finds the 'Movie Night with Son' event on Friday and prompts the user what they would like to change about the event.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-03-02T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "If today is Monday, the agent should retrieve all events scheduled for Monday and present them to the user (Review Catering Orders & Inventory, Meet with Food Supplier, Son's Soccer Practice).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-03-03T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on my calendar for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "If today is Monday, the agent should retrieve all events scheduled for Tuesday and present them to the user (Menu Planning for Corporate Event, Call with Client Regarding Wedding Menu, Dinner with Family).",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-03-03T08:00:00"
+    }
+]

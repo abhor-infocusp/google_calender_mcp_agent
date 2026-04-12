@@ -1,0 +1,149 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Meet with John about irrigation' for Wednesday at 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call the create_event tool with summary 'Meet with John about irrigation', start set to Wednesday at 3 PM, and end set to Wednesday at 4 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-05-24T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for Friday to discuss the broken baler from 2 PM to 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call the create_event tool with summary related to 'broken baler discussion', start set to Friday at 2 PM, and end set to Friday at 3 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-05-24T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy on Wednesday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "Call the list_events tool with time_min set to Wednesday at 7 AM and time_max set to Wednesday at 12 PM. Analyze the results to determine if any events exist during that time and respond accordingly.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-05-24T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing this Saturday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Call the list_events tool with time_min set to Saturday at 12 PM and time_max set to Saturday at 6 PM. Analyze the results to determine the events and respond with the details.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-05-24T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the Equipment Maintenance on Monday to 3 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event 'Equipment Maintenance' on Monday. Then call update_event with the event ID and updated start and end times to Monday at 3 PM and 4 PM respectively.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-05-24T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the bank meeting on Thursday to 10 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event 'Meeting with Bank Loan Officer' on Thursday. Then call update_event with the event ID and updated start and end times to Thursday at 10 AM and 12 PM respectively.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-05-24T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the barley harvest on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event 'Harvest Barley' on Thursday. Extract the start time from the event details and respond with the time.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-05-24T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who will I be seeing this Tuesday morning?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events tool with time_min set to Tuesday at 7 AM and time_max set to Tuesday at 12 PM. Extract the attendees from the event details and respond.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-05-24T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to reschedule my visit with the vet on Wednesday so it ends an hour later.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the event 'Visit veterinarian' on Wednesday. Call get_event to get current end time. Update end time to one hour later than current end time using update_event tool.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-05-24T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule my morning event on Monday to Friday afternoon.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the morning event on Monday ('Meet with Grain Co-op Manager'). Then call update_event with the event ID, updating the start and end times to Friday at 2 PM and 3 PM respectively.",
+        "addressed_days": [
+            "Monday",
+            "Friday"
+        ],
+        "current_time": "2026-05-24T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Barley?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for the week to identify events related to 'barley'. Respond with the details of the 'Harvest Barley' event on Thursday.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-05-24T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Move livestock...",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for the week to identify events related to 'livestock'. Since livestock events occur every day, ask user to be more specific about which day's event they want to move.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-05-24T12:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call the list_events tool with time_min set to today at 00:00 and time_max set to today at 23:59. Analyze the results to determine the events and respond with the details.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-05-25T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call the list_events tool with time_min set to tomorrow at 00:00 and time_max set to tomorrow at 23:59. Analyze the results to determine the events and respond with the details.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-05-25T08:00:00"
+    }
+]

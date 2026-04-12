@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a meeting to discuss the Q3 budget on Wednesday at 10 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event named 'Discuss the Q3 budget' for Wednesday, July 24, 2024, at 10:00 AM for one hour.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-21T14:30:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a doctor's appointment for Friday at 2:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event named 'Doctor's appointment' for Friday, July 26, 2024, at 2:30 PM for one hour.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-07-21T14:30:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I free to play golf with John on Saturday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "Check for any events scheduled between 8:00 AM and 12:00 PM on Saturday, July 27, 2024 and inform the user if there are any conflicts with the fishing trip with Gary or other events.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-07-21T14:30:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Thursday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Check for any events scheduled between 12:00 PM and 5:00 PM on Thursday, July 25, 2024, and provide a summary to the user.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-07-21T14:30:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule my meeting with Tom on Monday to 11:30 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Meeting with Tom' on Monday, July 22, 2024, and update the start time to 11:30 AM. Also update the end time to 12:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-21T14:30:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move the dinner with Linda on Saturday back an hour?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Dinner with Linda at local diner' on Saturday, July 27, 2024 and update the start time to 7:00 PM. Also update the end time to 9:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-07-21T14:30:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time does the progress meeting start on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event 'Progress Meeting with Sarah (Project Manager) and Maria (Civil Engineer)' on Wednesday, July 24, 2024, and retrieve the start time to inform the user. Report that it starts at 2 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-21T14:30:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the concrete pour on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event 'Concrete Pour - Bridge Foundation' on Monday, July 22, 2024, and retrieve the list of attendees. Report that David and Equipment Operators are the attendees.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-21T14:30:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the Family BBQ on Sunday, but I'm free after church. Update the event to reflect that I will arrive at 10:30 AM.",
+        "complexity": "High",
+        "expected_behavior": "Find the event 'Family BBQ at Linda's sister's house' on Sunday, July 28, 2024, and update the start time to 10:30 AM, keeping the original end time. Then decline the initial church event that starts at 9:00 AM.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-07-21T14:30:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Tell Carol I will be 30 minutes late for our meeting on Tuesday.",
+        "complexity": "High",
+        "expected_behavior": "Find the event 'Call with Carol (HR Manager) - Discussing Hiring Options' on Tuesday, July 23, 2024, and update the start time to 1:30 PM, keeping the meeting duration the same. Then send an email/message to carol.hrmanager@buildit.com informing her of the delay.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-21T14:30:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner Saturday... cancel.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Dinner with Linda at local diner' on Saturday, July 27, 2024 and delete it.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-07-21T14:30:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting with Ken Thursday... accept.",
+        "complexity": "Low",
+        "expected_behavior": "Find the event 'Meeting with Ken (Safety Inspector) - Site Compliance Review' on Thursday, July 25, 2024 and respond to it with 'ACCEPT'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-07-21T14:30:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have today?",
+        "complexity": "Low",
+        "expected_behavior": "Get the current date. List all events on the current date. Return summary to the user.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-24T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Am I doing anything tomorrow evening?",
+        "complexity": "Low",
+        "expected_behavior": "Get the date for tomorrow. Check for any events scheduled between 5:00 PM and 11:00 PM on tomorrow's date and summarize events to the user.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-22T14:00:00"
+    }
+]

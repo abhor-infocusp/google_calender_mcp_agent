@@ -1,0 +1,161 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Lunch' on Wednesday at 1 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Team Lunch', start time '2026-05-13T13:00:00', end time '2026-05-13T14:00:00'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-05-03T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for Friday at 3 PM named 'Project Brainstorming'.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Project Brainstorming', start time '2026-05-15T15:00:00', end time '2026-05-15T16:00:00'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-05-03T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I need to do some photo editing this week. Can you schedule it?",
+        "complexity": "Medium",
+        "expected_behavior": "User is likely referring to the already scheduled Image Editing & Selection event. Ask the user for clarification regarding day and time. If the user confirms a time, call update_event with the event ID and confirmed time.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-05-03T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I want to connect with the rangers. Put it on the calendar.",
+        "complexity": "Medium",
+        "expected_behavior": "User is likely referring to the Meeting with Park Rangers event already scheduled for Thursday. Ask the user for confirmation. If confirmed, do nothing. If user wants to create a new event, ask for more information.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-05-03T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule my dinner with the photographer to 8 PM on Tuesday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with fellow photographer' event on Tuesday. Call update_event with the event ID, setting the start time to '2026-05-12T20:00:00' and end time to '2026-05-12T21:30:00'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-05-03T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time for submitting photos to 'Wildlife Wonders' Magazine to 4:30 PM on Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Submit photos to 'Wildlife Wonders' Magazine' event on Monday. Call update_event with the event ID, setting the start time to '2026-05-11T16:30:00' and the end time to '2026-05-11T17:30:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-05-03T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What am I doing on Thursday afternoon?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to '2026-05-14T12:00:00' and time_max set to '2026-05-15T00:00:00'. Respond to the user with the events on Thursday afternoon, mentioning the meeting with the park rangers and the online webinar.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-05-03T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the Conservation Project Proposal Review on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to '2026-05-12T00:00:00' and time_max set to '2026-05-13T00:00:00', filtering for 'Conservation Project Proposal Review'. Respond to the user with the start time of the event, which is 2 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-05-03T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my meeting with park rangers to 1 PM on Thursday, but I am also photographing wildlife then. What should I do?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min set to '2026-05-14T06:00:00' and time_max set to '2026-05-14T11:00:00' to retrieve the Wildlife Photography Session. Also, call list_events with time_min set to '2026-05-14T13:00:00' and time_max set to '2026-05-14T14:00:00' to check the availability. Inform the user about the conflict between 'Wildlife Photography Session' and 'Meeting with Park Rangers'. Suggest rescheduling either event, and ask which event they would like to reschedule, or suggest moving the meeting to another day.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-05-03T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can I schedule a meeting with the anti-poaching unit at 9 AM on Saturday and still make it to bird watching on Sunday?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min set to '2026-05-16T08:00:00' and time_max set to '2026-05-16T11:00:00' to retrieve the Photographing elephants event. Call list_events with time_min set to '2026-05-17T09:00:00' and time_max set to '2026-05-17T11:00:00' to retrieve the Bird watching event. Assuming the events don't directly overlap, create a new event with summary 'Meeting with anti-poaching unit', start time '2026-05-16T09:00:00', and end time '2026-05-16T10:00:00'. Confirm with the user about the creation of the meeting.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-05-03T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner... photographer... change...",
+        "complexity": "High",
+        "expected_behavior": "Analyze the keywords. Identify that the user is likely referring to the 'Dinner with fellow photographer' event. Ask for clarification regarding the desired change (reschedule, cancel, etc.) and the new details (date, time, etc.). Based on the user's response, call the appropriate tool (update_event or delete_event).",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-05-03T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Park rangers... Thursday... postpone...",
+        "complexity": "High",
+        "expected_behavior": "Identify that the user is referring to the 'Meeting with Park Rangers' event on Thursday. Ask for clarification on the desired new date and time. Once the user confirms the new details, call update_event with the event ID and the new start and end times.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-05-03T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Based on the current time being Sunday, 'tomorrow' refers to Monday. Call list_events with time_min set to '2026-05-11T00:00:00' and time_max set to '2026-05-12T00:00:00'. Respond to the user with the events scheduled for Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-05-10T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Based on the current time being Tuesday, 'yesterday' refers to Monday. Call list_events with time_min set to '2026-05-11T00:00:00' and time_max set to '2026-05-12T00:00:00'. Respond to the user with the events scheduled for Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-05-12T10:00:00"
+    }
+]

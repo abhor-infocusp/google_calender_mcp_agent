@@ -1,0 +1,149 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting on Wednesday to discuss project updates with Sarah from 3:00 PM to 4:00 PM, and have her email be sarah@email.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event on Wednesday, February 21, 2024, from 3:00 PM to 4:00 PM with Sarah as an attendee.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-02-18T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a dentist appointment for Friday at 2 PM for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event on Friday, February 23, 2024, from 2:00 PM to 3:00 PM for a dentist appointment.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-02-18T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Monday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled on Monday, February 19, 2024, between 9:00 AM and 12:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-02-19T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Check my schedule for anything involving wedding preparations this week.",
+        "complexity": "Medium",
+        "expected_behavior": "List all events this week (February 19-25, 2024) where the summary includes 'wedding' or attendees contain '@email.com'.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-02-18T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my client consultation on Monday back by one hour?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Client Consultation - The Millers' event on Monday, February 19, 2024, and update the start time to 3:00 PM and end time to 4:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-02-19T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update the location for the meeting with the florist to their new studio at 123 Main Street.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meet with Florist - Petal Perfect' event on Tuesday, February 20, 2024, and add 'at 123 Main Street' to the description.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-02-20T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my yoga class on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Yoga Class' event on Wednesday, February 21, 2024, and return its start and end times.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-02-21T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me who I'm having dinner with on Friday.",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Dinner with friends' event on Friday, February 23, 2024, and return the event's summary.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-02-23T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my dinner with friends on Friday to Saturday night instead.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Dinner with friends' event on Friday, February 23, 2024, and update the date to Saturday, February 24, 2024, keeping the same time (6:00 PM - 8:00 PM).",
+        "addressed_days": [
+            "Friday",
+            "Saturday"
+        ],
+        "current_time": "2024-02-23T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is there any overlap between finalizing vendor payments and meeting with the DJ on Friday?",
+        "complexity": "High",
+        "expected_behavior": "Check the time ranges for the 'Finalize vendor payments' event (9:00 AM - 11:00 AM) and the 'Meet with DJ - PartyPros' event (11:00 AM - 12:00 PM) on Friday, February 23, 2024, and determine if there is any overlap.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-02-23T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Petal Perfect.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meet with Florist - Petal Perfect' event on Tuesday, February 20, 2024 and prompt for a new date and time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-02-20T07:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Wedding dress...",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Wedding Dress Appointment' event on Thursday, February 22, 2024 and display the details.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-02-22T11:00:00"
+    },
+    {
+        "category": "Relative Time References",
+        "query": "What's on the agenda for today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Sunday, February 25, 2024.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-02-25T08:00:00"
+    },
+    {
+        "category": "Relative Time References",
+        "query": "Did I have any meetings yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events that occurred on Tuesday, February 20, 2024.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-02-21T08:00:00"
+    }
+]

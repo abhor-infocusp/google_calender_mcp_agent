@@ -1,0 +1,2772 @@
+[
+  {
+    "query": "Create an event called 'Board Game Night' on Saturday at 6 PM and ending at 10 PM. Invite friend4@email.com.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event with summary 'Board Game Night', start time 2025-03-15T18:00:00, end time 2025-03-15T22:00:00, and attendees ['friend4@email.com'].",
+    "simulated_now": "2025-03-09 23:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Volunteer at Coding Camp",
+          "start": "2025-03-15 09:00:00",
+          "end": "2025-03-15 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5dbcf3bdf0694d8abc15cc85aa4b599a"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Hike with Hiking Group",
+          "start": "2025-03-15 14:00:00",
+          "end": "2025-03-15 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hiking_group@email.com"
+          ],
+          "id": "evt_a480abb249544100899b161b6c3b519f"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Volunteer at Coding Camp",
+          "start": "2025-03-15 09:00:00",
+          "end": "2025-03-15 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5dbcf3bdf0694d8abc15cc85aa4b599a"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Hike with Hiking Group",
+          "start": "2025-03-15 14:00:00",
+          "end": "2025-03-15 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hiking_group@email.com"
+          ],
+          "id": "evt_a480abb249544100899b161b6c3b519f"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Board Game Night",
+          "start": "2025-03-15 18:00:00",
+          "end": "2025-03-15 22:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend4@email.com"
+          ],
+          "id": "evt_5bf56234aadc4c94a16dc02667f04527"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Board Game Night' on Saturday at 6 PM and ending at 10 PM. Invite friend4@email.com."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-09 23:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "attendees": [
+            "friend4@email.com"
+          ],
+          "summary": "Board Game Night",
+          "start": "2025-03-15 18:00:00",
+          "end": "2025-03-15 22:00:00"
+        },
+        "result": "Event created successfully.\nBoard Game Night\n  ID: evt_5bf56234aadc4c94a16dc02667f04527\n  Time: Sat Mar 15, 18:00 - 22:00\n  Attendees: friend4@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've created the event 'Board Game Night' on Saturday, March 15th, from 6:00 PM to 10:00 PM and invited friend4@email.com."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Book me a meeting for 'Client Presentation' on Wednesday from 3 PM to 4 PM, and include client@email.com and marketing@company.com.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event with summary 'Client Presentation', start time 2025-03-12T15:00:00, end time 2025-03-12T16:00:00, and attendees ['client@email.com', 'marketing@company.com'].",
+    "simulated_now": "2025-03-09 23:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-12 09:00:00",
+          "end": "2025-03-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_dcd6759f3d2c40b2a55ba1aa159ce39f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Application Review",
+          "start": "2025-03-12 10:30:00",
+          "end": "2025-03-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c3b9539bfb114788b682e894f3fc204e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Pipeline Review Meeting",
+          "start": "2025-03-12 13:00:00",
+          "end": "2025-03-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com"
+          ],
+          "id": "evt_a0776de44e914f25acaef62b463bd2a4"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Campus Recruiting Presentation Prep",
+          "start": "2025-03-12 14:30:00",
+          "end": "2025-03-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_104d3ffad0d24f2bb69b215b3344875a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2025-03-12 18:00:00",
+          "end": "2025-03-12 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_243e5a68f1a649edba0e328493b2dd0b"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-12 09:00:00",
+          "end": "2025-03-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_dcd6759f3d2c40b2a55ba1aa159ce39f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Application Review",
+          "start": "2025-03-12 10:30:00",
+          "end": "2025-03-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c3b9539bfb114788b682e894f3fc204e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Pipeline Review Meeting",
+          "start": "2025-03-12 13:00:00",
+          "end": "2025-03-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com"
+          ],
+          "id": "evt_a0776de44e914f25acaef62b463bd2a4"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Campus Recruiting Presentation Prep",
+          "start": "2025-03-12 14:30:00",
+          "end": "2025-03-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_104d3ffad0d24f2bb69b215b3344875a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Presentation",
+          "start": "2025-03-12 15:00:00",
+          "end": "2025-03-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@email.com",
+            "marketing@company.com"
+          ],
+          "id": "evt_42e13c25e5d64ef8813f2ec5698686d9"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2025-03-12 18:00:00",
+          "end": "2025-03-12 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_243e5a68f1a649edba0e328493b2dd0b"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Book me a meeting for 'Client Presentation' on Wednesday from 3 PM to 4 PM, and include client@email.com and marketing@company.com."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I need to get the current date and time to schedule the meeting for this coming Wednesday. Then I'll create the event with the details you provided."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-09 23:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I have the current time. Now I will create the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "end": "2025-03-12 16:00:00",
+          "attendees": [
+            "client@email.com",
+            "marketing@company.com"
+          ],
+          "summary": "Client Presentation",
+          "start": "2025-03-12 15:00:00"
+        },
+        "result": "Event created successfully.\nClient Presentation\n  ID: evt_42e13c25e5d64ef8813f2ec5698686d9\n  Time: Wed Mar 12, 15:00 - 16:00\n  Attendees: client@email.com, marketing@company.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've scheduled the \"Client Presentation\" for Wednesday, March 12th, from 3 PM to 4 PM, with client@email.com and marketing@company.com invited."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "I'm busy Friday morning. What am I doing?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events with time_min set to 2025-03-14T09:00:00 and time_max to 2025-03-14T12:00:00 to determine the user's activities.",
+    "simulated_now": "2025-03-09 23:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Meeting - Weekly Updates",
+          "start": "2025-03-14 09:00:00",
+          "end": "2025-03-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com",
+            "hr_coordinator@company.com"
+          ],
+          "id": "evt_c41082a7b4ec4bb68d3bac7af00a8bee"
+        },
+        {
+          "day": "Friday",
+          "summary": "Final Interview - Senior Engineer",
+          "start": "2025-03-14 10:30:00",
+          "end": "2025-03-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "cto@company.com"
+          ],
+          "id": "evt_9cb0b14f8d5c434ba66056ade1d42938"
+        },
+        {
+          "day": "Friday",
+          "summary": "Offer Discussion",
+          "start": "2025-03-14 13:00:00",
+          "end": "2025-03-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com"
+          ],
+          "id": "evt_39334530c3ef4409b59885b6ae1f7a0e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Follow up with Candidates",
+          "start": "2025-03-14 14:30:00",
+          "end": "2025-03-14 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_92ac73d9e64840fe9b212d12a325efdc"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2025-03-14 19:00:00",
+          "end": "2025-03-14 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend2@email.com",
+            "friend3@email.com"
+          ],
+          "id": "evt_c7d1509d6b874b7880b002f00e2d82a4"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Meeting - Weekly Updates",
+          "start": "2025-03-14 09:00:00",
+          "end": "2025-03-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com",
+            "hr_coordinator@company.com"
+          ],
+          "id": "evt_c41082a7b4ec4bb68d3bac7af00a8bee"
+        },
+        {
+          "day": "Friday",
+          "summary": "Final Interview - Senior Engineer",
+          "start": "2025-03-14 10:30:00",
+          "end": "2025-03-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "cto@company.com"
+          ],
+          "id": "evt_9cb0b14f8d5c434ba66056ade1d42938"
+        },
+        {
+          "day": "Friday",
+          "summary": "Offer Discussion",
+          "start": "2025-03-14 13:00:00",
+          "end": "2025-03-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com"
+          ],
+          "id": "evt_39334530c3ef4409b59885b6ae1f7a0e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Follow up with Candidates",
+          "start": "2025-03-14 14:30:00",
+          "end": "2025-03-14 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_92ac73d9e64840fe9b212d12a325efdc"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2025-03-14 19:00:00",
+          "end": "2025-03-14 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend2@email.com",
+            "friend3@email.com"
+          ],
+          "id": "evt_c7d1509d6b874b7880b002f00e2d82a4"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "I'm busy Friday morning. What am I doing?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to check your calendar for Friday morning. First, I'll get the current date and time to determine which Friday you're referring to. Then, I'll list the events on that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-09 23:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-03-14 12:00:00",
+          "time_min": "2025-03-14 00:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_c41082a7b4ec4bb68d3bac7af00a8bee | Team Meeting - Weekly Updates \u2014 Fri 09:00-10:00\nid: evt_9cb0b14f8d5c434ba66056ade1d42938 | Final Interview - Senior Engineer \u2014 Fri 10:30-12:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have two events on Friday morning. First, you have \"Team Meeting - Weekly Updates\" from 9:00 to 10:00 AM. After that, you have \"Final Interview - Senior Engineer\" from 10:30 AM to 12:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can you move the hiring manager check-in on Monday to 3 PM?",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find the 'Hiring Manager Check-in' event on Monday. Then call update_event with the event_id and updated start time of 2025-03-10T15:00:00 and end time of 2025-03-10T16:00:00.",
+    "simulated_now": "2025-03-09 23:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting",
+          "start": "2025-03-10 09:00:00",
+          "end": "2025-03-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com",
+            "hr_coordinator@company.com"
+          ],
+          "id": "evt_51dbb6d0d3c24704b6140533c27200d6"
+        },
+        {
+          "day": "Monday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-10 10:30:00",
+          "end": "2025-03-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c949190c5a9446b1a6f1c5710ca5b3eb"
+        },
+        {
+          "day": "Monday",
+          "summary": "Hiring Manager Check-in",
+          "start": "2025-03-10 13:00:00",
+          "end": "2025-03-10 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com"
+          ],
+          "id": "evt_4bf93df52a5242ee906d6da27c14f48b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-10 14:30:00",
+          "end": "2025-03-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_1704ec822d7c439e96f5c99f491bdb22"
+        },
+        {
+          "day": "Monday",
+          "summary": "Networking Event - Women in Tech",
+          "start": "2025-03-10 18:30:00",
+          "end": "2025-03-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com"
+          ],
+          "id": "evt_b46055ada882485c8d9d8c4352178dd0"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting",
+          "start": "2025-03-10 09:00:00",
+          "end": "2025-03-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com",
+            "hr_coordinator@company.com"
+          ],
+          "id": "evt_51dbb6d0d3c24704b6140533c27200d6"
+        },
+        {
+          "day": "Monday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-10 10:30:00",
+          "end": "2025-03-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c949190c5a9446b1a6f1c5710ca5b3eb"
+        },
+        {
+          "day": "Monday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-10 14:30:00",
+          "end": "2025-03-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_1704ec822d7c439e96f5c99f491bdb22"
+        },
+        {
+          "day": "Monday",
+          "summary": "Hiring Manager Check-in",
+          "start": "2025-03-10 15:00:00",
+          "end": "2025-03-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com"
+          ],
+          "id": "evt_4bf93df52a5242ee906d6da27c14f48b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Networking Event - Women in Tech",
+          "start": "2025-03-10 18:30:00",
+          "end": "2025-03-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com"
+          ],
+          "id": "evt_b46055ada882485c8d9d8c4352178dd0"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can you move the hiring manager check-in on Monday to 3 PM?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-09 23:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-03-10 00:00:00",
+          "time_max": "2025-03-10 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_51dbb6d0d3c24704b6140533c27200d6 | Team Meeting \u2014 Mon 09:00-10:00\nid: evt_c949190c5a9446b1a6f1c5710ca5b3eb | Phone Screen Interviews \u2014 Mon 10:30-12:00\nid: evt_4bf93df52a5242ee906d6da27c14f48b | Hiring Manager Check-in \u2014 Mon 13:00-14:00\nid: evt_1704ec822d7c439e96f5c99f491bdb22 | Candidate Interview \u2014 Mon 14:30-16:00\nid: evt_b46055ada882485c8d9d8c4352178dd0 | Networking Event - Women in Tech \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2025-03-10 16:00:00",
+          "start": "2025-03-10 15:00:00",
+          "event_id": "evt_4bf93df52a5242ee906d6da27c14f48b"
+        },
+        "result": "Event updated successfully.\nHiring Manager Check-in\n  ID: evt_4bf93df52a5242ee906d6da27c14f48b\n  Time: Mon Mar 10, 15:00 - 16:00\n  Attendees: engineering_manager@company.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've moved the Hiring Manager Check-in to 3 PM on Monday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule the virtual book club meeting on Tuesday to 8 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find the 'Virtual Book Club Meeting' event on Tuesday. Then, call update_event with the event_id and updated start time of 2025-03-11T20:00:00 and end time of 2025-03-11T21:00:00.",
+    "simulated_now": "2025-03-09 23:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Sourcing Strategy Session",
+          "start": "2025-03-11 09:00:00",
+          "end": "2025-03-11 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "recruiter2@company.com",
+            "recruiter3@company.com"
+          ],
+          "id": "evt_31eb9830a0e1467a8069e59ebe87f4c1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-11 10:30:00",
+          "end": "2025-03-11 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a77b4213cdec4ac4aa28c4ff02201bdc"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Interview Debrief",
+          "start": "2025-03-11 13:00:00",
+          "end": "2025-03-11 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com",
+            "candidate@email.com"
+          ],
+          "id": "evt_95b9b77c58d64f8bac45b2fbf7af4b6d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Schedule Interviews for next week",
+          "start": "2025-03-11 14:30:00",
+          "end": "2025-03-11 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c3bcd11d3ac545af91465134129a040e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Virtual Book Club Meeting",
+          "start": "2025-03-11 19:00:00",
+          "end": "2025-03-11 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bookclub_friends@email.com"
+          ],
+          "id": "evt_71ce30f1ba1c4717acc725eb1bc79159"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Sourcing Strategy Session",
+          "start": "2025-03-11 09:00:00",
+          "end": "2025-03-11 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "recruiter2@company.com",
+            "recruiter3@company.com"
+          ],
+          "id": "evt_31eb9830a0e1467a8069e59ebe87f4c1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-11 10:30:00",
+          "end": "2025-03-11 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a77b4213cdec4ac4aa28c4ff02201bdc"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Interview Debrief",
+          "start": "2025-03-11 13:00:00",
+          "end": "2025-03-11 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com",
+            "candidate@email.com"
+          ],
+          "id": "evt_95b9b77c58d64f8bac45b2fbf7af4b6d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Schedule Interviews for next week",
+          "start": "2025-03-11 14:30:00",
+          "end": "2025-03-11 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c3bcd11d3ac545af91465134129a040e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Virtual Book Club Meeting",
+          "start": "2025-03-11 20:00:00",
+          "end": "2025-03-11 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bookclub_friends@email.com"
+          ],
+          "id": "evt_71ce30f1ba1c4717acc725eb1bc79159"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule the virtual book club meeting on Tuesday to 8 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. What is the new time for the book club meeting?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-09 23:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-03-11 00:00:00",
+          "time_max": "2025-03-11 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_31eb9830a0e1467a8069e59ebe87f4c1 | Sourcing Strategy Session \u2014 Tue 09:00-10:00\nid: evt_a77b4213cdec4ac4aa28c4ff02201bdc | Phone Screen Interviews \u2014 Tue 10:30-12:00\nid: evt_95b9b77c58d64f8bac45b2fbf7af4b6d | Interview Debrief \u2014 Tue 13:00-14:00\nid: evt_c3bcd11d3ac545af91465134129a040e | Schedule Interviews for next week \u2014 Tue 14:30-16:00\nid: evt_71ce30f1ba1c4717acc725eb1bc79159 | Virtual Book Club Meeting \u2014 Tue 19:00-20:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_71ce30f1ba1c4717acc725eb1bc79159",
+          "end": "2025-03-11 21:00:00",
+          "start": "2025-03-11 20:00:00"
+        },
+        "result": "Event updated successfully.\nVirtual Book Club Meeting\n  ID: evt_71ce30f1ba1c4717acc725eb1bc79159\n  Time: Tue Mar 11, 20:00 - 21:00\n  Attendees: bookclub_friends@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have rescheduled the Virtual Book Club Meeting to Tuesday at 8:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the Women in Tech networking event on Monday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to find the 'Networking Event - Women in Tech' event on Monday, then extract and return the attendees list.",
+    "simulated_now": "2025-03-09 23:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting",
+          "start": "2025-03-10 09:00:00",
+          "end": "2025-03-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com",
+            "hr_coordinator@company.com"
+          ],
+          "id": "evt_ac863c50a9fe4ad3b5d033aca6062cba"
+        },
+        {
+          "day": "Monday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-10 10:30:00",
+          "end": "2025-03-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7721789cfefd48eaa507a022fe630dd7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Hiring Manager Check-in",
+          "start": "2025-03-10 13:00:00",
+          "end": "2025-03-10 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com"
+          ],
+          "id": "evt_7650e35e961c4c2bba94ddd4bbde8a56"
+        },
+        {
+          "day": "Monday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-10 14:30:00",
+          "end": "2025-03-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_c7f9e0f44d634d1185ab66b4bb6bf760"
+        },
+        {
+          "day": "Monday",
+          "summary": "Networking Event - Women in Tech",
+          "start": "2025-03-10 18:30:00",
+          "end": "2025-03-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com"
+          ],
+          "id": "evt_e681c57a27394d90a803b5711c7b291c"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting",
+          "start": "2025-03-10 09:00:00",
+          "end": "2025-03-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com",
+            "hr_coordinator@company.com"
+          ],
+          "id": "evt_ac863c50a9fe4ad3b5d033aca6062cba"
+        },
+        {
+          "day": "Monday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-10 10:30:00",
+          "end": "2025-03-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7721789cfefd48eaa507a022fe630dd7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Hiring Manager Check-in",
+          "start": "2025-03-10 13:00:00",
+          "end": "2025-03-10 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com"
+          ],
+          "id": "evt_7650e35e961c4c2bba94ddd4bbde8a56"
+        },
+        {
+          "day": "Monday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-10 14:30:00",
+          "end": "2025-03-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_c7f9e0f44d634d1185ab66b4bb6bf760"
+        },
+        {
+          "day": "Monday",
+          "summary": "Networking Event - Women in Tech",
+          "start": "2025-03-10 18:30:00",
+          "end": "2025-03-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com"
+          ],
+          "id": "evt_e681c57a27394d90a803b5711c7b291c"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the Women in Tech networking event on Monday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-09 23:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-03-10 00:00:00",
+          "time_max": "2025-03-10 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_ac863c50a9fe4ad3b5d033aca6062cba | Team Meeting \u2014 Mon 09:00-10:00\nid: evt_7721789cfefd48eaa507a022fe630dd7 | Phone Screen Interviews \u2014 Mon 10:30-12:00\nid: evt_7650e35e961c4c2bba94ddd4bbde8a56 | Hiring Manager Check-in \u2014 Mon 13:00-14:00\nid: evt_c7f9e0f44d634d1185ab66b4bb6bf760 | Candidate Interview \u2014 Mon 14:30-16:00\nid: evt_e681c57a27394d90a803b5711c7b291c | Networking Event - Women in Tech \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_e681c57a27394d90a803b5711c7b291c"
+        },
+        "result": "Networking Event - Women in Tech\n  ID: evt_e681c57a27394d90a803b5711c7b291c\n  Time: Mon Mar 10, 18:30 - 20:00\n  Attendees: friend1@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "The networking event has one confirmed attendee: friend1@email.com."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is my yoga class on Wednesday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events with time_min set to 2025-03-12T00:00:00 and time_max to 2025-03-12T23:59:59 to find the 'Yoga Class' event and then show its start time.",
+    "simulated_now": "2025-03-09 23:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-12 09:00:00",
+          "end": "2025-03-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_a6969da0f1c94e518a7566775dc8c193"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Application Review",
+          "start": "2025-03-12 10:30:00",
+          "end": "2025-03-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8d3a26c48fbf468c890b8a86df0ea65c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Pipeline Review Meeting",
+          "start": "2025-03-12 13:00:00",
+          "end": "2025-03-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com"
+          ],
+          "id": "evt_537aa698d4e140489f1a46f39eeb79b8"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Campus Recruiting Presentation Prep",
+          "start": "2025-03-12 14:30:00",
+          "end": "2025-03-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_635871fc61494432b630af04413b6f89"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2025-03-12 18:00:00",
+          "end": "2025-03-12 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d98d5d003d84467eb8a3298fbe101210"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-12 09:00:00",
+          "end": "2025-03-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_a6969da0f1c94e518a7566775dc8c193"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Application Review",
+          "start": "2025-03-12 10:30:00",
+          "end": "2025-03-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8d3a26c48fbf468c890b8a86df0ea65c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Pipeline Review Meeting",
+          "start": "2025-03-12 13:00:00",
+          "end": "2025-03-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com"
+          ],
+          "id": "evt_537aa698d4e140489f1a46f39eeb79b8"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Campus Recruiting Presentation Prep",
+          "start": "2025-03-12 14:30:00",
+          "end": "2025-03-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_635871fc61494432b630af04413b6f89"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2025-03-12 18:00:00",
+          "end": "2025-03-12 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d98d5d003d84467eb8a3298fbe101210"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is my yoga class on Wednesday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out what time your yoga class is on Wednesday. First, I'll get the current time to know what day it is. Then, I'll search your calendar for a \"yoga class\" on Wednesday and let you know the time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-09 23:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "OK, this coming Wednesday is March 12th. Let me check your calendar for a yoga class on that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-03-12 00:00:00",
+          "time_max": "2025-03-13 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_a6969da0f1c94e518a7566775dc8c193 | Candidate Interview \u2014 Wed 09:00-10:00\nid: evt_8d3a26c48fbf468c890b8a86df0ea65c | Application Review \u2014 Wed 10:30-12:00\nid: evt_537aa698d4e140489f1a46f39eeb79b8 | Pipeline Review Meeting \u2014 Wed 13:00-14:00\nid: evt_635871fc61494432b630af04413b6f89 | Campus Recruiting Presentation Prep \u2014 Wed 14:30-16:00\nid: evt_d98d5d003d84467eb8a3298fbe101210 | Yoga Class \u2014 Wed 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Your yoga class on Wednesday is from 18:00 to 19:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "I can't make the brunch with family on Sunday. Decline it.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Call list_events to find the 'Brunch with Family' event on Sunday. Then call respond_to_event with the event_id and 'DECLINE'.",
+    "simulated_now": "2025-03-09 23:00:00",
+    "addressed_days": [
+      "Sunday"
+    ],
+    "calendar_before": {
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Family",
+          "start": "2025-03-16 10:00:00",
+          "end": "2025-03-16 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6051ae1ae5344bcda47fa2428200851c"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Attend Local Tech Meetup",
+          "start": "2025-03-16 14:00:00",
+          "end": "2025-03-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3464b1fdd06b4b48b2b1600485e0b1a6"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Family",
+          "start": "2025-03-16 10:00:00",
+          "end": "2025-03-16 12:00:00",
+          "attending": "DECLINE",
+          "attendees": [],
+          "id": "evt_6051ae1ae5344bcda47fa2428200851c"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Attend Local Tech Meetup",
+          "start": "2025-03-16 14:00:00",
+          "end": "2025-03-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3464b1fdd06b4b48b2b1600485e0b1a6"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "I can't make the brunch with family on Sunday. Decline it."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I need to check the calendar for the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-09 23:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I will search for a brunch on Sunday, March 9th."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-03-09 23:59:59",
+          "time_min": "2025-03-09 00:00:00"
+        },
+        "result": "Found 0 events:"
+      },
+      {
+        "role": "assistant",
+        "content": "No brunch found on March 9th. I'll check next Sunday, March 16th."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-03-16 00:00:00",
+          "time_max": "2025-03-16 23:59:59"
+        },
+        "result": "Found 2 events:\nid: evt_6051ae1ae5344bcda47fa2428200851c | Brunch with Family \u2014 Sun 10:00-12:00\nid: evt_3464b1fdd06b4b48b2b1600485e0b1a6 | Attend Local Tech Meetup \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found \"Brunch with Family\" on Sunday, March 16th and will decline it now."
+      },
+      {
+        "role": "tool_call",
+        "name": "respond_to_event",
+        "args": {
+          "event_id": "evt_6051ae1ae5344bcda47fa2428200851c",
+          "attending": "DECLINE"
+        },
+        "result": "RSVP updated to DECLINE.\nBrunch with Family\n  ID: evt_6051ae1ae5344bcda47fa2428200851c\n  Time: Sun Mar 16, 10:00 - 12:00\n  RSVP: DECLINE"
+      },
+      {
+        "role": "assistant",
+        "content": "I have declined the brunch with family on Sunday.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule Candidate Interview.",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "High",
+    "expected_behavior": "The request is ambiguous. The agent should ask for clarification: 'Which Candidate Interview would you like to reschedule, and to what time would you like to reschedule it?'",
+    "simulated_now": "2025-03-09 23:00:00",
+    "addressed_days": [],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting",
+          "start": "2025-03-10 09:00:00",
+          "end": "2025-03-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com",
+            "hr_coordinator@company.com"
+          ],
+          "id": "evt_9b6b5fc729bd406a869dcaa3c96853fa"
+        },
+        {
+          "day": "Monday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-10 10:30:00",
+          "end": "2025-03-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5d532775b1e5446d8df325b0e5a0903a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Hiring Manager Check-in",
+          "start": "2025-03-10 13:00:00",
+          "end": "2025-03-10 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com"
+          ],
+          "id": "evt_d79140ce5d33476a8fa6611f07084c97"
+        },
+        {
+          "day": "Monday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-10 14:30:00",
+          "end": "2025-03-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_deda886bb1be4aa2a56b4a3c357acfd2"
+        },
+        {
+          "day": "Monday",
+          "summary": "Networking Event - Women in Tech",
+          "start": "2025-03-10 18:30:00",
+          "end": "2025-03-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com"
+          ],
+          "id": "evt_1ae5731f0c484af1a878e39fa6741161"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Sourcing Strategy Session",
+          "start": "2025-03-11 09:00:00",
+          "end": "2025-03-11 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "recruiter2@company.com",
+            "recruiter3@company.com"
+          ],
+          "id": "evt_a76e08d2bdf24b81a3cf982f28059222"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-11 10:30:00",
+          "end": "2025-03-11 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f805df3bf82f4dbbbc4399958dd4f139"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Interview Debrief",
+          "start": "2025-03-11 13:00:00",
+          "end": "2025-03-11 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com",
+            "candidate@email.com"
+          ],
+          "id": "evt_028b216b5042494c897fcf202ff5c7b7"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Schedule Interviews for next week",
+          "start": "2025-03-11 14:30:00",
+          "end": "2025-03-11 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_18c26e8247e642c2b0932adc5101b911"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Virtual Book Club Meeting",
+          "start": "2025-03-11 19:00:00",
+          "end": "2025-03-11 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bookclub_friends@email.com"
+          ],
+          "id": "evt_6afe87f8896546d480312d07fe245d91"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-12 09:00:00",
+          "end": "2025-03-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_b13e7c083e3847f099d307c98e03466e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Application Review",
+          "start": "2025-03-12 10:30:00",
+          "end": "2025-03-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ffc242a8de1242809a16f3e1d461b124"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Pipeline Review Meeting",
+          "start": "2025-03-12 13:00:00",
+          "end": "2025-03-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com"
+          ],
+          "id": "evt_334e76bd9ec3405bb78f54923f0feabb"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Campus Recruiting Presentation Prep",
+          "start": "2025-03-12 14:30:00",
+          "end": "2025-03-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9126e6f12bc345299d57d700e7403d20"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2025-03-12 18:00:00",
+          "end": "2025-03-12 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c1d01f8942e849e486959fa466b60a5a"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Interview Debrief",
+          "start": "2025-03-13 09:00:00",
+          "end": "2025-03-13 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com",
+            "candidate@email.com"
+          ],
+          "id": "evt_ee144d1e5d8441b8825c2579e50d332e"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-13 10:30:00",
+          "end": "2025-03-13 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_386027daf40e4d8785be509979c1fcec"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Hiring Manager 1:1",
+          "start": "2025-03-13 13:00:00",
+          "end": "2025-03-13 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager2@company.com"
+          ],
+          "id": "evt_e5403fb2eeff487c8cc60a60d8408414"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Update Candidate Tracking System",
+          "start": "2025-03-13 14:30:00",
+          "end": "2025-03-13 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_efadc602fc2f4821b01f84cddf8098c2"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Meeting - Weekly Updates",
+          "start": "2025-03-14 09:00:00",
+          "end": "2025-03-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com",
+            "hr_coordinator@company.com"
+          ],
+          "id": "evt_cd4ac0ef539d48d790a30068eb7e4f7b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Final Interview - Senior Engineer",
+          "start": "2025-03-14 10:30:00",
+          "end": "2025-03-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "cto@company.com"
+          ],
+          "id": "evt_8f8539fd6bb848e496f144e4f8ae6334"
+        },
+        {
+          "day": "Friday",
+          "summary": "Offer Discussion",
+          "start": "2025-03-14 13:00:00",
+          "end": "2025-03-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com"
+          ],
+          "id": "evt_a50189de589149569daf6d654f4d6d99"
+        },
+        {
+          "day": "Friday",
+          "summary": "Follow up with Candidates",
+          "start": "2025-03-14 14:30:00",
+          "end": "2025-03-14 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_59f1069a8a5246ac879d99fff8957f0c"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2025-03-14 19:00:00",
+          "end": "2025-03-14 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend2@email.com",
+            "friend3@email.com"
+          ],
+          "id": "evt_ade0e1dda10d41d79306420c410cca89"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Volunteer at Coding Camp",
+          "start": "2025-03-15 09:00:00",
+          "end": "2025-03-15 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e2831ed95ead4c1bac0eabecc8cb7196"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Hike with Hiking Group",
+          "start": "2025-03-15 14:00:00",
+          "end": "2025-03-15 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hiking_group@email.com"
+          ],
+          "id": "evt_67cffcae6ae04b3ba7e83c3f47722b27"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Family",
+          "start": "2025-03-16 10:00:00",
+          "end": "2025-03-16 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3908799fa1064182b12bd063e0fd7bc5"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Attend Local Tech Meetup",
+          "start": "2025-03-16 14:00:00",
+          "end": "2025-03-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_89eed5edf29145cfaed13f9c85b67a82"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting",
+          "start": "2025-03-10 09:00:00",
+          "end": "2025-03-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com",
+            "hr_coordinator@company.com"
+          ],
+          "id": "evt_9b6b5fc729bd406a869dcaa3c96853fa"
+        },
+        {
+          "day": "Monday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-10 10:30:00",
+          "end": "2025-03-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5d532775b1e5446d8df325b0e5a0903a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Hiring Manager Check-in",
+          "start": "2025-03-10 13:00:00",
+          "end": "2025-03-10 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com"
+          ],
+          "id": "evt_d79140ce5d33476a8fa6611f07084c97"
+        },
+        {
+          "day": "Monday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-10 14:30:00",
+          "end": "2025-03-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_deda886bb1be4aa2a56b4a3c357acfd2"
+        },
+        {
+          "day": "Monday",
+          "summary": "Networking Event - Women in Tech",
+          "start": "2025-03-10 18:30:00",
+          "end": "2025-03-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com"
+          ],
+          "id": "evt_1ae5731f0c484af1a878e39fa6741161"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Sourcing Strategy Session",
+          "start": "2025-03-11 09:00:00",
+          "end": "2025-03-11 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "recruiter2@company.com",
+            "recruiter3@company.com"
+          ],
+          "id": "evt_a76e08d2bdf24b81a3cf982f28059222"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-11 10:30:00",
+          "end": "2025-03-11 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f805df3bf82f4dbbbc4399958dd4f139"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Interview Debrief",
+          "start": "2025-03-11 13:00:00",
+          "end": "2025-03-11 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com",
+            "candidate@email.com"
+          ],
+          "id": "evt_028b216b5042494c897fcf202ff5c7b7"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Schedule Interviews for next week",
+          "start": "2025-03-11 14:30:00",
+          "end": "2025-03-11 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_18c26e8247e642c2b0932adc5101b911"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Virtual Book Club Meeting",
+          "start": "2025-03-11 19:00:00",
+          "end": "2025-03-11 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bookclub_friends@email.com"
+          ],
+          "id": "evt_6afe87f8896546d480312d07fe245d91"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-12 09:00:00",
+          "end": "2025-03-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_b13e7c083e3847f099d307c98e03466e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Application Review",
+          "start": "2025-03-12 10:30:00",
+          "end": "2025-03-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ffc242a8de1242809a16f3e1d461b124"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Pipeline Review Meeting",
+          "start": "2025-03-12 13:00:00",
+          "end": "2025-03-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com"
+          ],
+          "id": "evt_334e76bd9ec3405bb78f54923f0feabb"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Campus Recruiting Presentation Prep",
+          "start": "2025-03-12 14:30:00",
+          "end": "2025-03-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9126e6f12bc345299d57d700e7403d20"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2025-03-12 18:00:00",
+          "end": "2025-03-12 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c1d01f8942e849e486959fa466b60a5a"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Interview Debrief",
+          "start": "2025-03-13 09:00:00",
+          "end": "2025-03-13 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com",
+            "candidate@email.com"
+          ],
+          "id": "evt_ee144d1e5d8441b8825c2579e50d332e"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-13 10:30:00",
+          "end": "2025-03-13 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_386027daf40e4d8785be509979c1fcec"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Hiring Manager 1:1",
+          "start": "2025-03-13 13:00:00",
+          "end": "2025-03-13 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager2@company.com"
+          ],
+          "id": "evt_e5403fb2eeff487c8cc60a60d8408414"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Update Candidate Tracking System",
+          "start": "2025-03-13 14:30:00",
+          "end": "2025-03-13 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_efadc602fc2f4821b01f84cddf8098c2"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Meeting - Weekly Updates",
+          "start": "2025-03-14 09:00:00",
+          "end": "2025-03-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com",
+            "hr_coordinator@company.com"
+          ],
+          "id": "evt_cd4ac0ef539d48d790a30068eb7e4f7b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Final Interview - Senior Engineer",
+          "start": "2025-03-14 10:30:00",
+          "end": "2025-03-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "cto@company.com"
+          ],
+          "id": "evt_8f8539fd6bb848e496f144e4f8ae6334"
+        },
+        {
+          "day": "Friday",
+          "summary": "Offer Discussion",
+          "start": "2025-03-14 13:00:00",
+          "end": "2025-03-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com"
+          ],
+          "id": "evt_a50189de589149569daf6d654f4d6d99"
+        },
+        {
+          "day": "Friday",
+          "summary": "Follow up with Candidates",
+          "start": "2025-03-14 14:30:00",
+          "end": "2025-03-14 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_59f1069a8a5246ac879d99fff8957f0c"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2025-03-14 19:00:00",
+          "end": "2025-03-14 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend2@email.com",
+            "friend3@email.com"
+          ],
+          "id": "evt_ade0e1dda10d41d79306420c410cca89"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Volunteer at Coding Camp",
+          "start": "2025-03-15 09:00:00",
+          "end": "2025-03-15 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e2831ed95ead4c1bac0eabecc8cb7196"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Hike with Hiking Group",
+          "start": "2025-03-15 14:00:00",
+          "end": "2025-03-15 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hiking_group@email.com"
+          ],
+          "id": "evt_67cffcae6ae04b3ba7e83c3f47722b27"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Family",
+          "start": "2025-03-16 10:00:00",
+          "end": "2025-03-16 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3908799fa1064182b12bd063e0fd7bc5"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Attend Local Tech Meetup",
+          "start": "2025-03-16 14:00:00",
+          "end": "2025-03-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_89eed5edf29145cfaed13f9c85b67a82"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule Candidate Interview."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 28 events:\nid: evt_9b6b5fc729bd406a869dcaa3c96853fa | Team Meeting \u2014 Mon 09:00-10:00\nid: evt_5d532775b1e5446d8df325b0e5a0903a | Phone Screen Interviews \u2014 Mon 10:30-12:00\nid: evt_d79140ce5d33476a8fa6611f07084c97 | Hiring Manager Check-in \u2014 Mon 13:00-14:00\nid: evt_deda886bb1be4aa2a56b4a3c357acfd2 | Candidate Interview \u2014 Mon 14:30-16:00\nid: evt_1ae5731f0c484af1a878e39fa6741161 | Networking Event - Women in Tech \u2014 Mon 18:30-20:00\nid: evt_a76e08d2bdf24b81a3cf982f28059222 | Sourcing Strategy Session \u2014 Tue 09:00-10:00\nid: evt_f805df3bf82f4dbbbc4399958dd4f139 | Phone Screen Interviews \u2014 Tue 10:30-12:00\nid: evt_028b216b5042494c897fcf202ff5c7b7 | Interview Debrief \u2014 Tue 13:00-14:00\nid: evt_18c26e8247e642c2b0932adc5101b911 | Schedule Interviews for next week \u2014 Tue 14:30-16:00\nid: evt_6afe87f8896546d480312d07fe245d91 | Virtual Book Club Meeting \u2014 Tue 19:00-20:00\nid: evt_b13e7c083e3847f099d307c98e03466e | Candidate Interview \u2014 Wed 09:00-10:00\nid: evt_ffc242a8de1242809a16f3e1d461b124 | Application Review \u2014 Wed 10:30-12:00\nid: evt_334e76bd9ec3405bb78f54923f0feabb | Pipeline Review Meeting \u2014 Wed 13:00-14:00\nid: evt_9126e6f12bc345299d57d700e7403d20 | Campus Recruiting Presentation Prep \u2014 Wed 14:30-16:00\nid: evt_c1d01f8942e849e486959fa466b60a5a | Yoga Class \u2014 Wed 18:00-19:00\nid: evt_ee144d1e5d8441b8825c2579e50d332e | Interview Debrief \u2014 Thu 09:00-10:00\nid: evt_386027daf40e4d8785be509979c1fcec | Phone Screen Interviews \u2014 Thu 10:30-12:00\nid: evt_e5403fb2eeff487c8cc60a60d8408414 | Hiring Manager 1:1 \u2014 Thu 13:00-14:00\nid: evt_efadc602fc2f4821b01f84cddf8098c2 | Update Candidate Tracking System \u2014 Thu 14:30-16:00\nid: evt_cd4ac0ef539d48d790a30068eb7e4f7b | Team Meeting - Weekly Updates \u2014 Fri 09:00-10:00\nid: evt_8f8539fd6bb848e496f144e4f8ae6334 | Final Interview - Senior Engineer \u2014 Fri 10:30-12:00\nid: evt_a50189de589149569daf6d654f4d6d99 | Offer Discussion \u2014 Fri 13:00-14:00\nid: evt_59f1069a8a5246ac879d99fff8957f0c | Follow up with Candidates \u2014 Fri 14:30-16:00\nid: evt_ade0e1dda10d41d79306420c410cca89 | Dinner with Friends \u2014 Fri 19:00-21:00\nid: evt_e2831ed95ead4c1bac0eabecc8cb7196 | Volunteer at Coding Camp \u2014 Sat 09:00-12:00\nid: evt_67cffcae6ae04b3ba7e83c3f47722b27 | Hike with Hiking Group \u2014 Sat 14:00-17:00\nid: evt_3908799fa1064182b12bd063e0fd7bc5 | Brunch with Family \u2014 Sun 10:00-12:00\nid: evt_89eed5edf29145cfaed13f9c85b67a82 | Attend Local Tech Meetup \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I can help with that. Which 'Candidate Interview' would you like to reschedule, and what's the new time for it?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change team meeting.",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "High",
+    "expected_behavior": "The request is ambiguous. The agent should ask for clarification: 'Which team meeting would you like to change, and what changes would you like to make?'",
+    "simulated_now": "2025-03-09 23:00:00",
+    "addressed_days": [],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting",
+          "start": "2025-03-10 09:00:00",
+          "end": "2025-03-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com",
+            "hr_coordinator@company.com"
+          ],
+          "id": "evt_b2f0ee6752254391b4bd380408682f75"
+        },
+        {
+          "day": "Monday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-10 10:30:00",
+          "end": "2025-03-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e6b0df4cc56141e9bc1fd581800d7ea7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Hiring Manager Check-in",
+          "start": "2025-03-10 13:00:00",
+          "end": "2025-03-10 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com"
+          ],
+          "id": "evt_5431262028104ddc831044cbf8afbf49"
+        },
+        {
+          "day": "Monday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-10 14:30:00",
+          "end": "2025-03-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_33a01914c73c49b1ae64bbcd323efc61"
+        },
+        {
+          "day": "Monday",
+          "summary": "Networking Event - Women in Tech",
+          "start": "2025-03-10 18:30:00",
+          "end": "2025-03-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com"
+          ],
+          "id": "evt_2683f43e4b6f495cbb63bd36b71b7420"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Sourcing Strategy Session",
+          "start": "2025-03-11 09:00:00",
+          "end": "2025-03-11 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "recruiter2@company.com",
+            "recruiter3@company.com"
+          ],
+          "id": "evt_d45f9438bd604d2eb51960219e6e40df"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-11 10:30:00",
+          "end": "2025-03-11 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9b1ed74a603f4c7bbe10ceebf5ad31dc"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Interview Debrief",
+          "start": "2025-03-11 13:00:00",
+          "end": "2025-03-11 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com",
+            "candidate@email.com"
+          ],
+          "id": "evt_6c6a2468a1b04f22ad2f0249027f6dcf"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Schedule Interviews for next week",
+          "start": "2025-03-11 14:30:00",
+          "end": "2025-03-11 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ab20f8f46e9442d1abdab8e67e4462a7"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Virtual Book Club Meeting",
+          "start": "2025-03-11 19:00:00",
+          "end": "2025-03-11 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bookclub_friends@email.com"
+          ],
+          "id": "evt_3feac7749b2d494da9d3c69c0ece9563"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-12 09:00:00",
+          "end": "2025-03-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_fbeab12bc1814fa4a332fc9ba8bd6216"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Application Review",
+          "start": "2025-03-12 10:30:00",
+          "end": "2025-03-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6ef3ebfd429f459b8d92dfb1d8305078"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Pipeline Review Meeting",
+          "start": "2025-03-12 13:00:00",
+          "end": "2025-03-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com"
+          ],
+          "id": "evt_7219dd25ff974d988e3cf556b09e1bba"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Campus Recruiting Presentation Prep",
+          "start": "2025-03-12 14:30:00",
+          "end": "2025-03-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b4cd1cb11ddb429593bc43ca90987a40"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2025-03-12 18:00:00",
+          "end": "2025-03-12 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_644e01dcc8004f44bab21086a275855d"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Interview Debrief",
+          "start": "2025-03-13 09:00:00",
+          "end": "2025-03-13 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com",
+            "candidate@email.com"
+          ],
+          "id": "evt_064dcdc21ac34b79a7e3872ed38b31d7"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-13 10:30:00",
+          "end": "2025-03-13 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_510a46b6beff4649994b42a0ec34ff55"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Hiring Manager 1:1",
+          "start": "2025-03-13 13:00:00",
+          "end": "2025-03-13 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager2@company.com"
+          ],
+          "id": "evt_2ca693bda55a405fbdbe73e2b9f10035"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Update Candidate Tracking System",
+          "start": "2025-03-13 14:30:00",
+          "end": "2025-03-13 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2868e179fc1147d2b6d5ec9ddba5d189"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Meeting - Weekly Updates",
+          "start": "2025-03-14 09:00:00",
+          "end": "2025-03-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com",
+            "hr_coordinator@company.com"
+          ],
+          "id": "evt_53383cb9eb724ef48466669d63f5a010"
+        },
+        {
+          "day": "Friday",
+          "summary": "Final Interview - Senior Engineer",
+          "start": "2025-03-14 10:30:00",
+          "end": "2025-03-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "cto@company.com"
+          ],
+          "id": "evt_2d4fad35ebef4ffb836c8b0975d38986"
+        },
+        {
+          "day": "Friday",
+          "summary": "Offer Discussion",
+          "start": "2025-03-14 13:00:00",
+          "end": "2025-03-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com"
+          ],
+          "id": "evt_d5370fceead7486d904f42237d800269"
+        },
+        {
+          "day": "Friday",
+          "summary": "Follow up with Candidates",
+          "start": "2025-03-14 14:30:00",
+          "end": "2025-03-14 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d200b81d8b2b4dbeb6accd9cbf3c7c99"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2025-03-14 19:00:00",
+          "end": "2025-03-14 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend2@email.com",
+            "friend3@email.com"
+          ],
+          "id": "evt_e73b9d256dc548c69d18f1b0f7ebcd75"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Volunteer at Coding Camp",
+          "start": "2025-03-15 09:00:00",
+          "end": "2025-03-15 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ef73ab7d78cf48cd8657ca05e3337993"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Hike with Hiking Group",
+          "start": "2025-03-15 14:00:00",
+          "end": "2025-03-15 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hiking_group@email.com"
+          ],
+          "id": "evt_3d8455c68752406eb59dc4aed70f99b7"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Family",
+          "start": "2025-03-16 10:00:00",
+          "end": "2025-03-16 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9eea1931e40a4b998a963d2e7bd39f11"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Attend Local Tech Meetup",
+          "start": "2025-03-16 14:00:00",
+          "end": "2025-03-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e5f1b333d10443d4a59203ceeb7d1956"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting",
+          "start": "2025-03-10 09:00:00",
+          "end": "2025-03-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com",
+            "hr_coordinator@company.com"
+          ],
+          "id": "evt_b2f0ee6752254391b4bd380408682f75"
+        },
+        {
+          "day": "Monday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-10 10:30:00",
+          "end": "2025-03-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e6b0df4cc56141e9bc1fd581800d7ea7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Hiring Manager Check-in",
+          "start": "2025-03-10 13:00:00",
+          "end": "2025-03-10 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com"
+          ],
+          "id": "evt_5431262028104ddc831044cbf8afbf49"
+        },
+        {
+          "day": "Monday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-10 14:30:00",
+          "end": "2025-03-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_33a01914c73c49b1ae64bbcd323efc61"
+        },
+        {
+          "day": "Monday",
+          "summary": "Networking Event - Women in Tech",
+          "start": "2025-03-10 18:30:00",
+          "end": "2025-03-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com"
+          ],
+          "id": "evt_2683f43e4b6f495cbb63bd36b71b7420"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Sourcing Strategy Session",
+          "start": "2025-03-11 09:00:00",
+          "end": "2025-03-11 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "recruiter2@company.com",
+            "recruiter3@company.com"
+          ],
+          "id": "evt_d45f9438bd604d2eb51960219e6e40df"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-11 10:30:00",
+          "end": "2025-03-11 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9b1ed74a603f4c7bbe10ceebf5ad31dc"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Interview Debrief",
+          "start": "2025-03-11 13:00:00",
+          "end": "2025-03-11 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com",
+            "candidate@email.com"
+          ],
+          "id": "evt_6c6a2468a1b04f22ad2f0249027f6dcf"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Schedule Interviews for next week",
+          "start": "2025-03-11 14:30:00",
+          "end": "2025-03-11 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ab20f8f46e9442d1abdab8e67e4462a7"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Virtual Book Club Meeting",
+          "start": "2025-03-11 19:00:00",
+          "end": "2025-03-11 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bookclub_friends@email.com"
+          ],
+          "id": "evt_3feac7749b2d494da9d3c69c0ece9563"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-12 09:00:00",
+          "end": "2025-03-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_fbeab12bc1814fa4a332fc9ba8bd6216"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Application Review",
+          "start": "2025-03-12 10:30:00",
+          "end": "2025-03-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6ef3ebfd429f459b8d92dfb1d8305078"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Pipeline Review Meeting",
+          "start": "2025-03-12 13:00:00",
+          "end": "2025-03-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com"
+          ],
+          "id": "evt_7219dd25ff974d988e3cf556b09e1bba"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Campus Recruiting Presentation Prep",
+          "start": "2025-03-12 14:30:00",
+          "end": "2025-03-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b4cd1cb11ddb429593bc43ca90987a40"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2025-03-12 18:00:00",
+          "end": "2025-03-12 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_644e01dcc8004f44bab21086a275855d"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Interview Debrief",
+          "start": "2025-03-13 09:00:00",
+          "end": "2025-03-13 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com",
+            "candidate@email.com"
+          ],
+          "id": "evt_064dcdc21ac34b79a7e3872ed38b31d7"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-13 10:30:00",
+          "end": "2025-03-13 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_510a46b6beff4649994b42a0ec34ff55"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Hiring Manager 1:1",
+          "start": "2025-03-13 13:00:00",
+          "end": "2025-03-13 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager2@company.com"
+          ],
+          "id": "evt_2ca693bda55a405fbdbe73e2b9f10035"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Update Candidate Tracking System",
+          "start": "2025-03-13 14:30:00",
+          "end": "2025-03-13 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2868e179fc1147d2b6d5ec9ddba5d189"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Meeting - Weekly Updates",
+          "start": "2025-03-14 09:00:00",
+          "end": "2025-03-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com",
+            "hr_coordinator@company.com"
+          ],
+          "id": "evt_53383cb9eb724ef48466669d63f5a010"
+        },
+        {
+          "day": "Friday",
+          "summary": "Final Interview - Senior Engineer",
+          "start": "2025-03-14 10:30:00",
+          "end": "2025-03-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "cto@company.com"
+          ],
+          "id": "evt_2d4fad35ebef4ffb836c8b0975d38986"
+        },
+        {
+          "day": "Friday",
+          "summary": "Offer Discussion",
+          "start": "2025-03-14 13:00:00",
+          "end": "2025-03-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com"
+          ],
+          "id": "evt_d5370fceead7486d904f42237d800269"
+        },
+        {
+          "day": "Friday",
+          "summary": "Follow up with Candidates",
+          "start": "2025-03-14 14:30:00",
+          "end": "2025-03-14 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d200b81d8b2b4dbeb6accd9cbf3c7c99"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2025-03-14 19:00:00",
+          "end": "2025-03-14 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend2@email.com",
+            "friend3@email.com"
+          ],
+          "id": "evt_e73b9d256dc548c69d18f1b0f7ebcd75"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Volunteer at Coding Camp",
+          "start": "2025-03-15 09:00:00",
+          "end": "2025-03-15 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ef73ab7d78cf48cd8657ca05e3337993"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Hike with Hiking Group",
+          "start": "2025-03-15 14:00:00",
+          "end": "2025-03-15 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hiking_group@email.com"
+          ],
+          "id": "evt_3d8455c68752406eb59dc4aed70f99b7"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Family",
+          "start": "2025-03-16 10:00:00",
+          "end": "2025-03-16 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9eea1931e40a4b998a963d2e7bd39f11"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Attend Local Tech Meetup",
+          "start": "2025-03-16 14:00:00",
+          "end": "2025-03-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e5f1b333d10443d4a59203ceeb7d1956"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change team meeting."
+      },
+      {
+        "role": "assistant",
+        "content": "I can help with that. Which team meeting would you like to change? And what changes would you like to make? If you want, I can list your upcoming meetings."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What is on my schedule today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to find all events scheduled for today, which is Monday, March 10, 2025.",
+    "simulated_now": "2025-03-10 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting",
+          "start": "2025-03-10 09:00:00",
+          "end": "2025-03-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com",
+            "hr_coordinator@company.com"
+          ],
+          "id": "evt_6bb420df5ba4467694da9e477ad09fac"
+        },
+        {
+          "day": "Monday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-10 10:30:00",
+          "end": "2025-03-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_44628814ce3f4ed1b789cbcf888b0be9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Hiring Manager Check-in",
+          "start": "2025-03-10 13:00:00",
+          "end": "2025-03-10 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com"
+          ],
+          "id": "evt_d17a91a383cb4c60a76d04c4c4ae5554"
+        },
+        {
+          "day": "Monday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-10 14:30:00",
+          "end": "2025-03-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_a4696ce2e0574760baec1dfac00b8b0d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Networking Event - Women in Tech",
+          "start": "2025-03-10 18:30:00",
+          "end": "2025-03-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com"
+          ],
+          "id": "evt_bc723c12e7ba46899a6e40849a73fe84"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting",
+          "start": "2025-03-10 09:00:00",
+          "end": "2025-03-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com",
+            "hr_coordinator@company.com"
+          ],
+          "id": "evt_6bb420df5ba4467694da9e477ad09fac"
+        },
+        {
+          "day": "Monday",
+          "summary": "Phone Screen Interviews",
+          "start": "2025-03-10 10:30:00",
+          "end": "2025-03-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_44628814ce3f4ed1b789cbcf888b0be9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Hiring Manager Check-in",
+          "start": "2025-03-10 13:00:00",
+          "end": "2025-03-10 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_manager@company.com"
+          ],
+          "id": "evt_d17a91a383cb4c60a76d04c4c4ae5554"
+        },
+        {
+          "day": "Monday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-10 14:30:00",
+          "end": "2025-03-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_a4696ce2e0574760baec1dfac00b8b0d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Networking Event - Women in Tech",
+          "start": "2025-03-10 18:30:00",
+          "end": "2025-03-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com"
+          ],
+          "id": "evt_bc723c12e7ba46899a6e40849a73fe84"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What is on my schedule today?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out the current date and time to identify what \"today\" is. Then, I'll list all the events scheduled for today.\n\nFirst, I'll get the current time.\nThen, I'll list the events for the entire day.\n"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-10 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-03-10 23:59:59",
+          "time_min": "2025-03-10 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_6bb420df5ba4467694da9e477ad09fac | Team Meeting \u2014 Mon 09:00-10:00\nid: evt_44628814ce3f4ed1b789cbcf888b0be9 | Phone Screen Interviews \u2014 Mon 10:30-12:00\nid: evt_d17a91a383cb4c60a76d04c4c4ae5554 | Hiring Manager Check-in \u2014 Mon 13:00-14:00\nid: evt_a4696ce2e0574760baec1dfac00b8b0d | Candidate Interview \u2014 Mon 14:30-16:00\nid: evt_bc723c12e7ba46899a6e40849a73fe84 | Networking Event - Women in Tech \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today, Monday, March 10, 2025, you have five events on your calendar:\n\n*   9:00 AM - 10:00 AM: Team Meeting\n*   10:30 AM - 12:00 PM: Phone Screen Interviews\n*   1:00 PM - 2:00 PM: Hiring Manager Check-in\n*   2:30 PM - 4:00 PM: Candidate Interview\n*   6:30 PM - 8:00 PM: Networking Event - Women in Tech"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to find all events scheduled for tomorrow, which is Wednesday, March 12, 2025.",
+    "simulated_now": "2025-03-11 22:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-12 09:00:00",
+          "end": "2025-03-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_c5719c06036247968a6d4577ac124506"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Application Review",
+          "start": "2025-03-12 10:30:00",
+          "end": "2025-03-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8440e267250340e387747c1be5deb5be"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Pipeline Review Meeting",
+          "start": "2025-03-12 13:00:00",
+          "end": "2025-03-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com"
+          ],
+          "id": "evt_0f5877d88ea244cf861534af79d75d5a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Campus Recruiting Presentation Prep",
+          "start": "2025-03-12 14:30:00",
+          "end": "2025-03-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_61197f73763945babbec3d45020c6cce"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2025-03-12 18:00:00",
+          "end": "2025-03-12 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1145ba0a6a8e47ff845378a963fb9786"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Candidate Interview",
+          "start": "2025-03-12 09:00:00",
+          "end": "2025-03-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "candidate@email.com",
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_c5719c06036247968a6d4577ac124506"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Application Review",
+          "start": "2025-03-12 10:30:00",
+          "end": "2025-03-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8440e267250340e387747c1be5deb5be"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Pipeline Review Meeting",
+          "start": "2025-03-12 13:00:00",
+          "end": "2025-03-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "hr_manager@company.com"
+          ],
+          "id": "evt_0f5877d88ea244cf861534af79d75d5a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Campus Recruiting Presentation Prep",
+          "start": "2025-03-12 14:30:00",
+          "end": "2025-03-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_61197f73763945babbec3d45020c6cce"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2025-03-12 18:00:00",
+          "end": "2025-03-12 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1145ba0a6a8e47ff845378a963fb9786"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing tomorrow?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to determine what \"tomorrow\" is. Then, I will list all events for that day.\n<ctrl42>"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-11 22:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-03-12 23:59:59",
+          "time_min": "2025-03-12 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_c5719c06036247968a6d4577ac124506 | Candidate Interview \u2014 Wed 09:00-10:00\nid: evt_8440e267250340e387747c1be5deb5be | Application Review \u2014 Wed 10:30-12:00\nid: evt_0f5877d88ea244cf861534af79d75d5a | Pipeline Review Meeting \u2014 Wed 13:00-14:00\nid: evt_61197f73763945babbec3d45020c6cce | Campus Recruiting Presentation Prep \u2014 Wed 14:30-16:00\nid: evt_1145ba0a6a8e47ff845378a963fb9786 | Yoga Class \u2014 Wed 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Tomorrow, you have 5 events scheduled:\n- Candidate Interview from 9:00 to 10:00\n- Application Review from 10:30 to 12:00\n- Pipeline Review Meeting from 13:00 to 14:00\n- Campus Recruiting Presentation Prep from 14:30 to 16:00\n- Yoga Class from 18:00 to 19:00"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

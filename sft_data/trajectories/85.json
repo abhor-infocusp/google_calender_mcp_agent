@@ -1,0 +1,1912 @@
+[
+  {
+    "query": "Schedule a meeting for Friday to discuss Q3 goals at 11 AM for 30 minutes.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "The agent should create a new event on Friday, June 21, 2024, at 11 AM for 30 minutes. The title should be 'Discuss Q3 goals'.",
+    "simulated_now": "2024-06-16 23:59:59",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Review client files",
+          "start": "2024-06-21 09:00:00",
+          "end": "2024-06-21 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4e64acbc329d47da81e5d2b6f62e5ca6"
+        },
+        {
+          "day": "Friday",
+          "summary": "Catch up on emails",
+          "start": "2024-06-21 10:00:00",
+          "end": "2024-06-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5bae40f201de454786373ae59e029127"
+        },
+        {
+          "day": "Friday",
+          "summary": "Team Lunch",
+          "start": "2024-06-21 13:00:00",
+          "end": "2024-06-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9c7748158b2e472f9be16b6027027ec6"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan next week's meetings",
+          "start": "2024-06-21 15:00:00",
+          "end": "2024-06-21 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_98a7fcceb69d4fefa0cb073cd9c19524"
+        },
+        {
+          "day": "Friday",
+          "summary": "Family Movie Night",
+          "start": "2024-06-21 19:00:00",
+          "end": "2024-06-21 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5714d56103974d09828e0008d8c229b1"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Review client files",
+          "start": "2024-06-21 09:00:00",
+          "end": "2024-06-21 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4e64acbc329d47da81e5d2b6f62e5ca6"
+        },
+        {
+          "day": "Friday",
+          "summary": "Catch up on emails",
+          "start": "2024-06-21 10:00:00",
+          "end": "2024-06-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5bae40f201de454786373ae59e029127"
+        },
+        {
+          "day": "Friday",
+          "summary": "Q3 Goals",
+          "start": "2024-06-21 11:00:00",
+          "end": "2024-06-21 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d771caee1498444d8f755cc71ebff9a8"
+        },
+        {
+          "day": "Friday",
+          "summary": "Team Lunch",
+          "start": "2024-06-21 13:00:00",
+          "end": "2024-06-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9c7748158b2e472f9be16b6027027ec6"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan next week's meetings",
+          "start": "2024-06-21 15:00:00",
+          "end": "2024-06-21 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_98a7fcceb69d4fefa0cb073cd9c19524"
+        },
+        {
+          "day": "Friday",
+          "summary": "Family Movie Night",
+          "start": "2024-06-21 19:00:00",
+          "end": "2024-06-21 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5714d56103974d09828e0008d8c229b1"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Schedule a meeting for Friday to discuss Q3 goals at 11 AM for 30 minutes."
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to determine the date of the upcoming Friday. Then, I will create a 30-minute event on that Friday at 11 AM with the title \"Q3 Goals\"."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-16 23:59:59 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will now create the event for Friday, June 21, 2024, at 11:00 AM for 30 minutes to discuss Q3 goals."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Q3 Goals",
+          "end": "2024-06-21 11:30:00",
+          "start": "2024-06-21 11:00:00"
+        },
+        "result": "Event created successfully.\nQ3 Goals\n  ID: evt_d771caee1498444d8f755cc71ebff9a8\n  Time: Fri Jun 21, 11:00 - 11:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've scheduled \"Q3 Goals\" for this Friday, June 21, from 11:00 AM to 11:30 AM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing right before dinner with friends on Wednesday?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should identify the 'Dinner with Friends' event on Wednesday, find the immediately preceding event ('Professional Development Webinar - Tax Law Changes'), and then provide details about that earlier event.",
+    "simulated_now": "2024-06-16 23:59:59",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Follow up from yesterday's meeting with Financial Advisor",
+          "start": "2024-06-19 09:00:00",
+          "end": "2024-06-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d85ce3fe3fc0410fb824adc56c3e2c11"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Business Tax Returns",
+          "start": "2024-06-19 10:00:00",
+          "end": "2024-06-19 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6f68685d56ae482891789e6c2ae95843"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Professional Development Webinar - Tax Law Changes",
+          "start": "2024-06-19 14:00:00",
+          "end": "2024-06-19 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "webinar host"
+          ],
+          "id": "evt_e491714856994698a52aae99c478b3ef"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Friends",
+          "start": "2024-06-19 18:30:00",
+          "end": "2024-06-19 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_84eac41f44a44ab2951966300b7c578a"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Follow up from yesterday's meeting with Financial Advisor",
+          "start": "2024-06-19 09:00:00",
+          "end": "2024-06-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d85ce3fe3fc0410fb824adc56c3e2c11"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Business Tax Returns",
+          "start": "2024-06-19 10:00:00",
+          "end": "2024-06-19 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6f68685d56ae482891789e6c2ae95843"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Professional Development Webinar - Tax Law Changes",
+          "start": "2024-06-19 14:00:00",
+          "end": "2024-06-19 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "webinar host"
+          ],
+          "id": "evt_e491714856994698a52aae99c478b3ef"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Friends",
+          "start": "2024-06-19 18:30:00",
+          "end": "2024-06-19 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_84eac41f44a44ab2951966300b7c578a"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing right before dinner with friends on Wednesday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out what you're doing before your \"dinner with friends\" on Wednesday. First, I'll get the current time to determine the correct date for this coming Wednesday. Then, I'll list all the events on that day to find the event you're asking about and the one immediately preceding it."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-16 23:59:59 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "Now that I know the current date, I'll search for events on the upcoming Wednesday, which is June 19th, 2024."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-06-19 00:00:00",
+          "time_max": "2024-06-19 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_d85ce3fe3fc0410fb824adc56c3e2c11 | Follow up from yesterday's meeting with Financial Advisor \u2014 Wed 09:00-10:00\nid: evt_6f68685d56ae482891789e6c2ae95843 | Prepare Business Tax Returns \u2014 Wed 10:00-12:00\nid: evt_e491714856994698a52aae99c478b3ef | Professional Development Webinar - Tax Law Changes \u2014 Wed 14:00-16:00\nid: evt_84eac41f44a44ab2951966300b7c578a | Dinner with Friends \u2014 Wed 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Before your \"Dinner with Friends\" at 6:30 PM, you have a \"Professional Development Webinar - Tax Law Changes\" from 2:00 PM to 4:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the Tax Planning for Retirement meeting on Tuesday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should find the 'Client Meeting - Tax Planning for Retirement' event on Tuesday, June 18, 2024, and respond with the attendee list, which includes Jane Doe.",
+    "simulated_now": "2024-06-16 23:59:59",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Respond to client emails",
+          "start": "2024-06-18 09:00:00",
+          "end": "2024-06-18 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7f478ec8ce8e49a48fdf565629564d4f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work on complex tax return",
+          "start": "2024-06-18 10:00:00",
+          "end": "2024-06-18 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8732f7f6ddc54497bb603d89a0b5a5e5"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lunch with a colleague to discuss work life balance",
+          "start": "2024-06-18 13:00:00",
+          "end": "2024-06-18 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6737b5d59ecc4e8394b952c8dd16dcfc"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Meeting - Tax Planning for Retirement",
+          "start": "2024-06-18 14:30:00",
+          "end": "2024-06-18 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.doe@email.com"
+          ],
+          "id": "evt_5727d111e22a48c29f58ed9d9e50e601"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Association Meeting",
+          "start": "2024-06-18 19:00:00",
+          "end": "2024-06-18 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a19539f158094deaacf7ead6719c35ed"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Respond to client emails",
+          "start": "2024-06-18 09:00:00",
+          "end": "2024-06-18 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7f478ec8ce8e49a48fdf565629564d4f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work on complex tax return",
+          "start": "2024-06-18 10:00:00",
+          "end": "2024-06-18 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8732f7f6ddc54497bb603d89a0b5a5e5"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lunch with a colleague to discuss work life balance",
+          "start": "2024-06-18 13:00:00",
+          "end": "2024-06-18 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6737b5d59ecc4e8394b952c8dd16dcfc"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Meeting - Tax Planning for Retirement",
+          "start": "2024-06-18 14:30:00",
+          "end": "2024-06-18 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.doe@email.com"
+          ],
+          "id": "evt_5727d111e22a48c29f58ed9d9e50e601"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Association Meeting",
+          "start": "2024-06-18 19:00:00",
+          "end": "2024-06-18 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a19539f158094deaacf7ead6719c35ed"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the Tax Planning for Retirement meeting on Tuesday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-16 23:59:59 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-06-18 00:00:00",
+          "time_max": "2024-06-18 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_7f478ec8ce8e49a48fdf565629564d4f | Respond to client emails \u2014 Tue 09:00-10:00\nid: evt_8732f7f6ddc54497bb603d89a0b5a5e5 | Work on complex tax return \u2014 Tue 10:00-12:00\nid: evt_6737b5d59ecc4e8394b952c8dd16dcfc | Lunch with a colleague to discuss work life balance \u2014 Tue 13:00-14:00\nid: evt_5727d111e22a48c29f58ed9d9e50e601 | Client Meeting - Tax Planning for Retirement \u2014 Tue 14:30-16:00\nid: evt_a19539f158094deaacf7ead6719c35ed | Parent-Teacher Association Meeting \u2014 Tue 19:00-20:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_5727d111e22a48c29f58ed9d9e50e601"
+        },
+        "result": "Client Meeting - Tax Planning for Retirement\n  ID: evt_5727d111e22a48c29f58ed9d9e50e601\n  Time: Tue Jun 18, 14:30 - 16:00\n  Attendees: jane.doe@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "The Tax Planning for Retirement meeting is attended by jane.doe@email.com."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is my team meeting this week?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should search for any event with 'Team Meeting' in the title this week and then provide the date and time of the event, which is Monday, June 17, 2024, at 1:00 PM.",
+    "simulated_now": "2024-06-16 23:59:59",
+    "addressed_days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Reviewing Q3 Business Expenses",
+          "start": "2024-06-17 09:00:00",
+          "end": "2024-06-17 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.smith@email.com"
+          ],
+          "id": "evt_6b65414332174af4987b57d331efa49b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Prepare Individual Tax Returns - Focus on itemized deductions",
+          "start": "2024-06-17 10:45:00",
+          "end": "2024-06-17 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_00c811fcd6514326b8c38c2a2d1039c7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Discussing New Tax Law Updates",
+          "start": "2024-06-17 13:00:00",
+          "end": "2024-06-17 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6e2a3e2a59014dbf84625d151720421c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call with Financial Advisor - Clarify client investment income",
+          "start": "2024-06-17 15:00:00",
+          "end": "2024-06-17 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@email.com"
+          ],
+          "id": "evt_e7c009f93e7544a6a1d43d093df9ec28"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2024-06-17 18:00:00",
+          "end": "2024-06-17 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_19c4526fd2c74685848f1a376bb040dc"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Respond to client emails",
+          "start": "2024-06-18 09:00:00",
+          "end": "2024-06-18 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_50cb5f72a7fb488ebc44e4727a0a7dea"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work on complex tax return",
+          "start": "2024-06-18 10:00:00",
+          "end": "2024-06-18 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c8b1dd515c9a447da2a7dc4ca6b30ce2"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lunch with a colleague to discuss work life balance",
+          "start": "2024-06-18 13:00:00",
+          "end": "2024-06-18 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_59c8516c3f6e4f22945b2d8329b51bbd"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Meeting - Tax Planning for Retirement",
+          "start": "2024-06-18 14:30:00",
+          "end": "2024-06-18 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.doe@email.com"
+          ],
+          "id": "evt_f8c215f59008491183c981c28c2a9c59"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Association Meeting",
+          "start": "2024-06-18 19:00:00",
+          "end": "2024-06-18 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4bad3c3c711d48f9bb92414ab7cf8c83"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Follow up from yesterday's meeting with Financial Advisor",
+          "start": "2024-06-19 09:00:00",
+          "end": "2024-06-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d25dbafb818a49ff9f2504a5042f8766"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Business Tax Returns",
+          "start": "2024-06-19 10:00:00",
+          "end": "2024-06-19 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1d66d980f2c84fdb9fbbf4a061dad6cb"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Professional Development Webinar - Tax Law Changes",
+          "start": "2024-06-19 14:00:00",
+          "end": "2024-06-19 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "webinar host"
+          ],
+          "id": "evt_52dfb6bfc2824612b83786d62d93aa35"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Friends",
+          "start": "2024-06-19 18:30:00",
+          "end": "2024-06-19 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_10f40988d3f94e8494fefaea36bb5252"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Client Meeting - Discuss estimated tax payments",
+          "start": "2024-06-20 09:00:00",
+          "end": "2024-06-20 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "robert.brown@email.com"
+          ],
+          "id": "evt_dfbd837c9d2b40098cc6ceb384e85010"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Review Tax Law Research",
+          "start": "2024-06-20 11:00:00",
+          "end": "2024-06-20 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b51c778b80ce4294930de4f5c7e8ae11"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Prepare Individual Tax Returns",
+          "start": "2024-06-20 13:30:00",
+          "end": "2024-06-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_14e90dbdb9ea4b628c8a27494d50b87f"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Tax Partner - Discussing a complex tax issue",
+          "start": "2024-06-20 15:30:00",
+          "end": "2024-06-20 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d66cfad1b5b84f43812ed9bd8462e33c"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Review client files",
+          "start": "2024-06-21 09:00:00",
+          "end": "2024-06-21 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_23e45f8f332e446491fc016e10c139b5"
+        },
+        {
+          "day": "Friday",
+          "summary": "Catch up on emails",
+          "start": "2024-06-21 10:00:00",
+          "end": "2024-06-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2f1dfc32db65420b9cf05700282ebf98"
+        },
+        {
+          "day": "Friday",
+          "summary": "Team Lunch",
+          "start": "2024-06-21 13:00:00",
+          "end": "2024-06-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_398a4ea5eb7e40adb7e5030b7cc5eab9"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan next week's meetings",
+          "start": "2024-06-21 15:00:00",
+          "end": "2024-06-21 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6193e67078de4b3488dab1863632ad4f"
+        },
+        {
+          "day": "Friday",
+          "summary": "Family Movie Night",
+          "start": "2024-06-21 19:00:00",
+          "end": "2024-06-21 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_731f4b15323944c9a973baffa651a0fd"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Kid's birthday party",
+          "start": "2024-06-22 10:00:00",
+          "end": "2024-06-22 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "other parents"
+          ],
+          "id": "evt_49a0e0c856344ee1b50cb255ae221ef0"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2024-06-22 13:00:00",
+          "end": "2024-06-22 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e70c38c275c0476ba973a7edf85b65b3"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner at parents' house",
+          "start": "2024-06-22 18:00:00",
+          "end": "2024-06-22 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fb6e815c1e3a4a4e8cd275986ce62fee"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Call with sibling",
+          "start": "2024-06-23 10:00:00",
+          "end": "2024-06-23 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_03c41b6d8e684d3dbba2167a3a7f111e"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Family time in the park",
+          "start": "2024-06-23 12:00:00",
+          "end": "2024-06-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c5698dd7d735420b964f5a1bc04fc3bc"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Plan next week's meals",
+          "start": "2024-06-23 16:00:00",
+          "end": "2024-06-23 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fbb10d6ed7224c489611beafdf8e436e"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Reviewing Q3 Business Expenses",
+          "start": "2024-06-17 09:00:00",
+          "end": "2024-06-17 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.smith@email.com"
+          ],
+          "id": "evt_6b65414332174af4987b57d331efa49b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Prepare Individual Tax Returns - Focus on itemized deductions",
+          "start": "2024-06-17 10:45:00",
+          "end": "2024-06-17 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_00c811fcd6514326b8c38c2a2d1039c7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Discussing New Tax Law Updates",
+          "start": "2024-06-17 13:00:00",
+          "end": "2024-06-17 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6e2a3e2a59014dbf84625d151720421c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call with Financial Advisor - Clarify client investment income",
+          "start": "2024-06-17 15:00:00",
+          "end": "2024-06-17 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@email.com"
+          ],
+          "id": "evt_e7c009f93e7544a6a1d43d093df9ec28"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2024-06-17 18:00:00",
+          "end": "2024-06-17 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_19c4526fd2c74685848f1a376bb040dc"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Respond to client emails",
+          "start": "2024-06-18 09:00:00",
+          "end": "2024-06-18 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_50cb5f72a7fb488ebc44e4727a0a7dea"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work on complex tax return",
+          "start": "2024-06-18 10:00:00",
+          "end": "2024-06-18 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c8b1dd515c9a447da2a7dc4ca6b30ce2"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lunch with a colleague to discuss work life balance",
+          "start": "2024-06-18 13:00:00",
+          "end": "2024-06-18 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_59c8516c3f6e4f22945b2d8329b51bbd"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Meeting - Tax Planning for Retirement",
+          "start": "2024-06-18 14:30:00",
+          "end": "2024-06-18 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.doe@email.com"
+          ],
+          "id": "evt_f8c215f59008491183c981c28c2a9c59"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Association Meeting",
+          "start": "2024-06-18 19:00:00",
+          "end": "2024-06-18 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4bad3c3c711d48f9bb92414ab7cf8c83"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Follow up from yesterday's meeting with Financial Advisor",
+          "start": "2024-06-19 09:00:00",
+          "end": "2024-06-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d25dbafb818a49ff9f2504a5042f8766"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Business Tax Returns",
+          "start": "2024-06-19 10:00:00",
+          "end": "2024-06-19 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1d66d980f2c84fdb9fbbf4a061dad6cb"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Professional Development Webinar - Tax Law Changes",
+          "start": "2024-06-19 14:00:00",
+          "end": "2024-06-19 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "webinar host"
+          ],
+          "id": "evt_52dfb6bfc2824612b83786d62d93aa35"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Friends",
+          "start": "2024-06-19 18:30:00",
+          "end": "2024-06-19 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_10f40988d3f94e8494fefaea36bb5252"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Client Meeting - Discuss estimated tax payments",
+          "start": "2024-06-20 09:00:00",
+          "end": "2024-06-20 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "robert.brown@email.com"
+          ],
+          "id": "evt_dfbd837c9d2b40098cc6ceb384e85010"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Review Tax Law Research",
+          "start": "2024-06-20 11:00:00",
+          "end": "2024-06-20 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b51c778b80ce4294930de4f5c7e8ae11"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Prepare Individual Tax Returns",
+          "start": "2024-06-20 13:30:00",
+          "end": "2024-06-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_14e90dbdb9ea4b628c8a27494d50b87f"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Tax Partner - Discussing a complex tax issue",
+          "start": "2024-06-20 15:30:00",
+          "end": "2024-06-20 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d66cfad1b5b84f43812ed9bd8462e33c"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Review client files",
+          "start": "2024-06-21 09:00:00",
+          "end": "2024-06-21 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_23e45f8f332e446491fc016e10c139b5"
+        },
+        {
+          "day": "Friday",
+          "summary": "Catch up on emails",
+          "start": "2024-06-21 10:00:00",
+          "end": "2024-06-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2f1dfc32db65420b9cf05700282ebf98"
+        },
+        {
+          "day": "Friday",
+          "summary": "Team Lunch",
+          "start": "2024-06-21 13:00:00",
+          "end": "2024-06-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_398a4ea5eb7e40adb7e5030b7cc5eab9"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan next week's meetings",
+          "start": "2024-06-21 15:00:00",
+          "end": "2024-06-21 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6193e67078de4b3488dab1863632ad4f"
+        },
+        {
+          "day": "Friday",
+          "summary": "Family Movie Night",
+          "start": "2024-06-21 19:00:00",
+          "end": "2024-06-21 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_731f4b15323944c9a973baffa651a0fd"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Kid's birthday party",
+          "start": "2024-06-22 10:00:00",
+          "end": "2024-06-22 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "other parents"
+          ],
+          "id": "evt_49a0e0c856344ee1b50cb255ae221ef0"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2024-06-22 13:00:00",
+          "end": "2024-06-22 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e70c38c275c0476ba973a7edf85b65b3"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner at parents' house",
+          "start": "2024-06-22 18:00:00",
+          "end": "2024-06-22 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fb6e815c1e3a4a4e8cd275986ce62fee"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Call with sibling",
+          "start": "2024-06-23 10:00:00",
+          "end": "2024-06-23 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_03c41b6d8e684d3dbba2167a3a7f111e"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Family time in the park",
+          "start": "2024-06-23 12:00:00",
+          "end": "2024-06-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c5698dd7d735420b964f5a1bc04fc3bc"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Plan next week's meals",
+          "start": "2024-06-23 16:00:00",
+          "end": "2024-06-23 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fbb10d6ed7224c489611beafdf8e436e"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is my team meeting this week?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify the beginning and end of the current week. Then, I will search for events with \"team meeting\" in the title within this week and provide you with the result."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-16 23:59:59 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-06-16 23:59:59",
+          "time_max": "2024-06-23 23:59:59"
+        },
+        "result": "Found 29 events:\nid: evt_6b65414332174af4987b57d331efa49b | Client Meeting - Reviewing Q3 Business Expenses \u2014 Mon 09:00-10:30\nid: evt_00c811fcd6514326b8c38c2a2d1039c7 | Prepare Individual Tax Returns - Focus on itemized deductions \u2014 Mon 10:45-12:00\nid: evt_6e2a3e2a59014dbf84625d151720421c | Team Meeting - Discussing New Tax Law Updates \u2014 Mon 13:00-14:00\nid: evt_e7c009f93e7544a6a1d43d093df9ec28 | Call with Financial Advisor - Clarify client investment income \u2014 Mon 15:00-16:00\nid: evt_19c4526fd2c74685848f1a376bb040dc | Kids' Soccer Practice \u2014 Mon 18:00-19:30\nid: evt_50cb5f72a7fb488ebc44e4727a0a7dea | Respond to client emails \u2014 Tue 09:00-10:00\nid: evt_c8b1dd515c9a447da2a7dc4ca6b30ce2 | Work on complex tax return \u2014 Tue 10:00-12:00\nid: evt_59c8516c3f6e4f22945b2d8329b51bbd | Lunch with a colleague to discuss work life balance \u2014 Tue 13:00-14:00\nid: evt_f8c215f59008491183c981c28c2a9c59 | Client Meeting - Tax Planning for Retirement \u2014 Tue 14:30-16:00\nid: evt_4bad3c3c711d48f9bb92414ab7cf8c83 | Parent-Teacher Association Meeting \u2014 Tue 19:00-20:00\nid: evt_d25dbafb818a49ff9f2504a5042f8766 | Follow up from yesterday's meeting with Financial Advisor \u2014 Wed 09:00-10:00\nid: evt_1d66d980f2c84fdb9fbbf4a061dad6cb | Prepare Business Tax Returns \u2014 Wed 10:00-12:00\nid: evt_52dfb6bfc2824612b83786d62d93aa35 | Professional Development Webinar - Tax Law Changes \u2014 Wed 14:00-16:00\nid: evt_10f40988d3f94e8494fefaea36bb5252 | Dinner with Friends \u2014 Wed 18:30-20:00\nid: evt_dfbd837c9d2b40098cc6ceb384e85010 | Client Meeting - Discuss estimated tax payments \u2014 Thu 09:00-10:30\nid: evt_b51c778b80ce4294930de4f5c7e8ae11 | Review Tax Law Research \u2014 Thu 11:00-12:00\nid: evt_14e90dbdb9ea4b628c8a27494d50b87f | Prepare Individual Tax Returns \u2014 Thu 13:30-15:00\nid: evt_d66cfad1b5b84f43812ed9bd8462e33c | Meeting with Tax Partner - Discussing a complex tax issue \u2014 Thu 15:30-16:30\nid: evt_23e45f8f332e446491fc016e10c139b5 | Review client files \u2014 Fri 09:00-10:00\nid: evt_2f1dfc32db65420b9cf05700282ebf98 | Catch up on emails \u2014 Fri 10:00-12:00\nid: evt_398a4ea5eb7e40adb7e5030b7cc5eab9 | Team Lunch \u2014 Fri 13:00-14:00\nid: evt_6193e67078de4b3488dab1863632ad4f | Plan next week's meetings \u2014 Fri 15:00-16:00\nid: evt_731f4b15323944c9a973baffa651a0fd | Family Movie Night \u2014 Fri 19:00-21:00\nid: evt_49a0e0c856344ee1b50cb255ae221ef0 | Kid's birthday party \u2014 Sat 10:00-12:00\nid: evt_e70c38c275c0476ba973a7edf85b65b3 | Grocery Shopping \u2014 Sat 13:00-15:00\nid: evt_fb6e815c1e3a4a4e8cd275986ce62fee | Dinner at parents' house \u2014 Sat 18:00-20:00\nid: evt_03c41b6d8e684d3dbba2167a3a7f111e | Call with sibling \u2014 Sun 10:00-11:00\nid: evt_c5698dd7d735420b964f5a1bc04fc3bc | Family time in the park \u2014 Sun 12:00-14:00\nid: evt_fbb10d6ed7224c489611beafdf8e436e | Plan next week's meals \u2014 Sun 16:00-17:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Your team meeting is on Monday from 13:00 to 14:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "I can't make the parent-teacher association meeting on Tuesday. Decline it.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should find the 'Parent-Teacher Association Meeting' event on Tuesday, June 18, 2024, and respond to the event with 'DECLINE'.",
+    "simulated_now": "2024-06-16 23:59:59",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Respond to client emails",
+          "start": "2024-06-18 09:00:00",
+          "end": "2024-06-18 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3939616e004b44a2aa1936256e599bec"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work on complex tax return",
+          "start": "2024-06-18 10:00:00",
+          "end": "2024-06-18 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ba2350123dda4edc99275da8484915e3"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lunch with a colleague to discuss work life balance",
+          "start": "2024-06-18 13:00:00",
+          "end": "2024-06-18 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_495bc724f5b340b6a8b94554e49c5967"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Meeting - Tax Planning for Retirement",
+          "start": "2024-06-18 14:30:00",
+          "end": "2024-06-18 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.doe@email.com"
+          ],
+          "id": "evt_2619b0dbd9df4e15b9d32a352451b87e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Association Meeting",
+          "start": "2024-06-18 19:00:00",
+          "end": "2024-06-18 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c01a6d6c7d7e42699ab7e7b292b66b5a"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Respond to client emails",
+          "start": "2024-06-18 09:00:00",
+          "end": "2024-06-18 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3939616e004b44a2aa1936256e599bec"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work on complex tax return",
+          "start": "2024-06-18 10:00:00",
+          "end": "2024-06-18 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ba2350123dda4edc99275da8484915e3"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lunch with a colleague to discuss work life balance",
+          "start": "2024-06-18 13:00:00",
+          "end": "2024-06-18 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_495bc724f5b340b6a8b94554e49c5967"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Meeting - Tax Planning for Retirement",
+          "start": "2024-06-18 14:30:00",
+          "end": "2024-06-18 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.doe@email.com"
+          ],
+          "id": "evt_2619b0dbd9df4e15b9d32a352451b87e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Association Meeting",
+          "start": "2024-06-18 19:00:00",
+          "end": "2024-06-18 20:00:00",
+          "attending": "DECLINE",
+          "attendees": [],
+          "id": "evt_c01a6d6c7d7e42699ab7e7b292b66b5a"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "I can't make the parent-teacher association meeting on Tuesday. Decline it."
+      },
+      {
+        "role": "assistant",
+        "content": "I will start by getting the current time to identify the date of the upcoming Tuesday. Then, I will list all events on that day to find the \"parent-teacher association meeting\", and decline it using its ID. Finally, I will confirm that the event has been declined."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-16 23:59:59 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "Now that I know today's date, I'll search for the parent-teacher association meeting on Tuesday, June 18th."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-06-18 23:59:59",
+          "time_min": "2024-06-18 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_3939616e004b44a2aa1936256e599bec | Respond to client emails \u2014 Tue 09:00-10:00\nid: evt_ba2350123dda4edc99275da8484915e3 | Work on complex tax return \u2014 Tue 10:00-12:00\nid: evt_495bc724f5b340b6a8b94554e49c5967 | Lunch with a colleague to discuss work life balance \u2014 Tue 13:00-14:00\nid: evt_2619b0dbd9df4e15b9d32a352451b87e | Client Meeting - Tax Planning for Retirement \u2014 Tue 14:30-16:00\nid: evt_c01a6d6c7d7e42699ab7e7b292b66b5a | Parent-Teacher Association Meeting \u2014 Tue 19:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I've found the \"Parent-Teacher Association Meeting\" on Tuesday, June 18th. I will now decline it for you."
+      },
+      {
+        "role": "tool_call",
+        "name": "respond_to_event",
+        "args": {
+          "event_id": "evt_c01a6d6c7d7e42699ab7e7b292b66b5a",
+          "attending": "DECLINE"
+        },
+        "result": "RSVP updated to DECLINE.\nParent-Teacher Association Meeting\n  ID: evt_c01a6d6c7d7e42699ab7e7b292b66b5a\n  Time: Tue Jun 18, 19:00 - 20:00\n  RSVP: DECLINE"
+      },
+      {
+        "role": "assistant",
+        "content": "I have declined the Parent-Teacher Association Meeting on your behalf. Is there anything else?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule the Q3 Business Expenses review on Monday for 30 minutes later.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should find the 'Client Meeting - Reviewing Q3 Business Expenses' event on Monday, June 17, 2024, and update its start time to 9:30 AM, keeping the duration the same.",
+    "simulated_now": "2024-06-16 23:59:59",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Reviewing Q3 Business Expenses",
+          "start": "2024-06-17 09:00:00",
+          "end": "2024-06-17 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.smith@email.com"
+          ],
+          "id": "evt_3c670c4bcbb74dc7800cff2862aa8f55"
+        },
+        {
+          "day": "Monday",
+          "summary": "Prepare Individual Tax Returns - Focus on itemized deductions",
+          "start": "2024-06-17 10:45:00",
+          "end": "2024-06-17 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d45679a0aff542d08983d6339c6b2552"
+        },
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Discussing New Tax Law Updates",
+          "start": "2024-06-17 13:00:00",
+          "end": "2024-06-17 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a22530a0570040ae86239c09599e6fa1"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call with Financial Advisor - Clarify client investment income",
+          "start": "2024-06-17 15:00:00",
+          "end": "2024-06-17 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@email.com"
+          ],
+          "id": "evt_d59983c44b2d4fada28a12afb6fe3469"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2024-06-17 18:00:00",
+          "end": "2024-06-17 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_88574f618ce542b7a6f9def56fe621fc"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Reviewing Q3 Business Expenses",
+          "start": "2024-06-17 09:30:00",
+          "end": "2024-06-17 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.smith@email.com"
+          ],
+          "id": "evt_3c670c4bcbb74dc7800cff2862aa8f55"
+        },
+        {
+          "day": "Monday",
+          "summary": "Prepare Individual Tax Returns - Focus on itemized deductions",
+          "start": "2024-06-17 10:45:00",
+          "end": "2024-06-17 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d45679a0aff542d08983d6339c6b2552"
+        },
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Discussing New Tax Law Updates",
+          "start": "2024-06-17 13:00:00",
+          "end": "2024-06-17 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a22530a0570040ae86239c09599e6fa1"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call with Financial Advisor - Clarify client investment income",
+          "start": "2024-06-17 15:00:00",
+          "end": "2024-06-17 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@email.com"
+          ],
+          "id": "evt_d59983c44b2d4fada28a12afb6fe3469"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2024-06-17 18:00:00",
+          "end": "2024-06-17 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_88574f618ce542b7a6f9def56fe621fc"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule the Q3 Business Expenses review on Monday for 30 minutes later."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I'll reschedule the Q3 Business Expenses review on Monday for 30 minutes later. First, I need to get the current time to identify the correct Monday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-16 23:59:59 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "Got it. Next, I'll list the events on Monday, June 17th, to find the review."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-06-17 00:00:00",
+          "time_max": "2024-06-17 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_3c670c4bcbb74dc7800cff2862aa8f55 | Client Meeting - Reviewing Q3 Business Expenses \u2014 Mon 09:00-10:30\nid: evt_d45679a0aff542d08983d6339c6b2552 | Prepare Individual Tax Returns - Focus on itemized deductions \u2014 Mon 10:45-12:00\nid: evt_a22530a0570040ae86239c09599e6fa1 | Team Meeting - Discussing New Tax Law Updates \u2014 Mon 13:00-14:00\nid: evt_d59983c44b2d4fada28a12afb6fe3469 | Call with Financial Advisor - Clarify client investment income \u2014 Mon 15:00-16:00\nid: evt_88574f618ce542b7a6f9def56fe621fc | Kids' Soccer Practice \u2014 Mon 18:00-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "I've found the event, \"Client Meeting - Reviewing Q3 Business Expenses,\" scheduled from 9:00 AM to 10:30 AM on Monday. I will now reschedule it to 9:30 AM - 11:00 AM."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_3c670c4bcbb74dc7800cff2862aa8f55",
+          "start": "2024-06-17 09:30:00",
+          "end": "2024-06-17 11:00:00"
+        },
+        "result": "Event updated successfully.\nClient Meeting - Reviewing Q3 Business Expenses\n  ID: evt_3c670c4bcbb74dc7800cff2862aa8f55\n  Time: Mon Jun 17, 09:30 - 11:00\n  Attendees: john.smith@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've rescheduled the \"Client Meeting - Reviewing Q3 Business Expenses\" to Monday at 9:30 AM - 11:00 AM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "dinner Wednesday?",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should search for events on Wednesday, June 19, 2024, containing the word 'dinner', and respond with the event named 'Dinner with Friends'.",
+    "simulated_now": "2024-06-16 23:59:59",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Follow up from yesterday's meeting with Financial Advisor",
+          "start": "2024-06-19 09:00:00",
+          "end": "2024-06-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_eeccddbe606c42b68e4690a840e9e9fb"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Business Tax Returns",
+          "start": "2024-06-19 10:00:00",
+          "end": "2024-06-19 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4a4df53c22f74201bb6ad4f7558c6210"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Professional Development Webinar - Tax Law Changes",
+          "start": "2024-06-19 14:00:00",
+          "end": "2024-06-19 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "webinar host"
+          ],
+          "id": "evt_f729e44aa18a40919e4fc919fc7dd6be"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Friends",
+          "start": "2024-06-19 18:30:00",
+          "end": "2024-06-19 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_36a9bcb0b21846a49c5aa441c4d56692"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Follow up from yesterday's meeting with Financial Advisor",
+          "start": "2024-06-19 09:00:00",
+          "end": "2024-06-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_eeccddbe606c42b68e4690a840e9e9fb"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Business Tax Returns",
+          "start": "2024-06-19 10:00:00",
+          "end": "2024-06-19 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4a4df53c22f74201bb6ad4f7558c6210"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Professional Development Webinar - Tax Law Changes",
+          "start": "2024-06-19 14:00:00",
+          "end": "2024-06-19 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "webinar host"
+          ],
+          "id": "evt_f729e44aa18a40919e4fc919fc7dd6be"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Friends",
+          "start": "2024-06-19 18:30:00",
+          "end": "2024-06-19 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_36a9bcb0b21846a49c5aa441c4d56692"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "dinner Wednesday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-16 23:59:59 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-06-19 23:59:59",
+          "time_min": "2024-06-19 00:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_eeccddbe606c42b68e4690a840e9e9fb | Follow up from yesterday's meeting with Financial Advisor \u2014 Wed 09:00-10:00\nid: evt_4a4df53c22f74201bb6ad4f7558c6210 | Prepare Business Tax Returns \u2014 Wed 10:00-12:00\nid: evt_f729e44aa18a40919e4fc919fc7dd6be | Professional Development Webinar - Tax Law Changes \u2014 Wed 14:00-16:00\nid: evt_36a9bcb0b21846a49c5aa441c4d56692 | Dinner with Friends \u2014 Wed 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I see you already have a \"Dinner with Friends\" scheduled for Wednesday from 6:30 PM to 8:00 PM. Are you looking to schedule another dinner?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "reschedule robert brown meeting",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should find the 'Client Meeting - Discuss estimated tax payments' event with Robert Brown on Thursday, June 20, 2024, and prompt the user for the new desired time.",
+    "simulated_now": "2024-06-16 23:59:59",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Client Meeting - Discuss estimated tax payments",
+          "start": "2024-06-20 09:00:00",
+          "end": "2024-06-20 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "robert.brown@email.com"
+          ],
+          "id": "evt_d6a643cbe634466f9317b88646dbd638"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Review Tax Law Research",
+          "start": "2024-06-20 11:00:00",
+          "end": "2024-06-20 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_256fa142d1cc407eab1078324200a8e5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Prepare Individual Tax Returns",
+          "start": "2024-06-20 13:30:00",
+          "end": "2024-06-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_addd2ca85bb0422e8c3cbea42b7c4e4d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Tax Partner - Discussing a complex tax issue",
+          "start": "2024-06-20 15:30:00",
+          "end": "2024-06-20 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_036a5c4223334ec9858dba8b26aa1e57"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Client Meeting - Discuss estimated tax payments",
+          "start": "2024-06-20 09:00:00",
+          "end": "2024-06-20 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "robert.brown@email.com"
+          ],
+          "id": "evt_d6a643cbe634466f9317b88646dbd638"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Review Tax Law Research",
+          "start": "2024-06-20 11:00:00",
+          "end": "2024-06-20 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_256fa142d1cc407eab1078324200a8e5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Prepare Individual Tax Returns",
+          "start": "2024-06-20 13:30:00",
+          "end": "2024-06-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_addd2ca85bb0422e8c3cbea42b7c4e4d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Tax Partner - Discussing a complex tax issue",
+          "start": "2024-06-20 15:30:00",
+          "end": "2024-06-20 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_036a5c4223334ec9858dba8b26aa1e57"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "reschedule robert brown meeting"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to get more information. First, I will look for the event you are referring to."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 29 events:\nid: evt_00d94151fbf74c53b943c9b44771feef | Client Meeting - Reviewing Q3 Business Expenses \u2014 Mon 09:00-10:30\nid: evt_3f088f37dd1649c7b300ed7ae9048dd0 | Prepare Individual Tax Returns - Focus on itemized deductions \u2014 Mon 10:45-12:00\nid: evt_182f181ea1bb4cc18e517c77cd77c714 | Team Meeting - Discussing New Tax Law Updates \u2014 Mon 13:00-14:00\nid: evt_c6839136c5bf4d17bcbef3fa46b066a4 | Call with Financial Advisor - Clarify client investment income \u2014 Mon 15:00-16:00\nid: evt_05a6b7110e2b43c0ab92e21b8515a534 | Kids' Soccer Practice \u2014 Mon 18:00-19:30\nid: evt_1776bf86cbec48e3b44f3a4477541b39 | Respond to client emails \u2014 Tue 09:00-10:00\nid: evt_b7498ed816ef4c69a53dfe095b87fa60 | Work on complex tax return \u2014 Tue 10:00-12:00\nid: evt_22b019df2e7b4c438d98317bcd45e2d6 | Lunch with a colleague to discuss work life balance \u2014 Tue 13:00-14:00\nid: evt_3e30c10fbf7b4a938861f533bfd3694f | Client Meeting - Tax Planning for Retirement \u2014 Tue 14:30-16:00\nid: evt_5bceddd74d4747358916781948e9f633 | Parent-Teacher Association Meeting \u2014 Tue 19:00-20:00\nid: evt_7e307e45f0604850b02fd28b402f3d60 | Follow up from yesterday's meeting with Financial Advisor \u2014 Wed 09:00-10:00\nid: evt_baa06fff66cf4cfd9a378269f3ea6935 | Prepare Business Tax Returns \u2014 Wed 10:00-12:00\nid: evt_243ba808eae748db9808b754056dc115 | Professional Development Webinar - Tax Law Changes \u2014 Wed 14:00-16:00\nid: evt_6360e3ee4ba44550aafab6a7c23c91e0 | Dinner with Friends \u2014 Wed 18:30-20:00\nid: evt_d6a643cbe634466f9317b88646dbd638 | Client Meeting - Discuss estimated tax payments \u2014 Thu 09:00-10:30\nid: evt_256fa142d1cc407eab1078324200a8e5 | Review Tax Law Research \u2014 Thu 11:00-12:00\nid: evt_addd2ca85bb0422e8c3cbea42b7c4e4d | Prepare Individual Tax Returns \u2014 Thu 13:30-15:00\nid: evt_036a5c4223334ec9858dba8b26aa1e57 | Meeting with Tax Partner - Discussing a complex tax issue \u2014 Thu 15:30-16:30\nid: evt_a5d109bdccae48fb9d1c32a03f03f7ae | Review client files \u2014 Fri 09:00-10:00\nid: evt_979841f8a0ab4292839e4d06af4eef3a | Catch up on emails \u2014 Fri 10:00-12:00\nid: evt_aa1019284ac34fd2b2b6c3eadd48a91b | Team Lunch \u2014 Fri 13:00-14:00\nid: evt_6d5aca975537439d88d0b1a842c2f193 | Plan next week's meetings \u2014 Fri 15:00-16:00\nid: evt_a8bb84d05f8e4ca08327bd69c18b7739 | Family Movie Night \u2014 Fri 19:00-21:00\nid: evt_e5a111901b3b40929d270343f9640d2f | Kid's birthday party \u2014 Sat 10:00-12:00\nid: evt_592fd985365f4dcdb1a0d1ce109e2c13 | Grocery Shopping \u2014 Sat 13:00-15:00\nid: evt_87942398e0c9496fb1a851bb367ac938 | Dinner at parents' house \u2014 Sat 18:00-20:00\nid: evt_eaad2e0f81cd436b8b14451949a0bdfa | Call with sibling \u2014 Sun 10:00-11:00\nid: evt_9c1f709f044d469e89d241bc3342b513 | Family time in the park \u2014 Sun 12:00-14:00\nid: evt_81ae1e2d5dfb40a793883a62a6cad20f | Plan next week's meals \u2014 Sun 16:00-17:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I can't find an event with \"Robert Brown\" in the title. I'll check the attendees of a few relevant events to find it."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_00d94151fbf74c53b943c9b44771feef"
+        },
+        "result": "Client Meeting - Reviewing Q3 Business Expenses\n  ID: evt_00d94151fbf74c53b943c9b44771feef\n  Time: Mon Jun 17, 09:00 - 10:30\n  Attendees: john.smith@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "Nope, that's a meeting with John Smith. Let me check the next one."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_3e30c10fbf7b4a938861f533bfd3694f"
+        },
+        "result": "Client Meeting - Tax Planning for Retirement\n  ID: evt_3e30c10fbf7b4a938861f533bfd3694f\n  Time: Tue Jun 18, 14:30 - 16:00\n  Attendees: jane.doe@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "Still not the one. That's with Jane Doe. Let's try the next one."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_d6a643cbe634466f9317b88646dbd638"
+        },
+        "result": "Client Meeting - Discuss estimated tax payments\n  ID: evt_d6a643cbe634466f9317b88646dbd638\n  Time: Thu Jun 20, 09:00 - 10:30\n  Attendees: robert.brown@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK, I've found the meeting with Robert Brown. It's \"Client Meeting - Discuss estimated tax payments\" on Thursday at 9am. What time would you like to move it to?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What meetings do I have tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should list all events scheduled for Tuesday, June 18, 2024, including 'Respond to client emails', 'Work on complex tax return', 'Lunch with a colleague to discuss work life balance', and 'Client Meeting - Tax Planning for Retirement'.",
+    "simulated_now": "2024-06-17 08:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Respond to client emails",
+          "start": "2024-06-18 09:00:00",
+          "end": "2024-06-18 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_eaa807b92fc34e298817e2e57b90a805"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work on complex tax return",
+          "start": "2024-06-18 10:00:00",
+          "end": "2024-06-18 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_744faece619f49249c130abba5e9b89a"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lunch with a colleague to discuss work life balance",
+          "start": "2024-06-18 13:00:00",
+          "end": "2024-06-18 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_30b6f010b8a94eef933df107ebad772a"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Meeting - Tax Planning for Retirement",
+          "start": "2024-06-18 14:30:00",
+          "end": "2024-06-18 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.doe@email.com"
+          ],
+          "id": "evt_30e8856337d948f19d452bb64487cae7"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Association Meeting",
+          "start": "2024-06-18 19:00:00",
+          "end": "2024-06-18 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_634c0901fac244c8b51228466ccffa16"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Respond to client emails",
+          "start": "2024-06-18 09:00:00",
+          "end": "2024-06-18 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_eaa807b92fc34e298817e2e57b90a805"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work on complex tax return",
+          "start": "2024-06-18 10:00:00",
+          "end": "2024-06-18 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_744faece619f49249c130abba5e9b89a"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lunch with a colleague to discuss work life balance",
+          "start": "2024-06-18 13:00:00",
+          "end": "2024-06-18 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_30b6f010b8a94eef933df107ebad772a"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Meeting - Tax Planning for Retirement",
+          "start": "2024-06-18 14:30:00",
+          "end": "2024-06-18 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.doe@email.com"
+          ],
+          "id": "evt_30e8856337d948f19d452bb64487cae7"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Association Meeting",
+          "start": "2024-06-18 19:00:00",
+          "end": "2024-06-18 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_634c0901fac244c8b51228466ccffa16"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What meetings do I have tomorrow?"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can help with that. First, I need to get the current time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-17 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-06-18 23:59:59",
+          "time_min": "2024-06-18 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_eaa807b92fc34e298817e2e57b90a805 | Respond to client emails \u2014 Tue 09:00-10:00\nid: evt_744faece619f49249c130abba5e9b89a | Work on complex tax return \u2014 Tue 10:00-12:00\nid: evt_30b6f010b8a94eef933df107ebad772a | Lunch with a colleague to discuss work life balance \u2014 Tue 13:00-14:00\nid: evt_30e8856337d948f19d452bb64487cae7 | Client Meeting - Tax Planning for Retirement \u2014 Tue 14:30-16:00\nid: evt_634c0901fac244c8b51228466ccffa16 | Parent-Teacher Association Meeting \u2014 Tue 19:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have 5 meetings tomorrow:\n- Respond to client emails \u2014 Tue 09:00-10:00\n- Work on complex tax return \u2014 Tue 10:00-12:00\n- Lunch with a colleague to discuss work life balance \u2014 Tue 13:00-14:00\n- Client Meeting - Tax Planning for Retirement \u2014 Tue 14:30-16:00\n- Parent-Teacher Association Meeting \u2014 Tue 19:00-20:00"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What did I do yesterday?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should list all events scheduled for Sunday, June 23, 2024, including 'Call with sibling', 'Family time in the park', and 'Plan next week's meals'.",
+    "simulated_now": "2024-06-24 08:00:00",
+    "addressed_days": [
+      "Sunday"
+    ],
+    "calendar_before": {
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Call with sibling",
+          "start": "2024-06-23 10:00:00",
+          "end": "2024-06-23 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6c46abd65dd6415b9b79282193454f56"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Family time in the park",
+          "start": "2024-06-23 12:00:00",
+          "end": "2024-06-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_116755639722487ea02d6900f53c608b"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Plan next week's meals",
+          "start": "2024-06-23 16:00:00",
+          "end": "2024-06-23 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bb96c94c9a604b50af653fe4c6f3f434"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Call with sibling",
+          "start": "2024-06-23 10:00:00",
+          "end": "2024-06-23 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6c46abd65dd6415b9b79282193454f56"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Family time in the park",
+          "start": "2024-06-23 12:00:00",
+          "end": "2024-06-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_116755639722487ea02d6900f53c608b"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Plan next week's meals",
+          "start": "2024-06-23 16:00:00",
+          "end": "2024-06-23 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bb96c94c9a604b50af653fe4c6f3f434"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What did I do yesterday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out what you did yesterday. First, I'll get the current time to determine what \"yesterday\" was. Then, I'll list the events from that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-06-24 08:00:00 | Monday"
+      },
+      {
+        "role": "assistant",
+        "content": "I'll get the events from yesterday, June 23, 2024."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-06-23 00:00:00",
+          "time_max": "2024-06-23 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_6c46abd65dd6415b9b79282193454f56 | Call with sibling \u2014 Sun 10:00-11:00\nid: evt_116755639722487ea02d6900f53c608b | Family time in the park \u2014 Sun 12:00-14:00\nid: evt_bb96c94c9a604b50af653fe4c6f3f434 | Plan next week's meals \u2014 Sun 16:00-17:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Yesterday, you had three events on your calendar: a call with your sibling from 10:00 to 11:00, family time in the park from 12:00 to 14:00, and planning next week's meals from 16:00 to 17:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

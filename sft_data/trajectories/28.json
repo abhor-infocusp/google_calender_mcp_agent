@@ -1,0 +1,1463 @@
+[
+  {
+    "query": "Schedule a meeting for Friday called 'Project Kickoff' from 10 AM to 11:30 AM with ICU_team@hospital.com and purchasing@hospital.com.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create an event titled 'Project Kickoff' on Friday, May 3, 2024, from 10:00 AM to 11:30 AM, with attendees ICU_team@hospital.com and purchasing@hospital.com.",
+    "simulated_now": "2024-04-28 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Check In with Pharmacy Director",
+          "start": "2024-05-03 08:00:00",
+          "end": "2024-05-03 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharmacy_director@hospital.com"
+          ],
+          "id": "evt_0b6cfcd491f24691840d22e3e21630e3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Verify Medication Orders",
+          "start": "2024-05-03 09:00:00",
+          "end": "2024-05-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bce388b05de841b697fe123560399bc9"
+        },
+        {
+          "day": "Friday",
+          "summary": "Attend Medical Rounds - ICU",
+          "start": "2024-05-03 13:00:00",
+          "end": "2024-05-03 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ICU_team@hospital.com"
+          ],
+          "id": "evt_9c3962dd5a4a47478b33bd39c282c143"
+        },
+        {
+          "day": "Friday",
+          "summary": "Manage Inventory",
+          "start": "2024-05-03 15:00:00",
+          "end": "2024-05-03 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dbf00472c4b4406984c162a4bf7db247"
+        },
+        {
+          "day": "Friday",
+          "summary": "Try new restaurant with Spouse/Partner",
+          "start": "2024-05-03 19:00:00",
+          "end": "2024-05-03 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a5a36a9820f74a32a8cb26c2ee34bbe2"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Check In with Pharmacy Director",
+          "start": "2024-05-03 08:00:00",
+          "end": "2024-05-03 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharmacy_director@hospital.com"
+          ],
+          "id": "evt_0b6cfcd491f24691840d22e3e21630e3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Verify Medication Orders",
+          "start": "2024-05-03 09:00:00",
+          "end": "2024-05-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bce388b05de841b697fe123560399bc9"
+        },
+        {
+          "day": "Friday",
+          "summary": "Project Kickoff",
+          "start": "2024-05-03 10:00:00",
+          "end": "2024-05-03 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ICU_team@hospital.com",
+            "purchasing@hospital.com"
+          ],
+          "id": "evt_6e565e5c9a8740cfb878c4a7ff34e3a9"
+        },
+        {
+          "day": "Friday",
+          "summary": "Attend Medical Rounds - ICU",
+          "start": "2024-05-03 13:00:00",
+          "end": "2024-05-03 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ICU_team@hospital.com"
+          ],
+          "id": "evt_9c3962dd5a4a47478b33bd39c282c143"
+        },
+        {
+          "day": "Friday",
+          "summary": "Manage Inventory",
+          "start": "2024-05-03 15:00:00",
+          "end": "2024-05-03 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dbf00472c4b4406984c162a4bf7db247"
+        },
+        {
+          "day": "Friday",
+          "summary": "Try new restaurant with Spouse/Partner",
+          "start": "2024-05-03 19:00:00",
+          "end": "2024-05-03 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a5a36a9820f74a32a8cb26c2ee34bbe2"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Schedule a meeting for Friday called 'Project Kickoff' from 10 AM to 11:30 AM with ICU_team@hospital.com and purchasing@hospital.com."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-04-28 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Project Kickoff",
+          "attendees": [
+            "ICU_team@hospital.com",
+            "purchasing@hospital.com"
+          ],
+          "end": "2024-05-03 11:30:00",
+          "start": "2024-05-03 10:00:00"
+        },
+        "result": "Event created successfully.\nProject Kickoff\n  ID: evt_6e565e5c9a8740cfb878c4a7ff34e3a9\n  Time: Fri May 03, 10:00 - 11:30\n  Attendees: ICU_team@hospital.com, purchasing@hospital.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've scheduled \"Project Kickoff\" for Friday, May 3rd, from 10:00 AM to 11:30 AM with ICU_team@hospital.com and purchasing@hospital.com."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Add an event to my calendar for Tuesday at 3:30 PM for 45 minutes called 'Team Brainstorm'.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create an event titled 'Team Brainstorm' on Tuesday, April 30, 2024, from 3:30 PM to 4:15 PM.",
+    "simulated_now": "2024-04-28 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Review Patient Profiles",
+          "start": "2024-04-30 07:30:00",
+          "end": "2024-04-30 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_87cc02e8db1c44999861c8fcd8dd85b1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Prepare IV Medications",
+          "start": "2024-04-30 08:00:00",
+          "end": "2024-04-30 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3bd78009bbc54fef94cd0c8851fa4bbd"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting: New Drug Implementation",
+          "start": "2024-04-30 11:00:00",
+          "end": "2024-04-30 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "other_pharmacist@hospital.com"
+          ],
+          "id": "evt_93c3cd8bf5a343f59bc5999499c62cfd"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Counsel Patients Upon Discharge",
+          "start": "2024-04-30 14:00:00",
+          "end": "2024-04-30 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a919a2208f8a4f7eb56f2b2113f09c91"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Yoga Class",
+          "start": "2024-04-30 19:00:00",
+          "end": "2024-04-30 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6f23d7929437449eb5dc3b20fcf99583"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Review Patient Profiles",
+          "start": "2024-04-30 07:30:00",
+          "end": "2024-04-30 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_87cc02e8db1c44999861c8fcd8dd85b1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Prepare IV Medications",
+          "start": "2024-04-30 08:00:00",
+          "end": "2024-04-30 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3bd78009bbc54fef94cd0c8851fa4bbd"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting: New Drug Implementation",
+          "start": "2024-04-30 11:00:00",
+          "end": "2024-04-30 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "other_pharmacist@hospital.com"
+          ],
+          "id": "evt_93c3cd8bf5a343f59bc5999499c62cfd"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Counsel Patients Upon Discharge",
+          "start": "2024-04-30 14:00:00",
+          "end": "2024-04-30 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a919a2208f8a4f7eb56f2b2113f09c91"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Team Brainstorm",
+          "start": "2024-04-30 15:30:00",
+          "end": "2024-04-30 16:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_414d8d31ff504bfba0e430dd506ac834"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Yoga Class",
+          "start": "2024-04-30 19:00:00",
+          "end": "2024-04-30 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6f23d7929437449eb5dc3b20fcf99583"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Add an event to my calendar for Tuesday at 3:30 PM for 45 minutes called 'Team Brainstorm'."
+      },
+      {
+        "role": "assistant",
+        "content": "Plan:\n1. Get the current time to determine the date of next Tuesday.\n2. Create an event with the specified title, start time, and duration.\n\nLet's start by getting the current time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-04-28 10:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "Got it. Next Tuesday is April 30th, so I will create the event on that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "end": "2024-04-30 16:15:00",
+          "summary": "Team Brainstorm",
+          "start": "2024-04-30 15:30:00"
+        },
+        "result": "Event created successfully.\nTeam Brainstorm\n  ID: evt_414d8d31ff504bfba0e430dd506ac834\n  Time: Tue Apr 30, 15:30 - 16:15\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've added a 45-minute event called 'Team Brainstorm' to your calendar for Tuesday, April 30th at 3:30 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Am I busy when the oncology team meets this week?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List events between Monday, April 29, 2024 and Sunday, May 5, 2024, that include oncology_team@hospital.com as attendees. Find 'Attend Medical Rounds - Oncology Unit' on Wednesday, May 1, 2024. Respond yes.",
+    "simulated_now": "2024-04-28 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Check In with Pharmacy Director",
+          "start": "2024-05-01 08:00:00",
+          "end": "2024-05-01 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharmacy_director@hospital.com"
+          ],
+          "id": "evt_1539911c963845c9b15b246d2e155360"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Verify Medication Orders",
+          "start": "2024-05-01 09:00:00",
+          "end": "2024-05-01 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e04ff1146d554331a212fe9816e84d11"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend Medical Rounds - Oncology Unit",
+          "start": "2024-05-01 13:00:00",
+          "end": "2024-05-01 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "oncology_team@hospital.com"
+          ],
+          "id": "evt_865dede3b88a4c899d9f49d8dcddf0d4"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Training Pharmacy Technicians",
+          "start": "2024-05-01 15:00:00",
+          "end": "2024-05-01 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_84ffc2d42aaa499c9f7e09657da48ecc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2024-05-01 18:00:00",
+          "end": "2024-05-01 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_e580a9de914242bd9402ba06f75152a8"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Check In with Pharmacy Director",
+          "start": "2024-05-01 08:00:00",
+          "end": "2024-05-01 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharmacy_director@hospital.com"
+          ],
+          "id": "evt_1539911c963845c9b15b246d2e155360"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Verify Medication Orders",
+          "start": "2024-05-01 09:00:00",
+          "end": "2024-05-01 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e04ff1146d554331a212fe9816e84d11"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend Medical Rounds - Oncology Unit",
+          "start": "2024-05-01 13:00:00",
+          "end": "2024-05-01 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "oncology_team@hospital.com"
+          ],
+          "id": "evt_865dede3b88a4c899d9f49d8dcddf0d4"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Training Pharmacy Technicians",
+          "start": "2024-05-01 15:00:00",
+          "end": "2024-05-01 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_84ffc2d42aaa499c9f7e09657da48ecc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2024-05-01 18:00:00",
+          "end": "2024-05-01 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_e580a9de914242bd9402ba06f75152a8"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Am I busy when the oncology team meets this week?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first find out the current time and date to identify the beginning and end of this week. Then, I will search for the \"oncology team meeting\" within this week. Finally, I will check the meeting's details to see if you are attending and let you know if you're busy."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-04-28 10:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will now search for the oncology team meeting in your calendar for the upcoming week."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-05-05 23:59:59",
+          "time_min": "2024-04-28 10:00:00"
+        },
+        "result": "Found 31 events:\nid: evt_b83a95bcf889404882437c26efdbe6b7 | Check In with Pharmacy Director \u2014 Mon 08:00-09:00\nid: evt_1367ef35089c4867a6bb04a37d861430 | Verify Medication Orders \u2014 Mon 09:00-12:00\nid: evt_12c6234d4fca478aa2dd7c162d44865d | Attend Medical Rounds - Cardiology Unit \u2014 Mon 13:00-14:00\nid: evt_bb11496f8d754d40ac9cb3f18e487851 | Medication Shortage Meeting \u2014 Mon 15:00-16:00\nid: evt_24e9f91605c54deea516ae07baa51ba1 | Dinner with Spouse/Partner \u2014 Mon 18:30-20:00\nid: evt_bbf3d84c906b42798096f1b1b4f5dc38 | Review Patient Profiles \u2014 Tue 07:30-08:00\nid: evt_6bc3b1805c624408bbdadce57a2404a5 | Prepare IV Medications \u2014 Tue 08:00-11:00\nid: evt_5e639a4921e640f79d77beef030fb680 | Meeting: New Drug Implementation \u2014 Tue 11:00-12:00\nid: evt_c5b02e168b864ce793c48de1b9ffa35f | Counsel Patients Upon Discharge \u2014 Tue 14:00-15:00\nid: evt_6f62568ab63142c9b5c7206e0936b7d5 | Yoga Class \u2014 Tue 19:00-20:30\nid: evt_1539911c963845c9b15b246d2e155360 | Check In with Pharmacy Director \u2014 Wed 08:00-09:00\nid: evt_e04ff1146d554331a212fe9816e84d11 | Verify Medication Orders \u2014 Wed 09:00-12:00\nid: evt_865dede3b88a4c899d9f49d8dcddf0d4 | Attend Medical Rounds - Oncology Unit \u2014 Wed 13:00-14:00\nid: evt_84ffc2d42aaa499c9f7e09657da48ecc | Training Pharmacy Technicians \u2014 Wed 15:00-16:00\nid: evt_e580a9de914242bd9402ba06f75152a8 | Book Club Meeting \u2014 Wed 18:00-19:00\nid: evt_2036d441b82e4a1d8ee980c0e918d291 | Review Patient Profiles \u2014 Thu 07:30-08:00\nid: evt_74067c1034734cadb45eb19af9574a57 | Prepare IV Medications \u2014 Thu 08:00-11:00\nid: evt_b85dd33521024591a431e8211db45974 | Meeting: Medication Errors Prevention \u2014 Thu 11:00-12:00\nid: evt_61c662101e334b10ac7b4b091701298a | Counsel Patients Upon Discharge \u2014 Thu 14:00-15:00\nid: evt_c707cf20e1bf4c1aaa1e1b00ff021a0e | Dinner with Friends from Pharmacy School \u2014 Thu 18:00-19:00\nid: evt_2e5207ebd4cc4151bada537671633da0 | Check In with Pharmacy Director \u2014 Fri 08:00-09:00\nid: evt_03bf1101d3264e67b512651d2f566b62 | Verify Medication Orders \u2014 Fri 09:00-12:00\nid: evt_eb2244e963524cabb2ee7cd23f5eecd9 | Attend Medical Rounds - ICU \u2014 Fri 13:00-14:00\nid: evt_4a2c06b7f8cb465888965e1898d315eb | Manage Inventory \u2014 Fri 15:00-16:00\nid: evt_7190234044b442ad82c7ee3266b7116e | Try new restaurant with Spouse/Partner \u2014 Fri 19:00-21:00\nid: evt_13df88aa01fa4197be50d893c65592be | Brunch with Spouse/Partner \u2014 Sat 09:00-10:00\nid: evt_82002a3f450940ba8c45488d2d02211a | Hiking Trip with Friends \u2014 Sat 11:00-16:00\nid: evt_58045ec813b740e280ccb37b2cb2742c | Relax at Home \u2014 Sat 19:00-23:59\nid: evt_792ff5baf13c4d39ac4434dce3021990 | Volunteer at Local Health Clinic \u2014 Sun 10:00-12:00\nid: evt_455f7537d9504cb1a37cd8be7f21d871 | Grocery Shopping \u2014 Sun 13:00-15:00\nid: evt_83c8dcbb04ce4ec093b4b169adc5ffd2 | Call Parents \u2014 Sun 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found a meeting, \"Attend Medical Rounds - Oncology Unit,\" on Wednesday from 1:00 PM to 2:00 PM. I will now check if you are busy during that time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_865dede3b88a4c899d9f49d8dcddf0d4"
+        },
+        "result": "Attend Medical Rounds - Oncology Unit\n  ID: evt_865dede3b88a4c899d9f49d8dcddf0d4\n  Time: Wed May 01, 13:00 - 14:00\n  Attendees: oncology_team@hospital.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, you are busy. You have the \"Attend Medical Rounds - Oncology Unit\" meeting on Wednesday, May 1st, from 13:00 to 14:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing the same day that I'm having dinner with my spouse?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List events on Monday, April 29, 2024. Return all events scheduled for Monday, April 29, 2024.",
+    "simulated_now": "2024-04-28 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check In with Pharmacy Director",
+          "start": "2024-04-29 08:00:00",
+          "end": "2024-04-29 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharmacy_director@hospital.com"
+          ],
+          "id": "evt_18c4313616574cbb84a35cb94f9e7c01"
+        },
+        {
+          "day": "Monday",
+          "summary": "Verify Medication Orders",
+          "start": "2024-04-29 09:00:00",
+          "end": "2024-04-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1c1ac567e7534a168ad786762b4fd14a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Attend Medical Rounds - Cardiology Unit",
+          "start": "2024-04-29 13:00:00",
+          "end": "2024-04-29 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cardiology_team@hospital.com"
+          ],
+          "id": "evt_fc6e70ce91894d108c481651c77a23e0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Medication Shortage Meeting",
+          "start": "2024-04-29 15:00:00",
+          "end": "2024-04-29 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "purchasing@hospital.com",
+            "pharma_rep1@company.com"
+          ],
+          "id": "evt_b02a5fb231e44e2aa2b235de4e3d3492"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Spouse/Partner",
+          "start": "2024-04-29 18:30:00",
+          "end": "2024-04-29 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9ba5d27f7881457d8bc0f67290ab26fc"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check In with Pharmacy Director",
+          "start": "2024-04-29 08:00:00",
+          "end": "2024-04-29 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharmacy_director@hospital.com"
+          ],
+          "id": "evt_18c4313616574cbb84a35cb94f9e7c01"
+        },
+        {
+          "day": "Monday",
+          "summary": "Verify Medication Orders",
+          "start": "2024-04-29 09:00:00",
+          "end": "2024-04-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1c1ac567e7534a168ad786762b4fd14a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Attend Medical Rounds - Cardiology Unit",
+          "start": "2024-04-29 13:00:00",
+          "end": "2024-04-29 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cardiology_team@hospital.com"
+          ],
+          "id": "evt_fc6e70ce91894d108c481651c77a23e0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Medication Shortage Meeting",
+          "start": "2024-04-29 15:00:00",
+          "end": "2024-04-29 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "purchasing@hospital.com",
+            "pharma_rep1@company.com"
+          ],
+          "id": "evt_b02a5fb231e44e2aa2b235de4e3d3492"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Spouse/Partner",
+          "start": "2024-04-29 18:30:00",
+          "end": "2024-04-29 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9ba5d27f7881457d8bc0f67290ab26fc"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing the same day that I'm having dinner with my spouse?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out what day you're having dinner with your spouse. Then, I can tell you what else is on your calendar for that day. I will start by searching your calendar for the dinner event."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 31 events:\nid: evt_18c4313616574cbb84a35cb94f9e7c01 | Check In with Pharmacy Director \u2014 Mon 08:00-09:00\nid: evt_1c1ac567e7534a168ad786762b4fd14a | Verify Medication Orders \u2014 Mon 09:00-12:00\nid: evt_fc6e70ce91894d108c481651c77a23e0 | Attend Medical Rounds - Cardiology Unit \u2014 Mon 13:00-14:00\nid: evt_b02a5fb231e44e2aa2b235de4e3d3492 | Medication Shortage Meeting \u2014 Mon 15:00-16:00\nid: evt_9ba5d27f7881457d8bc0f67290ab26fc | Dinner with Spouse/Partner \u2014 Mon 18:30-20:00\nid: evt_1eb5124877cc4a3299f80d844077a724 | Review Patient Profiles \u2014 Tue 07:30-08:00\nid: evt_cee2824b063a48399ebf7459fb6a9811 | Prepare IV Medications \u2014 Tue 08:00-11:00\nid: evt_a74d4f9d680e4643841a7d38df49786c | Meeting: New Drug Implementation \u2014 Tue 11:00-12:00\nid: evt_13baed40917e41bba2a1b7b418c9a758 | Counsel Patients Upon Discharge \u2014 Tue 14:00-15:00\nid: evt_b9e7303786614cf687b18a294b163e6b | Yoga Class \u2014 Tue 19:00-20:30\nid: evt_eb12293512b544ee968ac415eca2791e | Check In with Pharmacy Director \u2014 Wed 08:00-09:00\nid: evt_e635c1e5045f4aae93837326b12b20c2 | Verify Medication Orders \u2014 Wed 09:00-12:00\nid: evt_19ac85797d6c4794907c4f5988a47324 | Attend Medical Rounds - Oncology Unit \u2014 Wed 13:00-14:00\nid: evt_efafc41dfa2e4d979a37e378446259cc | Training Pharmacy Technicians \u2014 Wed 15:00-16:00\nid: evt_ce2880eea5544135b2a97770d5901e8f | Book Club Meeting \u2014 Wed 18:00-19:00\nid: evt_6a36db04f7394679b5a775e7146fc0f9 | Review Patient Profiles \u2014 Thu 07:30-08:00\nid: evt_d568e9f8403e4784934ee186c12c386d | Prepare IV Medications \u2014 Thu 08:00-11:00\nid: evt_0d9b3d7571cf45f5af52c44c5529fcb3 | Meeting: Medication Errors Prevention \u2014 Thu 11:00-12:00\nid: evt_8150ef178d134424b375997bc3365b86 | Counsel Patients Upon Discharge \u2014 Thu 14:00-15:00\nid: evt_2417a2b311ed45328ef0007ffe350c00 | Dinner with Friends from Pharmacy School \u2014 Thu 18:00-19:00\nid: evt_037f9f060f3741da8531c2c62fce128d | Check In with Pharmacy Director \u2014 Fri 08:00-09:00\nid: evt_92bd1919dbc64fd79b8a5272b233d715 | Verify Medication Orders \u2014 Fri 09:00-12:00\nid: evt_aba7c8f20eb24065987cd74bfcf23bfb | Attend Medical Rounds - ICU \u2014 Fri 13:00-14:00\nid: evt_6922cd8e84974e5792b49fcccc595822 | Manage Inventory \u2014 Fri 15:00-16:00\nid: evt_61278c5ce76e4966b82615e869f65daf | Try new restaurant with Spouse/Partner \u2014 Fri 19:00-21:00\nid: evt_b71314eb04f24a10b7a75bcb56f10244 | Brunch with Spouse/Partner \u2014 Sat 09:00-10:00\nid: evt_bca5c8b5fa784a42a3913879f4bdec8e | Hiking Trip with Friends \u2014 Sat 11:00-16:00\nid: evt_7fe554b73e8e40f5b0d6f8dfa4909e3a | Relax at Home \u2014 Sat 19:00-23:59\nid: evt_1b0a2f3f41cf4776a649b7f47efbecf2 | Volunteer at Local Health Clinic \u2014 Sun 10:00-12:00\nid: evt_ad678053be684af988230f76b36aaf31 | Grocery Shopping \u2014 Sun 13:00-15:00\nid: evt_cd29fdb58e084a9d9ec5b4bbc7999537 | Call Parents \u2014 Sun 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "On Monday, the same day as your dinner with your spouse, you have four other events: \"Check In with Pharmacy Director\" from 8:00 to 9:00, \"Verify Medication Orders\" from 9:00 to 12:00, \"Attend Medical Rounds - Cardiology Unit\" from 13:00 to 14:00, and \"Medication Shortage Meeting\" from 15:00 to 16:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change the Medication Shortage Meeting's attendees to include pharma_rep2@company.com.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Medication Shortage Meeting' on Monday, April 29, 2024, and update the attendees to purchasing@hospital.com, pharma_rep1@company.com, and pharma_rep2@company.com.",
+    "simulated_now": "2024-04-28 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check In with Pharmacy Director",
+          "start": "2024-04-29 08:00:00",
+          "end": "2024-04-29 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharmacy_director@hospital.com"
+          ],
+          "id": "evt_130fcaf95aa24760afeaa18b85f6050f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Verify Medication Orders",
+          "start": "2024-04-29 09:00:00",
+          "end": "2024-04-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e4f5ae8a333e42578129ef301b491961"
+        },
+        {
+          "day": "Monday",
+          "summary": "Attend Medical Rounds - Cardiology Unit",
+          "start": "2024-04-29 13:00:00",
+          "end": "2024-04-29 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cardiology_team@hospital.com"
+          ],
+          "id": "evt_d4d3616541384f2cb2280411a35fc106"
+        },
+        {
+          "day": "Monday",
+          "summary": "Medication Shortage Meeting",
+          "start": "2024-04-29 15:00:00",
+          "end": "2024-04-29 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "purchasing@hospital.com",
+            "pharma_rep1@company.com"
+          ],
+          "id": "evt_887e0bea5831411db5aa0b984376d8e8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Spouse/Partner",
+          "start": "2024-04-29 18:30:00",
+          "end": "2024-04-29 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_786421f4d6f440dcaa85c7936fc2e856"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check In with Pharmacy Director",
+          "start": "2024-04-29 08:00:00",
+          "end": "2024-04-29 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharmacy_director@hospital.com"
+          ],
+          "id": "evt_130fcaf95aa24760afeaa18b85f6050f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Verify Medication Orders",
+          "start": "2024-04-29 09:00:00",
+          "end": "2024-04-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e4f5ae8a333e42578129ef301b491961"
+        },
+        {
+          "day": "Monday",
+          "summary": "Attend Medical Rounds - Cardiology Unit",
+          "start": "2024-04-29 13:00:00",
+          "end": "2024-04-29 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cardiology_team@hospital.com"
+          ],
+          "id": "evt_d4d3616541384f2cb2280411a35fc106"
+        },
+        {
+          "day": "Monday",
+          "summary": "Medication Shortage Meeting",
+          "start": "2024-04-29 15:00:00",
+          "end": "2024-04-29 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "purchasing@hospital.com",
+            "pharma_rep1@company.com",
+            "pharma_rep2@company.com"
+          ],
+          "id": "evt_6925a89194b2432b95baf702a40ef7dc"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Spouse/Partner",
+          "start": "2024-04-29 18:30:00",
+          "end": "2024-04-29 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_786421f4d6f440dcaa85c7936fc2e856"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change the Medication Shortage Meeting's attendees to include pharma_rep2@company.com."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. I will add pharma_rep2@company.com to the Medication Shortage Meeting. Please note that I will need to create a new event and delete the old one to achieve this."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-04-28 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 31 events:\nid: evt_130fcaf95aa24760afeaa18b85f6050f | Check In with Pharmacy Director \u2014 Mon 08:00-09:00\nid: evt_e4f5ae8a333e42578129ef301b491961 | Verify Medication Orders \u2014 Mon 09:00-12:00\nid: evt_d4d3616541384f2cb2280411a35fc106 | Attend Medical Rounds - Cardiology Unit \u2014 Mon 13:00-14:00\nid: evt_887e0bea5831411db5aa0b984376d8e8 | Medication Shortage Meeting \u2014 Mon 15:00-16:00\nid: evt_786421f4d6f440dcaa85c7936fc2e856 | Dinner with Spouse/Partner \u2014 Mon 18:30-20:00\nid: evt_286fce10df2840e3970ccbacecceffcc | Review Patient Profiles \u2014 Tue 07:30-08:00\nid: evt_b7d8df54caaf4cf19f1948b1a2056c61 | Prepare IV Medications \u2014 Tue 08:00-11:00\nid: evt_64f81152271c49e88f19def4a6f18a2f | Meeting: New Drug Implementation \u2014 Tue 11:00-12:00\nid: evt_d17b0a5bf4c045979b0ec486506e562d | Counsel Patients Upon Discharge \u2014 Tue 14:00-15:00\nid: evt_537f86558d66451c95099db5c45ed613 | Yoga Class \u2014 Tue 19:00-20:30\nid: evt_fd5c32bea5aa4b5e926438f5c8f3b598 | Check In with Pharmacy Director \u2014 Wed 08:00-09:00\nid: evt_96f60566a1664fb7b95f2f364c3949fd | Verify Medication Orders \u2014 Wed 09:00-12:00\nid: evt_68994d42f1d14b78bd557d06039afe2a | Attend Medical Rounds - Oncology Unit \u2014 Wed 13:00-14:00\nid: evt_b5295d8c0bdc4cf79a4e1f5c8aaa04fa | Training Pharmacy Technicians \u2014 Wed 15:00-16:00\nid: evt_6dd7303efb0641418ff609c1b526e0e5 | Book Club Meeting \u2014 Wed 18:00-19:00\nid: evt_4ac727ce008d41289dbaafe105422f48 | Review Patient Profiles \u2014 Thu 07:30-08:00\nid: evt_e6aff42b772840268d5f1b72eb358a74 | Prepare IV Medications \u2014 Thu 08:00-11:00\nid: evt_c85a610aca664db2a21a0460cb5d5f63 | Meeting: Medication Errors Prevention \u2014 Thu 11:00-12:00\nid: evt_cd40e0dfc388455d9b4d8cf39e6a0b56 | Counsel Patients Upon Discharge \u2014 Thu 14:00-15:00\nid: evt_88479f7ac0e54e4aa156a97b85c2a3af | Dinner with Friends from Pharmacy School \u2014 Thu 18:00-19:00\nid: evt_0193210fc9f54c1391689b2d7c17f8ce | Check In with Pharmacy Director \u2014 Fri 08:00-09:00\nid: evt_3494db5d581b49fea283d6ee74328df4 | Verify Medication Orders \u2014 Fri 09:00-12:00\nid: evt_c07031d1e3ef4aa396eeeed886bc6f84 | Attend Medical Rounds - ICU \u2014 Fri 13:00-14:00\nid: evt_1d43252e72274bb3bd57f2b6cf4f06a0 | Manage Inventory \u2014 Fri 15:00-16:00\nid: evt_f9faeb5667dd4eb091436d799b2883d0 | Try new restaurant with Spouse/Partner \u2014 Fri 19:00-21:00\nid: evt_a553c21487f94319ab5f05996301c469 | Brunch with Spouse/Partner \u2014 Sat 09:00-10:00\nid: evt_bd9e81de8bdf4535adf6eeb71838f239 | Hiking Trip with Friends \u2014 Sat 11:00-16:00\nid: evt_4f8a08517ab54f3fbd20c532386d0b39 | Relax at Home \u2014 Sat 19:00-23:59\nid: evt_1b8ff4099d4d443d96d8efb088cae5bb | Volunteer at Local Health Clinic \u2014 Sun 10:00-12:00\nid: evt_f895d4607e4c430d9e73db933380bd44 | Grocery Shopping \u2014 Sun 13:00-15:00\nid: evt_83d84d2e1a084846b66ff7b55060c18a | Call Parents \u2014 Sun 18:00-19:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_887e0bea5831411db5aa0b984376d8e8"
+        },
+        "result": "Medication Shortage Meeting\n  ID: evt_887e0bea5831411db5aa0b984376d8e8\n  Time: Mon Apr 29, 15:00 - 16:00\n  Attendees: purchasing@hospital.com, pharma_rep1@company.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2024-04-29 15:00:00",
+          "end": "2024-04-29 16:00:00",
+          "summary": "Medication Shortage Meeting",
+          "attendees": [
+            "purchasing@hospital.com",
+            "pharma_rep1@company.com",
+            "pharma_rep2@company.com"
+          ]
+        },
+        "result": "Event created successfully.\nMedication Shortage Meeting\n  ID: evt_6925a89194b2432b95baf702a40ef7dc\n  Time: Mon Apr 29, 15:00 - 16:00\n  Attendees: purchasing@hospital.com, pharma_rep1@company.com, pharma_rep2@company.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "delete_event",
+        "args": {
+          "event_id": "evt_887e0bea5831411db5aa0b984376d8e8"
+        },
+        "result": "Event deleted: id: evt_887e0bea5831411db5aa0b984376d8e8 | Medication Shortage Meeting \u2014 Mon 15:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I have added pharma_rep2@company.com to the Medication Shortage Meeting's attendees. The meeting is scheduled for Monday, April 29th, from 3:00 PM to 4:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time do I attend medical rounds on Friday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find 'Attend Medical Rounds - ICU' on Friday, May 3, 2024, and return its start time, which is 1:00 PM.",
+    "simulated_now": "2024-04-28 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Check In with Pharmacy Director",
+          "start": "2024-05-03 08:00:00",
+          "end": "2024-05-03 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharmacy_director@hospital.com"
+          ],
+          "id": "evt_cd84b1d916fe4eaa9772fe7f780a4907"
+        },
+        {
+          "day": "Friday",
+          "summary": "Verify Medication Orders",
+          "start": "2024-05-03 09:00:00",
+          "end": "2024-05-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9a770dbedf9e45c9a29281e68510ff06"
+        },
+        {
+          "day": "Friday",
+          "summary": "Attend Medical Rounds - ICU",
+          "start": "2024-05-03 13:00:00",
+          "end": "2024-05-03 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ICU_team@hospital.com"
+          ],
+          "id": "evt_e8f5b80b2b564b82a010360fe86c88ef"
+        },
+        {
+          "day": "Friday",
+          "summary": "Manage Inventory",
+          "start": "2024-05-03 15:00:00",
+          "end": "2024-05-03 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3c641c76333e4775b640b6dc74c30754"
+        },
+        {
+          "day": "Friday",
+          "summary": "Try new restaurant with Spouse/Partner",
+          "start": "2024-05-03 19:00:00",
+          "end": "2024-05-03 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_73e73855d63443e3b5084b098b45bf3f"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Check In with Pharmacy Director",
+          "start": "2024-05-03 08:00:00",
+          "end": "2024-05-03 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharmacy_director@hospital.com"
+          ],
+          "id": "evt_cd84b1d916fe4eaa9772fe7f780a4907"
+        },
+        {
+          "day": "Friday",
+          "summary": "Verify Medication Orders",
+          "start": "2024-05-03 09:00:00",
+          "end": "2024-05-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9a770dbedf9e45c9a29281e68510ff06"
+        },
+        {
+          "day": "Friday",
+          "summary": "Attend Medical Rounds - ICU",
+          "start": "2024-05-03 13:00:00",
+          "end": "2024-05-03 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ICU_team@hospital.com"
+          ],
+          "id": "evt_e8f5b80b2b564b82a010360fe86c88ef"
+        },
+        {
+          "day": "Friday",
+          "summary": "Manage Inventory",
+          "start": "2024-05-03 15:00:00",
+          "end": "2024-05-03 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3c641c76333e4775b640b6dc74c30754"
+        },
+        {
+          "day": "Friday",
+          "summary": "Try new restaurant with Spouse/Partner",
+          "start": "2024-05-03 19:00:00",
+          "end": "2024-05-03 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_73e73855d63443e3b5084b098b45bf3f"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time do I attend medical rounds on Friday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-04-28 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-05-03 23:59:59",
+          "time_min": "2024-05-03 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_cd84b1d916fe4eaa9772fe7f780a4907 | Check In with Pharmacy Director \u2014 Fri 08:00-09:00\nid: evt_9a770dbedf9e45c9a29281e68510ff06 | Verify Medication Orders \u2014 Fri 09:00-12:00\nid: evt_e8f5b80b2b564b82a010360fe86c88ef | Attend Medical Rounds - ICU \u2014 Fri 13:00-14:00\nid: evt_3c641c76333e4775b640b6dc74c30754 | Manage Inventory \u2014 Fri 15:00-16:00\nid: evt_73e73855d63443e3b5084b098b45bf3f | Try new restaurant with Spouse/Partner \u2014 Fri 19:00-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have \"Attend Medical Rounds - ICU\" on Friday from 13:00 to 14:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who am I having brunch with on Saturday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find 'Brunch with Spouse/Partner' on Saturday, May 4, 2024, and return the attendees, which is Spouse/Partner.",
+    "simulated_now": "2024-04-28 10:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Brunch with Spouse/Partner",
+          "start": "2024-05-04 09:00:00",
+          "end": "2024-05-04 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_de3dd40d77a64c5cb136c610ef9016b0"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Hiking Trip with Friends",
+          "start": "2024-05-04 11:00:00",
+          "end": "2024-05-04 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend3@email.com"
+          ],
+          "id": "evt_0173814d04624ad685f1815f6ace33ae"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Relax at Home",
+          "start": "2024-05-04 19:00:00",
+          "end": "2024-05-04 23:59:59",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b8575b093ea14669b8e06055ce02bf11"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Brunch with Spouse/Partner",
+          "start": "2024-05-04 09:00:00",
+          "end": "2024-05-04 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_de3dd40d77a64c5cb136c610ef9016b0"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Hiking Trip with Friends",
+          "start": "2024-05-04 11:00:00",
+          "end": "2024-05-04 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend3@email.com"
+          ],
+          "id": "evt_0173814d04624ad685f1815f6ace33ae"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Relax at Home",
+          "start": "2024-05-04 19:00:00",
+          "end": "2024-05-04 23:59:59",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b8575b093ea14669b8e06055ce02bf11"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who am I having brunch with on Saturday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out who you're having brunch with on Saturday. First, I'll get the current time to determine this coming Saturday's date. Then, I'll search your calendar for a \"brunch\" event on that day and check the guest list."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-04-28 10:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "I'll look for a brunch event on your calendar for this coming Saturday, May 4th."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-05-04 00:00:00",
+          "time_max": "2024-05-04 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_de3dd40d77a64c5cb136c610ef9016b0 | Brunch with Spouse/Partner \u2014 Sat 09:00-10:00\nid: evt_0173814d04624ad685f1815f6ace33ae | Hiking Trip with Friends \u2014 Sat 11:00-16:00\nid: evt_b8575b093ea14669b8e06055ce02bf11 | Relax at Home \u2014 Sat 19:00-23:59"
+      },
+      {
+        "role": "assistant",
+        "content": "I see you have \"Brunch with Spouse/Partner\" on Saturday from 9:00 AM to 10:00 AM. Let me check who is attending."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_de3dd40d77a64c5cb136c610ef9016b0"
+        },
+        "result": "Brunch with Spouse/Partner\n  ID: evt_de3dd40d77a64c5cb136c610ef9016b0\n  Time: Sat May 04, 09:00 - 10:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "You are having brunch with your spouse/partner."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Cancel the yoga thing.",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "Find 'Yoga Class' on Tuesday, April 30, 2024, and delete it.",
+    "simulated_now": "2024-04-30 09:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Review Patient Profiles",
+          "start": "2024-04-30 07:30:00",
+          "end": "2024-04-30 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b1915ec2a3b44cc182f89e2641662896"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Prepare IV Medications",
+          "start": "2024-04-30 08:00:00",
+          "end": "2024-04-30 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_76ccbef072d845fdbe177dcf0bbd3817"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting: New Drug Implementation",
+          "start": "2024-04-30 11:00:00",
+          "end": "2024-04-30 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "other_pharmacist@hospital.com"
+          ],
+          "id": "evt_1e508a953f0e4cf9b32114ba1c6e166f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Counsel Patients Upon Discharge",
+          "start": "2024-04-30 14:00:00",
+          "end": "2024-04-30 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1a5900eecc8b4000b46c2e02689df1e9"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Yoga Class",
+          "start": "2024-04-30 19:00:00",
+          "end": "2024-04-30 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cfb74565779d40c6a8ef818951f20852"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Review Patient Profiles",
+          "start": "2024-04-30 07:30:00",
+          "end": "2024-04-30 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b1915ec2a3b44cc182f89e2641662896"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Prepare IV Medications",
+          "start": "2024-04-30 08:00:00",
+          "end": "2024-04-30 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_76ccbef072d845fdbe177dcf0bbd3817"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting: New Drug Implementation",
+          "start": "2024-04-30 11:00:00",
+          "end": "2024-04-30 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "other_pharmacist@hospital.com"
+          ],
+          "id": "evt_1e508a953f0e4cf9b32114ba1c6e166f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Counsel Patients Upon Discharge",
+          "start": "2024-04-30 14:00:00",
+          "end": "2024-04-30 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1a5900eecc8b4000b46c2e02689df1e9"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Cancel the yoga thing."
+      },
+      {
+        "role": "assistant",
+        "content": "I will first look for an event called \"Yoga\" in your calendar and then cancel it."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 31 events:\nid: evt_c5da8769ec044256b15eeecc4d4efb5d | Check In with Pharmacy Director \u2014 Mon 08:00-09:00\nid: evt_718226c859ed4aebb936f38ebbb391d3 | Verify Medication Orders \u2014 Mon 09:00-12:00\nid: evt_1d32b98b007d44f1b57f654712566cee | Attend Medical Rounds - Cardiology Unit \u2014 Mon 13:00-14:00\nid: evt_9a328801d9504649bb9ce275c65a0cec | Medication Shortage Meeting \u2014 Mon 15:00-16:00\nid: evt_55d9a395a97d4265a6f86f2cc39f9d6e | Dinner with Spouse/Partner \u2014 Mon 18:30-20:00\nid: evt_b1915ec2a3b44cc182f89e2641662896 | Review Patient Profiles \u2014 Tue 07:30-08:00\nid: evt_76ccbef072d845fdbe177dcf0bbd3817 | Prepare IV Medications \u2014 Tue 08:00-11:00\nid: evt_1e508a953f0e4cf9b32114ba1c6e166f | Meeting: New Drug Implementation \u2014 Tue 11:00-12:00\nid: evt_1a5900eecc8b4000b46c2e02689df1e9 | Counsel Patients Upon Discharge \u2014 Tue 14:00-15:00\nid: evt_cfb74565779d40c6a8ef818951f20852 | Yoga Class \u2014 Tue 19:00-20:30\nid: evt_4c81e740bae540f4b17bb31a13ffff96 | Check In with Pharmacy Director \u2014 Wed 08:00-09:00\nid: evt_317f5fc7343645759a5323205e5606e7 | Verify Medication Orders \u2014 Wed 09:00-12:00\nid: evt_093699bd61d34d0babf8d9bfa7cec22f | Attend Medical Rounds - Oncology Unit \u2014 Wed 13:00-14:00\nid: evt_41f472580cab4d60a30e41cbae039cdc | Training Pharmacy Technicians \u2014 Wed 15:00-16:00\nid: evt_8895a65c334f4f5f91cc5f0a05e6bb4a | Book Club Meeting \u2014 Wed 18:00-19:00\nid: evt_b262b7c5e449443f93064304f8b24a15 | Review Patient Profiles \u2014 Thu 07:30-08:00\nid: evt_4a3e5b6e7a274fbbb3234e46f7257b3a | Prepare IV Medications \u2014 Thu 08:00-11:00\nid: evt_09588f788bf94054aad1af9126c7bc1e | Meeting: Medication Errors Prevention \u2014 Thu 11:00-12:00\nid: evt_3644d47606514302820261fa59147059 | Counsel Patients Upon Discharge \u2014 Thu 14:00-15:00\nid: evt_39515c7599e94cd4a17edae8d24ea2b9 | Dinner with Friends from Pharmacy School \u2014 Thu 18:00-19:00\nid: evt_af3f06db5eea4854b5c3c8aea04e8b14 | Check In with Pharmacy Director \u2014 Fri 08:00-09:00\nid: evt_8d51db70c73547179e7965ac3396bf1e | Verify Medication Orders \u2014 Fri 09:00-12:00\nid: evt_3a255567cc704299b3571d9864b8366a | Attend Medical Rounds - ICU \u2014 Fri 13:00-14:00\nid: evt_b12b0e1a7d914481a525499b6fbba587 | Manage Inventory \u2014 Fri 15:00-16:00\nid: evt_954ad2f38ac7414dae6a59bb542545f1 | Try new restaurant with Spouse/Partner \u2014 Fri 19:00-21:00\nid: evt_1ed7e82381cc40ebbf14733270692374 | Brunch with Spouse/Partner \u2014 Sat 09:00-10:00\nid: evt_f5beb4d9f28d4059b4df44ce53c39212 | Hiking Trip with Friends \u2014 Sat 11:00-16:00\nid: evt_8b4f00bd418642a8b3d02be9353de4dc | Relax at Home \u2014 Sat 19:00-23:59\nid: evt_3148f656b89a48b4856d7964cbef0be8 | Volunteer at Local Health Clinic \u2014 Sun 10:00-12:00\nid: evt_985be7e45aa24890afbd3ce942ce84f0 | Grocery Shopping \u2014 Sun 13:00-15:00\nid: evt_db8b31351ae04cf2895814a84d0d9b99 | Call Parents \u2014 Sun 18:00-19:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "delete_event",
+        "args": {
+          "event_id": "evt_cfb74565779d40c6a8ef818951f20852"
+        },
+        "result": "Event deleted: id: evt_cfb74565779d40c6a8ef818951f20852 | Yoga Class \u2014 Tue 19:00-20:30"
+      },
+      {
+        "role": "assistant",
+        "content": "I've canceled your Yoga Class for Tuesday at 7:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List events for Monday, April 29, 2024. Return the full list of events.",
+    "simulated_now": "2024-04-29 08:30:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check In with Pharmacy Director",
+          "start": "2024-04-29 08:00:00",
+          "end": "2024-04-29 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharmacy_director@hospital.com"
+          ],
+          "id": "evt_c30b18dd36424a44a4c89b3362642145"
+        },
+        {
+          "day": "Monday",
+          "summary": "Verify Medication Orders",
+          "start": "2024-04-29 09:00:00",
+          "end": "2024-04-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5367291a4eb9497f9dc52fc71e2fb1a5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Attend Medical Rounds - Cardiology Unit",
+          "start": "2024-04-29 13:00:00",
+          "end": "2024-04-29 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cardiology_team@hospital.com"
+          ],
+          "id": "evt_62274de37c764a72a4da765dfc401eab"
+        },
+        {
+          "day": "Monday",
+          "summary": "Medication Shortage Meeting",
+          "start": "2024-04-29 15:00:00",
+          "end": "2024-04-29 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "purchasing@hospital.com",
+            "pharma_rep1@company.com"
+          ],
+          "id": "evt_4868eec3a86b46e7ae7b002babd7493a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Spouse/Partner",
+          "start": "2024-04-29 18:30:00",
+          "end": "2024-04-29 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2bbd403012f64b7292f413f9f6048e1b"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check In with Pharmacy Director",
+          "start": "2024-04-29 08:00:00",
+          "end": "2024-04-29 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharmacy_director@hospital.com"
+          ],
+          "id": "evt_c30b18dd36424a44a4c89b3362642145"
+        },
+        {
+          "day": "Monday",
+          "summary": "Verify Medication Orders",
+          "start": "2024-04-29 09:00:00",
+          "end": "2024-04-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5367291a4eb9497f9dc52fc71e2fb1a5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Attend Medical Rounds - Cardiology Unit",
+          "start": "2024-04-29 13:00:00",
+          "end": "2024-04-29 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cardiology_team@hospital.com"
+          ],
+          "id": "evt_62274de37c764a72a4da765dfc401eab"
+        },
+        {
+          "day": "Monday",
+          "summary": "Medication Shortage Meeting",
+          "start": "2024-04-29 15:00:00",
+          "end": "2024-04-29 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "purchasing@hospital.com",
+            "pharma_rep1@company.com"
+          ],
+          "id": "evt_4868eec3a86b46e7ae7b002babd7493a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Spouse/Partner",
+          "start": "2024-04-29 18:30:00",
+          "end": "2024-04-29 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2bbd403012f64b7292f413f9f6048e1b"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-04-29 08:30:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-04-29 23:59:59",
+          "time_min": "2024-04-29 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_c30b18dd36424a44a4c89b3362642145 | Check In with Pharmacy Director \u2014 Mon 08:00-09:00\nid: evt_5367291a4eb9497f9dc52fc71e2fb1a5 | Verify Medication Orders \u2014 Mon 09:00-12:00\nid: evt_62274de37c764a72a4da765dfc401eab | Attend Medical Rounds - Cardiology Unit \u2014 Mon 13:00-14:00\nid: evt_4868eec3a86b46e7ae7b002babd7493a | Medication Shortage Meeting \u2014 Mon 15:00-16:00\nid: evt_2bbd403012f64b7292f413f9f6048e1b | Dinner with Spouse/Partner \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today, Monday, April 29, 2024, you have five events on your calendar:\n\n*   8:00 AM - 9:00 AM: Check In with Pharmacy Director\n*   9:00 AM - 12:00 PM: Verify Medication Orders\n*   1:00 PM - 2:00 PM: Attend Medical Rounds - Cardiology Unit\n*   3:00 PM - 4:00 PM: Medication Shortage Meeting\n*   6:30 PM - 8:00 PM: Dinner with Spouse/Partner"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Did I have any meetings yesterday?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List events for Saturday, May 4, 2024. Return the full list of events.",
+    "simulated_now": "2024-05-05 08:30:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Brunch with Spouse/Partner",
+          "start": "2024-05-04 09:00:00",
+          "end": "2024-05-04 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c7845ab6ce064d5fb91ffe5dac998916"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Hiking Trip with Friends",
+          "start": "2024-05-04 11:00:00",
+          "end": "2024-05-04 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend3@email.com"
+          ],
+          "id": "evt_c6ea2c1abc944b4bae2ee9d8609f0590"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Relax at Home",
+          "start": "2024-05-04 19:00:00",
+          "end": "2024-05-04 23:59:59",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e7badce1e3944124b5bec6c6cf8e153f"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Brunch with Spouse/Partner",
+          "start": "2024-05-04 09:00:00",
+          "end": "2024-05-04 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c7845ab6ce064d5fb91ffe5dac998916"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Hiking Trip with Friends",
+          "start": "2024-05-04 11:00:00",
+          "end": "2024-05-04 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend3@email.com"
+          ],
+          "id": "evt_c6ea2c1abc944b4bae2ee9d8609f0590"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Relax at Home",
+          "start": "2024-05-04 19:00:00",
+          "end": "2024-05-04 23:59:59",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e7badce1e3944124b5bec6c6cf8e153f"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Did I have any meetings yesterday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to determine what date \"yesterday\" was, and then I will list all events from that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-05-05 08:30:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-05-04 00:00:00",
+          "time_max": "2024-05-04 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_c7845ab6ce064d5fb91ffe5dac998916 | Brunch with Spouse/Partner \u2014 Sat 09:00-10:00\nid: evt_c6ea2c1abc944b4bae2ee9d8609f0590 | Hiking Trip with Friends \u2014 Sat 11:00-16:00\nid: evt_e7badce1e3944124b5bec6c6cf8e153f | Relax at Home \u2014 Sat 19:00-23:59"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, you had three events yesterday:\n\n*   Brunch with Spouse/Partner from 9:00 AM to 10:00 AM\n*   Hiking Trip with Friends from 11:00 AM to 4:00 PM\n*   Relax at Home from 7:00 PM to 11:59 PM"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

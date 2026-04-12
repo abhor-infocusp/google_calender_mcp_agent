@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Client Meeting' on Monday at 2 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Client Meeting' scheduled for Monday, January 29, 2024, at 2:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a doctor's appointment for Wednesday at 9:00 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event for a doctor's appointment on Wednesday, January 31, 2024, at 9:00 AM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after my son's basketball practice this week?",
+        "complexity": "Medium",
+        "expected_behavior": "First find the event 'Son's Basketball Practice' on Monday. Then list any events scheduled after it on Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-29T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the schedule after the HVAC inspection this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'HVAC Install Inspection' event on Wednesday. Then list any events occurring after it on Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-30T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my dinner with Mom to 7:00 PM on Monday.",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Dinner with Mom' event on Monday and update its start time to 7:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-29T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the budget review on Tuesday to 3:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Budget Review with Project Manager' event on Tuesday and update its start time to 3:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-30T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Framing Inspection on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Framing Inspection' event on Thursday and retrieve the attendee list.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the electrical walkthrough on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Electrical Walkthrough with electrician team' event on Tuesday and retrieve its start time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting with the homeowner on Thursday, but only if it doesn't conflict with yoga class.",
+        "complexity": "High",
+        "expected_behavior": "List the events on Thursday. Check if there is a conflict between the homeowner meeting and Yoga Class. If there is no time conflict, create a 'Meeting with homeowner' event on Thursday. If the times conflict, respond that there is a conflict.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-29T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Add the plumbing manager to the Site Inspector meeting on Wednesday, but only if they are available.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Meeting with Site Inspector re: Plumbing Code Violation' event on Wednesday. Check current events for time conflicts. If there is no conflict, add plumbing_manager@subcontractors.com to the attendee list for the Site Inspector meeting.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-29T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting...plumbing subcontractor...Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Plumbing Subcontractor' event on Monday and display the event details to the user.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-29T11:30:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner...friends...Friday!",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Dinner with friends' event on Friday and display the event details to the user.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-31T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow morning?",
+        "complexity": "Medium",
+        "expected_behavior": "Get the current date (Monday). Retrieve events scheduled for tomorrow (Tuesday) between 7:00 AM and 12:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-29T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Get the current date (Tuesday). Retrieve all events that occurred yesterday (Monday).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-30T08:00:00"
+    }
+]

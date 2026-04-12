@@ -1,0 +1,140 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Lunch' for Wednesday from 12:30 PM to 1:30 PM and include david.lee@email.com as an attendee.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Team Lunch', start time 2024-06-05T12:30:00, end time 2024-06-05T13:30:00, and david.lee@email.com in the attendees list.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-06-02T20:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting named 'Marketing Review' on Friday at 11:00 AM lasting one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Marketing Review', start time 2024-06-07T11:00:00, and end time 2024-06-07T12:00:00.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-06-02T20:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing during lunch on Tuesday?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Tuesday between 12:00 PM and 2:00 PM to identify any events scheduled during the typical lunch period.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-06-04T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Check my schedule for Saturday afternoon.",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Saturday between 12:00 PM and 6:00 PM to identify afternoon activities.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-06-06T15:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the Client Consultation on Monday to 1:00 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Client Consultation - Divorce Case' event on Monday and update its start time to 2024-06-03T13:00:00 and end time to 2024-06-03T15:00:00 (assuming it's a 2 hour meeting).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-06-03T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my dinner with friends on Friday to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Friends' event on Friday and update its start time to 2024-06-07T19:30:00 and end time to 2024-06-07T21:30:00 (assuming it's a 2 hour dinner).",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-06-07T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my meeting with the Junior Associate on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Meeting with Junior Associate' event on Monday and respond with its start time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-06-03T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Client Call on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Client Call - Case Update' event on Tuesday and respond with the attendees.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-06-04T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the Mediation Session on Thursday. Decline it.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Mediation Session' event on Thursday and respond with DECLINE.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-06-06T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move the settlement negotiation on Wednesday back by 30 minutes.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Settlement Negotiation' event on Wednesday and update its start time to 2024-06-05T11:00:00 and end time to 2024-06-05T12:30:00.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-06-05T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner Friday?",
+        "complexity": "Low",
+        "expected_behavior": "List events on Friday that include 'Dinner' in the summary.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-06-07T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule custody.",
+        "complexity": "Low",
+        "expected_behavior": "Search for any events that include 'custody' in the summary and ask for clarification if multiple events are found. If only one event is found, ask what date/time to reschedule it to.",
+        "addressed_days": [],
+        "current_time": "2024-06-03T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for the current day.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-06-09T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for the day after the current day.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-06-05T23:00:00"
+    }
+]

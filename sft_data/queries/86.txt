@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Gardening' on Wednesday at 1 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Gardening', start '2024-01-31T13:00:00', and end '2024-01-31T14:00:00'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please schedule a meeting with my advisor, Professor Davis, for Friday at 3:00 PM to discuss my thesis proposal.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Meeting with Professor Davis', start '2024-02-02T15:00:00', and end '2024-02-02T16:00:00'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy on Monday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to '2024-01-29T12:00:00' and time_max to '2024-01-29T17:00:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Thursday evening?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to '2024-02-01T17:00:00' and time_max to '2024-02-02T00:00:00'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule my meeting with Michael on Monday to 3 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the meeting with Michael on Monday. Find the event ID and then call update_event with event_id and updates to set start time to '2024-01-29T15:00:00' and end time to '2024-01-29T16:30:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my seminar on Thursday back by an hour?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the seminar on Thursday. Find the event ID and then call update_event with event_id and updates to set start time to '2024-02-01T09:00:00' and end time to '2024-02-01T10:30:00'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my History Department Meeting on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to '2024-01-29T00:00:00' and time_max to '2024-01-30T00:00:00' to find the History Department Meeting. Extract the start time from the event details.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending my dinner on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to '2024-02-01T00:00:00' and time_max to '2024-02-02T00:00:00' to find the Dinner. Extract the attendees from the event details.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my Undergraduate Lecture on Wednesday to 11 AM, but check if that conflicts with anything first.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min set to '2024-01-30T00:00:00' and time_max to '2024-01-31T00:00:00' to find Undergraduate Lecture event ID. Then call list_events with time_min set to '2024-01-31T11:00:00' and time_max set to '2024-01-31T12:15:00' to check for conflicts. If no conflicts, call update_event with event_id and updates to set start time to '2024-01-31T11:00:00' and end time to '2024-01-31T12:15:00'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to shift my Friday meeting with Ms. Davies later by an hour, but only if Dr. Chen is still available for our Peer Review.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min set to '2024-02-02T00:00:00' and time_max to '2024-02-03T00:00:00' to find Peer Review event ID. Check for the start time. If the end time of the meeting with Ms. Davies (after shifting an hour later) does not conflict with the start time of the Peer Review event, call update_event with event_id to shift the Ms. Davies meeting by an hour.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Office hours Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to '2024-01-29T00:00:00' and time_max to '2024-01-30T00:00:00' to find event called 'Office Hours (students)'. Extract the start and end time from the event details.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule archives.",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to '2024-02-01T00:00:00' and time_max to '2024-02-02T00:00:00' to find 'Research at Archives'. Ask the user for clarification on when to reschedule. If the user replies with a valid date and time, call update_event to update the event.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-28T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to '2024-01-29T00:00:00' and time_max set to '2024-01-30T00:00:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-29T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to '2024-01-30T00:00:00' and time_max set to '2024-01-31T00:00:00'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-29T08:00:00"
+    }
+]

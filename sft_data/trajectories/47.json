@@ -1,0 +1,1260 @@
+[
+  {
+    "query": "Can you add a dentist appointment on Thursday at 11 AM?",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event on Thursday, October 9, 2025, named 'Dentist Appointment' at 11:00 AM.",
+    "simulated_now": "2025-09-28 10:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Analyze Marketing Campaign Performance",
+          "start": "2025-10-09 09:00:00",
+          "end": "2025-10-09 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7e37a12867e54a99bfa0afa141ab5696"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Update Website Content",
+          "start": "2025-10-09 10:30:00",
+          "end": "2025-10-09 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_942988275f06442fb4b85bc2363f9d66"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Development Officer",
+          "start": "2025-10-09 13:00:00",
+          "end": "2025-10-09 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Development Officer - development@nonprofit.org"
+          ],
+          "id": "evt_acb57aa89dca4482b6e83495546d3f88"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Volunteer Coordination",
+          "start": "2025-10-09 15:00:00",
+          "end": "2025-10-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6702794fa04d4d57a1c269888c72e424"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Spouse",
+          "start": "2025-10-09 19:00:00",
+          "end": "2025-10-09 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b093f7d4dbb24ce5a336de1ed1545a84"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Dentist Appointment",
+          "start": "2025-10-02 11:00:00",
+          "end": "2025-10-02 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d04e3fab1a10432db0f6699a472b430f"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Analyze Marketing Campaign Performance",
+          "start": "2025-10-09 09:00:00",
+          "end": "2025-10-09 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7e37a12867e54a99bfa0afa141ab5696"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Update Website Content",
+          "start": "2025-10-09 10:30:00",
+          "end": "2025-10-09 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_942988275f06442fb4b85bc2363f9d66"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Development Officer",
+          "start": "2025-10-09 13:00:00",
+          "end": "2025-10-09 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Development Officer - development@nonprofit.org"
+          ],
+          "id": "evt_acb57aa89dca4482b6e83495546d3f88"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Volunteer Coordination",
+          "start": "2025-10-09 15:00:00",
+          "end": "2025-10-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6702794fa04d4d57a1c269888c72e424"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Spouse",
+          "start": "2025-10-09 19:00:00",
+          "end": "2025-10-09 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b093f7d4dbb24ce5a336de1ed1545a84"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can you add a dentist appointment on Thursday at 11 AM?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I need to get the current time to determine the correct date for Thursday. Then, I will create the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-09-28 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2025-10-02 11:00:00",
+          "summary": "Dentist Appointment",
+          "end": "2025-10-02 12:00:00"
+        },
+        "result": "Event created successfully.\nDentist Appointment\n  ID: evt_d04e3fab1a10432db0f6699a472b430f\n  Time: Thu Oct 02, 11:00 - 12:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've added a dentist appointment for this coming Thursday, October 2nd, from 11 AM to 12 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's happening at the end of the work day on Friday?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Check calendar for events happening around 4 PM on Friday, October 10, 2025, assuming the workday ends around that time. Then respond with the name of any event found during that time.",
+    "simulated_now": "2025-10-10 09:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Review Grant Application",
+          "start": "2025-10-10 09:00:00",
+          "end": "2025-10-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6f4946fc9f8c4788924217080918378f"
+        },
+        {
+          "day": "Friday",
+          "summary": "Create Social Media Posts",
+          "start": "2025-10-10 10:30:00",
+          "end": "2025-10-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2d3e27fa4a664ccd95dbf61d36c84e10"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Fundraising Event Details",
+          "start": "2025-10-10 13:00:00",
+          "end": "2025-10-10 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_120b3c1178154018ac163c0aef1a948d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Team Collaboration and Planning for Next Week",
+          "start": "2025-10-10 14:30:00",
+          "end": "2025-10-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_38b7ebf2f9c54991831f3a6a29fbce61"
+        },
+        {
+          "day": "Friday",
+          "summary": "Pizza Night with Family",
+          "start": "2025-10-10 18:00:00",
+          "end": "2025-10-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7c3baece1ff84fb59b19ab793ed696eb"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Review Grant Application",
+          "start": "2025-10-10 09:00:00",
+          "end": "2025-10-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6f4946fc9f8c4788924217080918378f"
+        },
+        {
+          "day": "Friday",
+          "summary": "Create Social Media Posts",
+          "start": "2025-10-10 10:30:00",
+          "end": "2025-10-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2d3e27fa4a664ccd95dbf61d36c84e10"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Fundraising Event Details",
+          "start": "2025-10-10 13:00:00",
+          "end": "2025-10-10 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_120b3c1178154018ac163c0aef1a948d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Team Collaboration and Planning for Next Week",
+          "start": "2025-10-10 14:30:00",
+          "end": "2025-10-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_38b7ebf2f9c54991831f3a6a29fbce61"
+        },
+        {
+          "day": "Friday",
+          "summary": "Pizza Night with Family",
+          "start": "2025-10-10 18:00:00",
+          "end": "2025-10-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7c3baece1ff84fb59b19ab793ed696eb"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's happening at the end of the work day on Friday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first find out the current date and time. Then, I will find the events happening on Friday at the end of the work day. Finally, I will respond to you with what I find."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-10-10 09:00:00 | Friday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-10-10 19:00:00",
+          "time_min": "2025-10-10 16:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_38b7ebf2f9c54991831f3a6a29fbce61 | Team Collaboration and Planning for Next Week \u2014 Fri 14:30-16:00\nid: evt_7c3baece1ff84fb59b19ab793ed696eb | Pizza Night with Family \u2014 Fri 18:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "At the end of your work day on Friday, you have \"Team Collaboration and Planning for Next Week\" from 2:30 PM to 4:00 PM, and \"Pizza Night with Family\" from 6:00 PM to 8:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing Wednesday morning?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Check the calendar for events on Wednesday, October 8, 2025, between 9 AM and 12 PM and return the name or description of any events found.",
+    "simulated_now": "2025-10-08 13:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Board Meeting",
+          "start": "2025-10-08 09:00:00",
+          "end": "2025-10-08 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Board Member 1 - board1@nonprofit.org",
+            "Board Member 2 - board2@nonprofit.org"
+          ],
+          "id": "evt_e86ff23b7dd147ba9ecc23b2ad7bcda5"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Draft Email Newsletter",
+          "start": "2025-10-08 10:30:00",
+          "end": "2025-10-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a98c278b6c174ea8a0a9b507ba90579e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Media Outreach - Local Newspaper",
+          "start": "2025-10-08 13:00:00",
+          "end": "2025-10-08 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_df9284f67419489f8ed5ceb5c3558601"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Plan Upcoming Fundraising Event",
+          "start": "2025-10-08 15:00:00",
+          "end": "2025-10-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c38783397cca4e4198d995aced03c598"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2025-10-08 18:00:00",
+          "end": "2025-10-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fe315a8dcfab411dba12c6353700ccf2"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Board Meeting",
+          "start": "2025-10-08 09:00:00",
+          "end": "2025-10-08 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Board Member 1 - board1@nonprofit.org",
+            "Board Member 2 - board2@nonprofit.org"
+          ],
+          "id": "evt_e86ff23b7dd147ba9ecc23b2ad7bcda5"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Draft Email Newsletter",
+          "start": "2025-10-08 10:30:00",
+          "end": "2025-10-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a98c278b6c174ea8a0a9b507ba90579e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Media Outreach - Local Newspaper",
+          "start": "2025-10-08 13:00:00",
+          "end": "2025-10-08 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_df9284f67419489f8ed5ceb5c3558601"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Plan Upcoming Fundraising Event",
+          "start": "2025-10-08 15:00:00",
+          "end": "2025-10-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c38783397cca4e4198d995aced03c598"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2025-10-08 18:00:00",
+          "end": "2025-10-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fe315a8dcfab411dba12c6353700ccf2"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing Wednesday morning?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify the date of the upcoming Wednesday. Then, I will list all events scheduled for that Wednesday morning to let you know what you have planned."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-10-08 13:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-10-08 00:00:00",
+          "time_max": "2025-10-08 12:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_e86ff23b7dd147ba9ecc23b2ad7bcda5 | Board Meeting \u2014 Wed 09:00-10:00\nid: evt_a98c278b6c174ea8a0a9b507ba90579e | Draft Email Newsletter \u2014 Wed 10:30-12:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have two events scheduled for this Wednesday morning. First, you have a Board Meeting from 9:00 AM to 10:00 AM, followed by a task to Draft Email Newsletter from 10:30 AM to 12:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the Marketing Team Meeting?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Marketing Team Meeting' event and extract the attendees list, which should include comms@nonprofit.org.",
+    "simulated_now": "2025-10-06 11:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Marketing Team Meeting",
+          "start": "2025-10-06 09:00:00",
+          "end": "2025-10-06 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Communications Coordinator - comms@nonprofit.org"
+          ],
+          "id": "evt_52b0faa9636b42dfa5d6e3647ec097ae"
+        },
+        {
+          "day": "Monday",
+          "summary": "Develop Q3 Marketing Campaign Strategy",
+          "start": "2025-10-06 10:30:00",
+          "end": "2025-10-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b25b7e7a300749c9aab64af0175e140d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Grant Writing - Environmental Education Program",
+          "start": "2025-10-06 13:00:00",
+          "end": "2025-10-06 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c22d7f8f644f4b9c9b52c7d33ae6e91e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Review Website Analytics",
+          "start": "2025-10-06 15:00:00",
+          "end": "2025-10-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5f92e0ef82ee4cdaa8f574fa34fa5c2d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Family Dinner",
+          "start": "2025-10-06 18:30:00",
+          "end": "2025-10-06 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8c2742ea67184949ab7d7a0460d5ddb9"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Marketing Team Meeting",
+          "start": "2025-10-06 09:00:00",
+          "end": "2025-10-06 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Communications Coordinator - comms@nonprofit.org"
+          ],
+          "id": "evt_52b0faa9636b42dfa5d6e3647ec097ae"
+        },
+        {
+          "day": "Monday",
+          "summary": "Develop Q3 Marketing Campaign Strategy",
+          "start": "2025-10-06 10:30:00",
+          "end": "2025-10-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b25b7e7a300749c9aab64af0175e140d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Grant Writing - Environmental Education Program",
+          "start": "2025-10-06 13:00:00",
+          "end": "2025-10-06 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c22d7f8f644f4b9c9b52c7d33ae6e91e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Review Website Analytics",
+          "start": "2025-10-06 15:00:00",
+          "end": "2025-10-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5f92e0ef82ee4cdaa8f574fa34fa5c2d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Family Dinner",
+          "start": "2025-10-06 18:30:00",
+          "end": "2025-10-06 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8c2742ea67184949ab7d7a0460d5ddb9"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the Marketing Team Meeting?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find the event \"Marketing Team Meeting\" and then get its details to see who is attending. First, I will list the events to find the meeting, and then I will get the event details."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 30 events:\nid: evt_52b0faa9636b42dfa5d6e3647ec097ae | Marketing Team Meeting \u2014 Mon 09:00-10:00\nid: evt_b25b7e7a300749c9aab64af0175e140d | Develop Q3 Marketing Campaign Strategy \u2014 Mon 10:30-12:00\nid: evt_c22d7f8f644f4b9c9b52c7d33ae6e91e | Grant Writing - Environmental Education Program \u2014 Mon 13:00-14:30\nid: evt_5f92e0ef82ee4cdaa8f574fa34fa5c2d | Review Website Analytics \u2014 Mon 15:00-16:00\nid: evt_8c2742ea67184949ab7d7a0460d5ddb9 | Family Dinner \u2014 Mon 18:30-20:00\nid: evt_109c5c3835584b58a47ea118148c8ffd | Meeting with Program Directors \u2014 Tue 09:00-10:00\nid: evt_3e02fc28811f4578bbe77cf1d9d03be6 | Create Social Media Content Calendar for July \u2014 Tue 10:30-12:00\nid: evt_90445ef1950147058aa1d398427c7cb2 | Donor Database Management \u2014 Tue 13:00-14:00\nid: evt_7599cef17293408f9572489b76b0b9a7 | Meeting with Digital Marketing Consultant \u2014 Tue 14:30-16:00\nid: evt_feae9a517988493b8486faeffd327978 | Book Club \u2014 Tue 19:00-20:00\nid: evt_471f9f4d72fd4456b6c343d68b2de20c | Board Meeting \u2014 Wed 09:00-10:00\nid: evt_625dacee9a33482a93c47a400c9a403e | Draft Email Newsletter \u2014 Wed 10:30-12:00\nid: evt_c240da40bbaf41bbba3467ad577049e2 | Media Outreach - Local Newspaper \u2014 Wed 13:00-14:00\nid: evt_0378869f44ad4c6782c7fe2e7c3b38e6 | Plan Upcoming Fundraising Event \u2014 Wed 15:00-16:00\nid: evt_084261f7e9634951910a480cb54cd9d4 | Yoga Class \u2014 Wed 18:00-19:30\nid: evt_1448d513d8bb4b909f92e2f51d289fc1 | Analyze Marketing Campaign Performance \u2014 Thu 09:00-10:00\nid: evt_d85093263916433fa32d66121017aaa3 | Update Website Content \u2014 Thu 10:30-12:00\nid: evt_1444cfbef65744d4ba4e4cd0736cb4c3 | Meeting with Development Officer \u2014 Thu 13:00-14:00\nid: evt_d6dee2a369fe41b5a42c492e6c15cb4a | Volunteer Coordination \u2014 Thu 15:00-16:00\nid: evt_c2df9197b39547b5a578d5ddfcbd3858 | Dinner with Spouse \u2014 Thu 19:00-20:30\nid: evt_a1d56dadcdc9430ab01590359f24cd3e | Review Grant Application \u2014 Fri 09:00-10:00\nid: evt_786b82a6ed94434bb9d8903aee00ac3a | Create Social Media Posts \u2014 Fri 10:30-12:00\nid: evt_c3164a9c812e4357b4b56d4fd187424b | Finalize Fundraising Event Details \u2014 Fri 13:00-14:00\nid: evt_34ba603b50b84e3e8515da2ad7da0bd3 | Team Collaboration and Planning for Next Week \u2014 Fri 14:30-16:00\nid: evt_2c8b33de879442e29396f91dff8c9c77 | Pizza Night with Family \u2014 Fri 18:00-20:00\nid: evt_698a64df40fc474da279422967cfc320 | Children's Soccer Game \u2014 Sat 10:00-12:00\nid: evt_2067ee9d97d949b79250880bd183bbfc | Visit Local Farmer's Market \u2014 Sat 13:00-15:00\nid: evt_fd5856d41282448a88083e03960364a6 | Dinner Party with Friends \u2014 Sat 18:00-21:00\nid: evt_61d8533a27c8466195eadf7eadbf75bf | Family Brunch \u2014 Sun 10:00-13:00\nid: evt_1aed2165f536473bab9c1e213b9d3e58 | Hike in the Park \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found the Marketing Team Meeting. Now I'll get the details to see who is attending."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_52b0faa9636b42dfa5d6e3647ec097ae"
+        },
+        "result": "Marketing Team Meeting\n  ID: evt_52b0faa9636b42dfa5d6e3647ec097ae\n  Time: Mon Oct 06, 09:00 - 10:00\n  Attendees: Communications Coordinator - comms@nonprofit.org\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "The Marketing Team Meeting is being attended by the Communications Coordinator (comms@nonprofit.org)."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on the calendar for Saturday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "List all events scheduled for Saturday, October 11, 2025.",
+    "simulated_now": "2025-10-11 08:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Children's Soccer Game",
+          "start": "2025-10-11 10:00:00",
+          "end": "2025-10-11 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_48906f9db942443dbf135c16b8bc05a6"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Visit Local Farmer's Market",
+          "start": "2025-10-11 13:00:00",
+          "end": "2025-10-11 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8a6a9810e6f74b0e822762cae23ace49"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner Party with Friends",
+          "start": "2025-10-11 18:00:00",
+          "end": "2025-10-11 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b330a25b6b564bc49cd84288aa68be55"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Children's Soccer Game",
+          "start": "2025-10-11 10:00:00",
+          "end": "2025-10-11 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_48906f9db942443dbf135c16b8bc05a6"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Visit Local Farmer's Market",
+          "start": "2025-10-11 13:00:00",
+          "end": "2025-10-11 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8a6a9810e6f74b0e822762cae23ace49"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner Party with Friends",
+          "start": "2025-10-11 18:00:00",
+          "end": "2025-10-11 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b330a25b6b564bc49cd84288aa68be55"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on the calendar for Saturday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-10-11 08:00:00 | Saturday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-10-11 23:59:59",
+          "time_min": "2025-10-11 00:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_48906f9db942443dbf135c16b8bc05a6 | Children's Soccer Game \u2014 Sat 10:00-12:00\nid: evt_8a6a9810e6f74b0e822762cae23ace49 | Visit Local Farmer's Market \u2014 Sat 13:00-15:00\nid: evt_b330a25b6b564bc49cd84288aa68be55 | Dinner Party with Friends \u2014 Sat 18:00-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today is Saturday, October 11, 2025. Here's what's on your calendar:\n\n*   **10:00 AM - 12:00 PM:** Children's Soccer Game\n*   **1:00 PM - 3:00 PM:** Visit Local Farmer's Market\n*   **6:00 PM - 9:00 PM:** Dinner Party with Friends"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Board meeting?",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "Search for an event named 'Board Meeting'. If found, retrieve the date, time, and attendees. If not, respond that the event was not found.",
+    "simulated_now": "2025-10-08 11:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Board Meeting",
+          "start": "2025-10-08 09:00:00",
+          "end": "2025-10-08 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Board Member 1 - board1@nonprofit.org",
+            "Board Member 2 - board2@nonprofit.org"
+          ],
+          "id": "evt_68ba5e14acd7487e8cc7a2d2f620d53c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Draft Email Newsletter",
+          "start": "2025-10-08 10:30:00",
+          "end": "2025-10-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_936b7bfb54494bffb514631a19cbfce4"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Media Outreach - Local Newspaper",
+          "start": "2025-10-08 13:00:00",
+          "end": "2025-10-08 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9918041ab2f34d21846837406dd226d0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Plan Upcoming Fundraising Event",
+          "start": "2025-10-08 15:00:00",
+          "end": "2025-10-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_302c3edac57d4a69bdbe8923b069d652"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2025-10-08 18:00:00",
+          "end": "2025-10-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8a54f6bac33a4daebea5e30e0405deb0"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Board Meeting",
+          "start": "2025-10-08 09:00:00",
+          "end": "2025-10-08 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Board Member 1 - board1@nonprofit.org",
+            "Board Member 2 - board2@nonprofit.org"
+          ],
+          "id": "evt_68ba5e14acd7487e8cc7a2d2f620d53c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Draft Email Newsletter",
+          "start": "2025-10-08 10:30:00",
+          "end": "2025-10-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_936b7bfb54494bffb514631a19cbfce4"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Media Outreach - Local Newspaper",
+          "start": "2025-10-08 13:00:00",
+          "end": "2025-10-08 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9918041ab2f34d21846837406dd226d0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Plan Upcoming Fundraising Event",
+          "start": "2025-10-08 15:00:00",
+          "end": "2025-10-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_302c3edac57d4a69bdbe8923b069d652"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2025-10-08 18:00:00",
+          "end": "2025-10-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8a54f6bac33a4daebea5e30e0405deb0"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Board meeting?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-10-08 11:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 30 events:\nid: evt_1e7e7144bd72413b8c58d90c45b51f52 | Marketing Team Meeting \u2014 Mon 09:00-10:00\nid: evt_83eddb492b3744209320eca8855074f4 | Develop Q3 Marketing Campaign Strategy \u2014 Mon 10:30-12:00\nid: evt_419a1439011c4405bd54f8272131b0e7 | Grant Writing - Environmental Education Program \u2014 Mon 13:00-14:30\nid: evt_15a0f7fe56bf4d31810b5d452abef471 | Review Website Analytics \u2014 Mon 15:00-16:00\nid: evt_b5831246ca164839b6089f406cfbd8c4 | Family Dinner \u2014 Mon 18:30-20:00\nid: evt_fef055dbc81d47eaa5e868c789282492 | Meeting with Program Directors \u2014 Tue 09:00-10:00\nid: evt_350bf402d55e444ebd68b790bb10debc | Create Social Media Content Calendar for July \u2014 Tue 10:30-12:00\nid: evt_6533ad365e7d47a6b52cc45017df4bac | Donor Database Management \u2014 Tue 13:00-14:00\nid: evt_37214828b87245148f105fab2624b306 | Meeting with Digital Marketing Consultant \u2014 Tue 14:30-16:00\nid: evt_c78b1e870d9e48f597f63d2a4ee3a12d | Book Club \u2014 Tue 19:00-20:00\nid: evt_68ba5e14acd7487e8cc7a2d2f620d53c | Board Meeting \u2014 Wed 09:00-10:00\nid: evt_936b7bfb54494bffb514631a19cbfce4 | Draft Email Newsletter \u2014 Wed 10:30-12:00\nid: evt_9918041ab2f34d21846837406dd226d0 | Media Outreach - Local Newspaper \u2014 Wed 13:00-14:00\nid: evt_302c3edac57d4a69bdbe8923b069d652 | Plan Upcoming Fundraising Event \u2014 Wed 15:00-16:00\nid: evt_8a54f6bac33a4daebea5e30e0405deb0 | Yoga Class \u2014 Wed 18:00-19:30\nid: evt_d8e6b4ec6c3240e9bc4589be1e79d7c8 | Analyze Marketing Campaign Performance \u2014 Thu 09:00-10:00\nid: evt_89119062094948c181b6144a54ebedd6 | Update Website Content \u2014 Thu 10:30-12:00\nid: evt_427f497a2a6649dca3840836d49a3071 | Meeting with Development Officer \u2014 Thu 13:00-14:00\nid: evt_e9caf7579c6c448d9865f02d350ac96e | Volunteer Coordination \u2014 Thu 15:00-16:00\nid: evt_9a74099527c24ce6a456ebdd1ca4b9b2 | Dinner with Spouse \u2014 Thu 19:00-20:30\nid: evt_8cad7526b22b49f48c1551d1d1eff840 | Review Grant Application \u2014 Fri 09:00-10:00\nid: evt_3e67592099cb4ea390d743202472efbe | Create Social Media Posts \u2014 Fri 10:30-12:00\nid: evt_bbf3ba57b0b94806a8a820c750bc561e | Finalize Fundraising Event Details \u2014 Fri 13:00-14:00\nid: evt_7b101cc8f86d42889e0c558b1411de52 | Team Collaboration and Planning for Next Week \u2014 Fri 14:30-16:00\nid: evt_ce54b4b578884735be91f249487df631 | Pizza Night with Family \u2014 Fri 18:00-20:00\nid: evt_05aeef41d6994d928dc8a9cee54ce6b0 | Children's Soccer Game \u2014 Sat 10:00-12:00\nid: evt_64465bcc220f4208b8d97d7d11d99280 | Visit Local Farmer's Market \u2014 Sat 13:00-15:00\nid: evt_f32a9f8c482d4b2e96108ee3a3e87a39 | Dinner Party with Friends \u2014 Sat 18:00-21:00\nid: evt_b98de7a6e2404ec781f1fe591731def5 | Family Brunch \u2014 Sun 10:00-13:00\nid: evt_e4e8bbbf37e644aba507e6d072031e8a | Hike in the Park \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_68ba5e14acd7487e8cc7a2d2f620d53c"
+        },
+        "result": "Board Meeting\n  ID: evt_68ba5e14acd7487e8cc7a2d2f620d53c\n  Time: Wed Oct 08, 09:00 - 10:00\n  Attendees: Board Member 1 - board1@nonprofit.org, Board Member 2 - board2@nonprofit.org\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "There is a board meeting today from 9:00 AM to 10:00 AM. The attendees are Board Member 1 and Board Member 2.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change Thursday meeting.",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "Attempt to clarify which meeting the user is referring to on Thursday, October 9, 2025, by listing all events scheduled for that day. If the user then clarifies, proceed with the change as requested.",
+    "simulated_now": "2025-10-09 10:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Analyze Marketing Campaign Performance",
+          "start": "2025-10-09 09:00:00",
+          "end": "2025-10-09 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bb3ec7ba191849c99bd66685f331bd42"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Update Website Content",
+          "start": "2025-10-09 10:30:00",
+          "end": "2025-10-09 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0ad14ae5382245bd84456ddc34fef926"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Development Officer",
+          "start": "2025-10-09 13:00:00",
+          "end": "2025-10-09 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Development Officer - development@nonprofit.org"
+          ],
+          "id": "evt_1ece1d43de444c7fa7612315b45b04ed"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Volunteer Coordination",
+          "start": "2025-10-09 15:00:00",
+          "end": "2025-10-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8f48e3b2d3ba4a4d8131a48dff753e01"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Spouse",
+          "start": "2025-10-09 19:00:00",
+          "end": "2025-10-09 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_747845ca686146c89af3058c72e8194c"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Analyze Marketing Campaign Performance",
+          "start": "2025-10-09 09:00:00",
+          "end": "2025-10-09 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bb3ec7ba191849c99bd66685f331bd42"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Update Website Content",
+          "start": "2025-10-09 10:30:00",
+          "end": "2025-10-09 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0ad14ae5382245bd84456ddc34fef926"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Development Officer",
+          "start": "2025-10-09 13:00:00",
+          "end": "2025-10-09 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Development Officer - development@nonprofit.org"
+          ],
+          "id": "evt_1ece1d43de444c7fa7612315b45b04ed"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Volunteer Coordination",
+          "start": "2025-10-09 15:00:00",
+          "end": "2025-10-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8f48e3b2d3ba4a4d8131a48dff753e01"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Spouse",
+          "start": "2025-10-09 19:00:00",
+          "end": "2025-10-09 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_747845ca686146c89af3058c72e8194c"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change Thursday meeting."
+      },
+      {
+        "role": "assistant",
+        "content": "I can help with that. First, I need to know the current date to find the correct Thursday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-10-09 10:00:00 | Thursday"
+      },
+      {
+        "role": "assistant",
+        "content": "OK, today is Thursday, October 9, 2025. Let me see what meetings you have scheduled for today."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-10-09 23:59:59",
+          "time_min": "2025-10-09 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_bb3ec7ba191849c99bd66685f331bd42 | Analyze Marketing Campaign Performance \u2014 Thu 09:00-10:00\nid: evt_0ad14ae5382245bd84456ddc34fef926 | Update Website Content \u2014 Thu 10:30-12:00\nid: evt_1ece1d43de444c7fa7612315b45b04ed | Meeting with Development Officer \u2014 Thu 13:00-14:00\nid: evt_8f48e3b2d3ba4a4d8131a48dff753e01 | Volunteer Coordination \u2014 Thu 15:00-16:00\nid: evt_747845ca686146c89af3058c72e8194c | Dinner with Spouse \u2014 Thu 19:00-20:30"
+      },
+      {
+        "role": "assistant",
+        "content": "I found 5 meetings on Thursday. Which one would you like to change, and what should I change it to?\n\n- Analyze Marketing Campaign Performance (9am)\n- Update Website Content (10:30am)\n- Meeting with Development Officer (1pm)\n- Volunteer Coordination (3pm)\n- Dinner with Spouse (7pm)"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events scheduled for Monday, October 6, 2025.",
+    "simulated_now": "2025-10-06 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Marketing Team Meeting",
+          "start": "2025-10-06 09:00:00",
+          "end": "2025-10-06 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Communications Coordinator - comms@nonprofit.org"
+          ],
+          "id": "evt_bc87c1ee2dca404eaf0b5ef96f6ee853"
+        },
+        {
+          "day": "Monday",
+          "summary": "Develop Q3 Marketing Campaign Strategy",
+          "start": "2025-10-06 10:30:00",
+          "end": "2025-10-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_badd8cb92d6c47ed9ce01e4d8bf8c019"
+        },
+        {
+          "day": "Monday",
+          "summary": "Grant Writing - Environmental Education Program",
+          "start": "2025-10-06 13:00:00",
+          "end": "2025-10-06 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0835333a559f43d988cb59a64b54f1b8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Review Website Analytics",
+          "start": "2025-10-06 15:00:00",
+          "end": "2025-10-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a07104d95aa847518429380da2d9096f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Family Dinner",
+          "start": "2025-10-06 18:30:00",
+          "end": "2025-10-06 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ede00ff88e3d40b0bce21085bb91e8bb"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Marketing Team Meeting",
+          "start": "2025-10-06 09:00:00",
+          "end": "2025-10-06 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Communications Coordinator - comms@nonprofit.org"
+          ],
+          "id": "evt_bc87c1ee2dca404eaf0b5ef96f6ee853"
+        },
+        {
+          "day": "Monday",
+          "summary": "Develop Q3 Marketing Campaign Strategy",
+          "start": "2025-10-06 10:30:00",
+          "end": "2025-10-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_badd8cb92d6c47ed9ce01e4d8bf8c019"
+        },
+        {
+          "day": "Monday",
+          "summary": "Grant Writing - Environmental Education Program",
+          "start": "2025-10-06 13:00:00",
+          "end": "2025-10-06 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0835333a559f43d988cb59a64b54f1b8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Review Website Analytics",
+          "start": "2025-10-06 15:00:00",
+          "end": "2025-10-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a07104d95aa847518429380da2d9096f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Family Dinner",
+          "start": "2025-10-06 18:30:00",
+          "end": "2025-10-06 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ede00ff88e3d40b0bce21085bb91e8bb"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out the current date to understand what \"today\" is, and then I will list all the events scheduled for that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-10-06 08:00:00 | Monday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will now list all of your events for today, October 6, 2025."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-10-06 23:59:59",
+          "time_min": "2025-10-06 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_bc87c1ee2dca404eaf0b5ef96f6ee853 | Marketing Team Meeting \u2014 Mon 09:00-10:00\nid: evt_badd8cb92d6c47ed9ce01e4d8bf8c019 | Develop Q3 Marketing Campaign Strategy \u2014 Mon 10:30-12:00\nid: evt_0835333a559f43d988cb59a64b54f1b8 | Grant Writing - Environmental Education Program \u2014 Mon 13:00-14:30\nid: evt_a07104d95aa847518429380da2d9096f | Review Website Analytics \u2014 Mon 15:00-16:00\nid: evt_ede00ff88e3d40b0bce21085bb91e8bb | Family Dinner \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today is October 6, 2025, Monday. You have 5 events scheduled:\n- Marketing Team Meeting at 09:00-10:00\n- Develop Q3 Marketing Campaign Strategy at 10:30-12:00\n- Grant Writing - Environmental Education Program at 13:00-14:30\n- Review Website Analytics at 15:00-16:00\n- Family Dinner at 18:30-20:00"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Is anything planned for tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events scheduled for Wednesday, October 8, 2025.",
+    "simulated_now": "2025-10-07 20:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Board Meeting",
+          "start": "2025-10-08 09:00:00",
+          "end": "2025-10-08 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Board Member 1 - board1@nonprofit.org",
+            "Board Member 2 - board2@nonprofit.org"
+          ],
+          "id": "evt_d35cd95726b14a1c8492a8b40d39ad4a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Draft Email Newsletter",
+          "start": "2025-10-08 10:30:00",
+          "end": "2025-10-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5029cbe3f8ae4aaaa6536d7d5951fe74"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Media Outreach - Local Newspaper",
+          "start": "2025-10-08 13:00:00",
+          "end": "2025-10-08 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_49ac9bb4231b4be795dcf82d45298c02"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Plan Upcoming Fundraising Event",
+          "start": "2025-10-08 15:00:00",
+          "end": "2025-10-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_032d93fdcee140b7a66194ed40464cfd"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2025-10-08 18:00:00",
+          "end": "2025-10-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6010eeada77940a3b37adcbffea3f876"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Board Meeting",
+          "start": "2025-10-08 09:00:00",
+          "end": "2025-10-08 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Board Member 1 - board1@nonprofit.org",
+            "Board Member 2 - board2@nonprofit.org"
+          ],
+          "id": "evt_d35cd95726b14a1c8492a8b40d39ad4a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Draft Email Newsletter",
+          "start": "2025-10-08 10:30:00",
+          "end": "2025-10-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5029cbe3f8ae4aaaa6536d7d5951fe74"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Media Outreach - Local Newspaper",
+          "start": "2025-10-08 13:00:00",
+          "end": "2025-10-08 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_49ac9bb4231b4be795dcf82d45298c02"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Plan Upcoming Fundraising Event",
+          "start": "2025-10-08 15:00:00",
+          "end": "2025-10-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_032d93fdcee140b7a66194ed40464cfd"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Yoga Class",
+          "start": "2025-10-08 18:00:00",
+          "end": "2025-10-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6010eeada77940a3b37adcbffea3f876"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Is anything planned for tomorrow?"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I'll check your calendar."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-10-07 20:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-10-08 23:59:59",
+          "time_min": "2025-10-08 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_d35cd95726b14a1c8492a8b40d39ad4a | Board Meeting \u2014 Wed 09:00-10:00\nid: evt_5029cbe3f8ae4aaaa6536d7d5951fe74 | Draft Email Newsletter \u2014 Wed 10:30-12:00\nid: evt_49ac9bb4231b4be795dcf82d45298c02 | Media Outreach - Local Newspaper \u2014 Wed 13:00-14:00\nid: evt_032d93fdcee140b7a66194ed40464cfd | Plan Upcoming Fundraising Event \u2014 Wed 15:00-16:00\nid: evt_6010eeada77940a3b37adcbffea3f876 | Yoga Class \u2014 Wed 18:00-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, you have five events scheduled for tomorrow:\n\n*   Board Meeting: 9:00am - 10:00am\n*   Draft Email Newsletter: 10:30am - 12:00pm\n*   Media Outreach - Local Newspaper: 1:00pm - 2:00pm\n*   Plan Upcoming Fundraising Event: 3:00pm - 4:00pm\n*   Yoga Class: 6:00pm - 7:30pm"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

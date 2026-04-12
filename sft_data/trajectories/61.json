@@ -1,0 +1,2153 @@
+[
+  {
+    "query": "Book a meeting on Friday to review the new tax law updates at 10 AM with the training team.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event with the summary 'Review new tax law updates' on Friday, October 18, 2024, from 10:00 AM to 11:00 AM (default duration) with the attendee training@email.com.",
+    "simulated_now": "2024-10-13 18:30:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Review Tax Returns",
+          "start": "2024-10-18 09:00:00",
+          "end": "2024-10-18 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1315f7c654354dcaa56ff28c0d6c4333"
+        },
+        {
+          "day": "Friday",
+          "summary": "Staff Training - New Tax Software",
+          "start": "2024-10-18 11:00:00",
+          "end": "2024-10-18 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "training@email.com"
+          ],
+          "id": "evt_c340f4a39683419eba9d9599f3e4dab3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Wrap up for the Week",
+          "start": "2024-10-18 14:00:00",
+          "end": "2024-10-18 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_de563f79aa7b48fe9f11835af6e53323"
+        },
+        {
+          "day": "Friday",
+          "summary": "Family Movie Night",
+          "start": "2024-10-18 19:00:00",
+          "end": "2024-10-18 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3166f7d99c994211b9f1f776a6d38993"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Review Tax Returns",
+          "start": "2024-10-18 09:00:00",
+          "end": "2024-10-18 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1315f7c654354dcaa56ff28c0d6c4333"
+        },
+        {
+          "day": "Friday",
+          "summary": "Review new tax law updates",
+          "start": "2024-10-18 10:00:00",
+          "end": "2024-10-18 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "training@email.com"
+          ],
+          "id": "evt_79818873bb9a4808bdedfee455e48797"
+        },
+        {
+          "day": "Friday",
+          "summary": "Staff Training - New Tax Software",
+          "start": "2024-10-18 11:00:00",
+          "end": "2024-10-18 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "training@email.com"
+          ],
+          "id": "evt_c340f4a39683419eba9d9599f3e4dab3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Wrap up for the Week",
+          "start": "2024-10-18 14:00:00",
+          "end": "2024-10-18 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_de563f79aa7b48fe9f11835af6e53323"
+        },
+        {
+          "day": "Friday",
+          "summary": "Family Movie Night",
+          "start": "2024-10-18 19:00:00",
+          "end": "2024-10-18 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3166f7d99c994211b9f1f776a6d38993"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Book a meeting on Friday to review the new tax law updates at 10 AM with the training team."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I will book a meeting for you. First, I need to get the current time to determine the correct date for Friday. Then, I will search for past events to find the email addresses of the training team. Finally, I will create the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-10-13 18:30:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, the current date is October 13th, 2024. Friday will be October 18th. I will now search for past events with \"training\" in the title to find the attendees for the training team."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_930aa61f360a464a987b3065e891ef9d | Team Meeting - Tax Law Updates \u2014 Mon 09:00-10:00\nid: evt_84530f8094dc4f638d2898089f32d6f9 | Client Meeting - Business Tax Return \u2014 Mon 10:30-12:00\nid: evt_25d43ab155d24c42912b21be37727ce0 | Draft Tax Strategy Proposals \u2014 Mon 14:00-15:00\nid: evt_1bbd5fb6800a44c6afcb8977d31ce526 | Kids Soccer Practice \u2014 Mon 18:00-19:30\nid: evt_1268fb58d7cc4d759a28ec51211643da | Review Financial Documents \u2014 Tue 09:00-10:00\nid: evt_cab96eb3db7549e78499c77af35b212b | Client Meeting - Individual Tax Planning \u2014 Tue 10:30-12:00\nid: evt_43cce35eb66b46b0a22f7087a6a11b2f | Prepare Tax Forms \u2014 Tue 13:00-15:00\nid: evt_a01d1542dd404135b0f49aef1cd6ca7d | Parent-Teacher Association Meeting \u2014 Tue 19:00-20:00\nid: evt_fa956906589d43e1b1a3d21abe6beb62 | Meeting with Partner - Client Account Review \u2014 Wed 09:00-10:00\nid: evt_27b6727242e44911b417026ee505f963 | Work on Tax Returns \u2014 Wed 10:30-12:00\nid: evt_f9d9bc40754142ddadaca5d7d8463984 | Respond to Client Inquiries \u2014 Wed 14:00-16:00\nid: evt_41e1f55eb5a04fa3907909b390cd9123 | Dinner with family \u2014 Wed 18:30-20:00\nid: evt_e51656752d5740f2b6e06daf427bb523 | Research Tax Law Changes \u2014 Thu 09:00-10:00\nid: evt_793cc82b24394f08bcb914a5d9a9b56d | Client Meeting - Audit Support \u2014 Thu 10:30-12:00\nid: evt_684cb79b8db1402cb2cb70f0bf893616 | Prepare Tax Forms \u2014 Thu 13:00-15:00\nid: evt_1d66c02359a246d8a59ce90518708031 | Book Club Meeting \u2014 Thu 19:00-20:30\nid: evt_1315f7c654354dcaa56ff28c0d6c4333 | Review Tax Returns \u2014 Fri 09:00-11:00\nid: evt_c340f4a39683419eba9d9599f3e4dab3 | Staff Training - New Tax Software \u2014 Fri 11:00-12:00\nid: evt_de563f79aa7b48fe9f11835af6e53323 | Wrap up for the Week \u2014 Fri 14:00-15:00\nid: evt_3166f7d99c994211b9f1f776a6d38993 | Family Movie Night \u2014 Fri 19:00-21:00\nid: evt_f1b6f2ff9b974eeb8cbcc0d89693ec50 | Kids Soccer Game \u2014 Sat 10:00-12:00\nid: evt_667f6f188ee14d9684de95078dea8498 | Grocery Shopping \u2014 Sat 13:00-15:00\nid: evt_8d7d207e374e4b269749ca56ec2c9f5a | Dinner with Friends \u2014 Sat 18:00-20:00\nid: evt_219309e664b6497c8d64cd73fe649ec9 | Brunch with Family \u2014 Sun 10:00-12:00\nid: evt_8257eaa565344d3bb503b0a932ab0ed3 | Family Time - Park Visit \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found a \"Staff Training\" event. I will now get the details of that event to find the attendees and then create the new event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_c340f4a39683419eba9d9599f3e4dab3"
+        },
+        "result": "Staff Training - New Tax Software\n  ID: evt_c340f4a39683419eba9d9599f3e4dab3\n  Time: Fri Oct 18, 11:00 - 12:00\n  Attendees: training@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have the training team's email. I will now create the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "end": "2024-10-18 11:00:00",
+          "start": "2024-10-18 10:00:00",
+          "attendees": [
+            "training@email.com"
+          ],
+          "summary": "Review new tax law updates"
+        },
+        "result": "Event created successfully.\nReview new tax law updates\n  ID: evt_79818873bb9a4808bdedfee455e48797\n  Time: Fri Oct 18, 10:00 - 11:00\n  Attendees: training@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have booked the meeting for you. Here are the details:\n\n**Event:** Review new tax law updates\n**Time:** Friday, October 18th, 10:00 AM - 11:00 AM\n**Attendees:** training@email.com"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move my Business Tax Return client meeting to 1 PM on Monday.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Client Meeting - Business Tax Return' event on Monday and update its start time to 1:00 PM, keeping the same duration.",
+    "simulated_now": "2024-10-13 18:30:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tax Law Updates",
+          "start": "2024-10-14 09:00:00",
+          "end": "2024-10-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.jones@firm.com",
+            "michael.brown@firm.com"
+          ],
+          "id": "evt_38b8b390a66e4b7caa38cc675c16fb5d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Business Tax Return",
+          "start": "2024-10-14 10:30:00",
+          "end": "2024-10-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@client.com"
+          ],
+          "id": "evt_9b1c1133b63148bf8cdd5d01057c9022"
+        },
+        {
+          "day": "Monday",
+          "summary": "Draft Tax Strategy Proposals",
+          "start": "2024-10-14 14:00:00",
+          "end": "2024-10-14 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1c3036c62a7947a6ac4da0f1793c90fe"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids Soccer Practice",
+          "start": "2024-10-14 18:00:00",
+          "end": "2024-10-14 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_65b3796daa4c47b3a0aeaaa1a0142d90"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tax Law Updates",
+          "start": "2024-10-14 09:00:00",
+          "end": "2024-10-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.jones@firm.com",
+            "michael.brown@firm.com"
+          ],
+          "id": "evt_38b8b390a66e4b7caa38cc675c16fb5d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Business Tax Return",
+          "start": "2024-10-14 13:00:00",
+          "end": "2024-10-14 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@client.com"
+          ],
+          "id": "evt_9b1c1133b63148bf8cdd5d01057c9022"
+        },
+        {
+          "day": "Monday",
+          "summary": "Draft Tax Strategy Proposals",
+          "start": "2024-10-14 14:00:00",
+          "end": "2024-10-14 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1c3036c62a7947a6ac4da0f1793c90fe"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids Soccer Practice",
+          "start": "2024-10-14 18:00:00",
+          "end": "2024-10-14 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_65b3796daa4c47b3a0aeaaa1a0142d90"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move my Business Tax Return client meeting to 1 PM on Monday."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. I'll move your Business Tax Return client meeting to 1 PM on the next upcoming Monday. First, I need to get the current time and a list of your events to find the meeting."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-10-13 18:30:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_38b8b390a66e4b7caa38cc675c16fb5d | Team Meeting - Tax Law Updates \u2014 Mon 09:00-10:00\nid: evt_9b1c1133b63148bf8cdd5d01057c9022 | Client Meeting - Business Tax Return \u2014 Mon 10:30-12:00\nid: evt_1c3036c62a7947a6ac4da0f1793c90fe | Draft Tax Strategy Proposals \u2014 Mon 14:00-15:00\nid: evt_65b3796daa4c47b3a0aeaaa1a0142d90 | Kids Soccer Practice \u2014 Mon 18:00-19:30\nid: evt_3745a62afde241a4b3dfe14636ebf1e7 | Review Financial Documents \u2014 Tue 09:00-10:00\nid: evt_5630f56689dc48ce9bb3b13983afd8af | Client Meeting - Individual Tax Planning \u2014 Tue 10:30-12:00\nid: evt_290f8517f0894583b8e6b1e439953a8f | Prepare Tax Forms \u2014 Tue 13:00-15:00\nid: evt_0c05f8e210364cdb8aa1623ddb9903da | Parent-Teacher Association Meeting \u2014 Tue 19:00-20:00\nid: evt_d30ddf716f924fff8a206fac30667a7f | Meeting with Partner - Client Account Review \u2014 Wed 09:00-10:00\nid: evt_1ccfc7f8a7524080b4a350ed08c19f5f | Work on Tax Returns \u2014 Wed 10:30-12:00\nid: evt_a48ea9aefa6e4f3fbc98038ee493d8fc | Respond to Client Inquiries \u2014 Wed 14:00-16:00\nid: evt_af72b8653caa4ec1843d8dec48344640 | Dinner with family \u2014 Wed 18:30-20:00\nid: evt_31ae5cca958c4a3da55ed592dbe93819 | Research Tax Law Changes \u2014 Thu 09:00-10:00\nid: evt_f352ebf6334b48d392488e17702d6a85 | Client Meeting - Audit Support \u2014 Thu 10:30-12:00\nid: evt_ed5e4b372a1c45949d2a839eaa481be4 | Prepare Tax Forms \u2014 Thu 13:00-15:00\nid: evt_c2122d3fe4564995a49496217acc38c2 | Book Club Meeting \u2014 Thu 19:00-20:30\nid: evt_997ce7ac74b143abbf3414e80e09627e | Review Tax Returns \u2014 Fri 09:00-11:00\nid: evt_2a4b909cdef545d2ae6ec5705c50abe6 | Staff Training - New Tax Software \u2014 Fri 11:00-12:00\nid: evt_48fd8a8687f041c89faabe79e62b4275 | Wrap up for the Week \u2014 Fri 14:00-15:00\nid: evt_477e37c8727d47ee844eec01b86e95ba | Family Movie Night \u2014 Fri 19:00-21:00\nid: evt_64ddfd59d6394604b34ed93ff4e8272d | Kids Soccer Game \u2014 Sat 10:00-12:00\nid: evt_4ca2bcf3c4de458eafa0753ab1b0558c | Grocery Shopping \u2014 Sat 13:00-15:00\nid: evt_a42a4d6509fe495ba4efb1d2af0e7a45 | Dinner with Friends \u2014 Sat 18:00-20:00\nid: evt_1a3f57262ccc44cd896263435cb5df35 | Brunch with Family \u2014 Sun 10:00-12:00\nid: evt_7a3abbea62754229a8fa81b0d4e0656b | Family Time - Park Visit \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2024-10-14 13:00:00",
+          "end": "2024-10-14 14:30:00",
+          "event_id": "evt_9b1c1133b63148bf8cdd5d01057c9022"
+        },
+        "result": "Event updated successfully.\nClient Meeting - Business Tax Return\n  ID: evt_9b1c1133b63148bf8cdd5d01057c9022\n  Time: Mon Oct 14, 13:00 - 14:30\n  Attendees: john.doe@client.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've moved the \"Client Meeting - Business Tax Return\" to Monday, October 14th, from 1:00 PM to 2:30 PM for you."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "The Book Club meeting attendees changed. friend3 cannot make it and friend6@email.com will attend instead.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Book Club Meeting' event on Thursday and update the attendees to friend1@email.com, friend2@email.com, and friend6@email.com.",
+    "simulated_now": "2024-10-13 18:30:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Research Tax Law Changes",
+          "start": "2024-10-17 09:00:00",
+          "end": "2024-10-17 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b3f1b775157c4af08595d9f5a07fe5f3"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Client Meeting - Audit Support",
+          "start": "2024-10-17 10:30:00",
+          "end": "2024-10-17 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@email.com"
+          ],
+          "id": "evt_8005c993241944559915c9ffb3e86a5b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Prepare Tax Forms",
+          "start": "2024-10-17 13:00:00",
+          "end": "2024-10-17 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_77c4aa055e664249a7db8c912a2b7ab1"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Book Club Meeting",
+          "start": "2024-10-17 19:00:00",
+          "end": "2024-10-17 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com",
+            "friend3@email.com"
+          ],
+          "id": "evt_afa4dd1f76ad4c53bd90f69a0d425925"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Research Tax Law Changes",
+          "start": "2024-10-17 09:00:00",
+          "end": "2024-10-17 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b3f1b775157c4af08595d9f5a07fe5f3"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Client Meeting - Audit Support",
+          "start": "2024-10-17 10:30:00",
+          "end": "2024-10-17 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@email.com"
+          ],
+          "id": "evt_8005c993241944559915c9ffb3e86a5b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Prepare Tax Forms",
+          "start": "2024-10-17 13:00:00",
+          "end": "2024-10-17 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_77c4aa055e664249a7db8c912a2b7ab1"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Book Club Meeting",
+          "start": "2024-10-17 19:00:00",
+          "end": "2024-10-17 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com",
+            "friend6@email.com"
+          ],
+          "id": "evt_e329c01960e44e089e759e0ed24713bf"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "The Book Club meeting attendees changed. friend3 cannot make it and friend6@email.com will attend instead."
+      },
+      {
+        "role": "assistant",
+        "content": "I understand. I'll update the Book Club meeting attendees. First, I need to find the event. Then I'll get the event details, create a new event with the updated attendee list, and delete the old one."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-10-13 18:30:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_1d6cd31f7bde4ad39f1dcbf769eefcf3 | Team Meeting - Tax Law Updates \u2014 Mon 09:00-10:00\nid: evt_1a9896b119204570993940840fa2fae3 | Client Meeting - Business Tax Return \u2014 Mon 10:30-12:00\nid: evt_e6f8710f74164da7a0f111733b15f6a6 | Draft Tax Strategy Proposals \u2014 Mon 14:00-15:00\nid: evt_a19d578a0a6149edbf55ca9eec669a4c | Kids Soccer Practice \u2014 Mon 18:00-19:30\nid: evt_493051996e3a485082f36ca8deabd4f8 | Review Financial Documents \u2014 Tue 09:00-10:00\nid: evt_45e026474fec4598b21fe9a8f112a455 | Client Meeting - Individual Tax Planning \u2014 Tue 10:30-12:00\nid: evt_3b5740d8b1864d9abc6389de9e845212 | Prepare Tax Forms \u2014 Tue 13:00-15:00\nid: evt_8ce0d5294b0a4c1b96d4adda84f5f4d3 | Parent-Teacher Association Meeting \u2014 Tue 19:00-20:00\nid: evt_00c198fa46f4426cb3a913b182363ea4 | Meeting with Partner - Client Account Review \u2014 Wed 09:00-10:00\nid: evt_cec12641d0fe4016b47b4ad1f81b97e1 | Work on Tax Returns \u2014 Wed 10:30-12:00\nid: evt_c7cca168a6bb486486450eda54d0bf69 | Respond to Client Inquiries \u2014 Wed 14:00-16:00\nid: evt_e0378582dda445aa97b394e86ab28d30 | Dinner with family \u2014 Wed 18:30-20:00\nid: evt_b3f1b775157c4af08595d9f5a07fe5f3 | Research Tax Law Changes \u2014 Thu 09:00-10:00\nid: evt_8005c993241944559915c9ffb3e86a5b | Client Meeting - Audit Support \u2014 Thu 10:30-12:00\nid: evt_77c4aa055e664249a7db8c912a2b7ab1 | Prepare Tax Forms \u2014 Thu 13:00-15:00\nid: evt_afa4dd1f76ad4c53bd90f69a0d425925 | Book Club Meeting \u2014 Thu 19:00-20:30\nid: evt_b480fb8ff46f45ccbeee33c172581419 | Review Tax Returns \u2014 Fri 09:00-11:00\nid: evt_882c6356209540778c446fe5c98cca52 | Staff Training - New Tax Software \u2014 Fri 11:00-12:00\nid: evt_d3b03ebf407848088ed285d4f5639d8b | Wrap up for the Week \u2014 Fri 14:00-15:00\nid: evt_3e13cc111aa14466a921afba3d545f53 | Family Movie Night \u2014 Fri 19:00-21:00\nid: evt_5e7f034dfbf74570974d37a2b9c9f56c | Kids Soccer Game \u2014 Sat 10:00-12:00\nid: evt_9325911e1c2242cf871b10f2972b023b | Grocery Shopping \u2014 Sat 13:00-15:00\nid: evt_560e5fd5f6e64c4e889d507c19ff6948 | Dinner with Friends \u2014 Sat 18:00-20:00\nid: evt_f2d2d8d5c06c44eba6bda86f14bb79eb | Brunch with Family \u2014 Sun 10:00-12:00\nid: evt_416cf20165074b6db8ae46377a09328d | Family Time - Park Visit \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_afa4dd1f76ad4c53bd90f69a0d425925"
+        },
+        "result": "Book Club Meeting\n  ID: evt_afa4dd1f76ad4c53bd90f69a0d425925\n  Time: Thu Oct 17, 19:00 - 20:30\n  Attendees: friend1@email.com, friend2@email.com, friend3@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com",
+            "friend6@email.com"
+          ],
+          "end": "2024-10-17 20:30:00",
+          "start": "2024-10-17 19:00:00",
+          "summary": "Book Club Meeting"
+        },
+        "result": "Event created successfully.\nBook Club Meeting\n  ID: evt_e329c01960e44e089e759e0ed24713bf\n  Time: Thu Oct 17, 19:00 - 20:30\n  Attendees: friend1@email.com, friend2@email.com, friend6@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "delete_event",
+        "args": {
+          "event_id": "evt_afa4dd1f76ad4c53bd90f69a0d425925"
+        },
+        "result": "Event deleted: id: evt_afa4dd1f76ad4c53bd90f69a0d425925 | Book Club Meeting \u2014 Thu 19:00-20:30"
+      },
+      {
+        "role": "assistant",
+        "content": "Done. I've updated the attendees for the Book Club meeting. friend3 has been removed and friend6@email.com has been added."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is the meeting with the partner this week?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Meeting with Partner - Client Account Review' event and return its start time.",
+    "simulated_now": "2024-10-13 18:30:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Partner - Client Account Review",
+          "start": "2024-10-16 09:00:00",
+          "end": "2024-10-16 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "partner@firm.com"
+          ],
+          "id": "evt_3864461b31af41f29d50c26e3e2fab15"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Work on Tax Returns",
+          "start": "2024-10-16 10:30:00",
+          "end": "2024-10-16 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ee42ca42ebbc4f248a4f11bb688aa550"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Respond to Client Inquiries",
+          "start": "2024-10-16 14:00:00",
+          "end": "2024-10-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6b0eec2f39d243a79c09c00d276e46dd"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with family",
+          "start": "2024-10-16 18:30:00",
+          "end": "2024-10-16 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e1efab4992f14634bbd59bf09ea9accc"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Partner - Client Account Review",
+          "start": "2024-10-16 09:00:00",
+          "end": "2024-10-16 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "partner@firm.com"
+          ],
+          "id": "evt_3864461b31af41f29d50c26e3e2fab15"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Work on Tax Returns",
+          "start": "2024-10-16 10:30:00",
+          "end": "2024-10-16 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ee42ca42ebbc4f248a4f11bb688aa550"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Respond to Client Inquiries",
+          "start": "2024-10-16 14:00:00",
+          "end": "2024-10-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6b0eec2f39d243a79c09c00d276e46dd"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with family",
+          "start": "2024-10-16 18:30:00",
+          "end": "2024-10-16 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e1efab4992f14634bbd59bf09ea9accc"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is the meeting with the partner this week?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-10-13 18:30:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-10-13 00:00:00",
+          "time_max": "2024-10-20 23:59:59"
+        },
+        "result": "Found 25 events:\nid: evt_38ba861357854c3cacc4e901a2138243 | Team Meeting - Tax Law Updates \u2014 Mon 09:00-10:00\nid: evt_7efa90febc804bd584f3763f56850efc | Client Meeting - Business Tax Return \u2014 Mon 10:30-12:00\nid: evt_5aecb91119064b9fb48bec42156f7d6e | Draft Tax Strategy Proposals \u2014 Mon 14:00-15:00\nid: evt_0a712bb047b346198d1a9646ba4870be | Kids Soccer Practice \u2014 Mon 18:00-19:30\nid: evt_c08119081165491798dbe47f25b0b65b | Review Financial Documents \u2014 Tue 09:00-10:00\nid: evt_c6fbc191fa6647f18aacc3a3c3fe8da5 | Client Meeting - Individual Tax Planning \u2014 Tue 10:30-12:00\nid: evt_61bfcedbf55d46d88718e35a56fed9e6 | Prepare Tax Forms \u2014 Tue 13:00-15:00\nid: evt_9bfc7b77cc1a4e8cb8f599db758afe5e | Parent-Teacher Association Meeting \u2014 Tue 19:00-20:00\nid: evt_3864461b31af41f29d50c26e3e2fab15 | Meeting with Partner - Client Account Review \u2014 Wed 09:00-10:00\nid: evt_ee42ca42ebbc4f248a4f11bb688aa550 | Work on Tax Returns \u2014 Wed 10:30-12:00\nid: evt_6b0eec2f39d243a79c09c00d276e46dd | Respond to Client Inquiries \u2014 Wed 14:00-16:00\nid: evt_e1efab4992f14634bbd59bf09ea9accc | Dinner with family \u2014 Wed 18:30-20:00\nid: evt_7497bc23d3f54c368a9cdba685fd8fb4 | Research Tax Law Changes \u2014 Thu 09:00-10:00\nid: evt_02948d147c3b4a0db7798cdf526a317e | Client Meeting - Audit Support \u2014 Thu 10:30-12:00\nid: evt_7d25999751414630bd2c4b75f92ee1bb | Prepare Tax Forms \u2014 Thu 13:00-15:00\nid: evt_b862e7c4983d4f558101f7856b821ed8 | Book Club Meeting \u2014 Thu 19:00-20:30\nid: evt_2f86083c53054029935c726ed0638175 | Review Tax Returns \u2014 Fri 09:00-11:00\nid: evt_7ac73c7750004b9cbcc823991ffe8d20 | Staff Training - New Tax Software \u2014 Fri 11:00-12:00\nid: evt_5f986517816e4ac9a6152434e2bfa00b | Wrap up for the Week \u2014 Fri 14:00-15:00\nid: evt_9c9d9738546a49d7a9713a7f450f9e3b | Family Movie Night \u2014 Fri 19:00-21:00\nid: evt_92c9d96eee8c4fecb32deb914faccef5 | Kids Soccer Game \u2014 Sat 10:00-12:00\nid: evt_8fd880daff854d69ae6363b243f2b85f | Grocery Shopping \u2014 Sat 13:00-15:00\nid: evt_365f693d5b744fe49637212b76517f38 | Dinner with Friends \u2014 Sat 18:00-20:00\nid: evt_468fa2512abb4b46abdfd4182650d99e | Brunch with Family \u2014 Sun 10:00-12:00\nid: evt_49bbf57a7fb54a1294dcc904218d8a88 | Family Time - Park Visit \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "The \"Meeting with Partner - Client Account Review\" is scheduled for Wednesday from 9:00 to 10:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is going to be at the audit support meeting?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Client Meeting - Audit Support' event on Thursday and return the list of attendees.",
+    "simulated_now": "2024-10-13 18:30:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Research Tax Law Changes",
+          "start": "2024-10-17 09:00:00",
+          "end": "2024-10-17 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_18783660b620422c8998f5c6f4cb2be8"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Client Meeting - Audit Support",
+          "start": "2024-10-17 10:30:00",
+          "end": "2024-10-17 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@email.com"
+          ],
+          "id": "evt_0ffb5bdeb29a4a3e9448bb51275553b8"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Prepare Tax Forms",
+          "start": "2024-10-17 13:00:00",
+          "end": "2024-10-17 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f1ac0fe168784b698053b0ddf35dfd30"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Book Club Meeting",
+          "start": "2024-10-17 19:00:00",
+          "end": "2024-10-17 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com",
+            "friend3@email.com"
+          ],
+          "id": "evt_90c463a9a78c4e36b46a4f06cab8fb18"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Research Tax Law Changes",
+          "start": "2024-10-17 09:00:00",
+          "end": "2024-10-17 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_18783660b620422c8998f5c6f4cb2be8"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Client Meeting - Audit Support",
+          "start": "2024-10-17 10:30:00",
+          "end": "2024-10-17 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@email.com"
+          ],
+          "id": "evt_0ffb5bdeb29a4a3e9448bb51275553b8"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Prepare Tax Forms",
+          "start": "2024-10-17 13:00:00",
+          "end": "2024-10-17 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f1ac0fe168784b698053b0ddf35dfd30"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Book Club Meeting",
+          "start": "2024-10-17 19:00:00",
+          "end": "2024-10-17 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com",
+            "friend3@email.com"
+          ],
+          "id": "evt_90c463a9a78c4e36b46a4f06cab8fb18"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is going to be at the audit support meeting?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can help with that. I will first look for the \"audit support meeting\" in your calendar and then get the attendee list."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_244749c3bc644a7194b1081aa5777e98 | Team Meeting - Tax Law Updates \u2014 Mon 09:00-10:00\nid: evt_4adedda7fe2f48219cc9635f7566437a | Client Meeting - Business Tax Return \u2014 Mon 10:30-12:00\nid: evt_cdad3b54dd6346b7bf270bae21b22743 | Draft Tax Strategy Proposals \u2014 Mon 14:00-15:00\nid: evt_45991633e801473eb0acb9f4ee8abf84 | Kids Soccer Practice \u2014 Mon 18:00-19:30\nid: evt_8e665a52c0704e0c8345e8ac31561279 | Review Financial Documents \u2014 Tue 09:00-10:00\nid: evt_a6e2e3f36cde47e49e09ea17b7d87e5f | Client Meeting - Individual Tax Planning \u2014 Tue 10:30-12:00\nid: evt_5ea941aa84ac40ddb6304c9b95f0328e | Prepare Tax Forms \u2014 Tue 13:00-15:00\nid: evt_ac43639d27a7497e86d52feb05a64e55 | Parent-Teacher Association Meeting \u2014 Tue 19:00-20:00\nid: evt_fdb6829f3c9c4e5698484a9bad98136d | Meeting with Partner - Client Account Review \u2014 Wed 09:00-10:00\nid: evt_515df4ee3c8e4104beb5ddf0a7892114 | Work on Tax Returns \u2014 Wed 10:30-12:00\nid: evt_516f39fabf9a477182a46dba3748cc05 | Respond to Client Inquiries \u2014 Wed 14:00-16:00\nid: evt_882d63b08bef4af09d619aa38a707e3c | Dinner with family \u2014 Wed 18:30-20:00\nid: evt_18783660b620422c8998f5c6f4cb2be8 | Research Tax Law Changes \u2014 Thu 09:00-10:00\nid: evt_0ffb5bdeb29a4a3e9448bb51275553b8 | Client Meeting - Audit Support \u2014 Thu 10:30-12:00\nid: evt_f1ac0fe168784b698053b0ddf35dfd30 | Prepare Tax Forms \u2014 Thu 13:00-15:00\nid: evt_90c463a9a78c4e36b46a4f06cab8fb18 | Book Club Meeting \u2014 Thu 19:00-20:30\nid: evt_46b7a9d6d5cb4975900642f47b94d106 | Review Tax Returns \u2014 Fri 09:00-11:00\nid: evt_8eeb4341f521495db519b2fdf4c39160 | Staff Training - New Tax Software \u2014 Fri 11:00-12:00\nid: evt_2bcbb1a665b247379dcc1b32cb334ac2 | Wrap up for the Week \u2014 Fri 14:00-15:00\nid: evt_e32059170d454b1984ddfadac3aaa06f | Family Movie Night \u2014 Fri 19:00-21:00\nid: evt_8910cad023054810af6e920e3050fa6b | Kids Soccer Game \u2014 Sat 10:00-12:00\nid: evt_8e7f617509544640ac266a257707e6f9 | Grocery Shopping \u2014 Sat 13:00-15:00\nid: evt_ca8400756d054b5fb39dada489224a97 | Dinner with Friends \u2014 Sat 18:00-20:00\nid: evt_e0b3d8d580044f97911decf31b9f7494 | Brunch with Family \u2014 Sun 10:00-12:00\nid: evt_34ea455530a54792a1879470d75fcf97 | Family Time - Park Visit \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Great, I've found the \"Client Meeting - Audit Support\" event. Now I will get the attendee list."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_0ffb5bdeb29a4a3e9448bb51275553b8"
+        },
+        "result": "Client Meeting - Audit Support\n  ID: evt_0ffb5bdeb29a4a3e9448bb51275553b8\n  Time: Thu Oct 17, 10:30 - 12:00\n  Attendees: client@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "The only person attending the audit support meeting is client@email.com."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Schedule a meeting with John Doe on Monday. If he is busy during the morning put it in the afternoon.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Check John Doe's availability on Monday morning. If he is busy, create a new meeting with John Doe on Monday afternoon.",
+    "simulated_now": "2024-10-13 18:30:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tax Law Updates",
+          "start": "2024-10-14 09:00:00",
+          "end": "2024-10-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.jones@firm.com",
+            "michael.brown@firm.com"
+          ],
+          "id": "evt_f783735a13d34e2f9236aa534d7232cd"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Business Tax Return",
+          "start": "2024-10-14 10:30:00",
+          "end": "2024-10-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@client.com"
+          ],
+          "id": "evt_1828f86ab1214baf84533b2064b4bd53"
+        },
+        {
+          "day": "Monday",
+          "summary": "Draft Tax Strategy Proposals",
+          "start": "2024-10-14 14:00:00",
+          "end": "2024-10-14 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b059bb3803614609aeefcb06c2b23d03"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids Soccer Practice",
+          "start": "2024-10-14 18:00:00",
+          "end": "2024-10-14 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d8dd21d09aa946babda8f1db880f37b8"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tax Law Updates",
+          "start": "2024-10-14 09:00:00",
+          "end": "2024-10-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.jones@firm.com",
+            "michael.brown@firm.com"
+          ],
+          "id": "evt_f783735a13d34e2f9236aa534d7232cd"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Business Tax Return",
+          "start": "2024-10-14 10:30:00",
+          "end": "2024-10-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@client.com"
+          ],
+          "id": "evt_1828f86ab1214baf84533b2064b4bd53"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with John Doe",
+          "start": "2024-10-14 13:00:00",
+          "end": "2024-10-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@client.com"
+          ],
+          "id": "evt_ec8b1ed8b6ac4df7a7a97802da902ff0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Draft Tax Strategy Proposals",
+          "start": "2024-10-14 14:00:00",
+          "end": "2024-10-14 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b059bb3803614609aeefcb06c2b23d03"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids Soccer Practice",
+          "start": "2024-10-14 18:00:00",
+          "end": "2024-10-14 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d8dd21d09aa946babda8f1db880f37b8"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Schedule a meeting with John Doe on Monday. If he is busy during the morning put it in the afternoon."
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to determine the date of the upcoming Monday. Then, I will list all events on that Monday to check for John's availability. Finally, I will schedule a meeting with him in the morning if he is free, or in the afternoon if he is busy."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-10-13 18:30:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will now list all the events on Monday, October 14th, 2024, to see if there are any existing meetings with John Doe."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-10-14 23:59:59",
+          "time_min": "2024-10-14 00:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_f783735a13d34e2f9236aa534d7232cd | Team Meeting - Tax Law Updates \u2014 Mon 09:00-10:00\nid: evt_1828f86ab1214baf84533b2064b4bd53 | Client Meeting - Business Tax Return \u2014 Mon 10:30-12:00\nid: evt_b059bb3803614609aeefcb06c2b23d03 | Draft Tax Strategy Proposals \u2014 Mon 14:00-15:00\nid: evt_d8dd21d09aa946babda8f1db880f37b8 | Kids Soccer Practice \u2014 Mon 18:00-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "I am checking the attendees for all the events on Monday, October 14th to see if John Doe is busy."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_f783735a13d34e2f9236aa534d7232cd"
+        },
+        "result": "Team Meeting - Tax Law Updates\n  ID: evt_f783735a13d34e2f9236aa534d7232cd\n  Time: Mon Oct 14, 09:00 - 10:00\n  Attendees: david.lee@firm.com, sarah.jones@firm.com, michael.brown@firm.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_1828f86ab1214baf84533b2064b4bd53"
+        },
+        "result": "Client Meeting - Business Tax Return\n  ID: evt_1828f86ab1214baf84533b2064b4bd53\n  Time: Mon Oct 14, 10:30 - 12:00\n  Attendees: john.doe@client.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_b059bb3803614609aeefcb06c2b23d03"
+        },
+        "result": "Draft Tax Strategy Proposals\n  ID: evt_b059bb3803614609aeefcb06c2b23d03\n  Time: Mon Oct 14, 14:00 - 15:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_d8dd21d09aa946babda8f1db880f37b8"
+        },
+        "result": "Kids Soccer Practice\n  ID: evt_d8dd21d09aa946babda8f1db880f37b8\n  Time: Mon Oct 14, 18:00 - 19:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. John is busy on Monday morning from 10:30 to 12:00. I will schedule a meeting with him in the afternoon at 13:00."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "attendees": [
+            "john.doe@client.com"
+          ],
+          "end": "2024-10-14 14:00:00",
+          "start": "2024-10-14 13:00:00",
+          "summary": "Meeting with John Doe"
+        },
+        "result": "Event created successfully.\nMeeting with John Doe\n  ID: evt_ec8b1ed8b6ac4df7a7a97802da902ff0\n  Time: Mon Oct 14, 13:00 - 14:00\n  Attendees: john.doe@client.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have scheduled a meeting with John Doe on Monday, October 14th, from 13:00 to 14:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "Prompt user for additional information about which event to reschedule and the new desired time.",
+    "simulated_now": "2024-10-13 18:30:00",
+    "addressed_days": [],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tax Law Updates",
+          "start": "2024-10-14 09:00:00",
+          "end": "2024-10-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.jones@firm.com",
+            "michael.brown@firm.com"
+          ],
+          "id": "evt_17e03d0c37e347b1b454b10b966e74a8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Business Tax Return",
+          "start": "2024-10-14 10:30:00",
+          "end": "2024-10-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@client.com"
+          ],
+          "id": "evt_9bf279bb7d1e4b5ab2fb2256c77f042a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Draft Tax Strategy Proposals",
+          "start": "2024-10-14 14:00:00",
+          "end": "2024-10-14 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c2f98095359c44a7b5faefbd4aca1dac"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids Soccer Practice",
+          "start": "2024-10-14 18:00:00",
+          "end": "2024-10-14 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_db4faff70acb42f991f45c702442ac44"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Review Financial Documents",
+          "start": "2024-10-15 09:00:00",
+          "end": "2024-10-15 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_33283d10f8b8451fb7cb7c0b7cbb32b9"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Meeting - Individual Tax Planning",
+          "start": "2024-10-15 10:30:00",
+          "end": "2024-10-15 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.smith@client.com"
+          ],
+          "id": "evt_44556b803a774d4fa4f3f2eca9efe38b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Prepare Tax Forms",
+          "start": "2024-10-15 13:00:00",
+          "end": "2024-10-15 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_026cdff95a8f418ca1be997b561c5502"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Association Meeting",
+          "start": "2024-10-15 19:00:00",
+          "end": "2024-10-15 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "principal@school.com"
+          ],
+          "id": "evt_8ffdacfa2ac34b38ab47e9f4cb9ec884"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Partner - Client Account Review",
+          "start": "2024-10-16 09:00:00",
+          "end": "2024-10-16 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "partner@firm.com"
+          ],
+          "id": "evt_9e13199cf24e4494b9e18312b82fba71"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Work on Tax Returns",
+          "start": "2024-10-16 10:30:00",
+          "end": "2024-10-16 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_df344db16f8b42f4b51ebf8e5dc3ef4a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Respond to Client Inquiries",
+          "start": "2024-10-16 14:00:00",
+          "end": "2024-10-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_84011cb347ab4a8d84f233667e78177b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with family",
+          "start": "2024-10-16 18:30:00",
+          "end": "2024-10-16 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d2c2bca2fcdc4665ac68a74afb7b803b"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Research Tax Law Changes",
+          "start": "2024-10-17 09:00:00",
+          "end": "2024-10-17 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1a2fc97be0da460f9cb2e913909121ae"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Client Meeting - Audit Support",
+          "start": "2024-10-17 10:30:00",
+          "end": "2024-10-17 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@email.com"
+          ],
+          "id": "evt_a5449dd73f784d1aa9f32d2a49a1ad32"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Prepare Tax Forms",
+          "start": "2024-10-17 13:00:00",
+          "end": "2024-10-17 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d8f20f68600249c4813b607680f98470"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Book Club Meeting",
+          "start": "2024-10-17 19:00:00",
+          "end": "2024-10-17 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com",
+            "friend3@email.com"
+          ],
+          "id": "evt_535ac2372b91419a947daab8b998abc5"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Review Tax Returns",
+          "start": "2024-10-18 09:00:00",
+          "end": "2024-10-18 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9a81dae934a04f6c8d0e855342e97d89"
+        },
+        {
+          "day": "Friday",
+          "summary": "Staff Training - New Tax Software",
+          "start": "2024-10-18 11:00:00",
+          "end": "2024-10-18 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "training@email.com"
+          ],
+          "id": "evt_5206b121df0841aaaf1bd135a4a68492"
+        },
+        {
+          "day": "Friday",
+          "summary": "Wrap up for the Week",
+          "start": "2024-10-18 14:00:00",
+          "end": "2024-10-18 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4d5a5aa1f5ce41c08230fc6b1001e395"
+        },
+        {
+          "day": "Friday",
+          "summary": "Family Movie Night",
+          "start": "2024-10-18 19:00:00",
+          "end": "2024-10-18 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_489cd988d27842079dc8fe9f6983459f"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Kids Soccer Game",
+          "start": "2024-10-19 10:00:00",
+          "end": "2024-10-19 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_525e329de3ed4baa98a3e8d6f06f4dae"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2024-10-19 13:00:00",
+          "end": "2024-10-19 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cc278561790a45fe9c162e44aa1260b3"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with Friends",
+          "start": "2024-10-19 18:00:00",
+          "end": "2024-10-19 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend4@email.com",
+            "friend5@email.com"
+          ],
+          "id": "evt_879b407428f84665a56c44c9ece63a21"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Family",
+          "start": "2024-10-20 10:00:00",
+          "end": "2024-10-20 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0070c41685e94266b647d6ae25fe1260"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Family Time - Park Visit",
+          "start": "2024-10-20 14:00:00",
+          "end": "2024-10-20 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b26bb7a5b3a84122925c66e1d9400d88"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tax Law Updates",
+          "start": "2024-10-14 09:00:00",
+          "end": "2024-10-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.jones@firm.com",
+            "michael.brown@firm.com"
+          ],
+          "id": "evt_17e03d0c37e347b1b454b10b966e74a8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Business Tax Return",
+          "start": "2024-10-14 10:30:00",
+          "end": "2024-10-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@client.com"
+          ],
+          "id": "evt_9bf279bb7d1e4b5ab2fb2256c77f042a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Draft Tax Strategy Proposals",
+          "start": "2024-10-14 14:00:00",
+          "end": "2024-10-14 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c2f98095359c44a7b5faefbd4aca1dac"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids Soccer Practice",
+          "start": "2024-10-14 18:00:00",
+          "end": "2024-10-14 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_db4faff70acb42f991f45c702442ac44"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Review Financial Documents",
+          "start": "2024-10-15 09:00:00",
+          "end": "2024-10-15 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_33283d10f8b8451fb7cb7c0b7cbb32b9"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Meeting - Individual Tax Planning",
+          "start": "2024-10-15 10:30:00",
+          "end": "2024-10-15 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.smith@client.com"
+          ],
+          "id": "evt_44556b803a774d4fa4f3f2eca9efe38b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Prepare Tax Forms",
+          "start": "2024-10-15 13:00:00",
+          "end": "2024-10-15 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_026cdff95a8f418ca1be997b561c5502"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Association Meeting",
+          "start": "2024-10-15 19:00:00",
+          "end": "2024-10-15 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "principal@school.com"
+          ],
+          "id": "evt_8ffdacfa2ac34b38ab47e9f4cb9ec884"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Partner - Client Account Review",
+          "start": "2024-10-16 09:00:00",
+          "end": "2024-10-16 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "partner@firm.com"
+          ],
+          "id": "evt_9e13199cf24e4494b9e18312b82fba71"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Work on Tax Returns",
+          "start": "2024-10-16 10:30:00",
+          "end": "2024-10-16 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_df344db16f8b42f4b51ebf8e5dc3ef4a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Respond to Client Inquiries",
+          "start": "2024-10-16 14:00:00",
+          "end": "2024-10-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_84011cb347ab4a8d84f233667e78177b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with family",
+          "start": "2024-10-16 18:30:00",
+          "end": "2024-10-16 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d2c2bca2fcdc4665ac68a74afb7b803b"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Research Tax Law Changes",
+          "start": "2024-10-17 09:00:00",
+          "end": "2024-10-17 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1a2fc97be0da460f9cb2e913909121ae"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Client Meeting - Audit Support",
+          "start": "2024-10-17 10:30:00",
+          "end": "2024-10-17 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@email.com"
+          ],
+          "id": "evt_a5449dd73f784d1aa9f32d2a49a1ad32"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Prepare Tax Forms",
+          "start": "2024-10-17 13:00:00",
+          "end": "2024-10-17 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d8f20f68600249c4813b607680f98470"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Book Club Meeting",
+          "start": "2024-10-17 19:00:00",
+          "end": "2024-10-17 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com",
+            "friend3@email.com"
+          ],
+          "id": "evt_535ac2372b91419a947daab8b998abc5"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Review Tax Returns",
+          "start": "2024-10-18 09:00:00",
+          "end": "2024-10-18 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9a81dae934a04f6c8d0e855342e97d89"
+        },
+        {
+          "day": "Friday",
+          "summary": "Staff Training - New Tax Software",
+          "start": "2024-10-18 11:00:00",
+          "end": "2024-10-18 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "training@email.com"
+          ],
+          "id": "evt_5206b121df0841aaaf1bd135a4a68492"
+        },
+        {
+          "day": "Friday",
+          "summary": "Wrap up for the Week",
+          "start": "2024-10-18 14:00:00",
+          "end": "2024-10-18 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4d5a5aa1f5ce41c08230fc6b1001e395"
+        },
+        {
+          "day": "Friday",
+          "summary": "Family Movie Night",
+          "start": "2024-10-18 19:00:00",
+          "end": "2024-10-18 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_489cd988d27842079dc8fe9f6983459f"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Kids Soccer Game",
+          "start": "2024-10-19 10:00:00",
+          "end": "2024-10-19 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_525e329de3ed4baa98a3e8d6f06f4dae"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2024-10-19 13:00:00",
+          "end": "2024-10-19 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cc278561790a45fe9c162e44aa1260b3"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with Friends",
+          "start": "2024-10-19 18:00:00",
+          "end": "2024-10-19 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend4@email.com",
+            "friend5@email.com"
+          ],
+          "id": "evt_879b407428f84665a56c44c9ece63a21"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Family",
+          "start": "2024-10-20 10:00:00",
+          "end": "2024-10-20 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0070c41685e94266b647d6ae25fe1260"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Family Time - Park Visit",
+          "start": "2024-10-20 14:00:00",
+          "end": "2024-10-20 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b26bb7a5b3a84122925c66e1d9400d88"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule"
+      },
+      {
+        "role": "assistant",
+        "content": "I can help with that. What is the name of the event you would like to reschedule, and what is the new time you would like to set for it?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "cancel the meeting",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "Prompt user for additional information about which meeting to cancel.",
+    "simulated_now": "2024-10-13 18:30:00",
+    "addressed_days": [],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tax Law Updates",
+          "start": "2024-10-14 09:00:00",
+          "end": "2024-10-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.jones@firm.com",
+            "michael.brown@firm.com"
+          ],
+          "id": "evt_ae4ce482f8ac4cb585a42ca0484414ea"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Business Tax Return",
+          "start": "2024-10-14 10:30:00",
+          "end": "2024-10-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@client.com"
+          ],
+          "id": "evt_4018ecb303434397b920e0c28a391bcf"
+        },
+        {
+          "day": "Monday",
+          "summary": "Draft Tax Strategy Proposals",
+          "start": "2024-10-14 14:00:00",
+          "end": "2024-10-14 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_22240245e31d4512ab0f4cc87b2952ba"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids Soccer Practice",
+          "start": "2024-10-14 18:00:00",
+          "end": "2024-10-14 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fe8e96c936024d94b802d9af232f80e3"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Review Financial Documents",
+          "start": "2024-10-15 09:00:00",
+          "end": "2024-10-15 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4e385509f57047e282731b8e7f3b76da"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Meeting - Individual Tax Planning",
+          "start": "2024-10-15 10:30:00",
+          "end": "2024-10-15 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.smith@client.com"
+          ],
+          "id": "evt_b8ed9651ab1c475081cf7cb8958ab8ee"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Prepare Tax Forms",
+          "start": "2024-10-15 13:00:00",
+          "end": "2024-10-15 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7570588acce74a12bc55c308a61c419d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Association Meeting",
+          "start": "2024-10-15 19:00:00",
+          "end": "2024-10-15 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "principal@school.com"
+          ],
+          "id": "evt_f6f0da030c484f0db236a0f46736c15a"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Partner - Client Account Review",
+          "start": "2024-10-16 09:00:00",
+          "end": "2024-10-16 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "partner@firm.com"
+          ],
+          "id": "evt_fadf64e086364cc28eca147c818fc388"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Work on Tax Returns",
+          "start": "2024-10-16 10:30:00",
+          "end": "2024-10-16 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a97a31f86b0d446c820397fd157f04ac"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Respond to Client Inquiries",
+          "start": "2024-10-16 14:00:00",
+          "end": "2024-10-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_085780e9bdcb4ae39df3f362a834d3f5"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with family",
+          "start": "2024-10-16 18:30:00",
+          "end": "2024-10-16 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_501805f06c714087b74725f9061f1a62"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Research Tax Law Changes",
+          "start": "2024-10-17 09:00:00",
+          "end": "2024-10-17 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a7c8c11dbecd4d68873503fdd95fa785"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Client Meeting - Audit Support",
+          "start": "2024-10-17 10:30:00",
+          "end": "2024-10-17 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@email.com"
+          ],
+          "id": "evt_057acdcdf5294a9c830cb96fac1d5a7d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Prepare Tax Forms",
+          "start": "2024-10-17 13:00:00",
+          "end": "2024-10-17 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ce7576ab87ee4ebfb353fb645a3a8cb0"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Book Club Meeting",
+          "start": "2024-10-17 19:00:00",
+          "end": "2024-10-17 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com",
+            "friend3@email.com"
+          ],
+          "id": "evt_30bb5b0f0322456e90290510c7ea88dc"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Review Tax Returns",
+          "start": "2024-10-18 09:00:00",
+          "end": "2024-10-18 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e273ccdb64c540c5ba360057d0054138"
+        },
+        {
+          "day": "Friday",
+          "summary": "Staff Training - New Tax Software",
+          "start": "2024-10-18 11:00:00",
+          "end": "2024-10-18 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "training@email.com"
+          ],
+          "id": "evt_5231d041c5474644aa125784ab04df2b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Wrap up for the Week",
+          "start": "2024-10-18 14:00:00",
+          "end": "2024-10-18 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c061c93d3e0448f09fef54e5ee3057e3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Family Movie Night",
+          "start": "2024-10-18 19:00:00",
+          "end": "2024-10-18 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c40bd70fec544d809bdf54727178d3ea"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Kids Soccer Game",
+          "start": "2024-10-19 10:00:00",
+          "end": "2024-10-19 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_676b33a414df4c6196efd3320865295f"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2024-10-19 13:00:00",
+          "end": "2024-10-19 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f0eaeeb4209048cbabf5b58de004087f"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with Friends",
+          "start": "2024-10-19 18:00:00",
+          "end": "2024-10-19 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend4@email.com",
+            "friend5@email.com"
+          ],
+          "id": "evt_485b65d208524ca2aa5a1b4bad5274a5"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Family",
+          "start": "2024-10-20 10:00:00",
+          "end": "2024-10-20 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7cb19241148747feaae022024c9fa99d"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Family Time - Park Visit",
+          "start": "2024-10-20 14:00:00",
+          "end": "2024-10-20 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_be88892f338642678d05060f86ae7f41"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tax Law Updates",
+          "start": "2024-10-14 09:00:00",
+          "end": "2024-10-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.jones@firm.com",
+            "michael.brown@firm.com"
+          ],
+          "id": "evt_ae4ce482f8ac4cb585a42ca0484414ea"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Business Tax Return",
+          "start": "2024-10-14 10:30:00",
+          "end": "2024-10-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@client.com"
+          ],
+          "id": "evt_4018ecb303434397b920e0c28a391bcf"
+        },
+        {
+          "day": "Monday",
+          "summary": "Draft Tax Strategy Proposals",
+          "start": "2024-10-14 14:00:00",
+          "end": "2024-10-14 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_22240245e31d4512ab0f4cc87b2952ba"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids Soccer Practice",
+          "start": "2024-10-14 18:00:00",
+          "end": "2024-10-14 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fe8e96c936024d94b802d9af232f80e3"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Review Financial Documents",
+          "start": "2024-10-15 09:00:00",
+          "end": "2024-10-15 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4e385509f57047e282731b8e7f3b76da"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Meeting - Individual Tax Planning",
+          "start": "2024-10-15 10:30:00",
+          "end": "2024-10-15 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.smith@client.com"
+          ],
+          "id": "evt_b8ed9651ab1c475081cf7cb8958ab8ee"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Prepare Tax Forms",
+          "start": "2024-10-15 13:00:00",
+          "end": "2024-10-15 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7570588acce74a12bc55c308a61c419d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Association Meeting",
+          "start": "2024-10-15 19:00:00",
+          "end": "2024-10-15 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "principal@school.com"
+          ],
+          "id": "evt_f6f0da030c484f0db236a0f46736c15a"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Partner - Client Account Review",
+          "start": "2024-10-16 09:00:00",
+          "end": "2024-10-16 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "partner@firm.com"
+          ],
+          "id": "evt_fadf64e086364cc28eca147c818fc388"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Work on Tax Returns",
+          "start": "2024-10-16 10:30:00",
+          "end": "2024-10-16 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a97a31f86b0d446c820397fd157f04ac"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Respond to Client Inquiries",
+          "start": "2024-10-16 14:00:00",
+          "end": "2024-10-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_085780e9bdcb4ae39df3f362a834d3f5"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with family",
+          "start": "2024-10-16 18:30:00",
+          "end": "2024-10-16 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_501805f06c714087b74725f9061f1a62"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Research Tax Law Changes",
+          "start": "2024-10-17 09:00:00",
+          "end": "2024-10-17 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a7c8c11dbecd4d68873503fdd95fa785"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Client Meeting - Audit Support",
+          "start": "2024-10-17 10:30:00",
+          "end": "2024-10-17 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@email.com"
+          ],
+          "id": "evt_057acdcdf5294a9c830cb96fac1d5a7d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Prepare Tax Forms",
+          "start": "2024-10-17 13:00:00",
+          "end": "2024-10-17 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ce7576ab87ee4ebfb353fb645a3a8cb0"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Book Club Meeting",
+          "start": "2024-10-17 19:00:00",
+          "end": "2024-10-17 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com",
+            "friend3@email.com"
+          ],
+          "id": "evt_30bb5b0f0322456e90290510c7ea88dc"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Review Tax Returns",
+          "start": "2024-10-18 09:00:00",
+          "end": "2024-10-18 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e273ccdb64c540c5ba360057d0054138"
+        },
+        {
+          "day": "Friday",
+          "summary": "Staff Training - New Tax Software",
+          "start": "2024-10-18 11:00:00",
+          "end": "2024-10-18 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "training@email.com"
+          ],
+          "id": "evt_5231d041c5474644aa125784ab04df2b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Wrap up for the Week",
+          "start": "2024-10-18 14:00:00",
+          "end": "2024-10-18 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c061c93d3e0448f09fef54e5ee3057e3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Family Movie Night",
+          "start": "2024-10-18 19:00:00",
+          "end": "2024-10-18 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c40bd70fec544d809bdf54727178d3ea"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Kids Soccer Game",
+          "start": "2024-10-19 10:00:00",
+          "end": "2024-10-19 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_676b33a414df4c6196efd3320865295f"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2024-10-19 13:00:00",
+          "end": "2024-10-19 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f0eaeeb4209048cbabf5b58de004087f"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with Friends",
+          "start": "2024-10-19 18:00:00",
+          "end": "2024-10-19 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend4@email.com",
+            "friend5@email.com"
+          ],
+          "id": "evt_485b65d208524ca2aa5a1b4bad5274a5"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Family",
+          "start": "2024-10-20 10:00:00",
+          "end": "2024-10-20 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7cb19241148747feaae022024c9fa99d"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Family Time - Park Visit",
+          "start": "2024-10-20 14:00:00",
+          "end": "2024-10-20 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_be88892f338642678d05060f86ae7f41"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "cancel the meeting"
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. Which meeting would you like to cancel? I can see the following events on your calendar:"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_ae4ce482f8ac4cb585a42ca0484414ea | Team Meeting - Tax Law Updates \u2014 Mon 09:00-10:00\nid: evt_4018ecb303434397b920e0c28a391bcf | Client Meeting - Business Tax Return \u2014 Mon 10:30-12:00\nid: evt_22240245e31d4512ab0f4cc87b2952ba | Draft Tax Strategy Proposals \u2014 Mon 14:00-15:00\nid: evt_fe8e96c936024d94b802d9af232f80e3 | Kids Soccer Practice \u2014 Mon 18:00-19:30\nid: evt_4e385509f57047e282731b8e7f3b76da | Review Financial Documents \u2014 Tue 09:00-10:00\nid: evt_b8ed9651ab1c475081cf7cb8958ab8ee | Client Meeting - Individual Tax Planning \u2014 Tue 10:30-12:00\nid: evt_7570588acce74a12bc55c308a61c419d | Prepare Tax Forms \u2014 Tue 13:00-15:00\nid: evt_f6f0da030c484f0db236a0f46736c15a | Parent-Teacher Association Meeting \u2014 Tue 19:00-20:00\nid: evt_fadf64e086364cc28eca147c818fc388 | Meeting with Partner - Client Account Review \u2014 Wed 09:00-10:00\nid: evt_a97a31f86b0d446c820397fd157f04ac | Work on Tax Returns \u2014 Wed 10:30-12:00\nid: evt_085780e9bdcb4ae39df3f362a834d3f5 | Respond to Client Inquiries \u2014 Wed 14:00-16:00\nid: evt_501805f06c714087b74725f9061f1a62 | Dinner with family \u2014 Wed 18:30-20:00\nid: evt_a7c8c11dbecd4d68873503fdd95fa785 | Research Tax Law Changes \u2014 Thu 09:00-10:00\nid: evt_057acdcdf5294a9c830cb96fac1d5a7d | Client Meeting - Audit Support \u2014 Thu 10:30-12:00\nid: evt_ce7576ab87ee4ebfb353fb645a3a8cb0 | Prepare Tax Forms \u2014 Thu 13:00-15:00\nid: evt_30bb5b0f0322456e90290510c7ea88dc | Book Club Meeting \u2014 Thu 19:00-20:30\nid: evt_e273ccdb64c540c5ba360057d0054138 | Review Tax Returns \u2014 Fri 09:00-11:00\nid: evt_5231d041c5474644aa125784ab04df2b | Staff Training - New Tax Software \u2014 Fri 11:00-12:00\nid: evt_c061c93d3e0448f09fef54e5ee3057e3 | Wrap up for the Week \u2014 Fri 14:00-15:00\nid: evt_c40bd70fec544d809bdf54727178d3ea | Family Movie Night \u2014 Fri 19:00-21:00\nid: evt_676b33a414df4c6196efd3320865295f | Kids Soccer Game \u2014 Sat 10:00-12:00\nid: evt_f0eaeeb4209048cbabf5b58de004087f | Grocery Shopping \u2014 Sat 13:00-15:00\nid: evt_485b65d208524ca2aa5a1b4bad5274a5 | Dinner with Friends \u2014 Sat 18:00-20:00\nid: evt_7cb19241148747feaae022024c9fa99d | Brunch with Family \u2014 Sun 10:00-12:00\nid: evt_be88892f338642678d05060f86ae7f41 | Family Time - Park Visit \u2014 Sun 14:00-16:00"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What meetings do I have today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Find all events scheduled for today, October 14, 2024, and return their details.",
+    "simulated_now": "2024-10-14 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tax Law Updates",
+          "start": "2024-10-14 09:00:00",
+          "end": "2024-10-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.jones@firm.com",
+            "michael.brown@firm.com"
+          ],
+          "id": "evt_eb222dd93eac40ee9878656be4c2dea9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Business Tax Return",
+          "start": "2024-10-14 10:30:00",
+          "end": "2024-10-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@client.com"
+          ],
+          "id": "evt_4da519f4518f48638e37d9eadee08789"
+        },
+        {
+          "day": "Monday",
+          "summary": "Draft Tax Strategy Proposals",
+          "start": "2024-10-14 14:00:00",
+          "end": "2024-10-14 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7ac40c05d38f402bbe3493fb965b6c35"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids Soccer Practice",
+          "start": "2024-10-14 18:00:00",
+          "end": "2024-10-14 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6518260ff78645bbb8d98c27cccbc660"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tax Law Updates",
+          "start": "2024-10-14 09:00:00",
+          "end": "2024-10-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@firm.com",
+            "sarah.jones@firm.com",
+            "michael.brown@firm.com"
+          ],
+          "id": "evt_eb222dd93eac40ee9878656be4c2dea9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting - Business Tax Return",
+          "start": "2024-10-14 10:30:00",
+          "end": "2024-10-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@client.com"
+          ],
+          "id": "evt_4da519f4518f48638e37d9eadee08789"
+        },
+        {
+          "day": "Monday",
+          "summary": "Draft Tax Strategy Proposals",
+          "start": "2024-10-14 14:00:00",
+          "end": "2024-10-14 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7ac40c05d38f402bbe3493fb965b6c35"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids Soccer Practice",
+          "start": "2024-10-14 18:00:00",
+          "end": "2024-10-14 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6518260ff78645bbb8d98c27cccbc660"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What meetings do I have today?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify today's date. Then, I will call the `list_events` tool to get all of today's events. Finally, I will list the events to you."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-10-14 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-10-14 23:59:59",
+          "time_min": "2024-10-14 00:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_eb222dd93eac40ee9878656be4c2dea9 | Team Meeting - Tax Law Updates \u2014 Mon 09:00-10:00\nid: evt_4da519f4518f48638e37d9eadee08789 | Client Meeting - Business Tax Return \u2014 Mon 10:30-12:00\nid: evt_7ac40c05d38f402bbe3493fb965b6c35 | Draft Tax Strategy Proposals \u2014 Mon 14:00-15:00\nid: evt_6518260ff78645bbb8d98c27cccbc660 | Kids Soccer Practice \u2014 Mon 18:00-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today, Monday, October 14, 2024, you have four entries in your calendar:\n- Team Meeting - Tax Law Updates from 9:00 to 10:00.\n- Client Meeting - Business Tax Return from 10:30 to 12:00.\n- Draft Tax Strategy Proposals from 14:00 to 15:00.\n- Kids Soccer Practice from 18:00 to 19:30."
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

@@ -1,0 +1,1128 @@
+[
+  {
+    "query": "Create an event called 'Team Lunch' for this Wednesday at 1 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "The agent should use the create_event tool to add 'Team Lunch' to the calendar on Wednesday, September 25, 2024, from 1:00 PM to 2:00 PM.",
+    "simulated_now": "2024-09-22 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Daily Scrum Meeting",
+          "start": "2024-09-25 09:00:00",
+          "end": "2024-09-25 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Animation Director - director@studio.com",
+            "Lead Animator - leadanimator@studio.com",
+            "other Animators"
+          ],
+          "id": "evt_c71a3fffd69346d4bbfd9c62817fd2c1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Animate Scene 48 - Character B jumps over the obstacle",
+          "start": "2024-09-25 09:30:00",
+          "end": "2024-09-25 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f4d75e40ebf14a739ee3a5cdf1c2a62f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Compositing Meeting",
+          "start": "2024-09-25 14:00:00",
+          "end": "2024-09-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Compositor - compositor@studio.com"
+          ],
+          "id": "evt_2d33c94687fe46f8add8b061ce47cfcf"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Implement compositing notes on Scenes 34, 42, and 48",
+          "start": "2024-09-25 15:00:00",
+          "end": "2024-09-25 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_767dc9694ddf4e7b87dcd914a05aa582"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Daily Scrum Meeting",
+          "start": "2024-09-25 09:00:00",
+          "end": "2024-09-25 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Animation Director - director@studio.com",
+            "Lead Animator - leadanimator@studio.com",
+            "other Animators"
+          ],
+          "id": "evt_c71a3fffd69346d4bbfd9c62817fd2c1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Animate Scene 48 - Character B jumps over the obstacle",
+          "start": "2024-09-25 09:30:00",
+          "end": "2024-09-25 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f4d75e40ebf14a739ee3a5cdf1c2a62f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Team Lunch",
+          "start": "2024-09-25 13:00:00",
+          "end": "2024-09-25 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7e274ce8dbbc4475a756f6c1915cac55"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Compositing Meeting",
+          "start": "2024-09-25 14:00:00",
+          "end": "2024-09-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Compositor - compositor@studio.com"
+          ],
+          "id": "evt_2d33c94687fe46f8add8b061ce47cfcf"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Implement compositing notes on Scenes 34, 42, and 48",
+          "start": "2024-09-25 15:00:00",
+          "end": "2024-09-25 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_767dc9694ddf4e7b87dcd914a05aa582"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Team Lunch' for this Wednesday at 1 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. I'll create a 'Team Lunch' event for this Wednesday at 1 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-09-22 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Team Lunch",
+          "start": "2024-09-25 13:00:00",
+          "end": "2024-09-25 14:00:00"
+        },
+        "result": "Event created successfully.\nTeam Lunch\n  ID: evt_7e274ce8dbbc4475a756f6c1915cac55\n  Time: Wed Sep 25, 13:00 - 14:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've scheduled the \"Team Lunch\" for this Wednesday, September 25th, from 1 PM to 2 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Am I busy on Wednesday afternoon?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should use the list_events tool to find events scheduled on Wednesday, September 25, 2024, between 12:00 PM and 6:00 PM and then inform the user based on the results.",
+    "simulated_now": "2024-09-25 09:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Daily Scrum Meeting",
+          "start": "2024-09-25 09:00:00",
+          "end": "2024-09-25 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Animation Director - director@studio.com",
+            "Lead Animator - leadanimator@studio.com",
+            "other Animators"
+          ],
+          "id": "evt_a39eaacc1f6b4226a64f545a0675b80c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Animate Scene 48 - Character B jumps over the obstacle",
+          "start": "2024-09-25 09:30:00",
+          "end": "2024-09-25 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6c155719b8394fef915b9a2bff048836"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Compositing Meeting",
+          "start": "2024-09-25 14:00:00",
+          "end": "2024-09-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Compositor - compositor@studio.com"
+          ],
+          "id": "evt_61d46dd772d14918b57a4630218d8c5a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Implement compositing notes on Scenes 34, 42, and 48",
+          "start": "2024-09-25 15:00:00",
+          "end": "2024-09-25 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e5e77504cb9a4248a81e8d4a8c8035e9"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Daily Scrum Meeting",
+          "start": "2024-09-25 09:00:00",
+          "end": "2024-09-25 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Animation Director - director@studio.com",
+            "Lead Animator - leadanimator@studio.com",
+            "other Animators"
+          ],
+          "id": "evt_a39eaacc1f6b4226a64f545a0675b80c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Animate Scene 48 - Character B jumps over the obstacle",
+          "start": "2024-09-25 09:30:00",
+          "end": "2024-09-25 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6c155719b8394fef915b9a2bff048836"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Compositing Meeting",
+          "start": "2024-09-25 14:00:00",
+          "end": "2024-09-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Compositor - compositor@studio.com"
+          ],
+          "id": "evt_61d46dd772d14918b57a4630218d8c5a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Implement compositing notes on Scenes 34, 42, and 48",
+          "start": "2024-09-25 15:00:00",
+          "end": "2024-09-25 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e5e77504cb9a4248a81e8d4a8c8035e9"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Am I busy on Wednesday afternoon?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to know today's date. Then, I will list the events on Wednesday afternoon to check if you are busy."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-09-25 09:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-09-25 17:00:00",
+          "time_min": "2024-09-25 12:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_6c155719b8394fef915b9a2bff048836 | Animate Scene 48 - Character B jumps over the obstacle \u2014 Wed 09:30-12:30\nid: evt_61d46dd772d14918b57a4630218d8c5a | Compositing Meeting \u2014 Wed 14:00-15:00\nid: evt_e5e77504cb9a4248a81e8d4a8c8035e9 | Implement compositing notes on Scenes 34, 42, and 48 \u2014 Wed 15:00-17:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have three events on Wednesday afternoon:\n\n- Animate Scene 48 - Character B jumps over the obstacle from 09:30 to 12:30\n- Compositing Meeting from 14:00 to 15:00\n- Implement compositing notes on Scenes 34, 42, and 48 from 15:00 to 17:00"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on the books for Saturday?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should use the list_events tool to retrieve all events scheduled for Saturday, September 28, 2024 and present them to the user.",
+    "simulated_now": "2024-09-28 08:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Hiking with Friends",
+          "start": "2024-09-28 10:00:00",
+          "end": "2024-09-28 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1a29832c27454db1a5197f6edec7323f"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner at new restaurant",
+          "start": "2024-09-28 19:00:00",
+          "end": "2024-09-28 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_118514a9582f426c8436fafc12d0b973"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Hiking with Friends",
+          "start": "2024-09-28 10:00:00",
+          "end": "2024-09-28 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1a29832c27454db1a5197f6edec7323f"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner at new restaurant",
+          "start": "2024-09-28 19:00:00",
+          "end": "2024-09-28 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_118514a9582f426c8436fafc12d0b973"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on the books for Saturday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to know what day it is to answer that. Then, I'll check your calendar for Saturday's events."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-09-28 08:00:00 | Saturday"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, today is Saturday, September 28th. Let me see what you have scheduled."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-09-28 00:00:00",
+          "time_max": "2024-09-28 23:59:59"
+        },
+        "result": "Found 2 events:\nid: evt_1a29832c27454db1a5197f6edec7323f | Hiking with Friends \u2014 Sat 10:00-13:00\nid: evt_118514a9582f426c8436fafc12d0b973 | Dinner at new restaurant \u2014 Sat 19:00-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have two events scheduled for Saturday:\n\n- Hiking with Friends from 10:00 to 13:00\n- Dinner at a new restaurant from 19:00 to 21:00"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can you move my therapy appointment on Thursday to 7 PM?",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should use the list_events tool to find the 'Therapy Appointment' on Thursday, September 26, 2024. Once found, it should use the update_event tool to change the start time to 7:00 PM and the end time to 8:00 PM.",
+    "simulated_now": "2024-09-26 10:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Daily Scrum Meeting",
+          "start": "2024-09-26 09:00:00",
+          "end": "2024-09-26 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Animation Director - director@studio.com",
+            "Lead Animator - leadanimator@studio.com",
+            "other Animators"
+          ],
+          "id": "evt_ce8eb5c39b664f0b8697e04f7a764d7c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Animate Scene 52 - Character A and B interaction",
+          "start": "2024-09-26 09:30:00",
+          "end": "2024-09-26 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1f68d50f1be042cb97bdeb0d004c691b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Voice Actors meeting",
+          "start": "2024-09-26 14:00:00",
+          "end": "2024-09-26 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Voice Actors"
+          ],
+          "id": "evt_151be88389e040b283de9dd7bc4269b5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Refine Scene 52, implementing the voice actors lines",
+          "start": "2024-09-26 15:00:00",
+          "end": "2024-09-26 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_68a49de707294a6ca89fbac25173c87b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Therapy Appointment",
+          "start": "2024-09-26 18:00:00",
+          "end": "2024-09-26 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_44eed461f2b5484b9cb63a8afaeb595d"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Daily Scrum Meeting",
+          "start": "2024-09-26 09:00:00",
+          "end": "2024-09-26 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Animation Director - director@studio.com",
+            "Lead Animator - leadanimator@studio.com",
+            "other Animators"
+          ],
+          "id": "evt_ce8eb5c39b664f0b8697e04f7a764d7c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Animate Scene 52 - Character A and B interaction",
+          "start": "2024-09-26 09:30:00",
+          "end": "2024-09-26 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1f68d50f1be042cb97bdeb0d004c691b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Voice Actors meeting",
+          "start": "2024-09-26 14:00:00",
+          "end": "2024-09-26 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Voice Actors"
+          ],
+          "id": "evt_151be88389e040b283de9dd7bc4269b5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Refine Scene 52, implementing the voice actors lines",
+          "start": "2024-09-26 15:00:00",
+          "end": "2024-09-26 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_68a49de707294a6ca89fbac25173c87b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Therapy Appointment",
+          "start": "2024-09-26 19:00:00",
+          "end": "2024-09-26 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_44eed461f2b5484b9cb63a8afaeb595d"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can you move my therapy appointment on Thursday to 7 PM?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-09-26 10:00:00 | Thursday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-09-26 00:00:00",
+          "time_max": "2024-09-26 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_ce8eb5c39b664f0b8697e04f7a764d7c | Daily Scrum Meeting \u2014 Thu 09:00-09:30\nid: evt_1f68d50f1be042cb97bdeb0d004c691b | Animate Scene 52 - Character A and B interaction \u2014 Thu 09:30-12:30\nid: evt_151be88389e040b283de9dd7bc4269b5 | Voice Actors meeting \u2014 Thu 14:00-15:00\nid: evt_68a49de707294a6ca89fbac25173c87b | Refine Scene 52, implementing the voice actors lines \u2014 Thu 15:00-17:00\nid: evt_44eed461f2b5484b9cb63a8afaeb595d | Therapy Appointment \u2014 Thu 18:00-19:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_44eed461f2b5484b9cb63a8afaeb595d",
+          "end": "2024-09-26 20:00:00",
+          "start": "2024-09-26 19:00:00"
+        },
+        "result": "Event updated successfully.\nTherapy Appointment\n  ID: evt_44eed461f2b5484b9cb63a8afaeb595d\n  Time: Thu Sep 26, 19:00 - 20:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've moved your therapy appointment to 7 PM today."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is the Feedback Review with Lead Animator on Monday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should use the list_events tool to find 'Feedback Review with Lead Animator' on Monday, September 23, 2024 and then inform the user of the start time (2:00 PM).",
+    "simulated_now": "2024-09-23 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Daily Scrum Meeting",
+          "start": "2024-09-23 09:00:00",
+          "end": "2024-09-23 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Animation Director - director@studio.com",
+            "Lead Animator - leadanimator@studio.com",
+            "other Animators"
+          ],
+          "id": "evt_7a59163e79804c41a66c907d6b597aee"
+        },
+        {
+          "day": "Monday",
+          "summary": "Animate Scene 34 - Character A's reaction",
+          "start": "2024-09-23 09:30:00",
+          "end": "2024-09-23 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d2512b7421034361abf67f4fb4b1cb08"
+        },
+        {
+          "day": "Monday",
+          "summary": "Feedback Review with Lead Animator",
+          "start": "2024-09-23 14:00:00",
+          "end": "2024-09-23 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Lead Animator - leadanimator@studio.com"
+          ],
+          "id": "evt_a48c5b91129948089aad81274232ba14"
+        },
+        {
+          "day": "Monday",
+          "summary": "Revise Scene 34 based on feedback",
+          "start": "2024-09-23 15:00:00",
+          "end": "2024-09-23 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b2968ac4be0d451e9c32adef347acc8c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Partner",
+          "start": "2024-09-23 19:00:00",
+          "end": "2024-09-23 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_885f365d3f3b43d292e972979a0d2d65"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Daily Scrum Meeting",
+          "start": "2024-09-23 09:00:00",
+          "end": "2024-09-23 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Animation Director - director@studio.com",
+            "Lead Animator - leadanimator@studio.com",
+            "other Animators"
+          ],
+          "id": "evt_7a59163e79804c41a66c907d6b597aee"
+        },
+        {
+          "day": "Monday",
+          "summary": "Animate Scene 34 - Character A's reaction",
+          "start": "2024-09-23 09:30:00",
+          "end": "2024-09-23 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d2512b7421034361abf67f4fb4b1cb08"
+        },
+        {
+          "day": "Monday",
+          "summary": "Feedback Review with Lead Animator",
+          "start": "2024-09-23 14:00:00",
+          "end": "2024-09-23 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Lead Animator - leadanimator@studio.com"
+          ],
+          "id": "evt_a48c5b91129948089aad81274232ba14"
+        },
+        {
+          "day": "Monday",
+          "summary": "Revise Scene 34 based on feedback",
+          "start": "2024-09-23 15:00:00",
+          "end": "2024-09-23 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b2968ac4be0d451e9c32adef347acc8c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Partner",
+          "start": "2024-09-23 19:00:00",
+          "end": "2024-09-23 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_885f365d3f3b43d292e972979a0d2d65"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is the Feedback Review with Lead Animator on Monday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find the date of the upcoming Monday to search for the event. First, I'll get the current time. Then, I'll list all events on that Monday and find the \"Feedback Review with Lead Animator\" event to answer your question."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-09-23 10:00:00 | Monday"
+      },
+      {
+        "role": "assistant",
+        "content": "Today is Monday, September 23rd. I will now search for the event on this date."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-09-23 00:00:00",
+          "time_max": "2024-09-23 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_7a59163e79804c41a66c907d6b597aee | Daily Scrum Meeting \u2014 Mon 09:00-09:30\nid: evt_d2512b7421034361abf67f4fb4b1cb08 | Animate Scene 34 - Character A's reaction \u2014 Mon 09:30-12:30\nid: evt_a48c5b91129948089aad81274232ba14 | Feedback Review with Lead Animator \u2014 Mon 14:00-15:00\nid: evt_b2968ac4be0d451e9c32adef347acc8c | Revise Scene 34 based on feedback \u2014 Mon 15:00-17:00\nid: evt_885f365d3f3b43d292e972979a0d2d65 | Dinner with Partner \u2014 Mon 19:00-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "The Feedback Review with Lead Animator is scheduled for 14:00 to 15:00 on Monday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the voice actors meeting on Thursday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should use the list_events tool to locate the 'Voice Actors meeting' on Thursday, September 26, 2024, and then extract and present the attendee information to the user.",
+    "simulated_now": "2024-09-26 10:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Daily Scrum Meeting",
+          "start": "2024-09-26 09:00:00",
+          "end": "2024-09-26 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Animation Director - director@studio.com",
+            "Lead Animator - leadanimator@studio.com",
+            "other Animators"
+          ],
+          "id": "evt_43f9f8459a9f4186ab1a5164e8a94a6a"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Animate Scene 52 - Character A and B interaction",
+          "start": "2024-09-26 09:30:00",
+          "end": "2024-09-26 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_18b80dfab2ea41da966ee519677d3621"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Voice Actors meeting",
+          "start": "2024-09-26 14:00:00",
+          "end": "2024-09-26 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Voice Actors"
+          ],
+          "id": "evt_b9984c49740e4c0f94d3451602437a5e"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Refine Scene 52, implementing the voice actors lines",
+          "start": "2024-09-26 15:00:00",
+          "end": "2024-09-26 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dcc7bbb3c22647978afc2e7d25b18dd6"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Therapy Appointment",
+          "start": "2024-09-26 18:00:00",
+          "end": "2024-09-26 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_da9e2e622d4448848c5646cedc7e7dfe"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Daily Scrum Meeting",
+          "start": "2024-09-26 09:00:00",
+          "end": "2024-09-26 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Animation Director - director@studio.com",
+            "Lead Animator - leadanimator@studio.com",
+            "other Animators"
+          ],
+          "id": "evt_43f9f8459a9f4186ab1a5164e8a94a6a"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Animate Scene 52 - Character A and B interaction",
+          "start": "2024-09-26 09:30:00",
+          "end": "2024-09-26 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_18b80dfab2ea41da966ee519677d3621"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Voice Actors meeting",
+          "start": "2024-09-26 14:00:00",
+          "end": "2024-09-26 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Voice Actors"
+          ],
+          "id": "evt_b9984c49740e4c0f94d3451602437a5e"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Refine Scene 52, implementing the voice actors lines",
+          "start": "2024-09-26 15:00:00",
+          "end": "2024-09-26 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dcc7bbb3c22647978afc2e7d25b18dd6"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Therapy Appointment",
+          "start": "2024-09-26 18:00:00",
+          "end": "2024-09-26 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_da9e2e622d4448848c5646cedc7e7dfe"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the voice actors meeting on Thursday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-09-26 10:00:00 | Thursday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-09-26 23:59:59",
+          "time_min": "2024-09-26 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_43f9f8459a9f4186ab1a5164e8a94a6a | Daily Scrum Meeting \u2014 Thu 09:00-09:30\nid: evt_18b80dfab2ea41da966ee519677d3621 | Animate Scene 52 - Character A and B interaction \u2014 Thu 09:30-12:30\nid: evt_b9984c49740e4c0f94d3451602437a5e | Voice Actors meeting \u2014 Thu 14:00-15:00\nid: evt_dcc7bbb3c22647978afc2e7d25b18dd6 | Refine Scene 52, implementing the voice actors lines \u2014 Thu 15:00-17:00\nid: evt_da9e2e622d4448848c5646cedc7e7dfe | Therapy Appointment \u2014 Thu 18:00-19:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_b9984c49740e4c0f94d3451602437a5e"
+        },
+        "result": "Voice Actors meeting\n  ID: evt_b9984c49740e4c0f94d3451602437a5e\n  Time: Thu Sep 26, 14:00 - 15:00\n  Attendees: Voice Actors\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "The Voice Actors are attending the meeting."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Given that today is Monday, September 23, 2024, the agent should use the list_events tool to find all events scheduled for tomorrow, Tuesday, September 24, 2024, and present them to the user.",
+    "simulated_now": "2024-09-23 14:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Daily Scrum Meeting",
+          "start": "2024-09-24 09:00:00",
+          "end": "2024-09-24 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Animation Director - director@studio.com",
+            "Lead Animator - leadanimator@studio.com",
+            "other Animators"
+          ],
+          "id": "evt_13cc8a671c284ce2ab871af5783a3567"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Animate Scene 42 - Character B walks and talks",
+          "start": "2024-09-24 09:30:00",
+          "end": "2024-09-24 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_be19f1e02dff485f82a023ac46757fc1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Senior Animator Mentorship Meeting",
+          "start": "2024-09-24 14:00:00",
+          "end": "2024-09-24 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Senior Animator - senior@studio.com"
+          ],
+          "id": "evt_cfc9b5197cf34c0d9b28a2d48bfc344e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Troubleshoot rigging issue with Character B",
+          "start": "2024-09-24 15:00:00",
+          "end": "2024-09-24 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6663c44c87eb46358467fc6a053d929e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Life Drawing Session",
+          "start": "2024-09-24 18:30:00",
+          "end": "2024-09-24 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Friends from life drawing sessions"
+          ],
+          "id": "evt_f0185e61d1ec48e999945341bc5984b1"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Daily Scrum Meeting",
+          "start": "2024-09-24 09:00:00",
+          "end": "2024-09-24 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Animation Director - director@studio.com",
+            "Lead Animator - leadanimator@studio.com",
+            "other Animators"
+          ],
+          "id": "evt_13cc8a671c284ce2ab871af5783a3567"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Animate Scene 42 - Character B walks and talks",
+          "start": "2024-09-24 09:30:00",
+          "end": "2024-09-24 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_be19f1e02dff485f82a023ac46757fc1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Senior Animator Mentorship Meeting",
+          "start": "2024-09-24 14:00:00",
+          "end": "2024-09-24 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Senior Animator - senior@studio.com"
+          ],
+          "id": "evt_cfc9b5197cf34c0d9b28a2d48bfc344e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Troubleshoot rigging issue with Character B",
+          "start": "2024-09-24 15:00:00",
+          "end": "2024-09-24 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6663c44c87eb46358467fc6a053d929e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Life Drawing Session",
+          "start": "2024-09-24 18:30:00",
+          "end": "2024-09-24 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Friends from life drawing sessions"
+          ],
+          "id": "evt_f0185e61d1ec48e999945341bc5984b1"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing tomorrow?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to determine the date for tomorrow, and then list the events on your calendar for that day. First, I'll get the current time. Then, I'll call the calendar to get the events."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-09-23 14:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-09-25 00:00:00",
+          "time_min": "2024-09-24 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_13cc8a671c284ce2ab871af5783a3567 | Daily Scrum Meeting \u2014 Tue 09:00-09:30\nid: evt_be19f1e02dff485f82a023ac46757fc1 | Animate Scene 42 - Character B walks and talks \u2014 Tue 09:30-12:30\nid: evt_cfc9b5197cf34c0d9b28a2d48bfc344e | Senior Animator Mentorship Meeting \u2014 Tue 14:00-15:00\nid: evt_6663c44c87eb46358467fc6a053d929e | Troubleshoot rigging issue with Character B \u2014 Tue 15:00-17:00\nid: evt_f0185e61d1ec48e999945341bc5984b1 | Life Drawing Session \u2014 Tue 18:30-20:30"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Tomorrow, Tuesday, September 24, 2024, you have 5 events scheduled:\n- 9:00-9:30 AM: Daily Scrum Meeting\n- 9:30 AM-12:30 PM: Animate Scene 42 - Character B walks and talks\n- 2:00-3:00 PM: Senior Animator Mentorship Meeting\n- 3:00-5:00 PM: Troubleshoot rigging issue with Character B\n- 6:30-8:30 PM: Life Drawing Session"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Did I have any meetings yesterday?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Given that today is Tuesday, September 24, 2024, the agent should use the list_events tool to retrieve all events that occurred yesterday, Monday, September 23, 2024, and inform the user whether there were any meetings.",
+    "simulated_now": "2024-09-24 09:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Daily Scrum Meeting",
+          "start": "2024-09-23 09:00:00",
+          "end": "2024-09-23 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Animation Director - director@studio.com",
+            "Lead Animator - leadanimator@studio.com",
+            "other Animators"
+          ],
+          "id": "evt_4ee711e743a542f3a301f33af5056b8a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Animate Scene 34 - Character A's reaction",
+          "start": "2024-09-23 09:30:00",
+          "end": "2024-09-23 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_36d8b41327f64a03a65b43942188813d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Feedback Review with Lead Animator",
+          "start": "2024-09-23 14:00:00",
+          "end": "2024-09-23 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Lead Animator - leadanimator@studio.com"
+          ],
+          "id": "evt_1995f01e0ec54d36af3bc9c43d06e014"
+        },
+        {
+          "day": "Monday",
+          "summary": "Revise Scene 34 based on feedback",
+          "start": "2024-09-23 15:00:00",
+          "end": "2024-09-23 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4e3c42bacd45445a8afb503e30090217"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Partner",
+          "start": "2024-09-23 19:00:00",
+          "end": "2024-09-23 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b9c8575a5db844239889aa2f37f9f242"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Daily Scrum Meeting",
+          "start": "2024-09-23 09:00:00",
+          "end": "2024-09-23 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Animation Director - director@studio.com",
+            "Lead Animator - leadanimator@studio.com",
+            "other Animators"
+          ],
+          "id": "evt_4ee711e743a542f3a301f33af5056b8a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Animate Scene 34 - Character A's reaction",
+          "start": "2024-09-23 09:30:00",
+          "end": "2024-09-23 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_36d8b41327f64a03a65b43942188813d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Feedback Review with Lead Animator",
+          "start": "2024-09-23 14:00:00",
+          "end": "2024-09-23 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Lead Animator - leadanimator@studio.com"
+          ],
+          "id": "evt_1995f01e0ec54d36af3bc9c43d06e014"
+        },
+        {
+          "day": "Monday",
+          "summary": "Revise Scene 34 based on feedback",
+          "start": "2024-09-23 15:00:00",
+          "end": "2024-09-23 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4e3c42bacd45445a8afb503e30090217"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Partner",
+          "start": "2024-09-23 19:00:00",
+          "end": "2024-09-23 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b9c8575a5db844239889aa2f37f9f242"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Did I have any meetings yesterday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-09-24 09:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-09-23 23:59:59",
+          "time_min": "2024-09-23 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_4ee711e743a542f3a301f33af5056b8a | Daily Scrum Meeting \u2014 Mon 09:00-09:30\nid: evt_36d8b41327f64a03a65b43942188813d | Animate Scene 34 - Character A's reaction \u2014 Mon 09:30-12:30\nid: evt_1995f01e0ec54d36af3bc9c43d06e014 | Feedback Review with Lead Animator \u2014 Mon 14:00-15:00\nid: evt_4e3c42bacd45445a8afb503e30090217 | Revise Scene 34 based on feedback \u2014 Mon 15:00-17:00\nid: evt_b9c8575a5db844239889aa2f37f9f242 | Dinner with Partner \u2014 Mon 19:00-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, you had 5 meetings yesterday:\n\n* Daily Scrum Meeting \u2014 Mon 09:00-09:30\n* Animate Scene 34 - Character A's reaction \u2014 Mon 09:30-12:30\n* Feedback Review with Lead Animator \u2014 Mon 14:00-15:00\n* Revise Scene 34 based on feedback \u2014 Mon 15:00-17:00\n* Dinner with Partner \u2014 Mon 19:00-21:00"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Lunch' for this Wednesday at 1 PM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the create_event tool to add 'Team Lunch' to the calendar on Wednesday, September 25, 2024, from 1:00 PM to 2:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-09-22T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me a meeting with the marketing team this Friday at 10 AM to discuss Q4 plans.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the create_event tool to create a meeting on Friday, September 27, 2024, from 10:00 AM to 11:00 AM, called 'Discuss Q4 plans', and include the marketing team as attendees.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-09-22T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy on Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should use the list_events tool to find events scheduled on Wednesday, September 25, 2024, between 12:00 PM and 6:00 PM and then inform the user based on the results.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-09-25T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the books for Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the list_events tool to retrieve all events scheduled for Saturday, September 28, 2024 and present them to the user.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-09-28T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my therapy appointment on Thursday to 7 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should use the list_events tool to find the 'Therapy Appointment' on Thursday, September 26, 2024. Once found, it should use the update_event tool to change the start time to 7:00 PM and the end time to 8:00 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-09-26T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the Team Lunch time on Wednesday to 2:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should use the list_events tool to find the 'Team Lunch' event on Wednesday, September 25, 2024. Then, it should use the update_event tool to change the start time to 2:30 PM and the end time to 3:30 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-09-25T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the Feedback Review with Lead Animator on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the list_events tool to find 'Feedback Review with Lead Animator' on Monday, September 23, 2024 and then inform the user of the start time (2:00 PM).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-09-23T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the voice actors meeting on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the list_events tool to locate the 'Voice Actors meeting' on Thursday, September 26, 2024, and then extract and present the attendee information to the user.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-09-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my brunch with family on Sunday to 3 PM, but check if I have anything scheduled then first.",
+        "complexity": "High",
+        "expected_behavior": "The agent should first use the list_events tool to check for conflicts at 3:00 PM on Sunday, September 29, 2024.  If no conflict exists, it should use the update_event tool to move the 'Brunch with Family' event to 3:00 PM. If there is a conflict, inform the user.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-09-29T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline the Compositing Meeting and accept the invitation for Drinks with the animation team.",
+        "complexity": "High",
+        "expected_behavior": "The agent should first use the list_events tool to find the Compositing Meeting on Wednesday, September 25, 2024, then use the decline_event tool. Then, agent use the list_events tool to find Drinks with animation team on Friday, September 27, 2024, then use the accept_event tool.",
+        "addressed_days": [
+            "Wednesday",
+            "Friday"
+        ],
+        "current_time": "2024-09-24T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule life drawing.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should use the list_events tool to find the 'Life Drawing Session' on Tuesday, September 24, 2024. Then ask the user what time they would like to reschedule it to. Then, update the event accordingly.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-09-24T11:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "No, actually make that Thursday at 4 instead.",
+        "complexity": "High",
+        "expected_behavior": "The agent needs to understand the previous query's context (assuming it was related to rescheduling an event on Thursday). It should use the list_events tool to find the relevant event on Thursday, September 26, 2024 (likely the 'Therapy Appointment'). Then, it uses the update_event tool to change the event's start time to 4:00 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-09-26T11:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Given that today is Monday, September 23, 2024, the agent should use the list_events tool to find all events scheduled for tomorrow, Tuesday, September 24, 2024, and present them to the user.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-09-23T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any meetings yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Given that today is Tuesday, September 24, 2024, the agent should use the list_events tool to retrieve all events that occurred yesterday, Monday, September 23, 2024, and inform the user whether there were any meetings.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-09-24T09:00:00"
+    }
+]

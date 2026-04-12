@@ -1,0 +1,1167 @@
+[
+  {
+    "query": "Add an event on Wednesday at 1 PM for a doctor's appointment.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event with summary 'Doctor's appointment', start time 2026-04-22T13:00:00, and end time 2026-04-22T14:00:00 (assuming a one-hour appointment).",
+    "simulated_now": "2026-04-19 23:59:59",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Check in with experienced paramedic",
+          "start": "2026-04-22 08:00:00",
+          "end": "2026-04-22 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "experiencedparamedic@ems.org"
+          ],
+          "id": "evt_717b55ca7e9e40feb227f39c1134dc4d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Home Visit - Heart Failure Education for Patient & Family",
+          "start": "2026-04-22 09:30:00",
+          "end": "2026-04-22 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6958b14d26f2400d871a189098ab0a45"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Visit Local Pharmacy - Discuss Patient Medication Concerns",
+          "start": "2026-04-22 11:30:00",
+          "end": "2026-04-22 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharmacist@localpharmacy.com"
+          ],
+          "id": "evt_103202795e8b4d88a9414150750f7be0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Patient Appointment - Scheduling Specialist Visit",
+          "start": "2026-04-22 14:00:00",
+          "end": "2026-04-22 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4cdd511f17f046658fb4a67ea2f12e21"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Family Game Night",
+          "start": "2026-04-22 18:00:00",
+          "end": "2026-04-22 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_35790b796e6842f7a6613d4dcf376399"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Check in with experienced paramedic",
+          "start": "2026-04-22 08:00:00",
+          "end": "2026-04-22 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "experiencedparamedic@ems.org"
+          ],
+          "id": "evt_717b55ca7e9e40feb227f39c1134dc4d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Home Visit - Heart Failure Education for Patient & Family",
+          "start": "2026-04-22 09:30:00",
+          "end": "2026-04-22 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6958b14d26f2400d871a189098ab0a45"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Visit Local Pharmacy - Discuss Patient Medication Concerns",
+          "start": "2026-04-22 11:30:00",
+          "end": "2026-04-22 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharmacist@localpharmacy.com"
+          ],
+          "id": "evt_103202795e8b4d88a9414150750f7be0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Doctor's Appointment",
+          "start": "2026-04-22 13:00:00",
+          "end": "2026-04-22 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d20d35fcb7d140189971a3481b0ae4f7"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Patient Appointment - Scheduling Specialist Visit",
+          "start": "2026-04-22 14:00:00",
+          "end": "2026-04-22 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4cdd511f17f046658fb4a67ea2f12e21"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Family Game Night",
+          "start": "2026-04-22 18:00:00",
+          "end": "2026-04-22 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_35790b796e6842f7a6613d4dcf376399"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Add an event on Wednesday at 1 PM for a doctor's appointment."
+      },
+      {
+        "role": "assistant",
+        "content": "Plan:\n1. Get the current time to determine the date of the upcoming Wednesday.\n2. Create an event with the summary \"Doctor's Appointment\" on that Wednesday at 1 PM. The end time will be the default of one hour after the start time.\n3. Respond to the user with a confirmation."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-04-19 23:59:59 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Doctor's Appointment",
+          "end": "2026-04-22 14:00:00",
+          "start": "2026-04-22 13:00:00"
+        },
+        "result": "Event created successfully.\nDoctor's Appointment\n  ID: evt_d20d35fcb7d140189971a3481b0ae4f7\n  Time: Wed Apr 22, 13:00 - 14:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've added the doctor's appointment to your calendar for this Wednesday at 1:00 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "When am I meeting with the social worker?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List events on Tuesday and find the meeting with socialworker@county.org, then respond with the time of that meeting.",
+    "simulated_now": "2026-04-21 08:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Social Worker - Coordinating Resources for Patient",
+          "start": "2026-04-21 08:30:00",
+          "end": "2026-04-21 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "socialworker@county.org"
+          ],
+          "id": "evt_6cd2046602484c6999e29ea6223c35e4"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Wound Care for Mr. Davis",
+          "start": "2026-04-21 10:00:00",
+          "end": "2026-04-21 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_52ef5a735579433ba61e596721d9c7d2"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Medication Reconciliation for Elderly Patient",
+          "start": "2026-04-21 12:00:00",
+          "end": "2026-04-21 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6df491eea4734adc9318379da7b62595"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Professional Development Webinar - Rural Healthcare Challenges",
+          "start": "2026-04-21 14:00:00",
+          "end": "2026-04-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cb3f1c9c0388488eb6f4cbda8292c6b3"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Spouse",
+          "start": "2026-04-21 18:30:00",
+          "end": "2026-04-21 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ec5b84b92ccd499695e049f78c22d1df"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Social Worker - Coordinating Resources for Patient",
+          "start": "2026-04-21 08:30:00",
+          "end": "2026-04-21 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "socialworker@county.org"
+          ],
+          "id": "evt_6cd2046602484c6999e29ea6223c35e4"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Wound Care for Mr. Davis",
+          "start": "2026-04-21 10:00:00",
+          "end": "2026-04-21 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_52ef5a735579433ba61e596721d9c7d2"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Medication Reconciliation for Elderly Patient",
+          "start": "2026-04-21 12:00:00",
+          "end": "2026-04-21 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6df491eea4734adc9318379da7b62595"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Professional Development Webinar - Rural Healthcare Challenges",
+          "start": "2026-04-21 14:00:00",
+          "end": "2026-04-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cb3f1c9c0388488eb6f4cbda8292c6b3"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Spouse",
+          "start": "2026-04-21 18:30:00",
+          "end": "2026-04-21 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ec5b84b92ccd499695e049f78c22d1df"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "When am I meeting with the social worker?"
+      },
+      {
+        "role": "assistant",
+        "content": "When am I meeting with the social worker? I'll search your calendar for an event with \"social worker\" in the name."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 32 events:\nid: evt_26f55a76b7214cf6a9bde0e17d76dcf8 | Team Huddle - Discussing Patient Cases \u2014 Mon 08:00-08:30\nid: evt_7dbaf164a9144e848fef152c216dc9ae | Home Visit - Mr. Johnson (Diabetes Management) \u2014 Mon 09:00-10:30\nid: evt_b0af8c3f233d4a728d2d4f03c30de1d9 | Home Visit - Mrs. Smith (Post-Stroke Rehabilitation) \u2014 Mon 11:00-12:00\nid: evt_317b3c7404da4e5e8b90325dff034bc5 | Lunch / Paperwork at Clinic \u2014 Mon 13:00-14:00\nid: evt_9aee1d98b6164ec58c9d5bd56adbe1dd | New Patient Assessment - Referral from Local Clinic \u2014 Mon 14:30-16:00\nid: evt_7fb5322b1b8b4cc1b559c3402f05e422 | Children's Soccer Practice \u2014 Mon 18:00-19:00\nid: evt_6cd2046602484c6999e29ea6223c35e4 | Meeting with Social Worker - Coordinating Resources for Patient \u2014 Tue 08:30-09:30\nid: evt_52ef5a735579433ba61e596721d9c7d2 | Home Visit - Wound Care for Mr. Davis \u2014 Tue 10:00-11:30\nid: evt_6df491eea4734adc9318379da7b62595 | Home Visit - Medication Reconciliation for Elderly Patient \u2014 Tue 12:00-13:00\nid: evt_cb3f1c9c0388488eb6f4cbda8292c6b3 | Professional Development Webinar - Rural Healthcare Challenges \u2014 Tue 14:00-15:00\nid: evt_ec5b84b92ccd499695e049f78c22d1df | Dinner with Spouse \u2014 Tue 18:30-19:30\nid: evt_4dc4f8aab4994179b503ee72100a1953 | Check in with experienced paramedic \u2014 Wed 08:00-09:00\nid: evt_a8154b3e5a54493ca136249fb2749397 | Home Visit - Heart Failure Education for Patient & Family \u2014 Wed 09:30-11:00\nid: evt_2e7ac3ca07674d1cafc7c0fb06291cd0 | Visit Local Pharmacy - Discuss Patient Medication Concerns \u2014 Wed 11:30-12:30\nid: evt_dace6af51f2040c3a645c977e628a40c | Patient Appointment - Scheduling Specialist Visit \u2014 Wed 14:00-15:30\nid: evt_42eda53cbf174f64888acc449da54c3f | Family Game Night \u2014 Wed 18:00-19:30\nid: evt_6e41c2339dca425ca62531f403c98560 | Meeting with Mental Health Counselor \u2014 Thu 08:00-08:30\nid: evt_c7d8ff13c09945599adfca49c13f78e1 | Home Visit - Chronic Pain Management \u2014 Thu 09:00-10:30\nid: evt_719bb0abe25541979be2b2b5ae5aac65 | Follow up call to local clinic \u2014 Thu 11:00-12:00\nid: evt_86ac609b6cde473586707ea45db8b8c2 | Home Visit - Health Education \u2014 Thu 14:00-15:00\nid: evt_2e65891265ce4e30a2b4ba2e4f051904 | Dinner Prep \u2014 Thu 18:00-19:00\nid: evt_764ede76e8e1476a869ba0f72abb7735 | Team Huddle - Discussing Patient Cases \u2014 Fri 08:00-08:30\nid: evt_ca8c722b44d84778813ca009b0991689 | Home Visit - Mr. Johnson (Diabetes Management) \u2014 Fri 09:00-10:30\nid: evt_4216041ead4f4fffa5008e86dca7bc25 | Home Visit - Mrs. Smith (Post-Stroke Rehabilitation) \u2014 Fri 11:00-12:00\nid: evt_5fd6726220764c93ace967f2db918ec7 | New Patient Assessment - Referral from Local Clinic \u2014 Fri 14:30-16:00\nid: evt_912665bfe48340389203d9dcf1952bfc | Dinner at local restaurant with spouse \u2014 Fri 19:00-21:00\nid: evt_2cb16e40acd74448aeab09e4093b78e5 | Children's Soccer Game \u2014 Sat 09:00-12:00\nid: evt_89afb1f887b943f6a1cbcbbbb1583a78 | Grocery Shopping \u2014 Sat 13:00-15:00\nid: evt_76aa77daa6154f48bbc24b01e539c972 | Dinner with Extended Family \u2014 Sat 18:00-20:00\nid: evt_a5715ad223224afea887244fcee43b6c | Church \u2014 Sun 10:00-11:00\nid: evt_76830f944a3e498cbbda29f1b6cd2bbf | Lunch with Friends \u2014 Sun 12:00-14:00\nid: evt_31ab8e04990e4f988e520186aa853cb2 | Prepare for the week ahead \u2014 Sun 15:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have a \"Meeting with Social Worker - Coordinating Resources for Patient\" on Tuesday from 8:30 to 9:30 AM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing on Saturday morning?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List events on Saturday between 9:00 AM and 12:00 PM and respond with the event details.",
+    "simulated_now": "2026-04-25 07:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Children's Soccer Game",
+          "start": "2026-04-25 09:00:00",
+          "end": "2026-04-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7e5b0d5b03de4e88b01d959a314a3eca"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2026-04-25 13:00:00",
+          "end": "2026-04-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3cf076f3fa3d4935a4e766b72503f480"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with Extended Family",
+          "start": "2026-04-25 18:00:00",
+          "end": "2026-04-25 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7448624e383a43c2a0852b03c44e3c25"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Children's Soccer Game",
+          "start": "2026-04-25 09:00:00",
+          "end": "2026-04-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7e5b0d5b03de4e88b01d959a314a3eca"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2026-04-25 13:00:00",
+          "end": "2026-04-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3cf076f3fa3d4935a4e766b72503f480"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with Extended Family",
+          "start": "2026-04-25 18:00:00",
+          "end": "2026-04-25 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7448624e383a43c2a0852b03c44e3c25"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing on Saturday morning?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first find out the current date and time. Then, I will find all events on Saturday morning and tell you what you have scheduled."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-04-25 07:00:00 | Saturday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2026-04-25 07:00:00",
+          "time_max": "2026-04-25 12:00:00"
+        },
+        "result": "Found 1 events:\nid: evt_7e5b0d5b03de4e88b01d959a314a3eca | Children's Soccer Game \u2014 Sat 09:00-12:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have a \"Children's Soccer Game\" from 9:00 AM to 12:00 PM on Saturday.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can you move my soccer practice on Monday back an hour?",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Children's Soccer Practice' event on Monday and update its start time to 2026-04-20T19:00:00 and end time to 2026-04-20T20:00:00 (assuming duration remains the same).",
+    "simulated_now": "2026-04-20 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Huddle - Discussing Patient Cases",
+          "start": "2026-04-20 08:00:00",
+          "end": "2026-04-20 08:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisingphysician@clinic.org",
+            "registerednurse@clinic.org"
+          ],
+          "id": "evt_d0f9ae10b4aa47468d3d2be41edfc677"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mr. Johnson (Diabetes Management)",
+          "start": "2026-04-20 09:00:00",
+          "end": "2026-04-20 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e1131a1af88e4100b856e12997eae35b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mrs. Smith (Post-Stroke Rehabilitation)",
+          "start": "2026-04-20 11:00:00",
+          "end": "2026-04-20 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d3dab4ae715e4e3089fefa6745a5de57"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lunch / Paperwork at Clinic",
+          "start": "2026-04-20 13:00:00",
+          "end": "2026-04-20 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_53afd55977be4c3780d034c18b9e70d5"
+        },
+        {
+          "day": "Monday",
+          "summary": "New Patient Assessment - Referral from Local Clinic",
+          "start": "2026-04-20 14:30:00",
+          "end": "2026-04-20 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c54ec11e38a147fd9b121cf479c1dde9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Children's Soccer Practice",
+          "start": "2026-04-20 18:00:00",
+          "end": "2026-04-20 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_81636674421e44aaa19ec7a705d27db6"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Huddle - Discussing Patient Cases",
+          "start": "2026-04-20 08:00:00",
+          "end": "2026-04-20 08:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisingphysician@clinic.org",
+            "registerednurse@clinic.org"
+          ],
+          "id": "evt_d0f9ae10b4aa47468d3d2be41edfc677"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mr. Johnson (Diabetes Management)",
+          "start": "2026-04-20 09:00:00",
+          "end": "2026-04-20 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e1131a1af88e4100b856e12997eae35b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mrs. Smith (Post-Stroke Rehabilitation)",
+          "start": "2026-04-20 11:00:00",
+          "end": "2026-04-20 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d3dab4ae715e4e3089fefa6745a5de57"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lunch / Paperwork at Clinic",
+          "start": "2026-04-20 13:00:00",
+          "end": "2026-04-20 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_53afd55977be4c3780d034c18b9e70d5"
+        },
+        {
+          "day": "Monday",
+          "summary": "New Patient Assessment - Referral from Local Clinic",
+          "start": "2026-04-20 14:30:00",
+          "end": "2026-04-20 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c54ec11e38a147fd9b121cf479c1dde9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Children's Soccer Practice",
+          "start": "2026-04-20 19:00:00",
+          "end": "2026-04-20 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_81636674421e44aaa19ec7a705d27db6"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can you move my soccer practice on Monday back an hour?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I need to know the current date and time to identify the correct event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-04-20 10:00:00 | Monday"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Now I will look for a soccer practice on today, Monday, April 20th."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2026-04-20 00:00:00",
+          "time_max": "2026-04-20 23:59:59"
+        },
+        "result": "Found 6 events:\nid: evt_d0f9ae10b4aa47468d3d2be41edfc677 | Team Huddle - Discussing Patient Cases \u2014 Mon 08:00-08:30\nid: evt_e1131a1af88e4100b856e12997eae35b | Home Visit - Mr. Johnson (Diabetes Management) \u2014 Mon 09:00-10:30\nid: evt_d3dab4ae715e4e3089fefa6745a5de57 | Home Visit - Mrs. Smith (Post-Stroke Rehabilitation) \u2014 Mon 11:00-12:00\nid: evt_53afd55977be4c3780d034c18b9e70d5 | Lunch / Paperwork at Clinic \u2014 Mon 13:00-14:00\nid: evt_c54ec11e38a147fd9b121cf479c1dde9 | New Patient Assessment - Referral from Local Clinic \u2014 Mon 14:30-16:00\nid: evt_81636674421e44aaa19ec7a705d27db6 | Children's Soccer Practice \u2014 Mon 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've found \"Children's Soccer Practice\" scheduled for 6:00 PM to 7:00 PM today. I will now move it back by one hour to 7:00 PM to 8:00 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2026-04-20 20:00:00",
+          "start": "2026-04-20 19:00:00",
+          "event_id": "evt_81636674421e44aaa19ec7a705d27db6"
+        },
+        "result": "Event updated successfully.\nChildren's Soccer Practice\n  ID: evt_81636674421e44aaa19ec7a705d27db6\n  Time: Mon Apr 20, 19:00 - 20:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've moved your soccer practice to 7:00 PM - 8:00 PM. Is there anything else?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Tell me about my appointments on Thursday.",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "List all events on Thursday and respond with the details of each event.",
+    "simulated_now": "2026-04-23 07:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Mental Health Counselor",
+          "start": "2026-04-23 08:00:00",
+          "end": "2026-04-23 08:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "mentalhealth@wellness.org"
+          ],
+          "id": "evt_843d1d28b37e48adb163b600567b8cb6"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Home Visit - Chronic Pain Management",
+          "start": "2026-04-23 09:00:00",
+          "end": "2026-04-23 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_16c319d58c264136880d110b3dcafc8c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Follow up call to local clinic",
+          "start": "2026-04-23 11:00:00",
+          "end": "2026-04-23 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_11d5bf86dc054f94ada50e34b767ef99"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Home Visit - Health Education",
+          "start": "2026-04-23 14:00:00",
+          "end": "2026-04-23 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c6dd564f230f4ee8afbeb5a05219a351"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner Prep",
+          "start": "2026-04-23 18:00:00",
+          "end": "2026-04-23 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1e449310cce746b6bc6a502d5e149b7f"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Mental Health Counselor",
+          "start": "2026-04-23 08:00:00",
+          "end": "2026-04-23 08:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "mentalhealth@wellness.org"
+          ],
+          "id": "evt_843d1d28b37e48adb163b600567b8cb6"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Home Visit - Chronic Pain Management",
+          "start": "2026-04-23 09:00:00",
+          "end": "2026-04-23 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_16c319d58c264136880d110b3dcafc8c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Follow up call to local clinic",
+          "start": "2026-04-23 11:00:00",
+          "end": "2026-04-23 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_11d5bf86dc054f94ada50e34b767ef99"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Home Visit - Health Education",
+          "start": "2026-04-23 14:00:00",
+          "end": "2026-04-23 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c6dd564f230f4ee8afbeb5a05219a351"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner Prep",
+          "start": "2026-04-23 18:00:00",
+          "end": "2026-04-23 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1e449310cce746b6bc6a502d5e149b7f"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Tell me about my appointments on Thursday."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I need to find out the current date and time so I can identify the correct Thursday. Then, I will list all the events scheduled for that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-04-23 07:00:00 | Thursday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2026-04-23 00:00:00",
+          "time_max": "2026-04-23 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_843d1d28b37e48adb163b600567b8cb6 | Meeting with Mental Health Counselor \u2014 Thu 08:00-08:30\nid: evt_16c319d58c264136880d110b3dcafc8c | Home Visit - Chronic Pain Management \u2014 Thu 09:00-10:30\nid: evt_11d5bf86dc054f94ada50e34b767ef99 | Follow up call to local clinic \u2014 Thu 11:00-12:00\nid: evt_c6dd564f230f4ee8afbeb5a05219a351 | Home Visit - Health Education \u2014 Thu 14:00-15:00\nid: evt_1e449310cce746b6bc6a502d5e149b7f | Dinner Prep \u2014 Thu 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. This Thursday, April 23, 2026, you have 5 appointments:\n- 8:00-8:30: Meeting with Mental Health Counselor\n- 9:00-10:30: Home Visit - Chronic Pain Management\n- 11:00-12:00: Follow up call to local clinic\n- 14:00-15:00: Home Visit - Health Education\n- 18:00-19:00: Dinner Prep"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Dinner Friday?",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "List events on Friday with the word 'dinner' and show the details.",
+    "simulated_now": "2026-04-24 12:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Huddle - Discussing Patient Cases",
+          "start": "2026-04-24 08:00:00",
+          "end": "2026-04-24 08:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisingphysician@clinic.org",
+            "registerednurse@clinic.org"
+          ],
+          "id": "evt_57a77d48104f4dddb169d882ac52bd46"
+        },
+        {
+          "day": "Friday",
+          "summary": "Home Visit - Mr. Johnson (Diabetes Management)",
+          "start": "2026-04-24 09:00:00",
+          "end": "2026-04-24 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7394d4a3c0b746c79885c5b19ac7bf16"
+        },
+        {
+          "day": "Friday",
+          "summary": "Home Visit - Mrs. Smith (Post-Stroke Rehabilitation)",
+          "start": "2026-04-24 11:00:00",
+          "end": "2026-04-24 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_678d2fd89b2e454ea292e3944de1b4c6"
+        },
+        {
+          "day": "Friday",
+          "summary": "New Patient Assessment - Referral from Local Clinic",
+          "start": "2026-04-24 14:30:00",
+          "end": "2026-04-24 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7a56e016bcb848b9bf894a04407220d8"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner at local restaurant with spouse",
+          "start": "2026-04-24 19:00:00",
+          "end": "2026-04-24 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0c4adf15b6574690b9393afbcbf19c44"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Huddle - Discussing Patient Cases",
+          "start": "2026-04-24 08:00:00",
+          "end": "2026-04-24 08:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisingphysician@clinic.org",
+            "registerednurse@clinic.org"
+          ],
+          "id": "evt_57a77d48104f4dddb169d882ac52bd46"
+        },
+        {
+          "day": "Friday",
+          "summary": "Home Visit - Mr. Johnson (Diabetes Management)",
+          "start": "2026-04-24 09:00:00",
+          "end": "2026-04-24 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7394d4a3c0b746c79885c5b19ac7bf16"
+        },
+        {
+          "day": "Friday",
+          "summary": "Home Visit - Mrs. Smith (Post-Stroke Rehabilitation)",
+          "start": "2026-04-24 11:00:00",
+          "end": "2026-04-24 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_678d2fd89b2e454ea292e3944de1b4c6"
+        },
+        {
+          "day": "Friday",
+          "summary": "New Patient Assessment - Referral from Local Clinic",
+          "start": "2026-04-24 14:30:00",
+          "end": "2026-04-24 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7a56e016bcb848b9bf894a04407220d8"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner at local restaurant with spouse",
+          "start": "2026-04-24 19:00:00",
+          "end": "2026-04-24 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0c4adf15b6574690b9393afbcbf19c44"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Dinner Friday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can help with that. First, I'll check what day Friday is, and then I'll check your calendar for dinner."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-04-24 12:00:00 | Friday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2026-04-24 23:59:59",
+          "time_min": "2026-04-24 12:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_678d2fd89b2e454ea292e3944de1b4c6 | Home Visit - Mrs. Smith (Post-Stroke Rehabilitation) \u2014 Fri 11:00-12:00\nid: evt_7a56e016bcb848b9bf894a04407220d8 | New Patient Assessment - Referral from Local Clinic \u2014 Fri 14:30-16:00\nid: evt_0c4adf15b6574690b9393afbcbf19c44 | Dinner at local restaurant with spouse \u2014 Fri 19:00-21:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_0c4adf15b6574690b9393afbcbf19c44"
+        },
+        "result": "Dinner at local restaurant with spouse\n  ID: evt_0c4adf15b6574690b9393afbcbf19c44\n  Time: Fri Apr 24, 19:00 - 21:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "You have a dinner scheduled with your spouse at a local restaurant from 19:00-21:00. You have already accepted."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events for the current day and respond with the event details.",
+    "simulated_now": "2026-04-20 07:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Huddle - Discussing Patient Cases",
+          "start": "2026-04-20 08:00:00",
+          "end": "2026-04-20 08:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisingphysician@clinic.org",
+            "registerednurse@clinic.org"
+          ],
+          "id": "evt_8751d969cd1f4ee6883c948606f12d6d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mr. Johnson (Diabetes Management)",
+          "start": "2026-04-20 09:00:00",
+          "end": "2026-04-20 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c30b4ae4088a43ae876b6258c436ca53"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mrs. Smith (Post-Stroke Rehabilitation)",
+          "start": "2026-04-20 11:00:00",
+          "end": "2026-04-20 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e79b0e98af1544bbb629f280f9c0435b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lunch / Paperwork at Clinic",
+          "start": "2026-04-20 13:00:00",
+          "end": "2026-04-20 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_be5cf0cc6fd840479511028fdbd8f429"
+        },
+        {
+          "day": "Monday",
+          "summary": "New Patient Assessment - Referral from Local Clinic",
+          "start": "2026-04-20 14:30:00",
+          "end": "2026-04-20 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e1d46d94dc854bd28bcc2f5910873868"
+        },
+        {
+          "day": "Monday",
+          "summary": "Children's Soccer Practice",
+          "start": "2026-04-20 18:00:00",
+          "end": "2026-04-20 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d5577514c08840bfb649fdbcd97829aa"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Huddle - Discussing Patient Cases",
+          "start": "2026-04-20 08:00:00",
+          "end": "2026-04-20 08:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisingphysician@clinic.org",
+            "registerednurse@clinic.org"
+          ],
+          "id": "evt_8751d969cd1f4ee6883c948606f12d6d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mr. Johnson (Diabetes Management)",
+          "start": "2026-04-20 09:00:00",
+          "end": "2026-04-20 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c30b4ae4088a43ae876b6258c436ca53"
+        },
+        {
+          "day": "Monday",
+          "summary": "Home Visit - Mrs. Smith (Post-Stroke Rehabilitation)",
+          "start": "2026-04-20 11:00:00",
+          "end": "2026-04-20 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e79b0e98af1544bbb629f280f9c0435b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lunch / Paperwork at Clinic",
+          "start": "2026-04-20 13:00:00",
+          "end": "2026-04-20 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_be5cf0cc6fd840479511028fdbd8f429"
+        },
+        {
+          "day": "Monday",
+          "summary": "New Patient Assessment - Referral from Local Clinic",
+          "start": "2026-04-20 14:30:00",
+          "end": "2026-04-20 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e1d46d94dc854bd28bcc2f5910873868"
+        },
+        {
+          "day": "Monday",
+          "summary": "Children's Soccer Practice",
+          "start": "2026-04-20 18:00:00",
+          "end": "2026-04-20 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d5577514c08840bfb649fdbcd97829aa"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-04-20 07:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2026-04-20 23:59:59",
+          "time_min": "2026-04-20 00:00:00"
+        },
+        "result": "Found 6 events:\nid: evt_8751d969cd1f4ee6883c948606f12d6d | Team Huddle - Discussing Patient Cases \u2014 Mon 08:00-08:30\nid: evt_c30b4ae4088a43ae876b6258c436ca53 | Home Visit - Mr. Johnson (Diabetes Management) \u2014 Mon 09:00-10:30\nid: evt_e79b0e98af1544bbb629f280f9c0435b | Home Visit - Mrs. Smith (Post-Stroke Rehabilitation) \u2014 Mon 11:00-12:00\nid: evt_be5cf0cc6fd840479511028fdbd8f429 | Lunch / Paperwork at Clinic \u2014 Mon 13:00-14:00\nid: evt_e1d46d94dc854bd28bcc2f5910873868 | New Patient Assessment - Referral from Local Clinic \u2014 Mon 14:30-16:00\nid: evt_d5577514c08840bfb649fdbcd97829aa | Children's Soccer Practice \u2014 Mon 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Here is your schedule for today (April 20, 2026):\n\n*   8:00 AM - 8:30 AM: Team Huddle - Discussing Patient Cases\n*   9:00 AM - 10:30 AM: Home Visit - Mr. Johnson (Diabetes Management)\n*   11:00 AM - 12:00 PM: Home Visit - Mrs. Smith (Post-Stroke Rehabilitation)\n*   1:00 PM - 2:00 PM: Lunch / Paperwork at Clinic\n*   2:30 PM - 4:00 PM: New Patient Assessment - Referral from Local Clinic\n*   6:00 PM - 7:00 PM: Children's Soccer Practice"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Anything happening tomorrow morning?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List events on Tuesday between 8:00 AM and 12:00 PM and respond with the event details.",
+    "simulated_now": "2026-04-20 20:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Social Worker - Coordinating Resources for Patient",
+          "start": "2026-04-21 08:30:00",
+          "end": "2026-04-21 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "socialworker@county.org"
+          ],
+          "id": "evt_c4b042503ba7465b86dc202be7bfd158"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Wound Care for Mr. Davis",
+          "start": "2026-04-21 10:00:00",
+          "end": "2026-04-21 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f7dbb7273365420fa56e7334afca1687"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Medication Reconciliation for Elderly Patient",
+          "start": "2026-04-21 12:00:00",
+          "end": "2026-04-21 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d9942cfbabe74d7fb6c01356b789efe5"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Professional Development Webinar - Rural Healthcare Challenges",
+          "start": "2026-04-21 14:00:00",
+          "end": "2026-04-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c6aa7eb152c4432aa67f9258bc94ff4c"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Spouse",
+          "start": "2026-04-21 18:30:00",
+          "end": "2026-04-21 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_33239497bd6a4089858e651b88c21d28"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Social Worker - Coordinating Resources for Patient",
+          "start": "2026-04-21 08:30:00",
+          "end": "2026-04-21 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "socialworker@county.org"
+          ],
+          "id": "evt_c4b042503ba7465b86dc202be7bfd158"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Wound Care for Mr. Davis",
+          "start": "2026-04-21 10:00:00",
+          "end": "2026-04-21 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f7dbb7273365420fa56e7334afca1687"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Home Visit - Medication Reconciliation for Elderly Patient",
+          "start": "2026-04-21 12:00:00",
+          "end": "2026-04-21 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d9942cfbabe74d7fb6c01356b789efe5"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Professional Development Webinar - Rural Healthcare Challenges",
+          "start": "2026-04-21 14:00:00",
+          "end": "2026-04-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c6aa7eb152c4432aa67f9258bc94ff4c"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Spouse",
+          "start": "2026-04-21 18:30:00",
+          "end": "2026-04-21 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_33239497bd6a4089858e651b88c21d28"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Anything happening tomorrow morning?"
+      },
+      {
+        "role": "assistant",
+        "content": "Here is my plan:\n1. Get the current time.\n2. List events for tomorrow morning (from 8am to 12pm).\n3. Respond to the user with the events, if any."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-04-20 20:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2026-04-21 08:00:00",
+          "time_max": "2026-04-21 12:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_c4b042503ba7465b86dc202be7bfd158 | Meeting with Social Worker - Coordinating Resources for Patient \u2014 Tue 08:30-09:30\nid: evt_f7dbb7273365420fa56e7334afca1687 | Home Visit - Wound Care for Mr. Davis \u2014 Tue 10:00-11:30\nid: evt_d9942cfbabe74d7fb6c01356b789efe5 | Home Visit - Medication Reconciliation for Elderly Patient \u2014 Tue 12:00-13:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have three events scheduled for tomorrow morning:\n\n*  Meeting with Social Worker - Coordinating Resources for Patient: Tuesday 8:30am-9:30am\n*  Home Visit - Wound Care for Mr. Davis: Tuesday 10:00am-11:30am\n*  Home Visit - Medication Reconciliation for Elderly Patient: Tuesday 12:00pm-1:00pm"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

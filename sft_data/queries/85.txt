@@ -1,0 +1,148 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Retrospective' for next Wednesday at 3 PM, lasting one hour. Invite john.smith@email.com and david.lee@email.com. The event description is 'Discuss Q2 performance and plan for Q3'.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event on Wednesday, June 19, 2024, at 3 PM with the specified details, including the attendees and description.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-06-16T23:59:59"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting for Friday to discuss Q3 goals at 11 AM for 30 minutes.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event on Friday, June 21, 2024, at 11 AM for 30 minutes. The title should be 'Discuss Q3 goals'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-06-16T23:59:59"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I'm free after my financial advisor call on Monday. Can you schedule a meeting then?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should identify the 'Call with Financial Advisor' event on Monday, determine its end time (4:00 PM), and schedule a new meeting after that time. It should ask the user for more details about the new meeting if needed.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-06-16T23:59:59"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing right before dinner with friends on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should identify the 'Dinner with Friends' event on Wednesday, find the immediately preceding event ('Professional Development Webinar - Tax Law Changes'), and then provide details about that earlier event.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-06-16T23:59:59"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my Thursday meeting with Robert Brown back by one hour.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Client Meeting - Discuss estimated tax payments' event with Robert Brown on Thursday, June 20, 2024, and update its start time to 8:00 AM, adjusting the end time accordingly.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-06-16T23:59:59"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the location of dinner with friends on Wednesday to my house instead. The attendees are still friend1@email.com and friend2@email.com.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should identify the 'Dinner with Friends' event on Wednesday, June 19, 2024, and update the description to include \"at my house\".",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-06-16T23:59:59"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Tax Planning for Retirement meeting on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Client Meeting - Tax Planning for Retirement' event on Tuesday, June 18, 2024, and respond with the attendee list, which includes Jane Doe.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-06-16T23:59:59"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my team meeting this week?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should search for any event with 'Team Meeting' in the title this week and then provide the date and time of the event, which is Monday, June 17, 2024, at 1:00 PM.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-06-16T23:59:59"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the parent-teacher association meeting on Tuesday. Decline it.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Parent-Teacher Association Meeting' event on Tuesday, June 18, 2024, and respond to the event with 'DECLINE'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-06-16T23:59:59"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule the Q3 Business Expenses review on Monday for 30 minutes later.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Client Meeting - Reviewing Q3 Business Expenses' event on Monday, June 17, 2024, and update its start time to 9:30 AM, keeping the duration the same.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-06-16T23:59:59"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "dinner Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should search for events on Wednesday, June 19, 2024, containing the word 'dinner', and respond with the event named 'Dinner with Friends'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-06-16T23:59:59"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "reschedule robert brown meeting",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Client Meeting - Discuss estimated tax payments' event with Robert Brown on Thursday, June 20, 2024, and prompt the user for the new desired time.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-06-16T23:59:59"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should list all events scheduled for Tuesday, June 18, 2024, including 'Respond to client emails', 'Work on complex tax return', 'Lunch with a colleague to discuss work life balance', and 'Client Meeting - Tax Planning for Retirement'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-06-17T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should list all events scheduled for Sunday, June 23, 2024, including 'Call with sibling', 'Family time in the park', and 'Plan next week's meals'.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-06-24T08:00:00"
+    }
+]

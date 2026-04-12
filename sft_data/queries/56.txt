@@ -1,0 +1,144 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a meeting on Thursday at 4:30 PM called 'Discuss Q4 Results' with design@news.com, and have it last one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Discuss Q4 Results', start time of 2023-11-16T16:30:00, end time of 2023-11-16T17:30:00, and attendee design@news.com.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-11-12T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please book a time for me to call significant_other@email.com on Friday at 6:00 PM for thirty minutes to discuss our date night.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary including 'call with significant_other@email.com', start time of 2023-11-17T18:00:00, end time of 2023-11-17T18:30:00, and attendee significant_other@email.com.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-11-12T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Can you schedule some time for me to meet with Dr. Klein?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for existing meetings with Dr. Klein. Find the 'Interview with Dr. Klein' event on Monday at 10:30 AM. Ask the user if they want to confirm, reschedule or cancel that event.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-11-13T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I need to reschedule a meeting with my editor this week.",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for meetings with editor@news.com this week. Find the 'Team Meeting' event on Monday at 9:00 AM and the 'Meeting with Editor' event on Tuesday at 4:00 PM. Ask the user which meeting they would like to reschedule.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-11-14T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the Alzheimer's interview to 2 PM on Wednesday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Interview - Lead researcher on Alzheimer's breakthrough' event on Wednesday and update its start time to 2023-11-15T14:00:00 and adjust the end time accordingly.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-11-15T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "I cannot make it to dinner on Friday, please decline for me.",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Dinner date' event on Friday and respond with DECLINE.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-11-17T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What am I doing on Monday afternoon?",
+        "complexity": "Low",
+        "expected_behavior": "List events on Monday between 12:00 PM and 6:00 PM. Return the 'Writing: Draft article on renewable energy advancements' and 'Fact-Checking Session - Review article draft' events.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-11-13T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the book club this week?",
+        "complexity": "Low",
+        "expected_behavior": "List events containing 'Book Club' within the week. Return the 'Book Club Meeting' event on Wednesday at 7:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-11-15T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my meeting with journalist1@news.com on Wednesday to when I am free on Thursday.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Peer Review - Exchange articles with colleague' event on Wednesday. Find available time slots on Thursday. Propose available time slots to the user and ask for confirmation to reschedule the meeting.",
+        "addressed_days": [
+            "Wednesday",
+            "Thursday"
+        ],
+        "current_time": "2023-11-15T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule my meeting with the editor on Tuesday to tomorrow.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Editor - Discuss article feedback' event on Tuesday. Check if the new time (Wednesday at 4:00 PM) conflicts with the existing Peer Review at the same time. If conflict, prompt user to resolve. Otherwise, update the start and end time of the meeting with the editor.",
+        "addressed_days": [
+            "Tuesday",
+            "Wednesday"
+        ],
+        "current_time": "2023-11-14T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting editor...",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for meetings with editor@news.com this week. Find the 'Team Meeting' event on Monday at 9:00 AM and the 'Meeting with Editor' event on Tuesday at 4:00 PM. Ask the user which meeting they would like to specify.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-11-14T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "No to dinner.",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Dinner date' event on Friday and respond with DECLINE.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-11-17T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for today?",
+        "complexity": "Low",
+        "expected_behavior": "Get the current date (Monday November 13 2023). List all events scheduled for today (Monday). Return: 'Team Meeting' at 9:00 AM, 'Interview with Dr. Klein' at 10:30 AM, 'Writing: Draft article on renewable energy advancements' at 1:00 PM, and 'Fact-Checking Session' at 3:00 PM, Dinner with Family at 7:00 PM",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-11-13T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What do I have tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Get the date for tomorrow (Wednesday November 15 2023). List all events scheduled for that day. Return: 'Press Briefing' at 10:00 AM, 'Interview - Lead researcher on Alzheimer's breakthrough' at 11:30 AM, 'Writing: Draft article on Alzheimer's research' at 2:00 PM, and 'Peer Review' at 4:00 PM, Book Club Meeting at 7:00 PM",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-11-14T20:00:00"
+    }
+]

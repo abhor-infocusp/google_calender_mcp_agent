@@ -1,0 +1,151 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Board Game Night' for Wednesday at 7 PM with Rachel and Kevin.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Board Game Night' on Wednesday, April 19, 2023, at 7:00 PM, ending at 8:00 PM, with attendees rachel.nguyen@example.com and kevin.patel@example.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-16T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me a meeting for Friday at 2pm to discuss Q2 planning with the HR team",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event on Friday, April 21, 2023, at 2:00 PM, ending at 3:00 PM, with the summary 'Q2 planning discussion' and an empty list of attendees. Add 'HR team' to the description",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-04-16T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Thursday evening?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Thursday, April 20, 2023, between 6 PM and 8 PM to determine the user's activities during that time.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-04-20T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What is Sarah doing on Friday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Friday, April 21, 2023, between 9 AM and 12 PM that include sarah.johnson@company.com.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-04-21T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we push back the Data Scientist interview on Thursday by an hour?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Data Scientist Interview' event on Thursday, April 20, 2023, and update its start time to 11:30 AM and end time to 12:30 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-04-20T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update the dinner with friends on Monday to 7pm.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Friends' event on Monday, April 17, 2023, and update its start time to 7:00 PM and end time to 8:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-17T15:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my meeting with the engineering director?",
+        "complexity": "Low",
+        "expected_behavior": "Search for the event 'Meeting with Engineering Director' and return the start and end times.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-17T11:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the pipeline review?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Team Meeting: Pipeline Review' event and return the list of attendees.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-04-20T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I'm busy at 1pm on Wednesday, move my feedback session to Thursday at the same time.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Feedback Session with Hiring Manager' event on Wednesday, April 19, 2023, delete it, and create a new event with the same details on Thursday, April 20, 2023, at 1:00 PM.",
+        "addressed_days": [
+            "Wednesday",
+            "Thursday"
+        ],
+        "current_time": "2023-04-19T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline the meeting with the HR director and book a meeting with Sarah Johnson instead for Friday at 11am",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Meeting with HR Director' event on Friday, April 21, 2023, and decline it. Then, create a new event called 'Meeting with Sarah Johnson' on Friday, April 21, 2023, at 11:00 AM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-04-19T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Interview John",
+        "complexity": "Medium",
+        "expected_behavior": "Search for events that have 'interview' and 'John' in the title or include John's email. If found, return the information about the interview.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2023-04-18T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Data Scientist",
+        "complexity": "Medium",
+        "expected_behavior": "Search for Data Scientist interviews. If multiple exist, ask for clarification. If one is found, ask for the new time to reschedule.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2023-04-18T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for the current day (April 17, 2023).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-17T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any interviews yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events from Sunday April 16, 2023, that contain 'interview'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-17T08:00:00"
+    }
+]

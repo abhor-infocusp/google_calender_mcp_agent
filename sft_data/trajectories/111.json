@@ -1,0 +1,906 @@
+[
+  {
+    "query": "Can you book a session for 'Review Solar Panel Efficiency' on November 4th at 11:30 AM?",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event named 'Review Solar Panel Efficiency' on November 4th from 11:30 AM to 12:30 PM, with no attendees specified.",
+    "simulated_now": "2026-10-26 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Internal Design Review",
+          "start": "2026-11-04 09:00:00",
+          "end": "2026-11-04 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ce1ecff7fed44881b96ffa67b10a6624"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Material Suppliers",
+          "start": "2026-11-04 10:30:00",
+          "end": "2026-11-04 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supplier1@email.com",
+            "supplier2@email.com"
+          ],
+          "id": "evt_f7f2dfcabb7c4c688ad5637dba0d4180"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "LEED Documentation Preparation",
+          "start": "2026-11-04 14:00:00",
+          "end": "2026-11-04 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_91ee8531da5f4b3b842b31fdfd6add8d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Green Building Webinar",
+          "start": "2026-11-04 19:00:00",
+          "end": "2026-11-04 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_819cb711a18d4ca680feebd812443736"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Internal Design Review",
+          "start": "2026-11-04 09:00:00",
+          "end": "2026-11-04 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ce1ecff7fed44881b96ffa67b10a6624"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Material Suppliers",
+          "start": "2026-11-04 10:30:00",
+          "end": "2026-11-04 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supplier1@email.com",
+            "supplier2@email.com"
+          ],
+          "id": "evt_f7f2dfcabb7c4c688ad5637dba0d4180"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review Solar Panel Efficiency",
+          "start": "2026-11-04 11:30:00",
+          "end": "2026-11-04 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_02befc23b0af4e309f167b133dc61716"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "LEED Documentation Preparation",
+          "start": "2026-11-04 14:00:00",
+          "end": "2026-11-04 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_91ee8531da5f4b3b842b31fdfd6add8d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Green Building Webinar",
+          "start": "2026-11-04 19:00:00",
+          "end": "2026-11-04 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_819cb711a18d4ca680feebd812443736"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can you book a session for 'Review Solar Panel Efficiency' on November 4th at 11:30 AM?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. I'll schedule it for an hour. If you need to add invitees or change the duration, just let me know."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-10-26 10:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2026-11-04 11:30:00",
+          "summary": "Review Solar Panel Efficiency",
+          "end": "2026-11-04 12:30:00"
+        },
+        "result": "Event created successfully.\nReview Solar Panel Efficiency\n  ID: evt_02befc23b0af4e309f167b133dc61716\n  Time: Wed Nov 04, 11:30 - 12:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've scheduled \"Review Solar Panel Efficiency\" for November 4th from 11:30 AM to 12:30 PM. Let me know if you need to make any changes."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change the time of the LEED Documentation Preparation to 3 PM on Wednesday.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'LEED Documentation Preparation' event and update its start time to 3:00 PM.",
+    "simulated_now": "2026-11-04 09:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Internal Design Review",
+          "start": "2026-11-04 09:00:00",
+          "end": "2026-11-04 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d97c3f51b10f41599feb8b5efdf4ea9c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Material Suppliers",
+          "start": "2026-11-04 10:30:00",
+          "end": "2026-11-04 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supplier1@email.com",
+            "supplier2@email.com"
+          ],
+          "id": "evt_2458e88710d8443eb92de22cba8e80fa"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "LEED Documentation Preparation",
+          "start": "2026-11-04 14:00:00",
+          "end": "2026-11-04 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6a2462b834e64033b8695ec88da44ca0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Green Building Webinar",
+          "start": "2026-11-04 19:00:00",
+          "end": "2026-11-04 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f9dd2c4978c449c7a3f43a6d7669d584"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Internal Design Review",
+          "start": "2026-11-04 09:00:00",
+          "end": "2026-11-04 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d97c3f51b10f41599feb8b5efdf4ea9c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Material Suppliers",
+          "start": "2026-11-04 10:30:00",
+          "end": "2026-11-04 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supplier1@email.com",
+            "supplier2@email.com"
+          ],
+          "id": "evt_2458e88710d8443eb92de22cba8e80fa"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "LEED Documentation Preparation",
+          "start": "2026-11-04 15:00:00",
+          "end": "2026-11-04 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6a2462b834e64033b8695ec88da44ca0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Green Building Webinar",
+          "start": "2026-11-04 19:00:00",
+          "end": "2026-11-04 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f9dd2c4978c449c7a3f43a6d7669d584"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change the time of the LEED Documentation Preparation to 3 PM on Wednesday."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. Let me find the event and move it for you."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-11-04 09:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 22 events:\nid: evt_980cbfff835942a59d4c75883f7fc095 | Project Kickoff Meeting \u2014 Mon 09:00-10:30\nid: evt_36c6e6c2c1954356a8cd9457ca806dbe | Client Presentation: Sustainable Design Options \u2014 Mon 11:00-12:00\nid: evt_03008fb7862b4dcf81bb357d3437c7c3 | Team Meeting: Material Selection Review \u2014 Mon 14:00-15:00\nid: evt_1ad9c6a62840460daf4b6a02921f311a | Volunteer at Community Garden \u2014 Mon 18:30-20:00\nid: evt_169bc52b815b481fb20a9f2c02b4725d | Site Visit: New Construction Project \u2014 Tue 09:30-11:00\nid: evt_9746e15e5daa49b6beee8f5c81c9d86b | Meeting with Sustainability Consultant \u2014 Tue 13:00-14:30\nid: evt_cae12d8c1dee4265bc9a5e2c9fb61943 | Work on Energy Modeling for Project Alpha \u2014 Tue 15:00-17:00\nid: evt_d97c3f51b10f41599feb8b5efdf4ea9c | Internal Design Review \u2014 Wed 09:00-10:00\nid: evt_2458e88710d8443eb92de22cba8e80fa | Meeting with Material Suppliers \u2014 Wed 10:30-12:00\nid: evt_6a2462b834e64033b8695ec88da44ca0 | LEED Documentation Preparation \u2014 Wed 14:00-16:00\nid: evt_f9dd2c4978c449c7a3f43a6d7669d584 | Green Building Webinar \u2014 Wed 19:00-20:30\nid: evt_4ffa1a53ef0944a8b68c899f72fb3989 | Client Meeting: Design Updates \u2014 Thu 09:00-10:30\nid: evt_48d00aecd24f49f9b25fe40764fcb32f | Coordinate with Landscape Architects \u2014 Thu 11:00-12:00\nid: evt_96c1fa8bc6104c2d9f04725f02c6d978 | Research New Green Technologies \u2014 Thu 14:00-16:00\nid: evt_8a75329fde854df8998a27527d0e998e | Networking event with environmental professionals \u2014 Thu 18:00-19:00\nid: evt_04b565d5ddf74ccba9972bf4d316aec7 | Review Contractor Bids \u2014 Fri 09:00-10:00\nid: evt_8368e0517571496b906e465804dcc553 | Meeting: Renewable Energy System Options \u2014 Fri 10:30-12:00\nid: evt_875f63e2906b48d5bc4d5a722d292da1 | Finalize Project Budget \u2014 Fri 14:00-15:00\nid: evt_13a20a4dc556448a91e5a31fb65ef4a5 | Hike at State Park with Friends \u2014 Sat 09:00-12:00\nid: evt_ca5e0b503cdd4e6fa9f997b6f322b6c6 | Visit Local Farmer's Market \u2014 Sat 13:00-15:00\nid: evt_847af1ccb2894f8a9d8019f5863ac7a2 | Brunch with Partner \u2014 Sun 10:00-11:00\nid: evt_8b6257c1ec804a53a46b1f693d10b438 | Attend Environmental Awareness Workshop \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_6a2462b834e64033b8695ec88da44ca0",
+          "end": "2026-11-04 17:00:00",
+          "start": "2026-11-04 15:00:00"
+        },
+        "result": "Event updated successfully.\nLEED Documentation Preparation\n  ID: evt_6a2462b834e64033b8695ec88da44ca0\n  Time: Wed Nov 04, 15:00 - 17:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "Done. I've moved the LEED Documentation Preparation to 3 PM to 5 PM on Wednesday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move the renewable energy meeting on Friday to 11:00 AM and invite structural_engineer@email.com.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Meeting: Renewable Energy System Options' event and update its start time to 11:00 AM, and add structural_engineer@email.com to the attendees list.",
+    "simulated_now": "2026-11-06 14:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Review Contractor Bids",
+          "start": "2026-11-06 09:00:00",
+          "end": "2026-11-06 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "construction_manager@email.com"
+          ],
+          "id": "evt_926ec3606ca34b52af041e1d564a4d0a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meeting: Renewable Energy System Options",
+          "start": "2026-11-06 10:30:00",
+          "end": "2026-11-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "renewable_energy_expert@email.com"
+          ],
+          "id": "evt_0cd03ff549544fbcbe75155d46874c96"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Project Budget",
+          "start": "2026-11-06 14:00:00",
+          "end": "2026-11-06 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3e35dd755fa24cb689c4ad0d8930c3ed"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Review Contractor Bids",
+          "start": "2026-11-06 09:00:00",
+          "end": "2026-11-06 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "construction_manager@email.com"
+          ],
+          "id": "evt_926ec3606ca34b52af041e1d564a4d0a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meeting: Renewable Energy System Options",
+          "start": "2026-11-06 11:00:00",
+          "end": "2026-11-06 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "renewable_energy_expert@email.com",
+            "structural_engineer@email.com"
+          ],
+          "id": "evt_e5ca171dc28e42468715d8be73a4b150"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Project Budget",
+          "start": "2026-11-06 14:00:00",
+          "end": "2026-11-06 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3e35dd755fa24cb689c4ad0d8930c3ed"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move the renewable energy meeting on Friday to 11:00 AM and invite structural_engineer@email.com."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I'll move the renewable energy meeting on Friday to 11:00 AM and invite structural_engineer@email.com."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-11-06 14:00:00 | Friday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2026-11-06 00:00:00",
+          "time_max": "2026-11-06 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_926ec3606ca34b52af041e1d564a4d0a | Review Contractor Bids \u2014 Fri 09:00-10:00\nid: evt_0cd03ff549544fbcbe75155d46874c96 | Meeting: Renewable Energy System Options \u2014 Fri 10:30-12:00\nid: evt_3e35dd755fa24cb689c4ad0d8930c3ed | Finalize Project Budget \u2014 Fri 14:00-15:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_0cd03ff549544fbcbe75155d46874c96"
+        },
+        "result": "Meeting: Renewable Energy System Options\n  ID: evt_0cd03ff549544fbcbe75155d46874c96\n  Time: Fri Nov 06, 10:30 - 12:00\n  Attendees: renewable_energy_expert@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "end": "2026-11-06 12:30:00",
+          "attendees": [
+            "renewable_energy_expert@email.com",
+            "structural_engineer@email.com"
+          ],
+          "summary": "Meeting: Renewable Energy System Options",
+          "start": "2026-11-06 11:00:00"
+        },
+        "result": "Event created successfully.\nMeeting: Renewable Energy System Options\n  ID: evt_e5ca171dc28e42468715d8be73a4b150\n  Time: Fri Nov 06, 11:00 - 12:30\n  Attendees: renewable_energy_expert@email.com, structural_engineer@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "delete_event",
+        "args": {
+          "event_id": "evt_0cd03ff549544fbcbe75155d46874c96"
+        },
+        "result": "Event deleted: id: evt_0cd03ff549544fbcbe75155d46874c96 | Meeting: Renewable Energy System Options \u2014 Fri 10:30-12:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I have moved the \"Meeting: Renewable Energy System Options\" to 11:00 AM - 12:30 PM today and added structural_engineer@email.com to the invitation."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is my meeting with the material suppliers this week?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Meeting with Material Suppliers' event and respond with the event's start time.",
+    "simulated_now": "2026-11-01 12:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Internal Design Review",
+          "start": "2026-11-04 09:00:00",
+          "end": "2026-11-04 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_19e511410b32444ebecb9fed7f1f4eb6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Material Suppliers",
+          "start": "2026-11-04 10:30:00",
+          "end": "2026-11-04 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supplier1@email.com",
+            "supplier2@email.com"
+          ],
+          "id": "evt_edd276b229f8451791559b720b1a0ac2"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "LEED Documentation Preparation",
+          "start": "2026-11-04 14:00:00",
+          "end": "2026-11-04 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d62529bb6bc048c2835f8ac7f25bc0a3"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Green Building Webinar",
+          "start": "2026-11-04 19:00:00",
+          "end": "2026-11-04 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fc2321b55b034eadacca064f3374d76d"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Internal Design Review",
+          "start": "2026-11-04 09:00:00",
+          "end": "2026-11-04 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_19e511410b32444ebecb9fed7f1f4eb6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Material Suppliers",
+          "start": "2026-11-04 10:30:00",
+          "end": "2026-11-04 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supplier1@email.com",
+            "supplier2@email.com"
+          ],
+          "id": "evt_edd276b229f8451791559b720b1a0ac2"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "LEED Documentation Preparation",
+          "start": "2026-11-04 14:00:00",
+          "end": "2026-11-04 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d62529bb6bc048c2835f8ac7f25bc0a3"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Green Building Webinar",
+          "start": "2026-11-04 19:00:00",
+          "end": "2026-11-04 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fc2321b55b034eadacca064f3374d76d"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is my meeting with the material suppliers this week?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to establish the beginning of this week, and then I will search for a meeting with \"material suppliers\" within the upcoming week. Finally, I will tell you the time of that meeting."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-11-01 12:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2026-11-08 12:00:00",
+          "time_min": "2026-11-01 12:00:00"
+        },
+        "result": "Found 21 events:\nid: evt_6b75e3eff3cd4f5ca4020465f8d567e3 | Project Kickoff Meeting \u2014 Mon 09:00-10:30\nid: evt_6284406cb32d4c9c91ea313101e90b20 | Client Presentation: Sustainable Design Options \u2014 Mon 11:00-12:00\nid: evt_b25db995a01c400bb494a997c0282a60 | Team Meeting: Material Selection Review \u2014 Mon 14:00-15:00\nid: evt_83271d1d7d6e4ed89a632a9ad6fc5715 | Volunteer at Community Garden \u2014 Mon 18:30-20:00\nid: evt_3026d3b0fedd4fcb9d3f06dfd5c54cef | Site Visit: New Construction Project \u2014 Tue 09:30-11:00\nid: evt_0d544fade56b40bd8ff323b81c33fb8e | Meeting with Sustainability Consultant \u2014 Tue 13:00-14:30\nid: evt_2326d86486e24d2bb36cf91d5944a47e | Work on Energy Modeling for Project Alpha \u2014 Tue 15:00-17:00\nid: evt_19e511410b32444ebecb9fed7f1f4eb6 | Internal Design Review \u2014 Wed 09:00-10:00\nid: evt_edd276b229f8451791559b720b1a0ac2 | Meeting with Material Suppliers \u2014 Wed 10:30-12:00\nid: evt_d62529bb6bc048c2835f8ac7f25bc0a3 | LEED Documentation Preparation \u2014 Wed 14:00-16:00\nid: evt_fc2321b55b034eadacca064f3374d76d | Green Building Webinar \u2014 Wed 19:00-20:30\nid: evt_b40154bdd54048fcb174666a6e71ed06 | Client Meeting: Design Updates \u2014 Thu 09:00-10:30\nid: evt_33450e8b5a87426b99174995a939975f | Coordinate with Landscape Architects \u2014 Thu 11:00-12:00\nid: evt_b15afbc6357b4e9b9b23c4cafe5e1e10 | Research New Green Technologies \u2014 Thu 14:00-16:00\nid: evt_5a6ca3ead71a450db336453b822eeb62 | Networking event with environmental professionals \u2014 Thu 18:00-19:00\nid: evt_03c1182aff5748398f167b9d8ece2e55 | Review Contractor Bids \u2014 Fri 09:00-10:00\nid: evt_5a82222b244e49ae869a617ab72ce2f8 | Meeting: Renewable Energy System Options \u2014 Fri 10:30-12:00\nid: evt_8a643daeb91a4d0896b939ad0eefb164 | Finalize Project Budget \u2014 Fri 14:00-15:00\nid: evt_b1cb4ebd286e41b1b4d394f65a149521 | Hike at State Park with Friends \u2014 Sat 09:00-12:00\nid: evt_806bc67d857c48d68527e3ff70efa546 | Visit Local Farmer's Market \u2014 Sat 13:00-15:00\nid: evt_f6bf73a189644ab49611354b2f0af85e | Brunch with Partner \u2014 Sun 10:00-11:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Your meeting with the material suppliers is on Wednesday from 10:30 to 12:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Tell me who I am meeting with on Monday at 9 AM.",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Project Kickoff Meeting' event and respond with the list of attendees.",
+    "simulated_now": "2026-11-01 12:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Project Kickoff Meeting",
+          "start": "2026-11-02 09:00:00",
+          "end": "2026-11-02 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "structural_engineer@email.com",
+            "mechanical_engineer@email.com",
+            "construction_manager@email.com"
+          ],
+          "id": "evt_4247ada7c2734744ad985ddd6b0cfb87"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Presentation: Sustainable Design Options",
+          "start": "2026-11-02 11:00:00",
+          "end": "2026-11-02 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@email.com"
+          ],
+          "id": "evt_ab27ae49eb1f43f4a497a12fda7ce2ee"
+        },
+        {
+          "day": "Monday",
+          "summary": "Team Meeting: Material Selection Review",
+          "start": "2026-11-02 14:00:00",
+          "end": "2026-11-02 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e7eddc7e9adf4943a63a5713239b4ea7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Volunteer at Community Garden",
+          "start": "2026-11-02 18:30:00",
+          "end": "2026-11-02 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_22682114d633404b8108625ec14cda9f"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Project Kickoff Meeting",
+          "start": "2026-11-02 09:00:00",
+          "end": "2026-11-02 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "structural_engineer@email.com",
+            "mechanical_engineer@email.com",
+            "construction_manager@email.com"
+          ],
+          "id": "evt_4247ada7c2734744ad985ddd6b0cfb87"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Presentation: Sustainable Design Options",
+          "start": "2026-11-02 11:00:00",
+          "end": "2026-11-02 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client@email.com"
+          ],
+          "id": "evt_ab27ae49eb1f43f4a497a12fda7ce2ee"
+        },
+        {
+          "day": "Monday",
+          "summary": "Team Meeting: Material Selection Review",
+          "start": "2026-11-02 14:00:00",
+          "end": "2026-11-02 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e7eddc7e9adf4943a63a5713239b4ea7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Volunteer at Community Garden",
+          "start": "2026-11-02 18:30:00",
+          "end": "2026-11-02 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_22682114d633404b8108625ec14cda9f"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Tell me who I am meeting with on Monday at 9 AM."
+      },
+      {
+        "role": "assistant",
+        "content": "I need to determine the date of the upcoming Monday. First, I will get the current time. Then, I will list the events on that Monday and find the one at 9 AM. Finally, I will get the details of that event to identify the attendees."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-11-01 12:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, the current date is Sunday, November 1, 2026. Next Monday is November 2, 2026. I will now search for events on that day around 9 AM."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2026-11-02 08:00:00",
+          "time_max": "2026-11-02 10:00:00"
+        },
+        "result": "Found 1 events:\nid: evt_4247ada7c2734744ad985ddd6b0cfb87 | Project Kickoff Meeting \u2014 Mon 09:00-10:30"
+      },
+      {
+        "role": "assistant",
+        "content": "I've found a \"Project Kickoff Meeting\" scheduled for 9 AM on Monday. I will now get the event details to see who you're meeting with."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_4247ada7c2734744ad985ddd6b0cfb87"
+        },
+        "result": "Project Kickoff Meeting\n  ID: evt_4247ada7c2734744ad985ddd6b0cfb87\n  Time: Mon Nov 02, 09:00 - 10:30\n  Attendees: structural_engineer@email.com, mechanical_engineer@email.com, construction_manager@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "You are meeting with structural_engineer@email.com, mechanical_engineer@email.com, and construction_manager@email.com."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Meeting Friday about... solar stuff?",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Meeting: Renewable Energy System Options' event on Friday and display its details.",
+    "simulated_now": "2026-11-06 08:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Review Contractor Bids",
+          "start": "2026-11-06 09:00:00",
+          "end": "2026-11-06 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "construction_manager@email.com"
+          ],
+          "id": "evt_2d1b1541c1644fd196241c1549d98cb3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meeting: Renewable Energy System Options",
+          "start": "2026-11-06 10:30:00",
+          "end": "2026-11-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "renewable_energy_expert@email.com"
+          ],
+          "id": "evt_db19b50c2732488f9f1fb90eb7c21e30"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Project Budget",
+          "start": "2026-11-06 14:00:00",
+          "end": "2026-11-06 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3d0f72a0c9d046a5a25228c23e2ce634"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Review Contractor Bids",
+          "start": "2026-11-06 09:00:00",
+          "end": "2026-11-06 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "construction_manager@email.com"
+          ],
+          "id": "evt_2d1b1541c1644fd196241c1549d98cb3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meeting: Renewable Energy System Options",
+          "start": "2026-11-06 10:30:00",
+          "end": "2026-11-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "renewable_energy_expert@email.com"
+          ],
+          "id": "evt_db19b50c2732488f9f1fb90eb7c21e30"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Project Budget",
+          "start": "2026-11-06 14:00:00",
+          "end": "2026-11-06 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3d0f72a0c9d046a5a25228c23e2ce634"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Meeting Friday about... solar stuff?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can find that meeting for you. First, I need to determine today's date."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-11-06 08:00:00 | Friday"
+      },
+      {
+        "role": "assistant",
+        "content": "OK, today is Friday, November 6, 2026. Let me look at everything scheduled for today."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2026-11-06 00:00:00",
+          "time_max": "2026-11-06 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_2d1b1541c1644fd196241c1549d98cb3 | Review Contractor Bids \u2014 Fri 09:00-10:00\nid: evt_db19b50c2732488f9f1fb90eb7c21e30 | Meeting: Renewable Energy System Options \u2014 Fri 10:30-12:00\nid: evt_3d0f72a0c9d046a5a25228c23e2ce634 | Finalize Project Budget \u2014 Fri 14:00-15:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I see a meeting from 10:30 AM to 12:00 PM about \"Renewable Energy System Options.\" Is that the one you're looking for?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events for November 3rd.",
+    "simulated_now": "2026-11-03 07:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Site Visit: New Construction Project",
+          "start": "2026-11-03 09:30:00",
+          "end": "2026-11-03 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c76f8494c6284c799ec1626f5843cb3a"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Sustainability Consultant",
+          "start": "2026-11-03 13:00:00",
+          "end": "2026-11-03 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "consultant@email.com"
+          ],
+          "id": "evt_fcd420cf8f074d34ae7b2a2793d7cd91"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work on Energy Modeling for Project Alpha",
+          "start": "2026-11-03 15:00:00",
+          "end": "2026-11-03 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_07c6c4f5540f43cca1e2c82267c13278"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Site Visit: New Construction Project",
+          "start": "2026-11-03 09:30:00",
+          "end": "2026-11-03 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c76f8494c6284c799ec1626f5843cb3a"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Sustainability Consultant",
+          "start": "2026-11-03 13:00:00",
+          "end": "2026-11-03 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "consultant@email.com"
+          ],
+          "id": "evt_fcd420cf8f074d34ae7b2a2793d7cd91"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work on Energy Modeling for Project Alpha",
+          "start": "2026-11-03 15:00:00",
+          "end": "2026-11-03 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_07c6c4f5540f43cca1e2c82267c13278"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify today's date. Then, I will list all the events scheduled for today to let you know what you are doing."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-11-03 07:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2026-11-03 23:59:59",
+          "time_min": "2026-11-03 00:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_c76f8494c6284c799ec1626f5843cb3a | Site Visit: New Construction Project \u2014 Tue 09:30-11:00\nid: evt_fcd420cf8f074d34ae7b2a2793d7cd91 | Meeting with Sustainability Consultant \u2014 Tue 13:00-14:30\nid: evt_07c6c4f5540f43cca1e2c82267c13278 | Work on Energy Modeling for Project Alpha \u2014 Tue 15:00-17:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Today you have three events scheduled:\n\n*   Site Visit: New Construction Project from 09:30 to 11:00\n*   Meeting with Sustainability Consultant from 13:00 to 14:30\n*   Work on Energy Modeling for Project Alpha from 15:00 to 17:00"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

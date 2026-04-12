@@ -1,0 +1,969 @@
+[
+  {
+    "query": "Create an event called 'Team Lunch' for Tuesday at 12:00 PM, ending at 1:00 PM. Invite program_manager@nonprofit.org.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "The agent should create a new event with the title 'Team Lunch' on Tuesday, February 13, 2024, from 12:00 PM to 1:00 PM, with program_manager@nonprofit.org as an attendee.",
+    "simulated_now": "2024-02-11 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Content Calendar Planning",
+          "start": "2024-02-13 09:30:00",
+          "end": "2024-02-13 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_922f9f76479d435e8fbccaa07900cd17"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Program Manager",
+          "start": "2024-02-13 13:00:00",
+          "end": "2024-02-13 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "program_manager@nonprofit.org"
+          ],
+          "id": "evt_c145b1e9b327412999f9205038562740"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Brainstorm Session: Fall Fundraising Campaign",
+          "start": "2024-02-13 15:00:00",
+          "end": "2024-02-13 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ff2b7b2c9e0f42e6b9987d7c7f412de5"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Friends",
+          "start": "2024-02-13 19:00:00",
+          "end": "2024-02-13 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_05b9873fc6c749bda75dc4289b494842"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Content Calendar Planning",
+          "start": "2024-02-13 09:30:00",
+          "end": "2024-02-13 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_922f9f76479d435e8fbccaa07900cd17"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Team Lunch",
+          "start": "2024-02-13 12:00:00",
+          "end": "2024-02-13 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "program_manager@nonprofit.org"
+          ],
+          "id": "evt_d7df980a745647da8fe828704798897c"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Program Manager",
+          "start": "2024-02-13 13:00:00",
+          "end": "2024-02-13 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "program_manager@nonprofit.org"
+          ],
+          "id": "evt_c145b1e9b327412999f9205038562740"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Brainstorm Session: Fall Fundraising Campaign",
+          "start": "2024-02-13 15:00:00",
+          "end": "2024-02-13 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ff2b7b2c9e0f42e6b9987d7c7f412de5"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Friends",
+          "start": "2024-02-13 19:00:00",
+          "end": "2024-02-13 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_05b9873fc6c749bda75dc4289b494842"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Team Lunch' for Tuesday at 12:00 PM, ending at 1:00 PM. Invite program_manager@nonprofit.org."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-02-11 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "end": "2024-02-13 13:00:00",
+          "attendees": [
+            "program_manager@nonprofit.org"
+          ],
+          "summary": "Team Lunch",
+          "start": "2024-02-13 12:00:00"
+        },
+        "result": "Event created successfully.\nTeam Lunch\n  ID: evt_d7df980a745647da8fe828704798897c\n  Time: Tue Feb 13, 12:00 - 13:00\n  Attendees: program_manager@nonprofit.org\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've created the event \"Team Lunch\" for Tuesday, February 13, from 12:00 PM to 1:00 PM, with program_manager@nonprofit.org invited."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Book a meeting titled 'Final Project Discussion' for Friday from 3:00 PM to 4:00 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "The agent should create a new event titled 'Final Project Discussion' on Friday, February 16, 2024, from 3:00 PM to 4:00 PM.",
+    "simulated_now": "2024-02-11 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Review Upcoming Events",
+          "start": "2024-02-16 09:00:00",
+          "end": "2024-02-16 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1922e269689d4b1fbdf8e817fe1be60b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Donor Communication Strategy Session",
+          "start": "2024-02-16 10:30:00",
+          "end": "2024-02-16 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9833211cf0064dc593adf3f5f721d2b2"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Newsletter",
+          "start": "2024-02-16 14:00:00",
+          "end": "2024-02-16 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5243f9545f53450f9700f29ca6b3ecd8"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night",
+          "start": "2024-02-16 19:00:00",
+          "end": "2024-02-16 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8acd32d827bc432f88d781c0d0779242"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Review Upcoming Events",
+          "start": "2024-02-16 09:00:00",
+          "end": "2024-02-16 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1922e269689d4b1fbdf8e817fe1be60b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Donor Communication Strategy Session",
+          "start": "2024-02-16 10:30:00",
+          "end": "2024-02-16 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9833211cf0064dc593adf3f5f721d2b2"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Newsletter",
+          "start": "2024-02-16 14:00:00",
+          "end": "2024-02-16 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5243f9545f53450f9700f29ca6b3ecd8"
+        },
+        {
+          "day": "Friday",
+          "summary": "Final Project Discussion",
+          "start": "2024-02-16 15:00:00",
+          "end": "2024-02-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ed0e84489f0848629780c57bfa10189f"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night",
+          "start": "2024-02-16 19:00:00",
+          "end": "2024-02-16 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8acd32d827bc432f88d781c0d0779242"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Book a meeting titled 'Final Project Discussion' for Friday from 3:00 PM to 4:00 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to determine the date of the upcoming Friday, and then create the event as requested."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-02-11 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Final Project Discussion",
+          "start": "2024-02-16 15:00:00",
+          "end": "2024-02-16 16:00:00"
+        },
+        "result": "Event created successfully.\nFinal Project Discussion\n  ID: evt_ed0e84489f0848629780c57bfa10189f\n  Time: Fri Feb 16, 15:00 - 16:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I have scheduled \"Final Project Discussion\" for Friday, February 16th, from 3:00 PM to 4:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing after the content calendar planning meeting?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent needs to find the Content Calendar Planning event on Tuesday, determine its end time (11:00 AM), and then identify the next event after that time, which is 'Meeting with Program Manager' at 1:00 PM.",
+    "simulated_now": "2024-02-11 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Content Calendar Planning",
+          "start": "2024-02-13 09:30:00",
+          "end": "2024-02-13 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a2a07f9cfb3f4f36a858e377ffcce028"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Program Manager",
+          "start": "2024-02-13 13:00:00",
+          "end": "2024-02-13 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "program_manager@nonprofit.org"
+          ],
+          "id": "evt_a86a1d36ee68443bb1976c2cbc74be48"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Brainstorm Session: Fall Fundraising Campaign",
+          "start": "2024-02-13 15:00:00",
+          "end": "2024-02-13 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_55720a43454a4a769417c57e9bb0429d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Friends",
+          "start": "2024-02-13 19:00:00",
+          "end": "2024-02-13 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_13d0bdd23d3a4c33889be716d85001f5"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Content Calendar Planning",
+          "start": "2024-02-13 09:30:00",
+          "end": "2024-02-13 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a2a07f9cfb3f4f36a858e377ffcce028"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Program Manager",
+          "start": "2024-02-13 13:00:00",
+          "end": "2024-02-13 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "program_manager@nonprofit.org"
+          ],
+          "id": "evt_a86a1d36ee68443bb1976c2cbc74be48"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Brainstorm Session: Fall Fundraising Campaign",
+          "start": "2024-02-13 15:00:00",
+          "end": "2024-02-13 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_55720a43454a4a769417c57e9bb0429d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Friends",
+          "start": "2024-02-13 19:00:00",
+          "end": "2024-02-13 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_13d0bdd23d3a4c33889be716d85001f5"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing after the content calendar planning meeting?"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can help with that. Let me check your calendar."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 23 events:\nid: evt_da9fb65bba60477d825802b1f88414fd | Marketing Team Meeting \u2014 Mon 09:00-10:00\nid: evt_1e027bf68289469aa3b082a7be96ba28 | Reviewing Q3 Marketing Campaign Performance \u2014 Mon 10:30-12:00\nid: evt_93298ba9ffaf41fe84381ca2c5d27a48 | Meeting with Executive Director \u2014 Mon 14:00-15:00\nid: evt_affca911154f4f7db24272849b7cf915 | Yoga Class \u2014 Mon 18:30-19:30\nid: evt_a2a07f9cfb3f4f36a858e377ffcce028 | Content Calendar Planning \u2014 Tue 09:30-11:00\nid: evt_a86a1d36ee68443bb1976c2cbc74be48 | Meeting with Program Manager \u2014 Tue 13:00-14:00\nid: evt_55720a43454a4a769417c57e9bb0429d | Brainstorm Session: Fall Fundraising Campaign \u2014 Tue 15:00-16:00\nid: evt_13d0bdd23d3a4c33889be716d85001f5 | Dinner with Friends \u2014 Tue 19:00-20:30\nid: evt_22f6911c2ad7458c9cc23eef65b718f3 | Draft Press Release: New Conservation Initiative \u2014 Wed 10:00-11:30\nid: evt_9fb03e0a701f4cbe9ff68dc79f885371 | Meeting with Volunteer Coordinator \u2014 Wed 13:00-14:00\nid: evt_0f5455e126a441b7b78dd08e95f26d23 | Call with Grant Writer \u2014 Wed 15:00-16:00\nid: evt_ebd04f99b9f846948a637f394e43667f | Environmental Book Club \u2014 Wed 18:00-19:00\nid: evt_73a55da918484b8692b39a74abaeb0f8 | Social Media Strategy Review \u2014 Thu 09:00-10:00\nid: evt_a1372013ba4f4bb0b571e425fc720e62 | Meeting with Board Member \u2014 Thu 10:30-12:00\nid: evt_ff36873c45b14db39902c56df75b132f | Meeting with Corporate Sponsor \u2014 Thu 14:00-15:00\nid: evt_cfdc3f08b2ef4a8ca3e8a8c01417b7f5 | Review Upcoming Events \u2014 Fri 09:00-10:00\nid: evt_b2b77fe09bdc4ac8ad7330f650c82879 | Donor Communication Strategy Session \u2014 Fri 10:30-12:00\nid: evt_a36dd9df798d4aaf893808df76b5a85b | Finalize Newsletter \u2014 Fri 14:00-15:00\nid: evt_c7c7950375ab407eb51fa3261d3cc29e | Movie Night \u2014 Fri 19:00-21:00\nid: evt_b92716e46dc442ec9fb77278b272a350 | Volunteer at Community Garden \u2014 Sat 10:00-12:00\nid: evt_068336a029b34447ae3390eeda4ec8b3 | Dinner with Family \u2014 Sat 18:00-20:00\nid: evt_97da0c182a0147ebafdc076f4dbd662f | Hiking \u2014 Sun 09:00-12:00\nid: evt_17123f55b9c74c0eb97729d401e785ea | Relax and Read \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "After the Content Calendar Planning meeting, you have a meeting with the Program Manager at 1:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move the Marketing Team Meeting to 9:30 AM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should find the 'Marketing Team Meeting' on Monday and update its start time to 9:30 AM, keeping the duration the same.",
+    "simulated_now": "2024-02-11 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Marketing Team Meeting",
+          "start": "2024-02-12 09:00:00",
+          "end": "2024-02-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "marketing_specialist@nonprofit.org",
+            "content_creator@nonprofit.org",
+            "social_media@nonprofit.org"
+          ],
+          "id": "evt_c6bda698150a4a749b647caa83172ab3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Reviewing Q3 Marketing Campaign Performance",
+          "start": "2024-02-12 10:30:00",
+          "end": "2024-02-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f1b930e4391642afa945d23de8ac96d9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Executive Director",
+          "start": "2024-02-12 14:00:00",
+          "end": "2024-02-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "exec_director@nonprofit.org"
+          ],
+          "id": "evt_37fc2fae4203403b8e641bafef8874e7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2024-02-12 18:30:00",
+          "end": "2024-02-12 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8dc2a91fac2a4cd9900273bb08bc33b1"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Marketing Team Meeting",
+          "start": "2024-02-12 09:30:00",
+          "end": "2024-02-12 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "marketing_specialist@nonprofit.org",
+            "content_creator@nonprofit.org",
+            "social_media@nonprofit.org"
+          ],
+          "id": "evt_c6bda698150a4a749b647caa83172ab3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Reviewing Q3 Marketing Campaign Performance",
+          "start": "2024-02-12 10:30:00",
+          "end": "2024-02-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f1b930e4391642afa945d23de8ac96d9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Executive Director",
+          "start": "2024-02-12 14:00:00",
+          "end": "2024-02-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "exec_director@nonprofit.org"
+          ],
+          "id": "evt_37fc2fae4203403b8e641bafef8874e7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2024-02-12 18:30:00",
+          "end": "2024-02-12 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8dc2a91fac2a4cd9900273bb08bc33b1"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move the Marketing Team Meeting to 9:30 AM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-02-11 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 23 events:\nid: evt_c6bda698150a4a749b647caa83172ab3 | Marketing Team Meeting \u2014 Mon 09:00-10:00\nid: evt_f1b930e4391642afa945d23de8ac96d9 | Reviewing Q3 Marketing Campaign Performance \u2014 Mon 10:30-12:00\nid: evt_37fc2fae4203403b8e641bafef8874e7 | Meeting with Executive Director \u2014 Mon 14:00-15:00\nid: evt_8dc2a91fac2a4cd9900273bb08bc33b1 | Yoga Class \u2014 Mon 18:30-19:30\nid: evt_48309f2f487e42a58c69a663e9a8f478 | Content Calendar Planning \u2014 Tue 09:30-11:00\nid: evt_dca005e08f414c2c98df4e844d7a8b06 | Meeting with Program Manager \u2014 Tue 13:00-14:00\nid: evt_4acda49803724e8db39393b80fea6d94 | Brainstorm Session: Fall Fundraising Campaign \u2014 Tue 15:00-16:00\nid: evt_0613c0f525424af781deb7e7a845a7b3 | Dinner with Friends \u2014 Tue 19:00-20:30\nid: evt_8848c4b2da0c4a6aa2364ab999e325d1 | Draft Press Release: New Conservation Initiative \u2014 Wed 10:00-11:30\nid: evt_84f32652de894cc3890e60da95abe5e3 | Meeting with Volunteer Coordinator \u2014 Wed 13:00-14:00\nid: evt_8b85c4f8afa64f61baa10c7dd5a8573d | Call with Grant Writer \u2014 Wed 15:00-16:00\nid: evt_06bb749068384030bed98739fe7dcccc | Environmental Book Club \u2014 Wed 18:00-19:00\nid: evt_38c0004373664e4a8d2e5a849657811e | Social Media Strategy Review \u2014 Thu 09:00-10:00\nid: evt_c128322fa21e425c85782e98658a9320 | Meeting with Board Member \u2014 Thu 10:30-12:00\nid: evt_06a1ad768ab149f99519e1604bc0e9e3 | Meeting with Corporate Sponsor \u2014 Thu 14:00-15:00\nid: evt_2802f48dbc1a4950bed2d026b97f0ed6 | Review Upcoming Events \u2014 Fri 09:00-10:00\nid: evt_55d786e9566f488da305d5e91d3e204b | Donor Communication Strategy Session \u2014 Fri 10:30-12:00\nid: evt_b56fee4da7424b96a6910b8939fd787f | Finalize Newsletter \u2014 Fri 14:00-15:00\nid: evt_9a0a89a8d5b4444ba8e1c4737525e857 | Movie Night \u2014 Fri 19:00-21:00\nid: evt_19ea4d25bc224672971f9a7f8bed847a | Volunteer at Community Garden \u2014 Sat 10:00-12:00\nid: evt_8438074cd8484a7a9ed48795beb88204 | Dinner with Family \u2014 Sat 18:00-20:00\nid: evt_6118d3c5482c478bbf54af0aad6848ee | Hiking \u2014 Sun 09:00-12:00\nid: evt_1d6cdea97a1640758397ea98920be46a | Relax and Read \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_c6bda698150a4a749b647caa83172ab3",
+          "start": "2024-02-12 09:30:00",
+          "end": "2024-02-12 10:30:00"
+        },
+        "result": "Event updated successfully.\nMarketing Team Meeting\n  ID: evt_c6bda698150a4a749b647caa83172ab3\n  Time: Mon Feb 12, 09:30 - 10:30\n  Attendees: marketing_specialist@nonprofit.org, content_creator@nonprofit.org, social_media@nonprofit.org\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've moved the Marketing Team Meeting to 9:30 AM for you."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is the meeting with the volunteer coordinator?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should find the 'Meeting with Volunteer Coordinator' on Wednesday and return its start time, which is 1:00 PM.",
+    "simulated_now": "2024-02-11 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Draft Press Release: New Conservation Initiative",
+          "start": "2024-02-14 10:00:00",
+          "end": "2024-02-14 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3433ec31f71a495d8e0f9af67cecb119"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Volunteer Coordinator",
+          "start": "2024-02-14 13:00:00",
+          "end": "2024-02-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "volunteer_coordinator@nonprofit.org"
+          ],
+          "id": "evt_8d57bf040db8491fbdf24d2189391e82"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Call with Grant Writer",
+          "start": "2024-02-14 15:00:00",
+          "end": "2024-02-14 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "grant_writer@consultant.com"
+          ],
+          "id": "evt_3f348b921f28426d9421bda9286c645d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Environmental Book Club",
+          "start": "2024-02-14 18:00:00",
+          "end": "2024-02-14 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b7c08364f3cf495e936b8f1c45e1df07"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Draft Press Release: New Conservation Initiative",
+          "start": "2024-02-14 10:00:00",
+          "end": "2024-02-14 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3433ec31f71a495d8e0f9af67cecb119"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Volunteer Coordinator",
+          "start": "2024-02-14 13:00:00",
+          "end": "2024-02-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "volunteer_coordinator@nonprofit.org"
+          ],
+          "id": "evt_8d57bf040db8491fbdf24d2189391e82"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Call with Grant Writer",
+          "start": "2024-02-14 15:00:00",
+          "end": "2024-02-14 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "grant_writer@consultant.com"
+          ],
+          "id": "evt_3f348b921f28426d9421bda9286c645d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Environmental Book Club",
+          "start": "2024-02-14 18:00:00",
+          "end": "2024-02-14 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b7c08364f3cf495e936b8f1c45e1df07"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is the meeting with the volunteer coordinator?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find a meeting with the \"volunteer coordinator\". I will search your calendar for an event with that title."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 23 events:\nid: evt_ee4e07175514430d899559bb60279464 | Marketing Team Meeting \u2014 Mon 09:00-10:00\nid: evt_c869050994594a74b5417b38bbe71f23 | Reviewing Q3 Marketing Campaign Performance \u2014 Mon 10:30-12:00\nid: evt_767145c663e64b2099671cdc4aef457e | Meeting with Executive Director \u2014 Mon 14:00-15:00\nid: evt_78a16f04732a4a62b9933508f8a53233 | Yoga Class \u2014 Mon 18:30-19:30\nid: evt_9b7d487158f640cb960b0562be801d59 | Content Calendar Planning \u2014 Tue 09:30-11:00\nid: evt_84564764810349b2b88496b0f99886ae | Meeting with Program Manager \u2014 Tue 13:00-14:00\nid: evt_737d1b4dccff47aea2301213d69bb199 | Brainstorm Session: Fall Fundraising Campaign \u2014 Tue 15:00-16:00\nid: evt_994414f365e947198698a1daaedb4318 | Dinner with Friends \u2014 Tue 19:00-20:30\nid: evt_3433ec31f71a495d8e0f9af67cecb119 | Draft Press Release: New Conservation Initiative \u2014 Wed 10:00-11:30\nid: evt_8d57bf040db8491fbdf24d2189391e82 | Meeting with Volunteer Coordinator \u2014 Wed 13:00-14:00\nid: evt_3f348b921f28426d9421bda9286c645d | Call with Grant Writer \u2014 Wed 15:00-16:00\nid: evt_b7c08364f3cf495e936b8f1c45e1df07 | Environmental Book Club \u2014 Wed 18:00-19:00\nid: evt_bc43fd5d3e95408da0c0704b8cf63cc3 | Social Media Strategy Review \u2014 Thu 09:00-10:00\nid: evt_cb920ab0bea94329a7be92f843f0b101 | Meeting with Board Member \u2014 Thu 10:30-12:00\nid: evt_1fdcb7125ced44bf818909a6823feb8e | Meeting with Corporate Sponsor \u2014 Thu 14:00-15:00\nid: evt_cd9ebd6c56174ff7b89f9ae7bd5abcce | Review Upcoming Events \u2014 Fri 09:00-10:00\nid: evt_2e973b9077b8465b82eda8732b671a9b | Donor Communication Strategy Session \u2014 Fri 10:30-12:00\nid: evt_b7695fae9e5d48cd94292be686b3257e | Finalize Newsletter \u2014 Fri 14:00-15:00\nid: evt_303d87be387940d39cb4fbada267c4a0 | Movie Night \u2014 Fri 19:00-21:00\nid: evt_907a4da20e074a619ce904b8c13fbd51 | Volunteer at Community Garden \u2014 Sat 10:00-12:00\nid: evt_c8b258ae198843a0a7a666c1973530c9 | Dinner with Family \u2014 Sat 18:00-20:00\nid: evt_880a96387f8140aebcb48b531826e071 | Hiking \u2014 Sun 09:00-12:00\nid: evt_ebe29d2727364519adb0e8882dd1e48b | Relax and Read \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "The meeting with the volunteer coordinator is on Wednesday from 13:00 to 14:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Dinner... family...",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should locate the 'Dinner with Family' on Saturday. It should ask a clarifying question to understand what the user wants to do with this event.",
+    "simulated_now": "2024-02-11 10:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Volunteer at Community Garden",
+          "start": "2024-02-17 10:00:00",
+          "end": "2024-02-17 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_239dd6df13e14e5088794eab1a33a9d5"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with Family",
+          "start": "2024-02-17 18:00:00",
+          "end": "2024-02-17 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_432d1e9ecd3041c591d75dd9bb0c1377"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Volunteer at Community Garden",
+          "start": "2024-02-17 10:00:00",
+          "end": "2024-02-17 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_239dd6df13e14e5088794eab1a33a9d5"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with Family",
+          "start": "2024-02-17 18:00:00",
+          "end": "2024-02-17 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_432d1e9ecd3041c591d75dd9bb0c1377"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Dinner... family..."
+      },
+      {
+        "role": "assistant",
+        "content": "Of course, I can help with that. First, I need to get a better understanding of what you'd like to do. I'll start by getting the current time and checking your calendar for any existing events."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-02-11 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 23 events:\nid: evt_bc71c495056548a7b0e519419cd84f87 | Marketing Team Meeting \u2014 Mon 09:00-10:00\nid: evt_ef12c514d7bc4b58aa3cc374c3e869ac | Reviewing Q3 Marketing Campaign Performance \u2014 Mon 10:30-12:00\nid: evt_14f71187223745b788aefe87cb6621ad | Meeting with Executive Director \u2014 Mon 14:00-15:00\nid: evt_4c3ba222d97848e1b43d1159c2997876 | Yoga Class \u2014 Mon 18:30-19:30\nid: evt_775a3d539403414f8908a3c4921e4e68 | Content Calendar Planning \u2014 Tue 09:30-11:00\nid: evt_f88dbf10617c42d48c57012169465e67 | Meeting with Program Manager \u2014 Tue 13:00-14:00\nid: evt_ee3261ef48f84cea8a38e7a5ca9bbad2 | Brainstorm Session: Fall Fundraising Campaign \u2014 Tue 15:00-16:00\nid: evt_e0937f9167e54e1b87babab22923b11c | Dinner with Friends \u2014 Tue 19:00-20:30\nid: evt_07293de9023c406ba54ad08e8d80cf1e | Draft Press Release: New Conservation Initiative \u2014 Wed 10:00-11:30\nid: evt_b948feae28354fe1a8ee547b70bb1f23 | Meeting with Volunteer Coordinator \u2014 Wed 13:00-14:00\nid: evt_155997c4a4154ac7b2ccf5bfc7454325 | Call with Grant Writer \u2014 Wed 15:00-16:00\nid: evt_efbef58c846c424f962fd995c2058749 | Environmental Book Club \u2014 Wed 18:00-19:00\nid: evt_73319054623645549a7a695415e08a34 | Social Media Strategy Review \u2014 Thu 09:00-10:00\nid: evt_439d590db6fa459b9518cdb67cecbd77 | Meeting with Board Member \u2014 Thu 10:30-12:00\nid: evt_af2cc99233ea4f0aa47f017c569d7f77 | Meeting with Corporate Sponsor \u2014 Thu 14:00-15:00\nid: evt_ad854247c78d4aa8bb735581aee58065 | Review Upcoming Events \u2014 Fri 09:00-10:00\nid: evt_585fc967b5d64eb2aa57340d9424fcee | Donor Communication Strategy Session \u2014 Fri 10:30-12:00\nid: evt_13b3aad8353a4627b71d584c1d188cdb | Finalize Newsletter \u2014 Fri 14:00-15:00\nid: evt_a45bd7bf970d430fbf09bf6356500039 | Movie Night \u2014 Fri 19:00-21:00\nid: evt_239dd6df13e14e5088794eab1a33a9d5 | Volunteer at Community Garden \u2014 Sat 10:00-12:00\nid: evt_432d1e9ecd3041c591d75dd9bb0c1377 | Dinner with Family \u2014 Sat 18:00-20:00\nid: evt_064155b30f874459a8d545dc44266ed3 | Hiking \u2014 Sun 09:00-12:00\nid: evt_8708a4ad234c434ebf46cc589b5eef65 | Relax and Read \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I see you have \"Dinner with Family\" on Saturday from 6:00 PM to 8:00 PM. Are you referring to this event? Or would you like to schedule a new one?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should identify the current day (Monday, February 12, 2024) and list all events scheduled for that day. These include 'Marketing Team Meeting', 'Reviewing Q3 Marketing Campaign Performance', 'Meeting with Executive Director', and 'Yoga Class'.",
+    "simulated_now": "2024-02-12 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Marketing Team Meeting",
+          "start": "2024-02-12 09:00:00",
+          "end": "2024-02-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "marketing_specialist@nonprofit.org",
+            "content_creator@nonprofit.org",
+            "social_media@nonprofit.org"
+          ],
+          "id": "evt_d8f9853449db4e1894af968a48669b64"
+        },
+        {
+          "day": "Monday",
+          "summary": "Reviewing Q3 Marketing Campaign Performance",
+          "start": "2024-02-12 10:30:00",
+          "end": "2024-02-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7f5b67e5086a4b9ca35dff0654f0143c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Executive Director",
+          "start": "2024-02-12 14:00:00",
+          "end": "2024-02-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "exec_director@nonprofit.org"
+          ],
+          "id": "evt_0f340d197f4641c6b6e5b1471f46f2dd"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2024-02-12 18:30:00",
+          "end": "2024-02-12 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_39efd2e1c4df4856b8dec0061faee641"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Marketing Team Meeting",
+          "start": "2024-02-12 09:00:00",
+          "end": "2024-02-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "marketing_specialist@nonprofit.org",
+            "content_creator@nonprofit.org",
+            "social_media@nonprofit.org"
+          ],
+          "id": "evt_d8f9853449db4e1894af968a48669b64"
+        },
+        {
+          "day": "Monday",
+          "summary": "Reviewing Q3 Marketing Campaign Performance",
+          "start": "2024-02-12 10:30:00",
+          "end": "2024-02-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7f5b67e5086a4b9ca35dff0654f0143c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Executive Director",
+          "start": "2024-02-12 14:00:00",
+          "end": "2024-02-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "exec_director@nonprofit.org"
+          ],
+          "id": "evt_0f340d197f4641c6b6e5b1471f46f2dd"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2024-02-12 18:30:00",
+          "end": "2024-02-12 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_39efd2e1c4df4856b8dec0061faee641"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify today's date. Then, I will list all events scheduled for today to let you know what you are doing."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-02-12 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-02-12 00:00:00",
+          "time_max": "2024-02-12 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_d8f9853449db4e1894af968a48669b64 | Marketing Team Meeting \u2014 Mon 09:00-10:00\nid: evt_7f5b67e5086a4b9ca35dff0654f0143c | Reviewing Q3 Marketing Campaign Performance \u2014 Mon 10:30-12:00\nid: evt_0f340d197f4641c6b6e5b1471f46f2dd | Meeting with Executive Director \u2014 Mon 14:00-15:00\nid: evt_39efd2e1c4df4856b8dec0061faee641 | Yoga Class \u2014 Mon 18:30-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "You have four events scheduled for today:\n\n*   **9:00 AM - 10:00 AM:** Marketing Team Meeting\n*   **10:30 AM - 12:00 PM:** Reviewing Q3 Marketing Campaign Performance\n*   **2:00 PM - 3:00 PM:** Meeting with Executive Director\n*   **6:30 PM - 7:30 PM:** Yoga Class"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on the schedule tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should identify the day after the current day (Monday, February 12, 2024), which is Tuesday, February 13, 2024, and list all events scheduled for that day. These include 'Content Calendar Planning', 'Meeting with Program Manager', and 'Brainstorm Session: Fall Fundraising Campaign', and 'Dinner with Friends'.",
+    "simulated_now": "2024-02-12 15:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Content Calendar Planning",
+          "start": "2024-02-13 09:30:00",
+          "end": "2024-02-13 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8880836d888943eb82ebffd6f994b152"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Program Manager",
+          "start": "2024-02-13 13:00:00",
+          "end": "2024-02-13 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "program_manager@nonprofit.org"
+          ],
+          "id": "evt_503ffa74c2e941b082b48c9908fc0c6f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Brainstorm Session: Fall Fundraising Campaign",
+          "start": "2024-02-13 15:00:00",
+          "end": "2024-02-13 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cd36c30982da42ff988ef251f0297a22"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Friends",
+          "start": "2024-02-13 19:00:00",
+          "end": "2024-02-13 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_34cdb50db00e4400b786fd06e39c6a1a"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Content Calendar Planning",
+          "start": "2024-02-13 09:30:00",
+          "end": "2024-02-13 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8880836d888943eb82ebffd6f994b152"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Program Manager",
+          "start": "2024-02-13 13:00:00",
+          "end": "2024-02-13 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "program_manager@nonprofit.org"
+          ],
+          "id": "evt_503ffa74c2e941b082b48c9908fc0c6f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Brainstorm Session: Fall Fundraising Campaign",
+          "start": "2024-02-13 15:00:00",
+          "end": "2024-02-13 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cd36c30982da42ff988ef251f0297a22"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Friends",
+          "start": "2024-02-13 19:00:00",
+          "end": "2024-02-13 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_34cdb50db00e4400b786fd06e39c6a1a"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on the schedule tomorrow?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-02-12 15:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-02-13 00:00:00",
+          "time_max": "2024-02-13 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_8880836d888943eb82ebffd6f994b152 | Content Calendar Planning \u2014 Tue 09:30-11:00\nid: evt_503ffa74c2e941b082b48c9908fc0c6f | Meeting with Program Manager \u2014 Tue 13:00-14:00\nid: evt_cd36c30982da42ff988ef251f0297a22 | Brainstorm Session: Fall Fundraising Campaign \u2014 Tue 15:00-16:00\nid: evt_34cdb50db00e4400b786fd06e39c6a1a | Dinner with Friends \u2014 Tue 19:00-20:30"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Tomorrow, February 13th, you have four entries in your calendar:\n- 09:30-11:00: Content Calendar Planning (event id: evt_8880836d888943eb82ebffd6f994b152)\n- 13:00-14:00: Meeting with Program Manager (event id: evt_503ffa74c2e941b082b48c9908fc0c6f)\n- 15:00-16:00: Brainstorm Session: Fall Fundraising Campaign (event id: evt_cd36c30982da42ff988ef251f0297a22)\n- 19:00-20:30: Dinner with Friends (event id: evt_34cdb50db00e4400b786fd06e39c6a1a)"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

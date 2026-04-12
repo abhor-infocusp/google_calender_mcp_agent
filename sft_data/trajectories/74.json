@@ -1,0 +1,808 @@
+[
+  {
+    "query": "Can you schedule a meeting next Tuesday at 9 AM called 'Team Brainstorm'?",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create an event titled 'Team Brainstorm' on October 10, 2023, at 9:00 AM.",
+    "simulated_now": "2023-10-08 12:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Drive to work",
+          "start": "2023-10-10 07:45:00",
+          "end": "2023-10-10 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8bcd1558d127486f844a75b08de895ac"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Museum Guard Duty",
+          "start": "2023-10-10 08:00:00",
+          "end": "2023-10-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bfd06736234c4f9f8eb11925379502d4"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with daughter",
+          "start": "2023-10-10 19:00:00",
+          "end": "2023-10-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.e@email.com"
+          ],
+          "id": "evt_bf8094f3823045078f07762cce460714"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Drive to work",
+          "start": "2023-10-10 07:45:00",
+          "end": "2023-10-10 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8bcd1558d127486f844a75b08de895ac"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Museum Guard Duty",
+          "start": "2023-10-10 08:00:00",
+          "end": "2023-10-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bfd06736234c4f9f8eb11925379502d4"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Team Brainstorm",
+          "start": "2023-10-10 09:00:00",
+          "end": "2023-10-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fd170aad2f314d3093d549eb39b9b9b6"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with daughter",
+          "start": "2023-10-10 19:00:00",
+          "end": "2023-10-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.e@email.com"
+          ],
+          "id": "evt_bf8094f3823045078f07762cce460714"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can you schedule a meeting next Tuesday at 9 AM called 'Team Brainstorm'?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-10-08 12:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2023-10-10 09:00:00",
+          "end": "2023-10-10 10:00:00",
+          "summary": "Team Brainstorm"
+        },
+        "result": "Event created successfully.\nTeam Brainstorm\n  ID: evt_fd170aad2f314d3093d549eb39b9b9b6\n  Time: Tue Oct 10, 09:00 - 10:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've scheduled \"Team Brainstorm\" for Tuesday, October 10th, from 9 AM to 10 AM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "When am I busy on Friday?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List all events scheduled for Friday, October 13, 2023, to determine busy times.",
+    "simulated_now": "2023-10-13 07:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Drive to work",
+          "start": "2023-10-13 07:45:00",
+          "end": "2023-10-13 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_10892f64f46e412d87ea5fc6cb39ac86"
+        },
+        {
+          "day": "Friday",
+          "summary": "Museum Guard Duty",
+          "start": "2023-10-13 08:00:00",
+          "end": "2023-10-13 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7269eb261e974cdd86eecbbd3df45fc7"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with a friend",
+          "start": "2023-10-13 19:00:00",
+          "end": "2023-10-13 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "mark.s@email.com"
+          ],
+          "id": "evt_1de82309fbc84717bca88f0147961e48"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Drive to work",
+          "start": "2023-10-13 07:45:00",
+          "end": "2023-10-13 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_10892f64f46e412d87ea5fc6cb39ac86"
+        },
+        {
+          "day": "Friday",
+          "summary": "Museum Guard Duty",
+          "start": "2023-10-13 08:00:00",
+          "end": "2023-10-13 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7269eb261e974cdd86eecbbd3df45fc7"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with a friend",
+          "start": "2023-10-13 19:00:00",
+          "end": "2023-10-13 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "mark.s@email.com"
+          ],
+          "id": "evt_1de82309fbc84717bca88f0147961e48"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "When am I busy on Friday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out the date of the upcoming Friday to check your calendar."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-10-13 07:00:00 | Friday"
+      },
+      {
+        "role": "assistant",
+        "content": "OK, checking your calendar for today, Friday the 13th."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-10-13 00:00:00",
+          "time_max": "2023-10-13 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_10892f64f46e412d87ea5fc6cb39ac86 | Drive to work \u2014 Fri 07:45-08:00\nid: evt_7269eb261e974cdd86eecbbd3df45fc7 | Museum Guard Duty \u2014 Fri 08:00-16:00\nid: evt_1de82309fbc84717bca88f0147961e48 | Dinner with a friend \u2014 Fri 19:00-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have three events on your calendar for Friday, October 13th:\n\n*   **Drive to work** from 7:45 AM to 8:00 AM\n*   **Museum Guard Duty** from 8:00 AM to 4:00 PM\n*   **Dinner with a friend** from 7:00 PM to 9:00 PM"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's happening on Sunday?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Low",
+    "expected_behavior": "List all events scheduled for Sunday, October 15, 2023.",
+    "simulated_now": "2023-10-15 09:00:00",
+    "addressed_days": [
+      "Sunday"
+    ],
+    "calendar_before": {
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with daughter",
+          "start": "2023-10-15 11:00:00",
+          "end": "2023-10-15 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.e@email.com"
+          ],
+          "id": "evt_130a8b5fe0814964bac9770d4d121d64"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Relax at home, read art history book",
+          "start": "2023-10-15 14:00:00",
+          "end": "2023-10-15 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_72aff57dbf454e029ea20f343909a762"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with daughter",
+          "start": "2023-10-15 11:00:00",
+          "end": "2023-10-15 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.e@email.com"
+          ],
+          "id": "evt_130a8b5fe0814964bac9770d4d121d64"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Relax at home, read art history book",
+          "start": "2023-10-15 14:00:00",
+          "end": "2023-10-15 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_72aff57dbf454e029ea20f343909a762"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's happening on Sunday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I'll first get the current time to determine the date for this coming Sunday, and then retrieve all events scheduled for that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-10-15 09:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "I'll get the events for the rest of today, Sunday, October 15th."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-10-15 09:00:00",
+          "time_max": "2023-10-15 23:59:59"
+        },
+        "result": "Found 2 events:\nid: evt_130a8b5fe0814964bac9770d4d121d64 | Brunch with daughter \u2014 Sun 11:00-13:00\nid: evt_72aff57dbf454e029ea20f343909a762 | Relax at home, read art history book \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Here's what's on your calendar for the rest of today, Sunday, October 15th:\n\n*   **11:00 AM - 1:00 PM:** Brunch with daughter\n*   **2:00 PM - 4:00 PM:** Relax at home, read art history book"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change the time for dinner with my friend on Friday to 6 PM instead of 7.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Dinner with a friend' event on Friday, October 13, 2023, and update its start time to 6:00 PM, adjusting the end time accordingly.",
+    "simulated_now": "2023-10-13 11:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Drive to work",
+          "start": "2023-10-13 07:45:00",
+          "end": "2023-10-13 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_293e9ffe05ca4340bb783d927bda936b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Museum Guard Duty",
+          "start": "2023-10-13 08:00:00",
+          "end": "2023-10-13 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c46fe1f94d76428eb89b3cc416213575"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with a friend",
+          "start": "2023-10-13 19:00:00",
+          "end": "2023-10-13 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "mark.s@email.com"
+          ],
+          "id": "evt_36e0285216d6412099ec070b343c80fa"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Drive to work",
+          "start": "2023-10-13 07:45:00",
+          "end": "2023-10-13 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_293e9ffe05ca4340bb783d927bda936b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Museum Guard Duty",
+          "start": "2023-10-13 08:00:00",
+          "end": "2023-10-13 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c46fe1f94d76428eb89b3cc416213575"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with a friend",
+          "start": "2023-10-13 18:00:00",
+          "end": "2023-10-13 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "mark.s@email.com"
+          ],
+          "id": "evt_36e0285216d6412099ec070b343c80fa"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change the time for dinner with my friend on Friday to 6 PM instead of 7."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I'll get the current time to determine the date for this coming Friday, and then I'll find the dinner event on that day to reschedule it."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-10-13 11:00:00 | Friday"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today is Friday, October 13. I'll find the dinner event on your calendar for today and reschedule it."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-10-13 23:59:59",
+          "time_min": "2023-10-13 00:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_293e9ffe05ca4340bb783d927bda936b | Drive to work \u2014 Fri 07:45-08:00\nid: evt_c46fe1f94d76428eb89b3cc416213575 | Museum Guard Duty \u2014 Fri 08:00-16:00\nid: evt_36e0285216d6412099ec070b343c80fa | Dinner with a friend \u2014 Fri 19:00-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found \"Dinner with a friend\" scheduled for 7:00 PM today. I will now change the time to 6:00 PM, keeping the original two-hour duration, so it will now be from 6:00 PM to 8:00 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2023-10-13 18:00:00",
+          "event_id": "evt_36e0285216d6412099ec070b343c80fa",
+          "end": "2023-10-13 20:00:00"
+        },
+        "result": "Event updated successfully.\nDinner with a friend\n  ID: evt_36e0285216d6412099ec070b343c80fa\n  Time: Fri Oct 13, 18:00 - 20:00\n  Attendees: mark.s@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've rescheduled your dinner with a friend to 6:00 PM this Friday. It is now scheduled from 6:00 PM to 8:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is my call with my daughter on Tuesday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Call with daughter' event on Tuesday, October 10, 2023, and retrieve its start time.",
+    "simulated_now": "2023-10-10 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Drive to work",
+          "start": "2023-10-10 07:45:00",
+          "end": "2023-10-10 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2a4b27e075454adf967b45245be9797b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Museum Guard Duty",
+          "start": "2023-10-10 08:00:00",
+          "end": "2023-10-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_60213d3fb51d4910b02448c07607af9e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with daughter",
+          "start": "2023-10-10 19:00:00",
+          "end": "2023-10-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.e@email.com"
+          ],
+          "id": "evt_6cec8b1a9fa74475adc4ae55afbfbd5f"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Drive to work",
+          "start": "2023-10-10 07:45:00",
+          "end": "2023-10-10 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2a4b27e075454adf967b45245be9797b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Museum Guard Duty",
+          "start": "2023-10-10 08:00:00",
+          "end": "2023-10-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_60213d3fb51d4910b02448c07607af9e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with daughter",
+          "start": "2023-10-10 19:00:00",
+          "end": "2023-10-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.e@email.com"
+          ],
+          "id": "evt_6cec8b1a9fa74475adc4ae55afbfbd5f"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is my call with my daughter on Tuesday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-10-10 10:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-10-10 00:00:00",
+          "time_max": "2023-10-10 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_2a4b27e075454adf967b45245be9797b | Drive to work \u2014 Tue 07:45-08:00\nid: evt_60213d3fb51d4910b02448c07607af9e | Museum Guard Duty \u2014 Tue 08:00-16:00\nid: evt_6cec8b1a9fa74475adc4ae55afbfbd5f | Call with daughter \u2014 Tue 19:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have a call with your daughter on Tuesday from 19:00 to 20:00.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can I schedule a doctor's appointment on Wednesday from 4 PM to 5 PM, or am I working?",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "List all events on Wednesday, October 11, 2023, between 4:00 PM and 5:00 PM to check for conflicts with 'Museum Guard Duty'.",
+    "simulated_now": "2023-10-11 09:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Drive to work",
+          "start": "2023-10-11 14:45:00",
+          "end": "2023-10-11 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b42aed762a81498a8dbe16aec856e19d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Museum Guard Duty",
+          "start": "2023-10-11 15:00:00",
+          "end": "2023-10-11 23:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bb28608cb14544448a78c639a1a59a46"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Drive to work",
+          "start": "2023-10-11 14:45:00",
+          "end": "2023-10-11 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b42aed762a81498a8dbe16aec856e19d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Museum Guard Duty",
+          "start": "2023-10-11 15:00:00",
+          "end": "2023-10-11 23:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bb28608cb14544448a78c639a1a59a46"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can I schedule a doctor's appointment on Wednesday from 4 PM to 5 PM, or am I working?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-10-11 09:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-10-11 17:00:00",
+          "time_min": "2023-10-11 16:00:00"
+        },
+        "result": "Found 1 events:\nid: evt_bb28608cb14544448a78c639a1a59a46 | Museum Guard Duty \u2014 Wed 15:00-23:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You are working from 3:00 PM to 11:00 PM on Wednesday; you have \"Museum Guard Duty\"."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events scheduled for today, Monday, October 9, 2023.",
+    "simulated_now": "2023-10-09 08:30:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Drive to work",
+          "start": "2023-10-09 07:45:00",
+          "end": "2023-10-09 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9087165451ed4ddea18597e24e4e104d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Museum Guard Duty",
+          "start": "2023-10-09 08:00:00",
+          "end": "2023-10-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_74515bb38ad2486487e48303302613ee"
+        },
+        {
+          "day": "Monday",
+          "summary": "Therapy Appointment",
+          "start": "2023-10-09 18:00:00",
+          "end": "2023-10-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "dr.amy@email.com"
+          ],
+          "id": "evt_532d65bbc415420495a99be9bcb906db"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Drive to work",
+          "start": "2023-10-09 07:45:00",
+          "end": "2023-10-09 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9087165451ed4ddea18597e24e4e104d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Museum Guard Duty",
+          "start": "2023-10-09 08:00:00",
+          "end": "2023-10-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_74515bb38ad2486487e48303302613ee"
+        },
+        {
+          "day": "Monday",
+          "summary": "Therapy Appointment",
+          "start": "2023-10-09 18:00:00",
+          "end": "2023-10-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "dr.amy@email.com"
+          ],
+          "id": "evt_532d65bbc415420495a99be9bcb906db"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-10-09 08:30:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-10-09 00:00:00",
+          "time_max": "2023-10-09 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_9087165451ed4ddea18597e24e4e104d | Drive to work \u2014 Mon 07:45-08:00\nid: evt_74515bb38ad2486487e48303302613ee | Museum Guard Duty \u2014 Mon 08:00-16:00\nid: evt_532d65bbc415420495a99be9bcb906db | Therapy Appointment \u2014 Mon 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today is Monday, October 9, 2023.\nYou have 3 events scheduled:\n- Drive to work from 7:45 to 8:00\n- Museum Guard Duty from 8:00 to 16:00\n- Therapy Appointment from 18:00 to 19:00"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on tomorrow's schedule?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events scheduled for tomorrow, Wednesday, October 11, 2023.",
+    "simulated_now": "2023-10-10 16:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Drive to work",
+          "start": "2023-10-11 14:45:00",
+          "end": "2023-10-11 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7fe38134b17846adaecea1fcca044c56"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Museum Guard Duty",
+          "start": "2023-10-11 15:00:00",
+          "end": "2023-10-11 23:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_eb29a13c02e74a25863dc5028e3a4671"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Drive to work",
+          "start": "2023-10-11 14:45:00",
+          "end": "2023-10-11 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7fe38134b17846adaecea1fcca044c56"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Museum Guard Duty",
+          "start": "2023-10-11 15:00:00",
+          "end": "2023-10-11 23:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_eb29a13c02e74a25863dc5028e3a4671"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on tomorrow's schedule?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to get the current time to determine what \"tomorrow\" is, and then list the events on that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-10-10 16:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-10-11 23:59:59",
+          "time_min": "2023-10-11 00:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_7fe38134b17846adaecea1fcca044c56 | Drive to work \u2014 Wed 14:45-15:00\nid: evt_eb29a13c02e74a25863dc5028e3a4671 | Museum Guard Duty \u2014 Wed 15:00-23:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Tomorrow, Wednesday, October 11, 2023, you have 2 events scheduled:\n- Drive to work from 14:45 to 15:00\n- Museum Guard Duty from 15:00 to 23:00"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

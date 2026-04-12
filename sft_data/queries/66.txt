@@ -1,0 +1,149 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Meet John' on Wednesday at 1 PM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event named 'Meet John' on Wednesday, July 12, 2023, at 1:00 PM and ending an hour later.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-09T18:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a dentist appointment for me on Friday at 11:30 AM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event named 'Dentist Appointment' on Friday, July 14, 2023, at 11:30 AM and ending an hour later.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-07-09T18:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy tomorrow morning?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should check the calendar for Tuesday morning and see if there are any events scheduled between 8:00 AM and 12:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-10T18:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the agenda for the meeting this week with the city manager?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should search for the 'Meeting with City Manager' event and then retrieve the event details.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2023-07-09T18:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule my meeting with the Planning Department to 9:30 AM on Tuesday.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Meeting with Planning Department: Downtown Development Proposal' event on Tuesday and update its start time to 9:30 AM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-10T18:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the press conference on Monday to 3:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Press Conference: Announcing New Affordable Housing Initiative' event on Monday and update its start time to 3:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-09T18:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the budget review meeting?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Department Heads Meeting: Budget Review' event and return the list of attendees.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-09T18:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my last meeting on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should retrieve all meetings for Wednesday, identify the one that ends latest, and return its ending time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-12T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move the meeting with the head of the local construction union to Wednesday at 1 PM, but check if I have conflicts first.",
+        "complexity": "High",
+        "expected_behavior": "The agent should find the 'Meeting with Head of Local Construction Union' event, check for any conflicts on Wednesday at 1 PM, and if there are no conflicts, move the meeting.",
+        "addressed_days": [
+            "Monday",
+            "Wednesday"
+        ],
+        "current_time": "2023-07-09T18:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Schedule a meeting with both firechief@cityhall.gov and policechief@cityhall.gov on Thursday. Make it for an hour at 2 PM, but check for conflicts first.",
+        "complexity": "High",
+        "expected_behavior": "The agent should check both firechief@cityhall.gov and policechief@cityhall.gov's calendars for conflicts on Thursday at 2 PM. If no conflicts, schedule the meeting for one hour.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-07-09T18:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting police chief...",
+        "complexity": "Low",
+        "expected_behavior": "The agent should ask for clarification, such as 'What day and time would you like to schedule the meeting with the Police Chief?'",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-07-13T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change city council...",
+        "complexity": "Low",
+        "expected_behavior": "The agent should ask for clarification. For example, 'Which aspect of the City Council Meeting do you want to change? (Time, attendees, etc.)'",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-11T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should retrieve all events for the current day and display them.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-10T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any meetings yesterday with anyone from the regional government?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should check the calendar for Tuesday, July 11, 2023, and search for meetings containing 'regional government' in the title or attended by regionalofficial@regionalgov.org.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-12T08:00:00"
+    }
+]

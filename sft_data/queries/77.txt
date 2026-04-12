@@ -1,0 +1,148 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Project Brainstorm' for Tuesday at 3 PM for 1 hour with david.lee@hospital.org attending.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Project Brainstorm', start '2026-12-22T15:00:00', end '2026-12-22T16:00:00', attendees 'david.lee@hospital.org'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-12-20T23:59:59"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting on Friday at 10 AM to discuss 'New Initiatives'.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'New Initiatives', start '2026-12-25T10:00:00', end '2026-12-25T11:00:00'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-12-20T23:59:59"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to '2026-12-23T12:00:00' and time_max set to '2026-12-23T17:00:00' to determine events in the afternoon.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-12-23T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Friday look like?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for Friday with time_min set to '2026-12-25T00:00:00' and time_max set to '2026-12-25T23:59:59'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-12-25T07:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the Family Meeting on Monday to 3 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find 'Family Meeting' on Monday. If found, call update_event with event_id and updates including start time '2026-12-21T15:00:00' and end time '2026-12-21T16:00:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-12-21T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the Case Review Meeting on Tuesday so that case_review@hospital.org can't make it.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the Case Review Meeting on Tuesday. Then call update_event to remove case_review@hospital.org from the attendees list.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-12-22T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Discharge Planning meeting on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Discharge Planning' meeting on Monday. If found, extract and return the attendees.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-12-21T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the dinner on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for Wednesday to find the dinner event. If found, provide the event time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-12-23T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Move the Team Huddle on Monday to 9:00 AM and invite admin@hospital.org.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the Team Huddle. If found, call update_event with the event_id, set the start to '2026-12-21T09:00:00', the end to '2026-12-21T09:30:00', and add admin@hospital.org to attendees.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-12-21T07:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make it to the Brunch with Friends on Sunday. Decline it.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the 'Brunch with Friends' on Sunday. If found, call respond_to_event with the event_id and 'DECLINE'.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2026-12-27T18:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting with Smith?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to search for any events containing the word 'Smith' to clarify user intent.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-12-21T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Delete soccer.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find 'Kids' Soccer Practice' on Tuesday. If found, call delete_event with the corresponding event ID.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-12-22T11:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call get_current_time to determine the current date and list_events for today (e.g., if today is Monday, call list_events with time_min 2026-12-21T00:00:00 and time_max 2026-12-21T23:59:59).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-12-23T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Call get_current_time to determine today's date and then list_events for yesterday (e.g., if today is Tuesday, call list_events with time_min 2026-12-21T00:00:00 and time_max 2026-12-21T23:59:59).",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-12-22T10:00:00"
+    }
+]

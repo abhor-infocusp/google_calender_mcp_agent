@@ -1,0 +1,166 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create a meeting on Tuesday to discuss project updates with John and Jane, starting at 2 PM and lasting for an hour. Invite john@example.com and jane@example.com.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create an event on Tuesday, December 10th, from 2:00 PM to 3:00 PM with the summary \"Project Updates\", and attendees john@example.com and jane@example.com.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-12-08T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a team lunch on Friday at 12:30 PM with the team to celebrate a successful launch. Add team@company.com to the invite list.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create an event on Friday, December 13th, from 12:30 PM to 1:30 PM (assuming a one-hour lunch) with the summary \"Team Lunch\", and attendee team@company.com.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-12-08T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Can you schedule time for me to catch up with Pierre?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should check the existing schedule for 'Call with Chef Pierre' on Tuesday, December 10th, and ask for confirmation to schedule another meeting. If confirmed, schedule another one hour meeting with pierre@culinarymentor.com.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-12-08T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I need to finalize the menu for the weekend; set up some time for that.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should check the existing schedule for 'Finalize Weekend Specials' on Friday, December 13th and ask for confirmation to add another meeting. If confirmed, schedule another one hour meeting on Friday.",
+        "addressed_days": [
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-12-08T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the vendor meeting on Monday to 1 PM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should locate the 'Vendor Meeting - Seafood Selection' event on Monday, December 9th, and update its start time to 1:00 PM, adjusting the end time accordingly.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-12-08T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time I'm meeting with the restaurant consultant on Thursday, I now want to see him at 4 PM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should locate the 'Meeting with Restaurant Consultant' event on Thursday, December 12th, and update its start time to 4:00 PM, adjusting the end time accordingly.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-12-08T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What am I doing on Wednesday morning?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should list all events scheduled between 9:00 AM and 12:00 PM on Wednesday, December 11th.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-12-08T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is supposed to be at the kitchen staff meeting?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should locate the 'Kitchen Staff Meeting' event on Monday, December 9th, and return the list of attendees: souschef@lefleur.com, pastrychef@lefleur.com.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-12-08T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move the sous chef training to Wednesday, is that day free?",
+        "complexity": "High",
+        "expected_behavior": "The agent should check the current 'Sous Chef Training' scheduled on Tuesday, December 10th. Then, it should check Wednesday, December 11th, for any conflicting events during the original training time. If Wednesday is free, it should ask for confirmation to reschedule the training to Wednesday at the same time. If there is a conflict it should ask the user to clarify.",
+        "addressed_days": [
+            "Tuesday",
+            "Wednesday"
+        ],
+        "current_time": "2024-12-08T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move the meeting with the restaurant consultant to Thursday at 10 AM, and cancel my performance review?",
+        "complexity": "High",
+        "expected_behavior": "The agent should locate the 'Meeting with Restaurant Consultant' event on Thursday, December 12th. Then update it's start time to 10:00 AM, adjusting the end time accordingly. Also, it should locate the 'Staff Performance Review - Line Cook' event on Thursday, December 12th and delete it. The agent should then confirm both actions.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-12-08T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule...the seafood.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should ask for clarification regarding which event needs rescheduling, prompting with a list of events containing the word 'seafood' or mentioning a seafood supplier. This list should include 'Vendor Meeting - Seafood Selection' on Monday, December 9th.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-12-08T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting with... ProfitBoost",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should ask for clarification about which meeting with ProfitBoost is being referred to, referencing both the Monday and Thursday meetings, December 9th and 12th, and ask what action the user would like to take.",
+        "addressed_days": [
+            "Monday",
+            "Thursday"
+        ],
+        "current_time": "2024-12-08T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on my calendar today?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the current date (Monday, December 9th, based on current_time) and list all events scheduled for that day.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-12-09T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the current date (Monday, December 9th, based on current_time) and list all events scheduled for tomorrow (Tuesday, December 10th).",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-12-09T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Reschedule yesterday's meeting with the butcher to next week",
+        "complexity": "High",
+        "expected_behavior": "Since the query asks to reschedule to 'next week', but per constrains it must be confined to the current week, the model will clarify with the user what day in the current week they would like to reschedule to.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-12-09T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the current date (Tuesday, December 10th, based on current_time) and list all events scheduled for yesterday (Monday, December 9th).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-12-10T08:00:00"
+    }
+]

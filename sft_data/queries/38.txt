@@ -1,0 +1,144 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Lunch' for this Wednesday at 12 PM with Sarah from marketing.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule 'Team Lunch' for Wednesday, August 16, 2023 at 12:00 PM, adding Sarah from marketing as an attendee. Assume a duration of one hour.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-08-13T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a dentist appointment for me on Friday at 2 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule 'Dentist Appointment' for Friday, August 18, 2023 at 2:00 PM. Assume a duration of one hour.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-08-13T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should retrieve events scheduled for Tuesday, August 15, 2023, and list those events to the user.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-08-14T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the schedule for the day after tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should retrieve events scheduled for Thursday, August 17, 2023, and present them to the user.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-08-15T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my meeting with the hiring manager on Friday back to 11 AM?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the meeting with the hiring manager (nurse.manager@hospital.com) on Friday, August 18, 2023, and update its start time to 11:00 AM while maintaining the duration.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-08-17T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the lunch with family on Saturday to 2:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Lunch with Family' event on Saturday, August 19, 2023, and update its start time to 2:30 PM, keeping the duration the same.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-08-18T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the phone screen with the nurse candidate scheduled for on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Phone Screen - Nurse Candidate' event scheduled for Monday, August 14, 2023, and tell the user the start time (9:00 AM).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-08-14T07:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "When do I have to call the nursing school representative?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Call with Nursing School Representative' event and respond with the date and time: Tuesday, August 15, 2023, at 3:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-08-15T07:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to reschedule my virtual interview with the medical technician on Thursday to Friday at the same time. Can you do that?",
+        "complexity": "High",
+        "expected_behavior": "The agent should find the 'Virtual Interview - Medical Technician Candidate' on Thursday, August 17, note the time (1:00 PM), delete the Thursday event, and then create a new event with the same details on Friday, August 18 at 1:00 PM.",
+        "addressed_days": [
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2023-08-16T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the dinner party at my friend's house on Saturday, decline the invite.",
+        "complexity": "High",
+        "expected_behavior": "The agent needs to find the event 'Dinner Party at Friend's House' on Saturday, August 19, 2023, and then use respond_to_event to decline the invitation.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-08-18T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule nurse candidate.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should ask which nurse candidate the user is referring to, listing the options available (nurse.candidate@email.com on Monday at 9 AM, nurse.candidate3@email.com on Friday at 9 AM.)",
+        "addressed_days": [
+            "Monday",
+            "Friday"
+        ],
+        "current_time": "2023-08-17T15:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting with HR.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should ask which meeting with HR the user is referring to, specifying time and day (Wednesday, August 16, 2023 at 10:30 AM).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-08-16T11:45:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have today?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should check the current date (Wednesday, August 16, 2023) and list all events scheduled for that day (Virtual Job Fair, Meeting with HR Director, In-Person Interview - Registered Nurse Candidate).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-08-16T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any interviews yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should retrieve all events from yesterday (Monday, August 14, 2023) and specifically search for events with the substring 'Interview'. It should then inform the user about the virtual interview with the medical technician candidate at 1:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-08-15T09:00:00"
+    }
+]

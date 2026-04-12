@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Gardening' for this Wednesday at 4 PM for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Gardening' on Wednesday, April 12, 2023, at 4:00 PM and ending at 5:00 PM. The description should include 'Gardening'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-09T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting with the fact-checking organizations on Thursday at 11 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event on Thursday, April 13, 2023, at 11:00 AM with the attendees factcheck@org.com. The summary should include 'Fact-Checking Organizations meeting'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-04-09T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy Wednesday evening?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for events on Wednesday, April 12, 2023, between 6:00 PM and 11:59 PM. Return the event called 'Attend Tech Meetup (AI in Libraries)' that is scheduled for Wednesday at 6 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-12T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What is happening for dinner on Saturday?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for events on Saturday, April 15, 2023, that include the word 'dinner'. Return the event called 'Dinner at Local Restaurant' that is scheduled for Saturday at 6 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-04-15T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the accessibility audit follow-up to 3 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event called 'Accessibility Audit Follow-up' on Monday, April 10, 2023, and update the start time to 3:00 PM and the end time to 4:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-10T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "I need to decline the library system administrators meeting this Wednesday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event called 'Meeting with Library System Administrators' on Wednesday, April 12, 2023, and respond with DECLINE.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-12T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the e-book vendor demo?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event called 'E-book Vendor Demo' on Monday, April 10, 2023, and return the attendees. Respond with vendorrep@ebookprovider.com.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-10T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is dinner with friends on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event called 'Dinner with Friends' on Friday, April 14, 2023, and return the start time. Respond with 7:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-04-14T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a lunch on Thursday with the fact-checking organizations, but make sure it does not overlap with any existing appointments.",
+        "complexity": "High",
+        "expected_behavior": "Check the calendar on Thursday, April 13, 2023, for any existing events. If there are no events that overlap between 12:00 PM and 1:00 PM, then schedule a new event called 'Lunch with fact-checking organizations' with attendees factcheck@org.com on Thursday at 12:00 PM for one hour.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-04-09T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move the Friday team meeting to Thursday at the same time?",
+        "complexity": "High",
+        "expected_behavior": "Find the event called 'Team Meeting - Digital Resource Strategy' on Friday, April 14, 2023, and check if there is a conflict on Thursday, April 13, 2023, at the same time (9:00 AM - 10:00 AM). If there is no conflict, delete the Friday event and create an event called 'Team Meeting - Digital Resource Strategy' on Thursday from 9:00 AM to 10:00 AM.",
+        "addressed_days": [
+            "Friday",
+            "Thursday"
+        ],
+        "current_time": "2023-04-10T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule book club.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event called 'Book Club Meeting' on Tuesday, April 11, 2023. Prompt user for new date and time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-04-11T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Accessibility follow up?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event called 'Accessibility Audit Follow-up' on Monday, April 10, 2023 and return the details.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-10T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have today?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for events on Monday, April 10, 2023, and list all events.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-10T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I schedule anything for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for events on Wednesday, April 12, 2023, and list all events.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-11T20:00:00"
+    }
+]

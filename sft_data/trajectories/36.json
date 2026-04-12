@@ -1,0 +1,1220 @@
+[
+  {
+    "query": "Create an event called 'Meet John' for Thursday at 3 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "The agent should create a new event with the summary 'Meet John' on 2025-02-06 from 3:00 PM to 4:00 PM.",
+    "simulated_now": "2025-02-02 10:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Contract Review - Review and sign vendor contracts",
+          "start": "2025-02-06 10:00:00",
+          "end": "2025-02-06 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c40c3795ac874966b4619f07a5834550"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Caterer Tasting - Sample menu options with clients",
+          "start": "2025-02-06 13:00:00",
+          "end": "2025-02-06 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "caterer@email.com",
+            "client4@email.com"
+          ],
+          "id": "evt_23939cda8fea4bbdb3b87a29e2e330f5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Partner",
+          "start": "2025-02-06 19:00:00",
+          "end": "2025-02-06 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_196c2da2cab44a638b9e2d1c5ad4f220"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Contract Review - Review and sign vendor contracts",
+          "start": "2025-02-06 10:00:00",
+          "end": "2025-02-06 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c40c3795ac874966b4619f07a5834550"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Caterer Tasting - Sample menu options with clients",
+          "start": "2025-02-06 13:00:00",
+          "end": "2025-02-06 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "caterer@email.com",
+            "client4@email.com"
+          ],
+          "id": "evt_23939cda8fea4bbdb3b87a29e2e330f5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meet John",
+          "start": "2025-02-06 15:00:00",
+          "end": "2025-02-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ea49c0dab0dd436985e5664c08d44482"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Partner",
+          "start": "2025-02-06 19:00:00",
+          "end": "2025-02-06 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_196c2da2cab44a638b9e2d1c5ad4f220"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Meet John' for Thursday at 3 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "My plan is to first get the current time, then create an event with the information provided by the user. I will assume the event duration is 1 hour since it was not specified."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-02-02 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2025-02-06 15:00:00",
+          "end": "2025-02-06 16:00:00",
+          "summary": "Meet John"
+        },
+        "result": "Event created successfully.\nMeet John\n  ID: evt_ea49c0dab0dd436985e5664c08d44482\n  Time: Thu Feb 06, 15:00 - 16:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I have created the event 'Meet John' for Thursday, February 6, from 3:00 PM to 4:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Book a haircut appointment for me on Wednesday at 11:30 AM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "The agent should create a new event with the summary 'Haircut' on 2025-02-05 from 11:30 AM to 12:30 PM.",
+    "simulated_now": "2025-02-02 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Design Proposal Meeting - Present decor ideas to client",
+          "start": "2025-02-05 09:30:00",
+          "end": "2025-02-05 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client3@email.com"
+          ],
+          "id": "evt_73c5525688b24611983e2c07bb5a38a9"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Photographer Meeting - Finalize shot list",
+          "start": "2025-02-05 13:00:00",
+          "end": "2025-02-05 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "photographer@email.com"
+          ],
+          "id": "evt_b5b941d9598744d69d1e690405ac555a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Networking Event - Local business owners",
+          "start": "2025-02-05 18:00:00",
+          "end": "2025-02-05 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_64990e91bce8413399235a243af6194b"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Design Proposal Meeting - Present decor ideas to client",
+          "start": "2025-02-05 09:30:00",
+          "end": "2025-02-05 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client3@email.com"
+          ],
+          "id": "evt_73c5525688b24611983e2c07bb5a38a9"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Haircut Appointment",
+          "start": "2025-02-05 11:30:00",
+          "end": "2025-02-05 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b09316ae2a874b739cce84a42e5e9d6a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Photographer Meeting - Finalize shot list",
+          "start": "2025-02-05 13:00:00",
+          "end": "2025-02-05 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "photographer@email.com"
+          ],
+          "id": "evt_b5b941d9598744d69d1e690405ac555a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Networking Event - Local business owners",
+          "start": "2025-02-05 18:00:00",
+          "end": "2025-02-05 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_64990e91bce8413399235a243af6194b"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Book a haircut appointment for me on Wednesday at 11:30 AM."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. I'll schedule a 1-hour appointment for you. What is the date of the Wednesday you're referring to?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-02-02 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Haircut Appointment",
+          "start": "2025-02-05 11:30:00",
+          "end": "2025-02-05 12:30:00"
+        },
+        "result": "Event created successfully.\nHaircut Appointment\n  ID: evt_b09316ae2a874b739cce84a42e5e9d6a\n  Time: Wed Feb 05, 11:30 - 12:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've scheduled a \"Haircut Appointment\" for you on Wednesday, February 5th, from 11:30 AM to 12:30 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing Monday morning?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should list events scheduled between 9:00 AM and 12:00 PM on 2025-02-03.",
+    "simulated_now": "2025-02-03 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Discuss upcoming wedding logistics",
+          "start": "2025-02-03 09:00:00",
+          "end": "2025-02-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "assistant@email.com"
+          ],
+          "id": "evt_fc4dee386d8e4f94a536dadaa4aef340"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Initial meeting with prospective couple",
+          "start": "2025-02-03 10:30:00",
+          "end": "2025-02-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "couple1@email.com"
+          ],
+          "id": "evt_2a6f811cba7f43ada05af6cea00c9b8c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Budget Review - Analyze current wedding budgets and adjust as needed",
+          "start": "2025-02-03 14:00:00",
+          "end": "2025-02-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c2350985590a4dc28b975af0b78103c0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2025-02-03 18:30:00",
+          "end": "2025-02-03 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_79df87dc1d2e4eebbc76adcfda2fe20d"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Discuss upcoming wedding logistics",
+          "start": "2025-02-03 09:00:00",
+          "end": "2025-02-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "assistant@email.com"
+          ],
+          "id": "evt_fc4dee386d8e4f94a536dadaa4aef340"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Initial meeting with prospective couple",
+          "start": "2025-02-03 10:30:00",
+          "end": "2025-02-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "couple1@email.com"
+          ],
+          "id": "evt_2a6f811cba7f43ada05af6cea00c9b8c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Budget Review - Analyze current wedding budgets and adjust as needed",
+          "start": "2025-02-03 14:00:00",
+          "end": "2025-02-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c2350985590a4dc28b975af0b78103c0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2025-02-03 18:30:00",
+          "end": "2025-02-03 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_79df87dc1d2e4eebbc76adcfda2fe20d"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing Monday morning?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to determine the date of the upcoming Monday. Then, I will list the events on that Monday morning to tell you what you have scheduled."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-02-03 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-02-03 12:00:00",
+          "time_min": "2025-02-03 09:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_fc4dee386d8e4f94a536dadaa4aef340 | Team Meeting - Discuss upcoming wedding logistics \u2014 Mon 09:00-10:00\nid: evt_2a6f811cba7f43ada05af6cea00c9b8c | Client Consultation - Initial meeting with prospective couple \u2014 Mon 10:30-12:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have two events scheduled for this Monday morning.\n\nFrom 9:00 AM to 10:00 AM, you have a \"Team Meeting - Discuss upcoming wedding logistics.\"\n\nThen, from 10:30 AM to 12:00 PM, you have a \"Client Consultation - Initial meeting with prospective couple.\""
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Update the florist meeting to 3:00 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should find the 'Vendor Negotiation' event with the florist on Tuesday and update its start time to 3:00 PM and end time to 4:30 PM.",
+    "simulated_now": "2025-02-04 09:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Venue Visit - Tour potential wedding venue with client",
+          "start": "2025-02-04 10:00:00",
+          "end": "2025-02-04 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "venue_manager@email.com",
+            "client2@email.com"
+          ],
+          "id": "evt_627a263f037740e19f2bf03bfe71094b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Vendor Negotiation - Discuss pricing with florist",
+          "start": "2025-02-04 14:00:00",
+          "end": "2025-02-04 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "florist@email.com"
+          ],
+          "id": "evt_c44930bccc2c4bb3a4e67736281c1ed6"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Therapy Session - Stress management techniques",
+          "start": "2025-02-04 19:00:00",
+          "end": "2025-02-04 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@email.com"
+          ],
+          "id": "evt_1875300f31e545c98e07392a2ea6d745"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Venue Visit - Tour potential wedding venue with client",
+          "start": "2025-02-04 10:00:00",
+          "end": "2025-02-04 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "venue_manager@email.com",
+            "client2@email.com"
+          ],
+          "id": "evt_627a263f037740e19f2bf03bfe71094b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Vendor Negotiation - Discuss pricing with florist",
+          "start": "2025-02-04 15:00:00",
+          "end": "2025-02-04 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "florist@email.com"
+          ],
+          "id": "evt_c44930bccc2c4bb3a4e67736281c1ed6"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Therapy Session - Stress management techniques",
+          "start": "2025-02-04 19:00:00",
+          "end": "2025-02-04 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@email.com"
+          ],
+          "id": "evt_1875300f31e545c98e07392a2ea6d745"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Update the florist meeting to 3:00 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I'll update the florist meeting to 3:00 PM. First, I need to find the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 20 events:\nid: evt_69469ac8efb94911a4725fae08bcc3ca | Team Meeting - Discuss upcoming wedding logistics \u2014 Mon 09:00-10:00\nid: evt_617049744108480fae1934763fea1eef | Client Consultation - Initial meeting with prospective couple \u2014 Mon 10:30-12:00\nid: evt_3a08c0075c354b308b61820a911519fb | Budget Review - Analyze current wedding budgets and adjust as needed \u2014 Mon 14:00-15:00\nid: evt_1db021451ccf4895a720d74c43287906 | Yoga Class \u2014 Mon 18:30-20:00\nid: evt_627a263f037740e19f2bf03bfe71094b | Venue Visit - Tour potential wedding venue with client \u2014 Tue 10:00-11:30\nid: evt_c44930bccc2c4bb3a4e67736281c1ed6 | Vendor Negotiation - Discuss pricing with florist \u2014 Tue 14:00-15:30\nid: evt_1875300f31e545c98e07392a2ea6d745 | Therapy Session - Stress management techniques \u2014 Tue 19:00-20:00\nid: evt_fcee3dc631d743ac98047fdb9ad7d08b | Design Proposal Meeting - Present decor ideas to client \u2014 Wed 09:30-11:00\nid: evt_c976857d0b8a42ca8d2b1bd1e092ccec | Photographer Meeting - Finalize shot list \u2014 Wed 13:00-14:00\nid: evt_38e703c36803426b80172bb3a7f9e2e5 | Networking Event - Local business owners \u2014 Wed 18:00-19:30\nid: evt_c0f56c176fef48438459aed4c5c97aef | Contract Review - Review and sign vendor contracts \u2014 Thu 10:00-11:00\nid: evt_3da6b2d1bdbd47f180316980b47ab98d | Caterer Tasting - Sample menu options with clients \u2014 Thu 13:00-14:30\nid: evt_2bfffec4ecb443838b8ed65265d07d8a | Dinner with Partner \u2014 Thu 19:00-20:30\nid: evt_f5f42ce42039455f91e6bf20e3f03d84 | Timeline Creation - Create a detailed timeline for upcoming wedding \u2014 Fri 10:00-11:30\nid: evt_8247afe699de4e4982f7f2f616f8e639 | Call with DJ - Discuss music selection and event flow \u2014 Fri 14:00-15:00\nid: evt_b0cbabef34704a7b8c16c463f663bc91 | Movie Night with Friends \u2014 Fri 19:00-21:00\nid: evt_0d403c7038884265aac571c66fa4da41 | Wedding Day - On-site coordination \u2014 Sat 12:00-22:00\nid: evt_76d096127d164221858bd3ec260f2f41 | Dinner with Friends \u2014 Sat 19:00-21:00\nid: evt_2ac64960e3d2401eb8be06d94e08b8bb | Brunch with Family \u2014 Sun 10:00-12:00\nid: evt_cb012034434b41e1a45a7a27879c24c9 | Relax at Spa - massage \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I'll update the \"Vendor Negotiation - Discuss pricing with florist\" to 3:00 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-02-04 09:00:00 | Tuesday"
+      },
+      {
+        "role": "assistant",
+        "content": "Got it. The florist meeting is today. I'll move it to 3:00 PM, so it will now be from 3:00 PM to 4:30 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_c44930bccc2c4bb3a4e67736281c1ed6",
+          "start": "2025-02-04 15:00:00",
+          "end": "2025-02-04 16:30:00"
+        },
+        "result": "Event updated successfully.\nVendor Negotiation - Discuss pricing with florist\n  ID: evt_c44930bccc2c4bb3a4e67736281c1ed6\n  Time: Tue Feb 04, 15:00 - 16:30\n  Attendees: florist@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "Done. The florist meeting is now scheduled for 3:00 PM to 4:30 PM today."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the venue visit?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should retrieve the 'Venue Visit' event and return the attendees: venue_manager@email.com, client2@email.com.",
+    "simulated_now": "2025-02-04 09:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Venue Visit - Tour potential wedding venue with client",
+          "start": "2025-02-04 10:00:00",
+          "end": "2025-02-04 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "venue_manager@email.com",
+            "client2@email.com"
+          ],
+          "id": "evt_b6a2399f301b4044a0ef2ea77dd09dfa"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Vendor Negotiation - Discuss pricing with florist",
+          "start": "2025-02-04 14:00:00",
+          "end": "2025-02-04 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "florist@email.com"
+          ],
+          "id": "evt_9f288dfe87c946bf887fad13e53147e4"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Therapy Session - Stress management techniques",
+          "start": "2025-02-04 19:00:00",
+          "end": "2025-02-04 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@email.com"
+          ],
+          "id": "evt_16461892513040398e3a25ee5e20abcf"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Venue Visit - Tour potential wedding venue with client",
+          "start": "2025-02-04 10:00:00",
+          "end": "2025-02-04 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "venue_manager@email.com",
+            "client2@email.com"
+          ],
+          "id": "evt_b6a2399f301b4044a0ef2ea77dd09dfa"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Vendor Negotiation - Discuss pricing with florist",
+          "start": "2025-02-04 14:00:00",
+          "end": "2025-02-04 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "florist@email.com"
+          ],
+          "id": "evt_9f288dfe87c946bf887fad13e53147e4"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Therapy Session - Stress management techniques",
+          "start": "2025-02-04 19:00:00",
+          "end": "2025-02-04 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@email.com"
+          ],
+          "id": "evt_16461892513040398e3a25ee5e20abcf"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the venue visit?"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 20 events:\nid: evt_cd78db78e0e7436da7c0d3ff2fae8148 | Team Meeting - Discuss upcoming wedding logistics \u2014 Mon 09:00-10:00\nid: evt_8e74b687de474f4db14cd208315725be | Client Consultation - Initial meeting with prospective couple \u2014 Mon 10:30-12:00\nid: evt_cbcec46ba8ab4a4cb4eec42629f912bf | Budget Review - Analyze current wedding budgets and adjust as needed \u2014 Mon 14:00-15:00\nid: evt_134ea3c18cfc444a8d79247a7aa32c30 | Yoga Class \u2014 Mon 18:30-20:00\nid: evt_b6a2399f301b4044a0ef2ea77dd09dfa | Venue Visit - Tour potential wedding venue with client \u2014 Tue 10:00-11:30\nid: evt_9f288dfe87c946bf887fad13e53147e4 | Vendor Negotiation - Discuss pricing with florist \u2014 Tue 14:00-15:30\nid: evt_16461892513040398e3a25ee5e20abcf | Therapy Session - Stress management techniques \u2014 Tue 19:00-20:00\nid: evt_66903f8a22c44110a080c6009ea7c810 | Design Proposal Meeting - Present decor ideas to client \u2014 Wed 09:30-11:00\nid: evt_36d3f4107899447ab76a84ff295d074f | Photographer Meeting - Finalize shot list \u2014 Wed 13:00-14:00\nid: evt_e116068abaa847839b3c88070e9890e3 | Networking Event - Local business owners \u2014 Wed 18:00-19:30\nid: evt_29994c4871784c5c93358073dbfd8aff | Contract Review - Review and sign vendor contracts \u2014 Thu 10:00-11:00\nid: evt_c499266ac0d74901bf3232278adb0848 | Caterer Tasting - Sample menu options with clients \u2014 Thu 13:00-14:30\nid: evt_574be77309d045b0b1f6e230bc787743 | Dinner with Partner \u2014 Thu 19:00-20:30\nid: evt_a589c9b237c646109d6de0d2085192f5 | Timeline Creation - Create a detailed timeline for upcoming wedding \u2014 Fri 10:00-11:30\nid: evt_6ecb22d4307140b3aa88df66ffd26f63 | Call with DJ - Discuss music selection and event flow \u2014 Fri 14:00-15:00\nid: evt_d84301a15d144b60a82309b63191ad34 | Movie Night with Friends \u2014 Fri 19:00-21:00\nid: evt_b588b7556f7f4e28bdc006e4f393eb19 | Wedding Day - On-site coordination \u2014 Sat 12:00-22:00\nid: evt_8b4f4c8a557b44509b9614ef115f0b2f | Dinner with Friends \u2014 Sat 19:00-21:00\nid: evt_b208b37a63504dee8a3672cdad71b8d8 | Brunch with Family \u2014 Sun 10:00-12:00\nid: evt_f15feda27b7d44568d4cf4a7966b7ddd | Relax at Spa - massage \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_b6a2399f301b4044a0ef2ea77dd09dfa"
+        },
+        "result": "Venue Visit - Tour potential wedding venue with client\n  ID: evt_b6a2399f301b4044a0ef2ea77dd09dfa\n  Time: Tue Feb 04, 10:00 - 11:30\n  Attendees: venue_manager@email.com, client2@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "The attendees for the venue visit are venue_manager@email.com and client2@email.com."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on for Saturday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should list all events scheduled on Saturday, 2025-02-08, which is 'Wedding Day' and 'Dinner with Friends'.",
+    "simulated_now": "2025-02-07 14:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Wedding Day - On-site coordination",
+          "start": "2025-02-08 12:00:00",
+          "end": "2025-02-08 22:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6c7df75f073b4f19837c549a2d398b30"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with Friends",
+          "start": "2025-02-08 19:00:00",
+          "end": "2025-02-08 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a424188d0f22422a966393234da6c3e2"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Wedding Day - On-site coordination",
+          "start": "2025-02-08 12:00:00",
+          "end": "2025-02-08 22:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6c7df75f073b4f19837c549a2d398b30"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with Friends",
+          "start": "2025-02-08 19:00:00",
+          "end": "2025-02-08 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a424188d0f22422a966393234da6c3e2"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on for Saturday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-02-07 14:00:00 | Friday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-02-08 23:59:59",
+          "time_min": "2025-02-08 00:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_6c7df75f073b4f19837c549a2d398b30 | Wedding Day - On-site coordination \u2014 Sat 12:00-22:00\nid: evt_a424188d0f22422a966393234da6c3e2 | Dinner with Friends \u2014 Sat 19:00-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "On Saturday, you have two events: \"Wedding Day - On-site coordination\" from 12:00 to 22:00 and \"Dinner with Friends\" from 19:00 to 21:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "I want to move my dinner with my partner on Thursday to Friday, but I don't want to be late for the movie.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "The agent should find the 'Dinner with Partner' on Thursday and the 'Movie Night with Friends' on Friday. Then it should suggest a time slot for the dinner on Friday that ends before 7:00 PM. Finally, it should update the dinner time on Friday to the suggested time.",
+    "simulated_now": "2025-02-06 09:00:00",
+    "addressed_days": [
+      "Thursday",
+      "Friday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Contract Review - Review and sign vendor contracts",
+          "start": "2025-02-06 10:00:00",
+          "end": "2025-02-06 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4919d6c45fd34e56a74dbd32b2cdf5e4"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Caterer Tasting - Sample menu options with clients",
+          "start": "2025-02-06 13:00:00",
+          "end": "2025-02-06 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "caterer@email.com",
+            "client4@email.com"
+          ],
+          "id": "evt_38cd8287922747bdbc1090d1e535eb84"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Partner",
+          "start": "2025-02-06 19:00:00",
+          "end": "2025-02-06 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7f7cabfdadb94f66b5a5452b711042cd"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Timeline Creation - Create a detailed timeline for upcoming wedding",
+          "start": "2025-02-07 10:00:00",
+          "end": "2025-02-07 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_213ae9b625944eebaba0300e2a4de5a6"
+        },
+        {
+          "day": "Friday",
+          "summary": "Call with DJ - Discuss music selection and event flow",
+          "start": "2025-02-07 14:00:00",
+          "end": "2025-02-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "dj@email.com"
+          ],
+          "id": "evt_67b4d8564ba34b39ae8d118d3123c473"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Friends",
+          "start": "2025-02-07 19:00:00",
+          "end": "2025-02-07 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a288e2a6793d4848ba1bb15663c062d0"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Contract Review - Review and sign vendor contracts",
+          "start": "2025-02-06 10:00:00",
+          "end": "2025-02-06 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4919d6c45fd34e56a74dbd32b2cdf5e4"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Caterer Tasting - Sample menu options with clients",
+          "start": "2025-02-06 13:00:00",
+          "end": "2025-02-06 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "caterer@email.com",
+            "client4@email.com"
+          ],
+          "id": "evt_38cd8287922747bdbc1090d1e535eb84"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Timeline Creation - Create a detailed timeline for upcoming wedding",
+          "start": "2025-02-07 10:00:00",
+          "end": "2025-02-07 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_213ae9b625944eebaba0300e2a4de5a6"
+        },
+        {
+          "day": "Friday",
+          "summary": "Call with DJ - Discuss music selection and event flow",
+          "start": "2025-02-07 14:00:00",
+          "end": "2025-02-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "dj@email.com"
+          ],
+          "id": "evt_67b4d8564ba34b39ae8d118d3123c473"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Partner",
+          "start": "2025-02-07 17:00:00",
+          "end": "2025-02-07 18:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7f7cabfdadb94f66b5a5452b711042cd"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Friends",
+          "start": "2025-02-07 19:00:00",
+          "end": "2025-02-07 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a288e2a6793d4848ba1bb15663c062d0"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "I want to move my dinner with my partner on Thursday to Friday, but I don't want to be late for the movie."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-02-06 09:00:00 | Thursday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-02-06 00:00:00",
+          "time_max": "2025-02-07 23:59:59"
+        },
+        "result": "Found 6 events:\nid: evt_4919d6c45fd34e56a74dbd32b2cdf5e4 | Contract Review - Review and sign vendor contracts \u2014 Thu 10:00-11:00\nid: evt_38cd8287922747bdbc1090d1e535eb84 | Caterer Tasting - Sample menu options with clients \u2014 Thu 13:00-14:30\nid: evt_7f7cabfdadb94f66b5a5452b711042cd | Dinner with Partner \u2014 Thu 19:00-20:30\nid: evt_213ae9b625944eebaba0300e2a4de5a6 | Timeline Creation - Create a detailed timeline for upcoming wedding \u2014 Fri 10:00-11:30\nid: evt_67b4d8564ba34b39ae8d118d3123c473 | Call with DJ - Discuss music selection and event flow \u2014 Fri 14:00-15:00\nid: evt_a288e2a6793d4848ba1bb15663c062d0 | Movie Night with Friends \u2014 Fri 19:00-21:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_7f7cabfdadb94f66b5a5452b711042cd",
+          "end": "2025-02-07 18:30:00",
+          "start": "2025-02-07 17:00:00"
+        },
+        "result": "Event updated successfully.\nDinner with Partner\n  ID: evt_7f7cabfdadb94f66b5a5452b711042cd\n  Time: Fri Feb 07, 17:00 - 18:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've moved your dinner with your partner to Friday at 5:00 PM, ending at 6:30 PM. This will give you plenty of time before your movie at 7:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Team meeting?",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should find the 'Team Meeting' event on Monday and display its details (time, attendees).",
+    "simulated_now": "2025-02-03 09:15:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Discuss upcoming wedding logistics",
+          "start": "2025-02-03 09:00:00",
+          "end": "2025-02-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "assistant@email.com"
+          ],
+          "id": "evt_2a110c5486f14478844be834da7f9fa8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Initial meeting with prospective couple",
+          "start": "2025-02-03 10:30:00",
+          "end": "2025-02-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "couple1@email.com"
+          ],
+          "id": "evt_9308754c9793431288dd64e359e66e58"
+        },
+        {
+          "day": "Monday",
+          "summary": "Budget Review - Analyze current wedding budgets and adjust as needed",
+          "start": "2025-02-03 14:00:00",
+          "end": "2025-02-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0443d4a2103345a5925b9d6b7e42e182"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2025-02-03 18:30:00",
+          "end": "2025-02-03 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bb21051686af4f309dcb003ca88d1910"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Discuss upcoming wedding logistics",
+          "start": "2025-02-03 09:00:00",
+          "end": "2025-02-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "assistant@email.com"
+          ],
+          "id": "evt_2a110c5486f14478844be834da7f9fa8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Initial meeting with prospective couple",
+          "start": "2025-02-03 10:30:00",
+          "end": "2025-02-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "couple1@email.com"
+          ],
+          "id": "evt_9308754c9793431288dd64e359e66e58"
+        },
+        {
+          "day": "Monday",
+          "summary": "Budget Review - Analyze current wedding budgets and adjust as needed",
+          "start": "2025-02-03 14:00:00",
+          "end": "2025-02-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0443d4a2103345a5925b9d6b7e42e182"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2025-02-03 18:30:00",
+          "end": "2025-02-03 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bb21051686af4f309dcb003ca88d1910"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Team meeting?"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 20 events:\nid: evt_2a110c5486f14478844be834da7f9fa8 | Team Meeting - Discuss upcoming wedding logistics \u2014 Mon 09:00-10:00\nid: evt_9308754c9793431288dd64e359e66e58 | Client Consultation - Initial meeting with prospective couple \u2014 Mon 10:30-12:00\nid: evt_0443d4a2103345a5925b9d6b7e42e182 | Budget Review - Analyze current wedding budgets and adjust as needed \u2014 Mon 14:00-15:00\nid: evt_bb21051686af4f309dcb003ca88d1910 | Yoga Class \u2014 Mon 18:30-20:00\nid: evt_0836becb009c49de9b53f67b7a5a6989 | Venue Visit - Tour potential wedding venue with client \u2014 Tue 10:00-11:30\nid: evt_87ac037280084d44a8a5d5a6bddf71c5 | Vendor Negotiation - Discuss pricing with florist \u2014 Tue 14:00-15:30\nid: evt_acea6bd35e8c4c5fbd1362d3f4653045 | Therapy Session - Stress management techniques \u2014 Tue 19:00-20:00\nid: evt_9cdc8ed3375c4549a87ce89fe787c8b7 | Design Proposal Meeting - Present decor ideas to client \u2014 Wed 09:30-11:00\nid: evt_05dabe40e09243b18acce4b534932182 | Photographer Meeting - Finalize shot list \u2014 Wed 13:00-14:00\nid: evt_d5d701e30d31424ca32438b93d3c3af7 | Networking Event - Local business owners \u2014 Wed 18:00-19:30\nid: evt_15927bf74bd44cc5a62c0e526338dc29 | Contract Review - Review and sign vendor contracts \u2014 Thu 10:00-11:00\nid: evt_ad858d35a3764a09b8f4f9c3a8e137c4 | Caterer Tasting - Sample menu options with clients \u2014 Thu 13:00-14:30\nid: evt_30041394a0254363b7001ac6e62d1165 | Dinner with Partner \u2014 Thu 19:00-20:30\nid: evt_520d70a440f746398c6fc2f163364cf6 | Timeline Creation - Create a detailed timeline for upcoming wedding \u2014 Fri 10:00-11:30\nid: evt_b0780a5d28dd423d983897f45f38d070 | Call with DJ - Discuss music selection and event flow \u2014 Fri 14:00-15:00\nid: evt_a001022621ed4749a51826af910e6b78 | Movie Night with Friends \u2014 Fri 19:00-21:00\nid: evt_5532e19a59394abe946f6ead650b7cb1 | Wedding Day - On-site coordination \u2014 Sat 12:00-22:00\nid: evt_09d9398f24a042789102b1821849e861 | Dinner with Friends \u2014 Sat 19:00-21:00\nid: evt_91fa77a2dc8f438e97a03ba3b7bf7cfa | Brunch with Family \u2014 Sun 10:00-12:00\nid: evt_19569ff4c7d741e1bcaee261398733e7 | Relax at Spa - massage \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "There is a \u201cTeam Meeting - Discuss upcoming wedding logistics\u201d on Monday from 9:00 to 10:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What is happening today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should list all events scheduled for Monday, 2025-02-03.",
+    "simulated_now": "2025-02-03 07:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Discuss upcoming wedding logistics",
+          "start": "2025-02-03 09:00:00",
+          "end": "2025-02-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "assistant@email.com"
+          ],
+          "id": "evt_113d54416f8e46bcaf1ed9e845868ca8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Initial meeting with prospective couple",
+          "start": "2025-02-03 10:30:00",
+          "end": "2025-02-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "couple1@email.com"
+          ],
+          "id": "evt_d77b021d8d224ed992c44ff044b2ae88"
+        },
+        {
+          "day": "Monday",
+          "summary": "Budget Review - Analyze current wedding budgets and adjust as needed",
+          "start": "2025-02-03 14:00:00",
+          "end": "2025-02-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9b3c9ef965474f21add56451b41e925b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2025-02-03 18:30:00",
+          "end": "2025-02-03 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c96a5ddf22e4417f90ebab2c6a9ce2ff"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Discuss upcoming wedding logistics",
+          "start": "2025-02-03 09:00:00",
+          "end": "2025-02-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "assistant@email.com"
+          ],
+          "id": "evt_113d54416f8e46bcaf1ed9e845868ca8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Initial meeting with prospective couple",
+          "start": "2025-02-03 10:30:00",
+          "end": "2025-02-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "couple1@email.com"
+          ],
+          "id": "evt_d77b021d8d224ed992c44ff044b2ae88"
+        },
+        {
+          "day": "Monday",
+          "summary": "Budget Review - Analyze current wedding budgets and adjust as needed",
+          "start": "2025-02-03 14:00:00",
+          "end": "2025-02-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9b3c9ef965474f21add56451b41e925b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2025-02-03 18:30:00",
+          "end": "2025-02-03 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c96a5ddf22e4417f90ebab2c6a9ce2ff"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What is happening today?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time and then list all events for today."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-02-03 07:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-02-03 00:00:00",
+          "time_max": "2025-02-03 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_113d54416f8e46bcaf1ed9e845868ca8 | Team Meeting - Discuss upcoming wedding logistics \u2014 Mon 09:00-10:00\nid: evt_d77b021d8d224ed992c44ff044b2ae88 | Client Consultation - Initial meeting with prospective couple \u2014 Mon 10:30-12:00\nid: evt_9b3c9ef965474f21add56451b41e925b | Budget Review - Analyze current wedding budgets and adjust as needed \u2014 Mon 14:00-15:00\nid: evt_c96a5ddf22e4417f90ebab2c6a9ce2ff | Yoga Class \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Here is what is happening today:\n- Team Meeting - Discuss upcoming wedding logistics from 09:00 to 10:00.\n- Client Consultation - Initial meeting with prospective couple from 10:30 to 12:00.\n- Budget Review - Analyze current wedding budgets and adjust as needed from 14:00 to 15:00.\n- Yoga Class from 18:30 to 20:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Am I free tomorrow afternoon?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should check for any events scheduled on Wednesday, 2025-02-05, between 12:00 PM and 6:00 PM and report availability.",
+    "simulated_now": "2025-02-04 20:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Design Proposal Meeting - Present decor ideas to client",
+          "start": "2025-02-05 09:30:00",
+          "end": "2025-02-05 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client3@email.com"
+          ],
+          "id": "evt_60921b3bf7c6497699030cb590a4a55c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Photographer Meeting - Finalize shot list",
+          "start": "2025-02-05 13:00:00",
+          "end": "2025-02-05 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "photographer@email.com"
+          ],
+          "id": "evt_00158c21cc764075b8f90b6b87d41e81"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Networking Event - Local business owners",
+          "start": "2025-02-05 18:00:00",
+          "end": "2025-02-05 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_565b0b50b93346f5a0f122430b07ec1a"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Design Proposal Meeting - Present decor ideas to client",
+          "start": "2025-02-05 09:30:00",
+          "end": "2025-02-05 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client3@email.com"
+          ],
+          "id": "evt_60921b3bf7c6497699030cb590a4a55c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Photographer Meeting - Finalize shot list",
+          "start": "2025-02-05 13:00:00",
+          "end": "2025-02-05 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "photographer@email.com"
+          ],
+          "id": "evt_00158c21cc764075b8f90b6b87d41e81"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Networking Event - Local business owners",
+          "start": "2025-02-05 18:00:00",
+          "end": "2025-02-05 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_565b0b50b93346f5a0f122430b07ec1a"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Am I free tomorrow afternoon?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to know today's date. Then, I will check your calendar for any events scheduled for tomorrow afternoon to determine if you are free."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-02-04 20:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-02-05 17:00:00",
+          "time_min": "2025-02-05 12:00:00"
+        },
+        "result": "Found 1 events:\nid: evt_00158c21cc764075b8f90b6b87d41e81 | Photographer Meeting - Finalize shot list \u2014 Wed 13:00-14:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have one event tomorrow afternoon: a meeting with a photographer from 13:00 to 14:00 to finalize the shot list."
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

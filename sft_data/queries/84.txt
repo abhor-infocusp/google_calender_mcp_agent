@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Marketing Review' on Tuesday at 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Marketing Review' scheduled for Tuesday, February 11, 2025, at 3 PM and ending at 4 PM. No attendees or description is necessary.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-02-09T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting with Susan Williams on Thursday at 11:00 AM to discuss legal matters.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event called 'Meeting with Susan Williams' scheduled for Thursday, February 13, 2025, at 11:00 AM and ending at 12:00 PM, with susan.williams@hospital.com as an attendee. The description should be 'discuss legal matters'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-02-09T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after my meeting with IT on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "First, use list_events to find the 'Meeting with IT' event on Monday. Then, use list_events to find any other event scheduled after the meeting with IT event on Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-02-10T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on after the presentation prep on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "First, use list_events to find the 'Presentation Prep' event on Wednesday. Then, use list_events to find any other event scheduled after the Presentation Prep event on Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-02-12T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the Data Preprocessing on Monday to 1 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Data Preprocessing' on Monday using list_events. Update the event's start time to 1 PM using update_event.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-02-10T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the discussion with legal counsel on Thursday to start a half hour later.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Address Data Privacy Concerns w/ Legal Counsel' using list_events. Update the event's start time to 11:00 AM using update_event.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-02-13T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Team Meeting about Project X on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Use list_events to find the 'Team Meeting - Project X Update' event on Monday. Then, extract the attendees' emails.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-02-10T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What is the clinical staff training about on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Use list_events to find the 'Clinical Staff Training - Data Insights' event on Wednesday, then display its description.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-02-12T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Move the Team Meeting about Project Y on Thursday to the time when I am validating the model.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Team Meeting - Project Y Discussion' event and the 'Model Validation' event on Thursday using list_events. Retrieve the time of Model Validation event and then update the Team Meeting about Project Y to that time using update_event.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-02-13T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Change the meeting with Compliance Officer on Friday so it occurs at the same time I am creating the Dashboard.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Meeting with Compliance Officer' event and the 'Dashboard Creation' event on Friday using list_events. Retrieve the time of Dashboard Creation and then update the Compliance Officer meeting time to match using update_event.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-02-14T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Project X meeting... reschedule... 2 pm",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Team Meeting - Project X Update' event on Monday using list_events. Update the event's start time to 2 PM using update_event.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-02-10T09:30:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner with Friends... who's coming?",
+        "complexity": "Low",
+        "expected_behavior": "Use list_events to find the 'Dinner with Friends' event on Friday. Then, extract the attendees' emails.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-02-14T15:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have today?",
+        "complexity": "Low",
+        "expected_behavior": "Use get_current_time to get the current day. Use list_events for that day to get a list of all events scheduled for today.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-02-12T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Am I busy tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Use get_current_time to determine that today is Wednesday. Then use list_events for Thursday to retrieve all events and determine if there are any.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-02-12T08:00:00"
+    }
+]

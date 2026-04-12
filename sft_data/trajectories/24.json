@@ -1,0 +1,1806 @@
+[
+  {
+    "query": "Schedule a vet appointment for Wednesday at 11:00 AM to check on a sick calf.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event to schedule the vet appointment with summary 'Vet Visit - Calf Checkup', start time 2024-07-31T11:00:00, and end time 2024-07-31T12:00:00.",
+    "simulated_now": "2024-07-28 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-07-31 07:00:00",
+          "end": "2024-07-31 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bd6e62f394174bda889d0d27cad5dca5"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Vet Visit - Calf Vaccinations",
+          "start": "2024-07-31 09:30:00",
+          "end": "2024-07-31 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vet@animalhealth.com"
+          ],
+          "id": "evt_f97e4f0e8a95444fa4ffbe0694dc4176"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-07-31 14:00:00",
+          "end": "2024-07-31 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_195785921da048ff9b2e0247ad08b3c3"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review Farm Finances",
+          "start": "2024-07-31 16:30:00",
+          "end": "2024-07-31 17:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@email.com"
+          ],
+          "id": "evt_cd47bc0de6174b278ea6cc64d72a03f1"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-07-31 07:00:00",
+          "end": "2024-07-31 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bd6e62f394174bda889d0d27cad5dca5"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Vet Visit - Calf Vaccinations",
+          "start": "2024-07-31 09:30:00",
+          "end": "2024-07-31 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vet@animalhealth.com"
+          ],
+          "id": "evt_f97e4f0e8a95444fa4ffbe0694dc4176"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Vet Appointment",
+          "start": "2024-07-31 11:00:00",
+          "end": "2024-07-31 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d572b87be35f4468afea63e50a0c24c8"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-07-31 14:00:00",
+          "end": "2024-07-31 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_195785921da048ff9b2e0247ad08b3c3"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review Farm Finances",
+          "start": "2024-07-31 16:30:00",
+          "end": "2024-07-31 17:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@email.com"
+          ],
+          "id": "evt_cd47bc0de6174b278ea6cc64d72a03f1"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Schedule a vet appointment for Wednesday at 11:00 AM to check on a sick calf."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. Let me schedule it for you."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-07-28 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2024-07-31 11:00:00",
+          "summary": "Vet Appointment",
+          "description": "Check on a sick calf.",
+          "end": "2024-07-31 12:00:00"
+        },
+        "result": "Event created successfully.\nVet Appointment\n  ID: evt_d572b87be35f4468afea63e50a0c24c8\n  Time: Wed Jul 31, 11:00 - 12:00\n  Description: Check on a sick calf.\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've scheduled a \"Vet Appointment\" for Wednesday, July 31st, from 11:00 AM to 12:00 PM, with the description \"Check on a sick calf.\""
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "When am I meeting to discuss sustainable practices?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find the 'Meeting with Agricultural Extension Agent' event and read out the time.",
+    "simulated_now": "2024-07-28 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-07-30 07:00:00",
+          "end": "2024-07-30 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8ccbbb72037a455eba5187ebaad8c0ef"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Equipment Maintenance - Tractor Repair",
+          "start": "2024-07-30 09:30:00",
+          "end": "2024-07-30 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bbbcf0faa9044ab58ae86756902e5ff2"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Agricultural Extension Agent - Sustainable Practices",
+          "start": "2024-07-30 11:30:00",
+          "end": "2024-07-30 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "extension@agri.gov"
+          ],
+          "id": "evt_f0782b6c176b4f8a9d2352a533c6c3f9"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-07-30 14:00:00",
+          "end": "2024-07-30 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ed7c5825a75044f59f0d1ad25a8f160a"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Book Club Meeting",
+          "start": "2024-07-30 19:00:00",
+          "end": "2024-07-30 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com"
+          ],
+          "id": "evt_b00d9210c28c42538db33d634a15c538"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-07-30 07:00:00",
+          "end": "2024-07-30 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8ccbbb72037a455eba5187ebaad8c0ef"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Equipment Maintenance - Tractor Repair",
+          "start": "2024-07-30 09:30:00",
+          "end": "2024-07-30 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bbbcf0faa9044ab58ae86756902e5ff2"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Agricultural Extension Agent - Sustainable Practices",
+          "start": "2024-07-30 11:30:00",
+          "end": "2024-07-30 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "extension@agri.gov"
+          ],
+          "id": "evt_f0782b6c176b4f8a9d2352a533c6c3f9"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-07-30 14:00:00",
+          "end": "2024-07-30 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ed7c5825a75044f59f0d1ad25a8f160a"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Book Club Meeting",
+          "start": "2024-07-30 19:00:00",
+          "end": "2024-07-30 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com"
+          ],
+          "id": "evt_b00d9210c28c42538db33d634a15c538"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "When am I meeting to discuss sustainable practices?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find a meeting with \"sustainable practices\" in the title. I will search your calendar for it."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 29 events:\nid: evt_8e922f1756d943de8080c8cceb261da4 | Morning Milking & Cow Check \u2014 Mon 07:00-09:00\nid: evt_2128e0150673429c996015770509c507 | Review Milk Production Records & Order Feed \u2014 Mon 09:30-10:30\nid: evt_0857b58cf4374fa496126746d2b7f0dc | Pasture Rotation Planning \u2014 Mon 11:00-12:00\nid: evt_c0dcaca82d044fbd891f6bd1cad14a1a | Afternoon Milking & Barn Cleaning \u2014 Mon 14:00-16:00\nid: evt_be07eb36e4e34baa92b25cbff5c44cd3 | Dinner with Family \u2014 Mon 18:30-19:30\nid: evt_8ccbbb72037a455eba5187ebaad8c0ef | Morning Milking & Cow Check \u2014 Tue 07:00-09:00\nid: evt_bbbcf0faa9044ab58ae86756902e5ff2 | Equipment Maintenance - Tractor Repair \u2014 Tue 09:30-11:00\nid: evt_f0782b6c176b4f8a9d2352a533c6c3f9 | Meeting with Agricultural Extension Agent - Sustainable Practices \u2014 Tue 11:30-12:30\nid: evt_ed7c5825a75044f59f0d1ad25a8f160a | Afternoon Milking & Barn Cleaning \u2014 Tue 14:00-16:00\nid: evt_b00d9210c28c42538db33d634a15c538 | Book Club Meeting \u2014 Tue 19:00-20:00\nid: evt_6b1691366fd94d19befe6002d4acc263 | Morning Milking & Cow Check \u2014 Wed 07:00-09:00\nid: evt_0a1377ccfa09436883fa946850c61711 | Vet Visit - Calf Vaccinations \u2014 Wed 09:30-10:30\nid: evt_07d2ef60e4b84057af8f7f3ea5da5ac2 | Afternoon Milking & Barn Cleaning \u2014 Wed 14:00-16:00\nid: evt_c29422e86e6343539b48cc1ec64a939f | Review Farm Finances \u2014 Wed 16:30-17:30\nid: evt_0fd72b74a960445e8ad349fc46ded0a6 | Morning Milking & Cow Check \u2014 Thu 07:00-09:00\nid: evt_24b85960c5624ddaa1dc8a7f05bb3df9 | Meeting with Bank Loan Officer - Farm Improvement Loan \u2014 Thu 10:00-11:00\nid: evt_05887254f1384c53ac0eaf2fc17b0ac0 | Afternoon Milking & Barn Cleaning \u2014 Thu 14:00-16:00\nid: evt_0953da111938433ab78e86df969c79df | Family Game Night \u2014 Thu 19:00-20:00\nid: evt_aa8df83bd25744c09b3cfc970705bdca | Morning Milking & Cow Check \u2014 Fri 07:00-09:00\nid: evt_70f52a9e102d43e3bf302a6eaea69d1b | Order Supplies \u2014 Fri 09:30-10:30\nid: evt_22f2c8ae848f48989ac0dc948708368b | Afternoon Milking & Barn Cleaning \u2014 Fri 14:00-16:00\nid: evt_81369f3e829144879bff4a06d8bbdc4f | Dinner at Neighbor's \u2014 Fri 18:00-20:00\nid: evt_cfbeb96175184434bd86259d0003ec92 | Morning Milking & Cow Check \u2014 Sat 08:00-10:00\nid: evt_24041ceb196644b5a1ee072bff2f9622 | Farmer's Market - Sell Dairy Products \u2014 Sat 10:30-12:00\nid: evt_942fe043ecac4a008b92ccc5ff0d1e89 | Attend Child's Soccer Game \u2014 Sat 13:00-15:00\nid: evt_37bebc184b6b41728e879768ab9deaca | BBQ with Family \u2014 Sat 18:00-20:00\nid: evt_975a1274cd2c4859921ecf516bb556c6 | Morning Milking & Cow Check \u2014 Sun 08:00-10:00\nid: evt_a7058b695bb147d181aa5c449bfe3f6f | Church \u2014 Sun 11:00-12:00\nid: evt_7cd2e4bd14974f288afc6ed03a29681d | Visit Parents \u2014 Sun 13:00-15:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have a \"Meeting with Agricultural Extension Agent - Sustainable Practices\" on Tuesday from 11:30 to 12:30."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule the vet visit to 10:00 AM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find the 'Vet Visit - Calf Vaccinations' event on Wednesday, then call update_event with the event ID to change the start time to 2024-07-31T10:00:00 and the end time to 2024-07-31T11:00:00.",
+    "simulated_now": "2024-07-31 08:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-07-31 07:00:00",
+          "end": "2024-07-31 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_80cdafcf14ec43bf82d477c29d55b330"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Vet Visit - Calf Vaccinations",
+          "start": "2024-07-31 09:30:00",
+          "end": "2024-07-31 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vet@animalhealth.com"
+          ],
+          "id": "evt_64c76066cd44438aa01aa3ea485bba7d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-07-31 14:00:00",
+          "end": "2024-07-31 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c821485edc8a4eb6bae2b74340a61d2e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review Farm Finances",
+          "start": "2024-07-31 16:30:00",
+          "end": "2024-07-31 17:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@email.com"
+          ],
+          "id": "evt_7023df189cf7408fa1a6734e4e82b0c1"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-07-31 07:00:00",
+          "end": "2024-07-31 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_80cdafcf14ec43bf82d477c29d55b330"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Vet Visit - Calf Vaccinations",
+          "start": "2024-07-31 10:00:00",
+          "end": "2024-07-31 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vet@animalhealth.com"
+          ],
+          "id": "evt_64c76066cd44438aa01aa3ea485bba7d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-07-31 14:00:00",
+          "end": "2024-07-31 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c821485edc8a4eb6bae2b74340a61d2e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review Farm Finances",
+          "start": "2024-07-31 16:30:00",
+          "end": "2024-07-31 17:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@email.com"
+          ],
+          "id": "evt_7023df189cf7408fa1a6734e4e82b0c1"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule the vet visit to 10:00 AM."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I need to find the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-07-31 08:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-07-31 00:00:00",
+          "time_max": "2024-07-31 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_80cdafcf14ec43bf82d477c29d55b330 | Morning Milking & Cow Check \u2014 Wed 07:00-09:00\nid: evt_64c76066cd44438aa01aa3ea485bba7d | Vet Visit - Calf Vaccinations \u2014 Wed 09:30-10:30\nid: evt_c821485edc8a4eb6bae2b74340a61d2e | Afternoon Milking & Barn Cleaning \u2014 Wed 14:00-16:00\nid: evt_7023df189cf7408fa1a6734e4e82b0c1 | Review Farm Finances \u2014 Wed 16:30-17:30"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I'll reschedule the vet visit to 10:00 AM."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_64c76066cd44438aa01aa3ea485bba7d",
+          "end": "2024-07-31 11:00:00",
+          "start": "2024-07-31 10:00:00"
+        },
+        "result": "Event updated successfully.\nVet Visit - Calf Vaccinations\n  ID: evt_64c76066cd44438aa01aa3ea485bba7d\n  Time: Wed Jul 31, 10:00 - 11:00\n  Attendees: vet@animalhealth.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "Done. The vet visit has been rescheduled to 10:00 AM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can we move family game night to 7:30 PM instead?",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find the 'Family Game Night' event on Thursday, then call update_event with the event ID to change the start time to 2024-08-01T19:30:00 and end time to 2024-08-01T20:30:00.",
+    "simulated_now": "2024-08-01 14:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-08-01 07:00:00",
+          "end": "2024-08-01 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_49cff32fc07143a2960a0b4e94ecdcc6"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Bank Loan Officer - Farm Improvement Loan",
+          "start": "2024-08-01 10:00:00",
+          "end": "2024-08-01 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "loan.officer@bank.com"
+          ],
+          "id": "evt_9ac4290c665b4b259271e8e55c2cffc6"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-08-01 14:00:00",
+          "end": "2024-08-01 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a101c69cbf474d74a934245d27414e84"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Family Game Night",
+          "start": "2024-08-01 19:00:00",
+          "end": "2024-08-01 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_077b6c03c8794d23802d8ca44ff8821d"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-08-01 07:00:00",
+          "end": "2024-08-01 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_49cff32fc07143a2960a0b4e94ecdcc6"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Bank Loan Officer - Farm Improvement Loan",
+          "start": "2024-08-01 10:00:00",
+          "end": "2024-08-01 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "loan.officer@bank.com"
+          ],
+          "id": "evt_9ac4290c665b4b259271e8e55c2cffc6"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-08-01 14:00:00",
+          "end": "2024-08-01 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a101c69cbf474d74a934245d27414e84"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Family Game Night",
+          "start": "2024-08-01 19:30:00",
+          "end": "2024-08-01 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_077b6c03c8794d23802d8ca44ff8821d"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can we move family game night to 7:30 PM instead?"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 29 events:\nid: evt_2e8d5781cfd64b4db66208651bd9b12c | Morning Milking & Cow Check \u2014 Mon 07:00-09:00\nid: evt_d01df9e787b645e6ad4ba0b28af6021f | Review Milk Production Records & Order Feed \u2014 Mon 09:30-10:30\nid: evt_fd37ca7c0b6e452a801d1487b90af2f0 | Pasture Rotation Planning \u2014 Mon 11:00-12:00\nid: evt_7f4f378844454037bc141c9adfd51c9c | Afternoon Milking & Barn Cleaning \u2014 Mon 14:00-16:00\nid: evt_56afae8a358f4b189f8d03bf12a77769 | Dinner with Family \u2014 Mon 18:30-19:30\nid: evt_74a017b266ae4b7d954f4fd8a6c8a7af | Morning Milking & Cow Check \u2014 Tue 07:00-09:00\nid: evt_649efa8d856947adb4ac1b814f56bf19 | Equipment Maintenance - Tractor Repair \u2014 Tue 09:30-11:00\nid: evt_f3ae125f923f41b18aa418c6a2061e54 | Meeting with Agricultural Extension Agent - Sustainable Practices \u2014 Tue 11:30-12:30\nid: evt_0fa30ddd818d47ac962510d73a8ed151 | Afternoon Milking & Barn Cleaning \u2014 Tue 14:00-16:00\nid: evt_f353cb29068e4f7ba611385f2153687f | Book Club Meeting \u2014 Tue 19:00-20:00\nid: evt_1e17b51e3aa24a8ca34c0465f2e81e3f | Morning Milking & Cow Check \u2014 Wed 07:00-09:00\nid: evt_f05b18e7538b4256a6f75609776ff945 | Vet Visit - Calf Vaccinations \u2014 Wed 09:30-10:30\nid: evt_54834a67742c4fb2ac68969f41b912fa | Afternoon Milking & Barn Cleaning \u2014 Wed 14:00-16:00\nid: evt_d63df300da524046b2f5a46cde3ec584 | Review Farm Finances \u2014 Wed 16:30-17:30\nid: evt_49cff32fc07143a2960a0b4e94ecdcc6 | Morning Milking & Cow Check \u2014 Thu 07:00-09:00\nid: evt_9ac4290c665b4b259271e8e55c2cffc6 | Meeting with Bank Loan Officer - Farm Improvement Loan \u2014 Thu 10:00-11:00\nid: evt_a101c69cbf474d74a934245d27414e84 | Afternoon Milking & Barn Cleaning \u2014 Thu 14:00-16:00\nid: evt_077b6c03c8794d23802d8ca44ff8821d | Family Game Night \u2014 Thu 19:00-20:00\nid: evt_dc52bd1cf1e64bcb83e59f074846e648 | Morning Milking & Cow Check \u2014 Fri 07:00-09:00\nid: evt_713386d9cd0749839e500e739352cdf9 | Order Supplies \u2014 Fri 09:30-10:30\nid: evt_c504eb01df0946289a28a9bd8356ab86 | Afternoon Milking & Barn Cleaning \u2014 Fri 14:00-16:00\nid: evt_7b0223fe3b10487aa114da5b89c25b16 | Dinner at Neighbor's \u2014 Fri 18:00-20:00\nid: evt_b46e4f8327db43abb8f442ec9ce4ccc0 | Morning Milking & Cow Check \u2014 Sat 08:00-10:00\nid: evt_b38bc8fed8314e58ac93885b89e115e1 | Farmer's Market - Sell Dairy Products \u2014 Sat 10:30-12:00\nid: evt_2ba9606f35e447a8afd796d08ebe343f | Attend Child's Soccer Game \u2014 Sat 13:00-15:00\nid: evt_c61e7b836a944fde8dad71a941b3d06b | BBQ with Family \u2014 Sat 18:00-20:00\nid: evt_4716f492537047b998d0b4c3c14c4965 | Morning Milking & Cow Check \u2014 Sun 08:00-10:00\nid: evt_417dc0791d3a4714925d29411f25e85d | Church \u2014 Sun 11:00-12:00\nid: evt_db281391948b491aa23c828dee79da34 | Visit Parents \u2014 Sun 13:00-15:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-08-01 14:00:00 | Thursday"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_077b6c03c8794d23802d8ca44ff8821d",
+          "start": "2024-08-01 19:30:00",
+          "end": "2024-08-01 20:30:00"
+        },
+        "result": "Event updated successfully.\nFamily Game Night\n  ID: evt_077b6c03c8794d23802d8ca44ff8821d\n  Time: Thu Aug 01, 19:30 - 20:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved family game night to 7:30 PM - 8:30 PM tonight."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is dinner at the neighbor's house on Friday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to find the 'Dinner at Neighbor's' event on Friday and then read out the time.",
+    "simulated_now": "2024-08-02 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-08-02 07:00:00",
+          "end": "2024-08-02 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5dc136b76d524383bbe6def3e2a0c8c3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Order Supplies",
+          "start": "2024-08-02 09:30:00",
+          "end": "2024-08-02 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supplies@agrisupply.com"
+          ],
+          "id": "evt_c70b3d41504e4bfda36b9344cd287750"
+        },
+        {
+          "day": "Friday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-08-02 14:00:00",
+          "end": "2024-08-02 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c26bbc82ea6249eeaa98f21bc8d434dd"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner at Neighbor's",
+          "start": "2024-08-02 18:00:00",
+          "end": "2024-08-02 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john@email.com",
+            "sally@email.com"
+          ],
+          "id": "evt_73af589fca0448eba80fa642c524e3a7"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-08-02 07:00:00",
+          "end": "2024-08-02 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5dc136b76d524383bbe6def3e2a0c8c3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Order Supplies",
+          "start": "2024-08-02 09:30:00",
+          "end": "2024-08-02 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supplies@agrisupply.com"
+          ],
+          "id": "evt_c70b3d41504e4bfda36b9344cd287750"
+        },
+        {
+          "day": "Friday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-08-02 14:00:00",
+          "end": "2024-08-02 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c26bbc82ea6249eeaa98f21bc8d434dd"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner at Neighbor's",
+          "start": "2024-08-02 18:00:00",
+          "end": "2024-08-02 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john@email.com",
+            "sally@email.com"
+          ],
+          "id": "evt_73af589fca0448eba80fa642c524e3a7"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is dinner at the neighbor's house on Friday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find the time for a dinner event. First, I'll get the current time to know today's date, then I'll search the calendar for \"dinner\" on the upcoming Friday to find the event and its time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-08-02 10:00:00 | Friday"
+      },
+      {
+        "role": "assistant",
+        "content": "It's Friday, August 2nd. I will now check your calendar for a dinner at your neighbor's house later today."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-08-02 10:00:00",
+          "time_max": "2024-08-02 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_c70b3d41504e4bfda36b9344cd287750 | Order Supplies \u2014 Fri 09:30-10:30\nid: evt_c26bbc82ea6249eeaa98f21bc8d434dd | Afternoon Milking & Barn Cleaning \u2014 Fri 14:00-16:00\nid: evt_73af589fca0448eba80fa642c524e3a7 | Dinner at Neighbor's \u2014 Fri 18:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Dinner at the neighbor's house is at 6:00 PM on Friday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What meetings do I have on Thursday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to find any events on Thursday and then read out the names and times of the meeting events.",
+    "simulated_now": "2024-08-01 08:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-08-01 07:00:00",
+          "end": "2024-08-01 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cdd99c3c4acc4c5d81ff02361abaddd0"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Bank Loan Officer - Farm Improvement Loan",
+          "start": "2024-08-01 10:00:00",
+          "end": "2024-08-01 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "loan.officer@bank.com"
+          ],
+          "id": "evt_7505d7fc03d146d2ba99479f6bd8753d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-08-01 14:00:00",
+          "end": "2024-08-01 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e63a681924db45109015883d9ecbf80b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Family Game Night",
+          "start": "2024-08-01 19:00:00",
+          "end": "2024-08-01 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4d5a4624c7fd44f59848b05ebea59cd6"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-08-01 07:00:00",
+          "end": "2024-08-01 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cdd99c3c4acc4c5d81ff02361abaddd0"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Bank Loan Officer - Farm Improvement Loan",
+          "start": "2024-08-01 10:00:00",
+          "end": "2024-08-01 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "loan.officer@bank.com"
+          ],
+          "id": "evt_7505d7fc03d146d2ba99479f6bd8753d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-08-01 14:00:00",
+          "end": "2024-08-01 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e63a681924db45109015883d9ecbf80b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Family Game Night",
+          "start": "2024-08-01 19:00:00",
+          "end": "2024-08-01 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4d5a4624c7fd44f59848b05ebea59cd6"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What meetings do I have on Thursday?"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can help with that. First, I need to check the current date to identify the upcoming Thursday. Then, I'll search for all the events scheduled for that day.\n\n- **Step 1: Get the current time.** I'll use this to determine the date of the next Thursday.\n- **Step 2: List events on Thursday.** I'll use the `list_events` tool with the appropriate time range for Thursday.\n- **Step 3: Respond to the user.** I'll provide you with a list of all the meetings scheduled for Thursday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-08-01 08:00:00 | Thursday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-08-01 23:59:59",
+          "time_min": "2024-08-01 00:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_cdd99c3c4acc4c5d81ff02361abaddd0 | Morning Milking & Cow Check \u2014 Thu 07:00-09:00\nid: evt_7505d7fc03d146d2ba99479f6bd8753d | Meeting with Bank Loan Officer - Farm Improvement Loan \u2014 Thu 10:00-11:00\nid: evt_e63a681924db45109015883d9ecbf80b | Afternoon Milking & Barn Cleaning \u2014 Thu 14:00-16:00\nid: evt_4d5a4624c7fd44f59848b05ebea59cd6 | Family Game Night \u2014 Thu 19:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have 4 meetings scheduled for today, Thursday, August 1st:\n- 7:00 AM - 9:00 AM: Morning Milking & Cow Check\n- 10:00 AM - 11:00 AM: Meeting with Bank Loan Officer - Farm Improvement Loan\n- 2:00 PM - 4:00 PM: Afternoon Milking & Barn Cleaning\n- 7:00 PM - 8:00 PM: Family Game Night"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Vet on Wednesday",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event to schedule the vet appointment with summary 'Vet Visit', start time 2024-07-31T09:30:00, and end time 2024-07-31T10:30:00, since the schedule already has that time set.",
+    "simulated_now": "2024-07-28 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-07-31 07:00:00",
+          "end": "2024-07-31 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_171068432aec45019cb1564281c88609"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Vet Visit - Calf Vaccinations",
+          "start": "2024-07-31 09:30:00",
+          "end": "2024-07-31 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vet@animalhealth.com"
+          ],
+          "id": "evt_8da5258018aa4120a41b457ad780ee9c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-07-31 14:00:00",
+          "end": "2024-07-31 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_417d299b903e4a488715df926c71b1fc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review Farm Finances",
+          "start": "2024-07-31 16:30:00",
+          "end": "2024-07-31 17:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@email.com"
+          ],
+          "id": "evt_961153a5cb0f460a819287b4473e4f55"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-07-31 07:00:00",
+          "end": "2024-07-31 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_171068432aec45019cb1564281c88609"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Vet Visit - Calf Vaccinations",
+          "start": "2024-07-31 09:30:00",
+          "end": "2024-07-31 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vet@animalhealth.com"
+          ],
+          "id": "evt_8da5258018aa4120a41b457ad780ee9c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-07-31 14:00:00",
+          "end": "2024-07-31 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_417d299b903e4a488715df926c71b1fc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review Farm Finances",
+          "start": "2024-07-31 16:30:00",
+          "end": "2024-07-31 17:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@email.com"
+          ],
+          "id": "evt_961153a5cb0f460a819287b4473e4f55"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Vet on Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-07-28 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-07-31 23:59:59",
+          "time_min": "2024-07-31 00:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_171068432aec45019cb1564281c88609 | Morning Milking & Cow Check \u2014 Wed 07:00-09:00\nid: evt_8da5258018aa4120a41b457ad780ee9c | Vet Visit - Calf Vaccinations \u2014 Wed 09:30-10:30\nid: evt_417d299b903e4a488715df926c71b1fc | Afternoon Milking & Barn Cleaning \u2014 Wed 14:00-16:00\nid: evt_961153a5cb0f460a819287b4473e4f55 | Review Farm Finances \u2014 Wed 16:30-17:30"
+      },
+      {
+        "role": "assistant",
+        "content": "You have a vet visit scheduled for Wednesday at 9:30 AM for calf vaccinations."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule...",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "Acknowledge the request is incomplete and ask for clarification. Return 'Which event would you like to reschedule?'",
+    "simulated_now": "2024-07-28 10:00:00",
+    "addressed_days": [],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-07-29 07:00:00",
+          "end": "2024-07-29 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d7b63aad4d6b47d394ac2fefa901f7e0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Review Milk Production Records & Order Feed",
+          "start": "2024-07-29 09:30:00",
+          "end": "2024-07-29 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "rep@dairycoop.com"
+          ],
+          "id": "evt_c692b53ca4ad4aedb9984c345495d435"
+        },
+        {
+          "day": "Monday",
+          "summary": "Pasture Rotation Planning",
+          "start": "2024-07-29 11:00:00",
+          "end": "2024-07-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_15b3e75e91384d52b8c0ae79c727de9a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-07-29 14:00:00",
+          "end": "2024-07-29 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ce1db9bc705f4fdb9f7d2119f3977801"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2024-07-29 18:30:00",
+          "end": "2024-07-29 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_85cd940df1724ec0936615c96e8d55a2"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-07-30 07:00:00",
+          "end": "2024-07-30 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a76eaebb0f1547cd83a2eb45f5aaf053"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Equipment Maintenance - Tractor Repair",
+          "start": "2024-07-30 09:30:00",
+          "end": "2024-07-30 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a17797071c7c41b1943447d2e1e7ab9e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Agricultural Extension Agent - Sustainable Practices",
+          "start": "2024-07-30 11:30:00",
+          "end": "2024-07-30 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "extension@agri.gov"
+          ],
+          "id": "evt_d1b1e8b6ec01445db6921b902eb8041e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-07-30 14:00:00",
+          "end": "2024-07-30 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e3c939ad7186409cb56f030601495742"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Book Club Meeting",
+          "start": "2024-07-30 19:00:00",
+          "end": "2024-07-30 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com"
+          ],
+          "id": "evt_73c23862a6374b9ea8d76cc5adeb3806"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-07-31 07:00:00",
+          "end": "2024-07-31 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_055f996629df414f9cc5440fdad1a52e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Vet Visit - Calf Vaccinations",
+          "start": "2024-07-31 09:30:00",
+          "end": "2024-07-31 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vet@animalhealth.com"
+          ],
+          "id": "evt_a5a0664f5cfc48c8ae4c60809d5cccc4"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-07-31 14:00:00",
+          "end": "2024-07-31 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_42f19b877e4242119d6143ce7eeb7a4e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review Farm Finances",
+          "start": "2024-07-31 16:30:00",
+          "end": "2024-07-31 17:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@email.com"
+          ],
+          "id": "evt_59e43267310c476c87b1ffd4386ca8ff"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-08-01 07:00:00",
+          "end": "2024-08-01 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bf104dd9f3f34f52ad4bf62d099ac00a"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Bank Loan Officer - Farm Improvement Loan",
+          "start": "2024-08-01 10:00:00",
+          "end": "2024-08-01 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "loan.officer@bank.com"
+          ],
+          "id": "evt_4be467d30f344f05879345ac3c6d15ba"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-08-01 14:00:00",
+          "end": "2024-08-01 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5834c308b75142b0ab7be8a147a2eefe"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Family Game Night",
+          "start": "2024-08-01 19:00:00",
+          "end": "2024-08-01 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c7f2e2b20e2f4ac0a2dff62d5e4ec7df"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-08-02 07:00:00",
+          "end": "2024-08-02 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_260e1a9796a04f8382048f95ad472833"
+        },
+        {
+          "day": "Friday",
+          "summary": "Order Supplies",
+          "start": "2024-08-02 09:30:00",
+          "end": "2024-08-02 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supplies@agrisupply.com"
+          ],
+          "id": "evt_c9f014780e444fbbb1da44fe0ed0458c"
+        },
+        {
+          "day": "Friday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-08-02 14:00:00",
+          "end": "2024-08-02 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5ce606fb214742a39201f000b6405c74"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner at Neighbor's",
+          "start": "2024-08-02 18:00:00",
+          "end": "2024-08-02 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john@email.com",
+            "sally@email.com"
+          ],
+          "id": "evt_d420823c1444439c8b9b7cbfd635f09b"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-08-03 08:00:00",
+          "end": "2024-08-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7fdf3653379c4feea26d9baf0390b02b"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Farmer's Market - Sell Dairy Products",
+          "start": "2024-08-03 10:30:00",
+          "end": "2024-08-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c78520dfc7094907a867d321405395c4"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Attend Child's Soccer Game",
+          "start": "2024-08-03 13:00:00",
+          "end": "2024-08-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3803c8937801479fa543e939e85073d7"
+        },
+        {
+          "day": "Saturday",
+          "summary": "BBQ with Family",
+          "start": "2024-08-03 18:00:00",
+          "end": "2024-08-03 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cf6283540b344cc682f1720767ec8842"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-08-04 08:00:00",
+          "end": "2024-08-04 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d63e499e9b7c48269f1e3d53d96c513b"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Church",
+          "start": "2024-08-04 11:00:00",
+          "end": "2024-08-04 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ca80ecc9771e4615bbfb35175308f88d"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Visit Parents",
+          "start": "2024-08-04 13:00:00",
+          "end": "2024-08-04 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dfe1b0be2f9f4187851c167e7c64d3f1"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-07-29 07:00:00",
+          "end": "2024-07-29 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d7b63aad4d6b47d394ac2fefa901f7e0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Review Milk Production Records & Order Feed",
+          "start": "2024-07-29 09:30:00",
+          "end": "2024-07-29 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "rep@dairycoop.com"
+          ],
+          "id": "evt_c692b53ca4ad4aedb9984c345495d435"
+        },
+        {
+          "day": "Monday",
+          "summary": "Pasture Rotation Planning",
+          "start": "2024-07-29 11:00:00",
+          "end": "2024-07-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_15b3e75e91384d52b8c0ae79c727de9a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-07-29 14:00:00",
+          "end": "2024-07-29 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ce1db9bc705f4fdb9f7d2119f3977801"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2024-07-29 18:30:00",
+          "end": "2024-07-29 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_85cd940df1724ec0936615c96e8d55a2"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-07-30 07:00:00",
+          "end": "2024-07-30 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a76eaebb0f1547cd83a2eb45f5aaf053"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Equipment Maintenance - Tractor Repair",
+          "start": "2024-07-30 09:30:00",
+          "end": "2024-07-30 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a17797071c7c41b1943447d2e1e7ab9e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Agricultural Extension Agent - Sustainable Practices",
+          "start": "2024-07-30 11:30:00",
+          "end": "2024-07-30 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "extension@agri.gov"
+          ],
+          "id": "evt_d1b1e8b6ec01445db6921b902eb8041e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-07-30 14:00:00",
+          "end": "2024-07-30 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e3c939ad7186409cb56f030601495742"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Book Club Meeting",
+          "start": "2024-07-30 19:00:00",
+          "end": "2024-07-30 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah@email.com"
+          ],
+          "id": "evt_73c23862a6374b9ea8d76cc5adeb3806"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-07-31 07:00:00",
+          "end": "2024-07-31 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_055f996629df414f9cc5440fdad1a52e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Vet Visit - Calf Vaccinations",
+          "start": "2024-07-31 09:30:00",
+          "end": "2024-07-31 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vet@animalhealth.com"
+          ],
+          "id": "evt_a5a0664f5cfc48c8ae4c60809d5cccc4"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-07-31 14:00:00",
+          "end": "2024-07-31 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_42f19b877e4242119d6143ce7eeb7a4e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review Farm Finances",
+          "start": "2024-07-31 16:30:00",
+          "end": "2024-07-31 17:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@email.com"
+          ],
+          "id": "evt_59e43267310c476c87b1ffd4386ca8ff"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-08-01 07:00:00",
+          "end": "2024-08-01 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bf104dd9f3f34f52ad4bf62d099ac00a"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Bank Loan Officer - Farm Improvement Loan",
+          "start": "2024-08-01 10:00:00",
+          "end": "2024-08-01 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "loan.officer@bank.com"
+          ],
+          "id": "evt_4be467d30f344f05879345ac3c6d15ba"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-08-01 14:00:00",
+          "end": "2024-08-01 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5834c308b75142b0ab7be8a147a2eefe"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Family Game Night",
+          "start": "2024-08-01 19:00:00",
+          "end": "2024-08-01 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c7f2e2b20e2f4ac0a2dff62d5e4ec7df"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-08-02 07:00:00",
+          "end": "2024-08-02 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_260e1a9796a04f8382048f95ad472833"
+        },
+        {
+          "day": "Friday",
+          "summary": "Order Supplies",
+          "start": "2024-08-02 09:30:00",
+          "end": "2024-08-02 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supplies@agrisupply.com"
+          ],
+          "id": "evt_c9f014780e444fbbb1da44fe0ed0458c"
+        },
+        {
+          "day": "Friday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-08-02 14:00:00",
+          "end": "2024-08-02 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5ce606fb214742a39201f000b6405c74"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner at Neighbor's",
+          "start": "2024-08-02 18:00:00",
+          "end": "2024-08-02 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john@email.com",
+            "sally@email.com"
+          ],
+          "id": "evt_d420823c1444439c8b9b7cbfd635f09b"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-08-03 08:00:00",
+          "end": "2024-08-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7fdf3653379c4feea26d9baf0390b02b"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Farmer's Market - Sell Dairy Products",
+          "start": "2024-08-03 10:30:00",
+          "end": "2024-08-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c78520dfc7094907a867d321405395c4"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Attend Child's Soccer Game",
+          "start": "2024-08-03 13:00:00",
+          "end": "2024-08-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3803c8937801479fa543e939e85073d7"
+        },
+        {
+          "day": "Saturday",
+          "summary": "BBQ with Family",
+          "start": "2024-08-03 18:00:00",
+          "end": "2024-08-03 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cf6283540b344cc682f1720767ec8842"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-08-04 08:00:00",
+          "end": "2024-08-04 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d63e499e9b7c48269f1e3d53d96c513b"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Church",
+          "start": "2024-08-04 11:00:00",
+          "end": "2024-08-04 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ca80ecc9771e4615bbfb35175308f88d"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Visit Parents",
+          "start": "2024-08-04 13:00:00",
+          "end": "2024-08-04 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dfe1b0be2f9f4187851c167e7c64d3f1"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule..."
+      },
+      {
+        "role": "assistant",
+        "content": "Could you please tell me which event you would like to reschedule?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to find any events on Monday and then read out the names and times of the events.",
+    "simulated_now": "2024-07-29 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-07-29 07:00:00",
+          "end": "2024-07-29 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7b5b62152df84fd8a42e36b4c6fecb0e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Review Milk Production Records & Order Feed",
+          "start": "2024-07-29 09:30:00",
+          "end": "2024-07-29 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "rep@dairycoop.com"
+          ],
+          "id": "evt_92353d97df0b4487abf0331a6be7f889"
+        },
+        {
+          "day": "Monday",
+          "summary": "Pasture Rotation Planning",
+          "start": "2024-07-29 11:00:00",
+          "end": "2024-07-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ca98c0171dc943d3a8144d876e688d8e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-07-29 14:00:00",
+          "end": "2024-07-29 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4b5107cf1fbc4055b844ed70d6236ee9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2024-07-29 18:30:00",
+          "end": "2024-07-29 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dc35141297954e089152bce92caa8567"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-07-29 07:00:00",
+          "end": "2024-07-29 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7b5b62152df84fd8a42e36b4c6fecb0e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Review Milk Production Records & Order Feed",
+          "start": "2024-07-29 09:30:00",
+          "end": "2024-07-29 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "rep@dairycoop.com"
+          ],
+          "id": "evt_92353d97df0b4487abf0331a6be7f889"
+        },
+        {
+          "day": "Monday",
+          "summary": "Pasture Rotation Planning",
+          "start": "2024-07-29 11:00:00",
+          "end": "2024-07-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ca98c0171dc943d3a8144d876e688d8e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-07-29 14:00:00",
+          "end": "2024-07-29 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4b5107cf1fbc4055b844ed70d6236ee9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2024-07-29 18:30:00",
+          "end": "2024-07-29 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dc35141297954e089152bce92caa8567"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-07-29 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-07-29 00:00:00",
+          "time_max": "2024-07-29 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_7b5b62152df84fd8a42e36b4c6fecb0e | Morning Milking & Cow Check \u2014 Mon 07:00-09:00\nid: evt_92353d97df0b4487abf0331a6be7f889 | Review Milk Production Records & Order Feed \u2014 Mon 09:30-10:30\nid: evt_ca98c0171dc943d3a8144d876e688d8e | Pasture Rotation Planning \u2014 Mon 11:00-12:00\nid: evt_4b5107cf1fbc4055b844ed70d6236ee9 | Afternoon Milking & Barn Cleaning \u2014 Mon 14:00-16:00\nid: evt_dc35141297954e089152bce92caa8567 | Dinner with Family \u2014 Mon 18:30-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today is Monday, July 29, 2024. Here is your schedule:\n\n*   **7:00 AM - 9:00 AM**: Morning Milking & Cow Check\n*   **9:30 AM - 10:30 AM**: Review Milk Production Records & Order Feed\n*   **11:00 AM - 12:00 PM**: Pasture Rotation Planning\n*   **2:00 PM - 4:00 PM**: Afternoon Milking & Barn Cleaning\n*   **6:30 PM - 7:30 PM**: Dinner with Family"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on the schedule for tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to find any events on Wednesday and then read out the names and times of the events.",
+    "simulated_now": "2024-07-30 20:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-07-31 07:00:00",
+          "end": "2024-07-31 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d8dac1441228499ba3a89a24c1c1ece0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Vet Visit - Calf Vaccinations",
+          "start": "2024-07-31 09:30:00",
+          "end": "2024-07-31 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vet@animalhealth.com"
+          ],
+          "id": "evt_a0d8c58d9bd140379157d05ede163adc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-07-31 14:00:00",
+          "end": "2024-07-31 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0afebb22770646989166adb39397e9d1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review Farm Finances",
+          "start": "2024-07-31 16:30:00",
+          "end": "2024-07-31 17:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@email.com"
+          ],
+          "id": "evt_8e5cee36d6854a739154b5db48654e5d"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Morning Milking & Cow Check",
+          "start": "2024-07-31 07:00:00",
+          "end": "2024-07-31 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d8dac1441228499ba3a89a24c1c1ece0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Vet Visit - Calf Vaccinations",
+          "start": "2024-07-31 09:30:00",
+          "end": "2024-07-31 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vet@animalhealth.com"
+          ],
+          "id": "evt_a0d8c58d9bd140379157d05ede163adc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Afternoon Milking & Barn Cleaning",
+          "start": "2024-07-31 14:00:00",
+          "end": "2024-07-31 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0afebb22770646989166adb39397e9d1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review Farm Finances",
+          "start": "2024-07-31 16:30:00",
+          "end": "2024-07-31 17:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@email.com"
+          ],
+          "id": "evt_8e5cee36d6854a739154b5db48654e5d"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on the schedule for tomorrow?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out the current date to understand which day is \"tomorrow\". Then, I will list all the events scheduled for that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-07-30 20:00:00 | Tuesday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will now list the events for tomorrow, which is July 31st, 2024."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-07-31 00:00:00",
+          "time_max": "2024-08-01 00:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_d8dac1441228499ba3a89a24c1c1ece0 | Morning Milking & Cow Check \u2014 Wed 07:00-09:00\nid: evt_a0d8c58d9bd140379157d05ede163adc | Vet Visit - Calf Vaccinations \u2014 Wed 09:30-10:30\nid: evt_0afebb22770646989166adb39397e9d1 | Afternoon Milking & Barn Cleaning \u2014 Wed 14:00-16:00\nid: evt_8e5cee36d6854a739154b5db48654e5d | Review Farm Finances \u2014 Wed 16:30-17:30"
+      },
+      {
+        "role": "assistant",
+        "content": "Here is your schedule for tomorrow, July 31st:\n\n*   **7:00 AM - 9:00 AM:** Morning Milking & Cow Check\n*   **9:30 AM - 10:30 AM:** Vet Visit - Calf Vaccinations\n*   **2:00 PM - 4:00 PM:** Afternoon Milking & Barn Cleaning\n*   **4:30 PM - 5:30 PM:** Review Farm Finances"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

@@ -1,0 +1,148 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Lunch' for this Wednesday at 12:00 PM with content@example.com and social@example.com, and a brief description 'Team building lunch'.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Team Lunch' scheduled for Wednesday, February 21st at 12:00 PM, ending at 1:00 PM, with attendees content@example.com and social@example.com, and description 'Team building lunch'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-02-18T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for next Friday at 4 PM to discuss end of week goals.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event called 'Discuss end of week goals' scheduled for Friday, February 23rd at 4:00 PM, ending at 5:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-02-18T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What is on the calendar for the CFO this week?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events this week that the attendee cfo@example.com is attending, between Monday, February 19th and Sunday, February 25th.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-02-18T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What meetings do I have on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Thursday, February 22nd.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-02-22T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the dinner with friends on Thursday to 8 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Dinner with Friends' on Thursday, February 22nd and update its start time to 8:00 PM, extending the end time to 10:00 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-02-22T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the meeting with the web development team on Monday to 2 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Web Development Team' event on Monday, February 19th and update its start time to 2:00 PM, ending at 3:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-02-19T11:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the content calendar planning this Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Content Calendar Planning' event on Wednesday, February 21st and respond with its start time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-02-21T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Q3 Marketing Performance review?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Review Q3 Marketing Performance' event on Monday, February 19th and respond with a list of attendees.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-02-19T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to free up some time on Wednesday. What meetings are over an hour long?",
+        "complexity": "High",
+        "expected_behavior": "List events on Wednesday, February 21st longer than 1 hour. Return the 'Content Calendar Planning' which is 1.5 hours.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-02-21T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I'm busy during the budget review, what other meetings do I have on Tuesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Budget Review with CFO' event on Tuesday, February 20th, then list all other events scheduled for Tuesday, February 20th, excluding 'Budget Review with CFO'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-02-20T13:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule soccer.",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Children's Soccer Game' event on Saturday, February 24th and ask for a new time.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-02-24T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Update the Thursday meeting.",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Thursday, February 22nd and ask which event the user wants to update.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-02-22T11:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What is on my calendar today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for today, February 20th, Tuesday.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-02-20T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for tomorrow, February 21st, Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-02-20T18:00:00"
+    }
+]

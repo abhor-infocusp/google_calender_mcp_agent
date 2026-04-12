@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create a meeting called 'Discuss Project Alpha' for Tuesday at 3 PM lasting one hour, with David Lee as attendee.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Discuss Project Alpha' on Tuesday, August 27, 2024 from 3:00 PM to 4:00 PM, with david.lee@lawfirm.com as an attendee.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-08-25T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a dentist appointment on Friday from 10 am to 11 am.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Dentist Appointment' on Friday, August 30, 2024 from 10:00 AM to 11:00 AM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-08-25T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Wednesday, August 28, 2024 between 12:00 PM and 6:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-08-28T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's happening this Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "List events on Saturday, August 31, 2024.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-08-31T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my dinner with my husband on Monday to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Husband' event on Monday, August 26, 2024 and update its start time to 7:30 PM and end time to 9:00 PM (assuming it is still a 1.5 hour dinner).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-08-26T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the Adoption Case client meeting on Wednesday to 3 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Client Meeting - Adoption Case' event on Wednesday, August 28, 2024 and update its start time to 3:00 PM, keeping the duration the same (1.5 hours, so update the end time to 4:30 PM).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-08-28T11:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Partner Meeting on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Partner Meeting' event on Monday, August 26, 2024 and respond with the attendees: sarah.johnson@lawfirm.com and david.lee@lawfirm.com.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-08-26T11:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the court appearance on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Court Appearance - Domestic Violence Case' event on Thursday, August 29, 2024 and respond with the start time: 10:30 AM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-08-29T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you schedule another client consultation on Thursday at 3:30 PM?",
+        "complexity": "High",
+        "expected_behavior": "Check if there is a conflict on Thursday, August 29, 2024 at 3:30 PM.  The time slot is busy with 'Client Consultation - Divorce Case' event which starts at 3:30 PM. Respond that there is a conflict.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-08-29T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my deposition on Friday to 2 pm, will that work?",
+        "complexity": "High",
+        "expected_behavior": "Check if there is a conflict on Friday, August 30, 2024 at 2:00 PM. The time slot is busy with 'Catch up on Emails and Paperwork' event which starts at 2:00 PM. Respond that there is a conflict.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-08-30T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule client, divorce",
+        "complexity": "Medium",
+        "expected_behavior": "Find the next upcoming 'Client Consultation - Divorce Case' event (which is on Thursday, August 29, 2024 at 3:30 PM). Ask for clarification on the new desired time.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-08-29T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Parent teacher.. cancel",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Parent-Teacher Meeting' event on Tuesday, August 27, 2024, and delete the event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-08-27T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Monday, August 26, 2024.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-08-26T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Wednesday, August 28, 2024.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-08-27T15:00:00"
+    }
+]

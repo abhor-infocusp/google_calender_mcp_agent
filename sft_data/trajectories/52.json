@@ -1,0 +1,1987 @@
+[
+  {
+    "query": "Create an event called 'Board Game Night' for Wednesday at 7 PM with Rachel and Kevin.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event with the summary 'Board Game Night' on Wednesday, April 19, 2023, at 7:00 PM, ending at 8:00 PM, with attendees rachel.nguyen@example.com and kevin.patel@example.com.",
+    "simulated_now": "2023-04-16 12:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Check in with HR Business Partner",
+          "start": "2023-04-19 09:00:00",
+          "end": "2023-04-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "michael.brown@company.com"
+          ],
+          "id": "evt_e3d96dcc6c5e4aafb70fdde8279f179b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Phone Screen: Front-End Engineer Candidate",
+          "start": "2023-04-19 10:30:00",
+          "end": "2023-04-19 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "patrick.stewart@example.com"
+          ],
+          "id": "evt_b3f56d6e9953474da7314fcfdcbb8768"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Feedback Session with Hiring Manager",
+          "start": "2023-04-19 13:00:00",
+          "end": "2023-04-19 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.jones@company.com"
+          ],
+          "id": "evt_0d6a8e2ffd704d05bbbf659632463d49"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Networking Event: Tech Meetup",
+          "start": "2023-04-19 18:00:00",
+          "end": "2023-04-19 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_80d2602e6842487f98838813384f28dc"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Check in with HR Business Partner",
+          "start": "2023-04-19 09:00:00",
+          "end": "2023-04-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "michael.brown@company.com"
+          ],
+          "id": "evt_e3d96dcc6c5e4aafb70fdde8279f179b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Phone Screen: Front-End Engineer Candidate",
+          "start": "2023-04-19 10:30:00",
+          "end": "2023-04-19 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "patrick.stewart@example.com"
+          ],
+          "id": "evt_b3f56d6e9953474da7314fcfdcbb8768"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Feedback Session with Hiring Manager",
+          "start": "2023-04-19 13:00:00",
+          "end": "2023-04-19 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.jones@company.com"
+          ],
+          "id": "evt_0d6a8e2ffd704d05bbbf659632463d49"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Networking Event: Tech Meetup",
+          "start": "2023-04-19 18:00:00",
+          "end": "2023-04-19 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_80d2602e6842487f98838813384f28dc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Board Game Night",
+          "start": "2023-04-19 19:00:00",
+          "end": "2023-04-19 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "rachel.nguyen@example.com",
+            "kevin.patel@example.com"
+          ],
+          "id": "evt_0e7399a282744e6693308641bc5b84ff"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Board Game Night' for Wednesday at 7 PM with Rachel and Kevin."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. I'll first get the current time to determine the correct date for Wednesday, then I'll search for Rachel and Kevin's contact information in my calendar, and finally, I'll create the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-16 12:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_7c775a160e264898860ebf6850a879f2 | Team Meeting: Recruitment Strategy \u2014 Mon 09:00-10:00\nid: evt_a556d9633e974d5e90f4084ed766f37b | Phone Screen: Software Engineer Candidate \u2014 Mon 10:30-11:30\nid: evt_ac12f08c06474cfb8edbd09398145cdb | Interview: Data Scientist Candidate \u2014 Mon 13:00-14:00\nid: evt_4c11508f244848f1ab9cc3b0c23596ae | Meeting with Engineering Director \u2014 Mon 15:00-16:00\nid: evt_6826a56e351b493b8396404d80c6c5ba | Dinner with Friends \u2014 Mon 18:30-20:00\nid: evt_7c3c76c4fd6e4826806d1cf923d108aa | Candidate Review Meeting \u2014 Tue 09:30-10:30\nid: evt_4a070adee368421293ef44e02dbb61f3 | Sourcer Demo: New Recruiting Tool \u2014 Tue 11:00-12:00\nid: evt_97c4f2b6fbee43289d700f4daf671e45 | Interview: Software Engineer Candidate \u2014 Tue 14:00-15:00\nid: evt_24ba89b87c22423b85bbbd87f9677a4e | Follow up with Candidates \u2014 Tue 15:30-16:30\nid: evt_e3d96dcc6c5e4aafb70fdde8279f179b | Check in with HR Business Partner \u2014 Wed 09:00-10:00\nid: evt_b3f56d6e9953474da7314fcfdcbb8768 | Phone Screen: Front-End Engineer Candidate \u2014 Wed 10:30-11:30\nid: evt_0d6a8e2ffd704d05bbbf659632463d49 | Feedback Session with Hiring Manager \u2014 Wed 13:00-14:00\nid: evt_80d2602e6842487f98838813384f28dc | Networking Event: Tech Meetup \u2014 Wed 18:00-19:30\nid: evt_2c6faed4581a43a4b80fae6d0b76886d | Team Meeting: Pipeline Review \u2014 Thu 09:00-10:00\nid: evt_22ac9e9f4b96450296caa82c002ed57b | Interview: Data Scientist Candidate \u2014 Thu 10:30-11:30\nid: evt_d4b36a8f8c704a8bb86134b2e5234824 | Offer Negotiation Call \u2014 Thu 14:00-15:00\nid: evt_4d96b3a654394b95817b50efbd2e5378 | Virtual coffee chat with career coach \u2014 Thu 18:00-19:00\nid: evt_e7996a9054af4c06bcbf5eee69f1a5af | Hiring Manager Check-in \u2014 Fri 09:00-10:00\nid: evt_c1bc25ce042944828344748c9fbbd5f1 | Meeting with HR Director \u2014 Fri 10:30-11:30\nid: evt_8156d041a3504f38905746d1f6409d64 | Candidate Debrief Meeting \u2014 Fri 13:00-14:00\nid: evt_04caa18686a1406c8e8e65520abcd18f | Trying new restaurant with partner \u2014 Fri 18:00-20:00\nid: evt_553e8552eda44189b2d574e81ba65277 | Brunch with family \u2014 Sat 11:00-13:00\nid: evt_3c6802b5410b45d591b541dc43e38081 | Visit local farmer's market \u2014 Sat 14:00-16:00\nid: evt_8c83e0c47d314375af1c059545e68904 | Yoga Class \u2014 Sun 10:00-11:00\nid: evt_3430d1f49bf14d5a895cf461e9c6565b | Explore new neighborhood restaurant \u2014 Sun 13:00-15:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_6826a56e351b493b8396404d80c6c5ba"
+        },
+        "result": "Dinner with Friends\n  ID: evt_6826a56e351b493b8396404d80c6c5ba\n  Time: Mon Apr 17, 18:30 - 20:00\n  Attendees: rachel.nguyen@example.com, kevin.patel@example.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "attendees": [
+            "rachel.nguyen@example.com",
+            "kevin.patel@example.com"
+          ],
+          "end": "2023-04-19 20:00:00",
+          "summary": "Board Game Night",
+          "start": "2023-04-19 19:00:00"
+        },
+        "result": "Event created successfully.\nBoard Game Night\n  ID: evt_0e7399a282744e6693308641bc5b84ff\n  Time: Wed Apr 19, 19:00 - 20:00\n  Attendees: rachel.nguyen@example.com, kevin.patel@example.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've scheduled the event for you.\n\n**Event:** Board Game Night\n**Time:** Wednesday, April 19, 7:00 PM - 8:00 PM\n**Attendees:** rachel.nguyen@example.com, kevin.patel@example.com"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing Thursday evening?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List events on Thursday, April 20, 2023, between 6 PM and 8 PM to determine the user's activities during that time.",
+    "simulated_now": "2023-04-20 10:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Team Meeting: Pipeline Review",
+          "start": "2023-04-20 09:00:00",
+          "end": "2023-04-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com",
+            "mark.lee@company.com"
+          ],
+          "id": "evt_d46b8c18da15412bbcea0d4dbf183ac9"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Interview: Data Scientist Candidate",
+          "start": "2023-04-20 10:30:00",
+          "end": "2023-04-20 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "olivia.garcia@example.com",
+            "david.jones@company.com"
+          ],
+          "id": "evt_cd67b242da094f04b92d9409b417571e"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Offer Negotiation Call",
+          "start": "2023-04-20 14:00:00",
+          "end": "2023-04-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_b1dbae5af5254cd08d694dfbbcdc938a"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Virtual coffee chat with career coach",
+          "start": "2023-04-20 18:00:00",
+          "end": "2023-04-20 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "coach@coaching.com"
+          ],
+          "id": "evt_99d2da2bd5f245bcaf6e2b73d1eae17b"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Team Meeting: Pipeline Review",
+          "start": "2023-04-20 09:00:00",
+          "end": "2023-04-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com",
+            "mark.lee@company.com"
+          ],
+          "id": "evt_d46b8c18da15412bbcea0d4dbf183ac9"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Interview: Data Scientist Candidate",
+          "start": "2023-04-20 10:30:00",
+          "end": "2023-04-20 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "olivia.garcia@example.com",
+            "david.jones@company.com"
+          ],
+          "id": "evt_cd67b242da094f04b92d9409b417571e"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Offer Negotiation Call",
+          "start": "2023-04-20 14:00:00",
+          "end": "2023-04-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_b1dbae5af5254cd08d694dfbbcdc938a"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Virtual coffee chat with career coach",
+          "start": "2023-04-20 18:00:00",
+          "end": "2023-04-20 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "coach@coaching.com"
+          ],
+          "id": "evt_99d2da2bd5f245bcaf6e2b73d1eae17b"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing Thursday evening?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-20 10:00:00 | Thursday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-04-20 17:00:00",
+          "time_max": "2023-04-20 23:00:00"
+        },
+        "result": "Found 1 events:\nid: evt_99d2da2bd5f245bcaf6e2b73d1eae17b | Virtual coffee chat with career coach \u2014 Thu 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have a virtual coffee chat with your career coach from 18:00 to 19:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What is Sarah doing on Friday morning?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List events on Friday, April 21, 2023, between 9 AM and 12 PM that include sarah.johnson@company.com.",
+    "simulated_now": "2023-04-21 14:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Hiring Manager Check-in",
+          "start": "2023-04-21 09:00:00",
+          "end": "2023-04-21 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily.chen@company.com"
+          ],
+          "id": "evt_570e1d8f895c4faca40b847d2edaca3b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meeting with HR Director",
+          "start": "2023-04-21 10:30:00",
+          "end": "2023-04-21 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com"
+          ],
+          "id": "evt_dc0ff3dcb4bd4bf4a1e6e01315b41600"
+        },
+        {
+          "day": "Friday",
+          "summary": "Candidate Debrief Meeting",
+          "start": "2023-04-21 13:00:00",
+          "end": "2023-04-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_adf516dd48104d80a042ba256e0d91d9"
+        },
+        {
+          "day": "Friday",
+          "summary": "Trying new restaurant with partner",
+          "start": "2023-04-21 18:00:00",
+          "end": "2023-04-21 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8d9ea81aae824a77aabe46e4bc104a1c"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Hiring Manager Check-in",
+          "start": "2023-04-21 09:00:00",
+          "end": "2023-04-21 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily.chen@company.com"
+          ],
+          "id": "evt_570e1d8f895c4faca40b847d2edaca3b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meeting with HR Director",
+          "start": "2023-04-21 10:30:00",
+          "end": "2023-04-21 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com"
+          ],
+          "id": "evt_dc0ff3dcb4bd4bf4a1e6e01315b41600"
+        },
+        {
+          "day": "Friday",
+          "summary": "Candidate Debrief Meeting",
+          "start": "2023-04-21 13:00:00",
+          "end": "2023-04-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_adf516dd48104d80a042ba256e0d91d9"
+        },
+        {
+          "day": "Friday",
+          "summary": "Trying new restaurant with partner",
+          "start": "2023-04-21 18:00:00",
+          "end": "2023-04-21 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8d9ea81aae824a77aabe46e4bc104a1c"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What is Sarah doing on Friday morning?"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can help with that. I will first check the current time, then I will check for events with Sarah on Friday morning and let you know what I find."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-21 14:00:00 | Friday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will check for events this morning, which based on the current time is April 21, 2023."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-04-21 08:00:00",
+          "time_max": "2023-04-21 12:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_570e1d8f895c4faca40b847d2edaca3b | Hiring Manager Check-in \u2014 Fri 09:00-10:00\nid: evt_dc0ff3dcb4bd4bf4a1e6e01315b41600 | Meeting with HR Director \u2014 Fri 10:30-11:30"
+      },
+      {
+        "role": "assistant",
+        "content": "I have found two events for that time. I will check the guest lists to see if Sarah is in attendance."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_570e1d8f895c4faca40b847d2edaca3b"
+        },
+        "result": "Hiring Manager Check-in\n  ID: evt_570e1d8f895c4faca40b847d2edaca3b\n  Time: Fri Apr 21, 09:00 - 10:00\n  Attendees: emily.chen@company.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_dc0ff3dcb4bd4bf4a1e6e01315b41600"
+        },
+        "result": "Meeting with HR Director\n  ID: evt_dc0ff3dcb4bd4bf4a1e6e01315b41600\n  Time: Fri Apr 21, 10:30 - 11:30\n  Attendees: sarah.johnson@company.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "Sarah has a \"Meeting with HR Director\" from 10:30 to 11:30 on Friday morning."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can we push back the Data Scientist interview on Thursday by an hour?",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Data Scientist Interview' event on Thursday, April 20, 2023, and update its start time to 11:30 AM and end time to 12:30 PM.",
+    "simulated_now": "2023-04-20 09:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Team Meeting: Pipeline Review",
+          "start": "2023-04-20 09:00:00",
+          "end": "2023-04-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com",
+            "mark.lee@company.com"
+          ],
+          "id": "evt_a0df36c10ec94ffc8deb59bf0d4e012d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Interview: Data Scientist Candidate",
+          "start": "2023-04-20 10:30:00",
+          "end": "2023-04-20 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "olivia.garcia@example.com",
+            "david.jones@company.com"
+          ],
+          "id": "evt_dd36d45095a143989cdf1fbe9584dfd3"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Offer Negotiation Call",
+          "start": "2023-04-20 14:00:00",
+          "end": "2023-04-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_69e60e23b1bd4f6e9f84193a7870fd84"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Virtual coffee chat with career coach",
+          "start": "2023-04-20 18:00:00",
+          "end": "2023-04-20 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "coach@coaching.com"
+          ],
+          "id": "evt_da96dda967834035b85a7d030abd09a8"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Team Meeting: Pipeline Review",
+          "start": "2023-04-20 09:00:00",
+          "end": "2023-04-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com",
+            "mark.lee@company.com"
+          ],
+          "id": "evt_a0df36c10ec94ffc8deb59bf0d4e012d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Interview: Data Scientist Candidate",
+          "start": "2023-04-20 11:30:00",
+          "end": "2023-04-20 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "olivia.garcia@example.com",
+            "david.jones@company.com"
+          ],
+          "id": "evt_dd36d45095a143989cdf1fbe9584dfd3"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Offer Negotiation Call",
+          "start": "2023-04-20 14:00:00",
+          "end": "2023-04-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_69e60e23b1bd4f6e9f84193a7870fd84"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Virtual coffee chat with career coach",
+          "start": "2023-04-20 18:00:00",
+          "end": "2023-04-20 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "coach@coaching.com"
+          ],
+          "id": "evt_da96dda967834035b85a7d030abd09a8"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can we push back the Data Scientist interview on Thursday by an hour?"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. Let me find the interview first."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-20 09:00:00 | Thursday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-04-20 00:00:00",
+          "time_max": "2023-04-20 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_a0df36c10ec94ffc8deb59bf0d4e012d | Team Meeting: Pipeline Review \u2014 Thu 09:00-10:00\nid: evt_dd36d45095a143989cdf1fbe9584dfd3 | Interview: Data Scientist Candidate \u2014 Thu 10:30-11:30\nid: evt_69e60e23b1bd4f6e9f84193a7870fd84 | Offer Negotiation Call \u2014 Thu 14:00-15:00\nid: evt_da96dda967834035b85a7d030abd09a8 | Virtual coffee chat with career coach \u2014 Thu 18:00-19:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2023-04-20 11:30:00",
+          "event_id": "evt_dd36d45095a143989cdf1fbe9584dfd3",
+          "end": "2023-04-20 12:30:00"
+        },
+        "result": "Event updated successfully.\nInterview: Data Scientist Candidate\n  ID: evt_dd36d45095a143989cdf1fbe9584dfd3\n  Time: Thu Apr 20, 11:30 - 12:30\n  Attendees: olivia.garcia@example.com, david.jones@company.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "Of course. The Data Scientist interview has been rescheduled to 11:30 AM on Thursday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is my meeting with the engineering director?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Search for the event 'Meeting with Engineering Director' and return the start and end times.",
+    "simulated_now": "2023-04-17 11:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting: Recruitment Strategy",
+          "start": "2023-04-17 09:00:00",
+          "end": "2023-04-17 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com",
+            "mark.lee@company.com"
+          ],
+          "id": "evt_1c919c68b78a435387cd31545ef6858b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Phone Screen: Software Engineer Candidate",
+          "start": "2023-04-17 10:30:00",
+          "end": "2023-04-17 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_53cadcf2bda84d839b4e926691771d5a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Interview: Data Scientist Candidate",
+          "start": "2023-04-17 13:00:00",
+          "end": "2023-04-17 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.smith@example.com",
+            "david.jones@company.com"
+          ],
+          "id": "evt_d2a1d6d0e5894034bd15010e360db4fc"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Engineering Director",
+          "start": "2023-04-17 15:00:00",
+          "end": "2023-04-17 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily.chen@company.com"
+          ],
+          "id": "evt_8a6822c511e64872b8648556a8eaa5d9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Friends",
+          "start": "2023-04-17 18:30:00",
+          "end": "2023-04-17 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "rachel.nguyen@example.com",
+            "kevin.patel@example.com"
+          ],
+          "id": "evt_7bd8028b41f24d50bc9d3045a3007c0c"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting: Recruitment Strategy",
+          "start": "2023-04-17 09:00:00",
+          "end": "2023-04-17 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com",
+            "mark.lee@company.com"
+          ],
+          "id": "evt_1c919c68b78a435387cd31545ef6858b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Phone Screen: Software Engineer Candidate",
+          "start": "2023-04-17 10:30:00",
+          "end": "2023-04-17 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_53cadcf2bda84d839b4e926691771d5a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Interview: Data Scientist Candidate",
+          "start": "2023-04-17 13:00:00",
+          "end": "2023-04-17 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.smith@example.com",
+            "david.jones@company.com"
+          ],
+          "id": "evt_d2a1d6d0e5894034bd15010e360db4fc"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Engineering Director",
+          "start": "2023-04-17 15:00:00",
+          "end": "2023-04-17 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily.chen@company.com"
+          ],
+          "id": "evt_8a6822c511e64872b8648556a8eaa5d9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Friends",
+          "start": "2023-04-17 18:30:00",
+          "end": "2023-04-17 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "rachel.nguyen@example.com",
+            "kevin.patel@example.com"
+          ],
+          "id": "evt_7bd8028b41f24d50bc9d3045a3007c0c"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is my meeting with the engineering director?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find a meeting with the \"engineering director\". I will search your calendar for an event with this title."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_1c919c68b78a435387cd31545ef6858b | Team Meeting: Recruitment Strategy \u2014 Mon 09:00-10:00\nid: evt_53cadcf2bda84d839b4e926691771d5a | Phone Screen: Software Engineer Candidate \u2014 Mon 10:30-11:30\nid: evt_d2a1d6d0e5894034bd15010e360db4fc | Interview: Data Scientist Candidate \u2014 Mon 13:00-14:00\nid: evt_8a6822c511e64872b8648556a8eaa5d9 | Meeting with Engineering Director \u2014 Mon 15:00-16:00\nid: evt_7bd8028b41f24d50bc9d3045a3007c0c | Dinner with Friends \u2014 Mon 18:30-20:00\nid: evt_f313be94e8074da09282c692b7bdee6d | Candidate Review Meeting \u2014 Tue 09:30-10:30\nid: evt_0573916a2b6b45de897f5f953f52ddae | Sourcer Demo: New Recruiting Tool \u2014 Tue 11:00-12:00\nid: evt_61083a38aeae455b8313595f0b1f1877 | Interview: Software Engineer Candidate \u2014 Tue 14:00-15:00\nid: evt_6116de292fd54c32b6e806e069e9ba38 | Follow up with Candidates \u2014 Tue 15:30-16:30\nid: evt_49b6c172dd724c668c62f27b4b350dea | Check in with HR Business Partner \u2014 Wed 09:00-10:00\nid: evt_290fab6cd12b42da91d943a01385dfc3 | Phone Screen: Front-End Engineer Candidate \u2014 Wed 10:30-11:30\nid: evt_ff5841c39efa4e14ad3d0ace282dbabb | Feedback Session with Hiring Manager \u2014 Wed 13:00-14:00\nid: evt_fdd8aa4d46e344579e8d6ef3b52ebc18 | Networking Event: Tech Meetup \u2014 Wed 18:00-19:30\nid: evt_13441b868503475293df65316cc6cefa | Team Meeting: Pipeline Review \u2014 Thu 09:00-10:00\nid: evt_885e77c28a0b49c887e23a0285abca48 | Interview: Data Scientist Candidate \u2014 Thu 10:30-11:30\nid: evt_4ab77fdc59e24fcab1f393ffc9e746bb | Offer Negotiation Call \u2014 Thu 14:00-15:00\nid: evt_dcc9898ada4b4c0e9b47b5e725241667 | Virtual coffee chat with career coach \u2014 Thu 18:00-19:00\nid: evt_6cd931b48a974024bac8f6dcd38518c1 | Hiring Manager Check-in \u2014 Fri 09:00-10:00\nid: evt_1c27ca7d0ff445d3a97524ab2eb239ec | Meeting with HR Director \u2014 Fri 10:30-11:30\nid: evt_0fb9e66deeba4898b993b57f24ee20a3 | Candidate Debrief Meeting \u2014 Fri 13:00-14:00\nid: evt_56bfe5add66b449691ebe30c92d25483 | Trying new restaurant with partner \u2014 Fri 18:00-20:00\nid: evt_3a642800d66b48478f77bcbb250004f5 | Brunch with family \u2014 Sat 11:00-13:00\nid: evt_f82575a8f3954b4890be326d36ca128d | Visit local farmer's market \u2014 Sat 14:00-16:00\nid: evt_3b4a5ade3437499eb305302eb918d368 | Yoga Class \u2014 Sun 10:00-11:00\nid: evt_8693ccea779f403cb75ad47b29d1d411 | Explore new neighborhood restaurant \u2014 Sun 13:00-15:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Your meeting with the Engineering Director is on Monday from 15:00 to 16:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the pipeline review?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Team Meeting: Pipeline Review' event and return the list of attendees.",
+    "simulated_now": "2023-04-20 08:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Team Meeting: Pipeline Review",
+          "start": "2023-04-20 09:00:00",
+          "end": "2023-04-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com",
+            "mark.lee@company.com"
+          ],
+          "id": "evt_46bf9bb86e5f41d4864a10309829d3b5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Interview: Data Scientist Candidate",
+          "start": "2023-04-20 10:30:00",
+          "end": "2023-04-20 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "olivia.garcia@example.com",
+            "david.jones@company.com"
+          ],
+          "id": "evt_98c4ff811f144538835e3f9f65a29086"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Offer Negotiation Call",
+          "start": "2023-04-20 14:00:00",
+          "end": "2023-04-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_f5f2c1d254b5435bbec00ea0fb074838"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Virtual coffee chat with career coach",
+          "start": "2023-04-20 18:00:00",
+          "end": "2023-04-20 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "coach@coaching.com"
+          ],
+          "id": "evt_53bce3f5177e4c4394db79e33a7aa029"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Team Meeting: Pipeline Review",
+          "start": "2023-04-20 09:00:00",
+          "end": "2023-04-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com",
+            "mark.lee@company.com"
+          ],
+          "id": "evt_46bf9bb86e5f41d4864a10309829d3b5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Interview: Data Scientist Candidate",
+          "start": "2023-04-20 10:30:00",
+          "end": "2023-04-20 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "olivia.garcia@example.com",
+            "david.jones@company.com"
+          ],
+          "id": "evt_98c4ff811f144538835e3f9f65a29086"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Offer Negotiation Call",
+          "start": "2023-04-20 14:00:00",
+          "end": "2023-04-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_f5f2c1d254b5435bbec00ea0fb074838"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Virtual coffee chat with career coach",
+          "start": "2023-04-20 18:00:00",
+          "end": "2023-04-20 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "coach@coaching.com"
+          ],
+          "id": "evt_53bce3f5177e4c4394db79e33a7aa029"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the pipeline review?"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_416abdc4896e4a99ad639b1e0dc5329d | Team Meeting: Recruitment Strategy \u2014 Mon 09:00-10:00\nid: evt_d098d6371ddd4fa0a561e1b97559986f | Phone Screen: Software Engineer Candidate \u2014 Mon 10:30-11:30\nid: evt_2202506f51784c97ae29ffef375441d3 | Interview: Data Scientist Candidate \u2014 Mon 13:00-14:00\nid: evt_cf122eee39864fab9113e2ca7b41d8cb | Meeting with Engineering Director \u2014 Mon 15:00-16:00\nid: evt_0cd4c6fcdef3406fa750e624dfb76e7a | Dinner with Friends \u2014 Mon 18:30-20:00\nid: evt_f42a3b44240840d4ab9d4a0a324c824e | Candidate Review Meeting \u2014 Tue 09:30-10:30\nid: evt_bdbe65eb66ba4a79999a9ca6cae18f29 | Sourcer Demo: New Recruiting Tool \u2014 Tue 11:00-12:00\nid: evt_fde917cfc8cb4255946d4548d36d29d2 | Interview: Software Engineer Candidate \u2014 Tue 14:00-15:00\nid: evt_666ba06f3ee44e36806a0718afadc3e3 | Follow up with Candidates \u2014 Tue 15:30-16:30\nid: evt_de48868ca4934029950351f9ab3c783c | Check in with HR Business Partner \u2014 Wed 09:00-10:00\nid: evt_0824a3242346459ca66be1a30ead82b3 | Phone Screen: Front-End Engineer Candidate \u2014 Wed 10:30-11:30\nid: evt_f336557570f44b849577cf30abe3a83b | Feedback Session with Hiring Manager \u2014 Wed 13:00-14:00\nid: evt_46fa44b17f594a2c8f49be9fa72458cf | Networking Event: Tech Meetup \u2014 Wed 18:00-19:30\nid: evt_46bf9bb86e5f41d4864a10309829d3b5 | Team Meeting: Pipeline Review \u2014 Thu 09:00-10:00\nid: evt_98c4ff811f144538835e3f9f65a29086 | Interview: Data Scientist Candidate \u2014 Thu 10:30-11:30\nid: evt_f5f2c1d254b5435bbec00ea0fb074838 | Offer Negotiation Call \u2014 Thu 14:00-15:00\nid: evt_53bce3f5177e4c4394db79e33a7aa029 | Virtual coffee chat with career coach \u2014 Thu 18:00-19:00\nid: evt_fb68b137e98c46ce9198bab79e7c30ce | Hiring Manager Check-in \u2014 Fri 09:00-10:00\nid: evt_2fa77607c27a4af9ad3f8c6ff23eccea | Meeting with HR Director \u2014 Fri 10:30-11:30\nid: evt_ce006215bc594d2288a3f47e9419a667 | Candidate Debrief Meeting \u2014 Fri 13:00-14:00\nid: evt_d755462d0f5a449694fe4e6fc04f3256 | Trying new restaurant with partner \u2014 Fri 18:00-20:00\nid: evt_d8f5ef0c82d04aa6aa07a7dcf8c2859e | Brunch with family \u2014 Sat 11:00-13:00\nid: evt_49f138f79dbe425e9591648037189b2b | Visit local farmer's market \u2014 Sat 14:00-16:00\nid: evt_a99b4ba6f10842fea1ad20f0bb6ff147 | Yoga Class \u2014 Sun 10:00-11:00\nid: evt_1f7c4a3c0e7f4dda91a6d457548f05d1 | Explore new neighborhood restaurant \u2014 Sun 13:00-15:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_46bf9bb86e5f41d4864a10309829d3b5"
+        },
+        "result": "Team Meeting: Pipeline Review\n  ID: evt_46bf9bb86e5f41d4864a10309829d3b5\n  Time: Thu Apr 20, 09:00 - 10:00\n  Attendees: sarah.johnson@company.com, mark.lee@company.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "The attendees for the Pipeline Review are sarah.johnson@company.com and mark.lee@company.com."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "I'm busy at 1pm on Wednesday, move my feedback session to Thursday at the same time.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Find the 'Feedback Session with Hiring Manager' event on Wednesday, April 19, 2023, delete it, and create a new event with the same details on Thursday, April 20, 2023, at 1:00 PM.",
+    "simulated_now": "2023-04-19 08:00:00",
+    "addressed_days": [
+      "Wednesday",
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Check in with HR Business Partner",
+          "start": "2023-04-19 09:00:00",
+          "end": "2023-04-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "michael.brown@company.com"
+          ],
+          "id": "evt_9081eb3a0ffb4485b57083b228d872be"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Phone Screen: Front-End Engineer Candidate",
+          "start": "2023-04-19 10:30:00",
+          "end": "2023-04-19 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "patrick.stewart@example.com"
+          ],
+          "id": "evt_dc6c606c175543569b056f7831042ff9"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Feedback Session with Hiring Manager",
+          "start": "2023-04-19 13:00:00",
+          "end": "2023-04-19 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.jones@company.com"
+          ],
+          "id": "evt_9620ddd89e2d46859c8291b3788956d7"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Networking Event: Tech Meetup",
+          "start": "2023-04-19 18:00:00",
+          "end": "2023-04-19 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9c52d9c3c056409289d478805610312e"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Team Meeting: Pipeline Review",
+          "start": "2023-04-20 09:00:00",
+          "end": "2023-04-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com",
+            "mark.lee@company.com"
+          ],
+          "id": "evt_1c3b8143cd634f4ea21466cf36bbf80b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Interview: Data Scientist Candidate",
+          "start": "2023-04-20 10:30:00",
+          "end": "2023-04-20 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "olivia.garcia@example.com",
+            "david.jones@company.com"
+          ],
+          "id": "evt_4b82291220014d8687038d280c3184c8"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Offer Negotiation Call",
+          "start": "2023-04-20 14:00:00",
+          "end": "2023-04-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_e960d448d0eb4d3fb81890f725fd8107"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Virtual coffee chat with career coach",
+          "start": "2023-04-20 18:00:00",
+          "end": "2023-04-20 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "coach@coaching.com"
+          ],
+          "id": "evt_18e2207eccae4bb69164b94bc140cdae"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Check in with HR Business Partner",
+          "start": "2023-04-19 09:00:00",
+          "end": "2023-04-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "michael.brown@company.com"
+          ],
+          "id": "evt_9081eb3a0ffb4485b57083b228d872be"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Phone Screen: Front-End Engineer Candidate",
+          "start": "2023-04-19 10:30:00",
+          "end": "2023-04-19 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "patrick.stewart@example.com"
+          ],
+          "id": "evt_dc6c606c175543569b056f7831042ff9"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Networking Event: Tech Meetup",
+          "start": "2023-04-19 18:00:00",
+          "end": "2023-04-19 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9c52d9c3c056409289d478805610312e"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Team Meeting: Pipeline Review",
+          "start": "2023-04-20 09:00:00",
+          "end": "2023-04-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com",
+            "mark.lee@company.com"
+          ],
+          "id": "evt_1c3b8143cd634f4ea21466cf36bbf80b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Interview: Data Scientist Candidate",
+          "start": "2023-04-20 10:30:00",
+          "end": "2023-04-20 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "olivia.garcia@example.com",
+            "david.jones@company.com"
+          ],
+          "id": "evt_4b82291220014d8687038d280c3184c8"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Feedback Session with Hiring Manager",
+          "start": "2023-04-20 13:00:00",
+          "end": "2023-04-20 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.jones@company.com"
+          ],
+          "id": "evt_9620ddd89e2d46859c8291b3788956d7"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Offer Negotiation Call",
+          "start": "2023-04-20 14:00:00",
+          "end": "2023-04-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_e960d448d0eb4d3fb81890f725fd8107"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Virtual coffee chat with career coach",
+          "start": "2023-04-20 18:00:00",
+          "end": "2023-04-20 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "coach@coaching.com"
+          ],
+          "id": "evt_18e2207eccae4bb69164b94bc140cdae"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "I'm busy at 1pm on Wednesday, move my feedback session to Thursday at the same time."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. First, I need to know the current date and time. Then, I will find the feedback session on Wednesday and move it to Thursday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-19 08:00:00 | Wednesday"
+      },
+      {
+        "role": "assistant",
+        "content": "I'll search for the feedback session around 1 PM today."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-04-19 14:00:00",
+          "time_min": "2023-04-19 12:00:00"
+        },
+        "result": "Found 1 events:\nid: evt_9620ddd89e2d46859c8291b3788956d7 | Feedback Session with Hiring Manager \u2014 Wed 13:00-14:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've found the \"Feedback Session with Hiring Manager\" at 1 PM today. I will now move it to Thursday, April 20th, at 1:00 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2023-04-20 14:00:00",
+          "start": "2023-04-20 13:00:00",
+          "event_id": "evt_9620ddd89e2d46859c8291b3788956d7"
+        },
+        "result": "Event updated successfully.\nFeedback Session with Hiring Manager\n  ID: evt_9620ddd89e2d46859c8291b3788956d7\n  Time: Thu Apr 20, 13:00 - 14:00\n  Attendees: david.jones@company.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've moved the feedback session to Thursday at 1:00 PM for you."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Decline the meeting with the HR director and book a meeting with Sarah Johnson instead for Friday at 11am",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Find the 'Meeting with HR Director' event on Friday, April 21, 2023, and decline it. Then, create a new event called 'Meeting with Sarah Johnson' on Friday, April 21, 2023, at 11:00 AM.",
+    "simulated_now": "2023-04-19 08:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Hiring Manager Check-in",
+          "start": "2023-04-21 09:00:00",
+          "end": "2023-04-21 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily.chen@company.com"
+          ],
+          "id": "evt_936c033b771c45889ef0013e9aff68c3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meeting with HR Director",
+          "start": "2023-04-21 10:30:00",
+          "end": "2023-04-21 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com"
+          ],
+          "id": "evt_5a5b6437685640559bd3f363144e689a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Candidate Debrief Meeting",
+          "start": "2023-04-21 13:00:00",
+          "end": "2023-04-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f2683b5ed18c475a93f8a8406e9e6a14"
+        },
+        {
+          "day": "Friday",
+          "summary": "Trying new restaurant with partner",
+          "start": "2023-04-21 18:00:00",
+          "end": "2023-04-21 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1889879ad9e34bc8bb943164ca2150db"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Hiring Manager Check-in",
+          "start": "2023-04-21 09:00:00",
+          "end": "2023-04-21 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily.chen@company.com"
+          ],
+          "id": "evt_936c033b771c45889ef0013e9aff68c3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meeting with HR Director",
+          "start": "2023-04-21 10:30:00",
+          "end": "2023-04-21 11:30:00",
+          "attending": "DECLINE",
+          "attendees": [
+            "sarah.johnson@company.com"
+          ],
+          "id": "evt_5a5b6437685640559bd3f363144e689a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meeting with Sarah Johnson",
+          "start": "2023-04-21 11:00:00",
+          "end": "2023-04-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com"
+          ],
+          "id": "evt_d3b7d177b489481387750b958380a45d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Candidate Debrief Meeting",
+          "start": "2023-04-21 13:00:00",
+          "end": "2023-04-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f2683b5ed18c475a93f8a8406e9e6a14"
+        },
+        {
+          "day": "Friday",
+          "summary": "Trying new restaurant with partner",
+          "start": "2023-04-21 18:00:00",
+          "end": "2023-04-21 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1889879ad9e34bc8bb943164ca2150db"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Decline the meeting with the HR director and book a meeting with Sarah Johnson instead for Friday at 11am"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to decline a meeting with the HR director and book a new one with Sarah Johnson. First, I will find the meeting with the HR director by searching the calendar. Then, I will decline it. After that, I will find Sarah Johnson's email address by searching for past events with her. Finally, I will create a new meeting with her for Friday at 11 am."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-19 08:00:00 | Wednesday"
+      },
+      {
+        "role": "assistant",
+        "content": "I have the current date. Now I need to find the meeting with the HR director. I will list all events and find the meeting."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_5896f7f5bf5d49adbfaeeef9a932e53f | Team Meeting: Recruitment Strategy \u2014 Mon 09:00-10:00\nid: evt_ab993820620441e7990e1bfcbc5ae77f | Phone Screen: Software Engineer Candidate \u2014 Mon 10:30-11:30\nid: evt_ed55c91dc8d0498a83d11f00a4e90ef0 | Interview: Data Scientist Candidate \u2014 Mon 13:00-14:00\nid: evt_85161d50e2374a9c82b0a77c01bdef27 | Meeting with Engineering Director \u2014 Mon 15:00-16:00\nid: evt_16575597dc5a47519efb040f17060fad | Dinner with Friends \u2014 Mon 18:30-20:00\nid: evt_b478707b6d864616813e7f0d8e3ce8d7 | Candidate Review Meeting \u2014 Tue 09:30-10:30\nid: evt_f74d3f3d3f9e4b55a6de1fd6fb5a4936 | Sourcer Demo: New Recruiting Tool \u2014 Tue 11:00-12:00\nid: evt_60f91e8a5f384d28adf623aff789cd24 | Interview: Software Engineer Candidate \u2014 Tue 14:00-15:00\nid: evt_3c6df391d72f4650be4b90ca3118c30b | Follow up with Candidates \u2014 Tue 15:30-16:30\nid: evt_a168bbbbb4f248f09a4d6fea913213ef | Check in with HR Business Partner \u2014 Wed 09:00-10:00\nid: evt_d786b7ddf4074d7b91c14af0ff0eb7ff | Phone Screen: Front-End Engineer Candidate \u2014 Wed 10:30-11:30\nid: evt_dcf8c7f7f0424e73b1b62f34090ecd30 | Feedback Session with Hiring Manager \u2014 Wed 13:00-14:00\nid: evt_dd330df566f245b88f7ad29d3456bd46 | Networking Event: Tech Meetup \u2014 Wed 18:00-19:30\nid: evt_d30f629b54de475090bd8fb3bee7fc6a | Team Meeting: Pipeline Review \u2014 Thu 09:00-10:00\nid: evt_28423ec6c9f54cb89e10c096890eca6f | Interview: Data Scientist Candidate \u2014 Thu 10:30-11:30\nid: evt_dff3b27f4f77487d8a2861473517ef88 | Offer Negotiation Call \u2014 Thu 14:00-15:00\nid: evt_b5bed3a009d941d991e86422c83a6908 | Virtual coffee chat with career coach \u2014 Thu 18:00-19:00\nid: evt_936c033b771c45889ef0013e9aff68c3 | Hiring Manager Check-in \u2014 Fri 09:00-10:00\nid: evt_5a5b6437685640559bd3f363144e689a | Meeting with HR Director \u2014 Fri 10:30-11:30\nid: evt_f2683b5ed18c475a93f8a8406e9e6a14 | Candidate Debrief Meeting \u2014 Fri 13:00-14:00\nid: evt_1889879ad9e34bc8bb943164ca2150db | Trying new restaurant with partner \u2014 Fri 18:00-20:00\nid: evt_b35c4ac9c53c453498ad3b2696eb91ba | Brunch with family \u2014 Sat 11:00-13:00\nid: evt_16430430e6b94b2dbbf7e490294b49e7 | Visit local farmer's market \u2014 Sat 14:00-16:00\nid: evt_290bb4faa70b4a49aec1224f499b1e43 | Yoga Class \u2014 Sun 10:00-11:00\nid: evt_56e87b5f674c48cfa584838c8eacf0ef | Explore new neighborhood restaurant \u2014 Sun 13:00-15:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I've located the HR Director meeting (ID: `evt_5a5b6437685640559bd3f363144e689a`, Fri 10:30-11:30) and will now decline it."
+      },
+      {
+        "role": "tool_call",
+        "name": "respond_to_event",
+        "args": {
+          "event_id": "evt_5a5b6437685640559bd3f363144e689a",
+          "attending": "DECLINE"
+        },
+        "result": "RSVP updated to DECLINE.\nMeeting with HR Director\n  ID: evt_5a5b6437685640559bd3f363144e689a\n  Time: Fri Apr 21, 10:30 - 11:30\n  Attendees: sarah.johnson@company.com\n  RSVP: DECLINE"
+      },
+      {
+        "role": "assistant",
+        "content": "I've declined the HR director meeting. Now, I'll schedule a meeting with Sarah Johnson for Friday, April 21st, from 11:00 AM to 12:00 PM. I'll use the email address `sarah.johnson@company.com` for the invitation."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2023-04-21 11:00:00",
+          "attendees": [
+            "sarah.johnson@company.com"
+          ],
+          "summary": "Meeting with Sarah Johnson",
+          "end": "2023-04-21 12:00:00"
+        },
+        "result": "Event created successfully.\nMeeting with Sarah Johnson\n  ID: evt_d3b7d177b489481387750b958380a45d\n  Time: Fri Apr 21, 11:00 - 12:00\n  Attendees: sarah.johnson@company.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "error",
+        "content": "The model response did not complete successfully.\nFinish reason: 9.\nFinish message: Malformed function call: OK. I have declined the meeting with the HR director and scheduled a new meeting with Sarah Johnson for Friday, April 21st at 11am..\nSafety ratings: [].\nTo protect the integrity of the chat session, the request and response were not added to chat history.\nTo skip the response validation, specify `model.start_chat(response_validation=False)`.\nNote that letting blocked or otherwise incomplete responses into chat history might lead to future interactions being blocked by the service."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule Data Scientist",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "Search for Data Scientist interviews. If multiple exist, ask for clarification. If one is found, ask for the new time to reschedule.",
+    "simulated_now": "2023-04-18 14:00:00",
+    "addressed_days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting: Recruitment Strategy",
+          "start": "2023-04-17 09:00:00",
+          "end": "2023-04-17 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com",
+            "mark.lee@company.com"
+          ],
+          "id": "evt_f5f11fb524294eb0b9920829c1568f8a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Phone Screen: Software Engineer Candidate",
+          "start": "2023-04-17 10:30:00",
+          "end": "2023-04-17 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_1085f9dc136e4ea199041011b00d0ef4"
+        },
+        {
+          "day": "Monday",
+          "summary": "Interview: Data Scientist Candidate",
+          "start": "2023-04-17 13:00:00",
+          "end": "2023-04-17 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.smith@example.com",
+            "david.jones@company.com"
+          ],
+          "id": "evt_9d598869da9d4432be80902674864aa3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Engineering Director",
+          "start": "2023-04-17 15:00:00",
+          "end": "2023-04-17 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily.chen@company.com"
+          ],
+          "id": "evt_4b776a5a64a044228956b9122fcb3258"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Friends",
+          "start": "2023-04-17 18:30:00",
+          "end": "2023-04-17 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "rachel.nguyen@example.com",
+            "kevin.patel@example.com"
+          ],
+          "id": "evt_840a1347dab44b2c9538392ea6e1060b"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Candidate Review Meeting",
+          "start": "2023-04-18 09:30:00",
+          "end": "2023-04-18 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_75875a24ae0741f0b7d81835a5a5e5d3"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Sourcer Demo: New Recruiting Tool",
+          "start": "2023-04-18 11:00:00",
+          "end": "2023-04-18 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vendor.rep@toolco.com"
+          ],
+          "id": "evt_dfcaa51c64ce4d48b283e6698e895616"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Interview: Software Engineer Candidate",
+          "start": "2023-04-18 14:00:00",
+          "end": "2023-04-18 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "oliver.white@example.com",
+            "emily.chen@company.com"
+          ],
+          "id": "evt_3b53895cbe1341c987eec4dd4773d07e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Follow up with Candidates",
+          "start": "2023-04-18 15:30:00",
+          "end": "2023-04-18 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_67e3f259fd4a41e5851d68d58becaa23"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Check in with HR Business Partner",
+          "start": "2023-04-19 09:00:00",
+          "end": "2023-04-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "michael.brown@company.com"
+          ],
+          "id": "evt_c9d76a326ee34021a8995ba4aa25039d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Phone Screen: Front-End Engineer Candidate",
+          "start": "2023-04-19 10:30:00",
+          "end": "2023-04-19 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "patrick.stewart@example.com"
+          ],
+          "id": "evt_3b46f2dfa0cc44d0a7b5cf6329573ef6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Feedback Session with Hiring Manager",
+          "start": "2023-04-19 13:00:00",
+          "end": "2023-04-19 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.jones@company.com"
+          ],
+          "id": "evt_227894a40f6b49d9afec5b220c9ac8a1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Networking Event: Tech Meetup",
+          "start": "2023-04-19 18:00:00",
+          "end": "2023-04-19 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_21ef05afd3cb41b6b58dd4c4dafb67ac"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Team Meeting: Pipeline Review",
+          "start": "2023-04-20 09:00:00",
+          "end": "2023-04-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com",
+            "mark.lee@company.com"
+          ],
+          "id": "evt_36e55bc4c05e46f2838593dc7c90c21c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Interview: Data Scientist Candidate",
+          "start": "2023-04-20 10:30:00",
+          "end": "2023-04-20 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "olivia.garcia@example.com",
+            "david.jones@company.com"
+          ],
+          "id": "evt_255ea50ceadc41208a195e07dd000459"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Offer Negotiation Call",
+          "start": "2023-04-20 14:00:00",
+          "end": "2023-04-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_e87bdd7601534c198185c2bfbf764e34"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Virtual coffee chat with career coach",
+          "start": "2023-04-20 18:00:00",
+          "end": "2023-04-20 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "coach@coaching.com"
+          ],
+          "id": "evt_6f0f4c0df4264bf89d2c9a06fa818f39"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Hiring Manager Check-in",
+          "start": "2023-04-21 09:00:00",
+          "end": "2023-04-21 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily.chen@company.com"
+          ],
+          "id": "evt_bd2f246cca064f8bb6f034e84a8c5068"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meeting with HR Director",
+          "start": "2023-04-21 10:30:00",
+          "end": "2023-04-21 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com"
+          ],
+          "id": "evt_fdd5d13e4b1444b3918a716836f97663"
+        },
+        {
+          "day": "Friday",
+          "summary": "Candidate Debrief Meeting",
+          "start": "2023-04-21 13:00:00",
+          "end": "2023-04-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_35f961768b294aabb7675fc7292ecff3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Trying new restaurant with partner",
+          "start": "2023-04-21 18:00:00",
+          "end": "2023-04-21 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fb80ac0521d74d2abbc44d865b833025"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting: Recruitment Strategy",
+          "start": "2023-04-17 09:00:00",
+          "end": "2023-04-17 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com",
+            "mark.lee@company.com"
+          ],
+          "id": "evt_f5f11fb524294eb0b9920829c1568f8a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Phone Screen: Software Engineer Candidate",
+          "start": "2023-04-17 10:30:00",
+          "end": "2023-04-17 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_1085f9dc136e4ea199041011b00d0ef4"
+        },
+        {
+          "day": "Monday",
+          "summary": "Interview: Data Scientist Candidate",
+          "start": "2023-04-17 13:00:00",
+          "end": "2023-04-17 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.smith@example.com",
+            "david.jones@company.com"
+          ],
+          "id": "evt_9d598869da9d4432be80902674864aa3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Engineering Director",
+          "start": "2023-04-17 15:00:00",
+          "end": "2023-04-17 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily.chen@company.com"
+          ],
+          "id": "evt_4b776a5a64a044228956b9122fcb3258"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Friends",
+          "start": "2023-04-17 18:30:00",
+          "end": "2023-04-17 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "rachel.nguyen@example.com",
+            "kevin.patel@example.com"
+          ],
+          "id": "evt_840a1347dab44b2c9538392ea6e1060b"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Candidate Review Meeting",
+          "start": "2023-04-18 09:30:00",
+          "end": "2023-04-18 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_75875a24ae0741f0b7d81835a5a5e5d3"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Sourcer Demo: New Recruiting Tool",
+          "start": "2023-04-18 11:00:00",
+          "end": "2023-04-18 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vendor.rep@toolco.com"
+          ],
+          "id": "evt_dfcaa51c64ce4d48b283e6698e895616"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Interview: Software Engineer Candidate",
+          "start": "2023-04-18 14:00:00",
+          "end": "2023-04-18 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "oliver.white@example.com",
+            "emily.chen@company.com"
+          ],
+          "id": "evt_3b53895cbe1341c987eec4dd4773d07e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Follow up with Candidates",
+          "start": "2023-04-18 15:30:00",
+          "end": "2023-04-18 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_67e3f259fd4a41e5851d68d58becaa23"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Check in with HR Business Partner",
+          "start": "2023-04-19 09:00:00",
+          "end": "2023-04-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "michael.brown@company.com"
+          ],
+          "id": "evt_c9d76a326ee34021a8995ba4aa25039d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Phone Screen: Front-End Engineer Candidate",
+          "start": "2023-04-19 10:30:00",
+          "end": "2023-04-19 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "patrick.stewart@example.com"
+          ],
+          "id": "evt_3b46f2dfa0cc44d0a7b5cf6329573ef6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Feedback Session with Hiring Manager",
+          "start": "2023-04-19 13:00:00",
+          "end": "2023-04-19 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.jones@company.com"
+          ],
+          "id": "evt_227894a40f6b49d9afec5b220c9ac8a1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Networking Event: Tech Meetup",
+          "start": "2023-04-19 18:00:00",
+          "end": "2023-04-19 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_21ef05afd3cb41b6b58dd4c4dafb67ac"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Team Meeting: Pipeline Review",
+          "start": "2023-04-20 09:00:00",
+          "end": "2023-04-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com",
+            "mark.lee@company.com"
+          ],
+          "id": "evt_36e55bc4c05e46f2838593dc7c90c21c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Interview: Data Scientist Candidate",
+          "start": "2023-04-20 10:30:00",
+          "end": "2023-04-20 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "olivia.garcia@example.com",
+            "david.jones@company.com"
+          ],
+          "id": "evt_255ea50ceadc41208a195e07dd000459"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Offer Negotiation Call",
+          "start": "2023-04-20 14:00:00",
+          "end": "2023-04-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_e87bdd7601534c198185c2bfbf764e34"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Virtual coffee chat with career coach",
+          "start": "2023-04-20 18:00:00",
+          "end": "2023-04-20 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "coach@coaching.com"
+          ],
+          "id": "evt_6f0f4c0df4264bf89d2c9a06fa818f39"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Hiring Manager Check-in",
+          "start": "2023-04-21 09:00:00",
+          "end": "2023-04-21 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily.chen@company.com"
+          ],
+          "id": "evt_bd2f246cca064f8bb6f034e84a8c5068"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meeting with HR Director",
+          "start": "2023-04-21 10:30:00",
+          "end": "2023-04-21 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com"
+          ],
+          "id": "evt_fdd5d13e4b1444b3918a716836f97663"
+        },
+        {
+          "day": "Friday",
+          "summary": "Candidate Debrief Meeting",
+          "start": "2023-04-21 13:00:00",
+          "end": "2023-04-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_35f961768b294aabb7675fc7292ecff3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Trying new restaurant with partner",
+          "start": "2023-04-21 18:00:00",
+          "end": "2023-04-21 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fb80ac0521d74d2abbc44d865b833025"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule Data Scientist"
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. What's the new time and date for the Data Scientist event?"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_f5f11fb524294eb0b9920829c1568f8a | Team Meeting: Recruitment Strategy \u2014 Mon 09:00-10:00\nid: evt_1085f9dc136e4ea199041011b00d0ef4 | Phone Screen: Software Engineer Candidate \u2014 Mon 10:30-11:30\nid: evt_9d598869da9d4432be80902674864aa3 | Interview: Data Scientist Candidate \u2014 Mon 13:00-14:00\nid: evt_4b776a5a64a044228956b9122fcb3258 | Meeting with Engineering Director \u2014 Mon 15:00-16:00\nid: evt_840a1347dab44b2c9538392ea6e1060b | Dinner with Friends \u2014 Mon 18:30-20:00\nid: evt_75875a24ae0741f0b7d81835a5a5e5d3 | Candidate Review Meeting \u2014 Tue 09:30-10:30\nid: evt_dfcaa51c64ce4d48b283e6698e895616 | Sourcer Demo: New Recruiting Tool \u2014 Tue 11:00-12:00\nid: evt_3b53895cbe1341c987eec4dd4773d07e | Interview: Software Engineer Candidate \u2014 Tue 14:00-15:00\nid: evt_67e3f259fd4a41e5851d68d58becaa23 | Follow up with Candidates \u2014 Tue 15:30-16:30\nid: evt_c9d76a326ee34021a8995ba4aa25039d | Check in with HR Business Partner \u2014 Wed 09:00-10:00\nid: evt_3b46f2dfa0cc44d0a7b5cf6329573ef6 | Phone Screen: Front-End Engineer Candidate \u2014 Wed 10:30-11:30\nid: evt_227894a40f6b49d9afec5b220c9ac8a1 | Feedback Session with Hiring Manager \u2014 Wed 13:00-14:00\nid: evt_21ef05afd3cb41b6b58dd4c4dafb67ac | Networking Event: Tech Meetup \u2014 Wed 18:00-19:30\nid: evt_36e55bc4c05e46f2838593dc7c90c21c | Team Meeting: Pipeline Review \u2014 Thu 09:00-10:00\nid: evt_255ea50ceadc41208a195e07dd000459 | Interview: Data Scientist Candidate \u2014 Thu 10:30-11:30\nid: evt_e87bdd7601534c198185c2bfbf764e34 | Offer Negotiation Call \u2014 Thu 14:00-15:00\nid: evt_6f0f4c0df4264bf89d2c9a06fa818f39 | Virtual coffee chat with career coach \u2014 Thu 18:00-19:00\nid: evt_bd2f246cca064f8bb6f034e84a8c5068 | Hiring Manager Check-in \u2014 Fri 09:00-10:00\nid: evt_fdd5d13e4b1444b3918a716836f97663 | Meeting with HR Director \u2014 Fri 10:30-11:30\nid: evt_35f961768b294aabb7675fc7292ecff3 | Candidate Debrief Meeting \u2014 Fri 13:00-14:00\nid: evt_fb80ac0521d74d2abbc44d865b833025 | Trying new restaurant with partner \u2014 Fri 18:00-20:00\nid: evt_2d92eb583ea048f0b1f887d38f30a78b | Brunch with family \u2014 Sat 11:00-13:00\nid: evt_ad6ce0f436384085859617e83218ac83 | Visit local farmer's market \u2014 Sat 14:00-16:00\nid: evt_c372415769804ae39b57b6b62be91af2 | Yoga Class \u2014 Sun 10:00-11:00\nid: evt_6439d8e931a242058fd7d08ecb2d862c | Explore new neighborhood restaurant \u2014 Sun 13:00-15:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I see two \"Data Scientist Candidate\" interviews, one on Monday at 13:00 and another on Thursday at 10:30. Which one would you like to reschedule, and what's the new time and date?\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What meetings do I have today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events for the current day (April 17, 2023).",
+    "simulated_now": "2023-04-17 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting: Recruitment Strategy",
+          "start": "2023-04-17 09:00:00",
+          "end": "2023-04-17 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com",
+            "mark.lee@company.com"
+          ],
+          "id": "evt_caad09d1dc9143fb80a2660e9267d825"
+        },
+        {
+          "day": "Monday",
+          "summary": "Phone Screen: Software Engineer Candidate",
+          "start": "2023-04-17 10:30:00",
+          "end": "2023-04-17 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_5da3b95d1da54fa9930e11bbb3439a1f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Interview: Data Scientist Candidate",
+          "start": "2023-04-17 13:00:00",
+          "end": "2023-04-17 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.smith@example.com",
+            "david.jones@company.com"
+          ],
+          "id": "evt_847d329aef8e4af6957b9b27d93a7578"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Engineering Director",
+          "start": "2023-04-17 15:00:00",
+          "end": "2023-04-17 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily.chen@company.com"
+          ],
+          "id": "evt_bc17bd168cef4ce1951da719d9bdb52f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Friends",
+          "start": "2023-04-17 18:30:00",
+          "end": "2023-04-17 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "rachel.nguyen@example.com",
+            "kevin.patel@example.com"
+          ],
+          "id": "evt_8a66dba804dc44d281e58c631981a8e3"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting: Recruitment Strategy",
+          "start": "2023-04-17 09:00:00",
+          "end": "2023-04-17 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.johnson@company.com",
+            "mark.lee@company.com"
+          ],
+          "id": "evt_caad09d1dc9143fb80a2660e9267d825"
+        },
+        {
+          "day": "Monday",
+          "summary": "Phone Screen: Software Engineer Candidate",
+          "start": "2023-04-17 10:30:00",
+          "end": "2023-04-17 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_5da3b95d1da54fa9930e11bbb3439a1f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Interview: Data Scientist Candidate",
+          "start": "2023-04-17 13:00:00",
+          "end": "2023-04-17 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.smith@example.com",
+            "david.jones@company.com"
+          ],
+          "id": "evt_847d329aef8e4af6957b9b27d93a7578"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Engineering Director",
+          "start": "2023-04-17 15:00:00",
+          "end": "2023-04-17 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "emily.chen@company.com"
+          ],
+          "id": "evt_bc17bd168cef4ce1951da719d9bdb52f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Friends",
+          "start": "2023-04-17 18:30:00",
+          "end": "2023-04-17 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "rachel.nguyen@example.com",
+            "kevin.patel@example.com"
+          ],
+          "id": "evt_8a66dba804dc44d281e58c631981a8e3"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What meetings do I have today?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time and then retrieve all of today's events from the calendar. Finally, I will list all the meetings you have scheduled for today."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-17 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-04-17 00:00:00",
+          "time_max": "2023-04-17 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_caad09d1dc9143fb80a2660e9267d825 | Team Meeting: Recruitment Strategy \u2014 Mon 09:00-10:00\nid: evt_5da3b95d1da54fa9930e11bbb3439a1f | Phone Screen: Software Engineer Candidate \u2014 Mon 10:30-11:30\nid: evt_847d329aef8e4af6957b9b27d93a7578 | Interview: Data Scientist Candidate \u2014 Mon 13:00-14:00\nid: evt_bc17bd168cef4ce1951da719d9bdb52f | Meeting with Engineering Director \u2014 Mon 15:00-16:00\nid: evt_8a66dba804dc44d281e58c631981a8e3 | Dinner with Friends \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have 5 meetings scheduled for today:\n- Team Meeting: Recruitment Strategy from 09:00 to 10:00.\n- Phone Screen: Software Engineer Candidate from 10:30 to 11:30.\n- Interview: Data Scientist Candidate from 13:00 to 14:00.\n- Meeting with Engineering Director from 15:00 to 16:00.\n- Dinner with Friends from 18:30 to 20:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

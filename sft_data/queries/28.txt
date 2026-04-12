@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting for Friday called 'Project Kickoff' from 10 AM to 11:30 AM with ICU_team@hospital.com and purchasing@hospital.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event titled 'Project Kickoff' on Friday, May 3, 2024, from 10:00 AM to 11:30 AM, with attendees ICU_team@hospital.com and purchasing@hospital.com.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-04-28T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add an event to my calendar for Tuesday at 3:30 PM for 45 minutes called 'Team Brainstorm'.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event titled 'Team Brainstorm' on Tuesday, April 30, 2024, from 3:30 PM to 4:15 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-04-28T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy when the oncology team meets this week?",
+        "complexity": "Medium",
+        "expected_behavior": "List events between Monday, April 29, 2024 and Sunday, May 5, 2024, that include oncology_team@hospital.com as attendees. Find 'Attend Medical Rounds - Oncology Unit' on Wednesday, May 1, 2024. Respond yes.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-04-28T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing the same day that I'm having dinner with my spouse?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Monday, April 29, 2024. Return all events scheduled for Monday, April 29, 2024.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-04-28T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my yoga class to 8 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find 'Yoga Class' on Tuesday, April 30, 2024, and update its start time to 8:00 PM and end time to 9:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-04-30T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the Medication Shortage Meeting's attendees to include pharma_rep2@company.com.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Medication Shortage Meeting' on Monday, April 29, 2024, and update the attendees to purchasing@hospital.com, pharma_rep1@company.com, and pharma_rep2@company.com.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-04-28T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time do I attend medical rounds on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Find 'Attend Medical Rounds - ICU' on Friday, May 3, 2024, and return its start time, which is 1:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-04-28T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having brunch with on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Find 'Brunch with Spouse/Partner' on Saturday, May 4, 2024, and return the attendees, which is Spouse/Partner.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-04-28T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting with the cardiology team for 3 PM on Monday, but only if I'm free then.",
+        "complexity": "High",
+        "expected_behavior": "List events on Monday, April 29, 2024, between 3:00 PM and 4:00 PM. Since there are no conflicts, create a meeting called 'Meeting with Cardiology Team' on Monday, April 29, 2024, from 3:00 PM to 4:00 PM with attendee cardiology_team@hospital.com.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-04-28T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move my training of pharmacy technicians to Friday at the same time?",
+        "complexity": "High",
+        "expected_behavior": "Find 'Training Pharmacy Technicians' on Wednesday, May 1, 2024, determine its time is 3:00 PM to 4:00 PM. List events on Friday, May 3, 2024 between 3:00 PM and 4:00 PM. Since there are no conflicts, update the event to occur on Friday, May 3, 2024 from 3:00 PM to 4:00 PM.",
+        "addressed_days": [
+            "Wednesday",
+            "Friday"
+        ],
+        "current_time": "2024-04-28T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule dinner...",
+        "complexity": "Medium",
+        "expected_behavior": "Find 'Dinner with Spouse/Partner' on Monday, April 29, 2024. Ask for clarification on the new time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-04-28T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel the yoga thing.",
+        "complexity": "Medium",
+        "expected_behavior": "Find 'Yoga Class' on Tuesday, April 30, 2024, and delete it.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-04-30T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List events for Monday, April 29, 2024. Return the full list of events.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-04-29T08:30:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any meetings yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "List events for Saturday, May 4, 2024. Return the full list of events.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-05-05T08:30:00"
+    }
+]

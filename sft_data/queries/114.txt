@@ -1,0 +1,159 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Lunch' for Tuesday at 12:00 PM for one hour with customer_support_lead@company.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with summary 'Team Lunch', start time Tuesday at 12:00 PM, end time Tuesday at 1:00 PM and attendee customer_support_lead@company.com.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-09-07T18:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting named 'Marketing Review' on Friday from 2 PM to 3 PM. No attendees are needed.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with summary 'Marketing Review', start time Friday at 2 PM, and end time Friday at 3 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-09-07T18:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What meetings do I have with the engineering lead?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events that include engineering_lead@company.com as an attendee between Monday and Sunday.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-09-07T18:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What is the infrastructure team doing this week?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events that include head_of_infrastructure@company.com as an attendee between Monday and Sunday.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-09-07T18:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the Platform Roadmap Review to 11:00 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Platform Roadmap Review' event and update its start time to 11:00 AM and end time to 12:00 PM on Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-09-07T18:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "The coding camp session on Saturday needs to be only two hours.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Coding Camp - Teaching Session' event on Saturday and update the end time to 11:00 AM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-09-07T18:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the User Interview on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'User Interview - New Feature' event on Monday and return its start time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-09-07T18:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Cloud Scalability Discussion?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Cloud Scalability Discussion' event on Tuesday and return a list of attendees.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-09-07T18:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline the dinner with the hiking group because I have a conflicting meeting. Then move the team brainstorm to 5:30 PM",
+        "complexity": "High",
+        "expected_behavior": "Decline attending the 'Dinner with Hiking Group' event on Wednesday. Find the 'Team Brainstorm - Q3 Initiatives' event and update its start time to 5:30 PM and end time to 6:30 PM on Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-09-07T18:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Delete the Tech Debt meeting, then reschedule the UX review for Thursday at 2:00 PM.",
+        "complexity": "High",
+        "expected_behavior": "Delete the 'Tech Debt Prioritization Meeting' event on Monday. Find the 'UX Feedback Review' event on Thursday and update its start time to 2:00 PM and end time to 3:00 PM.",
+        "addressed_days": [
+            "Monday",
+            "Thursday"
+        ],
+        "current_time": "2025-09-07T18:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule engineering standup.",
+        "complexity": "Medium",
+        "expected_behavior": "List all Engineering Stand-up events for the week (Monday, Tuesday, Wednesday, Thursday, and Friday) to ask the user to confirm which one they want to reschedule.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2025-09-07T18:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "cancel coding",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Coding Camp - Teaching Session' event on Saturday and delete it.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-09-07T18:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings are scheduled for me today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for the current day (Monday, September 8, 2025) that include the user as an attendee.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-09-08T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Am I free tomorrow at 10 AM?",
+        "complexity": "Medium",
+        "expected_behavior": "List events for Tuesday, September 9, 2025, between 10:00 AM and 11:00 AM to check for conflicts.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-09-08T08:00:00"
+    }
+]

@@ -1,0 +1,168 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create a meeting called 'Discuss Q3 results' for Wednesday at 3 PM, lasting an hour. Have L.Wright@lawfirm.com attend.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create an event with the summary 'Discuss Q3 results', start time of 2026-05-27T15:00:00, end time of 2026-05-27T16:00:00, and attendee L.Wright@lawfirm.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-05-24T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me in for a dentist appointment next Tuesday at 10 AM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create an event with the summary 'Dentist appointment', start time of 2026-05-26T10:00:00, and end time of 2026-05-26T10:30:00. The duration is assumed to be 30 minutes.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-05-24T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I have a meeting with the regulatory agency. Can you move it back by an hour?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Meeting with Regulatory Agency Representatives' event on Monday, determine its current start time, and update the event to start one hour later at 3:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-05-25T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after reviewing the Brownfield report?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Review Site Assessment Report - Brownfield Redevelopment Project' event on Monday, then find the next event scheduled after it, which is the 'Meeting with Regulatory Agency Representatives'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-05-25T11:30:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the meeting with the legal counsel to 11:00 AM on Wednesday.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Meeting with Legal Counsel' event on Wednesday and update its start time to 11:00 AM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-05-26T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "I can't make the sustainable waste management call. Decline the invitation.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Conference Call: Sustainable Waste Management Strategies' event on Tuesday and decline the invitation.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-05-26T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time does my yoga class start?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Yoga Class' event on Monday and return its start time, which is 6:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-05-25T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who will be at the client meeting on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Client Meeting: Progress Report on Remediation Project' event on Thursday and return the attendees, which is R.Jones@industries.com.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-05-27T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my water sampling to Wednesday morning. Is that free?",
+        "complexity": "High",
+        "expected_behavior": "The agent should check the availability on Wednesday morning and recognize the conflict with 'Meeting with Legal Counsel' and 'Presentation Prep: Community Meeting on Proposed Development'. The agent should then inform the user about the conflict.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-05-26T15:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can I move my dinner with friends to Saturday at 9:30 PM?",
+        "complexity": "High",
+        "expected_behavior": "The agent should check the availability for dinner on Saturday at 9:30 PM. The agent should then inform the user that there is a conflict with the dinner party and ask the user to confirm.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-05-29T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting with agency?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should search for any event containing \"Meeting with agency\", find the 'Meeting with Regulatory Agency Representatives' event on Monday, and ask the user if this is the event they are referring to.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-05-25T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change emissions check.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should search for any event containing \"emissions check\", find the 'Site Visit: Industrial Plant Emissions Check' event on Tuesday, and ask the user what change they would like to make.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-05-26T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should retrieve all events scheduled for the current day (Monday) and display them.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-05-25T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any meetings yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should retrieve all events scheduled for the previous day (Sunday) and display them.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-05-25T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should retrieve all events scheduled for the next day (Tuesday) and display them.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-05-25T20:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "List all events this week.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should retrieve all events scheduled for the current week (Monday to Sunday) and display them.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-05-26T10:00:00"
+    }
+]

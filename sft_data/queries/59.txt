@@ -1,0 +1,147 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Board Game Night' for Wednesday at 8 PM, lasting for two hours.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Board Game Night', start time '2025-05-28T20:00:00', end time '2025-05-28T22:00:00', and no attendees or description.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-05-25T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me in for a yoga session this Friday at 6 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'yoga session', start time '2025-05-30T18:00:00', end time '2025-05-30T19:00:00', and no attendees or description.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-05-25T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing for dinner this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find any events with 'dinner' in the title. The tool should specify the date range for the week, from Monday to Sunday.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-05-26T11:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What is planned for Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find all events on Saturday.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-05-29T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we push back the brunch with my son on Sunday by an hour?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Brunch with Son' event on Sunday, then call update_event to update the event to start at 12:00 PM and end at 2:00 PM.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2025-05-29T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the dinner with my daughter on Monday to 6 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Dinner with Daughter' event on Monday, then call update_event to update the event to start at 6:00 PM and end at 7:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-05-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the visit to mom's place on Sunday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find 'Visit mom at assisted living home' on Sunday, then respond to the user with the start time.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2025-05-26T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What gallery am I guarding on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find 'Museum Guard Duty' on Tuesday, then respond to the user with the gallery listed in the event description.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-05-26T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my security training on Wednesday to Thursday at the same time.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find 'Security Training' on Wednesday, call update_event to change the event day to Thursday and update start and end times to '2025-05-29T09:00:00' and '2025-05-29T13:00:00'.",
+        "addressed_days": [
+            "Wednesday",
+            "Thursday"
+        ],
+        "current_time": "2025-05-27T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the dinner with my daughter on Monday. Decline the invitation.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find 'Dinner with Daughter' on Monday, then call respond_to_event with attending='DECLINE'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-05-26T11:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule dinner...",
+        "complexity": "Low",
+        "expected_behavior": "Ask clarifying question: 'Which dinner are you referring to?'",
+        "addressed_days": [],
+        "current_time": "2025-05-27T16:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Art fair time?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find 'Visit Local Art Fair' on Saturday, then respond to the user with the start time.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-05-29T12:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for the current day to find all events.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-05-28T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for the next day to find all events.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-05-28T20:00:00"
+    }
+]

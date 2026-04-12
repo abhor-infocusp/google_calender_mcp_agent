@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Lunch' for Tuesday at 12:00 PM, lasting an hour, with attendees crm_manager@ecommerce.com and sales@ecommerce.com, and the description is 'Celebrate successful quarter'.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Team Lunch' scheduled for Tuesday at 12:00 PM, ending at 1:00 PM, with attendees crm_manager@ecommerce.com, and sales@ecommerce.com, with description 'Celebrate successful quarter'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-09-27T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting on Wednesday at 3 PM to discuss the Q3 results, with the webanalytics@ecommerce.com team.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event titled 'Q3 Results Discussion' on Wednesday at 3:00 PM, lasting for some reasonable default duration (e.g., 1 hour), with attendees from webanalytics@ecommerce.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-09-27T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Can you schedule something for me after the data governance meeting on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "First, find the time the 'Data Governance Team Meeting' ends. Then, schedule a new event after that time, asking the user for the event title and other details before final creation.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-09-28T11:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I need to book some time to review the campaign performance. Please allocate some time on Friday morning.",
+        "complexity": "Medium",
+        "expected_behavior": "Schedule a new event called 'Campaign Performance Review' on Friday morning, asking the user for specific start time and duration before creation.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-09-27T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the meeting with the sales team on Tuesday to 3:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Find the event named 'Meeting with Sales Team' on Tuesday and update its start time to 3:30 PM, keeping the duration the same.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-09-27T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the 'Presentation Prep for Stakeholders' scheduled for Wednesday to Thursday at the same time.",
+        "complexity": "Medium",
+        "expected_behavior": "Locate the 'Presentation Prep for Stakeholders' event scheduled on Wednesday. Determine its current start time. Reschedule the event to Thursday at the same start time, maintaining the same duration.",
+        "addressed_days": [
+            "Wednesday",
+            "Thursday"
+        ],
+        "current_time": "2026-09-27T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What meetings do I have on Monday with the marketing team?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Monday that include any of the following attendees: marketing_manager@ecommerce.com, analyst1@ecommerce.com, analyst2@ecommerce.com.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-09-27T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my yoga class?",
+        "complexity": "Low",
+        "expected_behavior": "Search for an event called 'Yoga Class'. If found, return the start time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-09-27T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is there time for a quick meeting with analyst1@ecommerce.com and analyst2@ecommerce.com on Friday between 2 PM and 3 PM?",
+        "complexity": "High",
+        "expected_behavior": "Check for any existing events involving analyst1@ecommerce.com and analyst2@ecommerce.com between 2 PM and 3 PM on Friday. If no conflicts, respond affirmatively; otherwise, suggest alternative times.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-09-27T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline the Data Governance meeting and schedule a one-on-one with my manager at that same time.",
+        "complexity": "High",
+        "expected_behavior": "First, find the Data Governance meeting event id, decline it, and get the original start and end time of that event. Then create a new event at that same time slot called 'One-on-one with Manager'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-09-27T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting, Thursday, mle@ecommerce.com",
+        "complexity": "Medium",
+        "expected_behavior": "Interpret this as a request to schedule a meeting on Thursday with mle@ecommerce.com. Prompt user for meeting title and time, and other details.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-09-27T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... Friday... Campaign...",
+        "complexity": "Medium",
+        "expected_behavior": "Assume the user wants to reschedule an event on Friday related to a campaign. List the events on Friday that has 'Campaign' in its description or title. Ask the user to choose one, and then ask what time to reschedule to.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-09-27T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-09-28T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any meetings yesterday with the marketing team?",
+        "complexity": "Low",
+        "expected_behavior": "List all meetings from Sunday that has the marketing team as attendees (marketing_manager@ecommerce.com, analyst1@ecommerce.com, analyst2@ecommerce.com).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-09-28T08:00:00"
+    }
+]

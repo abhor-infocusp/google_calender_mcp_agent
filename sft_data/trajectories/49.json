@@ -1,0 +1,1071 @@
+[
+  {
+    "query": "Add a doctor's appointment to my calendar for Thursday at 3 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "The agent should create a new event with the summary 'Doctor's Appointment' on 2025-03-06 from 3:00 PM to 4:00 PM.",
+    "simulated_now": "2025-03-02 10:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Corporate Catering Event",
+          "start": "2025-03-06 11:00:00",
+          "end": "2025-03-06 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "souschef@email.com",
+            "server1@email.com",
+            "server2@email.com",
+            "bartender@email.com"
+          ],
+          "id": "evt_13421dc129b747fc8134b16d45fd1b05"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Corporate Catering Event",
+          "start": "2025-03-06 11:00:00",
+          "end": "2025-03-06 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "souschef@email.com",
+            "server1@email.com",
+            "server2@email.com",
+            "bartender@email.com"
+          ],
+          "id": "evt_13421dc129b747fc8134b16d45fd1b05"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Doctor's Appointment",
+          "start": "2025-03-06 15:00:00",
+          "end": "2025-03-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7be28496dcaf402ba120f1f6f23e4555"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Add a doctor's appointment to my calendar for Thursday at 3 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. I'll add a 1-hour appointment for you."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-02 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "end": "2025-03-06 16:00:00",
+          "start": "2025-03-06 15:00:00",
+          "summary": "Doctor's Appointment"
+        },
+        "result": "Event created successfully.\nDoctor's Appointment\n  ID: evt_7be28496dcaf402ba120f1f6f23e4555\n  Time: Thu Mar 06, 15:00 - 16:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've added it to your calendar:\n\nDoctor's Appointment\n  Time: Thu Mar 06, 15:00 - 16:00\n  RSVP: ACCEPT"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Create an event called 'Networking Lunch' for next Tuesday at 12:30 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "The agent should create a new event with the summary 'Networking Lunch' on 2025-03-04 from 12:30 PM to 1:30 PM.",
+    "simulated_now": "2025-03-02 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Menu Planning for Corporate Event",
+          "start": "2025-03-04 09:00:00",
+          "end": "2025-03-04 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_821d2770c1034d2f9e864ac5c127e28b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Client Regarding Wedding Menu",
+          "start": "2025-03-04 13:00:00",
+          "end": "2025-03-04 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.client@email.com"
+          ],
+          "id": "evt_6103927650c14ca8903ea00ff48336e8"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Family",
+          "start": "2025-03-04 19:00:00",
+          "end": "2025-03-04 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d393fc9843cb4e86b513e90507913a1e"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Menu Planning for Corporate Event",
+          "start": "2025-03-04 09:00:00",
+          "end": "2025-03-04 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_821d2770c1034d2f9e864ac5c127e28b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Networking Lunch",
+          "start": "2025-03-04 12:30:00",
+          "end": "2025-03-04 13:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_55201135a5f847f6a44d7722836ef1c9"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Client Regarding Wedding Menu",
+          "start": "2025-03-04 13:00:00",
+          "end": "2025-03-04 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.client@email.com"
+          ],
+          "id": "evt_6103927650c14ca8903ea00ff48336e8"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Family",
+          "start": "2025-03-04 19:00:00",
+          "end": "2025-03-04 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d393fc9843cb4e86b513e90507913a1e"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Networking Lunch' for next Tuesday at 12:30 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I need to get the current date and time to determine the correct date for next Tuesday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-02 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2025-03-04 12:30:00",
+          "end": "2025-03-04 13:30:00",
+          "summary": "Networking Lunch"
+        },
+        "result": "Event created successfully.\nNetworking Lunch\n  ID: evt_55201135a5f847f6a44d7722836ef1c9\n  Time: Tue Mar 04, 12:30 - 13:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've scheduled \"Networking Lunch\" for next Tuesday, March 4th, from 12:30 PM to 1:30 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Am I busy Wednesday evening?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should check the user's calendar for Wednesday between 6:00 PM and 9:00 PM and respond based on the events found (Book Club Meeting).",
+    "simulated_now": "2025-03-02 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prep for Thursday's Event",
+          "start": "2025-03-05 10:00:00",
+          "end": "2025-03-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "souschef@email.com",
+            "kitchenassistant@email.com"
+          ],
+          "id": "evt_e9a693e4c7e044f481f33523b123a51a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Event Planner",
+          "start": "2025-03-05 14:00:00",
+          "end": "2025-03-05 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.eplanner@email.com"
+          ],
+          "id": "evt_d7206110c4d0453284d0ede7c6793c81"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2025-03-05 18:30:00",
+          "end": "2025-03-05 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "alice@email.com",
+            "betty@email.com"
+          ],
+          "id": "evt_61f27f23ab314f21b046c55e86368d6c"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prep for Thursday's Event",
+          "start": "2025-03-05 10:00:00",
+          "end": "2025-03-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "souschef@email.com",
+            "kitchenassistant@email.com"
+          ],
+          "id": "evt_e9a693e4c7e044f481f33523b123a51a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Event Planner",
+          "start": "2025-03-05 14:00:00",
+          "end": "2025-03-05 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.eplanner@email.com"
+          ],
+          "id": "evt_d7206110c4d0453284d0ede7c6793c81"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2025-03-05 18:30:00",
+          "end": "2025-03-05 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "alice@email.com",
+            "betty@email.com"
+          ],
+          "id": "evt_61f27f23ab314f21b046c55e86368d6c"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Am I busy Wednesday evening?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-02 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-03-05 18:00:00"
+        },
+        "result": "Found 9 events:\nid: evt_61f27f23ab314f21b046c55e86368d6c | Book Club Meeting \u2014 Wed 18:30-20:00\nid: evt_24867c6ddd164355bc78e8ad8486c3cf | Corporate Catering Event \u2014 Thu 11:00-21:00\nid: evt_a50aafe43e5440eb80295760780c9447 | Invoicing & Bookkeeping \u2014 Fri 10:00-11:00\nid: evt_3c735cae90f34ee990582f2df3f7144d | Movie Night with Son \u2014 Fri 18:00-20:00\nid: evt_bb6cddb0bc3e4d2e86a3d1805b97cb4b | Private Party Catering Event \u2014 Sat 12:00-16:00\nid: evt_23463afbc64d4f249cfef5f169aebf46 | Grocery Shopping \u2014 Sat 18:00-19:00\nid: evt_33669469f4f54366bf3d303f96eb56b3 | Dinner with Friends \u2014 Sat 19:30-21:30\nid: evt_30518b8efc53488ea6ddc6269923b406 | Family Brunch \u2014 Sun 11:00-14:00\nid: evt_6f3c8b838c034d84bdc9f015cff04b43 | Relax - Visit Local Park with Son \u2014 Sun 15:00-17:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, you have a Book Club Meeting from 18:30 to 20:00 on Wednesday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What does my Saturday look like?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should retrieve all events scheduled for Saturday and present them to the user (Private Party Catering Event, Grocery Shopping, Dinner with Friends).",
+    "simulated_now": "2025-03-02 10:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Private Party Catering Event",
+          "start": "2025-03-08 12:00:00",
+          "end": "2025-03-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "souschef@email.com",
+            "server1@email.com"
+          ],
+          "id": "evt_82b5e3fb32e84459911719ac49a6f30c"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2025-03-08 18:00:00",
+          "end": "2025-03-08 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1d4d380bdf964efd9d41f0dc96e6e30f"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with Friends",
+          "start": "2025-03-08 19:30:00",
+          "end": "2025-03-08 21:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bob@email.com",
+            "carol@email.com"
+          ],
+          "id": "evt_ae2301f50e5540b0bb4d96ac39b1a2ad"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Private Party Catering Event",
+          "start": "2025-03-08 12:00:00",
+          "end": "2025-03-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "souschef@email.com",
+            "server1@email.com"
+          ],
+          "id": "evt_82b5e3fb32e84459911719ac49a6f30c"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2025-03-08 18:00:00",
+          "end": "2025-03-08 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1d4d380bdf964efd9d41f0dc96e6e30f"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with Friends",
+          "start": "2025-03-08 19:30:00",
+          "end": "2025-03-08 21:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bob@email.com",
+            "carol@email.com"
+          ],
+          "id": "evt_ae2301f50e5540b0bb4d96ac39b1a2ad"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What does my Saturday look like?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to know the current date to find out when the upcoming Saturday is."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-02 10:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will check for events on Saturday, March 8th, 2025."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-03-08 23:59:59",
+          "time_min": "2025-03-08 00:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_82b5e3fb32e84459911719ac49a6f30c | Private Party Catering Event \u2014 Sat 12:00-16:00\nid: evt_1d4d380bdf964efd9d41f0dc96e6e30f | Grocery Shopping \u2014 Sat 18:00-19:00\nid: evt_ae2301f50e5540b0bb4d96ac39b1a2ad | Dinner with Friends \u2014 Sat 19:30-21:30"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. This Saturday, March 8th, you have three entries in your calendar: a Private Party Catering Event from 12:00 to 16:00, Grocery Shopping from 18:00 to 19:00, and Dinner with Friends from 19:30 to 21:30."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move my son's soccer practice to 7 PM on Monday.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should find the 'Son's Soccer Practice' event on Monday and update its start time to 7:00 PM and end time to 8:30 PM.",
+    "simulated_now": "2025-03-02 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Review Catering Orders & Inventory",
+          "start": "2025-03-03 09:00:00",
+          "end": "2025-03-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "souschef@email.com"
+          ],
+          "id": "evt_6ceedbc1f4104b21b95e3e93c953cbe9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meet with Food Supplier",
+          "start": "2025-03-03 10:30:00",
+          "end": "2025-03-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@food.com"
+          ],
+          "id": "evt_063cc434bd324381a93798a458eaf17a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Son's Soccer Practice",
+          "start": "2025-03-03 18:00:00",
+          "end": "2025-03-03 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3d91e063b7d147f99a6a44410a89f614"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Review Catering Orders & Inventory",
+          "start": "2025-03-03 09:00:00",
+          "end": "2025-03-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "souschef@email.com"
+          ],
+          "id": "evt_6ceedbc1f4104b21b95e3e93c953cbe9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meet with Food Supplier",
+          "start": "2025-03-03 10:30:00",
+          "end": "2025-03-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@food.com"
+          ],
+          "id": "evt_063cc434bd324381a93798a458eaf17a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Son's Soccer Practice",
+          "start": "2025-03-03 19:00:00",
+          "end": "2025-03-03 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3d91e063b7d147f99a6a44410a89f614"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move my son's soccer practice to 7 PM on Monday."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. Let me find the event first."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-02 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 17 events:\nid: evt_6ceedbc1f4104b21b95e3e93c953cbe9 | Review Catering Orders & Inventory \u2014 Mon 09:00-10:00\nid: evt_063cc434bd324381a93798a458eaf17a | Meet with Food Supplier \u2014 Mon 10:30-12:00\nid: evt_3d91e063b7d147f99a6a44410a89f614 | Son's Soccer Practice \u2014 Mon 18:00-19:30\nid: evt_cb84a3a9b343465995916658302545e5 | Menu Planning for Corporate Event \u2014 Tue 09:00-11:00\nid: evt_b8c4eb11951142daaecaed9d4ac74b4a | Call with Client Regarding Wedding Menu \u2014 Tue 13:00-14:00\nid: evt_2cbb4451cf1d4715a5e5b6bffb68f5f0 | Dinner with Family \u2014 Tue 19:00-20:00\nid: evt_32fb351a8a554131a9320f20592ac307 | Prep for Thursday's Event \u2014 Wed 10:00-12:00\nid: evt_cc9be0e94b794573aec9b5654610a45e | Meeting with Event Planner \u2014 Wed 14:00-15:00\nid: evt_f4ed5bc21edc4df5af0273e94cd606b4 | Book Club Meeting \u2014 Wed 18:30-20:00\nid: evt_a5be548622b74577a6519f2178244e58 | Corporate Catering Event \u2014 Thu 11:00-21:00\nid: evt_4d0d50b64bd345f1beae72792e2144e7 | Invoicing & Bookkeeping \u2014 Fri 10:00-11:00\nid: evt_0851fbeab10e413fb3c4bc3fa890d4c7 | Movie Night with Son \u2014 Fri 18:00-20:00\nid: evt_1a38305787cc4b508ec5a8e7260c05c8 | Private Party Catering Event \u2014 Sat 12:00-16:00\nid: evt_81b19519e35a4bcb9c0479b529171fb2 | Grocery Shopping \u2014 Sat 18:00-19:00\nid: evt_818c3cbc78b6470597ab2b4b5feb4476 | Dinner with Friends \u2014 Sat 19:30-21:30\nid: evt_df8da606d7264a11b3902211c5a2a650 | Family Brunch \u2014 Sun 11:00-14:00\nid: evt_b54e97137a6e4bf8ad69686cc3a96018 | Relax - Visit Local Park with Son \u2014 Sun 15:00-17:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Got it. Moving your son's soccer practice to 7 PM on Monday, March 3rd."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2025-03-03 20:30:00",
+          "start": "2025-03-03 19:00:00",
+          "event_id": "evt_3d91e063b7d147f99a6a44410a89f614"
+        },
+        "result": "Event updated successfully.\nSon's Soccer Practice\n  ID: evt_3d91e063b7d147f99a6a44410a89f614\n  Time: Mon Mar 03, 19:00 - 20:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have moved your son's soccer practice to 7:00 PM to 8:30 PM on Monday, March 3rd."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who am I having dinner with on Saturday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should find the 'Dinner with Friends' event on Saturday and return the attendees: bob@email.com, carol@email.com.",
+    "simulated_now": "2025-03-02 10:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Private Party Catering Event",
+          "start": "2025-03-08 12:00:00",
+          "end": "2025-03-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "souschef@email.com",
+            "server1@email.com"
+          ],
+          "id": "evt_7dadbdab9af542ca9dd3f9f4ba717eea"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2025-03-08 18:00:00",
+          "end": "2025-03-08 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9dea084bdbf34b298707a1656290b92e"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with Friends",
+          "start": "2025-03-08 19:30:00",
+          "end": "2025-03-08 21:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bob@email.com",
+            "carol@email.com"
+          ],
+          "id": "evt_6b624b5071b84511bc104dd2935585b4"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Private Party Catering Event",
+          "start": "2025-03-08 12:00:00",
+          "end": "2025-03-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "souschef@email.com",
+            "server1@email.com"
+          ],
+          "id": "evt_7dadbdab9af542ca9dd3f9f4ba717eea"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2025-03-08 18:00:00",
+          "end": "2025-03-08 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9dea084bdbf34b298707a1656290b92e"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with Friends",
+          "start": "2025-03-08 19:30:00",
+          "end": "2025-03-08 21:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bob@email.com",
+            "carol@email.com"
+          ],
+          "id": "evt_6b624b5071b84511bc104dd2935585b4"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who am I having dinner with on Saturday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-02 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-03-08 00:00:00",
+          "time_max": "2025-03-08 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_7dadbdab9af542ca9dd3f9f4ba717eea | Private Party Catering Event \u2014 Sat 12:00-16:00\nid: evt_9dea084bdbf34b298707a1656290b92e | Grocery Shopping \u2014 Sat 18:00-19:00\nid: evt_6b624b5071b84511bc104dd2935585b4 | Dinner with Friends \u2014 Sat 19:30-21:30"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_6b624b5071b84511bc104dd2935585b4"
+        },
+        "result": "Dinner with Friends\n  ID: evt_6b624b5071b84511bc104dd2935585b4\n  Time: Sat Mar 08, 19:30 - 21:30\n  Attendees: bob@email.com, carol@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "You are having dinner with bob@email.com and carol@email.com."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Soccer?",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent searches for 'soccer' in the event summaries. It finds 'Son's Soccer Practice' on Monday and asks if the user is referring to that event.",
+    "simulated_now": "2025-03-02 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Review Catering Orders & Inventory",
+          "start": "2025-03-03 09:00:00",
+          "end": "2025-03-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "souschef@email.com"
+          ],
+          "id": "evt_85601ebe441c42dabc40891480d829dc"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meet with Food Supplier",
+          "start": "2025-03-03 10:30:00",
+          "end": "2025-03-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@food.com"
+          ],
+          "id": "evt_4c1d41cd8ade4d709bfe7d478c72517a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Son's Soccer Practice",
+          "start": "2025-03-03 18:00:00",
+          "end": "2025-03-03 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_aa09a34c474347e1a60892640abbb1bc"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Review Catering Orders & Inventory",
+          "start": "2025-03-03 09:00:00",
+          "end": "2025-03-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "souschef@email.com"
+          ],
+          "id": "evt_85601ebe441c42dabc40891480d829dc"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meet with Food Supplier",
+          "start": "2025-03-03 10:30:00",
+          "end": "2025-03-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@food.com"
+          ],
+          "id": "evt_4c1d41cd8ade4d709bfe7d478c72517a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Son's Soccer Practice",
+          "start": "2025-03-03 18:00:00",
+          "end": "2025-03-03 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_aa09a34c474347e1a60892640abbb1bc"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Soccer?"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 17 events:\nid: evt_85601ebe441c42dabc40891480d829dc | Review Catering Orders & Inventory \u2014 Mon 09:00-10:00\nid: evt_4c1d41cd8ade4d709bfe7d478c72517a | Meet with Food Supplier \u2014 Mon 10:30-12:00\nid: evt_aa09a34c474347e1a60892640abbb1bc | Son's Soccer Practice \u2014 Mon 18:00-19:30\nid: evt_4f071566017140b9a1f8f2f69b37a303 | Menu Planning for Corporate Event \u2014 Tue 09:00-11:00\nid: evt_1ea45bc763ab49419cc1d93c740dd880 | Call with Client Regarding Wedding Menu \u2014 Tue 13:00-14:00\nid: evt_8f3e4ca4c3d44de18b8d63a94beb03fb | Dinner with Family \u2014 Tue 19:00-20:00\nid: evt_383ca5afcf4b4b49aaa22dcbd452281e | Prep for Thursday's Event \u2014 Wed 10:00-12:00\nid: evt_a43570717d2343f98db66785acc20792 | Meeting with Event Planner \u2014 Wed 14:00-15:00\nid: evt_3c038ea51e6e4fe7a014f084153d392e | Book Club Meeting \u2014 Wed 18:30-20:00\nid: evt_2d21d7e7b40747898e635b5ba0cff7f7 | Corporate Catering Event \u2014 Thu 11:00-21:00\nid: evt_852339a5aa86405eaf75b5b8aac6addd | Invoicing & Bookkeeping \u2014 Fri 10:00-11:00\nid: evt_f3b0a9c1c2a541028abdc60b53a22fbc | Movie Night with Son \u2014 Fri 18:00-20:00\nid: evt_8c58bd81ef2f4b8daf5eedf448685cf5 | Private Party Catering Event \u2014 Sat 12:00-16:00\nid: evt_cb3d4be7179a4773923ca3b85436577d | Grocery Shopping \u2014 Sat 18:00-19:00\nid: evt_a87009cc2e6a45ac95849d8b19c3f522 | Dinner with Friends \u2014 Sat 19:30-21:30\nid: evt_f66620b11c3249429d30665e26cffc16 | Family Brunch \u2014 Sun 11:00-14:00\nid: evt_f893ee5b44cd4c4aac0928286868a111 | Relax - Visit Local Park with Son \u2014 Sun 15:00-17:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Are you asking about the Son's Soccer Practice on Monday from 6:00 PM to 7:30 PM?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change Friday movie",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent finds the 'Movie Night with Son' event on Friday and prompts the user what they would like to change about the event.",
+    "simulated_now": "2025-03-02 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Invoicing & Bookkeeping",
+          "start": "2025-03-07 10:00:00",
+          "end": "2025-03-07 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7faef7fd4bae4eb2a45fd882b4faafef"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Son",
+          "start": "2025-03-07 18:00:00",
+          "end": "2025-03-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d8a1f3b7641345b890acc5ee58610e09"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Invoicing & Bookkeeping",
+          "start": "2025-03-07 10:00:00",
+          "end": "2025-03-07 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7faef7fd4bae4eb2a45fd882b4faafef"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Son",
+          "start": "2025-03-07 18:00:00",
+          "end": "2025-03-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d8a1f3b7641345b890acc5ee58610e09"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change Friday movie"
+      },
+      {
+        "role": "assistant",
+        "content": "I can help with that. First, I need to know the current date and time to find the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-02 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-03-07 00:00:00",
+          "time_max": "2025-03-07 23:59:59"
+        },
+        "result": "Found 2 events:\nid: evt_7faef7fd4bae4eb2a45fd882b4faafef | Invoicing & Bookkeeping \u2014 Fri 10:00-11:00\nid: evt_d8a1f3b7641345b890acc5ee58610e09 | Movie Night with Son \u2014 Fri 18:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found an event called \"Movie Night with Son\" on Friday from 6:00 PM to 8:00 PM. What would you like to change about it?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "If today is Monday, the agent should retrieve all events scheduled for Monday and present them to the user (Review Catering Orders & Inventory, Meet with Food Supplier, Son's Soccer Practice).",
+    "simulated_now": "2025-03-03 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Review Catering Orders & Inventory",
+          "start": "2025-03-03 09:00:00",
+          "end": "2025-03-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "souschef@email.com"
+          ],
+          "id": "evt_18f2c284db304104882165a5cf7a4f70"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meet with Food Supplier",
+          "start": "2025-03-03 10:30:00",
+          "end": "2025-03-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@food.com"
+          ],
+          "id": "evt_f9d6c0830a9246198b9a73243c600781"
+        },
+        {
+          "day": "Monday",
+          "summary": "Son's Soccer Practice",
+          "start": "2025-03-03 18:00:00",
+          "end": "2025-03-03 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2f53ca0ab5314599b118f7142bd4a401"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Review Catering Orders & Inventory",
+          "start": "2025-03-03 09:00:00",
+          "end": "2025-03-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "souschef@email.com"
+          ],
+          "id": "evt_18f2c284db304104882165a5cf7a4f70"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meet with Food Supplier",
+          "start": "2025-03-03 10:30:00",
+          "end": "2025-03-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@food.com"
+          ],
+          "id": "evt_f9d6c0830a9246198b9a73243c600781"
+        },
+        {
+          "day": "Monday",
+          "summary": "Son's Soccer Practice",
+          "start": "2025-03-03 18:00:00",
+          "end": "2025-03-03 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2f53ca0ab5314599b118f7142bd4a401"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-03 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-03-03 00:00:00",
+          "time_max": "2025-03-03 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_18f2c284db304104882165a5cf7a4f70 | Review Catering Orders & Inventory \u2014 Mon 09:00-10:00\nid: evt_f9d6c0830a9246198b9a73243c600781 | Meet with Food Supplier \u2014 Mon 10:30-12:00\nid: evt_2f53ca0ab5314599b118f7142bd4a401 | Son's Soccer Practice \u2014 Mon 18:00-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "Today you have 3 events:\n- Review Catering Orders & Inventory from 09:00 to 10:00.\n- Meet with Food Supplier from 10:30 to 12:00.\n- Son's Soccer Practice from 18:00 to 19:30."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on my calendar for tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "If today is Monday, the agent should retrieve all events scheduled for Tuesday and present them to the user (Menu Planning for Corporate Event, Call with Client Regarding Wedding Menu, Dinner with Family).",
+    "simulated_now": "2025-03-03 08:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Menu Planning for Corporate Event",
+          "start": "2025-03-04 09:00:00",
+          "end": "2025-03-04 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_363081e17bd54204b72f00fe930ba190"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Client Regarding Wedding Menu",
+          "start": "2025-03-04 13:00:00",
+          "end": "2025-03-04 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.client@email.com"
+          ],
+          "id": "evt_732adb0cd7a4469481f69327bb5fda50"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Family",
+          "start": "2025-03-04 19:00:00",
+          "end": "2025-03-04 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_312c7f3646cc4e10b76326d0cd2585e2"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Menu Planning for Corporate Event",
+          "start": "2025-03-04 09:00:00",
+          "end": "2025-03-04 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_363081e17bd54204b72f00fe930ba190"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Client Regarding Wedding Menu",
+          "start": "2025-03-04 13:00:00",
+          "end": "2025-03-04 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.client@email.com"
+          ],
+          "id": "evt_732adb0cd7a4469481f69327bb5fda50"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Family",
+          "start": "2025-03-04 19:00:00",
+          "end": "2025-03-04 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_312c7f3646cc4e10b76326d0cd2585e2"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on my calendar for tomorrow?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out the current date to determine what \"tomorrow\" is. Then, I'll fetch the events for that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-03 08:00:00 | Monday"
+      },
+      {
+        "role": "assistant",
+        "content": "Tomorrow is Tuesday, March 4, 2025. Now I will check your calendar for that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-03-04 23:59:59",
+          "time_min": "2025-03-04 00:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_363081e17bd54204b72f00fe930ba190 | Menu Planning for Corporate Event \u2014 Tue 09:00-11:00\nid: evt_732adb0cd7a4469481f69327bb5fda50 | Call with Client Regarding Wedding Menu \u2014 Tue 13:00-14:00\nid: evt_312c7f3646cc4e10b76326d0cd2585e2 | Dinner with Family \u2014 Tue 19:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Here\u2019s what\u2019s on your calendar for tomorrow, Tuesday, March 4:\n\n*   **9:00 AM - 11:00 AM:** Menu Planning for Corporate Event\n*   **1:00 PM - 2:00 PM:** Call with Client Regarding Wedding Menu\n*   **7:00 PM - 8:00 PM:** Dinner with Family"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

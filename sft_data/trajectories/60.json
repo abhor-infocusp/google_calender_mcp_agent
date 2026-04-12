@@ -1,0 +1,1414 @@
+[
+  {
+    "query": "Create an event called 'Discuss Q1 budget' for Tuesday at 3 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create an event with the summary 'Discuss Q1 budget' on Tuesday, January 3rd, 2023, starting at 3:00 PM and ending at 4:00 PM. No attendees are specified.",
+    "simulated_now": "2023-01-01 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Contract Review - Tuscan Venue",
+          "start": "2023-01-03 10:00:00",
+          "end": "2023-01-03 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "legal_advisor@lawfirm.com"
+          ],
+          "id": "evt_1cb293a4c5dd48c9878c11e868615a65"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Currency Exchange Consultation",
+          "start": "2023-01-03 14:00:00",
+          "end": "2023-01-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "currency_expert@exchange.com"
+          ],
+          "id": "evt_6787ec9e8f4b4d17974ff750a44754b9"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Networking Event - Barcelona Event Planners",
+          "start": "2023-01-03 18:00:00",
+          "end": "2023-01-03 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_132df3cbb86a4ab89d892eb2e1f71479"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Contract Review - Tuscan Venue",
+          "start": "2023-01-03 10:00:00",
+          "end": "2023-01-03 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "legal_advisor@lawfirm.com"
+          ],
+          "id": "evt_1cb293a4c5dd48c9878c11e868615a65"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Currency Exchange Consultation",
+          "start": "2023-01-03 14:00:00",
+          "end": "2023-01-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "currency_expert@exchange.com"
+          ],
+          "id": "evt_6787ec9e8f4b4d17974ff750a44754b9"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Discuss Q1 budget",
+          "start": "2023-01-03 15:00:00",
+          "end": "2023-01-03 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8b77a7b17ed147b584fe5cada56454b5"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Networking Event - Barcelona Event Planners",
+          "start": "2023-01-03 18:00:00",
+          "end": "2023-01-03 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_132df3cbb86a4ab89d892eb2e1f71479"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Discuss Q1 budget' for Tuesday at 3 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "Cazl plan:\n1. Get the current time to determine the date for \"next Tuesday\".\n2. Create an event with the specified title, start time, and a default duration of one hour.\n\nAfter the current time is known, I will create the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-01-01 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Discuss Q1 budget",
+          "start": "2023-01-03 15:00:00",
+          "end": "2023-01-03 16:00:00"
+        },
+        "result": "Event created successfully.\nDiscuss Q1 budget\n  ID: evt_8b77a7b17ed147b584fe5cada56454b5\n  Time: Tue Jan 03, 15:00 - 16:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've scheduled \"Discuss Q1 budget\" for Tuesday, January 3rd, from 3:00 PM to 4:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Schedule a meeting for Friday at 2 PM to talk about the sales strategy.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create an event with the summary 'Talk about the sales strategy' on Friday, January 6th, 2023, starting at 2:00 PM and ending at 3:00 PM. No attendees are specified.",
+    "simulated_now": "2023-01-01 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Check-in - Upcoming Events",
+          "start": "2023-01-06 09:00:00",
+          "end": "2023-01-06 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_47a2129a929b4e139656e958fe5e3774"
+        },
+        {
+          "day": "Friday",
+          "summary": "Insurance Review - International Event Coverage",
+          "start": "2023-01-06 11:00:00",
+          "end": "2023-01-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "insurance_broker@insurance.com"
+          ],
+          "id": "evt_18e0b3e4f3ec45d690646c8c50c889b1"
+        },
+        {
+          "day": "Friday",
+          "summary": "Drinks with Friends - Celebrating a successful week",
+          "start": "2023-01-06 20:00:00",
+          "end": "2023-01-06 23:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f4e1a601650f4eecb35294faeea2396d"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Check-in - Upcoming Events",
+          "start": "2023-01-06 09:00:00",
+          "end": "2023-01-06 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_47a2129a929b4e139656e958fe5e3774"
+        },
+        {
+          "day": "Friday",
+          "summary": "Insurance Review - International Event Coverage",
+          "start": "2023-01-06 11:00:00",
+          "end": "2023-01-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "insurance_broker@insurance.com"
+          ],
+          "id": "evt_18e0b3e4f3ec45d690646c8c50c889b1"
+        },
+        {
+          "day": "Friday",
+          "summary": "Sales Strategy",
+          "start": "2023-01-06 14:00:00",
+          "end": "2023-01-06 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_798fc231dba4484d9cb278e840669547"
+        },
+        {
+          "day": "Friday",
+          "summary": "Drinks with Friends - Celebrating a successful week",
+          "start": "2023-01-06 20:00:00",
+          "end": "2023-01-06 23:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f4e1a601650f4eecb35294faeea2396d"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Schedule a meeting for Friday at 2 PM to talk about the sales strategy."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I will schedule a new meeting. First, I need to get the current time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-01-01 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2023-01-06 14:00:00",
+          "end": "2023-01-06 15:00:00",
+          "summary": "Sales Strategy"
+        },
+        "result": "Event created successfully.\nSales Strategy\n  ID: evt_798fc231dba4484d9cb278e840669547\n  Time: Fri Jan 06, 14:00 - 15:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have scheduled the meeting for this Friday at 2 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing Monday morning?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List events on Monday, January 2nd, 2023, between 9:00 AM and 12:00 PM to determine the user's morning activities.",
+    "simulated_now": "2023-01-02 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tuscany Retreat Debrief",
+          "start": "2023-01-02 09:00:00",
+          "end": "2023-01-02 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "event_coordinator1@example.com",
+            "event_coordinator2@example.com"
+          ],
+          "id": "evt_b5217ae400b64f2b921e601ba12398db"
+        },
+        {
+          "day": "Monday",
+          "summary": "Vendor Call - Catering Options, Santorini Wedding",
+          "start": "2023-01-02 11:00:00",
+          "end": "2023-01-02 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "catering_manager@santorini.com"
+          ],
+          "id": "evt_e98d95099fc44dd2927db424ade78e34"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Marrakech Product Launch",
+          "start": "2023-01-02 15:00:00",
+          "end": "2023-01-02 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_contact@corporation.com"
+          ],
+          "id": "evt_a9a1521678994cf1b6ffbcb962d6a6b8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Language Exchange Meetup - Spanish/English",
+          "start": "2023-01-02 19:30:00",
+          "end": "2023-01-02 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2294c3a2a25e4f8e8ed6caca82523826"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tuscany Retreat Debrief",
+          "start": "2023-01-02 09:00:00",
+          "end": "2023-01-02 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "event_coordinator1@example.com",
+            "event_coordinator2@example.com"
+          ],
+          "id": "evt_b5217ae400b64f2b921e601ba12398db"
+        },
+        {
+          "day": "Monday",
+          "summary": "Vendor Call - Catering Options, Santorini Wedding",
+          "start": "2023-01-02 11:00:00",
+          "end": "2023-01-02 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "catering_manager@santorini.com"
+          ],
+          "id": "evt_e98d95099fc44dd2927db424ade78e34"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Marrakech Product Launch",
+          "start": "2023-01-02 15:00:00",
+          "end": "2023-01-02 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_contact@corporation.com"
+          ],
+          "id": "evt_a9a1521678994cf1b6ffbcb962d6a6b8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Language Exchange Meetup - Spanish/English",
+          "start": "2023-01-02 19:30:00",
+          "end": "2023-01-02 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2294c3a2a25e4f8e8ed6caca82523826"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing Monday morning?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-01-02 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-01-02 12:00:00",
+          "time_min": "2023-01-02 00:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_b5217ae400b64f2b921e601ba12398db | Team Meeting - Tuscany Retreat Debrief \u2014 Mon 09:00-10:00\nid: evt_e98d95099fc44dd2927db424ade78e34 | Vendor Call - Catering Options, Santorini Wedding \u2014 Mon 11:00-12:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have two events scheduled for this morning:\n\n- Team Meeting - Tuscany Retreat Debrief from 9:00 to 10:00.\n- Vendor Call - Catering Options, Santorini Wedding from 11:00 to 12:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on the agenda for Wednesday evening?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List events on Wednesday, January 4th, 2023, between 6:00 PM and 10:00 PM to determine the user's evening plans.",
+    "simulated_now": "2023-01-04 17:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Site Visit - New Barcelona Venue",
+          "start": "2023-01-04 09:30:00",
+          "end": "2023-01-04 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a5700b84e9e94a0299bea3cb09b9e729"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Call with Travel Agent - Hotel Block, Marrakech",
+          "start": "2023-01-04 13:00:00",
+          "end": "2023-01-04 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "travel_agent@agency.com"
+          ],
+          "id": "evt_01bbf4c980b244d08f146c57aa321399"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Expat Friends",
+          "start": "2023-01-04 19:00:00",
+          "end": "2023-01-04 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bedea99dae1c4d1287a7b9b45292158e"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Site Visit - New Barcelona Venue",
+          "start": "2023-01-04 09:30:00",
+          "end": "2023-01-04 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a5700b84e9e94a0299bea3cb09b9e729"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Call with Travel Agent - Hotel Block, Marrakech",
+          "start": "2023-01-04 13:00:00",
+          "end": "2023-01-04 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "travel_agent@agency.com"
+          ],
+          "id": "evt_01bbf4c980b244d08f146c57aa321399"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Expat Friends",
+          "start": "2023-01-04 19:00:00",
+          "end": "2023-01-04 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bedea99dae1c4d1287a7b9b45292158e"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on the agenda for Wednesday evening?"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I'll check your calendar."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-01-04 17:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-01-04 17:00:00",
+          "time_max": "2023-01-04 23:59:59"
+        },
+        "result": "Found 1 events:\nid: evt_bedea99dae1c4d1287a7b9b45292158e | Dinner with Expat Friends \u2014 Wed 19:00-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have one event on the agenda for Wednesday evening: a \"Dinner with Expat Friends\" from 19:00 to 21:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can we move the Marrakech product launch client consultation to 4 PM on Monday?",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Client Consultation - Marrakech Product Launch' event on Monday and update its start time to 4:00 PM and end time to 5:00 PM.",
+    "simulated_now": "2023-01-02 11:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tuscany Retreat Debrief",
+          "start": "2023-01-02 09:00:00",
+          "end": "2023-01-02 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "event_coordinator1@example.com",
+            "event_coordinator2@example.com"
+          ],
+          "id": "evt_4be264fe3f28491f95ec57d8bbff4c8e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Vendor Call - Catering Options, Santorini Wedding",
+          "start": "2023-01-02 11:00:00",
+          "end": "2023-01-02 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "catering_manager@santorini.com"
+          ],
+          "id": "evt_48e7ba7595f745638a1518a3fdcc3225"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Marrakech Product Launch",
+          "start": "2023-01-02 15:00:00",
+          "end": "2023-01-02 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_contact@corporation.com"
+          ],
+          "id": "evt_86c9c7e6c63d4236bc9bea03771693bc"
+        },
+        {
+          "day": "Monday",
+          "summary": "Language Exchange Meetup - Spanish/English",
+          "start": "2023-01-02 19:30:00",
+          "end": "2023-01-02 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d7d231172ff84fe7a789c99f4fd51865"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tuscany Retreat Debrief",
+          "start": "2023-01-02 09:00:00",
+          "end": "2023-01-02 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "event_coordinator1@example.com",
+            "event_coordinator2@example.com"
+          ],
+          "id": "evt_4be264fe3f28491f95ec57d8bbff4c8e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Vendor Call - Catering Options, Santorini Wedding",
+          "start": "2023-01-02 11:00:00",
+          "end": "2023-01-02 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "catering_manager@santorini.com"
+          ],
+          "id": "evt_48e7ba7595f745638a1518a3fdcc3225"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Marrakech Product Launch",
+          "start": "2023-01-02 16:00:00",
+          "end": "2023-01-02 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_contact@corporation.com"
+          ],
+          "id": "evt_86c9c7e6c63d4236bc9bea03771693bc"
+        },
+        {
+          "day": "Monday",
+          "summary": "Language Exchange Meetup - Spanish/English",
+          "start": "2023-01-02 19:30:00",
+          "end": "2023-01-02 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d7d231172ff84fe7a789c99f4fd51865"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can we move the Marrakech product launch client consultation to 4 PM on Monday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I'll find the event and then I'll reschedule it."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-01-02 11:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-01-02 23:59:59",
+          "time_min": "2023-01-02 00:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_4be264fe3f28491f95ec57d8bbff4c8e | Team Meeting - Tuscany Retreat Debrief \u2014 Mon 09:00-10:00\nid: evt_48e7ba7595f745638a1518a3fdcc3225 | Vendor Call - Catering Options, Santorini Wedding \u2014 Mon 11:00-12:00\nid: evt_86c9c7e6c63d4236bc9bea03771693bc | Client Consultation - Marrakech Product Launch \u2014 Mon 15:00-16:00\nid: evt_d7d231172ff84fe7a789c99f4fd51865 | Language Exchange Meetup - Spanish/English \u2014 Mon 19:30-21:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2023-01-02 16:00:00",
+          "end": "2023-01-02 17:00:00",
+          "event_id": "evt_86c9c7e6c63d4236bc9bea03771693bc"
+        },
+        "result": "Event updated successfully.\nClient Consultation - Marrakech Product Launch\n  ID: evt_86c9c7e6c63d4236bc9bea03771693bc\n  Time: Mon Jan 02, 16:00 - 17:00\n  Attendees: client_contact@corporation.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved the Client Consultation - Marrakech Product Launch to 4 PM today."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the Tuscany retreat debrief?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Team Meeting - Tuscany Retreat Debrief' event and return the list of attendees: event_coordinator1@example.com, event_coordinator2@example.com.",
+    "simulated_now": "2023-01-02 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tuscany Retreat Debrief",
+          "start": "2023-01-02 09:00:00",
+          "end": "2023-01-02 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "event_coordinator1@example.com",
+            "event_coordinator2@example.com"
+          ],
+          "id": "evt_4410c3de992540789fb331a3010b028e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Vendor Call - Catering Options, Santorini Wedding",
+          "start": "2023-01-02 11:00:00",
+          "end": "2023-01-02 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "catering_manager@santorini.com"
+          ],
+          "id": "evt_443ba0583e17423996860da1bbea8bc5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Marrakech Product Launch",
+          "start": "2023-01-02 15:00:00",
+          "end": "2023-01-02 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_contact@corporation.com"
+          ],
+          "id": "evt_c4bf344fb7e94d07a7f861aaf54571d3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Language Exchange Meetup - Spanish/English",
+          "start": "2023-01-02 19:30:00",
+          "end": "2023-01-02 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_28e93860cb834fcaac8c570b61371313"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tuscany Retreat Debrief",
+          "start": "2023-01-02 09:00:00",
+          "end": "2023-01-02 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "event_coordinator1@example.com",
+            "event_coordinator2@example.com"
+          ],
+          "id": "evt_4410c3de992540789fb331a3010b028e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Vendor Call - Catering Options, Santorini Wedding",
+          "start": "2023-01-02 11:00:00",
+          "end": "2023-01-02 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "catering_manager@santorini.com"
+          ],
+          "id": "evt_443ba0583e17423996860da1bbea8bc5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Marrakech Product Launch",
+          "start": "2023-01-02 15:00:00",
+          "end": "2023-01-02 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_contact@corporation.com"
+          ],
+          "id": "evt_c4bf344fb7e94d07a7f861aaf54571d3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Language Exchange Meetup - Spanish/English",
+          "start": "2023-01-02 19:30:00",
+          "end": "2023-01-02 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_28e93860cb834fcaac8c570b61371313"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the Tuscany retreat debrief?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-01-02 10:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 21 events:\nid: evt_4410c3de992540789fb331a3010b028e | Team Meeting - Tuscany Retreat Debrief \u2014 Mon 09:00-10:00\nid: evt_443ba0583e17423996860da1bbea8bc5 | Vendor Call - Catering Options, Santorini Wedding \u2014 Mon 11:00-12:00\nid: evt_c4bf344fb7e94d07a7f861aaf54571d3 | Client Consultation - Marrakech Product Launch \u2014 Mon 15:00-16:00\nid: evt_28e93860cb834fcaac8c570b61371313 | Language Exchange Meetup - Spanish/English \u2014 Mon 19:30-21:00\nid: evt_92514319d11843b39c19b85b0d2303cc | Contract Review - Tuscan Venue \u2014 Tue 10:00-11:30\nid: evt_ec8a800bf8cc4704b07e2eb940f7fc3a | Currency Exchange Consultation \u2014 Tue 14:00-15:00\nid: evt_67cf9d274d454adfa1711308abb0c47a | Networking Event - Barcelona Event Planners \u2014 Tue 18:00-19:00\nid: evt_19949caab1ec422698071547edc70f22 | Site Visit - New Barcelona Venue \u2014 Wed 09:30-11:00\nid: evt_4e182bc32ea146daae459cc358b32fdb | Call with Travel Agent - Hotel Block, Marrakech \u2014 Wed 13:00-14:00\nid: evt_e42f03d0b7054bfba0d6670346b897e3 | Dinner with Expat Friends \u2014 Wed 19:00-21:00\nid: evt_84bafb88cc7c4ef7a5a3defc0f67a037 | Budget Reconciliation - Santorini Wedding \u2014 Thu 10:00-11:00\nid: evt_209d75c12f824f75a098353b09158708 | Virtual Meeting - Destination Marketing Org., Marrakech \u2014 Thu 14:00-15:30\nid: evt_35f506a8cd754b68bb80c178e64d5977 | Yoga Class \u2014 Thu 19:00-20:00\nid: evt_1d29a3b4694d49c48ba33892718dc6f5 | Team Check-in - Upcoming Events \u2014 Fri 09:00-10:30\nid: evt_3be8397aeba84bb59a7a338d7c03b4a1 | Insurance Review - International Event Coverage \u2014 Fri 11:00-12:00\nid: evt_9bc8a80b7f02489c90026066541b6956 | Drinks with Friends - Celebrating a successful week \u2014 Fri 20:00-23:00\nid: evt_33e79297491241a7ba611bcfa0816a5f | Potential Client Call - Corporate Retreat Inquiry \u2014 Sat 10:00-11:00\nid: evt_9f0e5fe64e934bbdbce0d401cb748c2d | Explore Gothic Quarter \u2014 Sat 13:00-16:00\nid: evt_9ae3f241ee164be7b094c64f918c78b9 | Dinner Party \u2014 Sat 20:00-23:59\nid: evt_d924101be8fe4f9191dd97ae0fa2dcbe | Brunch with Family \u2014 Sun 11:00-13:00\nid: evt_e98e5bbc19ca44d3b0b9f1d18ed7097c | Relax at Barceloneta Beach \u2014 Sun 15:00-17:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_4410c3de992540789fb331a3010b028e"
+        },
+        "result": "Team Meeting - Tuscany Retreat Debrief\n  ID: evt_4410c3de992540789fb331a3010b028e\n  Time: Mon Jan 02, 09:00 - 10:00\n  Attendees: event_coordinator1@example.com, event_coordinator2@example.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "The attendees for the Tuscany retreat debrief are event_coordinator1@example.com and event_coordinator2@example.com."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is the insurance review on Friday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Insurance Review - International Event Coverage' event on Friday and return the start time: 11:00 AM.",
+    "simulated_now": "2023-01-06 08:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Check-in - Upcoming Events",
+          "start": "2023-01-06 09:00:00",
+          "end": "2023-01-06 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_18771e2fab6842318c83cf143871d2b7"
+        },
+        {
+          "day": "Friday",
+          "summary": "Insurance Review - International Event Coverage",
+          "start": "2023-01-06 11:00:00",
+          "end": "2023-01-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "insurance_broker@insurance.com"
+          ],
+          "id": "evt_0cb06c4a9bbd4594aa93af4522ae67ec"
+        },
+        {
+          "day": "Friday",
+          "summary": "Drinks with Friends - Celebrating a successful week",
+          "start": "2023-01-06 20:00:00",
+          "end": "2023-01-06 23:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d9a4498d4ba0471a91b535174fe0b402"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Check-in - Upcoming Events",
+          "start": "2023-01-06 09:00:00",
+          "end": "2023-01-06 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_18771e2fab6842318c83cf143871d2b7"
+        },
+        {
+          "day": "Friday",
+          "summary": "Insurance Review - International Event Coverage",
+          "start": "2023-01-06 11:00:00",
+          "end": "2023-01-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "insurance_broker@insurance.com"
+          ],
+          "id": "evt_0cb06c4a9bbd4594aa93af4522ae67ec"
+        },
+        {
+          "day": "Friday",
+          "summary": "Drinks with Friends - Celebrating a successful week",
+          "start": "2023-01-06 20:00:00",
+          "end": "2023-01-06 23:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d9a4498d4ba0471a91b535174fe0b402"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is the insurance review on Friday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-01-06 08:00:00 | Friday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-01-06 00:00:00",
+          "time_max": "2023-01-06 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_18771e2fab6842318c83cf143871d2b7 | Team Check-in - Upcoming Events \u2014 Fri 09:00-10:30\nid: evt_0cb06c4a9bbd4594aa93af4522ae67ec | Insurance Review - International Event Coverage \u2014 Fri 11:00-12:00\nid: evt_d9a4498d4ba0471a91b535174fe0b402 | Drinks with Friends - Celebrating a successful week \u2014 Fri 20:00-23:00"
+      },
+      {
+        "role": "assistant",
+        "content": "The insurance review is scheduled for 11:00 to 12:00 this Friday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule the budget reconciliation for the Santorini Wedding to Thursday at 3:30 PM if it does not overlap with the virtual meeting.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Find the 'Budget Reconciliation - Santorini Wedding' event on Thursday and check if rescheduling it to 3:30 PM overlaps with the 'Virtual Meeting - Destination Marketing Org., Marrakech' event. If no overlap, update the 'Budget Reconciliation - Santorini Wedding' start time to 3:30 PM.",
+    "simulated_now": "2023-01-05 09:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Budget Reconciliation - Santorini Wedding",
+          "start": "2023-01-05 10:00:00",
+          "end": "2023-01-05 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e3c0e0c9d3474e7d8889edb066bde51a"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Virtual Meeting - Destination Marketing Org., Marrakech",
+          "start": "2023-01-05 14:00:00",
+          "end": "2023-01-05 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "dmo_contact@marrakech.com"
+          ],
+          "id": "evt_588534e0694b41c58963d557efa4719b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Yoga Class",
+          "start": "2023-01-05 19:00:00",
+          "end": "2023-01-05 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8b6d8e7c62874c939a8c394cf85eb8f1"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Virtual Meeting - Destination Marketing Org., Marrakech",
+          "start": "2023-01-05 14:00:00",
+          "end": "2023-01-05 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "dmo_contact@marrakech.com"
+          ],
+          "id": "evt_588534e0694b41c58963d557efa4719b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Budget Reconciliation - Santorini Wedding",
+          "start": "2023-01-05 15:30:00",
+          "end": "2023-01-05 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e3c0e0c9d3474e7d8889edb066bde51a"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Yoga Class",
+          "start": "2023-01-05 19:00:00",
+          "end": "2023-01-05 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8b6d8e7c62874c939a8c394cf85eb8f1"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule the budget reconciliation for the Santorini Wedding to Thursday at 3:30 PM if it does not overlap with the virtual meeting."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-01-05 09:00:00 | Thursday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 21 events:\nid: evt_7e7242f2e3e1434d94b4bc89ca795893 | Team Meeting - Tuscany Retreat Debrief \u2014 Mon 09:00-10:00\nid: evt_0df13a1d54e148dc94bfa8efea2bb756 | Vendor Call - Catering Options, Santorini Wedding \u2014 Mon 11:00-12:00\nid: evt_5eb1327747f64aa2a94b0a50eef822c4 | Client Consultation - Marrakech Product Launch \u2014 Mon 15:00-16:00\nid: evt_b901a7ecc4c942acb74a22f6600acfdc | Language Exchange Meetup - Spanish/English \u2014 Mon 19:30-21:00\nid: evt_e679c8708974430a8d7d815b5e27fd5f | Contract Review - Tuscan Venue \u2014 Tue 10:00-11:30\nid: evt_025fb2782c604ac2b096ef7dedba0582 | Currency Exchange Consultation \u2014 Tue 14:00-15:00\nid: evt_5347f873260f4761b082b28598f4ee65 | Networking Event - Barcelona Event Planners \u2014 Tue 18:00-19:00\nid: evt_e0bb854e7bdf4269bd90359515d1c2b8 | Site Visit - New Barcelona Venue \u2014 Wed 09:30-11:00\nid: evt_ceddc0ee723345fcbcdfd6080d7c569e | Call with Travel Agent - Hotel Block, Marrakech \u2014 Wed 13:00-14:00\nid: evt_ff3c146ae20d435dab30611708376a58 | Dinner with Expat Friends \u2014 Wed 19:00-21:00\nid: evt_e3c0e0c9d3474e7d8889edb066bde51a | Budget Reconciliation - Santorini Wedding \u2014 Thu 10:00-11:00\nid: evt_588534e0694b41c58963d557efa4719b | Virtual Meeting - Destination Marketing Org., Marrakech \u2014 Thu 14:00-15:30\nid: evt_8b6d8e7c62874c939a8c394cf85eb8f1 | Yoga Class \u2014 Thu 19:00-20:00\nid: evt_322dbbbdbf1a49f3945c23317c484e0d | Team Check-in - Upcoming Events \u2014 Fri 09:00-10:30\nid: evt_686317fac4404e63b12da19ea29fa585 | Insurance Review - International Event Coverage \u2014 Fri 11:00-12:00\nid: evt_47d8185f70f744109d002fc3193a11f7 | Drinks with Friends - Celebrating a successful week \u2014 Fri 20:00-23:00\nid: evt_1af13e74dd264283842b38e117282212 | Potential Client Call - Corporate Retreat Inquiry \u2014 Sat 10:00-11:00\nid: evt_dc52521e202b4b94a4d82412779db893 | Explore Gothic Quarter \u2014 Sat 13:00-16:00\nid: evt_1dfabda5dac641f5a75de7981576a907 | Dinner Party \u2014 Sat 20:00-23:59\nid: evt_47259e64057341038da911d7cc427ed9 | Brunch with Family \u2014 Sun 11:00-13:00\nid: evt_69acffa4ac6b427390df3c6086a32d3f | Relax at Barceloneta Beach \u2014 Sun 15:00-17:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2023-01-05 16:30:00",
+          "start": "2023-01-05 15:30:00",
+          "event_id": "evt_e3c0e0c9d3474e7d8889edb066bde51a"
+        },
+        "result": "Event updated successfully.\nBudget Reconciliation - Santorini Wedding\n  ID: evt_e3c0e0c9d3474e7d8889edb066bde51a\n  Time: Thu Jan 05, 15:30 - 16:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have rescheduled the budget reconciliation for the Santorini Wedding to Thursday at 3:30 PM. It does not conflict with the virtual meeting."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move... catering... Monday...",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Vendor Call - Catering Options, Santorini Wedding' event on Monday and prompt the user for the new time.",
+    "simulated_now": "2023-01-02 10:30:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tuscany Retreat Debrief",
+          "start": "2023-01-02 09:00:00",
+          "end": "2023-01-02 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "event_coordinator1@example.com",
+            "event_coordinator2@example.com"
+          ],
+          "id": "evt_a0ded48f5bb14b1b96efc3b65b9577cd"
+        },
+        {
+          "day": "Monday",
+          "summary": "Vendor Call - Catering Options, Santorini Wedding",
+          "start": "2023-01-02 11:00:00",
+          "end": "2023-01-02 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "catering_manager@santorini.com"
+          ],
+          "id": "evt_7f5f1a68821141c7b7bfe8fc1eb2fa3f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Marrakech Product Launch",
+          "start": "2023-01-02 15:00:00",
+          "end": "2023-01-02 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_contact@corporation.com"
+          ],
+          "id": "evt_219a938bb68d4b95bfabcaa6fccc6a7c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Language Exchange Meetup - Spanish/English",
+          "start": "2023-01-02 19:30:00",
+          "end": "2023-01-02 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a1da8a635e69464297db52bc023a94e4"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Tuscany Retreat Debrief",
+          "start": "2023-01-02 09:00:00",
+          "end": "2023-01-02 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "event_coordinator1@example.com",
+            "event_coordinator2@example.com"
+          ],
+          "id": "evt_a0ded48f5bb14b1b96efc3b65b9577cd"
+        },
+        {
+          "day": "Monday",
+          "summary": "Vendor Call - Catering Options, Santorini Wedding",
+          "start": "2023-01-02 11:00:00",
+          "end": "2023-01-02 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "catering_manager@santorini.com"
+          ],
+          "id": "evt_7f5f1a68821141c7b7bfe8fc1eb2fa3f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Consultation - Marrakech Product Launch",
+          "start": "2023-01-02 15:00:00",
+          "end": "2023-01-02 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_contact@corporation.com"
+          ],
+          "id": "evt_219a938bb68d4b95bfabcaa6fccc6a7c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Language Exchange Meetup - Spanish/English",
+          "start": "2023-01-02 19:30:00",
+          "end": "2023-01-02 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a1da8a635e69464297db52bc023a94e4"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move... catering... Monday..."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-01-02 10:30:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-01-02 00:00:00",
+          "time_max": "2023-01-02 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_a0ded48f5bb14b1b96efc3b65b9577cd | Team Meeting - Tuscany Retreat Debrief \u2014 Mon 09:00-10:00\nid: evt_7f5f1a68821141c7b7bfe8fc1eb2fa3f | Vendor Call - Catering Options, Santorini Wedding \u2014 Mon 11:00-12:00\nid: evt_219a938bb68d4b95bfabcaa6fccc6a7c | Client Consultation - Marrakech Product Launch \u2014 Mon 15:00-16:00\nid: evt_a1da8a635e69464297db52bc023a94e4 | Language Exchange Meetup - Spanish/English \u2014 Mon 19:30-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found a \"Vendor Call - Catering Options, Santorini Wedding\" event on Monday from 11:00 to 12:00. Is this the event you'd like to move? And if so, what day and time would you like to move it to?\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Delete...Barcelona...networking",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Networking Event - Barcelona Event Planners' event on Tuesday and ask the user if they want to delete it. If yes, then delete the event.",
+    "simulated_now": "2023-01-03 09:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Contract Review - Tuscan Venue",
+          "start": "2023-01-03 10:00:00",
+          "end": "2023-01-03 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "legal_advisor@lawfirm.com"
+          ],
+          "id": "evt_fe20d8ad66f940e781b89d2b8a6b9ef8"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Currency Exchange Consultation",
+          "start": "2023-01-03 14:00:00",
+          "end": "2023-01-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "currency_expert@exchange.com"
+          ],
+          "id": "evt_deb6fad5f4c640a98d94f70ea8573107"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Networking Event - Barcelona Event Planners",
+          "start": "2023-01-03 18:00:00",
+          "end": "2023-01-03 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c460242a45f0418b8b5b0982605d02d9"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Contract Review - Tuscan Venue",
+          "start": "2023-01-03 10:00:00",
+          "end": "2023-01-03 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "legal_advisor@lawfirm.com"
+          ],
+          "id": "evt_fe20d8ad66f940e781b89d2b8a6b9ef8"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Currency Exchange Consultation",
+          "start": "2023-01-03 14:00:00",
+          "end": "2023-01-03 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "currency_expert@exchange.com"
+          ],
+          "id": "evt_deb6fad5f4c640a98d94f70ea8573107"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Delete...Barcelona...networking"
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. I'll first look for the event and then delete it."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 21 events:\nid: evt_7282970358aa4cfc949f59e96495b79f | Team Meeting - Tuscany Retreat Debrief \u2014 Mon 09:00-10:00\nid: evt_20971e94738c4ade9be0a215717f1386 | Vendor Call - Catering Options, Santorini Wedding \u2014 Mon 11:00-12:00\nid: evt_d4aa0f2663b548aa84b73c419c0ee87d | Client Consultation - Marrakech Product Launch \u2014 Mon 15:00-16:00\nid: evt_2dbf123ef6334e7fbf71ac99ca110944 | Language Exchange Meetup - Spanish/English \u2014 Mon 19:30-21:00\nid: evt_fe20d8ad66f940e781b89d2b8a6b9ef8 | Contract Review - Tuscan Venue \u2014 Tue 10:00-11:30\nid: evt_deb6fad5f4c640a98d94f70ea8573107 | Currency Exchange Consultation \u2014 Tue 14:00-15:00\nid: evt_c460242a45f0418b8b5b0982605d02d9 | Networking Event - Barcelona Event Planners \u2014 Tue 18:00-19:00\nid: evt_403c31f482ea46039d872face6dc83c8 | Site Visit - New Barcelona Venue \u2014 Wed 09:30-11:00\nid: evt_6f2eb3da8b3d4fe0a8ce71fa7dc9c53e | Call with Travel Agent - Hotel Block, Marrakech \u2014 Wed 13:00-14:00\nid: evt_d26418f3928c4d87a0e8c21aba54e2fc | Dinner with Expat Friends \u2014 Wed 19:00-21:00\nid: evt_d2d83e73715a4018b355dc72d6521d4e | Budget Reconciliation - Santorini Wedding \u2014 Thu 10:00-11:00\nid: evt_cc9394d218f04d16bf6dc87ac11c7e92 | Virtual Meeting - Destination Marketing Org., Marrakech \u2014 Thu 14:00-15:30\nid: evt_ca6b251de3d14be1a4c4ee1af5a77748 | Yoga Class \u2014 Thu 19:00-20:00\nid: evt_e03b975ad8d94a72975feefaa9e51eba | Team Check-in - Upcoming Events \u2014 Fri 09:00-10:30\nid: evt_46bd8fe062e542dc8de09460a8d6a00d | Insurance Review - International Event Coverage \u2014 Fri 11:00-12:00\nid: evt_e04a1b4263604d3ba93187167be3a7f7 | Drinks with Friends - Celebrating a successful week \u2014 Fri 20:00-23:00\nid: evt_eaebf7ea90d2496aa23fc69f0ddb17bc | Potential Client Call - Corporate Retreat Inquiry \u2014 Sat 10:00-11:00\nid: evt_63fc7f0d6fb64b79b09d159a06523477 | Explore Gothic Quarter \u2014 Sat 13:00-16:00\nid: evt_786605729cce412e8ea3a828a3db0861 | Dinner Party \u2014 Sat 20:00-23:59\nid: evt_287de3a4ac784513bc6a2c61517cc205 | Brunch with Family \u2014 Sun 11:00-13:00\nid: evt_36b7ff79d6494aa2a55bf90a22640a24 | Relax at Barceloneta Beach \u2014 Sun 15:00-17:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found \"Networking Event - Barcelona Event Planners\" on Tuesday from 18:00 to 19:00. Deleting it now."
+      },
+      {
+        "role": "tool_call",
+        "name": "delete_event",
+        "args": {
+          "event_id": "evt_c460242a45f0418b8b5b0982605d02d9"
+        },
+        "result": "Event deleted: id: evt_c460242a45f0418b8b5b0982605d02d9 | Networking Event - Barcelona Event Planners \u2014 Tue 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Done. I have deleted the \"Networking Event - Barcelona Event Planners\" from your calendar."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events for today, January 5th, 2023.",
+    "simulated_now": "2023-01-05 08:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Budget Reconciliation - Santorini Wedding",
+          "start": "2023-01-05 10:00:00",
+          "end": "2023-01-05 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_281561d5f1984a2992b5521727d56536"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Virtual Meeting - Destination Marketing Org., Marrakech",
+          "start": "2023-01-05 14:00:00",
+          "end": "2023-01-05 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "dmo_contact@marrakech.com"
+          ],
+          "id": "evt_1399f3eb56b14e9581674e71c655269e"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Yoga Class",
+          "start": "2023-01-05 19:00:00",
+          "end": "2023-01-05 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5031691468ac4f61bf9e1a6fb391f94e"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Budget Reconciliation - Santorini Wedding",
+          "start": "2023-01-05 10:00:00",
+          "end": "2023-01-05 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_281561d5f1984a2992b5521727d56536"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Virtual Meeting - Destination Marketing Org., Marrakech",
+          "start": "2023-01-05 14:00:00",
+          "end": "2023-01-05 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "dmo_contact@marrakech.com"
+          ],
+          "id": "evt_1399f3eb56b14e9581674e71c655269e"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Yoga Class",
+          "start": "2023-01-05 19:00:00",
+          "end": "2023-01-05 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5031691468ac4f61bf9e1a6fb391f94e"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify today's date. Then, I will call list_events for today to see all the events scheduled.\n"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-01-05 08:00:00 | Thursday"
+      },
+      {
+        "role": "assistant",
+        "content": "I have the current date. Now I will retrieve all of your events for today.\n"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-01-05 00:00:00",
+          "time_max": "2023-01-05 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_281561d5f1984a2992b5521727d56536 | Budget Reconciliation - Santorini Wedding \u2014 Thu 10:00-11:00\nid: evt_1399f3eb56b14e9581674e71c655269e | Virtual Meeting - Destination Marketing Org., Marrakech \u2014 Thu 14:00-15:30\nid: evt_5031691468ac4f61bf9e1a6fb391f94e | Yoga Class \u2014 Thu 19:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have 3 events scheduled for today:\n- 10:00-11:00: Budget Reconciliation - Santorini Wedding\n- 14:00-15:30: Virtual Meeting - Destination Marketing Org., Marrakech\n- 19:00-20:00: Yoga Class"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on my schedule tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events for tomorrow, January 7th, 2023.",
+    "simulated_now": "2023-01-06 20:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Potential Client Call - Corporate Retreat Inquiry",
+          "start": "2023-01-07 10:00:00",
+          "end": "2023-01-07 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "prospect@company.com"
+          ],
+          "id": "evt_770a0b102b604c6990ad80c62734e7c2"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Explore Gothic Quarter",
+          "start": "2023-01-07 13:00:00",
+          "end": "2023-01-07 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_20e26ebe261d4d6e8e47a8f31d418e6e"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner Party",
+          "start": "2023-01-07 20:00:00",
+          "end": "2023-01-07 23:59:59",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_22b77c1d9b4d4da0b9f1cffc169d40e2"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Potential Client Call - Corporate Retreat Inquiry",
+          "start": "2023-01-07 10:00:00",
+          "end": "2023-01-07 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "prospect@company.com"
+          ],
+          "id": "evt_770a0b102b604c6990ad80c62734e7c2"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Explore Gothic Quarter",
+          "start": "2023-01-07 13:00:00",
+          "end": "2023-01-07 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_20e26ebe261d4d6e8e47a8f31d418e6e"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner Party",
+          "start": "2023-01-07 20:00:00",
+          "end": "2023-01-07 23:59:59",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_22b77c1d9b4d4da0b9f1cffc169d40e2"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on my schedule tomorrow?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out the current date to determine what \"tomorrow\" is. Then I'll list the events for that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-01-06 20:00:00 | Friday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-01-07 00:00:00",
+          "time_max": "2023-01-07 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_770a0b102b604c6990ad80c62734e7c2 | Potential Client Call - Corporate Retreat Inquiry \u2014 Sat 10:00-11:00\nid: evt_20e26ebe261d4d6e8e47a8f31d418e6e | Explore Gothic Quarter \u2014 Sat 13:00-16:00\nid: evt_22b77c1d9b4d4da0b9f1cffc169d40e2 | Dinner Party \u2014 Sat 20:00-23:59"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Tomorrow, Saturday, January 7, 2023, you have three entries in your calendar:\n\n- 10:00 AM to 11:00 AM: Potential Client Call - Corporate Retreat Inquiry\n- 1:00 PM to 4:00 PM: Explore Gothic Quarter\n- 8:00 PM to 11:59 PM: Dinner Party"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

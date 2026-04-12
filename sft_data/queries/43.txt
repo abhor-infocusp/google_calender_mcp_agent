@@ -1,0 +1,139 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Strategy Brainstorm' for Tuesday at 1 PM for 1 hour. Invite david.lee@company.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Strategy Brainstorm' on Tuesday, October 17, 2023, from 1:00 PM to 2:00 PM with david.lee@company.com as an attendee.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-10-15T23:59:59"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for Friday to discuss 'Project Alpha' at 11:00 AM for 30 minutes.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event named 'Project Alpha' on Friday, October 20, 2023, from 11:00 AM to 11:30 AM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-10-15T23:59:59"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List events scheduled between 12:00 PM and 6:00 PM on Wednesday, October 18, 2023.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-10-18T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Friday look like?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled for Friday, October 20, 2023, from 9:00 AM to 9:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-10-20T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the Marketing Analytics Team Meeting on Monday to start at 9:30 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Weekly Marketing Analytics Team Meeting' event on Monday, October 16, 2023, and update its start time to 9:30 AM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-10-16T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the 'A/B Test Design' meeting on Tuesday to 10 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'A/B Test Design' event on Tuesday, October 17, 2023, and update its start time to 10:00 AM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-10-17T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Marketing Analytics Team Meeting on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Weekly Marketing Analytics Team Meeting' event on Monday, October 16, 2023, and list the attendees.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-10-16T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What's the topic of the meeting with the CRM Specialist on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Meeting with CRM Specialist' event on Thursday, October 19, 2023, and return the event's summary (title).",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-10-19T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline the dinner with friends on Monday, and schedule a meeting with Ivan to discuss CRM on Monday at 6:30 PM for 1 hour.",
+        "complexity": "High",
+        "expected_behavior": "Decline the 'Dinner with Friends' event on Monday, October 16, 2023. Create a new event named 'Meeting with Ivan' on Monday, October 16, 2023, from 6:30 PM to 7:30 PM with ivan.petrov@company.com as an attendee.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-10-16T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Move the data governance meeting on Tuesday to Wednesday at the same time and invite david.lee@company.com.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Data Governance Meeting - Data Quality Issues' event on Tuesday, October 17, 2023. Get its start time. Delete the event on Tuesday. Create a new event with the same name and start time on Wednesday, October 18, 2023, and invite david.lee@company.com, al.garcia@company.com and becky.jones@company.com.",
+        "addressed_days": [
+            "Tuesday",
+            "Wednesday"
+        ],
+        "current_time": "2023-10-17T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change analytics.",
+        "complexity": "Medium",
+        "expected_behavior": "This query is ambiguous. The agent should ask for clarification. For example: Which analytics event are you referring to? And what date is this analytics event on?",
+        "addressed_days": [],
+        "current_time": "2023-10-15T23:59:59"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule meeting.",
+        "complexity": "Medium",
+        "expected_behavior": "This query is ambiguous. The agent should ask for clarification. For example: Which meeting do you want to reschedule and for which date are you thinking to reschedule the meeting?",
+        "addressed_days": [],
+        "current_time": "2023-10-15T23:59:59"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled for Tuesday, October 17, 2023.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-10-16T23:59:59"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled for Friday, October 20, 2023.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-10-21T00:00:01"
+    }
+]

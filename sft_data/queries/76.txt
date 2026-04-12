@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting for Thursday at 3 PM called 'Discuss Q4 Budget' with John Doe at john.doe@example.com and Jane Smith at jane.smith@example.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event on Thursday, September 21, 2023, from 3:00 PM to 4:00 PM, named 'Discuss Q4 Budget', with attendees john.doe@example.com and jane.smith@example.com.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-09-17T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a block of time for 'Project Brainstorm' on Wednesday from 1 PM to 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event on Wednesday, September 20, 2023, from 1:00 PM to 3:00 PM, named 'Project Brainstorm'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-09-17T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Wednesday, September 20, 2023, between 12:00 PM and 6:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-09-20T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on my schedule this Saturday?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events on Saturday, September 23, 2023.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-09-23T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move the meeting with the data engineer to 3 PM on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Data Engineer' event on Monday, September 18, 2023, and update its start time to 3:00 PM and end time to 4:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-09-18T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update the Book Club meeting to start half an hour later.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Book Club Meeting' event on Monday, September 18, 2023, and update its start time to 7:00 PM and end time to 8:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-09-18T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I meeting with on Friday at 2 PM?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event on Friday, September 22, 2023, at 2:00 PM and return the attendees.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-09-22T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What's the topic of the team meeting on Monday morning?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Team Meeting' event on Monday, September 18, 2023, and return the event summary.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-09-18T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my dinner with my partner on Thursday to Friday night and go to the brewery on Thursday instead.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Dinner with Partner' event on Thursday, September 21, 2023, and update the event date to Friday, September 22, 2023 at 7:00 PM. Then, find the 'Craft Brewery visit with friends' event on Friday, September 22, 2023, and update the event date to Thursday, September 21, 2023, at 6:00 PM.",
+        "addressed_days": [
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2023-09-17T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule the A/B test analysis on Tuesday, making it thirty minutes shorter and starting half an hour later.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'A/B Test Analysis' event on Tuesday, September 19, 2023, update its start time to 11:00 AM and end time to 12:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-09-19T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule happy hour?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Happy Hour with coworkers' event on Wednesday, September 20, 2023. Ask user for clarification on the new time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-09-20T11:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel the hike.",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Hiking Trip with Hiking Buddies' event on Saturday, September 23, 2023, and delete it.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-09-23T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Tuesday, September 19, 2023.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-09-18T15:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Saturday, September 23, 2023.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2023-09-24T09:00:00"
+    }
+]

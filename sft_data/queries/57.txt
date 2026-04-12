@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Project Brainstorm' for Tuesday at 2 PM for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Project Brainstorm', start set to 2023-09-26T14:00:00, end set to 2023-09-26T15:00:00.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-09-24T20:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me a meeting for Friday to discuss sales figures from 11 AM to 12 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Discuss sales figures', start set to 2023-09-29T11:00:00, end set to 2023-09-29T12:00:00.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-09-24T20:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing in the evening with my wife?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to 2023-09-27T18:00:00 and time_max set to 2023-09-28T00:00:00, then extract the event involving his wife Sarah.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-09-27T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What training do I have this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to 2023-09-25T00:00:00 and time_max set to 2023-10-01T00:00:00, then return any events that involves training.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-09-28T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the meeting with the warden back by an hour.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to 2023-09-26T00:00:00 and time_max set to 2023-09-27T00:00:00 to find the meeting with Warden, then call update_event with the event id and start set to 2023-09-26T08:00:00 and end set to 2023-09-26T09:00:00.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-09-26T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the soccer game time on Saturday to 11 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to 2023-09-30T00:00:00 and time_max set to 2023-10-01T00:00:00 to find the event with 'soccer game', then call update_event with the event id and start set to 2023-09-30T11:00:00 and end set to 2023-09-30T12:00:00.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-09-30T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the contraband search on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to 2023-09-27T00:00:00 and time_max set to 2023-09-28T00:00:00, find the event 'Contraband Search', and return the start time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-09-27T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is coming to the BBQ on Sunday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to 2023-10-01T00:00:00 and time_max set to 2023-10-02T00:00:00, then extract the attendee list for the BBQ.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2023-10-01T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move my dinner with my friends on Friday to Saturday at 7 PM?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min set to 2023-09-29T00:00:00 and time_max set to 2023-09-30T00:00:00 to find 'Dinner with Friends', then call update_event with the event id and start set to 2023-09-30T19:00:00, end set to 2023-09-30T21:00:00. Then check if a conflict happened by calling list_events for Saturday between 7 PM and 9 PM.",
+        "addressed_days": [
+            "Friday",
+            "Saturday"
+        ],
+        "current_time": "2023-09-28T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I need to schedule a meeting with the counselor this week, but not when I have the riot control training.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min set to 2023-09-28T00:00:00 and time_max set to 2023-09-29T00:00:00 to find the training time on Thursday. Then find a time slot on Monday, Tuesday, Wednesday, Friday that does not overlap the training time. Finally call create_event with the meeting info and available time.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-09-25T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner with family...",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to 2023-09-25T00:00:00 and time_max set to 2023-10-01T23:59:59 to determine if this event exists and return it. If it does not exist, then it is unresolvable and return that.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-09-25T16:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule...",
+        "complexity": "Low",
+        "expected_behavior": "This is an incomplete request. The agent should ask for clarification to determine which event needs rescheduling.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-09-26T13:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to 2023-09-25T00:00:00 and time_max set to 2023-09-26T00:00:00.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-09-25T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any meetings yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to 2023-09-26T00:00:00 and time_max set to 2023-09-27T00:00:00.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-09-26T09:00:00"
+    }
+]

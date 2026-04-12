@@ -1,0 +1,149 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Client Meeting' for Wednesday at 10 AM with Ashley Williams.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with summary 'Client Meeting', start time 2024-12-04T10:00:00, end time 2024-12-04T11:00:00, and attendee ashley.williams@example.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-12-01T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting with Robert Downy for Thursday at 3 PM regarding a HVAC troubleshooting issue.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with summary 'HVAC troubleshooting issue', start time 2024-12-05T15:00:00, end time 2024-12-05T16:00:00, and attendee robert.downy@example.com.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-12-01T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Tuesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List events between 12:00 PM and 6:00 PM on Tuesday, December 3rd, 2024.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-12-03T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does the week look like?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events between Monday, December 2nd, 2024, and Sunday, December 8th, 2024.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-12-02T07:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the dinner with my son on Monday back by an hour.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Dinner with Son' on Monday, December 2nd, 2024, and update its start time to 7:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-12-02T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time for the restaurant diagnosis on Tuesday to 9 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Diagnose Issue - Restaurant HVAC' on Tuesday, December 3rd, 2024, and update its start time to 9:00 AM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-12-03T07:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me about my Saturday.",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Saturday, December 7th, 2024.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-12-06T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the meeting with Sue Smith on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'New Installation Quote - Commercial Building' on Monday, December 2nd, 2024, and return the start time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-12-02T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can I move the equipment maintenance on Thursday to 10 AM?",
+        "complexity": "High",
+        "expected_behavior": "Find the event 'Equipment Maintenance' on Thursday, December 5th, 2024. Check for conflicts between 10:00 AM and 12:00 PM. If no conflicts, update the event's start time to 10:00 AM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-12-05T07:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is there time to schedule an hour-long call with a new client on Wednesday at 2 PM?",
+        "complexity": "High",
+        "expected_behavior": "Check for conflicts between 2:00 PM and 3:00 PM on Wednesday, December 4th, 2024.  Respond whether the time slot is available or not.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-12-04T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule John Doe.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'HVAC Repair - Residential Client' with client john.doe@example.com on Monday, December 2nd, 2024. Ask for the new desired date and time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-12-02T15:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel basketball.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event that contains the word 'basketball' on either Wednesday, December 4th, 2024, or Saturday, December 7th, 2024, and ask to clarify which event to cancel.",
+        "addressed_days": [
+            "Wednesday",
+            "Saturday"
+        ],
+        "current_time": "2024-12-04T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Monday, December 2nd, 2024.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-12-02T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Wednesday, December 4th, 2024.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-12-03T16:00:00"
+    }
+]

@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Strategy Discussion' for Wednesday at 2 PM, with analyst1@ecommerce.com as an attendee.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to create an event with summary 'Strategy Discussion', start time 2026-06-03T14:00:00, end time 2026-06-03T15:00:00, attendees [analyst1@ecommerce.com].",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-05-31T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for Thursday at 11 AM named 'Project Alpha Planning'.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to create an event with summary 'Project Alpha Planning', start time 2026-06-04T11:00:00, end time 2026-06-04T12:00:00.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-05-31T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Saturday after my hiking trip?",
+        "complexity": "Medium",
+        "expected_behavior": "First, call list_events for Saturday. Identify the hiking trip from 9:00 AM to 12:00 PM. Then, call list_events again for Saturday, with time_min=2026-06-06T12:00:00 to find events after the hiking trip.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-06-06T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What meetings do I have on Monday with someone from IT?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for Monday and filter events that include it_support@ecommerce.com in the attendees.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-05-31T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the data team meeting on Monday to 9:30 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Weekly Data Team Meeting' on Monday. Then, call update_event with the event id and the updated start time of 2026-06-01T09:30:00 and end time of 2026-06-01T10:30:00.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-06-01T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "The dinner on Thursday should include friend3@email.com.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for Thursday to find the dinner event. Call update_event with the event ID and add friend3@email.com to the attendees list.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-06-04T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my yoga class?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for Monday. Find the event named 'Yoga Class' and respond with the start time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-06-01T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having brunch with on Sunday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for Sunday. Find the 'Brunch with friends' event and respond with the attendees' names.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2026-06-07T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my meeting with the Marketing Manager on Monday to the same time as the Data Source Troubleshooting.",
+        "complexity": "High",
+        "expected_behavior": "First, call list_events for Monday to find the 'Meeting with Marketing Manager' and 'Data Source Troubleshooting'. Get the time of the troubleshooting meeting. Then, call update_event to update the 'Meeting with Marketing Manager' to the same time as the troubleshooting meeting.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-06-01T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "What events do I have on Wednesday that conflict with a meeting from 11:00 to 11:30?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events for Wednesday with time_min=2026-06-03T11:00:00 and time_max=2026-06-03T11:30:00.  Return those events.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-05-31T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Q3 sales.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for Monday. Find the event named 'Sales Data Analysis - Q3 Performance'. Then, ask the user to specify new time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-06-01T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel Friday afternoon.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events for Friday with time_min set to 2026-06-05T12:00:00 and time_max set to 2026-06-05T17:00:00 to find all events in the afternoon. Ask user to confirm to cancel them.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-06-05T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-06-01T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any meetings yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for Wednesday.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-06-04T08:00:00"
+    }
+]

@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting called 'New Project Kickoff' for next Tuesday at 3 PM with client3@example.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event named 'New Project Kickoff' for Tuesday, September 22, 2026, at 3 PM with client3@example.com as an attendee.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-09-20T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event on Friday at 4pm to discuss 'Marketing Campaign' with director@clinic.com",
+        "complexity": "Low",
+        "expected_behavior": "Create an event named 'Marketing Campaign' for Friday, September 25, 2026, at 4 PM with director@clinic.com as an attendee.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-09-20T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I free for lunch with anyone tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for free time slots on Tuesday, September 22, 2026, between 12 PM and 2 PM, then respond to the user. If the user means free for lunch with friends@email.com, the agent does not know this, and must not make this assumption.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-09-21T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Wednesday look like?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Wednesday, September 23, 2026, and present them to the user.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-09-20T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my yoga class on Monday to 7:00 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Yoga Class' event on Monday, September 21, 2026, and update its start time to 7:00 PM and end time to 8:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-09-21T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of my meeting with the family member on Thursday to 2 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Family Member of Client' event on Thursday, September 24, 2026, and update its start time to 2:00 PM and end time to 3:00 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-09-24T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I meeting with on Friday at 2 PM?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event scheduled for Friday, September 25, 2026, at 2 PM and return the attendees for that event.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-09-25T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What is the purpose of the treatment plan review meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Treatment Plan Review Meeting' event and return its description.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-09-21T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move my individual therapy session with client1@example.com to Friday at 11:30AM?",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Individual Therapy Session' event with client1@example.com on Monday and check if Friday at 11:30 AM is available. If it is, reschedule the therapy session.",
+        "addressed_days": [
+            "Monday",
+            "Friday"
+        ],
+        "current_time": "2026-09-21T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make it to dinner with my partner on Tuesday. Can we move it to Saturday night instead?",
+        "complexity": "High",
+        "expected_behavior": "Decline the 'Dinner with Partner' on Tuesday and then create a new event called 'Dinner with Partner' on Saturday at 7 PM.",
+        "addressed_days": [
+            "Tuesday",
+            "Saturday"
+        ],
+        "current_time": "2026-09-22T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule therapy...",
+        "complexity": "Low",
+        "expected_behavior": "Ask for clarification regarding which therapy session the user wants to reschedule.",
+        "addressed_days": [],
+        "current_time": "2026-09-20T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Friday meeting?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Friday, September 25, 2026.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-09-25T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Monday, September 21, 2026.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-09-21T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Wednesday, September 23, 2026.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-09-22T21:00:00"
+    }
+]

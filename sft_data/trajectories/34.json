@@ -1,0 +1,3691 @@
+[
+  {
+    "query": "Create an event called 'Project Meeting' for Tuesday at 11 AM with junior_researcher1@example.com.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event to schedule 'Project Meeting' on Tuesday, August 22, 2023, at 11:00 AM with junior_researcher1@example.com.",
+    "simulated_now": "2023-08-20 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Grant Writing: Draft Introduction Section",
+          "start": "2023-08-22 09:00:00",
+          "end": "2023-08-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4029aa207d05499d874b9f40ae5e0782"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lab Work: Drug Screening Assay",
+          "start": "2023-08-22 10:30:00",
+          "end": "2023-08-22 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_81105adf6481482f93b9114ee8b150ba"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Review Literature on New Cancer Therapies",
+          "start": "2023-08-22 13:30:00",
+          "end": "2023-08-22 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a02ff3a8bc884ad89974edea7ecc078c"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Principal Investigator: Discuss Research Direction",
+          "start": "2023-08-22 15:30:00",
+          "end": "2023-08-22 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pi@example.com"
+          ],
+          "id": "evt_967f11b74a994b38ab294fcd0643e1dd"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2023-08-22 18:00:00",
+          "end": "2023-08-22 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bee2018ba4824a1eada078dc8a1c1830"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Grant Writing: Draft Introduction Section",
+          "start": "2023-08-22 09:00:00",
+          "end": "2023-08-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4029aa207d05499d874b9f40ae5e0782"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lab Work: Drug Screening Assay",
+          "start": "2023-08-22 10:30:00",
+          "end": "2023-08-22 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_81105adf6481482f93b9114ee8b150ba"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Project Meeting",
+          "start": "2023-08-22 11:00:00",
+          "end": "2023-08-22 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "junior_researcher1@example.com"
+          ],
+          "id": "evt_2866167d19f74b3dad3f2f5ca3eea03a"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Review Literature on New Cancer Therapies",
+          "start": "2023-08-22 13:30:00",
+          "end": "2023-08-22 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a02ff3a8bc884ad89974edea7ecc078c"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Principal Investigator: Discuss Research Direction",
+          "start": "2023-08-22 15:30:00",
+          "end": "2023-08-22 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pi@example.com"
+          ],
+          "id": "evt_967f11b74a994b38ab294fcd0643e1dd"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2023-08-22 18:00:00",
+          "end": "2023-08-22 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bee2018ba4824a1eada078dc8a1c1830"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Project Meeting' for Tuesday at 11 AM with junior_researcher1@example.com."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can help with that. I'll create a new event called 'Project Meeting' for next Tuesday at 11 AM with junior_researcher1@example.com. I'll need to get the current time to do that."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-08-20 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Project Meeting",
+          "end": "2023-08-22 12:00:00",
+          "attendees": [
+            "junior_researcher1@example.com"
+          ],
+          "start": "2023-08-22 11:00:00"
+        },
+        "result": "Event created successfully.\nProject Meeting\n  ID: evt_2866167d19f74b3dad3f2f5ca3eea03a\n  Time: Tue Aug 22, 11:00 - 12:00\n  Attendees: junior_researcher1@example.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've created the event.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can you put 'Presentation to Board' on my calendar for Friday at 3:30 PM?",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event to schedule 'Presentation to Board' on Friday, August 25, 2023, at 3:30 PM.",
+    "simulated_now": "2023-08-20 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Lab Meeting: Review Weekly Progress",
+          "start": "2023-08-25 09:00:00",
+          "end": "2023-08-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5ac35b46050745e4b88f671e0e82f3ac"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Grant Proposal for Submission",
+          "start": "2023-08-25 10:30:00",
+          "end": "2023-08-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_79f05eeba1a44a2fa632bd00732e72c9"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meet with Oncologist: Discuss Clinical Needs",
+          "start": "2023-08-25 13:00:00",
+          "end": "2023-08-25 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "oncologist@example.com"
+          ],
+          "id": "evt_9acae87b7cb54eaebd4002e0496abcdf"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan Next Week's Experiments",
+          "start": "2023-08-25 14:30:00",
+          "end": "2023-08-25 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8fdbb3e4336a4e96ba523a227625e7a6"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2023-08-25 19:00:00",
+          "end": "2023-08-25 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_82ae5150aae74fe0b7fd61e9a6cc1cbb"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Lab Meeting: Review Weekly Progress",
+          "start": "2023-08-25 09:00:00",
+          "end": "2023-08-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5ac35b46050745e4b88f671e0e82f3ac"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Grant Proposal for Submission",
+          "start": "2023-08-25 10:30:00",
+          "end": "2023-08-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_79f05eeba1a44a2fa632bd00732e72c9"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meet with Oncologist: Discuss Clinical Needs",
+          "start": "2023-08-25 13:00:00",
+          "end": "2023-08-25 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "oncologist@example.com"
+          ],
+          "id": "evt_9acae87b7cb54eaebd4002e0496abcdf"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan Next Week's Experiments",
+          "start": "2023-08-25 14:30:00",
+          "end": "2023-08-25 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8fdbb3e4336a4e96ba523a227625e7a6"
+        },
+        {
+          "day": "Friday",
+          "summary": "Presentation to Board",
+          "start": "2023-08-25 15:30:00",
+          "end": "2023-08-25 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d6f936908b6c483095b8d0f49c262e5f"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2023-08-25 19:00:00",
+          "end": "2023-08-25 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_82ae5150aae74fe0b7fd61e9a6cc1cbb"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can you put 'Presentation to Board' on my calendar for Friday at 3:30 PM?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. I'll add 'Presentation to Board' to your calendar for this Friday at 3:30 PM. I'll set the duration to one hour. Does that sound right?\n\nOK. I will start by getting the current time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-08-20 10:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. This coming Friday is August 25, 2023. I will schedule the event for 3:30 PM on that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Presentation to Board",
+          "end": "2023-08-25 16:30:00",
+          "start": "2023-08-25 15:30:00"
+        },
+        "result": "Event created successfully.\nPresentation to Board\n  ID: evt_d6f936908b6c483095b8d0f49c262e5f\n  Time: Fri Aug 25, 15:30 - 16:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've added 'Presentation to Board' to your calendar for this Friday, August 25th, from 3:30 PM to 4:30 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing for lunch on Wednesday?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to check for events between 12 PM and 1 PM on Wednesday, August 23, 2023.",
+    "simulated_now": "2023-08-23 08:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Presentation Slides",
+          "start": "2023-08-23 08:30:00",
+          "end": "2023-08-23 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6e061b268642438eb295584d73e7cba4"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Presentation Practice",
+          "start": "2023-08-23 09:00:00",
+          "end": "2023-08-23 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6284fbdf21f345b3a803079832505dcd"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Lab Work: Microscopy and Imaging",
+          "start": "2023-08-23 10:30:00",
+          "end": "2023-08-23 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_af57e2444e1f48edb8092ad565ce46e6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Weekly Team Lunch",
+          "start": "2023-08-23 13:00:00",
+          "end": "2023-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1962611d2d8047ed8f93cc7e3de3af4d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meet with Pharmaceutical Rep: Discuss New Compounds",
+          "start": "2023-08-23 14:30:00",
+          "end": "2023-08-23 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharma_rep@example.com"
+          ],
+          "id": "evt_f4659059071b49fea0ed2a45fbed925c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2023-08-23 19:00:00",
+          "end": "2023-08-23 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7def20dc478849e0b81768b8655abfc3"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Presentation Slides",
+          "start": "2023-08-23 08:30:00",
+          "end": "2023-08-23 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6e061b268642438eb295584d73e7cba4"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Presentation Practice",
+          "start": "2023-08-23 09:00:00",
+          "end": "2023-08-23 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6284fbdf21f345b3a803079832505dcd"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Lab Work: Microscopy and Imaging",
+          "start": "2023-08-23 10:30:00",
+          "end": "2023-08-23 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_af57e2444e1f48edb8092ad565ce46e6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Weekly Team Lunch",
+          "start": "2023-08-23 13:00:00",
+          "end": "2023-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1962611d2d8047ed8f93cc7e3de3af4d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meet with Pharmaceutical Rep: Discuss New Compounds",
+          "start": "2023-08-23 14:30:00",
+          "end": "2023-08-23 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharma_rep@example.com"
+          ],
+          "id": "evt_f4659059071b49fea0ed2a45fbed925c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2023-08-23 19:00:00",
+          "end": "2023-08-23 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7def20dc478849e0b81768b8655abfc3"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing for lunch on Wednesday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out what you have scheduled for lunch on Wednesday. I'll first get the current time to know what day it is, and then I will check your calendar for any lunch events on the upcoming Wednesday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-08-23 08:00:00 | Wednesday"
+      },
+      {
+        "role": "assistant",
+        "content": "I'll check your calendar for lunch on Wednesday, August 23rd."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-08-23 23:59:59",
+          "time_min": "2023-08-23 00:00:00"
+        },
+        "result": "Found 6 events:\nid: evt_6e061b268642438eb295584d73e7cba4 | Prepare Presentation Slides \u2014 Wed 08:30-09:00\nid: evt_6284fbdf21f345b3a803079832505dcd | Presentation Practice \u2014 Wed 09:00-10:00\nid: evt_af57e2444e1f48edb8092ad565ce46e6 | Lab Work: Microscopy and Imaging \u2014 Wed 10:30-12:00\nid: evt_1962611d2d8047ed8f93cc7e3de3af4d | Weekly Team Lunch \u2014 Wed 13:00-14:00\nid: evt_f4659059071b49fea0ed2a45fbed925c | Meet with Pharmaceutical Rep: Discuss New Compounds \u2014 Wed 14:30-16:00\nid: evt_7def20dc478849e0b81768b8655abfc3 | Book Club Meeting \u2014 Wed 19:00-20:30"
+      },
+      {
+        "role": "assistant",
+        "content": "You have \"Weekly Team Lunch\" from 13:00 to 14:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What meetings do I have this week?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to retrieve all meetings from Monday, August 21, 2023, to Sunday, August 27, 2023.",
+    "simulated_now": "2023-08-20 09:00:00",
+    "addressed_days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Prioritize Tasks",
+          "start": "2023-08-21 08:30:00",
+          "end": "2023-08-21 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bf1e44e348654a1e9506fdf29c0a7a19"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lab Meeting: Discuss Experiment Progress",
+          "start": "2023-08-21 09:00:00",
+          "end": "2023-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "lab_tech1@example.com",
+            "junior_researcher1@example.com"
+          ],
+          "id": "evt_876e1d2d36c44a039f8782ebd3397bb5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Experiment: Cell Culture Preparation",
+          "start": "2023-08-21 10:30:00",
+          "end": "2023-08-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_496eeef844b648359d02d93fe7962e06"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Analysis: Initial Review of Recent Experiment Results",
+          "start": "2023-08-21 13:00:00",
+          "end": "2023-08-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a47d31c93ba04b6596e10f51efacdcf1"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Biostatistician: Discuss Statistical Methods for Data",
+          "start": "2023-08-21 15:30:00",
+          "end": "2023-08-21 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "biostatistician@example.com"
+          ],
+          "id": "evt_ddae1d87cb874315b52962fc37e5c5df"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-08-21 18:30:00",
+          "end": "2023-08-21 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_91b6c88f6d9840da8b41cb68a9e91da2"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Grant Writing: Draft Introduction Section",
+          "start": "2023-08-22 09:00:00",
+          "end": "2023-08-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_20f9fba0def64050a416f8e1b4dfd7ec"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lab Work: Drug Screening Assay",
+          "start": "2023-08-22 10:30:00",
+          "end": "2023-08-22 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_18bdd356ffd94a7d9b53cd1a96856d9a"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Review Literature on New Cancer Therapies",
+          "start": "2023-08-22 13:30:00",
+          "end": "2023-08-22 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5dd0e4ebe3c4472195bd26e8de05320e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Principal Investigator: Discuss Research Direction",
+          "start": "2023-08-22 15:30:00",
+          "end": "2023-08-22 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pi@example.com"
+          ],
+          "id": "evt_37b91b3af9184467b9bec4c5a825873f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2023-08-22 18:00:00",
+          "end": "2023-08-22 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b8e002dc08dd471585b3e38fc55ba70c"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Presentation Slides",
+          "start": "2023-08-23 08:30:00",
+          "end": "2023-08-23 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f89d1338f1884e4f97ce8bc3d871afeb"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Presentation Practice",
+          "start": "2023-08-23 09:00:00",
+          "end": "2023-08-23 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_df34ce3afc964299a6a8f16027d82178"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Lab Work: Microscopy and Imaging",
+          "start": "2023-08-23 10:30:00",
+          "end": "2023-08-23 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_46cf4aaee3fc4acaab33b8146c24a7b0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Weekly Team Lunch",
+          "start": "2023-08-23 13:00:00",
+          "end": "2023-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b57db968bfed4f008a01e28249d6145e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meet with Pharmaceutical Rep: Discuss New Compounds",
+          "start": "2023-08-23 14:30:00",
+          "end": "2023-08-23 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharma_rep@example.com"
+          ],
+          "id": "evt_7414c5be47af422f98375aca5bc66105"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2023-08-23 19:00:00",
+          "end": "2023-08-23 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7e77da3c4ef844a39a04f6f3473dc908"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Experiment: Animal Study Injections",
+          "start": "2023-08-24 09:00:00",
+          "end": "2023-08-24 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_345fac047ff843ce892c5c8955ba08e2"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Review and Edit Grant Proposal",
+          "start": "2023-08-24 11:30:00",
+          "end": "2023-08-24 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e606fe3eb00747e7b35b25538310c81c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Data Analysis: Statistical Analysis",
+          "start": "2023-08-24 13:30:00",
+          "end": "2023-08-24 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_653514f36e374cb7bf0a43ff9b86bb2d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Regulatory Affairs Specialist: Discuss Clinical Trial Regulations",
+          "start": "2023-08-24 15:30:00",
+          "end": "2023-08-24 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "regulatory_affairs@example.com"
+          ],
+          "id": "evt_4d3a9520ead343e6919fe7d781521845"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Parent-Teacher Conference",
+          "start": "2023-08-24 18:00:00",
+          "end": "2023-08-24 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1aeed859177848afbe578a2945a7bf79"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Lab Meeting: Review Weekly Progress",
+          "start": "2023-08-25 09:00:00",
+          "end": "2023-08-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cc50ddfb2f2b45f2917f5caa5bb86415"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Grant Proposal for Submission",
+          "start": "2023-08-25 10:30:00",
+          "end": "2023-08-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_04a57de49c0a4670831b5a1bf4e36a7f"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meet with Oncologist: Discuss Clinical Needs",
+          "start": "2023-08-25 13:00:00",
+          "end": "2023-08-25 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "oncologist@example.com"
+          ],
+          "id": "evt_ca21fb0c544449bb988d0a27650791ef"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan Next Week's Experiments",
+          "start": "2023-08-25 14:30:00",
+          "end": "2023-08-25 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4068c4b919d5430982f6de763e9e6c2c"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2023-08-25 19:00:00",
+          "end": "2023-08-25 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9380c84b3ef74f91ad6554f60bf61eca"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Hiking with Family",
+          "start": "2023-08-26 09:00:00",
+          "end": "2023-08-26 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_19dfcb0245ad4f309ec96c4258b88c1c"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2023-08-26 12:30:00",
+          "end": "2023-08-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f1cc35ca85d145a8879782d2922cb44c"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Children's Birthday Party",
+          "start": "2023-08-26 15:00:00",
+          "end": "2023-08-26 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c17ecef94e2c4271a743c9f9db2c0ca2"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Spouse's Family",
+          "start": "2023-08-27 10:00:00",
+          "end": "2023-08-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ea10e2210805478f82c3173d22416d9f"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Relaxing at Home/Reading",
+          "start": "2023-08-27 14:00:00",
+          "end": "2023-08-27 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_233d170d1e79420dafd96bc6b49692ac"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Prepare for the Week Ahead",
+          "start": "2023-08-27 18:00:00",
+          "end": "2023-08-27 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1668376e06694515b31c4510bf3238a0"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Prioritize Tasks",
+          "start": "2023-08-21 08:30:00",
+          "end": "2023-08-21 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bf1e44e348654a1e9506fdf29c0a7a19"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lab Meeting: Discuss Experiment Progress",
+          "start": "2023-08-21 09:00:00",
+          "end": "2023-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "lab_tech1@example.com",
+            "junior_researcher1@example.com"
+          ],
+          "id": "evt_876e1d2d36c44a039f8782ebd3397bb5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Experiment: Cell Culture Preparation",
+          "start": "2023-08-21 10:30:00",
+          "end": "2023-08-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_496eeef844b648359d02d93fe7962e06"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Analysis: Initial Review of Recent Experiment Results",
+          "start": "2023-08-21 13:00:00",
+          "end": "2023-08-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a47d31c93ba04b6596e10f51efacdcf1"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Biostatistician: Discuss Statistical Methods for Data",
+          "start": "2023-08-21 15:30:00",
+          "end": "2023-08-21 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "biostatistician@example.com"
+          ],
+          "id": "evt_ddae1d87cb874315b52962fc37e5c5df"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-08-21 18:30:00",
+          "end": "2023-08-21 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_91b6c88f6d9840da8b41cb68a9e91da2"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Grant Writing: Draft Introduction Section",
+          "start": "2023-08-22 09:00:00",
+          "end": "2023-08-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_20f9fba0def64050a416f8e1b4dfd7ec"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lab Work: Drug Screening Assay",
+          "start": "2023-08-22 10:30:00",
+          "end": "2023-08-22 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_18bdd356ffd94a7d9b53cd1a96856d9a"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Review Literature on New Cancer Therapies",
+          "start": "2023-08-22 13:30:00",
+          "end": "2023-08-22 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5dd0e4ebe3c4472195bd26e8de05320e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Principal Investigator: Discuss Research Direction",
+          "start": "2023-08-22 15:30:00",
+          "end": "2023-08-22 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pi@example.com"
+          ],
+          "id": "evt_37b91b3af9184467b9bec4c5a825873f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2023-08-22 18:00:00",
+          "end": "2023-08-22 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b8e002dc08dd471585b3e38fc55ba70c"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Presentation Slides",
+          "start": "2023-08-23 08:30:00",
+          "end": "2023-08-23 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f89d1338f1884e4f97ce8bc3d871afeb"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Presentation Practice",
+          "start": "2023-08-23 09:00:00",
+          "end": "2023-08-23 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_df34ce3afc964299a6a8f16027d82178"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Lab Work: Microscopy and Imaging",
+          "start": "2023-08-23 10:30:00",
+          "end": "2023-08-23 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_46cf4aaee3fc4acaab33b8146c24a7b0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Weekly Team Lunch",
+          "start": "2023-08-23 13:00:00",
+          "end": "2023-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b57db968bfed4f008a01e28249d6145e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meet with Pharmaceutical Rep: Discuss New Compounds",
+          "start": "2023-08-23 14:30:00",
+          "end": "2023-08-23 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharma_rep@example.com"
+          ],
+          "id": "evt_7414c5be47af422f98375aca5bc66105"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2023-08-23 19:00:00",
+          "end": "2023-08-23 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7e77da3c4ef844a39a04f6f3473dc908"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Experiment: Animal Study Injections",
+          "start": "2023-08-24 09:00:00",
+          "end": "2023-08-24 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_345fac047ff843ce892c5c8955ba08e2"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Review and Edit Grant Proposal",
+          "start": "2023-08-24 11:30:00",
+          "end": "2023-08-24 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e606fe3eb00747e7b35b25538310c81c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Data Analysis: Statistical Analysis",
+          "start": "2023-08-24 13:30:00",
+          "end": "2023-08-24 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_653514f36e374cb7bf0a43ff9b86bb2d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Regulatory Affairs Specialist: Discuss Clinical Trial Regulations",
+          "start": "2023-08-24 15:30:00",
+          "end": "2023-08-24 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "regulatory_affairs@example.com"
+          ],
+          "id": "evt_4d3a9520ead343e6919fe7d781521845"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Parent-Teacher Conference",
+          "start": "2023-08-24 18:00:00",
+          "end": "2023-08-24 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1aeed859177848afbe578a2945a7bf79"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Lab Meeting: Review Weekly Progress",
+          "start": "2023-08-25 09:00:00",
+          "end": "2023-08-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cc50ddfb2f2b45f2917f5caa5bb86415"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Grant Proposal for Submission",
+          "start": "2023-08-25 10:30:00",
+          "end": "2023-08-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_04a57de49c0a4670831b5a1bf4e36a7f"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meet with Oncologist: Discuss Clinical Needs",
+          "start": "2023-08-25 13:00:00",
+          "end": "2023-08-25 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "oncologist@example.com"
+          ],
+          "id": "evt_ca21fb0c544449bb988d0a27650791ef"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan Next Week's Experiments",
+          "start": "2023-08-25 14:30:00",
+          "end": "2023-08-25 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4068c4b919d5430982f6de763e9e6c2c"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2023-08-25 19:00:00",
+          "end": "2023-08-25 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9380c84b3ef74f91ad6554f60bf61eca"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Hiking with Family",
+          "start": "2023-08-26 09:00:00",
+          "end": "2023-08-26 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_19dfcb0245ad4f309ec96c4258b88c1c"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2023-08-26 12:30:00",
+          "end": "2023-08-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f1cc35ca85d145a8879782d2922cb44c"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Children's Birthday Party",
+          "start": "2023-08-26 15:00:00",
+          "end": "2023-08-26 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c17ecef94e2c4271a743c9f9db2c0ca2"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Spouse's Family",
+          "start": "2023-08-27 10:00:00",
+          "end": "2023-08-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ea10e2210805478f82c3173d22416d9f"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Relaxing at Home/Reading",
+          "start": "2023-08-27 14:00:00",
+          "end": "2023-08-27 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_233d170d1e79420dafd96bc6b49692ac"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Prepare for the Week Ahead",
+          "start": "2023-08-27 18:00:00",
+          "end": "2023-08-27 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1668376e06694515b31c4510bf3238a0"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What meetings do I have this week?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can help you with that. First, I need to get the current date and time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-08-20 09:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-08-21 00:00:00",
+          "time_max": "2023-08-27 23:59:59"
+        },
+        "result": "Found 33 events:\nid: evt_bf1e44e348654a1e9506fdf29c0a7a19 | Check Emails and Prioritize Tasks \u2014 Mon 08:30-09:00\nid: evt_876e1d2d36c44a039f8782ebd3397bb5 | Lab Meeting: Discuss Experiment Progress \u2014 Mon 09:00-10:30\nid: evt_496eeef844b648359d02d93fe7962e06 | Experiment: Cell Culture Preparation \u2014 Mon 10:30-12:00\nid: evt_a47d31c93ba04b6596e10f51efacdcf1 | Data Analysis: Initial Review of Recent Experiment Results \u2014 Mon 13:00-15:00\nid: evt_ddae1d87cb874315b52962fc37e5c5df | Meeting with Biostatistician: Discuss Statistical Methods for Data \u2014 Mon 15:30-17:00\nid: evt_91b6c88f6d9840da8b41cb68a9e91da2 | Dinner with Family \u2014 Mon 18:30-20:00\nid: evt_20f9fba0def64050a416f8e1b4dfd7ec | Grant Writing: Draft Introduction Section \u2014 Tue 09:00-10:00\nid: evt_18bdd356ffd94a7d9b53cd1a96856d9a | Lab Work: Drug Screening Assay \u2014 Tue 10:30-12:30\nid: evt_5dd0e4ebe3c4472195bd26e8de05320e | Review Literature on New Cancer Therapies \u2014 Tue 13:30-15:00\nid: evt_37b91b3af9184467b9bec4c5a825873f | Meeting with Principal Investigator: Discuss Research Direction \u2014 Tue 15:30-16:30\nid: evt_b8e002dc08dd471585b3e38fc55ba70c | Kids' Soccer Practice \u2014 Tue 18:00-19:30\nid: evt_f89d1338f1884e4f97ce8bc3d871afeb | Prepare Presentation Slides \u2014 Wed 08:30-09:00\nid: evt_df34ce3afc964299a6a8f16027d82178 | Presentation Practice \u2014 Wed 09:00-10:00\nid: evt_46cf4aaee3fc4acaab33b8146c24a7b0 | Lab Work: Microscopy and Imaging \u2014 Wed 10:30-12:00\nid: evt_b57db968bfed4f008a01e28249d6145e | Weekly Team Lunch \u2014 Wed 13:00-14:00\nid: evt_7414c5be47af422f98375aca5bc66105 | Meet with Pharmaceutical Rep: Discuss New Compounds \u2014 Wed 14:30-16:00\nid: evt_7e77da3c4ef844a39a04f6f3473dc908 | Book Club Meeting \u2014 Wed 19:00-20:30\nid: evt_345fac047ff843ce892c5c8955ba08e2 | Experiment: Animal Study Injections \u2014 Thu 09:00-11:00\nid: evt_e606fe3eb00747e7b35b25538310c81c | Review and Edit Grant Proposal \u2014 Thu 11:30-12:30\nid: evt_653514f36e374cb7bf0a43ff9b86bb2d | Data Analysis: Statistical Analysis \u2014 Thu 13:30-15:00\nid: evt_4d3a9520ead343e6919fe7d781521845 | Meeting with Regulatory Affairs Specialist: Discuss Clinical Trial Regulations \u2014 Thu 15:30-17:00\nid: evt_1aeed859177848afbe578a2945a7bf79 | Parent-Teacher Conference \u2014 Thu 18:00-19:00\nid: evt_cc50ddfb2f2b45f2917f5caa5bb86415 | Lab Meeting: Review Weekly Progress \u2014 Fri 09:00-10:00\nid: evt_04a57de49c0a4670831b5a1bf4e36a7f | Finalize Grant Proposal for Submission \u2014 Fri 10:30-12:00\nid: evt_ca21fb0c544449bb988d0a27650791ef | Meet with Oncologist: Discuss Clinical Needs \u2014 Fri 13:00-14:00\nid: evt_4068c4b919d5430982f6de763e9e6c2c | Plan Next Week's Experiments \u2014 Fri 14:30-16:00\nid: evt_9380c84b3ef74f91ad6554f60bf61eca | Dinner with Friends \u2014 Fri 19:00-21:00\nid: evt_19dfcb0245ad4f309ec96c4258b88c1c | Hiking with Family \u2014 Sat 09:00-11:00\nid: evt_f1cc35ca85d145a8879782d2922cb44c | Grocery Shopping \u2014 Sat 12:30-14:00\nid: evt_c17ecef94e2c4271a743c9f9db2c0ca2 | Children's Birthday Party \u2014 Sat 15:00-17:00\nid: evt_ea10e2210805478f82c3173d22416d9f | Brunch with Spouse's Family \u2014 Sun 10:00-12:00\nid: evt_233d170d1e79420dafd96bc6b49692ac | Relaxing at Home/Reading \u2014 Sun 14:00-16:00\nid: evt_1668376e06694515b31c4510bf3238a0 | Prepare for the Week Ahead \u2014 Sun 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Of course! Here are your meetings for this week:\n\n**Monday:**\n*   8:30 AM - 9:00 AM: Check Emails and Prioritize Tasks\n*   9:00 AM - 10:30 AM: Lab Meeting: Discuss Experiment Progress\n*   10:30 AM - 12:00 PM: Experiment: Cell Culture Preparation\n*   1:00 PM - 3:00 PM: Data Analysis: Initial Review of Recent Experiment Results\n*   3:30 PM - 5:00 PM: Meeting with Biostatistician: Discuss Statistical Methods for Data\n*   6:30 PM - 8:00 PM: Dinner with Family\n\n**Tuesday:**\n*   9:00 AM - 10:00 AM: Grant Writing: Draft Introduction Section\n*   10:30 AM - 12:30 PM: Lab Work: Drug Screening Assay\n*   1:30 PM - 3:00 PM: Review Literature on New Cancer Therapies\n*   3:30 PM - 4:30 PM: Meeting with Principal Investigator: Discuss Research Direction\n*   6:00 PM - 7:30 PM: Kids' Soccer Practice\n\n**Wednesday:**\n*   8:30 AM - 9:00 AM: Prepare Presentation Slides\n*   9:00 AM - 10:00 AM: Presentation Practice\n*   10:30 AM - 12:00 PM: Lab Work: Microscopy and Imaging\n*   1:00 PM - 2:00 PM: Weekly Team Lunch\n*   2:30 PM - 4:00 PM: Meet with Pharmaceutical Rep: Discuss New Compounds\n*   7:00 PM - 8:30 PM: Book Club Meeting\n\n**Thursday:**\n*   9:00 AM - 11:00 AM: Experiment: Animal Study Injections\n*   11:30 AM - 12:30 PM: Review and Edit Grant Proposal\n*   1:30 PM - 3:00 PM: Data Analysis: Statistical Analysis\n*   3:30 PM - 5:00 PM: Meeting with Regulatory Affairs Specialist: Discuss Clinical Trial Regulations\n*   6:00 PM - 7:00 PM: Parent-Teacher Conference\n\n**Friday:**\n*   9:00 AM - 10:00 AM: Lab Meeting: Review Weekly Progress\n*   10:30 AM - 12:00 PM: Finalize Grant Proposal for Submission\n*   1:00 PM - 2:00 PM: Meet with Oncologist: Discuss Clinical Needs\n*   2:30 PM - 4:00 PM: Plan Next Week's Experiments\n*   7:00 PM - 9:00 PM: Dinner with Friends\n\n**Saturday:**\n*   9:00 AM - 11:00 AM: Hiking with Family\n*   12:30 PM - 2:00 PM: Grocery Shopping\n*   3:00 PM - 5:00 PM: Children's Birthday Party\n\n**Sunday:**\n*   10:00 AM - 12:00 PM: Brunch with Spouse's Family\n*   2:00 PM - 4:00 PM: Relaxing at Home/Reading\n*   6:00 PM - 7:00 PM: Prepare for the Week Ahead"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move the meeting with the biostatistician on Monday to 4 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find the 'Meeting with Biostatistician' on Monday, August 21, 2023, then call update_event with the event id to change the event start time to 4:00 PM and end time to 5:30 PM.",
+    "simulated_now": "2023-08-21 11:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Prioritize Tasks",
+          "start": "2023-08-21 08:30:00",
+          "end": "2023-08-21 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dc0d0c649ad843948916b41a8f040339"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lab Meeting: Discuss Experiment Progress",
+          "start": "2023-08-21 09:00:00",
+          "end": "2023-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "lab_tech1@example.com",
+            "junior_researcher1@example.com"
+          ],
+          "id": "evt_dfc519bd88ae4bfdab03807a3fb000a8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Experiment: Cell Culture Preparation",
+          "start": "2023-08-21 10:30:00",
+          "end": "2023-08-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1f79c2f401ce49e8afdfb27ffb306f75"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Analysis: Initial Review of Recent Experiment Results",
+          "start": "2023-08-21 13:00:00",
+          "end": "2023-08-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_40674cfcd7294eef875e0956924c4c56"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Biostatistician: Discuss Statistical Methods for Data",
+          "start": "2023-08-21 15:30:00",
+          "end": "2023-08-21 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "biostatistician@example.com"
+          ],
+          "id": "evt_25cad277b5274a66a214b47ec0de37c2"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-08-21 18:30:00",
+          "end": "2023-08-21 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_31a01421e7dc453e95162edfc6b94110"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Prioritize Tasks",
+          "start": "2023-08-21 08:30:00",
+          "end": "2023-08-21 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dc0d0c649ad843948916b41a8f040339"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lab Meeting: Discuss Experiment Progress",
+          "start": "2023-08-21 09:00:00",
+          "end": "2023-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "lab_tech1@example.com",
+            "junior_researcher1@example.com"
+          ],
+          "id": "evt_dfc519bd88ae4bfdab03807a3fb000a8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Experiment: Cell Culture Preparation",
+          "start": "2023-08-21 10:30:00",
+          "end": "2023-08-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1f79c2f401ce49e8afdfb27ffb306f75"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Analysis: Initial Review of Recent Experiment Results",
+          "start": "2023-08-21 13:00:00",
+          "end": "2023-08-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_40674cfcd7294eef875e0956924c4c56"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Biostatistician: Discuss Statistical Methods for Data",
+          "start": "2023-08-21 16:00:00",
+          "end": "2023-08-21 17:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "biostatistician@example.com"
+          ],
+          "id": "evt_25cad277b5274a66a214b47ec0de37c2"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-08-21 18:30:00",
+          "end": "2023-08-21 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_31a01421e7dc453e95162edfc6b94110"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move the meeting with the biostatistician on Monday to 4 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-08-21 11:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-08-21 00:00:00",
+          "time_max": "2023-08-21 23:59:59"
+        },
+        "result": "Found 6 events:\nid: evt_dc0d0c649ad843948916b41a8f040339 | Check Emails and Prioritize Tasks \u2014 Mon 08:30-09:00\nid: evt_dfc519bd88ae4bfdab03807a3fb000a8 | Lab Meeting: Discuss Experiment Progress \u2014 Mon 09:00-10:30\nid: evt_1f79c2f401ce49e8afdfb27ffb306f75 | Experiment: Cell Culture Preparation \u2014 Mon 10:30-12:00\nid: evt_40674cfcd7294eef875e0956924c4c56 | Data Analysis: Initial Review of Recent Experiment Results \u2014 Mon 13:00-15:00\nid: evt_25cad277b5274a66a214b47ec0de37c2 | Meeting with Biostatistician: Discuss Statistical Methods for Data \u2014 Mon 15:30-17:00\nid: evt_31a01421e7dc453e95162edfc6b94110 | Dinner with Family \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_25cad277b5274a66a214b47ec0de37c2",
+          "end": "2023-08-21 17:30:00",
+          "start": "2023-08-21 16:00:00"
+        },
+        "result": "Event updated successfully.\nMeeting with Biostatistician: Discuss Statistical Methods for Data\n  ID: evt_25cad277b5274a66a214b47ec0de37c2\n  Time: Mon Aug 21, 16:00 - 17:30\n  Attendees: biostatistician@example.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved the meeting with the biostatistician to 4:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change dinner with friends on Friday to 7:30 PM instead.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find 'Dinner with Friends' on Friday, August 25, 2023, then call update_event with the event id to change the event start time to 7:30 PM and end time to 9:30 PM.",
+    "simulated_now": "2023-08-25 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Lab Meeting: Review Weekly Progress",
+          "start": "2023-08-25 09:00:00",
+          "end": "2023-08-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fc1d9a6e2b71462aab98c4925ce9bfb8"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Grant Proposal for Submission",
+          "start": "2023-08-25 10:30:00",
+          "end": "2023-08-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3a8b987cee304454887f4bc27d622586"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meet with Oncologist: Discuss Clinical Needs",
+          "start": "2023-08-25 13:00:00",
+          "end": "2023-08-25 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "oncologist@example.com"
+          ],
+          "id": "evt_27d141cc29cb47a69f349795ceaa1bad"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan Next Week's Experiments",
+          "start": "2023-08-25 14:30:00",
+          "end": "2023-08-25 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7f6fe20261f6458ca25a3af9a9f7fc80"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2023-08-25 19:00:00",
+          "end": "2023-08-25 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_52e13a3fe68249e8befb0bae6012a77c"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Lab Meeting: Review Weekly Progress",
+          "start": "2023-08-25 09:00:00",
+          "end": "2023-08-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fc1d9a6e2b71462aab98c4925ce9bfb8"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Grant Proposal for Submission",
+          "start": "2023-08-25 10:30:00",
+          "end": "2023-08-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3a8b987cee304454887f4bc27d622586"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meet with Oncologist: Discuss Clinical Needs",
+          "start": "2023-08-25 13:00:00",
+          "end": "2023-08-25 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "oncologist@example.com"
+          ],
+          "id": "evt_27d141cc29cb47a69f349795ceaa1bad"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan Next Week's Experiments",
+          "start": "2023-08-25 14:30:00",
+          "end": "2023-08-25 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7f6fe20261f6458ca25a3af9a9f7fc80"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2023-08-25 19:30:00",
+          "end": "2023-08-25 21:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_52e13a3fe68249e8befb0bae6012a77c"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change dinner with friends on Friday to 7:30 PM instead."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. First, I need to know today's date."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-08-25 10:00:00 | Friday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will search for a \"dinner with friends\" event on Friday, August 25, 2023."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-08-25 00:00:00",
+          "time_max": "2023-08-25 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_fc1d9a6e2b71462aab98c4925ce9bfb8 | Lab Meeting: Review Weekly Progress \u2014 Fri 09:00-10:00\nid: evt_3a8b987cee304454887f4bc27d622586 | Finalize Grant Proposal for Submission \u2014 Fri 10:30-12:00\nid: evt_27d141cc29cb47a69f349795ceaa1bad | Meet with Oncologist: Discuss Clinical Needs \u2014 Fri 13:00-14:00\nid: evt_7f6fe20261f6458ca25a3af9a9f7fc80 | Plan Next Week's Experiments \u2014 Fri 14:30-16:00\nid: evt_52e13a3fe68249e8befb0bae6012a77c | Dinner with Friends \u2014 Fri 19:00-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Found it. I'll update the event to the new time."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_52e13a3fe68249e8befb0bae6012a77c",
+          "start": "2023-08-25 19:30:00",
+          "end": "2023-08-25 21:30:00"
+        },
+        "result": "Event updated successfully.\nDinner with Friends\n  ID: evt_52e13a3fe68249e8befb0bae6012a77c\n  Time: Fri Aug 25, 19:30 - 21:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've moved your \"Dinner with Friends\" to 7:30 PM this Friday, August 25th. It will now end at 9:30 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is the lab meeting on Monday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to find the 'Lab Meeting' on Monday, August 21, 2023, and then respond with its start time.",
+    "simulated_now": "2023-08-21 07:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Prioritize Tasks",
+          "start": "2023-08-21 08:30:00",
+          "end": "2023-08-21 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f981cc735e264dd9a09af092a489462e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lab Meeting: Discuss Experiment Progress",
+          "start": "2023-08-21 09:00:00",
+          "end": "2023-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "lab_tech1@example.com",
+            "junior_researcher1@example.com"
+          ],
+          "id": "evt_e0d57bf348374b49ae312f7affc9d298"
+        },
+        {
+          "day": "Monday",
+          "summary": "Experiment: Cell Culture Preparation",
+          "start": "2023-08-21 10:30:00",
+          "end": "2023-08-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7aea1b7401914ccd914e387583f5b908"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Analysis: Initial Review of Recent Experiment Results",
+          "start": "2023-08-21 13:00:00",
+          "end": "2023-08-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a994cc1170814e8fa22f0dee18d2884a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Biostatistician: Discuss Statistical Methods for Data",
+          "start": "2023-08-21 15:30:00",
+          "end": "2023-08-21 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "biostatistician@example.com"
+          ],
+          "id": "evt_fa1cb3da6b3349ffbf965e98f15b1e34"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-08-21 18:30:00",
+          "end": "2023-08-21 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_419f4832ca874eed837cd7d6323f8e7c"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Prioritize Tasks",
+          "start": "2023-08-21 08:30:00",
+          "end": "2023-08-21 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f981cc735e264dd9a09af092a489462e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lab Meeting: Discuss Experiment Progress",
+          "start": "2023-08-21 09:00:00",
+          "end": "2023-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "lab_tech1@example.com",
+            "junior_researcher1@example.com"
+          ],
+          "id": "evt_e0d57bf348374b49ae312f7affc9d298"
+        },
+        {
+          "day": "Monday",
+          "summary": "Experiment: Cell Culture Preparation",
+          "start": "2023-08-21 10:30:00",
+          "end": "2023-08-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7aea1b7401914ccd914e387583f5b908"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Analysis: Initial Review of Recent Experiment Results",
+          "start": "2023-08-21 13:00:00",
+          "end": "2023-08-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a994cc1170814e8fa22f0dee18d2884a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Biostatistician: Discuss Statistical Methods for Data",
+          "start": "2023-08-21 15:30:00",
+          "end": "2023-08-21 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "biostatistician@example.com"
+          ],
+          "id": "evt_fa1cb3da6b3349ffbf965e98f15b1e34"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-08-21 18:30:00",
+          "end": "2023-08-21 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_419f4832ca874eed837cd7d6323f8e7c"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is the lab meeting on Monday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-08-21 07:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-08-21 00:00:00",
+          "time_max": "2023-08-21 23:59:59"
+        },
+        "result": "Found 6 events:\nid: evt_f981cc735e264dd9a09af092a489462e | Check Emails and Prioritize Tasks \u2014 Mon 08:30-09:00\nid: evt_e0d57bf348374b49ae312f7affc9d298 | Lab Meeting: Discuss Experiment Progress \u2014 Mon 09:00-10:30\nid: evt_7aea1b7401914ccd914e387583f5b908 | Experiment: Cell Culture Preparation \u2014 Mon 10:30-12:00\nid: evt_a994cc1170814e8fa22f0dee18d2884a | Data Analysis: Initial Review of Recent Experiment Results \u2014 Mon 13:00-15:00\nid: evt_fa1cb3da6b3349ffbf965e98f15b1e34 | Meeting with Biostatistician: Discuss Statistical Methods for Data \u2014 Mon 15:30-17:00\nid: evt_419f4832ca874eed837cd7d6323f8e7c | Dinner with Family \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "The lab meeting is from 9:00 to 10:30 AM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who am I meeting with on Friday at 1 PM?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to find events scheduled at 1 PM on Friday, August 25, 2023, and then respond with the attendees.",
+    "simulated_now": "2023-08-25 08:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Lab Meeting: Review Weekly Progress",
+          "start": "2023-08-25 09:00:00",
+          "end": "2023-08-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1d60ed08318f4b5ab1140d7267bbc9af"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Grant Proposal for Submission",
+          "start": "2023-08-25 10:30:00",
+          "end": "2023-08-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5de890a1f2104726971ad4888d448f27"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meet with Oncologist: Discuss Clinical Needs",
+          "start": "2023-08-25 13:00:00",
+          "end": "2023-08-25 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "oncologist@example.com"
+          ],
+          "id": "evt_6606a529d0a544e592605d8b18b8c5c8"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan Next Week's Experiments",
+          "start": "2023-08-25 14:30:00",
+          "end": "2023-08-25 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_08fa7fa7feef410a991ea32b6c61f37d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2023-08-25 19:00:00",
+          "end": "2023-08-25 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_93493242b6f74cba9a09dd400e5ec8b8"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Lab Meeting: Review Weekly Progress",
+          "start": "2023-08-25 09:00:00",
+          "end": "2023-08-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1d60ed08318f4b5ab1140d7267bbc9af"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Grant Proposal for Submission",
+          "start": "2023-08-25 10:30:00",
+          "end": "2023-08-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5de890a1f2104726971ad4888d448f27"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meet with Oncologist: Discuss Clinical Needs",
+          "start": "2023-08-25 13:00:00",
+          "end": "2023-08-25 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "oncologist@example.com"
+          ],
+          "id": "evt_6606a529d0a544e592605d8b18b8c5c8"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan Next Week's Experiments",
+          "start": "2023-08-25 14:30:00",
+          "end": "2023-08-25 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_08fa7fa7feef410a991ea32b6c61f37d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2023-08-25 19:00:00",
+          "end": "2023-08-25 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_93493242b6f74cba9a09dd400e5ec8b8"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who am I meeting with on Friday at 1 PM?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-08-25 08:00:00 | Friday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-08-25 14:00:00",
+          "time_min": "2023-08-25 12:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_5de890a1f2104726971ad4888d448f27 | Finalize Grant Proposal for Submission \u2014 Fri 10:30-12:00\nid: evt_6606a529d0a544e592605d8b18b8c5c8 | Meet with Oncologist: Discuss Clinical Needs \u2014 Fri 13:00-14:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_6606a529d0a544e592605d8b18b8c5c8"
+        },
+        "result": "Meet with Oncologist: Discuss Clinical Needs\n  ID: evt_6606a529d0a544e592605d8b18b8c5c8\n  Time: Fri Aug 25, 13:00 - 14:00\n  Attendees: oncologist@example.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "Friday at 1 PM, you are meeting with oncologist@example.com to discuss clinical needs."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "I want to schedule a meeting with the PI on Thursday. Find a 30-minute slot in the morning.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Call list_events for Thursday, August 24, 2023, find available 30-minute slot in the morning before 12:00 PM. Then call create_event for a 30 minute meeting with the Principal Investigator (pi@example.com).",
+    "simulated_now": "2023-08-24 08:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Experiment: Animal Study Injections",
+          "start": "2023-08-24 09:00:00",
+          "end": "2023-08-24 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_92b81d1d2864451d8058e281ddbf8879"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Review and Edit Grant Proposal",
+          "start": "2023-08-24 11:30:00",
+          "end": "2023-08-24 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3b0887937ccf435ca256336c1aa2c1a5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Data Analysis: Statistical Analysis",
+          "start": "2023-08-24 13:30:00",
+          "end": "2023-08-24 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7d7979074ae24ee2a84442a2f6ebdded"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Regulatory Affairs Specialist: Discuss Clinical Trial Regulations",
+          "start": "2023-08-24 15:30:00",
+          "end": "2023-08-24 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "regulatory_affairs@example.com"
+          ],
+          "id": "evt_92228280c0294755b3d0a9d23ed45f9f"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Parent-Teacher Conference",
+          "start": "2023-08-24 18:00:00",
+          "end": "2023-08-24 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_93542e55429849149eaa64cf35fa8705"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Meeting with PI",
+          "start": "2023-08-24 08:00:00",
+          "end": "2023-08-24 08:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pi@example.com"
+          ],
+          "id": "evt_8ab3902f89a54b6d865e2ac314b17474"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Experiment: Animal Study Injections",
+          "start": "2023-08-24 09:00:00",
+          "end": "2023-08-24 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_92b81d1d2864451d8058e281ddbf8879"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Review and Edit Grant Proposal",
+          "start": "2023-08-24 11:30:00",
+          "end": "2023-08-24 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3b0887937ccf435ca256336c1aa2c1a5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Data Analysis: Statistical Analysis",
+          "start": "2023-08-24 13:30:00",
+          "end": "2023-08-24 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7d7979074ae24ee2a84442a2f6ebdded"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Regulatory Affairs Specialist: Discuss Clinical Trial Regulations",
+          "start": "2023-08-24 15:30:00",
+          "end": "2023-08-24 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "regulatory_affairs@example.com"
+          ],
+          "id": "evt_92228280c0294755b3d0a9d23ed45f9f"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Parent-Teacher Conference",
+          "start": "2023-08-24 18:00:00",
+          "end": "2023-08-24 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_93542e55429849149eaa64cf35fa8705"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "I want to schedule a meeting with the PI on Thursday. Find a 30-minute slot in the morning."
+      },
+      {
+        "role": "assistant",
+        "content": "I will first find out the current date and time. Then, I will list all the events on Thursday to find a suitable 30-minute slot in the morning."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-08-24 08:00:00 | Thursday"
+      },
+      {
+        "role": "assistant",
+        "content": "Now I will list all the events on Thursday morning to find a suitable 30-minute slot."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-08-24 08:00:00",
+          "time_max": "2023-08-24 12:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_92b81d1d2864451d8058e281ddbf8879 | Experiment: Animal Study Injections \u2014 Thu 09:00-11:00\nid: evt_3b0887937ccf435ca256336c1aa2c1a5 | Review and Edit Grant Proposal \u2014 Thu 11:30-12:30"
+      },
+      {
+        "role": "assistant",
+        "content": "I have found two free slots on Thursday morning: 8:00-9:00 AM and 11:00-11:30 AM.\n\nI will now search for the PI's email address in your calendar to invite them to the meeting."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 33 events:\nid: evt_15c97d1c1a4f49158dc8b296fbc6928d | Check Emails and Prioritize Tasks \u2014 Mon 08:30-09:00\nid: evt_2c535770022143bf868d65e53a549b23 | Lab Meeting: Discuss Experiment Progress \u2014 Mon 09:00-10:30\nid: evt_d607f95569c640b69c6f0075cc62beae | Experiment: Cell Culture Preparation \u2014 Mon 10:30-12:00\nid: evt_3464e82e594442d684e256f09b22dc9a | Data Analysis: Initial Review of Recent Experiment Results \u2014 Mon 13:00-15:00\nid: evt_1a6132ffb2b6498fbacacebcee4d02d7 | Meeting with Biostatistician: Discuss Statistical Methods for Data \u2014 Mon 15:30-17:00\nid: evt_af46d4e38f244325a591f5dc290edfe4 | Dinner with Family \u2014 Mon 18:30-20:00\nid: evt_11e4f24f0a7a44368858cd21d03b1e18 | Grant Writing: Draft Introduction Section \u2014 Tue 09:00-10:00\nid: evt_f65044eb7bd84e23b9818c2f2acdeff4 | Lab Work: Drug Screening Assay \u2014 Tue 10:30-12:30\nid: evt_3cfb014620ba4fb084d7d8ca48e1947e | Review Literature on New Cancer Therapies \u2014 Tue 13:30-15:00\nid: evt_e87a9c9dc19b42faa03bbdce4cf19230 | Meeting with Principal Investigator: Discuss Research Direction \u2014 Tue 15:30-16:30\nid: evt_dbbc44620b114e48ac4411c8aa31b48b | Kids' Soccer Practice \u2014 Tue 18:00-19:30\nid: evt_eb64ec72cdbc4c1e93ee5b0120a3a9c0 | Prepare Presentation Slides \u2014 Wed 08:30-09:00\nid: evt_e3ff46210988426a81ae658819195345 | Presentation Practice \u2014 Wed 09:00-10:00\nid: evt_436738215b124494849540982fd54f28 | Lab Work: Microscopy and Imaging \u2014 Wed 10:30-12:00\nid: evt_bc18f7826b6e45cb83ae79d5f7fd2134 | Weekly Team Lunch \u2014 Wed 13:00-14:00\nid: evt_8029a0bed13a4124b4174149346f0ea2 | Meet with Pharmaceutical Rep: Discuss New Compounds \u2014 Wed 14:30-16:00\nid: evt_c2aa265ab7e14797bc2f8efe461243ae | Book Club Meeting \u2014 Wed 19:00-20:30\nid: evt_92b81d1d2864451d8058e281ddbf8879 | Experiment: Animal Study Injections \u2014 Thu 09:00-11:00\nid: evt_3b0887937ccf435ca256336c1aa2c1a5 | Review and Edit Grant Proposal \u2014 Thu 11:30-12:30\nid: evt_7d7979074ae24ee2a84442a2f6ebdded | Data Analysis: Statistical Analysis \u2014 Thu 13:30-15:00\nid: evt_92228280c0294755b3d0a9d23ed45f9f | Meeting with Regulatory Affairs Specialist: Discuss Clinical Trial Regulations \u2014 Thu 15:30-17:00\nid: evt_93542e55429849149eaa64cf35fa8705 | Parent-Teacher Conference \u2014 Thu 18:00-19:00\nid: evt_bec992bf2d2843a3a1e9c0f59b3b16bb | Lab Meeting: Review Weekly Progress \u2014 Fri 09:00-10:00\nid: evt_c812b80c838b476b924389a8ba13003a | Finalize Grant Proposal for Submission \u2014 Fri 10:30-12:00\nid: evt_49a7ea9fb6de4493bb9f1d8abc722bcf | Meet with Oncologist: Discuss Clinical Needs \u2014 Fri 13:00-14:00\nid: evt_233857319e90415982058596590ca9af | Plan Next Week's Experiments \u2014 Fri 14:30-16:00\nid: evt_6b33db23768e49768013b405cb3c41c3 | Dinner with Friends \u2014 Fri 19:00-21:00\nid: evt_7a0194751dca47e794dec4a38c49045f | Hiking with Family \u2014 Sat 09:00-11:00\nid: evt_5f1569accc8c47d092058e241ebfccdf | Grocery Shopping \u2014 Sat 12:30-14:00\nid: evt_d0de0efeb682473193b9f0e7ec066bda | Children's Birthday Party \u2014 Sat 15:00-17:00\nid: evt_d53cda2b29bb403486b2f709d97294f1 | Brunch with Spouse's Family \u2014 Sun 10:00-12:00\nid: evt_f3877c63577c450c92ace1a91556678c | Relaxing at Home/Reading \u2014 Sun 14:00-16:00\nid: evt_7fd4b3abc2af4449a732681224586e45 | Prepare for the Week Ahead \u2014 Sun 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've found a \"Meeting with Principal Investigator\" in your calendar. I'll check the details to get their email address and schedule the meeting."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_e87a9c9dc19b42faa03bbdce4cf19230"
+        },
+        "result": "Meeting with Principal Investigator: Discuss Research Direction\n  ID: evt_e87a9c9dc19b42faa03bbdce4cf19230\n  Time: Tue Aug 22, 15:30 - 16:30\n  Attendees: pi@example.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have found the PI's email address. I will now schedule a 30-minute meeting with them on Thursday at 8:00 AM."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "end": "2023-08-24 08:30:00",
+          "summary": "Meeting with PI",
+          "start": "2023-08-24 08:00:00",
+          "attendees": [
+            "pi@example.com"
+          ]
+        },
+        "result": "Event created successfully.\nMeeting with PI\n  ID: evt_8ab3902f89a54b6d865e2ac314b17474\n  Time: Thu Aug 24, 08:00 - 08:30\n  Attendees: pi@example.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have scheduled a meeting with the PI on Thursday, August 24th, from 8:00 AM to 8:30 AM. An invitation has been sent to pi@example.com."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Meeting biostatistician?",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find 'Meeting with Biostatistician'. If a match is found, respond with the details of the meeting, otherwise respond with \"No such event found\".",
+    "simulated_now": "2023-08-21 12:00:00",
+    "addressed_days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Prioritize Tasks",
+          "start": "2023-08-21 08:30:00",
+          "end": "2023-08-21 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f208217de8764cf4bfb8c9ec233d0b43"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lab Meeting: Discuss Experiment Progress",
+          "start": "2023-08-21 09:00:00",
+          "end": "2023-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "lab_tech1@example.com",
+            "junior_researcher1@example.com"
+          ],
+          "id": "evt_8bb003bf307c48de80561013bb9babfe"
+        },
+        {
+          "day": "Monday",
+          "summary": "Experiment: Cell Culture Preparation",
+          "start": "2023-08-21 10:30:00",
+          "end": "2023-08-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2686af572604403493dbae4acc191273"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Analysis: Initial Review of Recent Experiment Results",
+          "start": "2023-08-21 13:00:00",
+          "end": "2023-08-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4abead9c349c422abc67d9e294ef7a5f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Biostatistician: Discuss Statistical Methods for Data",
+          "start": "2023-08-21 15:30:00",
+          "end": "2023-08-21 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "biostatistician@example.com"
+          ],
+          "id": "evt_723453e1a3f145db835564a994b6c8bd"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-08-21 18:30:00",
+          "end": "2023-08-21 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_33ed51fa5ce14336a938553eb9ea6bb9"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Grant Writing: Draft Introduction Section",
+          "start": "2023-08-22 09:00:00",
+          "end": "2023-08-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c765b93d1ffe4f23895035385cfd89e7"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lab Work: Drug Screening Assay",
+          "start": "2023-08-22 10:30:00",
+          "end": "2023-08-22 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b6e3cc2e07a64de39c4738ca55918d4c"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Review Literature on New Cancer Therapies",
+          "start": "2023-08-22 13:30:00",
+          "end": "2023-08-22 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_49ee0f95fd804d7aa44822673b99468b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Principal Investigator: Discuss Research Direction",
+          "start": "2023-08-22 15:30:00",
+          "end": "2023-08-22 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pi@example.com"
+          ],
+          "id": "evt_1f4bbed18e3f40a19add8ad9103593c1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2023-08-22 18:00:00",
+          "end": "2023-08-22 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_165f707c72b946d69c4713fce5a5460a"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Presentation Slides",
+          "start": "2023-08-23 08:30:00",
+          "end": "2023-08-23 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b1b53671a7ac4b3db7d275605990ea66"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Presentation Practice",
+          "start": "2023-08-23 09:00:00",
+          "end": "2023-08-23 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_df041692faee486e8296284e9f707828"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Lab Work: Microscopy and Imaging",
+          "start": "2023-08-23 10:30:00",
+          "end": "2023-08-23 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1fae6a633fbc41f49c792cca6992fd14"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Weekly Team Lunch",
+          "start": "2023-08-23 13:00:00",
+          "end": "2023-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_53eb9d04a8744b288c23068e144ecd84"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meet with Pharmaceutical Rep: Discuss New Compounds",
+          "start": "2023-08-23 14:30:00",
+          "end": "2023-08-23 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharma_rep@example.com"
+          ],
+          "id": "evt_1a7909826b384498b58a240627105887"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2023-08-23 19:00:00",
+          "end": "2023-08-23 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e0d98deeeed3467f914d4e254aaea160"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Experiment: Animal Study Injections",
+          "start": "2023-08-24 09:00:00",
+          "end": "2023-08-24 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b8ecf012c5c347d283a7ad49ac5fca03"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Review and Edit Grant Proposal",
+          "start": "2023-08-24 11:30:00",
+          "end": "2023-08-24 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e95f639570c44c82959224e5094251df"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Data Analysis: Statistical Analysis",
+          "start": "2023-08-24 13:30:00",
+          "end": "2023-08-24 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0a2daea42cfa4268b13f06af25c0e100"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Regulatory Affairs Specialist: Discuss Clinical Trial Regulations",
+          "start": "2023-08-24 15:30:00",
+          "end": "2023-08-24 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "regulatory_affairs@example.com"
+          ],
+          "id": "evt_ebf9a20fb2384f61863ab815460a45a1"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Parent-Teacher Conference",
+          "start": "2023-08-24 18:00:00",
+          "end": "2023-08-24 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_79c0ec66318e45ebb78a6066df9e6c48"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Lab Meeting: Review Weekly Progress",
+          "start": "2023-08-25 09:00:00",
+          "end": "2023-08-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2aaa3d8aab8440de9237d2d3bf03dc7a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Grant Proposal for Submission",
+          "start": "2023-08-25 10:30:00",
+          "end": "2023-08-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8c8f298adeeb425298311be3d544e5d0"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meet with Oncologist: Discuss Clinical Needs",
+          "start": "2023-08-25 13:00:00",
+          "end": "2023-08-25 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "oncologist@example.com"
+          ],
+          "id": "evt_5d745ae774284cfe93463f29405372b1"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan Next Week's Experiments",
+          "start": "2023-08-25 14:30:00",
+          "end": "2023-08-25 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b344a09c7dd4489796c35b0dbe97721b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2023-08-25 19:00:00",
+          "end": "2023-08-25 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d3f1c437a29b469d922c5e2387b180c4"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Hiking with Family",
+          "start": "2023-08-26 09:00:00",
+          "end": "2023-08-26 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_78ba80c457474837bf0cdd0dfcac8a96"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2023-08-26 12:30:00",
+          "end": "2023-08-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_88ee180281f84df59533eea5f2776995"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Children's Birthday Party",
+          "start": "2023-08-26 15:00:00",
+          "end": "2023-08-26 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3e493d8eb728402596767e1b59e43512"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Spouse's Family",
+          "start": "2023-08-27 10:00:00",
+          "end": "2023-08-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_71910ee035a849c3a769f2f5bf43e7ac"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Relaxing at Home/Reading",
+          "start": "2023-08-27 14:00:00",
+          "end": "2023-08-27 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_54d1f0518a534f28871c54a8da1b9bb5"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Prepare for the Week Ahead",
+          "start": "2023-08-27 18:00:00",
+          "end": "2023-08-27 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9befe1e6525d4ba5ae513caa750b24c8"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Prioritize Tasks",
+          "start": "2023-08-21 08:30:00",
+          "end": "2023-08-21 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f208217de8764cf4bfb8c9ec233d0b43"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lab Meeting: Discuss Experiment Progress",
+          "start": "2023-08-21 09:00:00",
+          "end": "2023-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "lab_tech1@example.com",
+            "junior_researcher1@example.com"
+          ],
+          "id": "evt_8bb003bf307c48de80561013bb9babfe"
+        },
+        {
+          "day": "Monday",
+          "summary": "Experiment: Cell Culture Preparation",
+          "start": "2023-08-21 10:30:00",
+          "end": "2023-08-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2686af572604403493dbae4acc191273"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Analysis: Initial Review of Recent Experiment Results",
+          "start": "2023-08-21 13:00:00",
+          "end": "2023-08-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4abead9c349c422abc67d9e294ef7a5f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Biostatistician: Discuss Statistical Methods for Data",
+          "start": "2023-08-21 15:30:00",
+          "end": "2023-08-21 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "biostatistician@example.com"
+          ],
+          "id": "evt_723453e1a3f145db835564a994b6c8bd"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-08-21 18:30:00",
+          "end": "2023-08-21 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_33ed51fa5ce14336a938553eb9ea6bb9"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Grant Writing: Draft Introduction Section",
+          "start": "2023-08-22 09:00:00",
+          "end": "2023-08-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c765b93d1ffe4f23895035385cfd89e7"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lab Work: Drug Screening Assay",
+          "start": "2023-08-22 10:30:00",
+          "end": "2023-08-22 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b6e3cc2e07a64de39c4738ca55918d4c"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Review Literature on New Cancer Therapies",
+          "start": "2023-08-22 13:30:00",
+          "end": "2023-08-22 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_49ee0f95fd804d7aa44822673b99468b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Principal Investigator: Discuss Research Direction",
+          "start": "2023-08-22 15:30:00",
+          "end": "2023-08-22 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pi@example.com"
+          ],
+          "id": "evt_1f4bbed18e3f40a19add8ad9103593c1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2023-08-22 18:00:00",
+          "end": "2023-08-22 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_165f707c72b946d69c4713fce5a5460a"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Presentation Slides",
+          "start": "2023-08-23 08:30:00",
+          "end": "2023-08-23 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b1b53671a7ac4b3db7d275605990ea66"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Presentation Practice",
+          "start": "2023-08-23 09:00:00",
+          "end": "2023-08-23 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_df041692faee486e8296284e9f707828"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Lab Work: Microscopy and Imaging",
+          "start": "2023-08-23 10:30:00",
+          "end": "2023-08-23 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1fae6a633fbc41f49c792cca6992fd14"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Weekly Team Lunch",
+          "start": "2023-08-23 13:00:00",
+          "end": "2023-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_53eb9d04a8744b288c23068e144ecd84"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meet with Pharmaceutical Rep: Discuss New Compounds",
+          "start": "2023-08-23 14:30:00",
+          "end": "2023-08-23 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharma_rep@example.com"
+          ],
+          "id": "evt_1a7909826b384498b58a240627105887"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2023-08-23 19:00:00",
+          "end": "2023-08-23 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e0d98deeeed3467f914d4e254aaea160"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Experiment: Animal Study Injections",
+          "start": "2023-08-24 09:00:00",
+          "end": "2023-08-24 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b8ecf012c5c347d283a7ad49ac5fca03"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Review and Edit Grant Proposal",
+          "start": "2023-08-24 11:30:00",
+          "end": "2023-08-24 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e95f639570c44c82959224e5094251df"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Data Analysis: Statistical Analysis",
+          "start": "2023-08-24 13:30:00",
+          "end": "2023-08-24 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0a2daea42cfa4268b13f06af25c0e100"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Regulatory Affairs Specialist: Discuss Clinical Trial Regulations",
+          "start": "2023-08-24 15:30:00",
+          "end": "2023-08-24 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "regulatory_affairs@example.com"
+          ],
+          "id": "evt_ebf9a20fb2384f61863ab815460a45a1"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Parent-Teacher Conference",
+          "start": "2023-08-24 18:00:00",
+          "end": "2023-08-24 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_79c0ec66318e45ebb78a6066df9e6c48"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Lab Meeting: Review Weekly Progress",
+          "start": "2023-08-25 09:00:00",
+          "end": "2023-08-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2aaa3d8aab8440de9237d2d3bf03dc7a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Grant Proposal for Submission",
+          "start": "2023-08-25 10:30:00",
+          "end": "2023-08-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8c8f298adeeb425298311be3d544e5d0"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meet with Oncologist: Discuss Clinical Needs",
+          "start": "2023-08-25 13:00:00",
+          "end": "2023-08-25 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "oncologist@example.com"
+          ],
+          "id": "evt_5d745ae774284cfe93463f29405372b1"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan Next Week's Experiments",
+          "start": "2023-08-25 14:30:00",
+          "end": "2023-08-25 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b344a09c7dd4489796c35b0dbe97721b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2023-08-25 19:00:00",
+          "end": "2023-08-25 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d3f1c437a29b469d922c5e2387b180c4"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Hiking with Family",
+          "start": "2023-08-26 09:00:00",
+          "end": "2023-08-26 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_78ba80c457474837bf0cdd0dfcac8a96"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2023-08-26 12:30:00",
+          "end": "2023-08-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_88ee180281f84df59533eea5f2776995"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Children's Birthday Party",
+          "start": "2023-08-26 15:00:00",
+          "end": "2023-08-26 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3e493d8eb728402596767e1b59e43512"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Spouse's Family",
+          "start": "2023-08-27 10:00:00",
+          "end": "2023-08-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_71910ee035a849c3a769f2f5bf43e7ac"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Relaxing at Home/Reading",
+          "start": "2023-08-27 14:00:00",
+          "end": "2023-08-27 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_54d1f0518a534f28871c54a8da1b9bb5"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Prepare for the Week Ahead",
+          "start": "2023-08-27 18:00:00",
+          "end": "2023-08-27 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9befe1e6525d4ba5ae513caa750b24c8"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Meeting biostatistician?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can help with that. First, I'll check your calendar for any meetings with a biostatistician."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 33 events:\nid: evt_f208217de8764cf4bfb8c9ec233d0b43 | Check Emails and Prioritize Tasks \u2014 Mon 08:30-09:00\nid: evt_8bb003bf307c48de80561013bb9babfe | Lab Meeting: Discuss Experiment Progress \u2014 Mon 09:00-10:30\nid: evt_2686af572604403493dbae4acc191273 | Experiment: Cell Culture Preparation \u2014 Mon 10:30-12:00\nid: evt_4abead9c349c422abc67d9e294ef7a5f | Data Analysis: Initial Review of Recent Experiment Results \u2014 Mon 13:00-15:00\nid: evt_723453e1a3f145db835564a994b6c8bd | Meeting with Biostatistician: Discuss Statistical Methods for Data \u2014 Mon 15:30-17:00\nid: evt_33ed51fa5ce14336a938553eb9ea6bb9 | Dinner with Family \u2014 Mon 18:30-20:00\nid: evt_c765b93d1ffe4f23895035385cfd89e7 | Grant Writing: Draft Introduction Section \u2014 Tue 09:00-10:00\nid: evt_b6e3cc2e07a64de39c4738ca55918d4c | Lab Work: Drug Screening Assay \u2014 Tue 10:30-12:30\nid: evt_49ee0f95fd804d7aa44822673b99468b | Review Literature on New Cancer Therapies \u2014 Tue 13:30-15:00\nid: evt_1f4bbed18e3f40a19add8ad9103593c1 | Meeting with Principal Investigator: Discuss Research Direction \u2014 Tue 15:30-16:30\nid: evt_165f707c72b946d69c4713fce5a5460a | Kids' Soccer Practice \u2014 Tue 18:00-19:30\nid: evt_b1b53671a7ac4b3db7d275605990ea66 | Prepare Presentation Slides \u2014 Wed 08:30-09:00\nid: evt_df041692faee486e8296284e9f707828 | Presentation Practice \u2014 Wed 09:00-10:00\nid: evt_1fae6a633fbc41f49c792cca6992fd14 | Lab Work: Microscopy and Imaging \u2014 Wed 10:30-12:00\nid: evt_53eb9d04a8744b288c23068e144ecd84 | Weekly Team Lunch \u2014 Wed 13:00-14:00\nid: evt_1a7909826b384498b58a240627105887 | Meet with Pharmaceutical Rep: Discuss New Compounds \u2014 Wed 14:30-16:00\nid: evt_e0d98deeeed3467f914d4e254aaea160 | Book Club Meeting \u2014 Wed 19:00-20:30\nid: evt_b8ecf012c5c347d283a7ad49ac5fca03 | Experiment: Animal Study Injections \u2014 Thu 09:00-11:00\nid: evt_e95f639570c44c82959224e5094251df | Review and Edit Grant Proposal \u2014 Thu 11:30-12:30\nid: evt_0a2daea42cfa4268b13f06af25c0e100 | Data Analysis: Statistical Analysis \u2014 Thu 13:30-15:00\nid: evt_ebf9a20fb2384f61863ab815460a45a1 | Meeting with Regulatory Affairs Specialist: Discuss Clinical Trial Regulations \u2014 Thu 15:30-17:00\nid: evt_79c0ec66318e45ebb78a6066df9e6c48 | Parent-Teacher Conference \u2014 Thu 18:00-19:00\nid: evt_2aaa3d8aab8440de9237d2d3bf03dc7a | Lab Meeting: Review Weekly Progress \u2014 Fri 09:00-10:00\nid: evt_8c8f298adeeb425298311be3d544e5d0 | Finalize Grant Proposal for Submission \u2014 Fri 10:30-12:00\nid: evt_5d745ae774284cfe93463f29405372b1 | Meet with Oncologist: Discuss Clinical Needs \u2014 Fri 13:00-14:00\nid: evt_b344a09c7dd4489796c35b0dbe97721b | Plan Next Week's Experiments \u2014 Fri 14:30-16:00\nid: evt_d3f1c437a29b469d922c5e2387b180c4 | Dinner with Friends \u2014 Fri 19:00-21:00\nid: evt_78ba80c457474837bf0cdd0dfcac8a96 | Hiking with Family \u2014 Sat 09:00-11:00\nid: evt_88ee180281f84df59533eea5f2776995 | Grocery Shopping \u2014 Sat 12:30-14:00\nid: evt_3e493d8eb728402596767e1b59e43512 | Children's Birthday Party \u2014 Sat 15:00-17:00\nid: evt_71910ee035a849c3a769f2f5bf43e7ac | Brunch with Spouse's Family \u2014 Sun 10:00-12:00\nid: evt_54d1f0518a534f28871c54a8da1b9bb5 | Relaxing at Home/Reading \u2014 Sun 14:00-16:00\nid: evt_9befe1e6525d4ba5ae513caa750b24c8 | Prepare for the Week Ahead \u2014 Sun 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, you have a \"Meeting with Biostatistician: Discuss Statistical Methods for Data\" scheduled for Monday from 3:30 PM to 5:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule soccer.",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find 'Kids' Soccer Practice'. If a match is found, ask for the day and new time. Otherwise, respond with \"No such event found\".",
+    "simulated_now": "2023-08-22 14:00:00",
+    "addressed_days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Prioritize Tasks",
+          "start": "2023-08-21 08:30:00",
+          "end": "2023-08-21 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_87b987f619dc4f748f22ea8e833b59c9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lab Meeting: Discuss Experiment Progress",
+          "start": "2023-08-21 09:00:00",
+          "end": "2023-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "lab_tech1@example.com",
+            "junior_researcher1@example.com"
+          ],
+          "id": "evt_d88976e7c5934d92a294a9da3f1e6971"
+        },
+        {
+          "day": "Monday",
+          "summary": "Experiment: Cell Culture Preparation",
+          "start": "2023-08-21 10:30:00",
+          "end": "2023-08-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b74dd7ca46114fa989de132a267c9083"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Analysis: Initial Review of Recent Experiment Results",
+          "start": "2023-08-21 13:00:00",
+          "end": "2023-08-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_39165a5127024b7baa718e2e38e11635"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Biostatistician: Discuss Statistical Methods for Data",
+          "start": "2023-08-21 15:30:00",
+          "end": "2023-08-21 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "biostatistician@example.com"
+          ],
+          "id": "evt_bc94322d1aff4cb6afa376a30b0f7504"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-08-21 18:30:00",
+          "end": "2023-08-21 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_127b4ac3ad7b41c4b176acc1f7ef3543"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Grant Writing: Draft Introduction Section",
+          "start": "2023-08-22 09:00:00",
+          "end": "2023-08-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_87d566ea402a458ba5ddf3adbab99f46"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lab Work: Drug Screening Assay",
+          "start": "2023-08-22 10:30:00",
+          "end": "2023-08-22 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fc825e6617f94ea782d79bb79c4fb4ca"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Review Literature on New Cancer Therapies",
+          "start": "2023-08-22 13:30:00",
+          "end": "2023-08-22 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3099d81e4e8648389e9e3a12b82733ba"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Principal Investigator: Discuss Research Direction",
+          "start": "2023-08-22 15:30:00",
+          "end": "2023-08-22 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pi@example.com"
+          ],
+          "id": "evt_f35e075339544b6582d2b77d75341422"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2023-08-22 18:00:00",
+          "end": "2023-08-22 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e93399bf026d4e6f9b1d253f1c6a17dd"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Presentation Slides",
+          "start": "2023-08-23 08:30:00",
+          "end": "2023-08-23 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2cfa3519a8a346b2ba617f2ed8b39995"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Presentation Practice",
+          "start": "2023-08-23 09:00:00",
+          "end": "2023-08-23 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_96ebb123ffc046d09ab4a4a14c455ff8"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Lab Work: Microscopy and Imaging",
+          "start": "2023-08-23 10:30:00",
+          "end": "2023-08-23 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3fa2a772b13341c89b182b63b16b6b1e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Weekly Team Lunch",
+          "start": "2023-08-23 13:00:00",
+          "end": "2023-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_97b4781b8b4843fcb937ea6a8f8d6eca"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meet with Pharmaceutical Rep: Discuss New Compounds",
+          "start": "2023-08-23 14:30:00",
+          "end": "2023-08-23 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharma_rep@example.com"
+          ],
+          "id": "evt_a9e26b757696413888235bdc43388ce0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2023-08-23 19:00:00",
+          "end": "2023-08-23 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_170e1b00e8134ff69b1bae5995df6746"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Experiment: Animal Study Injections",
+          "start": "2023-08-24 09:00:00",
+          "end": "2023-08-24 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_20e70bd0972947dbbb8a36a2401a20a2"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Review and Edit Grant Proposal",
+          "start": "2023-08-24 11:30:00",
+          "end": "2023-08-24 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d837ddb9ead84df29ba410ad9c0e56af"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Data Analysis: Statistical Analysis",
+          "start": "2023-08-24 13:30:00",
+          "end": "2023-08-24 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_845a1e4f07514d7ba31f157739ce0302"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Regulatory Affairs Specialist: Discuss Clinical Trial Regulations",
+          "start": "2023-08-24 15:30:00",
+          "end": "2023-08-24 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "regulatory_affairs@example.com"
+          ],
+          "id": "evt_e5d8f09c808c4dc69c3bd8dd6ee54ccd"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Parent-Teacher Conference",
+          "start": "2023-08-24 18:00:00",
+          "end": "2023-08-24 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_42dfc4d42d4b4e0a91b3edc3bc5834c1"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Lab Meeting: Review Weekly Progress",
+          "start": "2023-08-25 09:00:00",
+          "end": "2023-08-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f4497fcdfa1643629c1e08814bd7b1fa"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Grant Proposal for Submission",
+          "start": "2023-08-25 10:30:00",
+          "end": "2023-08-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8b23be9889b54dbbb531158797cfe7cb"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meet with Oncologist: Discuss Clinical Needs",
+          "start": "2023-08-25 13:00:00",
+          "end": "2023-08-25 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "oncologist@example.com"
+          ],
+          "id": "evt_cbf6ddc10b5c40ebbdd77e65879da2bf"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan Next Week's Experiments",
+          "start": "2023-08-25 14:30:00",
+          "end": "2023-08-25 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a4ba386060144ee5a3de57fc7b389195"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2023-08-25 19:00:00",
+          "end": "2023-08-25 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e2a686a8f568495ba1ba024c17e468fb"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Hiking with Family",
+          "start": "2023-08-26 09:00:00",
+          "end": "2023-08-26 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f064cb8d07c6469dbebd1e8e344f9fa4"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2023-08-26 12:30:00",
+          "end": "2023-08-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1274a74a827f499d88ecf4942a70cfc1"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Children's Birthday Party",
+          "start": "2023-08-26 15:00:00",
+          "end": "2023-08-26 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dad82f49c4634d44ab110c3c8d32cab2"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Spouse's Family",
+          "start": "2023-08-27 10:00:00",
+          "end": "2023-08-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6f7ed46f3827455cb8fc6dd581824367"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Relaxing at Home/Reading",
+          "start": "2023-08-27 14:00:00",
+          "end": "2023-08-27 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a5913629d359427eb0654c3e09cbbc32"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Prepare for the Week Ahead",
+          "start": "2023-08-27 18:00:00",
+          "end": "2023-08-27 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5d6dd29961fd41449fd3c2dfed4526c6"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Prioritize Tasks",
+          "start": "2023-08-21 08:30:00",
+          "end": "2023-08-21 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_87b987f619dc4f748f22ea8e833b59c9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lab Meeting: Discuss Experiment Progress",
+          "start": "2023-08-21 09:00:00",
+          "end": "2023-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "lab_tech1@example.com",
+            "junior_researcher1@example.com"
+          ],
+          "id": "evt_d88976e7c5934d92a294a9da3f1e6971"
+        },
+        {
+          "day": "Monday",
+          "summary": "Experiment: Cell Culture Preparation",
+          "start": "2023-08-21 10:30:00",
+          "end": "2023-08-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b74dd7ca46114fa989de132a267c9083"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Analysis: Initial Review of Recent Experiment Results",
+          "start": "2023-08-21 13:00:00",
+          "end": "2023-08-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_39165a5127024b7baa718e2e38e11635"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Biostatistician: Discuss Statistical Methods for Data",
+          "start": "2023-08-21 15:30:00",
+          "end": "2023-08-21 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "biostatistician@example.com"
+          ],
+          "id": "evt_bc94322d1aff4cb6afa376a30b0f7504"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-08-21 18:30:00",
+          "end": "2023-08-21 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_127b4ac3ad7b41c4b176acc1f7ef3543"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Grant Writing: Draft Introduction Section",
+          "start": "2023-08-22 09:00:00",
+          "end": "2023-08-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_87d566ea402a458ba5ddf3adbab99f46"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lab Work: Drug Screening Assay",
+          "start": "2023-08-22 10:30:00",
+          "end": "2023-08-22 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fc825e6617f94ea782d79bb79c4fb4ca"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Review Literature on New Cancer Therapies",
+          "start": "2023-08-22 13:30:00",
+          "end": "2023-08-22 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3099d81e4e8648389e9e3a12b82733ba"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Principal Investigator: Discuss Research Direction",
+          "start": "2023-08-22 15:30:00",
+          "end": "2023-08-22 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pi@example.com"
+          ],
+          "id": "evt_f35e075339544b6582d2b77d75341422"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2023-08-22 18:00:00",
+          "end": "2023-08-22 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e93399bf026d4e6f9b1d253f1c6a17dd"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Prepare Presentation Slides",
+          "start": "2023-08-23 08:30:00",
+          "end": "2023-08-23 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2cfa3519a8a346b2ba617f2ed8b39995"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Presentation Practice",
+          "start": "2023-08-23 09:00:00",
+          "end": "2023-08-23 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_96ebb123ffc046d09ab4a4a14c455ff8"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Lab Work: Microscopy and Imaging",
+          "start": "2023-08-23 10:30:00",
+          "end": "2023-08-23 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3fa2a772b13341c89b182b63b16b6b1e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Weekly Team Lunch",
+          "start": "2023-08-23 13:00:00",
+          "end": "2023-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_97b4781b8b4843fcb937ea6a8f8d6eca"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meet with Pharmaceutical Rep: Discuss New Compounds",
+          "start": "2023-08-23 14:30:00",
+          "end": "2023-08-23 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pharma_rep@example.com"
+          ],
+          "id": "evt_a9e26b757696413888235bdc43388ce0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2023-08-23 19:00:00",
+          "end": "2023-08-23 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_170e1b00e8134ff69b1bae5995df6746"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Experiment: Animal Study Injections",
+          "start": "2023-08-24 09:00:00",
+          "end": "2023-08-24 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_20e70bd0972947dbbb8a36a2401a20a2"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Review and Edit Grant Proposal",
+          "start": "2023-08-24 11:30:00",
+          "end": "2023-08-24 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d837ddb9ead84df29ba410ad9c0e56af"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Data Analysis: Statistical Analysis",
+          "start": "2023-08-24 13:30:00",
+          "end": "2023-08-24 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_845a1e4f07514d7ba31f157739ce0302"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Regulatory Affairs Specialist: Discuss Clinical Trial Regulations",
+          "start": "2023-08-24 15:30:00",
+          "end": "2023-08-24 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "regulatory_affairs@example.com"
+          ],
+          "id": "evt_e5d8f09c808c4dc69c3bd8dd6ee54ccd"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Parent-Teacher Conference",
+          "start": "2023-08-24 18:00:00",
+          "end": "2023-08-24 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_42dfc4d42d4b4e0a91b3edc3bc5834c1"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Lab Meeting: Review Weekly Progress",
+          "start": "2023-08-25 09:00:00",
+          "end": "2023-08-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f4497fcdfa1643629c1e08814bd7b1fa"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Grant Proposal for Submission",
+          "start": "2023-08-25 10:30:00",
+          "end": "2023-08-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8b23be9889b54dbbb531158797cfe7cb"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meet with Oncologist: Discuss Clinical Needs",
+          "start": "2023-08-25 13:00:00",
+          "end": "2023-08-25 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "oncologist@example.com"
+          ],
+          "id": "evt_cbf6ddc10b5c40ebbdd77e65879da2bf"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan Next Week's Experiments",
+          "start": "2023-08-25 14:30:00",
+          "end": "2023-08-25 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a4ba386060144ee5a3de57fc7b389195"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2023-08-25 19:00:00",
+          "end": "2023-08-25 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e2a686a8f568495ba1ba024c17e468fb"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Hiking with Family",
+          "start": "2023-08-26 09:00:00",
+          "end": "2023-08-26 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f064cb8d07c6469dbebd1e8e344f9fa4"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2023-08-26 12:30:00",
+          "end": "2023-08-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1274a74a827f499d88ecf4942a70cfc1"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Children's Birthday Party",
+          "start": "2023-08-26 15:00:00",
+          "end": "2023-08-26 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dad82f49c4634d44ab110c3c8d32cab2"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Spouse's Family",
+          "start": "2023-08-27 10:00:00",
+          "end": "2023-08-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6f7ed46f3827455cb8fc6dd581824367"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Relaxing at Home/Reading",
+          "start": "2023-08-27 14:00:00",
+          "end": "2023-08-27 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a5913629d359427eb0654c3e09cbbc32"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Prepare for the Week Ahead",
+          "start": "2023-08-27 18:00:00",
+          "end": "2023-08-27 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5d6dd29961fd41449fd3c2dfed4526c6"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule soccer."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 33 events:\nid: evt_87b987f619dc4f748f22ea8e833b59c9 | Check Emails and Prioritize Tasks \u2014 Mon 08:30-09:00\nid: evt_d88976e7c5934d92a294a9da3f1e6971 | Lab Meeting: Discuss Experiment Progress \u2014 Mon 09:00-10:30\nid: evt_b74dd7ca46114fa989de132a267c9083 | Experiment: Cell Culture Preparation \u2014 Mon 10:30-12:00\nid: evt_39165a5127024b7baa718e2e38e11635 | Data Analysis: Initial Review of Recent Experiment Results \u2014 Mon 13:00-15:00\nid: evt_bc94322d1aff4cb6afa376a30b0f7504 | Meeting with Biostatistician: Discuss Statistical Methods for Data \u2014 Mon 15:30-17:00\nid: evt_127b4ac3ad7b41c4b176acc1f7ef3543 | Dinner with Family \u2014 Mon 18:30-20:00\nid: evt_87d566ea402a458ba5ddf3adbab99f46 | Grant Writing: Draft Introduction Section \u2014 Tue 09:00-10:00\nid: evt_fc825e6617f94ea782d79bb79c4fb4ca | Lab Work: Drug Screening Assay \u2014 Tue 10:30-12:30\nid: evt_3099d81e4e8648389e9e3a12b82733ba | Review Literature on New Cancer Therapies \u2014 Tue 13:30-15:00\nid: evt_f35e075339544b6582d2b77d75341422 | Meeting with Principal Investigator: Discuss Research Direction \u2014 Tue 15:30-16:30\nid: evt_e93399bf026d4e6f9b1d253f1c6a17dd | Kids' Soccer Practice \u2014 Tue 18:00-19:30\nid: evt_2cfa3519a8a346b2ba617f2ed8b39995 | Prepare Presentation Slides \u2014 Wed 08:30-09:00\nid: evt_96ebb123ffc046d09ab4a4a14c455ff8 | Presentation Practice \u2014 Wed 09:00-10:00\nid: evt_3fa2a772b13341c89b182b63b16b6b1e | Lab Work: Microscopy and Imaging \u2014 Wed 10:30-12:00\nid: evt_97b4781b8b4843fcb937ea6a8f8d6eca | Weekly Team Lunch \u2014 Wed 13:00-14:00\nid: evt_a9e26b757696413888235bdc43388ce0 | Meet with Pharmaceutical Rep: Discuss New Compounds \u2014 Wed 14:30-16:00\nid: evt_170e1b00e8134ff69b1bae5995df6746 | Book Club Meeting \u2014 Wed 19:00-20:30\nid: evt_20e70bd0972947dbbb8a36a2401a20a2 | Experiment: Animal Study Injections \u2014 Thu 09:00-11:00\nid: evt_d837ddb9ead84df29ba410ad9c0e56af | Review and Edit Grant Proposal \u2014 Thu 11:30-12:30\nid: evt_845a1e4f07514d7ba31f157739ce0302 | Data Analysis: Statistical Analysis \u2014 Thu 13:30-15:00\nid: evt_e5d8f09c808c4dc69c3bd8dd6ee54ccd | Meeting with Regulatory Affairs Specialist: Discuss Clinical Trial Regulations \u2014 Thu 15:30-17:00\nid: evt_42dfc4d42d4b4e0a91b3edc3bc5834c1 | Parent-Teacher Conference \u2014 Thu 18:00-19:00\nid: evt_f4497fcdfa1643629c1e08814bd7b1fa | Lab Meeting: Review Weekly Progress \u2014 Fri 09:00-10:00\nid: evt_8b23be9889b54dbbb531158797cfe7cb | Finalize Grant Proposal for Submission \u2014 Fri 10:30-12:00\nid: evt_cbf6ddc10b5c40ebbdd77e65879da2bf | Meet with Oncologist: Discuss Clinical Needs \u2014 Fri 13:00-14:00\nid: evt_a4ba386060144ee5a3de57fc7b389195 | Plan Next Week's Experiments \u2014 Fri 14:30-16:00\nid: evt_e2a686a8f568495ba1ba024c17e468fb | Dinner with Friends \u2014 Fri 19:00-21:00\nid: evt_f064cb8d07c6469dbebd1e8e344f9fa4 | Hiking with Family \u2014 Sat 09:00-11:00\nid: evt_1274a74a827f499d88ecf4942a70cfc1 | Grocery Shopping \u2014 Sat 12:30-14:00\nid: evt_dad82f49c4634d44ab110c3c8d32cab2 | Children's Birthday Party \u2014 Sat 15:00-17:00\nid: evt_6f7ed46f3827455cb8fc6dd581824367 | Brunch with Spouse's Family \u2014 Sun 10:00-12:00\nid: evt_a5913629d359427eb0654c3e09cbbc32 | Relaxing at Home/Reading \u2014 Sun 14:00-16:00\nid: evt_5d6dd29961fd41449fd3c2dfed4526c6 | Prepare for the Week Ahead \u2014 Sun 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found an event, \"Kids' Soccer Practice,\" on Tuesday from 18:00 to 19:30. To reschedule, I need to know the new time. When would you like to move it to?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to retrieve all events for the current day, Monday, August 21, 2023.",
+    "simulated_now": "2023-08-21 09:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Prioritize Tasks",
+          "start": "2023-08-21 08:30:00",
+          "end": "2023-08-21 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_381711528692493d9265cb9046227e16"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lab Meeting: Discuss Experiment Progress",
+          "start": "2023-08-21 09:00:00",
+          "end": "2023-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "lab_tech1@example.com",
+            "junior_researcher1@example.com"
+          ],
+          "id": "evt_9442163add2743658afd479795140108"
+        },
+        {
+          "day": "Monday",
+          "summary": "Experiment: Cell Culture Preparation",
+          "start": "2023-08-21 10:30:00",
+          "end": "2023-08-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_13dddae3abaa41188a932dce2b9058c0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Analysis: Initial Review of Recent Experiment Results",
+          "start": "2023-08-21 13:00:00",
+          "end": "2023-08-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f4d5a0a80cf547e88451c7179dccca07"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Biostatistician: Discuss Statistical Methods for Data",
+          "start": "2023-08-21 15:30:00",
+          "end": "2023-08-21 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "biostatistician@example.com"
+          ],
+          "id": "evt_e64485cddac043ab9928d769df81c361"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-08-21 18:30:00",
+          "end": "2023-08-21 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_557e3cb813074b0c85b98eb92fbd640d"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Prioritize Tasks",
+          "start": "2023-08-21 08:30:00",
+          "end": "2023-08-21 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_381711528692493d9265cb9046227e16"
+        },
+        {
+          "day": "Monday",
+          "summary": "Lab Meeting: Discuss Experiment Progress",
+          "start": "2023-08-21 09:00:00",
+          "end": "2023-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "lab_tech1@example.com",
+            "junior_researcher1@example.com"
+          ],
+          "id": "evt_9442163add2743658afd479795140108"
+        },
+        {
+          "day": "Monday",
+          "summary": "Experiment: Cell Culture Preparation",
+          "start": "2023-08-21 10:30:00",
+          "end": "2023-08-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_13dddae3abaa41188a932dce2b9058c0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Data Analysis: Initial Review of Recent Experiment Results",
+          "start": "2023-08-21 13:00:00",
+          "end": "2023-08-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f4d5a0a80cf547e88451c7179dccca07"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Biostatistician: Discuss Statistical Methods for Data",
+          "start": "2023-08-21 15:30:00",
+          "end": "2023-08-21 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "biostatistician@example.com"
+          ],
+          "id": "evt_e64485cddac043ab9928d769df81c361"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-08-21 18:30:00",
+          "end": "2023-08-21 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_557e3cb813074b0c85b98eb92fbd640d"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-08-21 09:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-08-21 00:00:00",
+          "time_max": "2023-08-21 23:59:59"
+        },
+        "result": "Found 6 events:\nid: evt_381711528692493d9265cb9046227e16 | Check Emails and Prioritize Tasks \u2014 Mon 08:30-09:00\nid: evt_9442163add2743658afd479795140108 | Lab Meeting: Discuss Experiment Progress \u2014 Mon 09:00-10:30\nid: evt_13dddae3abaa41188a932dce2b9058c0 | Experiment: Cell Culture Preparation \u2014 Mon 10:30-12:00\nid: evt_f4d5a0a80cf547e88451c7179dccca07 | Data Analysis: Initial Review of Recent Experiment Results \u2014 Mon 13:00-15:00\nid: evt_e64485cddac043ab9928d769df81c361 | Meeting with Biostatistician: Discuss Statistical Methods for Data \u2014 Mon 15:30-17:00\nid: evt_557e3cb813074b0c85b98eb92fbd640d | Dinner with Family \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Here is your schedule for today:\n\n*   8:30 AM - 9:00 AM: Check Emails and Prioritize Tasks\n*   9:00 AM - 10:30 AM: Lab Meeting: Discuss Experiment Progress\n*   10:30 AM - 12:00 PM: Experiment: Cell Culture Preparation\n*   1:00 PM - 3:00 PM: Data Analysis: Initial Review of Recent Experiment Results\n*   3:30 PM - 5:00 PM: Meeting with Biostatistician: Discuss Statistical Methods for Data\n*   6:30 PM - 8:00 PM: Dinner with Family"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on the schedule for tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to retrieve all events for Tuesday, August 22, 2023.",
+    "simulated_now": "2023-08-21 15:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Grant Writing: Draft Introduction Section",
+          "start": "2023-08-22 09:00:00",
+          "end": "2023-08-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ebb0976915e24fdda452c81c80042850"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lab Work: Drug Screening Assay",
+          "start": "2023-08-22 10:30:00",
+          "end": "2023-08-22 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3fda29b2629c43d29afe786761c72c4f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Review Literature on New Cancer Therapies",
+          "start": "2023-08-22 13:30:00",
+          "end": "2023-08-22 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a49feda52e4d43ca8f3a7c862940689b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Principal Investigator: Discuss Research Direction",
+          "start": "2023-08-22 15:30:00",
+          "end": "2023-08-22 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pi@example.com"
+          ],
+          "id": "evt_50b2fb6b7d444152b62192a56be0eff3"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2023-08-22 18:00:00",
+          "end": "2023-08-22 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2b1e7caaba3943a0bafe4dac37adef55"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Grant Writing: Draft Introduction Section",
+          "start": "2023-08-22 09:00:00",
+          "end": "2023-08-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ebb0976915e24fdda452c81c80042850"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lab Work: Drug Screening Assay",
+          "start": "2023-08-22 10:30:00",
+          "end": "2023-08-22 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3fda29b2629c43d29afe786761c72c4f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Review Literature on New Cancer Therapies",
+          "start": "2023-08-22 13:30:00",
+          "end": "2023-08-22 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a49feda52e4d43ca8f3a7c862940689b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Principal Investigator: Discuss Research Direction",
+          "start": "2023-08-22 15:30:00",
+          "end": "2023-08-22 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pi@example.com"
+          ],
+          "id": "evt_50b2fb6b7d444152b62192a56be0eff3"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2023-08-22 18:00:00",
+          "end": "2023-08-22 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2b1e7caaba3943a0bafe4dac37adef55"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on the schedule for tomorrow?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out the current date to identify what \"tomorrow\" is, and then list all events scheduled for that day.\n\n1. Get the current time.\n2. List events for tomorrow."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-08-21 15:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-08-22 23:59:59",
+          "time_min": "2023-08-22 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_ebb0976915e24fdda452c81c80042850 | Grant Writing: Draft Introduction Section \u2014 Tue 09:00-10:00\nid: evt_3fda29b2629c43d29afe786761c72c4f | Lab Work: Drug Screening Assay \u2014 Tue 10:30-12:30\nid: evt_a49feda52e4d43ca8f3a7c862940689b | Review Literature on New Cancer Therapies \u2014 Tue 13:30-15:00\nid: evt_50b2fb6b7d444152b62192a56be0eff3 | Meeting with Principal Investigator: Discuss Research Direction \u2014 Tue 15:30-16:30\nid: evt_2b1e7caaba3943a0bafe4dac37adef55 | Kids' Soccer Practice \u2014 Tue 18:00-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "Here is your schedule for tomorrow, August 22nd, 2023:\n\n*   **9:00 AM - 10:00 AM:** Grant Writing: Draft Introduction Section\n*   **10:30 AM - 12:30 PM:** Lab Work: Drug Screening Assay\n*   **1:30 PM - 3:00 PM:** Review Literature on New Cancer Therapies\n*   **3:30 PM - 4:30 PM:** Meeting with Principal Investigator: Discuss Research Direction\n*   **6:00 PM - 7:30 PM:** Kids' Soccer Practice"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

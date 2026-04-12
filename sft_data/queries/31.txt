@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create a meeting on Monday at 9 AM called 'Project Kickoff'.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Project Kickoff', start '2024-12-09T09:00:00', and end '2024-12-09T10:00:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-12-08T18:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me for a 'Team Lunch' this Friday at 12:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Team Lunch', start '2024-12-13T12:30:00', and end '2024-12-13T13:30:00'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-12-08T18:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Wednesday look like?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min='2024-12-11T00:00:00' and time_max='2024-12-11T23:59:59'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-12-11T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Anything happening on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min='2024-12-14T00:00:00' and time_max='2024-12-14T23:59:59'.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-12-14T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the 'School Improvement Committee Meeting' on Tuesday to 4 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min='2024-12-10T00:00:00' and time_max='2024-12-10T23:59:59' to find the 'School Improvement Committee Meeting'. Then call update_event with the event id and updates containing start='2024-12-10T16:00:00' and end='2024-12-10T17:00:00'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-12-10T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the 'Meeting with Teacher Regarding Student Performance' on Monday to 4:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min='2024-12-09T00:00:00' and time_max='2024-12-09T23:59:59' to find the 'Meeting with Teacher Regarding Student Performance'. Then call update_event with the event id and updates containing start='2024-12-09T16:30:00' and end='2024-12-09T17:30:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-12-09T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the 'Budget Review Meeting' on Tuesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min='2024-12-10T00:00:00' and time_max='2024-12-10T23:59:59' to find the 'Budget Review Meeting'. Then call get_event with the event id to retrieve the attendee list.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-12-10T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the 'Student Government Meeting' on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min='2024-12-11T00:00:00' and time_max='2024-12-11T23:59:59' to find the 'Student Government Meeting'. Then call get_event with the event id to retrieve the start time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-12-11T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Add friend5@email.com to the 'Dinner with Friends' on Saturday and tell me who is coming.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min='2024-12-14T00:00:00' and time_max='2024-12-14T23:59:59' to find the 'Dinner with Friends'. Then call update_event with the event id and updates containing adding friend5@email.com to attendees, call get_event to retrieve attendees.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-12-14T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline the invitation to the PTA meeting on Tuesday, because I am attending the school improvement committee meeting.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min='2024-12-10T00:00:00' and time_max='2024-12-10T23:59:59' to find the 'Parent-Teacher Association (PTA) Meeting'. Call respond_to_event with the event id and attending='DECLINE'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-12-10T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Saturday soccer?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min='2024-12-14T00:00:00' and time_max='2024-12-14T23:59:59' to look for events with 'soccer' in the title or description.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-12-14T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "cancel family brunch Sunday",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min='2024-12-15T00:00:00' and time_max='2024-12-15T23:59:59' to find the 'Family Brunch'. Then call delete_event with the event id.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-12-15T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min='2024-12-12T00:00:00' and time_max='2024-12-12T23:59:59'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-12-12T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any meetings yesterday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min='2024-12-11T00:00:00' and time_max='2024-12-11T23:59:59'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-12-12T08:00:00"
+    }
+]

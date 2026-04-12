@@ -1,0 +1,139 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Discuss Q4 Budget' for Wednesday at 1 PM with Sarah Jones.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Discuss Q4 Budget' on Wednesday, October 16, 2024, from 1:00 PM to 2:00 PM (default duration) and attendee sarah.jones@firm.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-10-13T18:30:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting on Friday to review the new tax law updates at 10 AM with the training team.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Review new tax law updates' on Friday, October 18, 2024, from 10:00 AM to 11:00 AM (default duration) with the attendee training@email.com.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-10-13T18:30:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Tuesday after my first meeting?",
+        "complexity": "Medium",
+        "expected_behavior": "First, find the first event on Tuesday. Then, find any other events scheduled after that time. Return the details of all events after 12:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-10-13T18:30:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's happening on Saturday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Find any events scheduled on Saturday between 12:00 PM and 6:00 PM. Return the details of those events.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-10-13T18:30:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my Business Tax Return client meeting to 1 PM on Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Client Meeting - Business Tax Return' event on Monday and update its start time to 1:00 PM, keeping the same duration.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-10-13T18:30:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "The Book Club meeting attendees changed. friend3 cannot make it and friend6@email.com will attend instead.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Book Club Meeting' event on Thursday and update the attendees to friend1@email.com, friend2@email.com, and friend6@email.com.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-10-13T18:30:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the meeting with the partner this week?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Meeting with Partner - Client Account Review' event and return its start time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-10-13T18:30:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is going to be at the audit support meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Client Meeting - Audit Support' event on Thursday and return the list of attendees.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-10-13T18:30:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to shift family movie night to Saturday. If the dinner with friends conflicts, move movie night later on Sunday.",
+        "complexity": "High",
+        "expected_behavior": "Attempt to move 'Family Movie Night' to Saturday at 7:00 PM. Check for conflicts with 'Dinner with Friends'. If a conflict exists, move 'Family Movie Night' to Sunday at 7:00 PM.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-10-13T18:30:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Schedule a meeting with John Doe on Monday. If he is busy during the morning put it in the afternoon.",
+        "complexity": "High",
+        "expected_behavior": "Check John Doe's availability on Monday morning. If he is busy, create a new meeting with John Doe on Monday afternoon.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-10-13T18:30:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule",
+        "complexity": "Low",
+        "expected_behavior": "Prompt user for additional information about which event to reschedule and the new desired time.",
+        "addressed_days": [],
+        "current_time": "2024-10-13T18:30:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "cancel the meeting",
+        "complexity": "Low",
+        "expected_behavior": "Prompt user for additional information about which meeting to cancel.",
+        "addressed_days": [],
+        "current_time": "2024-10-13T18:30:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have today?",
+        "complexity": "Low",
+        "expected_behavior": "Find all events scheduled for today, October 14, 2024, and return their details.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-10-14T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What is happening tomorrow at 10 am?",
+        "complexity": "Low",
+        "expected_behavior": "Find all events scheduled for tomorrow, October 16, 2024, at 10:00 AM and return their details.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-10-15T15:00:00"
+    }
+]

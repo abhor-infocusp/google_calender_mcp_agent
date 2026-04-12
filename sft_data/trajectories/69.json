@@ -1,0 +1,1642 @@
+[
+  {
+    "query": "Can you add a doctor's appointment to my calendar for Friday at 3 PM?",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create an event with summary 'Doctor's Appointment', start '2023-12-15T15:00:00', and end '2023-12-15T16:00:00'.",
+    "simulated_now": "2023-12-10 20:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-15 07:00:00",
+          "end": "2023-12-15 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b2d07a3478d34df3a2d31777a3aee42b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Review Progress and Plan for Next Week",
+          "start": "2023-12-15 07:30:00",
+          "end": "2023-12-15 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_363a321434bd4357a68fbf0c8e9f4680"
+        },
+        {
+          "day": "Friday",
+          "summary": "Material Order Placement",
+          "start": "2023-12-15 10:00:00",
+          "end": "2023-12-15 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supplyorders@email.com"
+          ],
+          "id": "evt_7e5fb329cf41488caa257639593b35d5"
+        },
+        {
+          "day": "Friday",
+          "summary": "Final Site Inspection",
+          "start": "2023-12-15 14:00:00",
+          "end": "2023-12-15 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_22d510aa9efd43fa991f5b08e30a5acf"
+        },
+        {
+          "day": "Friday",
+          "summary": "Fishing Trip with Buddies",
+          "start": "2023-12-15 18:00:00",
+          "end": "2023-12-15 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jim.fish@email.com",
+            "tom.fish@email.com"
+          ],
+          "id": "evt_697ea18317bd4a9ab2d52e778e2fb016"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-15 07:00:00",
+          "end": "2023-12-15 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b2d07a3478d34df3a2d31777a3aee42b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Review Progress and Plan for Next Week",
+          "start": "2023-12-15 07:30:00",
+          "end": "2023-12-15 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_363a321434bd4357a68fbf0c8e9f4680"
+        },
+        {
+          "day": "Friday",
+          "summary": "Material Order Placement",
+          "start": "2023-12-15 10:00:00",
+          "end": "2023-12-15 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supplyorders@email.com"
+          ],
+          "id": "evt_7e5fb329cf41488caa257639593b35d5"
+        },
+        {
+          "day": "Friday",
+          "summary": "Final Site Inspection",
+          "start": "2023-12-15 14:00:00",
+          "end": "2023-12-15 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_22d510aa9efd43fa991f5b08e30a5acf"
+        },
+        {
+          "day": "Friday",
+          "summary": "Doctor's Appointment",
+          "start": "2023-12-15 15:00:00",
+          "end": "2023-12-15 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_55bdc479776e48e38f049a65e3bce1c1"
+        },
+        {
+          "day": "Friday",
+          "summary": "Fishing Trip with Buddies",
+          "start": "2023-12-15 18:00:00",
+          "end": "2023-12-15 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jim.fish@email.com",
+            "tom.fish@email.com"
+          ],
+          "id": "evt_697ea18317bd4a9ab2d52e778e2fb016"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can you add a doctor's appointment to my calendar for Friday at 3 PM?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. I'll add a 1-hour appointment for you."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-10 20:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Doctor's Appointment",
+          "start": "2023-12-15 15:00:00",
+          "end": "2023-12-15 16:00:00"
+        },
+        "result": "Event created successfully.\nDoctor's Appointment\n  ID: evt_55bdc479776e48e38f049a65e3bce1c1\n  Time: Fri Dec 15, 15:00 - 16:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've added a doctor's appointment to your calendar for Friday, December 15th, from 3 PM to 4 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Am I busy on Thursday afternoon?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List events between 2023-12-14T12:00:00 and 2023-12-14T17:00:00 to determine if the user has any afternoon appointments.",
+    "simulated_now": "2023-12-10 20:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-14 07:00:00",
+          "end": "2023-12-14 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_439b0e2c4993412f91aa48f8fba1fee9"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Road Paving: Crew Briefing",
+          "start": "2023-12-14 07:30:00",
+          "end": "2023-12-14 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d83b87a55cc849e08a16dab3cd02ea17"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Budget Review Meeting",
+          "start": "2023-12-14 10:00:00",
+          "end": "2023-12-14 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accounts@email.com"
+          ],
+          "id": "evt_ff5bb3739de540f7abe1d3b127c8126e"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Government Inspector Site Walkthrough",
+          "start": "2023-12-14 13:00:00",
+          "end": "2023-12-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "inspectors@email.com"
+          ],
+          "id": "evt_5b00db2361464c729a2738ed095d0a89"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Wife",
+          "start": "2023-12-14 18:00:00",
+          "end": "2023-12-14 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9264c5f1fff247498cbcd5a771174ed1"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-14 07:00:00",
+          "end": "2023-12-14 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_439b0e2c4993412f91aa48f8fba1fee9"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Road Paving: Crew Briefing",
+          "start": "2023-12-14 07:30:00",
+          "end": "2023-12-14 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d83b87a55cc849e08a16dab3cd02ea17"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Budget Review Meeting",
+          "start": "2023-12-14 10:00:00",
+          "end": "2023-12-14 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accounts@email.com"
+          ],
+          "id": "evt_ff5bb3739de540f7abe1d3b127c8126e"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Government Inspector Site Walkthrough",
+          "start": "2023-12-14 13:00:00",
+          "end": "2023-12-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "inspectors@email.com"
+          ],
+          "id": "evt_5b00db2361464c729a2738ed095d0a89"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Wife",
+          "start": "2023-12-14 18:00:00",
+          "end": "2023-12-14 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9264c5f1fff247498cbcd5a771174ed1"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Am I busy on Thursday afternoon?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can check that for you. First, I need to know the current date and time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-10 20:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-12-14 17:00:00",
+          "time_min": "2023-12-14 12:00:00"
+        },
+        "result": "Found 1 events:\nid: evt_5b00db2361464c729a2738ed095d0a89 | Government Inspector Site Walkthrough \u2014 Thu 13:00-14:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, you have one event on Thursday afternoon: \"Government Inspector Site Walkthrough\" from 13:00 to 14:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing Saturday morning?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List events between 2023-12-16T08:00:00 and 2023-12-16T12:00:00 to determine the user's morning activities.",
+    "simulated_now": "2023-12-10 20:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Equipment Maintenance",
+          "start": "2023-12-16 08:00:00",
+          "end": "2023-12-16 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2e8006993dbe4ad1bae077c5a08c30a0"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Family Time",
+          "start": "2023-12-16 11:00:00",
+          "end": "2023-12-16 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6576b40a4f864aed98b0e45b75d71487"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Gardening",
+          "start": "2023-12-16 14:00:00",
+          "end": "2023-12-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_02cd2fa66df3442fae113194912c26e6"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Equipment Maintenance",
+          "start": "2023-12-16 08:00:00",
+          "end": "2023-12-16 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2e8006993dbe4ad1bae077c5a08c30a0"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Family Time",
+          "start": "2023-12-16 11:00:00",
+          "end": "2023-12-16 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6576b40a4f864aed98b0e45b75d71487"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Gardening",
+          "start": "2023-12-16 14:00:00",
+          "end": "2023-12-16 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_02cd2fa66df3442fae113194912c26e6"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing Saturday morning?"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I'll check your calendar for this Saturday morning."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-10 20:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-12-16 00:00:00",
+          "time_max": "2023-12-16 12:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_2e8006993dbe4ad1bae077c5a08c30a0 | Equipment Maintenance \u2014 Sat 08:00-10:00\nid: evt_6576b40a4f864aed98b0e45b75d71487 | Family Time \u2014 Sat 11:00-13:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have two events scheduled for Saturday, December 16th. From 8:00 AM to 10:00 AM, you have \"Equipment Maintenance\", and from 11:00 AM to 1:00 PM, you have \"Family Time\"."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move the meeting with the project manager on Monday to 3 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the event with the summary 'Meeting with Project Manager' on 2023-12-11 and update the start time to '2023-12-11T15:00:00' and end time to '2023-12-11T16:30:00'.",
+    "simulated_now": "2023-12-10 20:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-11 07:00:00",
+          "end": "2023-12-11 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_13bce986982a4bd7861d333c7381f1e9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Crew Briefing: Road Resurfacing Project",
+          "start": "2023-12-11 07:30:00",
+          "end": "2023-12-11 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fb4a967470414ed2b0331da6fe3a15c7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Material Delivery Coordination",
+          "start": "2023-12-11 09:30:00",
+          "end": "2023-12-11 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "suppliers@email.com"
+          ],
+          "id": "evt_1dc93abbeaaf4e07909f05b03dffa59f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Project Manager",
+          "start": "2023-12-11 14:00:00",
+          "end": "2023-12-11 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.pm@email.com"
+          ],
+          "id": "evt_1cd280aedadf47408ef742a0a5f55a0f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-12-11 18:30:00",
+          "end": "2023-12-11 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ffc4dbd343844a598bf17cb43e012bd8"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-11 07:00:00",
+          "end": "2023-12-11 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_13bce986982a4bd7861d333c7381f1e9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Crew Briefing: Road Resurfacing Project",
+          "start": "2023-12-11 07:30:00",
+          "end": "2023-12-11 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fb4a967470414ed2b0331da6fe3a15c7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Material Delivery Coordination",
+          "start": "2023-12-11 09:30:00",
+          "end": "2023-12-11 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "suppliers@email.com"
+          ],
+          "id": "evt_1dc93abbeaaf4e07909f05b03dffa59f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Project Manager",
+          "start": "2023-12-11 15:00:00",
+          "end": "2023-12-11 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.pm@email.com"
+          ],
+          "id": "evt_1cd280aedadf47408ef742a0a5f55a0f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-12-11 18:30:00",
+          "end": "2023-12-11 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ffc4dbd343844a598bf17cb43e012bd8"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move the meeting with the project manager on Monday to 3 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I need to find the meeting you're referring to."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-10 20:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-12-11 23:59:59",
+          "time_min": "2023-12-11 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_13bce986982a4bd7861d333c7381f1e9 | Site Safety Check \u2014 Mon 07:00-07:30\nid: evt_fb4a967470414ed2b0331da6fe3a15c7 | Crew Briefing: Road Resurfacing Project \u2014 Mon 07:30-09:00\nid: evt_1dc93abbeaaf4e07909f05b03dffa59f | Material Delivery Coordination \u2014 Mon 09:30-11:00\nid: evt_1cd280aedadf47408ef742a0a5f55a0f | Meeting with Project Manager \u2014 Mon 14:00-15:30\nid: evt_ffc4dbd343844a598bf17cb43e012bd8 | Dinner with Family \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've found the \"Meeting with Project Manager\" on Monday from 2:00 PM to 3:30 PM. I will now move it to 3:00 PM, keeping the same duration."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2023-12-11 16:30:00",
+          "start": "2023-12-11 15:00:00",
+          "event_id": "evt_1cd280aedadf47408ef742a0a5f55a0f"
+        },
+        "result": "Event updated successfully.\nMeeting with Project Manager\n  ID: evt_1cd280aedadf47408ef742a0a5f55a0f\n  Time: Mon Dec 11, 15:00 - 16:30\n  Attendees: sarah.pm@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've moved the meeting with the project manager to 3:00 PM. It is now scheduled from 3:00 PM to 4:30 PM on Monday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change the time of the budget review meeting on Thursday to 11:30 AM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the event with the summary 'Budget Review Meeting' on 2023-12-14 and update the start time to '2023-12-14T11:30:00' and end time to '2023-12-14T12:30:00'.",
+    "simulated_now": "2023-12-10 20:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-14 07:00:00",
+          "end": "2023-12-14 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ac1f175145824e22a32d96f7b1650efa"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Road Paving: Crew Briefing",
+          "start": "2023-12-14 07:30:00",
+          "end": "2023-12-14 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_80033f12edf34676b6baeda946da1d06"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Budget Review Meeting",
+          "start": "2023-12-14 10:00:00",
+          "end": "2023-12-14 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accounts@email.com"
+          ],
+          "id": "evt_584308a7c85d41ae888c0109e6fc5a37"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Government Inspector Site Walkthrough",
+          "start": "2023-12-14 13:00:00",
+          "end": "2023-12-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "inspectors@email.com"
+          ],
+          "id": "evt_0c1ced7387ee4a648636cedb4ea66db8"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Wife",
+          "start": "2023-12-14 18:00:00",
+          "end": "2023-12-14 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1ee076135ccb45dc8b062d6320d45664"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-14 07:00:00",
+          "end": "2023-12-14 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ac1f175145824e22a32d96f7b1650efa"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Road Paving: Crew Briefing",
+          "start": "2023-12-14 07:30:00",
+          "end": "2023-12-14 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_80033f12edf34676b6baeda946da1d06"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Budget Review Meeting",
+          "start": "2023-12-14 11:30:00",
+          "end": "2023-12-14 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accounts@email.com"
+          ],
+          "id": "evt_584308a7c85d41ae888c0109e6fc5a37"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Government Inspector Site Walkthrough",
+          "start": "2023-12-14 13:00:00",
+          "end": "2023-12-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "inspectors@email.com"
+          ],
+          "id": "evt_0c1ced7387ee4a648636cedb4ea66db8"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Wife",
+          "start": "2023-12-14 18:00:00",
+          "end": "2023-12-14 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1ee076135ccb45dc8b062d6320d45664"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change the time of the budget review meeting on Thursday to 11:30 AM."
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to know the date of the upcoming Thursday. Then, I will find the \"budget review meeting\" on that day to get its current start and end times. Finally, I will update the meeting to the new start time of 11:30 AM while preserving its original duration."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-10 20:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "Thursday is December 14th. I will now search for the \"budget review meeting\" on that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-12-15 00:00:00",
+          "time_min": "2023-12-14 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_ac1f175145824e22a32d96f7b1650efa | Site Safety Check \u2014 Thu 07:00-07:30\nid: evt_80033f12edf34676b6baeda946da1d06 | Road Paving: Crew Briefing \u2014 Thu 07:30-09:00\nid: evt_584308a7c85d41ae888c0109e6fc5a37 | Budget Review Meeting \u2014 Thu 10:00-11:00\nid: evt_0c1ced7387ee4a648636cedb4ea66db8 | Government Inspector Site Walkthrough \u2014 Thu 13:00-14:00\nid: evt_1ee076135ccb45dc8b062d6320d45664 | Dinner with Wife \u2014 Thu 18:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. The Budget Review Meeting is on Thursday from 10:00 to 11:00. I will now move it to 11:30 AM, keeping the one-hour duration."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2023-12-14 12:30:00",
+          "start": "2023-12-14 11:30:00",
+          "event_id": "evt_584308a7c85d41ae888c0109e6fc5a37"
+        },
+        "result": "Event updated successfully.\nBudget Review Meeting\n  ID: evt_584308a7c85d41ae888c0109e6fc5a37\n  Time: Thu Dec 14, 11:30 - 12:30\n  Attendees: accounts@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I\u2019ve updated the budget review meeting to 11:30 AM on Thursday. It will now end at 12:30 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is my dinner with my wife this week?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "List events between 2023-12-11 and 2023-12-17 that have 'Dinner with Wife' in the title. Display the start time of the found event.",
+    "simulated_now": "2023-12-10 20:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-14 07:00:00",
+          "end": "2023-12-14 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2b61bc64ac4f4ee6928e02ec28d91309"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Road Paving: Crew Briefing",
+          "start": "2023-12-14 07:30:00",
+          "end": "2023-12-14 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f0833ad9a4cc4622b6e919e26ed6d749"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Budget Review Meeting",
+          "start": "2023-12-14 10:00:00",
+          "end": "2023-12-14 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accounts@email.com"
+          ],
+          "id": "evt_b5e922198b1642b1a4450884f607da9f"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Government Inspector Site Walkthrough",
+          "start": "2023-12-14 13:00:00",
+          "end": "2023-12-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "inspectors@email.com"
+          ],
+          "id": "evt_cac300678f894c1baff537576a26d9ca"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Wife",
+          "start": "2023-12-14 18:00:00",
+          "end": "2023-12-14 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0901ae29a24a4421a5609152ecfebd1c"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-14 07:00:00",
+          "end": "2023-12-14 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2b61bc64ac4f4ee6928e02ec28d91309"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Road Paving: Crew Briefing",
+          "start": "2023-12-14 07:30:00",
+          "end": "2023-12-14 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f0833ad9a4cc4622b6e919e26ed6d749"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Budget Review Meeting",
+          "start": "2023-12-14 10:00:00",
+          "end": "2023-12-14 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accounts@email.com"
+          ],
+          "id": "evt_b5e922198b1642b1a4450884f607da9f"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Government Inspector Site Walkthrough",
+          "start": "2023-12-14 13:00:00",
+          "end": "2023-12-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "inspectors@email.com"
+          ],
+          "id": "evt_cac300678f894c1baff537576a26d9ca"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Wife",
+          "start": "2023-12-14 18:00:00",
+          "end": "2023-12-14 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0901ae29a24a4421a5609152ecfebd1c"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is my dinner with my wife this week?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-10 20:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-12-11 00:00:00",
+          "time_max": "2023-12-17 23:59:59"
+        },
+        "result": "Found 30 events:\nid: evt_09008ea9fce44ea3bb7ea384ecdc2e4e | Site Safety Check \u2014 Mon 07:00-07:30\nid: evt_2afbe5be542f4d069c199e4a9185ce06 | Crew Briefing: Road Resurfacing Project \u2014 Mon 07:30-09:00\nid: evt_aaeef23c04904a7883203a2d7c7e1deb | Material Delivery Coordination \u2014 Mon 09:30-11:00\nid: evt_b6ec320fc47a47a5976fd041fddac4c7 | Meeting with Project Manager \u2014 Mon 14:00-15:30\nid: evt_70f67695e8724be5b2a9d9f915205b85 | Dinner with Family \u2014 Mon 18:30-20:00\nid: evt_4484ab2acbe84d5d9b7feb7313755dda | Site Safety Check \u2014 Tue 07:00-07:30\nid: evt_c509d1196abb4f258828d16ac2823c56 | Concrete Pouring - Bridge Supports \u2014 Tue 07:30-09:00\nid: evt_22c1c22112e14085b92e8788d778e373 | Equipment Maintenance Review \u2014 Tue 10:00-11:30\nid: evt_a06b4c73d0624d09ac79a915aa17a648 | Meeting with Union Rep \u2014 Tue 14:00-15:00\nid: evt_2f0f472ce7d94303ab1e7a06992b9a60 | Community Meeting \u2014 Tue 19:00-20:30\nid: evt_7906d720b55948ca9e8e1be96c1e73dc | Site Safety Check \u2014 Wed 07:00-07:30\nid: evt_adf2955c04b44a71bf9a583284e4166a | Drainage Installation \u2014 Wed 07:30-09:00\nid: evt_1bf456991d8443fcbeda644e6614cb67 | Review Environmental Compliance \u2014 Wed 09:30-11:00\nid: evt_7fc26b88c5f1409ab1d7a73fb9cffa02 | Subcontractor Coordination Meeting \u2014 Wed 14:00-15:30\nid: evt_190e6766d9714be19883ee766d0a52bc | Kids soccer practice \u2014 Wed 18:00-19:00\nid: evt_2b61bc64ac4f4ee6928e02ec28d91309 | Site Safety Check \u2014 Thu 07:00-07:30\nid: evt_f0833ad9a4cc4622b6e919e26ed6d749 | Road Paving: Crew Briefing \u2014 Thu 07:30-09:00\nid: evt_b5e922198b1642b1a4450884f607da9f | Budget Review Meeting \u2014 Thu 10:00-11:00\nid: evt_cac300678f894c1baff537576a26d9ca | Government Inspector Site Walkthrough \u2014 Thu 13:00-14:00\nid: evt_0901ae29a24a4421a5609152ecfebd1c | Dinner with Wife \u2014 Thu 18:00-20:00\nid: evt_a53b340c4d2f46f19767ca363527b021 | Site Safety Check \u2014 Fri 07:00-07:30\nid: evt_d4c9cf2a8c154dfd8476c52970f80e7c | Review Progress and Plan for Next Week \u2014 Fri 07:30-09:00\nid: evt_cc64871abb9d488dbc4beba2abe4ff5e | Material Order Placement \u2014 Fri 10:00-11:00\nid: evt_612b846794744d4eb0d5fe5afd0e10b4 | Final Site Inspection \u2014 Fri 14:00-15:00\nid: evt_169b5e16e4a4427e91848cfed0358916 | Fishing Trip with Buddies \u2014 Fri 18:00-21:00\nid: evt_1517a220acae4894b972c2ecd376ad05 | Equipment Maintenance \u2014 Sat 08:00-10:00\nid: evt_ded57e497ca94fac940610eb4d412446 | Family Time \u2014 Sat 11:00-13:00\nid: evt_856fe3b9d8704e7e8b39c2fc839c32a7 | Gardening \u2014 Sat 14:00-16:00\nid: evt_a8b604978e524168bac22b376ca8c653 | Church \u2014 Sun 09:00-10:00\nid: evt_d841a67e5ef34e6589a1a9e67c0aa5a2 | Family Barbecue \u2014 Sun 13:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Your dinner with your wife is scheduled for this Thursday from 6:00 PM to 8:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who am I meeting with on Wednesday at 2 PM?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "List events on 2023-12-13 that start at 2 PM. Display the attendees of the found event.",
+    "simulated_now": "2023-12-10 20:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-13 07:00:00",
+          "end": "2023-12-13 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_31f6e97252be475ab8b470495c8d2581"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Drainage Installation",
+          "start": "2023-12-13 07:30:00",
+          "end": "2023-12-13 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a8b9e62904a0401b8e0666c5a6e7e375"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review Environmental Compliance",
+          "start": "2023-12-13 09:30:00",
+          "end": "2023-12-13 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jenny.eco@email.com"
+          ],
+          "id": "evt_38aa414349d04ddeb05410697a77b438"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Subcontractor Coordination Meeting",
+          "start": "2023-12-13 14:00:00",
+          "end": "2023-12-13 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "subs@email.com"
+          ],
+          "id": "evt_120085c214d943298df2c82baea748d5"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Kids soccer practice",
+          "start": "2023-12-13 18:00:00",
+          "end": "2023-12-13 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b72e6313a49e45d89c4763f125fc85ee"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-13 07:00:00",
+          "end": "2023-12-13 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_31f6e97252be475ab8b470495c8d2581"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Drainage Installation",
+          "start": "2023-12-13 07:30:00",
+          "end": "2023-12-13 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a8b9e62904a0401b8e0666c5a6e7e375"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review Environmental Compliance",
+          "start": "2023-12-13 09:30:00",
+          "end": "2023-12-13 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jenny.eco@email.com"
+          ],
+          "id": "evt_38aa414349d04ddeb05410697a77b438"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Subcontractor Coordination Meeting",
+          "start": "2023-12-13 14:00:00",
+          "end": "2023-12-13 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "subs@email.com"
+          ],
+          "id": "evt_120085c214d943298df2c82baea748d5"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Kids soccer practice",
+          "start": "2023-12-13 18:00:00",
+          "end": "2023-12-13 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b72e6313a49e45d89c4763f125fc85ee"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who am I meeting with on Wednesday at 2 PM?"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can help with that. First, I need to find out the current date and time. Then, I'll check your calendar for events on Wednesday at 2 PM and let you know who you're meeting with."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-10 20:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-12-13 00:00:00",
+          "time_max": "2023-12-13 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_31f6e97252be475ab8b470495c8d2581 | Site Safety Check \u2014 Wed 07:00-07:30\nid: evt_a8b9e62904a0401b8e0666c5a6e7e375 | Drainage Installation \u2014 Wed 07:30-09:00\nid: evt_38aa414349d04ddeb05410697a77b438 | Review Environmental Compliance \u2014 Wed 09:30-11:00\nid: evt_120085c214d943298df2c82baea748d5 | Subcontractor Coordination Meeting \u2014 Wed 14:00-15:30\nid: evt_b72e6313a49e45d89c4763f125fc85ee | Kids soccer practice \u2014 Wed 18:00-19:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_120085c214d943298df2c82baea748d5"
+        },
+        "result": "Subcontractor Coordination Meeting\n  ID: evt_120085c214d943298df2c82baea748d5\n  Time: Wed Dec 13, 14:00 - 15:30\n  Attendees: subs@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "You have one meeting at 2 PM on Wednesday. It is the \"Subcontractor Coordination Meeting,\" and you are meeting with subs@email.com."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "If the site walkthrough on Thursday is less than two hours, book me for a haircut afterwards.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Get the event with the summary 'Government Inspector Site Walkthrough' on 2023-12-14. If the event's duration is less than two hours, create an event with summary 'Haircut', start '2023-12-14T16:00:00', and end '2023-12-14T17:00:00'.",
+    "simulated_now": "2023-12-10 20:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-14 07:00:00",
+          "end": "2023-12-14 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9d2f444ed76d48cfb7aa655948629b40"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Road Paving: Crew Briefing",
+          "start": "2023-12-14 07:30:00",
+          "end": "2023-12-14 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_77302e91fbb246b1bfb0357a4164a639"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Budget Review Meeting",
+          "start": "2023-12-14 10:00:00",
+          "end": "2023-12-14 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accounts@email.com"
+          ],
+          "id": "evt_6497ce87cc92449591a1b0a4db0e09d4"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Government Inspector Site Walkthrough",
+          "start": "2023-12-14 13:00:00",
+          "end": "2023-12-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "inspectors@email.com"
+          ],
+          "id": "evt_9502cf22ab324b3e8c8be5170b73c6bc"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Wife",
+          "start": "2023-12-14 18:00:00",
+          "end": "2023-12-14 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_016805fc26c745be8e422029767acbef"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-14 07:00:00",
+          "end": "2023-12-14 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9d2f444ed76d48cfb7aa655948629b40"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Road Paving: Crew Briefing",
+          "start": "2023-12-14 07:30:00",
+          "end": "2023-12-14 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_77302e91fbb246b1bfb0357a4164a639"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Budget Review Meeting",
+          "start": "2023-12-14 10:00:00",
+          "end": "2023-12-14 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accounts@email.com"
+          ],
+          "id": "evt_6497ce87cc92449591a1b0a4db0e09d4"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Government Inspector Site Walkthrough",
+          "start": "2023-12-14 13:00:00",
+          "end": "2023-12-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "inspectors@email.com"
+          ],
+          "id": "evt_9502cf22ab324b3e8c8be5170b73c6bc"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Haircut",
+          "start": "2023-12-14 14:00:00",
+          "end": "2023-12-14 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c1fc7b3f957c4ce7a739f12dec36b268"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Wife",
+          "start": "2023-12-14 18:00:00",
+          "end": "2023-12-14 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_016805fc26c745be8e422029767acbef"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "If the site walkthrough on Thursday is less than two hours, book me for a haircut afterwards."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I need to know today's date to find the event on Thursday. Then, I will check the duration of the \"Site walkthrough\" and schedule the haircut if it's less than two hours."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-10 20:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-12-14 23:59:59",
+          "time_min": "2023-12-14 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_9d2f444ed76d48cfb7aa655948629b40 | Site Safety Check \u2014 Thu 07:00-07:30\nid: evt_77302e91fbb246b1bfb0357a4164a639 | Road Paving: Crew Briefing \u2014 Thu 07:30-09:00\nid: evt_6497ce87cc92449591a1b0a4db0e09d4 | Budget Review Meeting \u2014 Thu 10:00-11:00\nid: evt_9502cf22ab324b3e8c8be5170b73c6bc | Government Inspector Site Walkthrough \u2014 Thu 13:00-14:00\nid: evt_016805fc26c745be8e422029767acbef | Dinner with Wife \u2014 Thu 18:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "The site walkthrough on Thursday is one hour, so I've booked you a one-hour haircut for right after."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "end": "2023-12-14 15:00:00",
+          "summary": "Haircut",
+          "start": "2023-12-14 14:00:00"
+        },
+        "result": "Event created successfully.\nHaircut\n  ID: evt_c1fc7b3f957c4ce7a739f12dec36b268\n  Time: Thu Dec 14, 14:00 - 15:00\n  RSVP: ACCEPT"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Safety check Monday?",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the event with the summary 'Site Safety Check' on 2023-12-11 and return the event details (start/end time).",
+    "simulated_now": "2023-12-10 20:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-11 07:00:00",
+          "end": "2023-12-11 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e362a249aa77498bbbf4d5ab2f976dcb"
+        },
+        {
+          "day": "Monday",
+          "summary": "Crew Briefing: Road Resurfacing Project",
+          "start": "2023-12-11 07:30:00",
+          "end": "2023-12-11 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1492a8c6c4774d84ad364a314bda2b30"
+        },
+        {
+          "day": "Monday",
+          "summary": "Material Delivery Coordination",
+          "start": "2023-12-11 09:30:00",
+          "end": "2023-12-11 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "suppliers@email.com"
+          ],
+          "id": "evt_35d846232f4b479888777588893106b8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Project Manager",
+          "start": "2023-12-11 14:00:00",
+          "end": "2023-12-11 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.pm@email.com"
+          ],
+          "id": "evt_d379d6dbc6284c1081b158c23801c4fe"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-12-11 18:30:00",
+          "end": "2023-12-11 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fd2dbade4901425990d68d6d2a6af079"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-11 07:00:00",
+          "end": "2023-12-11 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e362a249aa77498bbbf4d5ab2f976dcb"
+        },
+        {
+          "day": "Monday",
+          "summary": "Crew Briefing: Road Resurfacing Project",
+          "start": "2023-12-11 07:30:00",
+          "end": "2023-12-11 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1492a8c6c4774d84ad364a314bda2b30"
+        },
+        {
+          "day": "Monday",
+          "summary": "Material Delivery Coordination",
+          "start": "2023-12-11 09:30:00",
+          "end": "2023-12-11 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "suppliers@email.com"
+          ],
+          "id": "evt_35d846232f4b479888777588893106b8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Project Manager",
+          "start": "2023-12-11 14:00:00",
+          "end": "2023-12-11 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.pm@email.com"
+          ],
+          "id": "evt_d379d6dbc6284c1081b158c23801c4fe"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-12-11 18:30:00",
+          "end": "2023-12-11 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fd2dbade4901425990d68d6d2a6af079"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Safety check Monday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First I need to get the current time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-10 20:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, tomorrow is Monday, December 11th. Let me check for a \"Safety check\" event on that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-12-11 23:59:59",
+          "time_min": "2023-12-11 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_e362a249aa77498bbbf4d5ab2f976dcb | Site Safety Check \u2014 Mon 07:00-07:30\nid: evt_1492a8c6c4774d84ad364a314bda2b30 | Crew Briefing: Road Resurfacing Project \u2014 Mon 07:30-09:00\nid: evt_35d846232f4b479888777588893106b8 | Material Delivery Coordination \u2014 Mon 09:30-11:00\nid: evt_d379d6dbc6284c1081b158c23801c4fe | Meeting with Project Manager \u2014 Mon 14:00-15:30\nid: evt_fd2dbade4901425990d68d6d2a6af079 | Dinner with Family \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, I see a \"Site Safety Check\" on Monday from 7:00 to 7:30 AM. Let me get you the details."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_e362a249aa77498bbbf4d5ab2f976dcb"
+        },
+        "result": "Site Safety Check\n  ID: evt_e362a249aa77498bbbf4d5ab2f976dcb\n  Time: Mon Dec 11, 07:00 - 07:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, you have a \"Site Safety Check\" tomorrow (Monday, December 11th) from 7:00 to 7:30 AM. You have already accepted the invitation."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Resurfacing project briefing!",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the event with the summary 'Crew Briefing: Road Resurfacing Project' on 2023-12-11 and return the event details (start/end time).",
+    "simulated_now": "2023-12-10 20:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-11 07:00:00",
+          "end": "2023-12-11 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_20a94dc92e6e4fc8886f8a5f44708d6a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Crew Briefing: Road Resurfacing Project",
+          "start": "2023-12-11 07:30:00",
+          "end": "2023-12-11 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d409ab3201b740f9a52598889613d649"
+        },
+        {
+          "day": "Monday",
+          "summary": "Material Delivery Coordination",
+          "start": "2023-12-11 09:30:00",
+          "end": "2023-12-11 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "suppliers@email.com"
+          ],
+          "id": "evt_97cb1cc14dbe4445872a55814ac0405f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Project Manager",
+          "start": "2023-12-11 14:00:00",
+          "end": "2023-12-11 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.pm@email.com"
+          ],
+          "id": "evt_5ca8f66e9565437da6ecf276224cfde9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-12-11 18:30:00",
+          "end": "2023-12-11 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2daf85aaa61649ca8f3b8c461d4a1842"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-11 07:00:00",
+          "end": "2023-12-11 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_20a94dc92e6e4fc8886f8a5f44708d6a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Crew Briefing: Road Resurfacing Project",
+          "start": "2023-12-11 07:30:00",
+          "end": "2023-12-11 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d409ab3201b740f9a52598889613d649"
+        },
+        {
+          "day": "Monday",
+          "summary": "Material Delivery Coordination",
+          "start": "2023-12-11 09:30:00",
+          "end": "2023-12-11 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "suppliers@email.com"
+          ],
+          "id": "evt_97cb1cc14dbe4445872a55814ac0405f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Project Manager",
+          "start": "2023-12-11 14:00:00",
+          "end": "2023-12-11 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.pm@email.com"
+          ],
+          "id": "evt_5ca8f66e9565437da6ecf276224cfde9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-12-11 18:30:00",
+          "end": "2023-12-11 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2daf85aaa61649ca8f3b8c461d4a1842"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Resurfacing project briefing!"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can help with that. First, I'll check your calendar for any existing events with \"Resurfacing project briefing\" in the title."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-10 20:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-12-01 00:00:00"
+        },
+        "result": "Found 30 events:\nid: evt_20a94dc92e6e4fc8886f8a5f44708d6a | Site Safety Check \u2014 Mon 07:00-07:30\nid: evt_d409ab3201b740f9a52598889613d649 | Crew Briefing: Road Resurfacing Project \u2014 Mon 07:30-09:00\nid: evt_97cb1cc14dbe4445872a55814ac0405f | Material Delivery Coordination \u2014 Mon 09:30-11:00\nid: evt_5ca8f66e9565437da6ecf276224cfde9 | Meeting with Project Manager \u2014 Mon 14:00-15:30\nid: evt_2daf85aaa61649ca8f3b8c461d4a1842 | Dinner with Family \u2014 Mon 18:30-20:00\nid: evt_860b35b6a16243f68d15016d2c5a53d9 | Site Safety Check \u2014 Tue 07:00-07:30\nid: evt_1a206a283c5a4970abf5d7942a240dcd | Concrete Pouring - Bridge Supports \u2014 Tue 07:30-09:00\nid: evt_d23d32207d6446f68dd2ebd794f49b0c | Equipment Maintenance Review \u2014 Tue 10:00-11:30\nid: evt_072334971734411ea20f1ff595ef72cb | Meeting with Union Rep \u2014 Tue 14:00-15:00\nid: evt_fd896c4f335c4e6aab9f8738c32aafeb | Community Meeting \u2014 Tue 19:00-20:30\nid: evt_15a7209a8ae2447aadeb9aa41584c5ce | Site Safety Check \u2014 Wed 07:00-07:30\nid: evt_05db2474913c4674bdd682df455011ef | Drainage Installation \u2014 Wed 07:30-09:00\nid: evt_a797cd7e5cb44b35bdf8853187c103c3 | Review Environmental Compliance \u2014 Wed 09:30-11:00\nid: evt_d7391060a97a48479c650fa12e43f852 | Subcontractor Coordination Meeting \u2014 Wed 14:00-15:30\nid: evt_b46b399180674090bb03b67206f27c0f | Kids soccer practice \u2014 Wed 18:00-19:00\nid: evt_41b206a243b0430faeb7d42a4a7f7a7d | Site Safety Check \u2014 Thu 07:00-07:30\nid: evt_90b6ed2f41f049678d6ab50ab520691e | Road Paving: Crew Briefing \u2014 Thu 07:30-09:00\nid: evt_030e3e43f90c49c685b8d2ca7633064c | Budget Review Meeting \u2014 Thu 10:00-11:00\nid: evt_2d4a1916d97148e89c156a319948823f | Government Inspector Site Walkthrough \u2014 Thu 13:00-14:00\nid: evt_9c10dde469874f45a60220f213ec1320 | Dinner with Wife \u2014 Thu 18:00-20:00\nid: evt_17605fe63cb849148a85a79ff5a3d8bd | Site Safety Check \u2014 Fri 07:00-07:30\nid: evt_dc0bf471783f4d69897390742c88a353 | Review Progress and Plan for Next Week \u2014 Fri 07:30-09:00\nid: evt_a2db28ecb8b842d1a76df419e59cc992 | Material Order Placement \u2014 Fri 10:00-11:00\nid: evt_a79075d626dc4847a2b229a624466908 | Final Site Inspection \u2014 Fri 14:00-15:00\nid: evt_1f5944beb78b4e7ba1d0682cc04d7b74 | Fishing Trip with Buddies \u2014 Fri 18:00-21:00\nid: evt_ad5d7678a3024287a66cc821fcafcf9e | Equipment Maintenance \u2014 Sat 08:00-10:00\nid: evt_28c5e7ba44e7429990bc5d2f98cc0857 | Family Time \u2014 Sat 11:00-13:00\nid: evt_dfd8c5f17f404dce8c7acf7d94142b80 | Gardening \u2014 Sat 14:00-16:00\nid: evt_7f9525515169478683ae64d8803bc9cf | Church \u2014 Sun 09:00-10:00\nid: evt_bcc062e0e2b14d9d9c46bef7e2b429ff | Family Barbecue \u2014 Sun 13:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found an event on your calendar: \"Crew Briefing: Road Resurfacing Project\" on Monday, December 11th, from 7:30 AM to 9:00 AM. Is this the event you're looking for?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events on 2023-12-11.",
+    "simulated_now": "2023-12-11 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-11 07:00:00",
+          "end": "2023-12-11 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9a900051559b498ca0ecc19c7ad0c3ce"
+        },
+        {
+          "day": "Monday",
+          "summary": "Crew Briefing: Road Resurfacing Project",
+          "start": "2023-12-11 07:30:00",
+          "end": "2023-12-11 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5e0ba090c7a049fcb8b1096b3b8a94e8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Material Delivery Coordination",
+          "start": "2023-12-11 09:30:00",
+          "end": "2023-12-11 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "suppliers@email.com"
+          ],
+          "id": "evt_edf00856425f4c57b5e77ec7065cad04"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Project Manager",
+          "start": "2023-12-11 14:00:00",
+          "end": "2023-12-11 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.pm@email.com"
+          ],
+          "id": "evt_ec6cc09c74ad43c7895269fd9fc31aca"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-12-11 18:30:00",
+          "end": "2023-12-11 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7283f8a580cd4062acccdfa533416b04"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Site Safety Check",
+          "start": "2023-12-11 07:00:00",
+          "end": "2023-12-11 07:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9a900051559b498ca0ecc19c7ad0c3ce"
+        },
+        {
+          "day": "Monday",
+          "summary": "Crew Briefing: Road Resurfacing Project",
+          "start": "2023-12-11 07:30:00",
+          "end": "2023-12-11 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5e0ba090c7a049fcb8b1096b3b8a94e8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Material Delivery Coordination",
+          "start": "2023-12-11 09:30:00",
+          "end": "2023-12-11 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "suppliers@email.com"
+          ],
+          "id": "evt_edf00856425f4c57b5e77ec7065cad04"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Project Manager",
+          "start": "2023-12-11 14:00:00",
+          "end": "2023-12-11 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.pm@email.com"
+          ],
+          "id": "evt_ec6cc09c74ad43c7895269fd9fc31aca"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-12-11 18:30:00",
+          "end": "2023-12-11 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7283f8a580cd4062acccdfa533416b04"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-11 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-12-11 00:00:00",
+          "time_max": "2023-12-11 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_9a900051559b498ca0ecc19c7ad0c3ce | Site Safety Check \u2014 Mon 07:00-07:30\nid: evt_5e0ba090c7a049fcb8b1096b3b8a94e8 | Crew Briefing: Road Resurfacing Project \u2014 Mon 07:30-09:00\nid: evt_edf00856425f4c57b5e77ec7065cad04 | Material Delivery Coordination \u2014 Mon 09:30-11:00\nid: evt_ec6cc09c74ad43c7895269fd9fc31aca | Meeting with Project Manager \u2014 Mon 14:00-15:30\nid: evt_7283f8a580cd4062acccdfa533416b04 | Dinner with Family \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Here is your schedule for today, December 11th:\n* 7:00 AM - 7:30 AM: Site Safety Check\n* 7:30 AM - 9:00 AM: Crew Briefing: Road Resurfacing Project\n* 9:30 AM - 11:00 AM: Material Delivery Coordination\n* 2:00 PM - 3:30 PM: Meeting with Project Manager\n* 6:30 PM - 8:00 PM: Dinner with Family"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

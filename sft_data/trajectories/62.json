@@ -1,0 +1,1754 @@
+[
+  {
+    "query": "Create an event called 'Project Brainstorm' for Tuesday at 9 AM for one hour with Michael.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "The agent should create a new event with the summary 'Project Brainstorm', start time of 2023-07-25T09:00:00, end time of 2023-07-25T10:00:00 and attendee Michael.",
+    "simulated_now": "2023-07-23 18:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Research and Writing - Chapter 3",
+          "start": "2023-07-25 10:00:00",
+          "end": "2023-07-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b75fe8af1188453eb884f15d66812757"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Graduate Student",
+          "start": "2023-07-25 13:30:00",
+          "end": "2023-07-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Sarah"
+          ],
+          "id": "evt_a1c8bd1ad82d48dcb06120ccc60c962a"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Graduate Student",
+          "start": "2023-07-25 15:30:00",
+          "end": "2023-07-25 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Michael"
+          ],
+          "id": "evt_aac2b6d369544435b27c9718ed4dfb8f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Book Editor",
+          "start": "2023-07-25 17:00:00",
+          "end": "2023-07-25 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0110eb9f0f0549d38a34a912501bb9c4"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Project Brainstorm",
+          "start": "2023-07-25 09:00:00",
+          "end": "2023-07-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Michael"
+          ],
+          "id": "evt_597b7235cddf471ea5c8e116ef64dff0"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Research and Writing - Chapter 3",
+          "start": "2023-07-25 10:00:00",
+          "end": "2023-07-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b75fe8af1188453eb884f15d66812757"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Graduate Student",
+          "start": "2023-07-25 13:30:00",
+          "end": "2023-07-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Sarah"
+          ],
+          "id": "evt_a1c8bd1ad82d48dcb06120ccc60c962a"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Graduate Student",
+          "start": "2023-07-25 15:30:00",
+          "end": "2023-07-25 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Michael"
+          ],
+          "id": "evt_aac2b6d369544435b27c9718ed4dfb8f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Book Editor",
+          "start": "2023-07-25 17:00:00",
+          "end": "2023-07-25 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0110eb9f0f0549d38a34a912501bb9c4"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Project Brainstorm' for Tuesday at 9 AM for one hour with Michael."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. First, I need to get the current time to determine the correct date for Tuesday. Then I'll search for Michael's email address in your calendar. Finally, I'll create the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-23 18:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_acd7c5a66d2349ae9e089453d48f7194 | Undergraduate Lecture: \"The Old Regime\" \u2014 Mon 09:00-10:15\nid: evt_a2760998bd15432392131826d8138b7b | Office Hours \u2014 Mon 10:30-11:30\nid: evt_c092921c2a304b8db26697813d064114 | Faculty Meeting \u2014 Mon 14:00-15:30\nid: evt_56f18b39908d4f4d91b03b454e39aba1 | Dinner with friend \u2014 Mon 18:30-20:00\nid: evt_b75fe8af1188453eb884f15d66812757 | Research and Writing - Chapter 3 \u2014 Tue 10:00-12:00\nid: evt_a1c8bd1ad82d48dcb06120ccc60c962a | Meeting with Graduate Student \u2014 Tue 13:30-15:00\nid: evt_aac2b6d369544435b27c9718ed4dfb8f | Meeting with Graduate Student \u2014 Tue 15:30-16:30\nid: evt_0110eb9f0f0549d38a34a912501bb9c4 | Call with Book Editor \u2014 Tue 17:00-18:00\nid: evt_b9e95585b103404eb028d388bcc03b0b | Undergraduate Lecture: \"The French Revolution Begins\" \u2014 Wed 09:00-10:15\nid: evt_c4f220e33331468690b06a349a420c08 | Office Hours \u2014 Wed 10:30-11:30\nid: evt_010e78dabe2c43ada0d8ce491ca51e8f | Meeting with University Librarian \u2014 Wed 13:00-14:00\nid: evt_443cbf81c4d74f7fb6b60e90c3066879 | Grade papers \u2014 Wed 16:00-17:00\nid: evt_211e4062ff4844ad825f00fb8c17fe88 | Research and Writing - Chapter 3 \u2014 Thu 10:00-12:00\nid: evt_357ad573b5c748d58be5e1735c070028 | Grant Proposal Review Committee Meeting \u2014 Thu 14:00-15:00\nid: evt_185c9067b86f430d9389febc8bd0d42d | Attend French Film Screening \u2014 Thu 18:00-19:30\nid: evt_596c629d4e214428939c540ed56501dc | Undergraduate Lecture: \"The Reign of Terror\" \u2014 Fri 09:00-10:15\nid: evt_3306e10a8c1c49d6bfb78f8854d7a052 | Office Hours \u2014 Fri 10:30-11:30\nid: evt_11468c5f15f947c9bb23dd0d8695e71b | Grade papers \u2014 Fri 13:00-14:00\nid: evt_dfa4afc7819943028cc87764ff151d5a | Call with Grant Program Officer \u2014 Fri 15:00-16:00\nid: evt_766add294b714cd1907de88c68ba2932 | Trip to local bookstore \u2014 Sat 10:00-13:00\nid: evt_a0890ece4f6246a284526d6c18d8d70e | Reading and note-taking for book \u2014 Sat 14:00-16:00\nid: evt_373f0bb3a5ec41b38b8e0cfc8b78f4b3 | Dinner party at colleague's house \u2014 Sat 19:00-21:00\nid: evt_3b210f6cc0574b4b8c4161749d411c21 | Brunch \u2014 Sun 11:00-12:00\nid: evt_936124899d4d4b7b8427107e61e8c296 | Grading student papers \u2014 Sun 13:00-16:00\nid: evt_19d5c2e2309b4de18038a90c9c99a26b | Relax and listen to classical music \u2014 Sun 19:00-20:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_acd7c5a66d2349ae9e089453d48f7194"
+        },
+        "result": "Undergraduate Lecture: \"The Old Regime\"\n  ID: evt_acd7c5a66d2349ae9e089453d48f7194\n  Time: Mon Jul 24, 09:00 - 10:15\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_a2760998bd15432392131826d8138b7b"
+        },
+        "result": "Office Hours\n  ID: evt_a2760998bd15432392131826d8138b7b\n  Time: Mon Jul 24, 10:30 - 11:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_c092921c2a304b8db26697813d064114"
+        },
+        "result": "Faculty Meeting\n  ID: evt_c092921c2a304b8db26697813d064114\n  Time: Mon Jul 24, 14:00 - 15:30\n  Attendees: Dr. Smith, Dr. Jones, Dr. Brown\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_56f18b39908d4f4d91b03b454e39aba1"
+        },
+        "result": "Dinner with friend\n  ID: evt_56f18b39908d4f4d91b03b454e39aba1\n  Time: Mon Jul 24, 18:30 - 20:00\n  Attendees: English Department Professor\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_b75fe8af1188453eb884f15d66812757"
+        },
+        "result": "Research and Writing - Chapter 3\n  ID: evt_b75fe8af1188453eb884f15d66812757\n  Time: Tue Jul 25, 10:00 - 12:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_a1c8bd1ad82d48dcb06120ccc60c962a"
+        },
+        "result": "Meeting with Graduate Student\n  ID: evt_a1c8bd1ad82d48dcb06120ccc60c962a\n  Time: Tue Jul 25, 13:30 - 15:00\n  Attendees: Sarah\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_aac2b6d369544435b27c9718ed4dfb8f"
+        },
+        "result": "Meeting with Graduate Student\n  ID: evt_aac2b6d369544435b27c9718ed4dfb8f\n  Time: Tue Jul 25, 15:30 - 16:30\n  Attendees: Michael\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I couldn't find an email address for Michael, so I'll create the event and add him as a guest by name. If you'd like me to add his email, please provide it."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Project Brainstorm",
+          "start": "2023-07-25 09:00:00",
+          "end": "2023-07-25 10:00:00",
+          "attendees": [
+            "Michael"
+          ]
+        },
+        "result": "Event created successfully.\nProject Brainstorm\n  ID: evt_597b7235cddf471ea5c8e116ef64dff0\n  Time: Tue Jul 25, 09:00 - 10:00\n  Attendees: Michael\n  RSVP: ACCEPT"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Schedule a meeting with the University Librarian for Wednesday at 2:30 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "The agent should create a new event with the summary 'Meeting with University Librarian', start time of 2023-07-26T14:30:00, and end time of 2023-07-26T15:30:00.",
+    "simulated_now": "2023-07-23 18:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Undergraduate Lecture: \"The French Revolution Begins\"",
+          "start": "2023-07-26 09:00:00",
+          "end": "2023-07-26 10:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_12f5a8f57b334df695e217e4e8dd76ab"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Office Hours",
+          "start": "2023-07-26 10:30:00",
+          "end": "2023-07-26 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_42303512cdb644a1b1dc0380f4c2a0ba"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with University Librarian",
+          "start": "2023-07-26 13:00:00",
+          "end": "2023-07-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2dbd9da189ad4591b96671736c6f6b01"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Grade papers",
+          "start": "2023-07-26 16:00:00",
+          "end": "2023-07-26 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0dcb208def2a443a9039bcfd10a4e18f"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Undergraduate Lecture: \"The French Revolution Begins\"",
+          "start": "2023-07-26 09:00:00",
+          "end": "2023-07-26 10:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_12f5a8f57b334df695e217e4e8dd76ab"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Office Hours",
+          "start": "2023-07-26 10:30:00",
+          "end": "2023-07-26 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_42303512cdb644a1b1dc0380f4c2a0ba"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with University Librarian",
+          "start": "2023-07-26 13:00:00",
+          "end": "2023-07-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2dbd9da189ad4591b96671736c6f6b01"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with the University Librarian",
+          "start": "2023-07-26 14:30:00",
+          "end": "2023-07-26 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c210139b771546ff8d4190f175558377"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Grade papers",
+          "start": "2023-07-26 16:00:00",
+          "end": "2023-07-26 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0dcb208def2a443a9039bcfd10a4e18f"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Schedule a meeting with the University Librarian for Wednesday at 2:30 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I'll check your calendar for any past events with the University Librarian to find their email address. Then, I'll schedule the meeting for this coming Wednesday."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_e3ebba9a13f54fffb01779d1f11a496c | Undergraduate Lecture: \"The Old Regime\" \u2014 Mon 09:00-10:15\nid: evt_e7dc811c8e6d4c11945f01ad339dcc72 | Office Hours \u2014 Mon 10:30-11:30\nid: evt_ea2862fce4ec4fc5ba6d9ce30719b555 | Faculty Meeting \u2014 Mon 14:00-15:30\nid: evt_efde9e5488004a20a93daf380fa3ce73 | Dinner with friend \u2014 Mon 18:30-20:00\nid: evt_f74d95661bc94e98add279fa6c221886 | Research and Writing - Chapter 3 \u2014 Tue 10:00-12:00\nid: evt_e6bafcf51772403a84e3c93d8906f3c3 | Meeting with Graduate Student \u2014 Tue 13:30-15:00\nid: evt_d09cbaab5eb547d7b1d3c906cc04311f | Meeting with Graduate Student \u2014 Tue 15:30-16:30\nid: evt_a83fe97d3fd54426af9e6c2b56edd7fc | Call with Book Editor \u2014 Tue 17:00-18:00\nid: evt_12f5a8f57b334df695e217e4e8dd76ab | Undergraduate Lecture: \"The French Revolution Begins\" \u2014 Wed 09:00-10:15\nid: evt_42303512cdb644a1b1dc0380f4c2a0ba | Office Hours \u2014 Wed 10:30-11:30\nid: evt_2dbd9da189ad4591b96671736c6f6b01 | Meeting with University Librarian \u2014 Wed 13:00-14:00\nid: evt_0dcb208def2a443a9039bcfd10a4e18f | Grade papers \u2014 Wed 16:00-17:00\nid: evt_1a4fe509464e4e34a6b721ec15f0effe | Research and Writing - Chapter 3 \u2014 Thu 10:00-12:00\nid: evt_db8dc496d016421db749de9cc306aace | Grant Proposal Review Committee Meeting \u2014 Thu 14:00-15:00\nid: evt_975c78f1630a4df7bf56d42ef8a85ffd | Attend French Film Screening \u2014 Thu 18:00-19:30\nid: evt_79043399a733467ab94d839ad892441c | Undergraduate Lecture: \"The Reign of Terror\" \u2014 Fri 09:00-10:15\nid: evt_4cee0a0297824a1fbc52d2bd7a91531a | Office Hours \u2014 Fri 10:30-11:30\nid: evt_9a8bfb24ab61438fa4bf868b4bc5b6f1 | Grade papers \u2014 Fri 13:00-14:00\nid: evt_92b850d2801341fca5eb4373b1909f82 | Call with Grant Program Officer \u2014 Fri 15:00-16:00\nid: evt_998d030de2174f11af072bb6bbf1e323 | Trip to local bookstore \u2014 Sat 10:00-13:00\nid: evt_acbb48d0f0624abeb1b50d05ce3b9ad8 | Reading and note-taking for book \u2014 Sat 14:00-16:00\nid: evt_cd0ef9e52e524bb3937c37724809098b | Dinner party at colleague's house \u2014 Sat 19:00-21:00\nid: evt_0bc4fdb38fcb437e8d279a4db24a44a1 | Brunch \u2014 Sun 11:00-12:00\nid: evt_31be793e2e2f4e34afd337b10cc0e843 | Grading student papers \u2014 Sun 13:00-16:00\nid: evt_82753ccae4ba4a16967c8ccc298beb77 | Relax and listen to classical music \u2014 Sun 19:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I've found a past meeting with the University Librarian in your calendar. I'll now get the details of that event to find their email address."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_2dbd9da189ad4591b96671736c6f6b01"
+        },
+        "result": "Meeting with University Librarian\n  ID: evt_2dbd9da189ad4591b96671736c6f6b01\n  Time: Wed Jul 26, 13:00 - 14:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I couldn't find an email address for the University Librarian in your past events, so I'll create the meeting without an attendee. First I need to check the current date."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-23 18:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will schedule the meeting for this Wednesday."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2023-07-26 14:30:00",
+          "end": "2023-07-26 15:30:00",
+          "summary": "Meeting with the University Librarian"
+        },
+        "result": "Event created successfully.\nMeeting with the University Librarian\n  ID: evt_c210139b771546ff8d4190f175558377\n  Time: Wed Jul 26, 14:30 - 15:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've scheduled the meeting for Wednesday at 2:30 PM.\n\nI couldn't find an email address for the University Librarian, so please add them to the event."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on the schedule for tomorrow afternoon?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should first determine that 'tomorrow' is Tuesday, July 25th. Then, it should list events occurring between 12:00 PM and 6:00 PM on that day.",
+    "simulated_now": "2023-07-24 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Research and Writing - Chapter 3",
+          "start": "2023-07-25 10:00:00",
+          "end": "2023-07-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0b67fe8d0e1e4a9db1ee2f4aa976d494"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Graduate Student",
+          "start": "2023-07-25 13:30:00",
+          "end": "2023-07-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Sarah"
+          ],
+          "id": "evt_4e39844388964ee9b8de14bcff28edd0"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Graduate Student",
+          "start": "2023-07-25 15:30:00",
+          "end": "2023-07-25 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Michael"
+          ],
+          "id": "evt_0b605eefb9e64ebe8b87a537174828df"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Book Editor",
+          "start": "2023-07-25 17:00:00",
+          "end": "2023-07-25 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3617efc11fb4465a9e5ccb38cf6af701"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Research and Writing - Chapter 3",
+          "start": "2023-07-25 10:00:00",
+          "end": "2023-07-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0b67fe8d0e1e4a9db1ee2f4aa976d494"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Graduate Student",
+          "start": "2023-07-25 13:30:00",
+          "end": "2023-07-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Sarah"
+          ],
+          "id": "evt_4e39844388964ee9b8de14bcff28edd0"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Graduate Student",
+          "start": "2023-07-25 15:30:00",
+          "end": "2023-07-25 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Michael"
+          ],
+          "id": "evt_0b605eefb9e64ebe8b87a537174828df"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with Book Editor",
+          "start": "2023-07-25 17:00:00",
+          "end": "2023-07-25 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3617efc11fb4465a9e5ccb38cf6af701"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on the schedule for tomorrow afternoon?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to determine the date of tomorrow. Then, I will list the events scheduled for tomorrow afternoon, which I will define as the time between 12:00 and 17:00. Finally, I will present the list of events to you."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-24 10:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-07-25 17:00:00",
+          "time_min": "2023-07-25 12:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_0b67fe8d0e1e4a9db1ee2f4aa976d494 | Research and Writing - Chapter 3 \u2014 Tue 10:00-12:00\nid: evt_4e39844388964ee9b8de14bcff28edd0 | Meeting with Graduate Student \u2014 Tue 13:30-15:00\nid: evt_0b605eefb9e64ebe8b87a537174828df | Meeting with Graduate Student \u2014 Tue 15:30-16:30\nid: evt_3617efc11fb4465a9e5ccb38cf6af701 | Call with Book Editor \u2014 Tue 17:00-18:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have three events tomorrow afternoon:\n\n*   **Meeting with Graduate Student** from 13:30 to 15:00\n*   **Meeting with Graduate Student** from 15:30 to 16:30\n*   **Call with Book Editor** from 17:00 to 18:00\n\nYou also have **Research and Writing - Chapter 3** from 10:00 to 12:00, which ends in the afternoon."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who am I having dinner with on Monday?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should find the event on Monday evening and retrieve the attendees, noting that the attendee is the English Department Professor.",
+    "simulated_now": "2023-07-24 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Undergraduate Lecture: \"The Old Regime\"",
+          "start": "2023-07-24 09:00:00",
+          "end": "2023-07-24 10:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ba4638a7b95b44de8703fe9369c8f614"
+        },
+        {
+          "day": "Monday",
+          "summary": "Office Hours",
+          "start": "2023-07-24 10:30:00",
+          "end": "2023-07-24 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5a7edf053982413bbb8b418245701179"
+        },
+        {
+          "day": "Monday",
+          "summary": "Faculty Meeting",
+          "start": "2023-07-24 14:00:00",
+          "end": "2023-07-24 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith",
+            "Dr. Jones",
+            "Dr. Brown"
+          ],
+          "id": "evt_66dd9649dd884674a45d64b02a686101"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with friend",
+          "start": "2023-07-24 18:30:00",
+          "end": "2023-07-24 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "English Department Professor"
+          ],
+          "id": "evt_cd1e716f586e4c7aa8e88e6d2e40245d"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Undergraduate Lecture: \"The Old Regime\"",
+          "start": "2023-07-24 09:00:00",
+          "end": "2023-07-24 10:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ba4638a7b95b44de8703fe9369c8f614"
+        },
+        {
+          "day": "Monday",
+          "summary": "Office Hours",
+          "start": "2023-07-24 10:30:00",
+          "end": "2023-07-24 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5a7edf053982413bbb8b418245701179"
+        },
+        {
+          "day": "Monday",
+          "summary": "Faculty Meeting",
+          "start": "2023-07-24 14:00:00",
+          "end": "2023-07-24 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith",
+            "Dr. Jones",
+            "Dr. Brown"
+          ],
+          "id": "evt_66dd9649dd884674a45d64b02a686101"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with friend",
+          "start": "2023-07-24 18:30:00",
+          "end": "2023-07-24 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "English Department Professor"
+          ],
+          "id": "evt_cd1e716f586e4c7aa8e88e6d2e40245d"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who am I having dinner with on Monday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out who you're having dinner with on Monday. First, I'll get the current date and time to determine which Monday you're referring to. Then, I'll check your calendar for any dinner events on that day and let you know who the other attendees are."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-24 10:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-07-24 00:00:00",
+          "time_max": "2023-07-24 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_ba4638a7b95b44de8703fe9369c8f614 | Undergraduate Lecture: \"The Old Regime\" \u2014 Mon 09:00-10:15\nid: evt_5a7edf053982413bbb8b418245701179 | Office Hours \u2014 Mon 10:30-11:30\nid: evt_66dd9649dd884674a45d64b02a686101 | Faculty Meeting \u2014 Mon 14:00-15:30\nid: evt_cd1e716f586e4c7aa8e88e6d2e40245d | Dinner with friend \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_cd1e716f586e4c7aa8e88e6d2e40245d"
+        },
+        "result": "Dinner with friend\n  ID: evt_cd1e716f586e4c7aa8e88e6d2e40245d\n  Time: Mon Jul 24, 18:30 - 20:00\n  Attendees: English Department Professor\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "You are having dinner with the English Department Professor on Monday from 6:30 PM to 8:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule the Faculty Meeting to 4 PM on Monday.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should find the Faculty Meeting on Monday and update its start time to 2023-07-24T16:00:00 and end time to 2023-07-24T17:30:00.",
+    "simulated_now": "2023-07-24 11:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Undergraduate Lecture: \"The Old Regime\"",
+          "start": "2023-07-24 09:00:00",
+          "end": "2023-07-24 10:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_09e1caa14f374668be20c62684372d75"
+        },
+        {
+          "day": "Monday",
+          "summary": "Office Hours",
+          "start": "2023-07-24 10:30:00",
+          "end": "2023-07-24 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_19e876f65b254fa8bce9ff0bf1ff5845"
+        },
+        {
+          "day": "Monday",
+          "summary": "Faculty Meeting",
+          "start": "2023-07-24 14:00:00",
+          "end": "2023-07-24 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith",
+            "Dr. Jones",
+            "Dr. Brown"
+          ],
+          "id": "evt_983c4d58cbcd4f5d8a9785ffd8fa8e03"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with friend",
+          "start": "2023-07-24 18:30:00",
+          "end": "2023-07-24 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "English Department Professor"
+          ],
+          "id": "evt_d0ea95272ffa45a9843b0b95badd4746"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Undergraduate Lecture: \"The Old Regime\"",
+          "start": "2023-07-24 09:00:00",
+          "end": "2023-07-24 10:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_09e1caa14f374668be20c62684372d75"
+        },
+        {
+          "day": "Monday",
+          "summary": "Office Hours",
+          "start": "2023-07-24 10:30:00",
+          "end": "2023-07-24 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_19e876f65b254fa8bce9ff0bf1ff5845"
+        },
+        {
+          "day": "Monday",
+          "summary": "Faculty Meeting",
+          "start": "2023-07-24 16:00:00",
+          "end": "2023-07-24 17:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith",
+            "Dr. Jones",
+            "Dr. Brown"
+          ],
+          "id": "evt_983c4d58cbcd4f5d8a9785ffd8fa8e03"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with friend",
+          "start": "2023-07-24 18:30:00",
+          "end": "2023-07-24 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "English Department Professor"
+          ],
+          "id": "evt_d0ea95272ffa45a9843b0b95badd4746"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule the Faculty Meeting to 4 PM on Monday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-24 11:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_09e1caa14f374668be20c62684372d75 | Undergraduate Lecture: \"The Old Regime\" \u2014 Mon 09:00-10:15\nid: evt_19e876f65b254fa8bce9ff0bf1ff5845 | Office Hours \u2014 Mon 10:30-11:30\nid: evt_983c4d58cbcd4f5d8a9785ffd8fa8e03 | Faculty Meeting \u2014 Mon 14:00-15:30\nid: evt_d0ea95272ffa45a9843b0b95badd4746 | Dinner with friend \u2014 Mon 18:30-20:00\nid: evt_3cadda4bbad247c9b8648ae1ac864152 | Research and Writing - Chapter 3 \u2014 Tue 10:00-12:00\nid: evt_852000d504704759b0aae3e17ef3da41 | Meeting with Graduate Student \u2014 Tue 13:30-15:00\nid: evt_2478190c19bd4d77b64da5143fad6395 | Meeting with Graduate Student \u2014 Tue 15:30-16:30\nid: evt_1ad117a10e8c48ed830a949692890afa | Call with Book Editor \u2014 Tue 17:00-18:00\nid: evt_8b4138c16c83475ca822347b2e48a3ec | Undergraduate Lecture: \"The French Revolution Begins\" \u2014 Wed 09:00-10:15\nid: evt_5fcc197c56b741fca63d2a064f7bc7f1 | Office Hours \u2014 Wed 10:30-11:30\nid: evt_6c73e84ce8ee4ac0bbe40cf0eb11dc8e | Meeting with University Librarian \u2014 Wed 13:00-14:00\nid: evt_ea6500c720d14d8ea92dc24b08b5533e | Grade papers \u2014 Wed 16:00-17:00\nid: evt_d23a704b106e44178b3348a621680135 | Research and Writing - Chapter 3 \u2014 Thu 10:00-12:00\nid: evt_ee11ced46d1f407a926bf2226e5c266e | Grant Proposal Review Committee Meeting \u2014 Thu 14:00-15:00\nid: evt_0080d15df96342c18df73bde3422da6b | Attend French Film Screening \u2014 Thu 18:00-19:30\nid: evt_f053b736d0684708821ef29b6be9bacf | Undergraduate Lecture: \"The Reign of Terror\" \u2014 Fri 09:00-10:15\nid: evt_7f355d68b31549a8acb4da528c1f89ee | Office Hours \u2014 Fri 10:30-11:30\nid: evt_e7aa2642c11e45ad95d0ea20acaa8d4e | Grade papers \u2014 Fri 13:00-14:00\nid: evt_8aaaceb1a4f14cce8911fef12824fe47 | Call with Grant Program Officer \u2014 Fri 15:00-16:00\nid: evt_79346892930c4ff897eeb980e7578d00 | Trip to local bookstore \u2014 Sat 10:00-13:00\nid: evt_215c0cbe9cec40eb9fa703594597474f | Reading and note-taking for book \u2014 Sat 14:00-16:00\nid: evt_c41bfe86d63e4e0c8a0c787735a56d17 | Dinner party at colleague's house \u2014 Sat 19:00-21:00\nid: evt_cb11b6cb2a474fbcb9d15f2e8b498549 | Brunch \u2014 Sun 11:00-12:00\nid: evt_8fc62e46f5524e0ab71c7ff78a00f587 | Grading student papers \u2014 Sun 13:00-16:00\nid: evt_3fdcc1ee28644982af4d2d144bf09083 | Relax and listen to classical music \u2014 Sun 19:00-20:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_983c4d58cbcd4f5d8a9785ffd8fa8e03",
+          "start": "2023-07-24 16:00:00",
+          "end": "2023-07-24 17:30:00"
+        },
+        "result": "Event updated successfully.\nFaculty Meeting\n  ID: evt_983c4d58cbcd4f5d8a9785ffd8fa8e03\n  Time: Mon Jul 24, 16:00 - 17:30\n  Attendees: Dr. Smith, Dr. Jones, Dr. Brown\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've rescheduled the Faculty Meeting to 4 PM on Monday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is the French Film Screening on Thursday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should retrieve the event 'Attend French Film Screening' on Thursday and return the start time, 6:00 PM.",
+    "simulated_now": "2023-07-24 12:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Research and Writing - Chapter 3",
+          "start": "2023-07-27 10:00:00",
+          "end": "2023-07-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cb9d522020c14696a656ec9ea68a0d33"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Grant Proposal Review Committee Meeting",
+          "start": "2023-07-27 14:00:00",
+          "end": "2023-07-27 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1136d58b7ba64d0d9e0af17d7149208b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Attend French Film Screening",
+          "start": "2023-07-27 18:00:00",
+          "end": "2023-07-27 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_56941a16546a4b63bef57600786668fc"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Research and Writing - Chapter 3",
+          "start": "2023-07-27 10:00:00",
+          "end": "2023-07-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cb9d522020c14696a656ec9ea68a0d33"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Grant Proposal Review Committee Meeting",
+          "start": "2023-07-27 14:00:00",
+          "end": "2023-07-27 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1136d58b7ba64d0d9e0af17d7149208b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Attend French Film Screening",
+          "start": "2023-07-27 18:00:00",
+          "end": "2023-07-27 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_56941a16546a4b63bef57600786668fc"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is the French Film Screening on Thursday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find the time of the \"French Film Screening on Thursday\". First, I will get the current time to know what day it is. Then, I will list the events on Thursday to find the screening."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-24 12:00:00 | Monday"
+      },
+      {
+        "role": "assistant",
+        "content": "I have the current date. Now I will list the events on Thursday, July 27th, 2023 to find the \"French Film Screening\"."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-07-27 23:59:59",
+          "time_min": "2023-07-27 00:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_cb9d522020c14696a656ec9ea68a0d33 | Research and Writing - Chapter 3 \u2014 Thu 10:00-12:00\nid: evt_1136d58b7ba64d0d9e0af17d7149208b | Grant Proposal Review Committee Meeting \u2014 Thu 14:00-15:00\nid: evt_56941a16546a4b63bef57600786668fc | Attend French Film Screening \u2014 Thu 18:00-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "The French Film Screening is on Thursday from 18:00 to 19:30."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the faculty meeting?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should find the faculty meeting and return the list of attendees: Dr. Smith, Dr. Jones, Dr. Brown.",
+    "simulated_now": "2023-07-24 12:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Undergraduate Lecture: \"The Old Regime\"",
+          "start": "2023-07-24 09:00:00",
+          "end": "2023-07-24 10:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_899cb9140a18468ea9e0d7454e9a5fd8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Office Hours",
+          "start": "2023-07-24 10:30:00",
+          "end": "2023-07-24 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_370cbbe92b8b402ca8a5c8f4c8e3a096"
+        },
+        {
+          "day": "Monday",
+          "summary": "Faculty Meeting",
+          "start": "2023-07-24 14:00:00",
+          "end": "2023-07-24 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith",
+            "Dr. Jones",
+            "Dr. Brown"
+          ],
+          "id": "evt_90683cf9312241cfbde5f2b85f2a4726"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with friend",
+          "start": "2023-07-24 18:30:00",
+          "end": "2023-07-24 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "English Department Professor"
+          ],
+          "id": "evt_f9f05b55973e4824b7933fcbc535e34c"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Undergraduate Lecture: \"The Old Regime\"",
+          "start": "2023-07-24 09:00:00",
+          "end": "2023-07-24 10:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_899cb9140a18468ea9e0d7454e9a5fd8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Office Hours",
+          "start": "2023-07-24 10:30:00",
+          "end": "2023-07-24 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_370cbbe92b8b402ca8a5c8f4c8e3a096"
+        },
+        {
+          "day": "Monday",
+          "summary": "Faculty Meeting",
+          "start": "2023-07-24 14:00:00",
+          "end": "2023-07-24 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith",
+            "Dr. Jones",
+            "Dr. Brown"
+          ],
+          "id": "evt_90683cf9312241cfbde5f2b85f2a4726"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with friend",
+          "start": "2023-07-24 18:30:00",
+          "end": "2023-07-24 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "English Department Professor"
+          ],
+          "id": "evt_f9f05b55973e4824b7933fcbc535e34c"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the faculty meeting?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find the event ID for the faculty meeting to check who is attending. First, I will get the current time, and then I will search for the event in your calendar."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-24 12:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_899cb9140a18468ea9e0d7454e9a5fd8 | Undergraduate Lecture: \"The Old Regime\" \u2014 Mon 09:00-10:15\nid: evt_370cbbe92b8b402ca8a5c8f4c8e3a096 | Office Hours \u2014 Mon 10:30-11:30\nid: evt_90683cf9312241cfbde5f2b85f2a4726 | Faculty Meeting \u2014 Mon 14:00-15:30\nid: evt_f9f05b55973e4824b7933fcbc535e34c | Dinner with friend \u2014 Mon 18:30-20:00\nid: evt_bb04ea805c6349438860e79bcde3a8ed | Research and Writing - Chapter 3 \u2014 Tue 10:00-12:00\nid: evt_d38ff7148cc24cbcbd002f2a6484c0b4 | Meeting with Graduate Student \u2014 Tue 13:30-15:00\nid: evt_22774e2fda12488daa3a7102c7746948 | Meeting with Graduate Student \u2014 Tue 15:30-16:30\nid: evt_3f42cbfcece24d079caf528da38822dd | Call with Book Editor \u2014 Tue 17:00-18:00\nid: evt_c1cc5348a0a94e20ac3d341c381a57b5 | Undergraduate Lecture: \"The French Revolution Begins\" \u2014 Wed 09:00-10:15\nid: evt_98a67edaa8d84d018c677ec6b65cb6bc | Office Hours \u2014 Wed 10:30-11:30\nid: evt_2c831c55954b4b759c5ac6522f05986a | Meeting with University Librarian \u2014 Wed 13:00-14:00\nid: evt_bbda62ee068546b78248a0dbe2056ca4 | Grade papers \u2014 Wed 16:00-17:00\nid: evt_9b27af481e9c4b209921938b53e93d94 | Research and Writing - Chapter 3 \u2014 Thu 10:00-12:00\nid: evt_a5162017c5f748369a8214102b1a8904 | Grant Proposal Review Committee Meeting \u2014 Thu 14:00-15:00\nid: evt_cd4c5ee1bc5b455280bfd9ffd3fe0959 | Attend French Film Screening \u2014 Thu 18:00-19:30\nid: evt_1883910830a547c393ad8f7158505d50 | Undergraduate Lecture: \"The Reign of Terror\" \u2014 Fri 09:00-10:15\nid: evt_881d46d69e8a4157afa0b456c0679423 | Office Hours \u2014 Fri 10:30-11:30\nid: evt_7b4af3a8edc44874ade397ecec6010e6 | Grade papers \u2014 Fri 13:00-14:00\nid: evt_c0c7038306f845d988f4ea9eeaaf39e2 | Call with Grant Program Officer \u2014 Fri 15:00-16:00\nid: evt_3a8168398d4a401992dc066344abc851 | Trip to local bookstore \u2014 Sat 10:00-13:00\nid: evt_bd8485533f294dce9fd46beefb55683f | Reading and note-taking for book \u2014 Sat 14:00-16:00\nid: evt_e8259a3f9c0e451db0f3956352563ffe | Dinner party at colleague's house \u2014 Sat 19:00-21:00\nid: evt_ca2e18ca07534091903c3cebd1faff8f | Brunch \u2014 Sun 11:00-12:00\nid: evt_daba91cc49b14e33a3cea54450c06015 | Grading student papers \u2014 Sun 13:00-16:00\nid: evt_db61eadc63b44de88c8d88ef29eca2f1 | Relax and listen to classical music \u2014 Sun 19:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I've found the faculty meeting in your calendar. Now I'll get the event details to see who is attending."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_90683cf9312241cfbde5f2b85f2a4726"
+        },
+        "result": "Faculty Meeting\n  ID: evt_90683cf9312241cfbde5f2b85f2a4726\n  Time: Mon Jul 24, 14:00 - 15:30\n  Attendees: Dr. Smith, Dr. Jones, Dr. Brown\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "The attendees for the Faculty Meeting are Dr. Smith, Dr. Jones, and Dr. Brown."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "I can't make it to the dinner party on Saturday. Decline the invitation.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should find the 'Dinner party at colleague's house' event on Saturday and respond to it with a 'DECLINE'.",
+    "simulated_now": "2023-07-27 10:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Trip to local bookstore",
+          "start": "2023-07-29 10:00:00",
+          "end": "2023-07-29 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f30ea1dc622d4ab995bb3c1a927187a5"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Reading and note-taking for book",
+          "start": "2023-07-29 14:00:00",
+          "end": "2023-07-29 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_27e4bc6cda3648f8bfd53c28dfd25e2c"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner party at colleague's house",
+          "start": "2023-07-29 19:00:00",
+          "end": "2023-07-29 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "History Department colleagues"
+          ],
+          "id": "evt_a8a51aa082334aeb89c30b48a6fe57a1"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Trip to local bookstore",
+          "start": "2023-07-29 10:00:00",
+          "end": "2023-07-29 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f30ea1dc622d4ab995bb3c1a927187a5"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Reading and note-taking for book",
+          "start": "2023-07-29 14:00:00",
+          "end": "2023-07-29 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_27e4bc6cda3648f8bfd53c28dfd25e2c"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner party at colleague's house",
+          "start": "2023-07-29 19:00:00",
+          "end": "2023-07-29 21:00:00",
+          "attending": "DECLINE",
+          "attendees": [
+            "History Department colleagues"
+          ],
+          "id": "evt_a8a51aa082334aeb89c30b48a6fe57a1"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "I can't make it to the dinner party on Saturday. Decline the invitation."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I need to find the event in your calendar."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-27 10:00:00 | Thursday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-07-29 23:59:59",
+          "time_min": "2023-07-29 00:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_f30ea1dc622d4ab995bb3c1a927187a5 | Trip to local bookstore \u2014 Sat 10:00-13:00\nid: evt_27e4bc6cda3648f8bfd53c28dfd25e2c | Reading and note-taking for book \u2014 Sat 14:00-16:00\nid: evt_a8a51aa082334aeb89c30b48a6fe57a1 | Dinner party at colleague's house \u2014 Sat 19:00-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Done. I've found the dinner party and will decline the invitation for you."
+      },
+      {
+        "role": "tool_call",
+        "name": "respond_to_event",
+        "args": {
+          "attending": "DECLINE",
+          "event_id": "evt_a8a51aa082334aeb89c30b48a6fe57a1"
+        },
+        "result": "RSVP updated to DECLINE.\nDinner party at colleague's house\n  ID: evt_a8a51aa082334aeb89c30b48a6fe57a1\n  Time: Sat Jul 29, 19:00 - 21:00\n  Attendees: History Department colleagues\n  RSVP: DECLINE"
+      },
+      {
+        "role": "assistant",
+        "content": "I have declined the invitation to the dinner party."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Is Dr. Smith at the University Librarian meeting?",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "The agent should find the 'Meeting with University Librarian' event on Wednesday and confirm that Dr. Smith is not attending it. It should respond that Dr. Smith is not at the meeting.",
+    "simulated_now": "2023-07-25 15:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Undergraduate Lecture: \"The French Revolution Begins\"",
+          "start": "2023-07-26 09:00:00",
+          "end": "2023-07-26 10:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_499117b8c8d542ae9b7948558ddf607c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Office Hours",
+          "start": "2023-07-26 10:30:00",
+          "end": "2023-07-26 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_67a8315e7dd34da68f417446399b9a7c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with University Librarian",
+          "start": "2023-07-26 13:00:00",
+          "end": "2023-07-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b7f6ad3212484f2a8bdbad2462924bd8"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Grade papers",
+          "start": "2023-07-26 16:00:00",
+          "end": "2023-07-26 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4faf0b2edfc845beb7bb9bec24b86a00"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Undergraduate Lecture: \"The French Revolution Begins\"",
+          "start": "2023-07-26 09:00:00",
+          "end": "2023-07-26 10:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_499117b8c8d542ae9b7948558ddf607c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Office Hours",
+          "start": "2023-07-26 10:30:00",
+          "end": "2023-07-26 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_67a8315e7dd34da68f417446399b9a7c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with University Librarian",
+          "start": "2023-07-26 13:00:00",
+          "end": "2023-07-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b7f6ad3212484f2a8bdbad2462924bd8"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Grade papers",
+          "start": "2023-07-26 16:00:00",
+          "end": "2023-07-26 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4faf0b2edfc845beb7bb9bec24b86a00"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Is Dr. Smith at the University Librarian meeting?"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_f4ae798cf7524f6eab472caee8c9f2e5 | Undergraduate Lecture: \"The Old Regime\" \u2014 Mon 09:00-10:15\nid: evt_893d7930ff3345ef8ce5790b4842889d | Office Hours \u2014 Mon 10:30-11:30\nid: evt_cc47d70ac397444f94424d6e855d638b | Faculty Meeting \u2014 Mon 14:00-15:30\nid: evt_28411da93e554f21a573b6346fe6d82c | Dinner with friend \u2014 Mon 18:30-20:00\nid: evt_36bf8fdd33104bd4963319f469737d2e | Research and Writing - Chapter 3 \u2014 Tue 10:00-12:00\nid: evt_4814baf5d4b3424085dac954b0acff11 | Meeting with Graduate Student \u2014 Tue 13:30-15:00\nid: evt_83861dedfefc40b49d599801c48fee8f | Meeting with Graduate Student \u2014 Tue 15:30-16:30\nid: evt_85c1601ec0744d5c97a7699fe4b59a99 | Call with Book Editor \u2014 Tue 17:00-18:00\nid: evt_499117b8c8d542ae9b7948558ddf607c | Undergraduate Lecture: \"The French Revolution Begins\" \u2014 Wed 09:00-10:15\nid: evt_67a8315e7dd34da68f417446399b9a7c | Office Hours \u2014 Wed 10:30-11:30\nid: evt_b7f6ad3212484f2a8bdbad2462924bd8 | Meeting with University Librarian \u2014 Wed 13:00-14:00\nid: evt_4faf0b2edfc845beb7bb9bec24b86a00 | Grade papers \u2014 Wed 16:00-17:00\nid: evt_8c936a3d347c48dc9535e81fc53ba4ce | Research and Writing - Chapter 3 \u2014 Thu 10:00-12:00\nid: evt_c667e55239c74354a0ce1e9c331dae24 | Grant Proposal Review Committee Meeting \u2014 Thu 14:00-15:00\nid: evt_32ea0953990c409d9f3498ba10733b7a | Attend French Film Screening \u2014 Thu 18:00-19:30\nid: evt_35eca84481934cacad7a7a20536e0c89 | Undergraduate Lecture: \"The Reign of Terror\" \u2014 Fri 09:00-10:15\nid: evt_4077422b1fab4362817737e918dd09a5 | Office Hours \u2014 Fri 10:30-11:30\nid: evt_42dad2df650f4685a47bdd1c469b4d7b | Grade papers \u2014 Fri 13:00-14:00\nid: evt_ba13e73e74e8412ebee0cece30f0b76e | Call with Grant Program Officer \u2014 Fri 15:00-16:00\nid: evt_9ed7d34adf874fa399650236e9db954b | Trip to local bookstore \u2014 Sat 10:00-13:00\nid: evt_0319a641463b4fe5bf6bac4d4b88e736 | Reading and note-taking for book \u2014 Sat 14:00-16:00\nid: evt_473c0b8cd0c543af9520ead985413057 | Dinner party at colleague's house \u2014 Sat 19:00-21:00\nid: evt_4e38dbbd3343477c9b0a33b390f7a6c3 | Brunch \u2014 Sun 11:00-12:00\nid: evt_a134f00204e74ce4b7cf3721a147bd4f | Grading student papers \u2014 Sun 13:00-16:00\nid: evt_ee400cf249354702b6675c8075d0c01e | Relax and listen to classical music \u2014 Sun 19:00-20:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_b7f6ad3212484f2a8bdbad2462924bd8"
+        },
+        "result": "Meeting with University Librarian\n  ID: evt_b7f6ad3212484f2a8bdbad2462924bd8\n  Time: Wed Jul 26, 13:00 - 14:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "No, Dr. Smith is not on the attendee list for the \"Meeting with University Librarian.\""
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Office hours?",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should list the office hours from Monday, Wednesday and Friday.",
+    "simulated_now": "2023-07-24 08:00:00",
+    "addressed_days": [
+      "Monday",
+      "Wednesday",
+      "Friday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Undergraduate Lecture: \"The Old Regime\"",
+          "start": "2023-07-24 09:00:00",
+          "end": "2023-07-24 10:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6f87c86881384426b9251c746bb1f4b6"
+        },
+        {
+          "day": "Monday",
+          "summary": "Office Hours",
+          "start": "2023-07-24 10:30:00",
+          "end": "2023-07-24 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b7b0dab762ff4a01b2012803ff94fb17"
+        },
+        {
+          "day": "Monday",
+          "summary": "Faculty Meeting",
+          "start": "2023-07-24 14:00:00",
+          "end": "2023-07-24 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith",
+            "Dr. Jones",
+            "Dr. Brown"
+          ],
+          "id": "evt_44320832f93b42af8158dc122b468474"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with friend",
+          "start": "2023-07-24 18:30:00",
+          "end": "2023-07-24 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "English Department Professor"
+          ],
+          "id": "evt_d1e92f1de5434b34bb3e28bec16907fe"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Undergraduate Lecture: \"The French Revolution Begins\"",
+          "start": "2023-07-26 09:00:00",
+          "end": "2023-07-26 10:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9ec36346e2e545549957ab9411790a86"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Office Hours",
+          "start": "2023-07-26 10:30:00",
+          "end": "2023-07-26 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1f446dfe20cd4739ab892c264bd7bd5f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with University Librarian",
+          "start": "2023-07-26 13:00:00",
+          "end": "2023-07-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_37507abdbbe54bb19b0e8ce89a5c12a6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Grade papers",
+          "start": "2023-07-26 16:00:00",
+          "end": "2023-07-26 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5f3cf148eda74d0f8ce961a6376d7e56"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Undergraduate Lecture: \"The Reign of Terror\"",
+          "start": "2023-07-28 09:00:00",
+          "end": "2023-07-28 10:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_993227a751534a3cb4e513db606c440b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Office Hours",
+          "start": "2023-07-28 10:30:00",
+          "end": "2023-07-28 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0a0cc2bd0ab0437eb2d109aa964a14e1"
+        },
+        {
+          "day": "Friday",
+          "summary": "Grade papers",
+          "start": "2023-07-28 13:00:00",
+          "end": "2023-07-28 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_947f367b64384e758ad55486531c3e93"
+        },
+        {
+          "day": "Friday",
+          "summary": "Call with Grant Program Officer",
+          "start": "2023-07-28 15:00:00",
+          "end": "2023-07-28 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "NEH Program Officer"
+          ],
+          "id": "evt_4094d9e9dbb3467fafccaeb9576bcdc6"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Undergraduate Lecture: \"The Old Regime\"",
+          "start": "2023-07-24 09:00:00",
+          "end": "2023-07-24 10:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6f87c86881384426b9251c746bb1f4b6"
+        },
+        {
+          "day": "Monday",
+          "summary": "Office Hours",
+          "start": "2023-07-24 10:30:00",
+          "end": "2023-07-24 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b7b0dab762ff4a01b2012803ff94fb17"
+        },
+        {
+          "day": "Monday",
+          "summary": "Faculty Meeting",
+          "start": "2023-07-24 14:00:00",
+          "end": "2023-07-24 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith",
+            "Dr. Jones",
+            "Dr. Brown"
+          ],
+          "id": "evt_44320832f93b42af8158dc122b468474"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with friend",
+          "start": "2023-07-24 18:30:00",
+          "end": "2023-07-24 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "English Department Professor"
+          ],
+          "id": "evt_d1e92f1de5434b34bb3e28bec16907fe"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Undergraduate Lecture: \"The French Revolution Begins\"",
+          "start": "2023-07-26 09:00:00",
+          "end": "2023-07-26 10:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9ec36346e2e545549957ab9411790a86"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Office Hours",
+          "start": "2023-07-26 10:30:00",
+          "end": "2023-07-26 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1f446dfe20cd4739ab892c264bd7bd5f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with University Librarian",
+          "start": "2023-07-26 13:00:00",
+          "end": "2023-07-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_37507abdbbe54bb19b0e8ce89a5c12a6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Grade papers",
+          "start": "2023-07-26 16:00:00",
+          "end": "2023-07-26 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5f3cf148eda74d0f8ce961a6376d7e56"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Undergraduate Lecture: \"The Reign of Terror\"",
+          "start": "2023-07-28 09:00:00",
+          "end": "2023-07-28 10:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_993227a751534a3cb4e513db606c440b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Office Hours",
+          "start": "2023-07-28 10:30:00",
+          "end": "2023-07-28 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0a0cc2bd0ab0437eb2d109aa964a14e1"
+        },
+        {
+          "day": "Friday",
+          "summary": "Grade papers",
+          "start": "2023-07-28 13:00:00",
+          "end": "2023-07-28 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_947f367b64384e758ad55486531c3e93"
+        },
+        {
+          "day": "Friday",
+          "summary": "Call with Grant Program Officer",
+          "start": "2023-07-28 15:00:00",
+          "end": "2023-07-28 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "NEH Program Officer"
+          ],
+          "id": "evt_4094d9e9dbb3467fafccaeb9576bcdc6"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Office hours?"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_6f87c86881384426b9251c746bb1f4b6 | Undergraduate Lecture: \"The Old Regime\" \u2014 Mon 09:00-10:15\nid: evt_b7b0dab762ff4a01b2012803ff94fb17 | Office Hours \u2014 Mon 10:30-11:30\nid: evt_44320832f93b42af8158dc122b468474 | Faculty Meeting \u2014 Mon 14:00-15:30\nid: evt_d1e92f1de5434b34bb3e28bec16907fe | Dinner with friend \u2014 Mon 18:30-20:00\nid: evt_a5b598aa6e8e49b89ad890fc1e743135 | Research and Writing - Chapter 3 \u2014 Tue 10:00-12:00\nid: evt_b8cd533ef94948e0a6cb3d051699162c | Meeting with Graduate Student \u2014 Tue 13:30-15:00\nid: evt_d3aa0ad4fb1945df973d78f85a4557af | Meeting with Graduate Student \u2014 Tue 15:30-16:30\nid: evt_c4f8637c1ea3440bb6f9f62f8c6a90a8 | Call with Book Editor \u2014 Tue 17:00-18:00\nid: evt_9ec36346e2e545549957ab9411790a86 | Undergraduate Lecture: \"The French Revolution Begins\" \u2014 Wed 09:00-10:15\nid: evt_1f446dfe20cd4739ab892c264bd7bd5f | Office Hours \u2014 Wed 10:30-11:30\nid: evt_37507abdbbe54bb19b0e8ce89a5c12a6 | Meeting with University Librarian \u2014 Wed 13:00-14:00\nid: evt_5f3cf148eda74d0f8ce961a6376d7e56 | Grade papers \u2014 Wed 16:00-17:00\nid: evt_43bb62ac7fdf4f2fbc4d46b7082ddc71 | Research and Writing - Chapter 3 \u2014 Thu 10:00-12:00\nid: evt_56ad451cda5f4270ad8bc20dde1ae286 | Grant Proposal Review Committee Meeting \u2014 Thu 14:00-15:00\nid: evt_34f81503b66742f1891c8315494692b6 | Attend French Film Screening \u2014 Thu 18:00-19:30\nid: evt_993227a751534a3cb4e513db606c440b | Undergraduate Lecture: \"The Reign of Terror\" \u2014 Fri 09:00-10:15\nid: evt_0a0cc2bd0ab0437eb2d109aa964a14e1 | Office Hours \u2014 Fri 10:30-11:30\nid: evt_947f367b64384e758ad55486531c3e93 | Grade papers \u2014 Fri 13:00-14:00\nid: evt_4094d9e9dbb3467fafccaeb9576bcdc6 | Call with Grant Program Officer \u2014 Fri 15:00-16:00\nid: evt_5473042f4ca54151abdf5ee3f599246e | Trip to local bookstore \u2014 Sat 10:00-13:00\nid: evt_f684655ce96843c0bccc02ad6b248b5e | Reading and note-taking for book \u2014 Sat 14:00-16:00\nid: evt_b974c896a88640cf9e12546ac88a79ff | Dinner party at colleague's house \u2014 Sat 19:00-21:00\nid: evt_dc9d6ce38f594615b1d32d8c3306bac8 | Brunch \u2014 Sun 11:00-12:00\nid: evt_6f494b2969a043bb959c50691a54e10b | Grading student papers \u2014 Sun 13:00-16:00\nid: evt_6efb2dab37a9430283fba5c9a8fe883e | Relax and listen to classical music \u2014 Sun 19:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Of course. I see three \"Office Hours\" events on your calendar:\n- Mondays 10:30-11:30\n- Wednesdays 10:30-11:30\n- Fridays 10:30-11:30"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Bookstore this Saturday",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should find the 'Trip to local bookstore' event on Saturday.",
+    "simulated_now": "2023-07-27 08:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Trip to local bookstore",
+          "start": "2023-07-29 10:00:00",
+          "end": "2023-07-29 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_21e0cb61207e442fabc23b402937a448"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Reading and note-taking for book",
+          "start": "2023-07-29 14:00:00",
+          "end": "2023-07-29 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4db06ce15e014730869b2c95ebb74892"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner party at colleague's house",
+          "start": "2023-07-29 19:00:00",
+          "end": "2023-07-29 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "History Department colleagues"
+          ],
+          "id": "evt_96456e3c712e4740ba0e81725a678ea1"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Trip to local bookstore",
+          "start": "2023-07-29 10:00:00",
+          "end": "2023-07-29 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_21e0cb61207e442fabc23b402937a448"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Reading and note-taking for book",
+          "start": "2023-07-29 14:00:00",
+          "end": "2023-07-29 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4db06ce15e014730869b2c95ebb74892"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner party at colleague's house",
+          "start": "2023-07-29 19:00:00",
+          "end": "2023-07-29 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "History Department colleagues"
+          ],
+          "id": "evt_96456e3c712e4740ba0e81725a678ea1"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Bookstore this Saturday"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-27 08:00:00 | Thursday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-07-29 23:59:59",
+          "time_min": "2023-07-29 00:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_21e0cb61207e442fabc23b402937a448 | Trip to local bookstore \u2014 Sat 10:00-13:00\nid: evt_4db06ce15e014730869b2c95ebb74892 | Reading and note-taking for book \u2014 Sat 14:00-16:00\nid: evt_96456e3c712e4740ba0e81725a678ea1 | Dinner party at colleague's house \u2014 Sat 19:00-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I see you have a \"Trip to local bookstore\" scheduled for Saturday from 10:00 AM to 1:00 PM. Are you referring to this event, or would you like me to create a new one?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should list all events scheduled for today, Monday.",
+    "simulated_now": "2023-07-24 07:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Undergraduate Lecture: \"The Old Regime\"",
+          "start": "2023-07-24 09:00:00",
+          "end": "2023-07-24 10:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7adf7a517a574e009097514ef25c4306"
+        },
+        {
+          "day": "Monday",
+          "summary": "Office Hours",
+          "start": "2023-07-24 10:30:00",
+          "end": "2023-07-24 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0e0adec4fe0844909a73010625d8f824"
+        },
+        {
+          "day": "Monday",
+          "summary": "Faculty Meeting",
+          "start": "2023-07-24 14:00:00",
+          "end": "2023-07-24 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith",
+            "Dr. Jones",
+            "Dr. Brown"
+          ],
+          "id": "evt_a361c0d5e3bc44d4b2e39a347a0a7afa"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with friend",
+          "start": "2023-07-24 18:30:00",
+          "end": "2023-07-24 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "English Department Professor"
+          ],
+          "id": "evt_d61b58d236454139a4c0e6b6dbb27594"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Undergraduate Lecture: \"The Old Regime\"",
+          "start": "2023-07-24 09:00:00",
+          "end": "2023-07-24 10:15:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7adf7a517a574e009097514ef25c4306"
+        },
+        {
+          "day": "Monday",
+          "summary": "Office Hours",
+          "start": "2023-07-24 10:30:00",
+          "end": "2023-07-24 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0e0adec4fe0844909a73010625d8f824"
+        },
+        {
+          "day": "Monday",
+          "summary": "Faculty Meeting",
+          "start": "2023-07-24 14:00:00",
+          "end": "2023-07-24 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith",
+            "Dr. Jones",
+            "Dr. Brown"
+          ],
+          "id": "evt_a361c0d5e3bc44d4b2e39a347a0a7afa"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with friend",
+          "start": "2023-07-24 18:30:00",
+          "end": "2023-07-24 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "English Department Professor"
+          ],
+          "id": "evt_d61b58d236454139a4c0e6b6dbb27594"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-24 07:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-07-24 00:00:00",
+          "time_max": "2023-07-24 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_7adf7a517a574e009097514ef25c4306 | Undergraduate Lecture: \"The Old Regime\" \u2014 Mon 09:00-10:15\nid: evt_0e0adec4fe0844909a73010625d8f824 | Office Hours \u2014 Mon 10:30-11:30\nid: evt_a361c0d5e3bc44d4b2e39a347a0a7afa | Faculty Meeting \u2014 Mon 14:00-15:30\nid: evt_d61b58d236454139a4c0e6b6dbb27594 | Dinner with friend \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Today you have four events:\n- Undergraduate Lecture: \"The Old Regime\" from 09:00 to 10:15\n- Office Hours from 10:30 to 11:30\n- Faculty Meeting from 14:00 to 15:30\n- Dinner with friend from 18:30 to 20:00"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

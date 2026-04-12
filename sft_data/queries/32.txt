@@ -1,0 +1,165 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting on Wednesday to discuss the Q4 marketing strategy from 3 PM to 4 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Q4 Marketing Strategy Discussion', start time of 2026-10-14T15:00:00, end time of 2026-10-14T16:00:00, no attendees, and an empty description.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-10-04T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you set up a call with the legal team on Thursday at 10 AM for one hour?",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Call with Legal Team', start time of 2026-10-15T10:00:00, end time of 2026-10-15T11:00:00, no attendees, and an empty description.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-10-04T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Wednesday between 12:00 PM and 6:00 PM to check for conflicts.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-10-04T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the agenda for my meeting with Thomas this week?",
+        "complexity": "Medium",
+        "expected_behavior": "List events that include Thomas as attendee during the week, from Monday to Sunday. Then return the meeting details.",
+        "addressed_days": [
+            "Monday",
+            "Friday"
+        ],
+        "current_time": "2026-10-04T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move the Marketing Team Meeting on Monday to 11 AM?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Marketing Team Meeting' event on Monday. Update the start time to 2026-10-12T11:00:00 and the end time to 2026-10-12T12:00:00.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-10-04T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "I need to cancel my dinner plans with friends Saturday.",
+        "complexity": "Low",
+        "expected_behavior": "Find 'Dinner with friends' on Saturday and delete the event.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-10-04T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my PR Strategy Meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'PR Strategy Meeting' event and respond with the start time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-10-04T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the meeting with Buyers from Department Store?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Meeting with Buyers from Department Store' event and respond with the list of attendees.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-10-04T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to reschedule the presentation for the Head of Sales on Wednesday, can you check what my availability looks like between 1 PM and 4 PM?",
+        "complexity": "High",
+        "expected_behavior": "List events on Wednesday between 1 PM and 4 PM.  Then suggest times that are free.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-10-04T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is there a conflict if I move my dinner with Thomas on Monday to Wednesday at the same time?",
+        "complexity": "High",
+        "expected_behavior": "Find the dinner with Thomas on Monday, and determine the start and end time. List events on Wednesday at that time to determine if there is a conflict.",
+        "addressed_days": [
+            "Monday",
+            "Wednesday"
+        ],
+        "current_time": "2026-10-04T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule meeting... Thursday... Buyers...",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Buyers from Department Store' event on Thursday. Prompt for the new time.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-10-04T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "CEO Meeting, Sustainability, Monday add Bob",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with CEO - Discussing new sustainability initiatives' event on Monday and add Bob to the attendees.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-10-04T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-10-12T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on my calendar for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-10-14T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings did I have yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Thursday.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-10-16T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have this week with the PR manager?",
+        "complexity": "Low",
+        "expected_behavior": "List all events between Monday and Sunday that include pr_manager@maisonreve.com",
+        "addressed_days": [
+            "Monday",
+            "Wednesday"
+        ],
+        "current_time": "2026-10-13T08:00:00"
+    }
+]

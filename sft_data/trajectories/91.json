@@ -1,0 +1,1195 @@
+[
+  {
+    "query": "Create an event called 'Gardening' on Tuesday at 3 PM for one hour.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event with summary 'Gardening', start '2025-10-07T15:00:00', end '2025-10-07T16:00:00' and no attendees or description.",
+    "simulated_now": "2025-09-28 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with patient's family regarding care options",
+          "start": "2025-10-07 09:00:00",
+          "end": "2025-10-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bd7ee04c39b746d98a5f7ecaf630b728"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Crisis Intervention - New Patient Intake",
+          "start": "2025-10-07 10:30:00",
+          "end": "2025-10-07 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3df43747c6e44822a5431132a5d8459a"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Home Healthcare Coordination",
+          "start": "2025-10-07 14:00:00",
+          "end": "2025-10-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "homehealthcare@agency.org"
+          ],
+          "id": "evt_c975acd09f8b446dbde1f9bc6427bb65"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Support Group Meeting",
+          "start": "2025-10-07 19:00:00",
+          "end": "2025-10-07 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@email.com",
+            "supportgroupmember1@email.com"
+          ],
+          "id": "evt_42a3980568164e77a6535cc0c15c2683"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Gardening",
+          "start": "2025-09-30 15:00:00",
+          "end": "2025-09-30 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3b8946021f90469daf3fc0ab4984907b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with patient's family regarding care options",
+          "start": "2025-10-07 09:00:00",
+          "end": "2025-10-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bd7ee04c39b746d98a5f7ecaf630b728"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Crisis Intervention - New Patient Intake",
+          "start": "2025-10-07 10:30:00",
+          "end": "2025-10-07 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3df43747c6e44822a5431132a5d8459a"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Home Healthcare Coordination",
+          "start": "2025-10-07 14:00:00",
+          "end": "2025-10-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "homehealthcare@agency.org"
+          ],
+          "id": "evt_c975acd09f8b446dbde1f9bc6427bb65"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Support Group Meeting",
+          "start": "2025-10-07 19:00:00",
+          "end": "2025-10-07 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@email.com",
+            "supportgroupmember1@email.com"
+          ],
+          "id": "evt_42a3980568164e77a6535cc0c15c2683"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Gardening' on Tuesday at 3 PM for one hour."
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to find out the date for Tuesday, and then create the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-09-28 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2025-09-30 15:00:00",
+          "summary": "Gardening",
+          "end": "2025-09-30 16:00:00"
+        },
+        "result": "Event created successfully.\nGardening\n  ID: evt_3b8946021f90469daf3fc0ab4984907b\n  Time: Tue Sep 30, 15:00 - 16:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've scheduled \"Gardening\" for you on Tuesday, September 30th, from 3:00 PM to 4:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Update the Patient Assessment for Mr. Johnson on Monday to start a half hour earlier.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Patient Assessment - Mr. Johnson' event on Monday, October 6th, and update its start time to 9:30 AM.",
+    "simulated_now": "2025-09-28 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting",
+          "start": "2025-10-06 08:30:00",
+          "end": "2025-10-06 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith - smith@hospital.com",
+            "Nurse Jones - jones@hospital.com"
+          ],
+          "id": "evt_b9a4b5da541544018cf536a75e21e058"
+        },
+        {
+          "day": "Monday",
+          "summary": "Patient Assessment - Mr. Johnson",
+          "start": "2025-10-06 10:00:00",
+          "end": "2025-10-06 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8ee53efd246b49eca22dc87064349031"
+        },
+        {
+          "day": "Monday",
+          "summary": "Discharge Planning Meeting - Mrs. Garcia",
+          "start": "2025-10-06 11:30:00",
+          "end": "2025-10-06 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Maria Rodriguez",
+            "PT Williams - williams@hospital.com",
+            "Mrs. Garcia's daughter - garcia_daughter@email.com"
+          ],
+          "id": "evt_ab9c0364ea8640f3b9185307ea49cfc9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Insurance Representative",
+          "start": "2025-10-06 15:00:00",
+          "end": "2025-10-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "insurance_rep@insurance.com"
+          ],
+          "id": "evt_8be217cb1ad446999f68d993addf2858"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Husband",
+          "start": "2025-10-06 18:30:00",
+          "end": "2025-10-06 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_67bbced3a1ce42d193add0bd01175a1f"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting",
+          "start": "2025-10-06 08:30:00",
+          "end": "2025-10-06 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith - smith@hospital.com",
+            "Nurse Jones - jones@hospital.com"
+          ],
+          "id": "evt_b9a4b5da541544018cf536a75e21e058"
+        },
+        {
+          "day": "Monday",
+          "summary": "Patient Assessment - Mr. Johnson",
+          "start": "2025-10-06 09:30:00",
+          "end": "2025-10-06 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8ee53efd246b49eca22dc87064349031"
+        },
+        {
+          "day": "Monday",
+          "summary": "Discharge Planning Meeting - Mrs. Garcia",
+          "start": "2025-10-06 11:30:00",
+          "end": "2025-10-06 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Maria Rodriguez",
+            "PT Williams - williams@hospital.com",
+            "Mrs. Garcia's daughter - garcia_daughter@email.com"
+          ],
+          "id": "evt_ab9c0364ea8640f3b9185307ea49cfc9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Insurance Representative",
+          "start": "2025-10-06 15:00:00",
+          "end": "2025-10-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "insurance_rep@insurance.com"
+          ],
+          "id": "evt_8be217cb1ad446999f68d993addf2858"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Husband",
+          "start": "2025-10-06 18:30:00",
+          "end": "2025-10-06 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_67bbced3a1ce42d193add0bd01175a1f"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Update the Patient Assessment for Mr. Johnson on Monday to start a half hour earlier."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-09-28 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-09-29 23:59:59",
+          "time_min": "2025-09-29 00:00:00"
+        },
+        "result": "Found 0 events:"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-10-06 00:00:00",
+          "time_max": "2025-10-06 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_b9a4b5da541544018cf536a75e21e058 | Team Meeting \u2014 Mon 08:30-09:30\nid: evt_8ee53efd246b49eca22dc87064349031 | Patient Assessment - Mr. Johnson \u2014 Mon 10:00-11:00\nid: evt_ab9c0364ea8640f3b9185307ea49cfc9 | Discharge Planning Meeting - Mrs. Garcia \u2014 Mon 11:30-12:30\nid: evt_8be217cb1ad446999f68d993addf2858 | Meeting with Insurance Representative \u2014 Mon 15:00-16:00\nid: evt_67bbced3a1ce42d193add0bd01175a1f | Dinner with Husband \u2014 Mon 18:30-19:30"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2025-10-06 10:30:00",
+          "start": "2025-10-06 09:30:00",
+          "event_id": "evt_8ee53efd246b49eca22dc87064349031"
+        },
+        "result": "Event updated successfully.\nPatient Assessment - Mr. Johnson\n  ID: evt_8ee53efd246b49eca22dc87064349031\n  Time: Mon Oct 06, 09:30 - 10:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved the Patient Assessment for Mr. Johnson to 9:30 AM on Monday, October 6th."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is the discharge planning meeting for Mrs. Garcia?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Discharge Planning Meeting - Mrs. Garcia' event on Monday and return its start time, 11:30 AM.",
+    "simulated_now": "2025-09-28 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting",
+          "start": "2025-10-06 08:30:00",
+          "end": "2025-10-06 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith - smith@hospital.com",
+            "Nurse Jones - jones@hospital.com"
+          ],
+          "id": "evt_ffe3dcd32089480dac3a2b20d41c6203"
+        },
+        {
+          "day": "Monday",
+          "summary": "Patient Assessment - Mr. Johnson",
+          "start": "2025-10-06 10:00:00",
+          "end": "2025-10-06 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c901e336f5a649028c26ffc8e42fdf64"
+        },
+        {
+          "day": "Monday",
+          "summary": "Discharge Planning Meeting - Mrs. Garcia",
+          "start": "2025-10-06 11:30:00",
+          "end": "2025-10-06 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Maria Rodriguez",
+            "PT Williams - williams@hospital.com",
+            "Mrs. Garcia's daughter - garcia_daughter@email.com"
+          ],
+          "id": "evt_5b0128badded4a1d809039ccf532af15"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Insurance Representative",
+          "start": "2025-10-06 15:00:00",
+          "end": "2025-10-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "insurance_rep@insurance.com"
+          ],
+          "id": "evt_d03b907231184be0a4a240669dbbdb0e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Husband",
+          "start": "2025-10-06 18:30:00",
+          "end": "2025-10-06 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_68abdbf583744cd499b0b9387666ba44"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting",
+          "start": "2025-10-06 08:30:00",
+          "end": "2025-10-06 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith - smith@hospital.com",
+            "Nurse Jones - jones@hospital.com"
+          ],
+          "id": "evt_ffe3dcd32089480dac3a2b20d41c6203"
+        },
+        {
+          "day": "Monday",
+          "summary": "Patient Assessment - Mr. Johnson",
+          "start": "2025-10-06 10:00:00",
+          "end": "2025-10-06 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c901e336f5a649028c26ffc8e42fdf64"
+        },
+        {
+          "day": "Monday",
+          "summary": "Discharge Planning Meeting - Mrs. Garcia",
+          "start": "2025-10-06 11:30:00",
+          "end": "2025-10-06 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Maria Rodriguez",
+            "PT Williams - williams@hospital.com",
+            "Mrs. Garcia's daughter - garcia_daughter@email.com"
+          ],
+          "id": "evt_5b0128badded4a1d809039ccf532af15"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Insurance Representative",
+          "start": "2025-10-06 15:00:00",
+          "end": "2025-10-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "insurance_rep@insurance.com"
+          ],
+          "id": "evt_d03b907231184be0a4a240669dbbdb0e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Husband",
+          "start": "2025-10-06 18:30:00",
+          "end": "2025-10-06 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_68abdbf583744cd499b0b9387666ba44"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is the discharge planning meeting for Mrs. Garcia?"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 26 events:\nid: evt_ffe3dcd32089480dac3a2b20d41c6203 | Team Meeting \u2014 Mon 08:30-09:30\nid: evt_c901e336f5a649028c26ffc8e42fdf64 | Patient Assessment - Mr. Johnson \u2014 Mon 10:00-11:00\nid: evt_5b0128badded4a1d809039ccf532af15 | Discharge Planning Meeting - Mrs. Garcia \u2014 Mon 11:30-12:30\nid: evt_d03b907231184be0a4a240669dbbdb0e | Meeting with Insurance Representative \u2014 Mon 15:00-16:00\nid: evt_68abdbf583744cd499b0b9387666ba44 | Dinner with Husband \u2014 Mon 18:30-19:30\nid: evt_32136874a1444ba1952548166f0786ff | Meeting with patient's family regarding care options \u2014 Tue 09:00-10:00\nid: evt_57e9d4b811d74ef2a0baf4950c4844b0 | Crisis Intervention - New Patient Intake \u2014 Tue 10:30-11:30\nid: evt_a603f8d7c0f14f3a9cddd7e2801e24f0 | Home Healthcare Coordination \u2014 Tue 14:00-15:00\nid: evt_1c2107c7800541f49d3fd774a1ce7764 | Support Group Meeting \u2014 Tue 19:00-20:30\nid: evt_acf587232181469db44bfd4e6c0ec235 | Weekly check-in with supervisor \u2014 Wed 08:30-09:30\nid: evt_5db80912d97f412c8c62d183228759f8 | Patient Assessment - Ms. Lee \u2014 Wed 10:00-11:00\nid: evt_bdff9e8929074ff2892fe271f99d0bd3 | Meeting with community organization staff \u2014 Wed 11:30-12:30\nid: evt_db336daed3dc443b821f8b9e5214d29c | Doctor's Appointment \u2014 Wed 16:00-17:00\nid: evt_d6c9dca9c03e40809debf0b8dd38a7e5 | Patient/Family Meeting - Discussing Financial Aid \u2014 Thu 09:00-10:00\nid: evt_90feee5dfa894671be2749eb94a12220 | Discharge Planning - Mr. Davis \u2014 Thu 10:30-11:30\nid: evt_b55303c1e3b040eaaf8ac52617245442 | Team Meeting \u2014 Thu 14:00-15:00\nid: evt_03da845b0283411bafac82f043c1df45 | Dinner with Friends \u2014 Thu 18:00-19:00\nid: evt_5d96a32f66cd4f399348d0e35ce6c581 | Meeting with patient's family regarding care options \u2014 Fri 09:00-10:00\nid: evt_9dc589de33ca45e48becf5ef2369d591 | Crisis Intervention - New Patient Intake \u2014 Fri 10:30-11:30\nid: evt_35e6055bccc44676bb6b6ab380746269 | Meeting with Hospital Administrators \u2014 Fri 14:00-15:00\nid: evt_ad28dbacadf342d0892b74d6c5478833 | Grocery Shopping \u2014 Sat 10:00-12:00\nid: evt_79ad6bbc20c24668ab1b427a7d5f3170 | Visit to Mother's House \u2014 Sat 13:00-15:00\nid: evt_ef146432ce634b26821c008635226a2b | Movie Night with Family \u2014 Sat 19:00-21:00\nid: evt_63fa29c91bda46f49ccdd80dfcd68366 | Check in with Support Group \u2014 Sun 10:00-11:00\nid: evt_8bba7526b31b4e168a66ae3501c05e85 | Family Brunch \u2014 Sun 12:00-14:00\nid: evt_1c5249a095324707aa44583da102ad69 | Relax with a book \u2014 Sun 15:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "The discharge planning meeting for Mrs. Garcia is on Monday from 11:30 to 12:30."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the team meeting on Thursday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Team Meeting' event on Thursday and return the attendees: Dr. Smith - smith@hospital.com, Nurse Jones - jones@hospital.com.",
+    "simulated_now": "2025-09-28 10:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Patient/Family Meeting - Discussing Financial Aid",
+          "start": "2025-10-09 09:00:00",
+          "end": "2025-10-09 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_69c91c79d40f4625bded406b3d2fa8aa"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Discharge Planning - Mr. Davis",
+          "start": "2025-10-09 10:30:00",
+          "end": "2025-10-09 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5a816cb4c0ef41d7bf709605f61c4053"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Team Meeting",
+          "start": "2025-10-09 14:00:00",
+          "end": "2025-10-09 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith - smith@hospital.com",
+            "Nurse Jones - jones@hospital.com"
+          ],
+          "id": "evt_7c895d829ba14ddcaf9f1744316599ca"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Friends",
+          "start": "2025-10-09 18:00:00",
+          "end": "2025-10-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_c04dbc4163fc455ab1455eeff59d6fc0"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Patient/Family Meeting - Discussing Financial Aid",
+          "start": "2025-10-09 09:00:00",
+          "end": "2025-10-09 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_69c91c79d40f4625bded406b3d2fa8aa"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Discharge Planning - Mr. Davis",
+          "start": "2025-10-09 10:30:00",
+          "end": "2025-10-09 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5a816cb4c0ef41d7bf709605f61c4053"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Team Meeting",
+          "start": "2025-10-09 14:00:00",
+          "end": "2025-10-09 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith - smith@hospital.com",
+            "Nurse Jones - jones@hospital.com"
+          ],
+          "id": "evt_7c895d829ba14ddcaf9f1744316599ca"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Dinner with Friends",
+          "start": "2025-10-09 18:00:00",
+          "end": "2025-10-09 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_c04dbc4163fc455ab1455eeff59d6fc0"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the team meeting on Thursday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find the attendees for the team meeting on Thursday. First, I will get the current time to determine the correct date for this coming Thursday. Then, I will list all the events on that Thursday to find the team meeting and get its event ID. Finally, I will use the event ID to get the event details and list of attendees."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-09-28 10:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will now search for events on Thursday, October 2, 2025 to find the team meeting."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-10-02 00:00:00",
+          "time_max": "2025-10-02 23:59:59"
+        },
+        "result": "Found 0 events:"
+      },
+      {
+        "role": "assistant",
+        "content": "I couldn't find a team meeting on the upcoming Thursday, October 2, 2025. I will check the following Thursday, October 9, 2025, to make sure I haven't missed it."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-10-09 00:00:00",
+          "time_max": "2025-10-09 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_69c91c79d40f4625bded406b3d2fa8aa | Patient/Family Meeting - Discussing Financial Aid \u2014 Thu 09:00-10:00\nid: evt_5a816cb4c0ef41d7bf709605f61c4053 | Discharge Planning - Mr. Davis \u2014 Thu 10:30-11:30\nid: evt_7c895d829ba14ddcaf9f1744316599ca | Team Meeting \u2014 Thu 14:00-15:00\nid: evt_c04dbc4163fc455ab1455eeff59d6fc0 | Dinner with Friends \u2014 Thu 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I've found the Team Meeting on Thursday, October 9, 2025. I will now get the event details to identify the attendees."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_7c895d829ba14ddcaf9f1744316599ca"
+        },
+        "result": "Team Meeting\n  ID: evt_7c895d829ba14ddcaf9f1744316599ca\n  Time: Thu Oct 09, 14:00 - 15:00\n  Attendees: Dr. Smith - smith@hospital.com, Nurse Jones - jones@hospital.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "Dr. Smith (smith@hospital.com) and Nurse Jones (jones@hospital.com) are attending the Team Meeting on Thursday, October 9, from 2:00 PM to 3:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "I can't make the check-in with the support group on Sunday; can you decline the invitation?",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Check in with Support Group' event on Sunday and call respond_to_event with attending set to DECLINE.",
+    "simulated_now": "2025-09-28 10:00:00",
+    "addressed_days": [
+      "Sunday"
+    ],
+    "calendar_before": {
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Check in with Support Group",
+          "start": "2025-10-12 10:00:00",
+          "end": "2025-10-12 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supportgroupmember1@email.com"
+          ],
+          "id": "evt_1cb4f6027aa74aeca1f90bf0c1770eb3"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Family Brunch",
+          "start": "2025-10-12 12:00:00",
+          "end": "2025-10-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e183906b59594a40a12320b5af581ee8"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Relax with a book",
+          "start": "2025-10-12 15:00:00",
+          "end": "2025-10-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_10da2a8c16524f978bed2698b42b1ed2"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Check in with Support Group",
+          "start": "2025-10-12 10:00:00",
+          "end": "2025-10-12 11:00:00",
+          "attending": "DECLINE",
+          "attendees": [
+            "supportgroupmember1@email.com"
+          ],
+          "id": "evt_1cb4f6027aa74aeca1f90bf0c1770eb3"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Family Brunch",
+          "start": "2025-10-12 12:00:00",
+          "end": "2025-10-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e183906b59594a40a12320b5af581ee8"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Relax with a book",
+          "start": "2025-10-12 15:00:00",
+          "end": "2025-10-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_10da2a8c16524f978bed2698b42b1ed2"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "I can't make the check-in with the support group on Sunday; can you decline the invitation?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I need to get the current time to find the event for the upcoming Sunday. Then I will search for the \"check-in with the support group\" event and decline the invitation. Finally, I will confirm that the invitation has been declined."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-09-28 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-09-28 00:00:00",
+          "time_max": "2025-09-28 23:59:59"
+        },
+        "result": "Found 0 events:"
+      },
+      {
+        "role": "assistant",
+        "content": "I couldn't find a \"check-in with the support group\" event on this Sunday, September 28th. I will check the following Sunday, October 5th."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-10-05 00:00:00",
+          "time_max": "2025-10-05 23:59:59"
+        },
+        "result": "Found 0 events:"
+      },
+      {
+        "role": "assistant",
+        "content": "I still could not find the event. I will now check the following Sunday, October 12th."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-10-12 00:00:00",
+          "time_max": "2025-10-12 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_1cb4f6027aa74aeca1f90bf0c1770eb3 | Check in with Support Group \u2014 Sun 10:00-11:00\nid: evt_e183906b59594a40a12320b5af581ee8 | Family Brunch \u2014 Sun 12:00-14:00\nid: evt_10da2a8c16524f978bed2698b42b1ed2 | Relax with a book \u2014 Sun 15:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found the event on Sunday, October 12th. I will now decline the invitation."
+      },
+      {
+        "role": "tool_call",
+        "name": "respond_to_event",
+        "args": {
+          "event_id": "evt_1cb4f6027aa74aeca1f90bf0c1770eb3",
+          "attending": "DECLINE"
+        },
+        "result": "RSVP updated to DECLINE.\nCheck in with Support Group\n  ID: evt_1cb4f6027aa74aeca1f90bf0c1770eb3\n  Time: Sun Oct 12, 10:00 - 11:00\n  Attendees: supportgroupmember1@email.com\n  RSVP: DECLINE"
+      },
+      {
+        "role": "assistant",
+        "content": "I have declined the invitation for the \"Check in with Support Group\" on Sunday, October 12th."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Meeting with insurance...",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Meeting with Insurance Representative' event on Monday, October 6th, and respond by confirming the event details to the user.",
+    "simulated_now": "2025-09-28 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting",
+          "start": "2025-10-06 08:30:00",
+          "end": "2025-10-06 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith - smith@hospital.com",
+            "Nurse Jones - jones@hospital.com"
+          ],
+          "id": "evt_33b9ba146d004986a85aa0601226268f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Patient Assessment - Mr. Johnson",
+          "start": "2025-10-06 10:00:00",
+          "end": "2025-10-06 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_10886cb669f347fd903b9194a663b504"
+        },
+        {
+          "day": "Monday",
+          "summary": "Discharge Planning Meeting - Mrs. Garcia",
+          "start": "2025-10-06 11:30:00",
+          "end": "2025-10-06 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Maria Rodriguez",
+            "PT Williams - williams@hospital.com",
+            "Mrs. Garcia's daughter - garcia_daughter@email.com"
+          ],
+          "id": "evt_c19c59c9ddb14d7793e65fbc923e275a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Insurance Representative",
+          "start": "2025-10-06 15:00:00",
+          "end": "2025-10-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "insurance_rep@insurance.com"
+          ],
+          "id": "evt_59c45a405f8044cbab9955c598ca9e31"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Husband",
+          "start": "2025-10-06 18:30:00",
+          "end": "2025-10-06 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1e2704c869cb4d6b950172ffcf9e7f70"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting",
+          "start": "2025-10-06 08:30:00",
+          "end": "2025-10-06 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith - smith@hospital.com",
+            "Nurse Jones - jones@hospital.com"
+          ],
+          "id": "evt_33b9ba146d004986a85aa0601226268f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Patient Assessment - Mr. Johnson",
+          "start": "2025-10-06 10:00:00",
+          "end": "2025-10-06 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_10886cb669f347fd903b9194a663b504"
+        },
+        {
+          "day": "Monday",
+          "summary": "Discharge Planning Meeting - Mrs. Garcia",
+          "start": "2025-10-06 11:30:00",
+          "end": "2025-10-06 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Maria Rodriguez",
+            "PT Williams - williams@hospital.com",
+            "Mrs. Garcia's daughter - garcia_daughter@email.com"
+          ],
+          "id": "evt_c19c59c9ddb14d7793e65fbc923e275a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Insurance Representative",
+          "start": "2025-10-06 15:00:00",
+          "end": "2025-10-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "insurance_rep@insurance.com"
+          ],
+          "id": "evt_59c45a405f8044cbab9955c598ca9e31"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Husband",
+          "start": "2025-10-06 18:30:00",
+          "end": "2025-10-06 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1e2704c869cb4d6b950172ffcf9e7f70"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Meeting with insurance..."
+      },
+      {
+        "role": "assistant",
+        "content": "The user's request is very vague. To help them, I will first look at the calendar for any events that mention \"insurance\" to get more context."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 26 events:\nid: evt_33b9ba146d004986a85aa0601226268f | Team Meeting \u2014 Mon 08:30-09:30\nid: evt_10886cb669f347fd903b9194a663b504 | Patient Assessment - Mr. Johnson \u2014 Mon 10:00-11:00\nid: evt_c19c59c9ddb14d7793e65fbc923e275a | Discharge Planning Meeting - Mrs. Garcia \u2014 Mon 11:30-12:30\nid: evt_59c45a405f8044cbab9955c598ca9e31 | Meeting with Insurance Representative \u2014 Mon 15:00-16:00\nid: evt_1e2704c869cb4d6b950172ffcf9e7f70 | Dinner with Husband \u2014 Mon 18:30-19:30\nid: evt_fcefcd917e854a4d99f20b61b5fca424 | Meeting with patient's family regarding care options \u2014 Tue 09:00-10:00\nid: evt_6815856e7a924fb79b0789a1ddba4780 | Crisis Intervention - New Patient Intake \u2014 Tue 10:30-11:30\nid: evt_bf46b242f21a43c6afbe39020558a89f | Home Healthcare Coordination \u2014 Tue 14:00-15:00\nid: evt_5c2ff0e2f1b84c70a3678c5b13666fce | Support Group Meeting \u2014 Tue 19:00-20:30\nid: evt_9c1c36c00e0e40cab92a5d8881e3df92 | Weekly check-in with supervisor \u2014 Wed 08:30-09:30\nid: evt_080c7d4353da46028201a8ae785b1e74 | Patient Assessment - Ms. Lee \u2014 Wed 10:00-11:00\nid: evt_4bafeebcdb8149d599e3012c1f1ec08f | Meeting with community organization staff \u2014 Wed 11:30-12:30\nid: evt_1358d92a05a8427ca88c75e90364b2dd | Doctor's Appointment \u2014 Wed 16:00-17:00\nid: evt_63e299fe49444fcea38671ba2773103e | Patient/Family Meeting - Discussing Financial Aid \u2014 Thu 09:00-10:00\nid: evt_2f699186efd549a3baa3fcf145ec3f35 | Discharge Planning - Mr. Davis \u2014 Thu 10:30-11:30\nid: evt_b7a051b9e00c4abc9b3c6e1c84546a4b | Team Meeting \u2014 Thu 14:00-15:00\nid: evt_c4118fbe92044f88b63e348bf71a79e4 | Dinner with Friends \u2014 Thu 18:00-19:00\nid: evt_a996ae6b4b2f4c60af9ae4c099540098 | Meeting with patient's family regarding care options \u2014 Fri 09:00-10:00\nid: evt_0d10e4557ef142959a7f9731b7f381a5 | Crisis Intervention - New Patient Intake \u2014 Fri 10:30-11:30\nid: evt_f9cbd43c5b8742b095fe39ca1f7c33ad | Meeting with Hospital Administrators \u2014 Fri 14:00-15:00\nid: evt_cac8f529da904bbea0356748eb17b50b | Grocery Shopping \u2014 Sat 10:00-12:00\nid: evt_f40dcc5a0e494932bfb1769fd1700028 | Visit to Mother's House \u2014 Sat 13:00-15:00\nid: evt_f3caee97b9744ab09755134b7768e513 | Movie Night with Family \u2014 Sat 19:00-21:00\nid: evt_37778590681b489789ecff0afa2fcfd3 | Check in with Support Group \u2014 Sun 10:00-11:00\nid: evt_60e11b9a4da74da4a7e14fd7941aabb1 | Family Brunch \u2014 Sun 12:00-14:00\nid: evt_b886d1aa5f214e2983248ab312fc7e89 | Relax with a book \u2014 Sun 15:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I see you have a \"Meeting with Insurance Representative\" on Monday from 15:00-16:00. Are you asking about this event?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Using the current time, determine today's date, then search the calendar for events on that day. If it is Monday, respond with 'Team Meeting at 8:30 AM, Patient Assessment at 10:00 AM, Discharge Planning Meeting at 11:30 AM, Meeting with Insurance Representative at 3:00 PM, and Dinner with Husband at 6:30 PM.",
+    "simulated_now": "2025-10-06 07:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting",
+          "start": "2025-10-06 08:30:00",
+          "end": "2025-10-06 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith - smith@hospital.com",
+            "Nurse Jones - jones@hospital.com"
+          ],
+          "id": "evt_a709d930aa7745a9b7ed89db02571492"
+        },
+        {
+          "day": "Monday",
+          "summary": "Patient Assessment - Mr. Johnson",
+          "start": "2025-10-06 10:00:00",
+          "end": "2025-10-06 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_40549c464c034eb3b997db84e8e2e08c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Discharge Planning Meeting - Mrs. Garcia",
+          "start": "2025-10-06 11:30:00",
+          "end": "2025-10-06 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Maria Rodriguez",
+            "PT Williams - williams@hospital.com",
+            "Mrs. Garcia's daughter - garcia_daughter@email.com"
+          ],
+          "id": "evt_a22ac46dc53e436f952a8842982f7550"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Insurance Representative",
+          "start": "2025-10-06 15:00:00",
+          "end": "2025-10-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "insurance_rep@insurance.com"
+          ],
+          "id": "evt_6435aec7df3b49bb8af56ce22d379f2b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Husband",
+          "start": "2025-10-06 18:30:00",
+          "end": "2025-10-06 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6709f139505248cc96bb4292a8c11e8d"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting",
+          "start": "2025-10-06 08:30:00",
+          "end": "2025-10-06 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith - smith@hospital.com",
+            "Nurse Jones - jones@hospital.com"
+          ],
+          "id": "evt_a709d930aa7745a9b7ed89db02571492"
+        },
+        {
+          "day": "Monday",
+          "summary": "Patient Assessment - Mr. Johnson",
+          "start": "2025-10-06 10:00:00",
+          "end": "2025-10-06 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_40549c464c034eb3b997db84e8e2e08c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Discharge Planning Meeting - Mrs. Garcia",
+          "start": "2025-10-06 11:30:00",
+          "end": "2025-10-06 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Maria Rodriguez",
+            "PT Williams - williams@hospital.com",
+            "Mrs. Garcia's daughter - garcia_daughter@email.com"
+          ],
+          "id": "evt_a22ac46dc53e436f952a8842982f7550"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Insurance Representative",
+          "start": "2025-10-06 15:00:00",
+          "end": "2025-10-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "insurance_rep@insurance.com"
+          ],
+          "id": "evt_6435aec7df3b49bb8af56ce22d379f2b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Husband",
+          "start": "2025-10-06 18:30:00",
+          "end": "2025-10-06 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6709f139505248cc96bb4292a8c11e8d"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify today's date. Then, I will call the `list_events` tool to get all the events scheduled for today and tell you what you have scheduled."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-10-06 07:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-10-06 23:59:59",
+          "time_min": "2025-10-06 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_a709d930aa7745a9b7ed89db02571492 | Team Meeting \u2014 Mon 08:30-09:30\nid: evt_40549c464c034eb3b997db84e8e2e08c | Patient Assessment - Mr. Johnson \u2014 Mon 10:00-11:00\nid: evt_a22ac46dc53e436f952a8842982f7550 | Discharge Planning Meeting - Mrs. Garcia \u2014 Mon 11:30-12:30\nid: evt_6435aec7df3b49bb8af56ce22d379f2b | Meeting with Insurance Representative \u2014 Mon 15:00-16:00\nid: evt_6709f139505248cc96bb4292a8c11e8d | Dinner with Husband \u2014 Mon 18:30-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today, Monday, October 6th, you have 5 events scheduled:\n\n*   **8:30 AM - 9:30 AM:** Team Meeting\n*   **10:00 AM - 11:00 AM:** Patient Assessment - Mr. Johnson\n*   **11:30 AM - 12:30 PM:** Discharge Planning Meeting - Mrs. Garcia\n*   **3:00 PM - 4:00 PM:** Meeting with Insurance Representative\n*   **6:30 PM - 7:30 PM:** Dinner with Husband"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on the schedule for tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Using the current time, determine tomorrow's date, then search the calendar for events on that day. If it is Monday, respond with 'Meeting with patient's family regarding care options at 9:00 AM, Crisis Intervention at 10:30 AM, and Home Healthcare Coordination at 2:00 PM, and Support Group Meeting at 7:00 PM'.",
+    "simulated_now": "2025-10-06 18:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with patient's family regarding care options",
+          "start": "2025-10-07 09:00:00",
+          "end": "2025-10-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ce03f4a68c1c4b5da67cfca16ffb5af7"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Crisis Intervention - New Patient Intake",
+          "start": "2025-10-07 10:30:00",
+          "end": "2025-10-07 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7131df4cf02b4bab8b28dd821d11b8a0"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Home Healthcare Coordination",
+          "start": "2025-10-07 14:00:00",
+          "end": "2025-10-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "homehealthcare@agency.org"
+          ],
+          "id": "evt_81005844c5514204804d9a1ff3ac0301"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Support Group Meeting",
+          "start": "2025-10-07 19:00:00",
+          "end": "2025-10-07 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@email.com",
+            "supportgroupmember1@email.com"
+          ],
+          "id": "evt_c79b47423d974a93b40c7f33148ede29"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with patient's family regarding care options",
+          "start": "2025-10-07 09:00:00",
+          "end": "2025-10-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ce03f4a68c1c4b5da67cfca16ffb5af7"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Crisis Intervention - New Patient Intake",
+          "start": "2025-10-07 10:30:00",
+          "end": "2025-10-07 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7131df4cf02b4bab8b28dd821d11b8a0"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Home Healthcare Coordination",
+          "start": "2025-10-07 14:00:00",
+          "end": "2025-10-07 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "homehealthcare@agency.org"
+          ],
+          "id": "evt_81005844c5514204804d9a1ff3ac0301"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Support Group Meeting",
+          "start": "2025-10-07 19:00:00",
+          "end": "2025-10-07 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@email.com",
+            "supportgroupmember1@email.com"
+          ],
+          "id": "evt_c79b47423d974a93b40c7f33148ede29"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on the schedule for tomorrow?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out the current date to determine what \"tomorrow\" is, and then get the list of events for that day.\n\n1. Get the current time.\n2. Call `list_events` for the entirety of the next day.\n3. Respond to the user with the list of events, or a message saying there are no events."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-10-06 18:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-10-07 00:00:00",
+          "time_max": "2025-10-07 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_ce03f4a68c1c4b5da67cfca16ffb5af7 | Meeting with patient's family regarding care options \u2014 Tue 09:00-10:00\nid: evt_7131df4cf02b4bab8b28dd821d11b8a0 | Crisis Intervention - New Patient Intake \u2014 Tue 10:30-11:30\nid: evt_81005844c5514204804d9a1ff3ac0301 | Home Healthcare Coordination \u2014 Tue 14:00-15:00\nid: evt_c79b47423d974a93b40c7f33148ede29 | Support Group Meeting \u2014 Tue 19:00-20:30"
+      },
+      {
+        "role": "assistant",
+        "content": "Tomorrow, you have:\n- 9am-10am: Meeting with patient's family regarding care options\n- 10:30am-11:30am: Crisis Intervention - New Patient Intake\n- 2pm-3pm: Home Healthcare Coordination\n- 7pm-8:30pm: Support Group Meeting"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

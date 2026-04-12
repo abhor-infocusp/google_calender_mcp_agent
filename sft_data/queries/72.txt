@@ -1,0 +1,156 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create a meeting on Tuesday at 3 PM called 'Client Follow-up'.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to create a 'Client Follow-up' event on Tuesday, November 18, 2025, at 3 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-11-16T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me a yoga class for Wednesday at 9 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule a yoga class on Wednesday, November 19, 2025, at 9 AM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-11-16T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing for dinner this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to check for dinner events between Monday and Sunday. Extract the dinner event from the list.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-11-16T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "When am I meeting with potential clients?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to search for events containing 'client' in their summaries this week. Return the time of the event found.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-11-16T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move the meeting with the sports publication editor to 2 PM on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Pitch Meeting with Sports Publication Editor' event. Then, call update_event to update the start time of the event to 2:00 PM on Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-11-16T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "I'm busy Saturday afternoon. Reschedule Game 2 for Sunday morning at 10 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Cover Afternoon Game (Game 2)' event on Saturday. Then, call update_event to reschedule the event to Sunday, November 23, 2025, at 10:00 AM.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-11-16T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me who is attending the dinner on Monday.",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for events on Monday, find 'Dinner with friends' event, then call get_event to get the details including the attendees: friend1@email.com, friend2@email.com.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-11-16T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the location scouting at the stadium?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to search for 'Location Scouting at Stadium'. Extract and return the event time: 10:00 AM - 12:00 PM on Tuesday.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-11-16T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting with the new client the same day as the call with my accountant. Make it 30 minutes before.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the date of the 'Call with Accountant' event (Wednesday at 1:00 PM). Then, call create_event to schedule a 'Meeting with Potential New Client' on Wednesday, November 19, 2025, at 12:30 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-11-16T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Move the location scouting to Wednesday, but make sure I don't have any conflicts.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the 'Location Scouting at Stadium' event. Call list_events again to find all events on Wednesday. Check if moving 'Location Scouting at Stadium' to Wednesday causes a conflict. If no conflicts, call update_event to change the date of the 'Location Scouting at Stadium' event to Wednesday, November 19, 2025.",
+        "addressed_days": [
+            "Tuesday",
+            "Wednesday"
+        ],
+        "current_time": "2025-11-16T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting with editor... new publication... Thursday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events on Thursday, November 20, 2025, find 'Meeting with Potential New Client', then call get_event to get the details of the meeting with editor@newpublication.com.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-11-16T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel yoga",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the Yoga Class event. Then, call delete_event with the event ID to delete the Yoga Class event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-11-16T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Given current_time is Sunday, call list_events for events on Monday, November 17, 2025.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-11-23T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any meetings yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Given current_time is Tuesday, call list_events for events on Monday, November 17, 2025.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-11-18T08:00:00"
+    }
+]

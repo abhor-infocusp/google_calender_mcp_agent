@@ -1,0 +1,971 @@
+[
+  {
+    "query": "Please create an event called 'Project Meeting' for Tuesday at 3 PM with attendees boss@company.com and coworker@company.com.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event with summary 'Project Meeting', start time Tuesday at 3 PM, end time Tuesday at 4 PM, and attendees boss@company.com, coworker@company.com.",
+    "simulated_now": "2023-12-31 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Pre-trip Bus Inspection",
+          "start": "2024-01-02 05:30:00",
+          "end": "2024-01-02 06:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@transitauth.com"
+          ],
+          "id": "evt_babbd0ecac6c439c8cb8a54fd89d3ae8"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Route 42 - Morning Shift",
+          "start": "2024-01-02 06:00:00",
+          "end": "2024-01-02 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c972b7f9ccf549b9b42b5c574f56573c"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Son's Basketball Practice",
+          "start": "2024-01-02 18:30:00",
+          "end": "2024-01-02 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_94ac9c8cb08e4f89b624b06173882de9"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Pre-trip Bus Inspection",
+          "start": "2024-01-02 05:30:00",
+          "end": "2024-01-02 06:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@transitauth.com"
+          ],
+          "id": "evt_babbd0ecac6c439c8cb8a54fd89d3ae8"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Route 42 - Morning Shift",
+          "start": "2024-01-02 06:00:00",
+          "end": "2024-01-02 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c972b7f9ccf549b9b42b5c574f56573c"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Project Meeting",
+          "start": "2024-01-02 15:00:00",
+          "end": "2024-01-02 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "boss@company.com",
+            "coworker@company.com"
+          ],
+          "id": "evt_90b7f440d88647e1bd57a207bcfe71ba"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Son's Basketball Practice",
+          "start": "2024-01-02 18:30:00",
+          "end": "2024-01-02 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_94ac9c8cb08e4f89b624b06173882de9"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Please create an event called 'Project Meeting' for Tuesday at 3 PM with attendees boss@company.com and coworker@company.com."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. First, I need to get the current time to schedule the event for next Tuesday. Then I will create the event.\n"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-31 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "attendees": [
+            "boss@company.com",
+            "coworker@company.com"
+          ],
+          "end": "2024-01-02 16:00:00",
+          "start": "2024-01-02 15:00:00",
+          "summary": "Project Meeting"
+        },
+        "result": "Event created successfully.\nProject Meeting\n  ID: evt_90b7f440d88647e1bd57a207bcfe71ba\n  Time: Tue Jan 02, 15:00 - 16:00\n  Attendees: boss@company.com, coworker@company.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "Event created.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Schedule a dentist appointment for me on Wednesday at 9 AM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event with summary 'Dentist Appointment', start time Wednesday at 9 AM, and end time Wednesday at 10 AM.",
+    "simulated_now": "2023-12-31 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Pre-trip Bus Inspection",
+          "start": "2024-01-03 13:30:00",
+          "end": "2024-01-03 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@transitauth.com"
+          ],
+          "id": "evt_7c8c80f16fe845c187dd4280ea7903b0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Route 15 - Afternoon Shift",
+          "start": "2024-01-03 14:00:00",
+          "end": "2024-01-03 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_356fb5dd688b4c3999f04899a86dad74"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Support Group Meeting",
+          "start": "2024-01-03 19:00:00",
+          "end": "2024-01-03 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "fellowdrivers@transitauth.com"
+          ],
+          "id": "evt_92f9d0a3fd3c4438a439b01cfd3ad5f2"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Dentist Appointment",
+          "start": "2024-01-03 09:00:00",
+          "end": "2024-01-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3fb70c872191492da5162cfce7cc52ca"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Pre-trip Bus Inspection",
+          "start": "2024-01-03 13:30:00",
+          "end": "2024-01-03 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@transitauth.com"
+          ],
+          "id": "evt_7c8c80f16fe845c187dd4280ea7903b0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Route 15 - Afternoon Shift",
+          "start": "2024-01-03 14:00:00",
+          "end": "2024-01-03 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_356fb5dd688b4c3999f04899a86dad74"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Support Group Meeting",
+          "start": "2024-01-03 19:00:00",
+          "end": "2024-01-03 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "fellowdrivers@transitauth.com"
+          ],
+          "id": "evt_92f9d0a3fd3c4438a439b01cfd3ad5f2"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Schedule a dentist appointment for me on Wednesday at 9 AM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-31 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Dentist Appointment",
+          "start": "2024-01-03 09:00:00",
+          "end": "2024-01-03 10:00:00"
+        },
+        "result": "Event created successfully.\nDentist Appointment\n  ID: evt_3fb70c872191492da5162cfce7cc52ca\n  Time: Wed Jan 03, 09:00 - 10:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've scheduled a \"Dentist Appointment\" for you on Wednesday, January 3, from 9:00 AM to 10:00 AM. Is there anything else?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing Monday evening?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List all events scheduled for Monday between 6 PM and 11:59 PM.",
+    "simulated_now": "2024-01-01 12:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Pre-trip Bus Inspection",
+          "start": "2024-01-01 05:30:00",
+          "end": "2024-01-01 06:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@transitauth.com"
+          ],
+          "id": "evt_bd14cbf4272d49a2ae36ad4f20c8df09"
+        },
+        {
+          "day": "Monday",
+          "summary": "Route 42 - Morning Shift",
+          "start": "2024-01-01 06:00:00",
+          "end": "2024-01-01 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3b3ecf63befb43de9461d449a659f742"
+        },
+        {
+          "day": "Monday",
+          "summary": "Appointment with Therapist",
+          "start": "2024-01-01 10:30:00",
+          "end": "2024-01-01 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "dr.jones@wellness.com"
+          ],
+          "id": "evt_ad9767db8166465ba4c7e17fd62cb77e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with her son",
+          "start": "2024-01-01 18:00:00",
+          "end": "2024-01-01 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_256d94f6bd094674beb524dcb42b608e"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Pre-trip Bus Inspection",
+          "start": "2024-01-01 05:30:00",
+          "end": "2024-01-01 06:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@transitauth.com"
+          ],
+          "id": "evt_bd14cbf4272d49a2ae36ad4f20c8df09"
+        },
+        {
+          "day": "Monday",
+          "summary": "Route 42 - Morning Shift",
+          "start": "2024-01-01 06:00:00",
+          "end": "2024-01-01 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3b3ecf63befb43de9461d449a659f742"
+        },
+        {
+          "day": "Monday",
+          "summary": "Appointment with Therapist",
+          "start": "2024-01-01 10:30:00",
+          "end": "2024-01-01 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "dr.jones@wellness.com"
+          ],
+          "id": "evt_ad9767db8166465ba4c7e17fd62cb77e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with her son",
+          "start": "2024-01-01 18:00:00",
+          "end": "2024-01-01 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_256d94f6bd094674beb524dcb42b608e"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing Monday evening?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify the upcoming Monday and then retrieve all the events scheduled for that evening."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-01-01 12:00:00 | Monday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will now check for events scheduled on Monday evening between 6 PM and 11 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-01-01 18:00:00",
+          "time_max": "2024-01-01 23:00:00"
+        },
+        "result": "Found 1 events:\nid: evt_256d94f6bd094674beb524dcb42b608e | Dinner with her son \u2014 Mon 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "This Monday evening, you have \"Dinner with her son\" from 6:00 PM to 7:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on for Saturday after lunch?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List all events scheduled for Saturday between 1 PM and 11:59 PM.",
+    "simulated_now": "2024-01-06 09:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2024-01-06 10:00:00",
+          "end": "2024-01-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7a49d414aa4b419b836c3d946adcf091"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Son's Basketball Game",
+          "start": "2024-01-06 13:00:00",
+          "end": "2024-01-06 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_02623bc0afeb43eb98bada3214704723"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Relax",
+          "start": "2024-01-06 19:00:00",
+          "end": "2024-01-06 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1e8de5b180034e2488e9ae04d58d7445"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Grocery Shopping",
+          "start": "2024-01-06 10:00:00",
+          "end": "2024-01-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7a49d414aa4b419b836c3d946adcf091"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Son's Basketball Game",
+          "start": "2024-01-06 13:00:00",
+          "end": "2024-01-06 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_02623bc0afeb43eb98bada3214704723"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Relax",
+          "start": "2024-01-06 19:00:00",
+          "end": "2024-01-06 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1e8de5b180034e2488e9ae04d58d7445"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on for Saturday after lunch?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to determine the date of the upcoming Saturday. Then, I will list the events on that Saturday after 13:00."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-01-06 09:00:00 | Saturday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-01-06 13:00:00",
+          "time_max": "2024-01-06 23:59:59"
+        },
+        "result": "Found 2 events:\nid: evt_02623bc0afeb43eb98bada3214704723 | Son's Basketball Game \u2014 Sat 13:00-15:00\nid: evt_1e8de5b180034e2488e9ae04d58d7445 | Relax \u2014 Sat 19:00-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have two events scheduled for this afternoon: Son's Basketball Game from 13:00 to 15:00 and Relax from 19:00 to 21:00.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move my therapist appointment on Monday to 11:00 AM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Appointment with Therapist' event on Monday and update its start time to 11:00 AM and end time to 12:00 PM.",
+    "simulated_now": "2024-01-01 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Pre-trip Bus Inspection",
+          "start": "2024-01-01 05:30:00",
+          "end": "2024-01-01 06:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@transitauth.com"
+          ],
+          "id": "evt_ebc419c963e948b3b838ff5e839b9a8d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Route 42 - Morning Shift",
+          "start": "2024-01-01 06:00:00",
+          "end": "2024-01-01 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ef980cd5549c4bbd8ea22de991ff07c4"
+        },
+        {
+          "day": "Monday",
+          "summary": "Appointment with Therapist",
+          "start": "2024-01-01 10:30:00",
+          "end": "2024-01-01 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "dr.jones@wellness.com"
+          ],
+          "id": "evt_3efa241c753749c0be979dd70329380f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with her son",
+          "start": "2024-01-01 18:00:00",
+          "end": "2024-01-01 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_acdfba77c9044137b096672c46467300"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Pre-trip Bus Inspection",
+          "start": "2024-01-01 05:30:00",
+          "end": "2024-01-01 06:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@transitauth.com"
+          ],
+          "id": "evt_ebc419c963e948b3b838ff5e839b9a8d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Route 42 - Morning Shift",
+          "start": "2024-01-01 06:00:00",
+          "end": "2024-01-01 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ef980cd5549c4bbd8ea22de991ff07c4"
+        },
+        {
+          "day": "Monday",
+          "summary": "Appointment with Therapist",
+          "start": "2024-01-01 11:00:00",
+          "end": "2024-01-01 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "dr.jones@wellness.com"
+          ],
+          "id": "evt_3efa241c753749c0be979dd70329380f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with her son",
+          "start": "2024-01-01 18:00:00",
+          "end": "2024-01-01 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_acdfba77c9044137b096672c46467300"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move my therapist appointment on Monday to 11:00 AM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-01-01 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-01-01 23:59:59",
+          "time_min": "2024-01-01 00:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_ebc419c963e948b3b838ff5e839b9a8d | Pre-trip Bus Inspection \u2014 Mon 05:30-06:00\nid: evt_ef980cd5549c4bbd8ea22de991ff07c4 | Route 42 - Morning Shift \u2014 Mon 06:00-10:00\nid: evt_3efa241c753749c0be979dd70329380f | Appointment with Therapist \u2014 Mon 10:30-11:30\nid: evt_acdfba77c9044137b096672c46467300 | Dinner with her son \u2014 Mon 18:00-19:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_3efa241c753749c0be979dd70329380f",
+          "end": "2024-01-01 12:00:00",
+          "start": "2024-01-01 11:00:00"
+        },
+        "result": "Event updated successfully.\nAppointment with Therapist\n  ID: evt_3efa241c753749c0be979dd70329380f\n  Time: Mon Jan 01, 11:00 - 12:00\n  Attendees: dr.jones@wellness.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved your appointment with the therapist to 11:00 AM today."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can you update the Movie Night on Thursday to include neighbor3@email.com.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Movie Night with Neighbors' event on Thursday and update the attendees to neighbor1@email.com, neighbor2@email.com, and neighbor3@email.com.",
+    "simulated_now": "2024-01-04 09:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Pre-trip Bus Inspection",
+          "start": "2024-01-04 13:30:00",
+          "end": "2024-01-04 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@transitauth.com"
+          ],
+          "id": "evt_22bec4e200624b6887fceab9e913e11f"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Route 15 - Afternoon Shift",
+          "start": "2024-01-04 14:00:00",
+          "end": "2024-01-04 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d4cf7c415d9b469d8969a852395dba95"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Movie Night with Neighbors",
+          "start": "2024-01-04 19:00:00",
+          "end": "2024-01-04 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "neighbor1@email.com",
+            "neighbor2@email.com"
+          ],
+          "id": "evt_dfe18633413444baa99d2d9f31cf2453"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Pre-trip Bus Inspection",
+          "start": "2024-01-04 13:30:00",
+          "end": "2024-01-04 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@transitauth.com"
+          ],
+          "id": "evt_22bec4e200624b6887fceab9e913e11f"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Route 15 - Afternoon Shift",
+          "start": "2024-01-04 14:00:00",
+          "end": "2024-01-04 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d4cf7c415d9b469d8969a852395dba95"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Movie Night with Neighbors",
+          "start": "2024-01-04 19:00:00",
+          "end": "2024-01-04 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "neighbor1@email.com",
+            "neighbor2@email.com",
+            "neighbor3@email.com"
+          ],
+          "id": "evt_39b50848c96f418582dadbe3ef537385"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can you update the Movie Night on Thursday to include neighbor3@email.com."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-01-04 09:00:00 | Thursday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-01-04 23:59:59",
+          "time_min": "2024-01-04 00:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_22bec4e200624b6887fceab9e913e11f | Pre-trip Bus Inspection \u2014 Thu 13:30-14:00\nid: evt_d4cf7c415d9b469d8969a852395dba95 | Route 15 - Afternoon Shift \u2014 Thu 14:00-18:00\nid: evt_dfe18633413444baa99d2d9f31cf2453 | Movie Night with Neighbors \u2014 Thu 19:00-20:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_dfe18633413444baa99d2d9f31cf2453"
+        },
+        "result": "Movie Night with Neighbors\n  ID: evt_dfe18633413444baa99d2d9f31cf2453\n  Time: Thu Jan 04, 19:00 - 20:00\n  Attendees: neighbor1@email.com, neighbor2@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "attendees": [
+            "neighbor1@email.com",
+            "neighbor2@email.com",
+            "neighbor3@email.com"
+          ],
+          "end": "2024-01-04 20:00:00",
+          "start": "2024-01-04 19:00:00",
+          "summary": "Movie Night with Neighbors"
+        },
+        "result": "Event created successfully.\nMovie Night with Neighbors\n  ID: evt_39b50848c96f418582dadbe3ef537385\n  Time: Thu Jan 04, 19:00 - 20:00\n  Attendees: neighbor1@email.com, neighbor2@email.com, neighbor3@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "delete_event",
+        "args": {
+          "event_id": "evt_dfe18633413444baa99d2d9f31cf2453"
+        },
+        "result": "Event deleted: id: evt_dfe18633413444baa99d2d9f31cf2453 | Movie Night with Neighbors \u2014 Thu 19:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I've added neighbor3@email.com to the Movie Night. Here are the updated details:\n\nMovie Night with Neighbors\n  ID: evt_39b50848c96f418582dadbe3ef537385\n  Time: Thu Jan 04, 19:00 - 20:00\n  Attendees: neighbor1@email.com, neighbor2@email.com, neighbor3@email.com\n  RSVP: ACCEPT"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending my brunch on Sunday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Brunch with Friends' event on Sunday and respond with the attendees, which are friend1@email.com and friend2@email.com.",
+    "simulated_now": "2024-01-07 09:00:00",
+    "addressed_days": [
+      "Sunday"
+    ],
+    "calendar_before": {
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Friends",
+          "start": "2024-01-07 11:00:00",
+          "end": "2024-01-07 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_c793b39a211246afb5ff9ac449c96396"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Visit to her mother",
+          "start": "2024-01-07 14:00:00",
+          "end": "2024-01-07 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_56ca0076b4a84bcda7b77d357d941b66"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Friends",
+          "start": "2024-01-07 11:00:00",
+          "end": "2024-01-07 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_c793b39a211246afb5ff9ac449c96396"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Visit to her mother",
+          "start": "2024-01-07 14:00:00",
+          "end": "2024-01-07 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_56ca0076b4a84bcda7b77d357d941b66"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending my brunch on Sunday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-01-07 09:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-01-07 00:00:00",
+          "time_max": "2024-01-07 23:59:59"
+        },
+        "result": "Found 2 events:\nid: evt_c793b39a211246afb5ff9ac449c96396 | Brunch with Friends \u2014 Sun 11:00-13:00\nid: evt_56ca0076b4a84bcda7b77d357d941b66 | Visit to her mother \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_c793b39a211246afb5ff9ac449c96396"
+        },
+        "result": "Brunch with Friends\n  ID: evt_c793b39a211246afb5ff9ac449c96396\n  Time: Sun Jan 07, 11:00 - 13:00\n  Attendees: friend1@email.com, friend2@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "friend1@email.com and friend2@email.com are attending your brunch on Sunday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events scheduled for Monday, January 1st, 2024.",
+    "simulated_now": "2024-01-01 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Pre-trip Bus Inspection",
+          "start": "2024-01-01 05:30:00",
+          "end": "2024-01-01 06:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@transitauth.com"
+          ],
+          "id": "evt_4353ce645a594917b6e422257d328f52"
+        },
+        {
+          "day": "Monday",
+          "summary": "Route 42 - Morning Shift",
+          "start": "2024-01-01 06:00:00",
+          "end": "2024-01-01 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cd70b64f4e204e30bc392d42c1dd3d45"
+        },
+        {
+          "day": "Monday",
+          "summary": "Appointment with Therapist",
+          "start": "2024-01-01 10:30:00",
+          "end": "2024-01-01 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "dr.jones@wellness.com"
+          ],
+          "id": "evt_b699b87055cd4558a4dd014a9bc05f0c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with her son",
+          "start": "2024-01-01 18:00:00",
+          "end": "2024-01-01 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f158daf8caef4f178038211dfd25a66d"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Pre-trip Bus Inspection",
+          "start": "2024-01-01 05:30:00",
+          "end": "2024-01-01 06:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "supervisor@transitauth.com"
+          ],
+          "id": "evt_4353ce645a594917b6e422257d328f52"
+        },
+        {
+          "day": "Monday",
+          "summary": "Route 42 - Morning Shift",
+          "start": "2024-01-01 06:00:00",
+          "end": "2024-01-01 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cd70b64f4e204e30bc392d42c1dd3d45"
+        },
+        {
+          "day": "Monday",
+          "summary": "Appointment with Therapist",
+          "start": "2024-01-01 10:30:00",
+          "end": "2024-01-01 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "dr.jones@wellness.com"
+          ],
+          "id": "evt_b699b87055cd4558a4dd014a9bc05f0c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with her son",
+          "start": "2024-01-01 18:00:00",
+          "end": "2024-01-01 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f158daf8caef4f178038211dfd25a66d"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify today's date. Then, I will list all the events scheduled for today to let you know what you are doing."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-01-01 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-01-01 23:59:59",
+          "time_min": "2024-01-01 00:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_4353ce645a594917b6e422257d328f52 | Pre-trip Bus Inspection \u2014 Mon 05:30-06:00\nid: evt_cd70b64f4e204e30bc392d42c1dd3d45 | Route 42 - Morning Shift \u2014 Mon 06:00-10:00\nid: evt_b699b87055cd4558a4dd014a9bc05f0c | Appointment with Therapist \u2014 Mon 10:30-11:30\nid: evt_f158daf8caef4f178038211dfd25a66d | Dinner with her son \u2014 Mon 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today, Monday, January 1, 2024, you have 4 events scheduled:\n- 5:30-6:00: Pre-trip Bus Inspection\n- 6:00-10:00: Route 42 - Morning Shift\n- 10:30-11:30: Appointment with Therapist\n- 18:00-19:00: Dinner with her son"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

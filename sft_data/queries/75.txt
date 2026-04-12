@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting with John on Thursday at 3 PM to discuss the new Triumph Clutch Replacement.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with summary 'Discuss Triumph Clutch Replacement with John', start time 2026-01-01T15:00:00, end time 2026-01-01T16:00:00, attendees 'John', and description 'Discuss the new Triumph Clutch Replacement'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-12-28T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you add a yoga class to my calendar for Thursday from 6 PM to 7 PM?",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with summary 'Yoga Class', start time 2026-01-01T18:00:00, end time 2026-01-01T19:00:00, attendees [], and description ''.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-12-28T11:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List events between 2025-12-31T12:00:00 and 2025-12-31T18:00:00 to check for conflicts during Wednesday afternoon.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-12-28T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on for the weekend?",
+        "complexity": "Medium",
+        "expected_behavior": "List events between 2026-01-03T00:00:00 and 2026-01-04T23:59:59 to find the weekend's schedule.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-12-28T13:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the Ducati diagnosis appointment on Friday to 10 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event on Friday with summary 'Diagnose Ducati Timing Issue' and update its start time to 2026-01-02T10:00:00 and end time to 2026-01-02T12:00:00.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-12-28T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the parts order I placed on Monday to include oil filters.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event on Monday with summary 'Order Parts from Bike Supply Co.' and update its description to include 'Include oil filters'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-12-28T15:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is dinner with my family on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event on Monday with summary 'Dinner with Family' and respond with its start time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-12-28T16:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me about the riding club meeting on Wednesday.",
+        "complexity": "Low",
+        "expected_behavior": "Find the event on Wednesday with summary 'Riding Club Meeting' and respond with its details (start time, end time, description, attendees).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-12-28T17:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my bookkeeping appointment on Wednesday back by 3 hours.",
+        "complexity": "High",
+        "expected_behavior": "Find the event on Wednesday with summary 'Bookkeeping with assistant' and update its start time to 2025-12-31T10:00:00 and end time to 2025-12-31T11:00:00.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-12-28T18:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule my meeting with the small business mentor on Tuesday so it starts 30 minutes later.",
+        "complexity": "High",
+        "expected_behavior": "Find the event on Tuesday with summary 'Meet with Small Business Mentor' and update its start time to 2025-12-30T14:30:00 and end time to 2025-12-30T15:30:00.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-12-28T19:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Kawasaki repair.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event with summary 'Repair Kawasaki Carburetor' on Monday and ask the user to provide new date and time for the repair.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-12-28T20:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "cancel riding club",
+        "complexity": "Low",
+        "expected_behavior": "Find the event with summary 'Riding Club Meeting' on Wednesday and ask user which Riding Club event needs to be cancelled. The user can then respond with either accept or decline.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-12-28T21:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Monday, 2025-12-29.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-12-29T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Wednesday, 2025-12-31.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-12-30T23:00:00"
+    }
+]

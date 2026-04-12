@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please create an appointment called 'Trip to the bank' on Wednesday at 3pm.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with the title 'Trip to the bank' that starts at 2025-02-26T15:00:00 and ends at 2025-02-26T16:00:00.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-02-23T23:59:59"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting with Bob next Thursday at 11:30am about Project X.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event titled 'Meeting with Bob about Project X' that starts at 2025-02-27T11:30:00 and ends at 2025-02-27T12:30:00. No attendees are specified in the prompt, so create the event without attendees.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-02-23T23:59:59"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Friday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "Find all events on Friday between 8:00 AM and 12:00 PM to determine the user's morning activities.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-02-28T06:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Tuesday look like?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled for Tuesday between 00:00:00 and 23:59:59 to give an overview of the day.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-02-25T00:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my Thursday meeting with the pharmaceutical rep back by an hour?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with pharmaceutical rep regarding new drug' event on Thursday, and update its start time to 2025-02-27T14:00:00 and its end time to 2025-02-27T15:00:00.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-02-27T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update the book club meeting on Tuesday to start half an hour later.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Book Club Meeting' event on Tuesday, and update its start time to 2025-02-25T19:00:00 and its end time to 2025-02-25T20:30:00.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-02-25T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Interdisciplinary Team Meeting on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Interdisciplinary Team Meeting' on Monday and extract the list of attendees.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-02-24T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me more about the meeting with the pharmacy residents on Thursday.",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Meeting with pharmacy residents' event on Thursday and retrieve its details.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-02-27T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is there any time on Wednesday when I'm not busy before 5 PM?",
+        "complexity": "High",
+        "expected_behavior": "List all events on Wednesday, then determine available time slots before 5 PM that are not occupied by existing events.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-02-26T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my grocery shopping to Sunday morning, is that possible?",
+        "complexity": "High",
+        "expected_behavior": "First, find the grocery shopping event scheduled for Saturday. Next, check for any scheduling conflicts on Sunday morning. Finally, inform the user about whether it is possible to reschedule the event and, if so, move it to Sunday morning.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-02-26T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule team meeting.",
+        "complexity": "Medium",
+        "expected_behavior": "The query is ambiguous. Find all team meetings this week and ask the user to clarify which one to reschedule and to what time.",
+        "addressed_days": [
+            "Monday",
+            "Friday"
+        ],
+        "current_time": "2025-02-26T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel...",
+        "complexity": "Low",
+        "expected_behavior": "Since the request is incomplete and not specifying which event to delete, respond with a clarification request, asking the user which event they'd like to cancel.",
+        "addressed_days": [],
+        "current_time": "2025-02-26T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for today (2025-02-24).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-02-24T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow's schedule?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for tomorrow (2025-02-26).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-02-25T20:00:00"
+    }
+]

@@ -1,0 +1,149 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Board Game Night' for Wednesday at 8 PM, ending at 10 PM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the create_event tool to create an event with the summary 'Board Game Night' on Wednesday, December 20, 2023, from 8 PM to 10 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-12-17T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for Friday with the title 'Team Retrospective' from 10 AM to 11 AM and invite colleague@example.com.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the create_event tool to create an event with the summary 'Team Retrospective' on Friday, December 22, 2023, from 10 AM to 11 AM and add colleague@example.com to the attendees.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-12-17T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing for lunch tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should use get_current_time to get the current date. The agent should then use list_events to find events on Tuesday, December 19, 2023, between 12 PM and 2 PM and respond with the event details.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-12-18T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What work events do I have on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should use list_events to find events on Wednesday, December 20, 2023, and filter to only show work related events and respond with those details.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-12-17T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move the family law court session on Thursday to 3 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should use list_events to find the 'Afternoon court session - Family Law' on Thursday, December 21, 2023. Then, it should use the update_event tool to update the start time to 3 PM and adjust the end time accordingly.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-12-17T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "I need to cancel my lunch with family on Saturday.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should use list_events to find the 'Lunch with family' event on Saturday, December 23, 2023. Then, it should use the delete_event tool to delete that event.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-12-17T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the civil cases court session on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use list_events to find the 'Morning court session - Civil Cases' event on Monday, December 18, 2023, and then use get_event to retrieve the event details, including the attendees. The agent should then respond with the list of attendees (judge@example.com, lawyer1@example.com, lawyer2@example.com).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-12-17T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the therapy appointment on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use list_events to find 'Therapy appointment' on Tuesday, December 19, 2023. It should then respond with the time of the appointment, which is 6:00 PM to 7:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-12-17T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the brunch with friends on Sunday. Decline the invite.",
+        "complexity": "High",
+        "expected_behavior": "The agent should use list_events to find the 'Brunch with friends' on Sunday, December 24, 2023. Then, it should use the respond_to_event tool to decline the invitation.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2023-12-17T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule the afternoon family law court session this week to start an hour later.",
+        "complexity": "High",
+        "expected_behavior": "The agent should first identify the current day. Then, the agent uses list_events to find the 'Afternoon court session - Family Law' event on either Monday, December 18, 2023, or Thursday, December 21, 2023. Once found, the agent should use the update_event tool to update the start time to an hour later (either 3:00 PM or 3:00 PM) and adjust the end time accordingly.",
+        "addressed_days": [
+            "Monday",
+            "Thursday"
+        ],
+        "current_time": "2023-12-18T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change dinner...",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should first use the get_current_time tool to determine the current day. Then use the list_events to retrieve the events. If there is a dinner event on the current day, change the event. If there is no event, respond that no dinner event was found.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2023-12-17T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Therapy",
+        "complexity": "Low",
+        "expected_behavior": "The agent should search the calendar for the 'Therapy appointment'. Use the list_events tool to find the event. Respond with the time of the appointment.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-12-17T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use get_current_time to determine the current day and date. It should then use list_events for that day and respond with a summary of each event.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-12-18T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Any meetings scheduled for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use get_current_time to determine the current day and date. It should then use list_events for the next day and respond with a summary of each event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-12-18T20:00:00"
+    }
+]

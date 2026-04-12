@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please create an event called 'Project Meeting' for Tuesday at 3 PM with attendees boss@company.com and coworker@company.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with summary 'Project Meeting', start time Tuesday at 3 PM, end time Tuesday at 4 PM, and attendees boss@company.com, coworker@company.com.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-12-31T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a dentist appointment for me on Wednesday at 9 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with summary 'Dentist Appointment', start time Wednesday at 9 AM, and end time Wednesday at 10 AM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-12-31T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Monday evening?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled for Monday between 6 PM and 11:59 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-01T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on for Saturday after lunch?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled for Saturday between 1 PM and 11:59 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-06T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my therapist appointment on Monday to 11:00 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Appointment with Therapist' event on Monday and update its start time to 11:00 AM and end time to 12:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-01T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you update the Movie Night on Thursday to include neighbor3@email.com.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Movie Night with Neighbors' event on Thursday and update the attendees to neighbor1@email.com, neighbor2@email.com, and neighbor3@email.com.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-04T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time does Route 15 start on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Route 15 - Afternoon Shift' event on Wednesday and respond with its start time, which is 2:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-03T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending my brunch on Sunday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Brunch with Friends' event on Sunday and respond with the attendees, which are friend1@email.com and friend2@email.com.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-07T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting with supervisor@transitauth.com on Friday at 5:30 AM for 30 minutes.",
+        "complexity": "High",
+        "expected_behavior": "Check for any conflicts on Friday between 5:30 AM and 6:00 AM. Find the Pre-trip Bus Inspection. Since supervisor@transitauth.com is already attending this event, inform the user of the conflict and suggest an alternative time or ask if they want to schedule it anyway. Assume the user says yes, create the 'Meeting with supervisor@transitauth.com' event anyway.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-05T00:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to see my son play basketball on Saturday but I don't know what time he plays.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Son's Basketball Game' event on Saturday and respond with its start and end times, which are 1:00 PM and 3:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-01-06T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner Friday with Mom?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with mother' event on Friday and respond with the full event details.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-05T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Route 42.",
+        "complexity": "Medium",
+        "expected_behavior": "Ask the user which day and time they want to reschedule 'Route 42'. Assume the user responds 'Tuesday at 2 PM'. Find the 'Route 42 - Morning Shift' and update the start time to Tuesday at 2 PM and end time to Tuesday at 6 PM. Delete the original Route 42 event. ",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-01T12:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Monday, January 1st, 2024.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-01T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any appointments yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Check for any events on Saturday, January 6th, 2024 and list them.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-07T08:00:00"
+    }
+]

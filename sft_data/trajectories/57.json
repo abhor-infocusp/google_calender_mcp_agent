@@ -1,0 +1,1346 @@
+[
+  {
+    "query": "Create an event called 'Project Brainstorm' for Tuesday at 2 PM for one hour.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event with summary 'Project Brainstorm', start set to 2023-09-26T14:00:00, end set to 2023-09-26T15:00:00.",
+    "simulated_now": "2023-09-24 20:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Morning Briefing - Shift Start",
+          "start": "2023-09-26 06:30:00",
+          "end": "2023-09-26 07:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_8ebaf995c4e84c3282ca7efb5d22d0fd"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Warden - Security Protocol Review",
+          "start": "2023-09-26 09:00:00",
+          "end": "2023-09-26 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Warden"
+          ],
+          "id": "evt_8dad6245bc8e4f3784e4fb03fbf0af79"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Inmate Transport - Medical Appointment",
+          "start": "2023-09-26 13:00:00",
+          "end": "2023-09-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e4fa72bd9f7a4aa3ac6e50c5145617df"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Shift Debriefing - Incident Report Review",
+          "start": "2023-09-26 15:00:00",
+          "end": "2023-09-26 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_d70dc42bae274fb69b47400179a3a66f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2023-09-26 19:30:00",
+          "end": "2023-09-26 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e51ab9722f414eb6bf18ba7713893da8"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Morning Briefing - Shift Start",
+          "start": "2023-09-26 06:30:00",
+          "end": "2023-09-26 07:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_8ebaf995c4e84c3282ca7efb5d22d0fd"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Warden - Security Protocol Review",
+          "start": "2023-09-26 09:00:00",
+          "end": "2023-09-26 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Warden"
+          ],
+          "id": "evt_8dad6245bc8e4f3784e4fb03fbf0af79"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Inmate Transport - Medical Appointment",
+          "start": "2023-09-26 13:00:00",
+          "end": "2023-09-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e4fa72bd9f7a4aa3ac6e50c5145617df"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Project Brainstorm",
+          "start": "2023-09-26 14:00:00",
+          "end": "2023-09-26 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_170bf59bd1174b16aed1aa16b7f34b8a"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Shift Debriefing - Incident Report Review",
+          "start": "2023-09-26 15:00:00",
+          "end": "2023-09-26 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_d70dc42bae274fb69b47400179a3a66f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2023-09-26 19:30:00",
+          "end": "2023-09-26 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e51ab9722f414eb6bf18ba7713893da8"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Project Brainstorm' for Tuesday at 2 PM for one hour."
+      },
+      {
+        "role": "assistant",
+        "content": "I will first find out the current date and time, and then create an event for next Tuesday at 2 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-09-24 20:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Project Brainstorm",
+          "start": "2023-09-26 14:00:00",
+          "end": "2023-09-26 15:00:00"
+        },
+        "result": "Event created successfully.\nProject Brainstorm\n  ID: evt_170bf59bd1174b16aed1aa16b7f34b8a\n  Time: Tue Sep 26, 14:00 - 15:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I have created the event 'Project Brainstorm' for Tuesday, September 26th, from 2:00 PM to 3:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Book me a meeting for Friday to discuss sales figures from 11 AM to 12 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event with summary 'Discuss sales figures', start set to 2023-09-29T11:00:00, end set to 2023-09-29T12:00:00.",
+    "simulated_now": "2023-09-24 20:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Morning Briefing - Shift Start",
+          "start": "2023-09-29 06:30:00",
+          "end": "2023-09-29 07:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_1f17255841e94e35a8c5cca3f8f8e0fb"
+        },
+        {
+          "day": "Friday",
+          "summary": "Security Equipment Inventory",
+          "start": "2023-09-29 10:00:00",
+          "end": "2023-09-29 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c106cc9dfc424526894366e38b4449f4"
+        },
+        {
+          "day": "Friday",
+          "summary": "Shift Debriefing - Incident Report Review",
+          "start": "2023-09-29 15:00:00",
+          "end": "2023-09-29 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_963eacabf6ca44d1876f63dfda9b318d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2023-09-29 19:00:00",
+          "end": "2023-09-29 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Tom - tom@email.com",
+            "Mike - mike@email.com"
+          ],
+          "id": "evt_303830e6a0544257a0aaf55f1b577ba7"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Morning Briefing - Shift Start",
+          "start": "2023-09-29 06:30:00",
+          "end": "2023-09-29 07:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_1f17255841e94e35a8c5cca3f8f8e0fb"
+        },
+        {
+          "day": "Friday",
+          "summary": "Security Equipment Inventory",
+          "start": "2023-09-29 10:00:00",
+          "end": "2023-09-29 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c106cc9dfc424526894366e38b4449f4"
+        },
+        {
+          "day": "Friday",
+          "summary": "Sales Figures Discussion",
+          "start": "2023-09-29 11:00:00",
+          "end": "2023-09-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0da40cbaa5d7453ba4c2b029b4c07a7b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Shift Debriefing - Incident Report Review",
+          "start": "2023-09-29 15:00:00",
+          "end": "2023-09-29 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_963eacabf6ca44d1876f63dfda9b318d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2023-09-29 19:00:00",
+          "end": "2023-09-29 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Tom - tom@email.com",
+            "Mike - mike@email.com"
+          ],
+          "id": "evt_303830e6a0544257a0aaf55f1b577ba7"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Book me a meeting for Friday to discuss sales figures from 11 AM to 12 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. What is the title of the event?\n"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-09-24 20:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Sales Figures Discussion",
+          "start": "2023-09-29 11:00:00",
+          "end": "2023-09-29 12:00:00"
+        },
+        "result": "Event created successfully.\nSales Figures Discussion\n  ID: evt_0da40cbaa5d7453ba4c2b029b4c07a7b\n  Time: Fri Sep 29, 11:00 - 12:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I have scheduled a meeting for you to discuss sales figures on Friday, September 29th from 11 AM to 12 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing in the evening with my wife?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events with time_min set to 2023-09-27T18:00:00 and time_max set to 2023-09-28T00:00:00, then extract the event involving his wife Sarah.",
+    "simulated_now": "2023-09-27 12:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Morning Briefing - Shift Start",
+          "start": "2023-09-27 06:30:00",
+          "end": "2023-09-27 07:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_ff3360079715495787769029da880b8b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Contraband Search - Cell Block Alpha",
+          "start": "2023-09-27 10:00:00",
+          "end": "2023-09-27 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a12435bf79194af5b7f219e8bab03726"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Shift Debriefing - Incident Report Review",
+          "start": "2023-09-27 15:00:00",
+          "end": "2023-09-27 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_1cb437d46f8c479dbc3d8fa6590e6a98"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Wife",
+          "start": "2023-09-27 18:30:00",
+          "end": "2023-09-27 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Sarah - wife@email.com"
+          ],
+          "id": "evt_f2dc7917f3ba4959bbe14b935fe8d183"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Morning Briefing - Shift Start",
+          "start": "2023-09-27 06:30:00",
+          "end": "2023-09-27 07:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_ff3360079715495787769029da880b8b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Contraband Search - Cell Block Alpha",
+          "start": "2023-09-27 10:00:00",
+          "end": "2023-09-27 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a12435bf79194af5b7f219e8bab03726"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Shift Debriefing - Incident Report Review",
+          "start": "2023-09-27 15:00:00",
+          "end": "2023-09-27 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_1cb437d46f8c479dbc3d8fa6590e6a98"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Wife",
+          "start": "2023-09-27 18:30:00",
+          "end": "2023-09-27 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Sarah - wife@email.com"
+          ],
+          "id": "evt_f2dc7917f3ba4959bbe14b935fe8d183"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing in the evening with my wife?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can help with that. First, I need to check the current time to determine what \"evening\" means. Then, I will search your calendar for any events with your wife."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-09-27 12:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-09-27 18:00:00",
+          "time_max": "2023-09-27 23:00:00"
+        },
+        "result": "Found 1 events:\nid: evt_f2dc7917f3ba4959bbe14b935fe8d183 | Dinner with Wife \u2014 Wed 18:30-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "You have \"Dinner with Wife\" scheduled from 6:30 PM to 7:30 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What training do I have this week?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events with time_min set to 2023-09-25T00:00:00 and time_max set to 2023-10-01T00:00:00, then return any events that involves training.",
+    "simulated_now": "2023-09-28 08:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Morning Briefing - Shift Start",
+          "start": "2023-09-28 06:30:00",
+          "end": "2023-09-28 07:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_80684e5f415f4d73ad31764793544a0c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Training Exercise - Riot Control",
+          "start": "2023-09-28 09:00:00",
+          "end": "2023-09-28 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Fellow Guards"
+          ],
+          "id": "evt_934ba57b6287418087ce050edab2b4d2"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Counselor - Inmate Behavior Patterns",
+          "start": "2023-09-28 13:00:00",
+          "end": "2023-09-28 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Counselor"
+          ],
+          "id": "evt_b1abb20515a14eb98cb004660ebabbd1"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Shift Debriefing - Incident Report Review",
+          "start": "2023-09-28 15:00:00",
+          "end": "2023-09-28 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_3d167211787246bb90035e1fd9b38b8f"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Check in with Therapist",
+          "start": "2023-09-28 19:00:00",
+          "end": "2023-09-28 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith - drsmith@email.com"
+          ],
+          "id": "evt_902236c81c9e474791482843e1d20768"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Morning Briefing - Shift Start",
+          "start": "2023-09-28 06:30:00",
+          "end": "2023-09-28 07:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_80684e5f415f4d73ad31764793544a0c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Training Exercise - Riot Control",
+          "start": "2023-09-28 09:00:00",
+          "end": "2023-09-28 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Fellow Guards"
+          ],
+          "id": "evt_934ba57b6287418087ce050edab2b4d2"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Counselor - Inmate Behavior Patterns",
+          "start": "2023-09-28 13:00:00",
+          "end": "2023-09-28 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Counselor"
+          ],
+          "id": "evt_b1abb20515a14eb98cb004660ebabbd1"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Shift Debriefing - Incident Report Review",
+          "start": "2023-09-28 15:00:00",
+          "end": "2023-09-28 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_3d167211787246bb90035e1fd9b38b8f"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Check in with Therapist",
+          "start": "2023-09-28 19:00:00",
+          "end": "2023-09-28 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith - drsmith@email.com"
+          ],
+          "id": "evt_902236c81c9e474791482843e1d20768"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What training do I have this week?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-09-28 08:00:00 | Thursday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-09-25 00:00:00",
+          "time_max": "2023-10-01 23:59:59"
+        },
+        "result": "Found 27 events:\nid: evt_74a0600dbe2347ba8e342d238c6b6fd9 | Morning Briefing - Shift Start \u2014 Mon 06:30-07:00\nid: evt_df7b9136a03f4f87b50b6b08da9785c2 | Cell Block Inspection - Cell Block Delta \u2014 Mon 10:00-11:00\nid: evt_a8bce09234514ee8ae42143ce8b8ef34 | Shift Debriefing - Incident Report Review \u2014 Mon 15:00-15:30\nid: evt_10836985d9114e2ba4e8bb02635fb39c | Dinner with Family \u2014 Mon 18:00-19:00\nid: evt_4fd0e565ac5c413ebb45e19ae60c11b7 | Morning Briefing - Shift Start \u2014 Tue 06:30-07:00\nid: evt_d26134e9e1ae43489058a5b5c61c10de | Meeting with Warden - Security Protocol Review \u2014 Tue 09:00-10:00\nid: evt_ffe859e646f348088fc834235a38857e | Inmate Transport - Medical Appointment \u2014 Tue 13:00-14:00\nid: evt_5ada6961117e4a109d749080d305b5a3 | Shift Debriefing - Incident Report Review \u2014 Tue 15:00-15:30\nid: evt_a1c81ce6531045adb48b6fcdfb476d52 | Kids' Soccer Practice \u2014 Tue 19:30-20:30\nid: evt_6d3aa5a336b343b2af5077b47c3d20cb | Morning Briefing - Shift Start \u2014 Wed 06:30-07:00\nid: evt_6fe4f5429f694fde958cf91a69ee7a7e | Contraband Search - Cell Block Alpha \u2014 Wed 10:00-11:00\nid: evt_c105a302db13466e9578099a437b54d3 | Shift Debriefing - Incident Report Review \u2014 Wed 15:00-15:30\nid: evt_78de170653f143569b2787fc3439cf73 | Dinner with Wife \u2014 Wed 18:30-19:30\nid: evt_80684e5f415f4d73ad31764793544a0c | Morning Briefing - Shift Start \u2014 Thu 06:30-07:00\nid: evt_934ba57b6287418087ce050edab2b4d2 | Training Exercise - Riot Control \u2014 Thu 09:00-10:00\nid: evt_b1abb20515a14eb98cb004660ebabbd1 | Meeting with Counselor - Inmate Behavior Patterns \u2014 Thu 13:00-14:00\nid: evt_3d167211787246bb90035e1fd9b38b8f | Shift Debriefing - Incident Report Review \u2014 Thu 15:00-15:30\nid: evt_902236c81c9e474791482843e1d20768 | Check in with Therapist \u2014 Thu 19:00-20:00\nid: evt_1ea01196330249edbc137cd492e13068 | Morning Briefing - Shift Start \u2014 Fri 06:30-07:00\nid: evt_27a98aa87a2e4f41bbc3bd0ab97eb556 | Security Equipment Inventory \u2014 Fri 10:00-11:00\nid: evt_84b2b4c9deaa431d8bb2c609c331ca04 | Shift Debriefing - Incident Report Review \u2014 Fri 15:00-15:30\nid: evt_a75e2cd31130429b9d08c73f9ffcf324 | Dinner with Friends \u2014 Fri 19:00-21:00\nid: evt_8003dad9beaa4bcf9e1e1b91abcb3cd3 | Kids' Soccer Game \u2014 Sat 09:00-10:00\nid: evt_dc7ffd2466104bec9192e172b160f03d | Lunch with Family \u2014 Sat 12:00-14:00\nid: evt_ecf7d65925624055a5814530dc822f4b | Movie Night with Family \u2014 Sat 18:00-20:00\nid: evt_6b55c03930bd4f2085d12cff39261291 | Church \u2014 Sun 10:00-11:00\nid: evt_d1c1136a7f834209803dff6e918a942a | BBQ at Friend's House \u2014 Sun 13:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have one training event this week: \"Training Exercise - Riot Control\" on Thursday from 9:00 to 10:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move the meeting with the warden back by an hour.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events with time_min set to 2023-09-26T00:00:00 and time_max set to 2023-09-27T00:00:00 to find the meeting with Warden, then call update_event with the event id and start set to 2023-09-26T08:00:00 and end set to 2023-09-26T09:00:00.",
+    "simulated_now": "2023-09-26 11:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Morning Briefing - Shift Start",
+          "start": "2023-09-26 06:30:00",
+          "end": "2023-09-26 07:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_d11bc34d8d2a4b41b4f5aa25c9499c37"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Warden - Security Protocol Review",
+          "start": "2023-09-26 09:00:00",
+          "end": "2023-09-26 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Warden"
+          ],
+          "id": "evt_d3a91f4918814c968af0778be4a591a8"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Inmate Transport - Medical Appointment",
+          "start": "2023-09-26 13:00:00",
+          "end": "2023-09-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9e1d8e15bc5e43d49a755b7d326d9030"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Shift Debriefing - Incident Report Review",
+          "start": "2023-09-26 15:00:00",
+          "end": "2023-09-26 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_db9707bc358141a4adb201bfcb555ed9"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2023-09-26 19:30:00",
+          "end": "2023-09-26 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_05a666450d224bc69fbe9787b96c5d79"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Morning Briefing - Shift Start",
+          "start": "2023-09-26 06:30:00",
+          "end": "2023-09-26 07:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_d11bc34d8d2a4b41b4f5aa25c9499c37"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Warden - Security Protocol Review",
+          "start": "2023-09-26 10:00:00",
+          "end": "2023-09-26 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Warden"
+          ],
+          "id": "evt_d3a91f4918814c968af0778be4a591a8"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Inmate Transport - Medical Appointment",
+          "start": "2023-09-26 13:00:00",
+          "end": "2023-09-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9e1d8e15bc5e43d49a755b7d326d9030"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Shift Debriefing - Incident Report Review",
+          "start": "2023-09-26 15:00:00",
+          "end": "2023-09-26 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_db9707bc358141a4adb201bfcb555ed9"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2023-09-26 19:30:00",
+          "end": "2023-09-26 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_05a666450d224bc69fbe9787b96c5d79"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move the meeting with the warden back by an hour."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 27 events:\nid: evt_612db0357f374a7b89062467de6d02be | Morning Briefing - Shift Start \u2014 Mon 06:30-07:00\nid: evt_79d3ae150974481097ce721fc77dbf98 | Cell Block Inspection - Cell Block Delta \u2014 Mon 10:00-11:00\nid: evt_3f848367c81d449b8d4b60e444eace37 | Shift Debriefing - Incident Report Review \u2014 Mon 15:00-15:30\nid: evt_25a273bbe04a4870a8709c2c2a9a1a3d | Dinner with Family \u2014 Mon 18:00-19:00\nid: evt_d11bc34d8d2a4b41b4f5aa25c9499c37 | Morning Briefing - Shift Start \u2014 Tue 06:30-07:00\nid: evt_d3a91f4918814c968af0778be4a591a8 | Meeting with Warden - Security Protocol Review \u2014 Tue 09:00-10:00\nid: evt_9e1d8e15bc5e43d49a755b7d326d9030 | Inmate Transport - Medical Appointment \u2014 Tue 13:00-14:00\nid: evt_db9707bc358141a4adb201bfcb555ed9 | Shift Debriefing - Incident Report Review \u2014 Tue 15:00-15:30\nid: evt_05a666450d224bc69fbe9787b96c5d79 | Kids' Soccer Practice \u2014 Tue 19:30-20:30\nid: evt_ec1269f656ba4abf967e45361a703da3 | Morning Briefing - Shift Start \u2014 Wed 06:30-07:00\nid: evt_a06bf171477e440db5d377f30f8b7569 | Contraband Search - Cell Block Alpha \u2014 Wed 10:00-11:00\nid: evt_3b6045aa88464debbe9a14b64fa3c29a | Shift Debriefing - Incident Report Review \u2014 Wed 15:00-15:30\nid: evt_dbfa83d636c04d60a2ef4228a7c96db7 | Dinner with Wife \u2014 Wed 18:30-19:30\nid: evt_c617500eba1246afa474eebac9a6699d | Morning Briefing - Shift Start \u2014 Thu 06:30-07:00\nid: evt_97426c65d29b46e8a0154a0edb0d8e89 | Training Exercise - Riot Control \u2014 Thu 09:00-10:00\nid: evt_93ac21b4a0c149828ec20681f30458ea | Meeting with Counselor - Inmate Behavior Patterns \u2014 Thu 13:00-14:00\nid: evt_44d987a159e0457b8eeaf998845a8580 | Shift Debriefing - Incident Report Review \u2014 Thu 15:00-15:30\nid: evt_ce9c8097926844769e0fefd717d90e2d | Check in with Therapist \u2014 Thu 19:00-20:00\nid: evt_aa55b1345e6f4c949a8e4c42f64c2aa4 | Morning Briefing - Shift Start \u2014 Fri 06:30-07:00\nid: evt_e589ca4510704919b2f980977d94ad5c | Security Equipment Inventory \u2014 Fri 10:00-11:00\nid: evt_25cf719f9edc44be9991b66bd6aee66a | Shift Debriefing - Incident Report Review \u2014 Fri 15:00-15:30\nid: evt_7ef475ffc06f44f8baf7be851fae0c4d | Dinner with Friends \u2014 Fri 19:00-21:00\nid: evt_12914d5676154a5da5507cc48471fe10 | Kids' Soccer Game \u2014 Sat 09:00-10:00\nid: evt_13e54e20c99140348ac2601423cb0b07 | Lunch with Family \u2014 Sat 12:00-14:00\nid: evt_e1ecb31a77654991ac14f739602694d2 | Movie Night with Family \u2014 Sat 18:00-20:00\nid: evt_c03fd66022e0439dad6c7ff98433aecd | Church \u2014 Sun 10:00-11:00\nid: evt_a91336ec244041f4935db77edf714345 | BBQ at Friend's House \u2014 Sun 13:00-16:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_d3a91f4918814c968af0778be4a591a8"
+        },
+        "result": "Meeting with Warden - Security Protocol Review\n  ID: evt_d3a91f4918814c968af0778be4a591a8\n  Time: Tue Sep 26, 09:00 - 10:00\n  Attendees: Warden\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-09-26 11:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2023-09-26 10:00:00",
+          "event_id": "evt_d3a91f4918814c968af0778be4a591a8",
+          "end": "2023-09-26 11:00:00"
+        },
+        "result": "Event updated successfully.\nMeeting with Warden - Security Protocol Review\n  ID: evt_d3a91f4918814c968af0778be4a591a8\n  Time: Tue Sep 26, 10:00 - 11:00\n  Attendees: Warden\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved the meeting with the warden to 10:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change the soccer game time on Saturday to 11 AM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events with time_min set to 2023-09-30T00:00:00 and time_max set to 2023-10-01T00:00:00 to find the event with 'soccer game', then call update_event with the event id and start set to 2023-09-30T11:00:00 and end set to 2023-09-30T12:00:00.",
+    "simulated_now": "2023-09-30 08:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Kids' Soccer Game",
+          "start": "2023-09-30 09:00:00",
+          "end": "2023-09-30 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_234f066fb31e48ae9f71b4a7d1537259"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Lunch with Family",
+          "start": "2023-09-30 12:00:00",
+          "end": "2023-09-30 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8f1c839a8d8e43d08812a042af89c826"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Movie Night with Family",
+          "start": "2023-09-30 18:00:00",
+          "end": "2023-09-30 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7ef2d4d61a9d4277915334b224700cdf"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Kids' Soccer Game",
+          "start": "2023-09-30 11:00:00",
+          "end": "2023-09-30 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_234f066fb31e48ae9f71b4a7d1537259"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Lunch with Family",
+          "start": "2023-09-30 12:00:00",
+          "end": "2023-09-30 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8f1c839a8d8e43d08812a042af89c826"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Movie Night with Family",
+          "start": "2023-09-30 18:00:00",
+          "end": "2023-09-30 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7ef2d4d61a9d4277915334b224700cdf"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change the soccer game time on Saturday to 11 AM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-09-30 08:00:00 | Saturday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-09-30 23:59:59",
+          "time_min": "2023-09-30 00:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_234f066fb31e48ae9f71b4a7d1537259 | Kids' Soccer Game \u2014 Sat 09:00-10:00\nid: evt_8f1c839a8d8e43d08812a042af89c826 | Lunch with Family \u2014 Sat 12:00-14:00\nid: evt_7ef2d4d61a9d4277915334b224700cdf | Movie Night with Family \u2014 Sat 18:00-20:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2023-09-30 11:00:00",
+          "end": "2023-09-30 12:00:00",
+          "event_id": "evt_234f066fb31e48ae9f71b4a7d1537259"
+        },
+        "result": "Event updated successfully.\nKids' Soccer Game\n  ID: evt_234f066fb31e48ae9f71b4a7d1537259\n  Time: Sat Sep 30, 11:00 - 12:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've changed the time for the Kids' Soccer Game to 11:00 AM - 12:00 PM on Saturday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is the contraband search on Wednesday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events with time_min set to 2023-09-27T00:00:00 and time_max set to 2023-09-28T00:00:00, find the event 'Contraband Search', and return the start time.",
+    "simulated_now": "2023-09-27 08:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Morning Briefing - Shift Start",
+          "start": "2023-09-27 06:30:00",
+          "end": "2023-09-27 07:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_5001ecd970464395a4e1ce21b264c072"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Contraband Search - Cell Block Alpha",
+          "start": "2023-09-27 10:00:00",
+          "end": "2023-09-27 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4de400cb47814cad907130a57357e62f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Shift Debriefing - Incident Report Review",
+          "start": "2023-09-27 15:00:00",
+          "end": "2023-09-27 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_851b3dcde52c43e482afc6ddf5bb7486"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Wife",
+          "start": "2023-09-27 18:30:00",
+          "end": "2023-09-27 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Sarah - wife@email.com"
+          ],
+          "id": "evt_9fc3c5c2f18247baa05e7a89d802cd8b"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Morning Briefing - Shift Start",
+          "start": "2023-09-27 06:30:00",
+          "end": "2023-09-27 07:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_5001ecd970464395a4e1ce21b264c072"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Contraband Search - Cell Block Alpha",
+          "start": "2023-09-27 10:00:00",
+          "end": "2023-09-27 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4de400cb47814cad907130a57357e62f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Shift Debriefing - Incident Report Review",
+          "start": "2023-09-27 15:00:00",
+          "end": "2023-09-27 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_851b3dcde52c43e482afc6ddf5bb7486"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Wife",
+          "start": "2023-09-27 18:30:00",
+          "end": "2023-09-27 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Sarah - wife@email.com"
+          ],
+          "id": "evt_9fc3c5c2f18247baa05e7a89d802cd8b"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is the contraband search on Wednesday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-09-27 08:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-09-27 23:59:59",
+          "time_min": "2023-09-27 00:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_5001ecd970464395a4e1ce21b264c072 | Morning Briefing - Shift Start \u2014 Wed 06:30-07:00\nid: evt_4de400cb47814cad907130a57357e62f | Contraband Search - Cell Block Alpha \u2014 Wed 10:00-11:00\nid: evt_851b3dcde52c43e482afc6ddf5bb7486 | Shift Debriefing - Incident Report Review \u2014 Wed 15:00-15:30\nid: evt_9fc3c5c2f18247baa05e7a89d802cd8b | Dinner with Wife \u2014 Wed 18:30-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "The contraband search is scheduled for 10:00 to 11:00 on Wednesday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is coming to the BBQ on Sunday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events with time_min set to 2023-10-01T00:00:00 and time_max set to 2023-10-02T00:00:00, then extract the attendee list for the BBQ.",
+    "simulated_now": "2023-10-01 09:00:00",
+    "addressed_days": [
+      "Sunday"
+    ],
+    "calendar_before": {
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Church",
+          "start": "2023-10-01 10:00:00",
+          "end": "2023-10-01 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a043c5ea2d0748b989213cadab39ec6e"
+        },
+        {
+          "day": "Sunday",
+          "summary": "BBQ at Friend's House",
+          "start": "2023-10-01 13:00:00",
+          "end": "2023-10-01 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Tom - tom@email.com",
+            "Mike - mike@email.com"
+          ],
+          "id": "evt_5545790eeea94131a4e6dc83f7e6da1e"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Church",
+          "start": "2023-10-01 10:00:00",
+          "end": "2023-10-01 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a043c5ea2d0748b989213cadab39ec6e"
+        },
+        {
+          "day": "Sunday",
+          "summary": "BBQ at Friend's House",
+          "start": "2023-10-01 13:00:00",
+          "end": "2023-10-01 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Tom - tom@email.com",
+            "Mike - mike@email.com"
+          ],
+          "id": "evt_5545790eeea94131a4e6dc83f7e6da1e"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is coming to the BBQ on Sunday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out who is coming to the BBQ on Sunday. First, I will get the current time to know today's date. Then, I will list the events on Sunday to find the BBQ. Finally, I will get the event details to see the attendees."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-10-01 09:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will now look for a \"BBQ\" event in your calendar for today, October 1st."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-10-01 00:00:00",
+          "time_max": "2023-10-01 23:59:59"
+        },
+        "result": "Found 2 events:\nid: evt_a043c5ea2d0748b989213cadab39ec6e | Church \u2014 Sun 10:00-11:00\nid: evt_5545790eeea94131a4e6dc83f7e6da1e | BBQ at Friend's House \u2014 Sun 13:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I've found the \"BBQ at Friend's House\" event. Now I will get the guest list."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_5545790eeea94131a4e6dc83f7e6da1e"
+        },
+        "result": "BBQ at Friend's House\n  ID: evt_5545790eeea94131a4e6dc83f7e6da1e\n  Time: Sun Oct 01, 13:00 - 16:00\n  Attendees: Tom - tom@email.com, Mike - mike@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "You are attending the BBQ at Friend's House this Sunday from 1:00 PM to 4:00 PM. The other attendees are Tom and Mike."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Dinner with family...",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events with time_min set to 2023-09-25T00:00:00 and time_max set to 2023-10-01T23:59:59 to determine if this event exists and return it. If it does not exist, then it is unresolvable and return that.",
+    "simulated_now": "2023-09-25 16:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Morning Briefing - Shift Start",
+          "start": "2023-09-25 06:30:00",
+          "end": "2023-09-25 07:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_9bde5014a1254fffb7b63b598b01b9cc"
+        },
+        {
+          "day": "Monday",
+          "summary": "Cell Block Inspection - Cell Block Delta",
+          "start": "2023-09-25 10:00:00",
+          "end": "2023-09-25 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_257657883a074fe2ba6f489cd3af105c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Shift Debriefing - Incident Report Review",
+          "start": "2023-09-25 15:00:00",
+          "end": "2023-09-25 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_b9ca01f533a041c5848a0409de61a700"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-09-25 18:00:00",
+          "end": "2023-09-25 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c39d60eeac6b434e94305bfd869a681a"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Morning Briefing - Shift Start",
+          "start": "2023-09-25 06:30:00",
+          "end": "2023-09-25 07:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_9bde5014a1254fffb7b63b598b01b9cc"
+        },
+        {
+          "day": "Monday",
+          "summary": "Cell Block Inspection - Cell Block Delta",
+          "start": "2023-09-25 10:00:00",
+          "end": "2023-09-25 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_257657883a074fe2ba6f489cd3af105c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Shift Debriefing - Incident Report Review",
+          "start": "2023-09-25 15:00:00",
+          "end": "2023-09-25 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_b9ca01f533a041c5848a0409de61a700"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-09-25 18:00:00",
+          "end": "2023-09-25 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c39d60eeac6b434e94305bfd869a681a"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Dinner with family..."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 27 events:\nid: evt_9bde5014a1254fffb7b63b598b01b9cc | Morning Briefing - Shift Start \u2014 Mon 06:30-07:00\nid: evt_257657883a074fe2ba6f489cd3af105c | Cell Block Inspection - Cell Block Delta \u2014 Mon 10:00-11:00\nid: evt_b9ca01f533a041c5848a0409de61a700 | Shift Debriefing - Incident Report Review \u2014 Mon 15:00-15:30\nid: evt_c39d60eeac6b434e94305bfd869a681a | Dinner with Family \u2014 Mon 18:00-19:00\nid: evt_d9405cfbd87845f5a45e975210fd6fd9 | Morning Briefing - Shift Start \u2014 Tue 06:30-07:00\nid: evt_b3a01cdc5da84f7386be39692a4a079b | Meeting with Warden - Security Protocol Review \u2014 Tue 09:00-10:00\nid: evt_2b8026ee45454feeafde810e2e1cf213 | Inmate Transport - Medical Appointment \u2014 Tue 13:00-14:00\nid: evt_b2d189249c2f4e46b67c5d19d1c37676 | Shift Debriefing - Incident Report Review \u2014 Tue 15:00-15:30\nid: evt_913b883f783e41eb8064be9269534ac3 | Kids' Soccer Practice \u2014 Tue 19:30-20:30\nid: evt_475d713e50ed4ef5a934171286cbf44b | Morning Briefing - Shift Start \u2014 Wed 06:30-07:00\nid: evt_bbbfbcff5a60461797d165bed25fc695 | Contraband Search - Cell Block Alpha \u2014 Wed 10:00-11:00\nid: evt_cd6b4854539447e4a24101a84c768c6c | Shift Debriefing - Incident Report Review \u2014 Wed 15:00-15:30\nid: evt_586f2e7899f04ce5a84a609a09010918 | Dinner with Wife \u2014 Wed 18:30-19:30\nid: evt_336d22f5e1934329a3ba16331d232cd0 | Morning Briefing - Shift Start \u2014 Thu 06:30-07:00\nid: evt_efdf444de63a4f1a96c77626a6d4d1f4 | Training Exercise - Riot Control \u2014 Thu 09:00-10:00\nid: evt_332d6dfd618a4e12831a76722329488c | Meeting with Counselor - Inmate Behavior Patterns \u2014 Thu 13:00-14:00\nid: evt_7a558a95eae24683b1528fde5ee1e65e | Shift Debriefing - Incident Report Review \u2014 Thu 15:00-15:30\nid: evt_3c2ceb061e6f4cc8bc3b0f92da8df93a | Check in with Therapist \u2014 Thu 19:00-20:00\nid: evt_14521b7412ad4a039548c2720e3790de | Morning Briefing - Shift Start \u2014 Fri 06:30-07:00\nid: evt_b51ac0526e194d0f9933e1b77de1ebb6 | Security Equipment Inventory \u2014 Fri 10:00-11:00\nid: evt_8c83253870a44dac89d97c7f028ea902 | Shift Debriefing - Incident Report Review \u2014 Fri 15:00-15:30\nid: evt_6ff30ebee59f44ab9c36ca4ee2e3905c | Dinner with Friends \u2014 Fri 19:00-21:00\nid: evt_7683e4d092864a849ebbd466f11ba412 | Kids' Soccer Game \u2014 Sat 09:00-10:00\nid: evt_8d40717f786443058507d8abd0bc8238 | Lunch with Family \u2014 Sat 12:00-14:00\nid: evt_45dda79753554bb5b08451ea06e2b973 | Movie Night with Family \u2014 Sat 18:00-20:00\nid: evt_2bc99a96c5674dc0b63d961a06756871 | Church \u2014 Sun 10:00-11:00\nid: evt_8bdd8cd0578d4e0dad2d3bf5995bc871 | BBQ at Friend's House \u2014 Sun 13:00-16:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_c39d60eeac6b434e94305bfd869a681a"
+        },
+        "result": "Dinner with Family\n  ID: evt_c39d60eeac6b434e94305bfd869a681a\n  Time: Mon Sep 25, 18:00 - 19:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I see you have \"Dinner with Family\" on your calendar for Monday, September 25th, from 6:00 PM to 7:00 PM. Do you have any questions or need to make any changes?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on the schedule for today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events with time_min set to 2023-09-25T00:00:00 and time_max set to 2023-09-26T00:00:00.",
+    "simulated_now": "2023-09-25 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Morning Briefing - Shift Start",
+          "start": "2023-09-25 06:30:00",
+          "end": "2023-09-25 07:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_8765ccb15dd24bc08d52927ff5a8f221"
+        },
+        {
+          "day": "Monday",
+          "summary": "Cell Block Inspection - Cell Block Delta",
+          "start": "2023-09-25 10:00:00",
+          "end": "2023-09-25 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_91e920433a184ceda0432478080ff8ba"
+        },
+        {
+          "day": "Monday",
+          "summary": "Shift Debriefing - Incident Report Review",
+          "start": "2023-09-25 15:00:00",
+          "end": "2023-09-25 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_a91743ca663245629485866289900bf7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-09-25 18:00:00",
+          "end": "2023-09-25 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_98c0c41f3b8143a18e03958a32e6c590"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Morning Briefing - Shift Start",
+          "start": "2023-09-25 06:30:00",
+          "end": "2023-09-25 07:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_8765ccb15dd24bc08d52927ff5a8f221"
+        },
+        {
+          "day": "Monday",
+          "summary": "Cell Block Inspection - Cell Block Delta",
+          "start": "2023-09-25 10:00:00",
+          "end": "2023-09-25 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_91e920433a184ceda0432478080ff8ba"
+        },
+        {
+          "day": "Monday",
+          "summary": "Shift Debriefing - Incident Report Review",
+          "start": "2023-09-25 15:00:00",
+          "end": "2023-09-25 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Shift Supervisor"
+          ],
+          "id": "evt_a91743ca663245629485866289900bf7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Family",
+          "start": "2023-09-25 18:00:00",
+          "end": "2023-09-25 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_98c0c41f3b8143a18e03958a32e6c590"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on the schedule for today?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify today's date. Then, I will list all events scheduled for today to let you know what is on your schedule."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-09-25 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-09-25 00:00:00",
+          "time_max": "2023-09-25 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_8765ccb15dd24bc08d52927ff5a8f221 | Morning Briefing - Shift Start \u2014 Mon 06:30-07:00\nid: evt_91e920433a184ceda0432478080ff8ba | Cell Block Inspection - Cell Block Delta \u2014 Mon 10:00-11:00\nid: evt_a91743ca663245629485866289900bf7 | Shift Debriefing - Incident Report Review \u2014 Mon 15:00-15:30\nid: evt_98c0c41f3b8143a18e03958a32e6c590 | Dinner with Family \u2014 Mon 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today, Monday, September 25, 2023, you have four entries on your calendar:\n\n*   **Morning Briefing - Shift Start** from 6:30 AM to 7:00 AM.\n*   **Cell Block Inspection - Cell Block Delta** from 10:00 AM to 11:00 AM.\n*   **Shift Debriefing - Incident Report Review** from 3:00 PM to 3:30 PM.\n*   **Dinner with Family** from 6:00 PM to 7:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

@@ -1,0 +1,1366 @@
+[
+  {
+    "query": "Book me a doctor's appointment for Tuesday at 11:00 AM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event with summary 'Doctor's Appointment', start '2023-12-12T11:00:00', end '2023-12-12T12:00:00'. Attendees and description should be empty.",
+    "simulated_now": "2023-12-10 23:59:59",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Review Meeting - Project Alpha Deliverables",
+          "start": "2023-12-12 09:00:00",
+          "end": "2023-12-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "project_manager@company.com"
+          ],
+          "id": "evt_093d96c59bf3400b848770e387535e76"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Write - User Manual Section on Installation",
+          "start": "2023-12-12 10:30:00",
+          "end": "2023-12-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a63c06ac2adb4b66bc406ceaadd2229d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Usability Testing Observation - Installation Guide",
+          "start": "2023-12-12 13:00:00",
+          "end": "2023-12-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_58e05c73f59a4308aec1fc8154dd4a03"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "API Documentation - Write Example Code Snippets",
+          "start": "2023-12-12 14:30:00",
+          "end": "2023-12-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d73cddcb85024423824a516d841e4f79"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Family",
+          "start": "2023-12-12 19:00:00",
+          "end": "2023-12-12 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8c9d72dbb6f449b9b4b38e508588ab96"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Review Meeting - Project Alpha Deliverables",
+          "start": "2023-12-12 09:00:00",
+          "end": "2023-12-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "project_manager@company.com"
+          ],
+          "id": "evt_093d96c59bf3400b848770e387535e76"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Write - User Manual Section on Installation",
+          "start": "2023-12-12 10:30:00",
+          "end": "2023-12-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a63c06ac2adb4b66bc406ceaadd2229d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Doctor's Appointment",
+          "start": "2023-12-12 11:00:00",
+          "end": "2023-12-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c886a6f1a55a46219e5064adf75c46d8"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Usability Testing Observation - Installation Guide",
+          "start": "2023-12-12 13:00:00",
+          "end": "2023-12-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_58e05c73f59a4308aec1fc8154dd4a03"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "API Documentation - Write Example Code Snippets",
+          "start": "2023-12-12 14:30:00",
+          "end": "2023-12-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d73cddcb85024423824a516d841e4f79"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Family",
+          "start": "2023-12-12 19:00:00",
+          "end": "2023-12-12 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8c9d72dbb6f449b9b4b38e508588ab96"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Book me a doctor's appointment for Tuesday at 11:00 AM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-10 23:59:59 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2023-12-12 11:00:00",
+          "summary": "Doctor's Appointment",
+          "end": "2023-12-12 12:00:00"
+        },
+        "result": "Event created successfully.\nDoctor's Appointment\n  ID: evt_c886a6f1a55a46219e5064adf75c46d8\n  Time: Tue Dec 12, 11:00 - 12:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've booked you a doctor's appointment for Tuesday, December 12th, from 11:00 AM to 12:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Am I free after my usability testing observation on Tuesday?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events with time_min set to '2023-12-12T13:00:00'. The agent checks if there are any conflicting events scheduled after the usability testing observation.",
+    "simulated_now": "2023-12-12 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Review Meeting - Project Alpha Deliverables",
+          "start": "2023-12-12 09:00:00",
+          "end": "2023-12-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "project_manager@company.com"
+          ],
+          "id": "evt_43525ab6f9de426b9ae207bf39c4784f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Write - User Manual Section on Installation",
+          "start": "2023-12-12 10:30:00",
+          "end": "2023-12-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dd4c05e87fee4dbfa9a6b2f6dca17eca"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Usability Testing Observation - Installation Guide",
+          "start": "2023-12-12 13:00:00",
+          "end": "2023-12-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_8289c6a72e4c449eb0df21d5eb9e7f80"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "API Documentation - Write Example Code Snippets",
+          "start": "2023-12-12 14:30:00",
+          "end": "2023-12-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8912ae4be9f5422a915ff8fdb4ec5884"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Family",
+          "start": "2023-12-12 19:00:00",
+          "end": "2023-12-12 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bd7c297390ad477ba1c0c48a3d930129"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Review Meeting - Project Alpha Deliverables",
+          "start": "2023-12-12 09:00:00",
+          "end": "2023-12-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "project_manager@company.com"
+          ],
+          "id": "evt_43525ab6f9de426b9ae207bf39c4784f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Write - User Manual Section on Installation",
+          "start": "2023-12-12 10:30:00",
+          "end": "2023-12-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dd4c05e87fee4dbfa9a6b2f6dca17eca"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Usability Testing Observation - Installation Guide",
+          "start": "2023-12-12 13:00:00",
+          "end": "2023-12-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_8289c6a72e4c449eb0df21d5eb9e7f80"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "API Documentation - Write Example Code Snippets",
+          "start": "2023-12-12 14:30:00",
+          "end": "2023-12-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8912ae4be9f5422a915ff8fdb4ec5884"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Family",
+          "start": "2023-12-12 19:00:00",
+          "end": "2023-12-12 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bd7c297390ad477ba1c0c48a3d930129"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Am I free after my usability testing observation on Tuesday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to determine your availability after the \"usability testing observation\" on Tuesday. First, I will get the current time to identify the correct Tuesday. Then, I will find the event in question and check for any other events scheduled after it on that same day to answer your question."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-12 10:00:00 | Tuesday"
+      },
+      {
+        "role": "assistant",
+        "content": "I have the current date. Now I will list all events on Tuesday, December 12th, to find the \"usability testing observation\" and check your availability afterward."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-12-12 23:59:59",
+          "time_min": "2023-12-12 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_43525ab6f9de426b9ae207bf39c4784f | Review Meeting - Project Alpha Deliverables \u2014 Tue 09:00-10:00\nid: evt_dd4c05e87fee4dbfa9a6b2f6dca17eca | Write - User Manual Section on Installation \u2014 Tue 10:30-12:00\nid: evt_8289c6a72e4c449eb0df21d5eb9e7f80 | Usability Testing Observation - Installation Guide \u2014 Tue 13:00-14:00\nid: evt_8912ae4be9f5422a915ff8fdb4ec5884 | API Documentation - Write Example Code Snippets \u2014 Tue 14:30-16:00\nid: evt_bd7c297390ad477ba1c0c48a3d930129 | Dinner with Family \u2014 Tue 19:00-20:30"
+      },
+      {
+        "role": "assistant",
+        "content": "No, you are not free after your usability testing observation. You have \"API Documentation - Write Example Code Snippets\" from 14:30 to 16:00, and \"Dinner with Family\" from 19:00 to 20:30."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing before Yoga Class on Monday?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events with time_max set to '2023-12-11T18:30:00'. The agent checks the calendar for any events scheduled before the Yoga Class on Monday.",
+    "simulated_now": "2023-12-11 17:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Documentation Strategy",
+          "start": "2023-12-11 09:00:00",
+          "end": "2023-12-11 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "fellow_writer@company.com",
+            "ux_designer@company.com"
+          ],
+          "id": "evt_7498f77ba19442fda44793e7fee19f6a"
+        },
+        {
+          "day": "Monday",
+          "summary": "API Documentation - Research & Outline",
+          "start": "2023-12-11 10:30:00",
+          "end": "2023-12-11 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ca2c9ee8137d4a308d1a76ec206094ea"
+        },
+        {
+          "day": "Monday",
+          "summary": "Interview - Senior Developer on New Feature",
+          "start": "2023-12-11 13:00:00",
+          "end": "2023-12-11 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "senior_dev@company.com"
+          ],
+          "id": "evt_784936711180422d907b516c3af78ed6"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Manual - Edit Draft",
+          "start": "2023-12-11 15:00:00",
+          "end": "2023-12-11 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_447aaa147e84484f87722d6ef3b450bc"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2023-12-11 18:30:00",
+          "end": "2023-12-11 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7452b84c285f49858fa3aa7497db87a5"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Documentation Strategy",
+          "start": "2023-12-11 09:00:00",
+          "end": "2023-12-11 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "fellow_writer@company.com",
+            "ux_designer@company.com"
+          ],
+          "id": "evt_7498f77ba19442fda44793e7fee19f6a"
+        },
+        {
+          "day": "Monday",
+          "summary": "API Documentation - Research & Outline",
+          "start": "2023-12-11 10:30:00",
+          "end": "2023-12-11 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ca2c9ee8137d4a308d1a76ec206094ea"
+        },
+        {
+          "day": "Monday",
+          "summary": "Interview - Senior Developer on New Feature",
+          "start": "2023-12-11 13:00:00",
+          "end": "2023-12-11 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "senior_dev@company.com"
+          ],
+          "id": "evt_784936711180422d907b516c3af78ed6"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Manual - Edit Draft",
+          "start": "2023-12-11 15:00:00",
+          "end": "2023-12-11 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_447aaa147e84484f87722d6ef3b450bc"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2023-12-11 18:30:00",
+          "end": "2023-12-11 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7452b84c285f49858fa3aa7497db87a5"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing before Yoga Class on Monday?"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can help with that. First, I need to check the current date and time to determine which Monday you're referring to. Then, I'll check your calendar for that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-11 17:00:00 | Monday"
+      },
+      {
+        "role": "assistant",
+        "content": "I'll check your calendar for Monday, December 11th, to see what you have scheduled."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-12-11 00:00:00",
+          "time_max": "2023-12-11 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_7498f77ba19442fda44793e7fee19f6a | Team Meeting - Documentation Strategy \u2014 Mon 09:00-10:00\nid: evt_ca2c9ee8137d4a308d1a76ec206094ea | API Documentation - Research & Outline \u2014 Mon 10:30-12:00\nid: evt_784936711180422d907b516c3af78ed6 | Interview - Senior Developer on New Feature \u2014 Mon 13:00-14:30\nid: evt_447aaa147e84484f87722d6ef3b450bc | User Manual - Edit Draft \u2014 Mon 15:00-16:00\nid: evt_7452b84c285f49858fa3aa7497db87a5 | Yoga Class \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Before your Yoga Class at 6:30 PM, you have \"User Manual - Edit Draft\" from 3:00 PM to 4:00 PM. After that, you have a break before your yoga class."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move my interview with the senior developer on Monday to 2 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find the event with the attendee 'senior_dev@company.com' on Monday. Then call update_event with event_id and updates to start '2023-12-11T14:00:00' and end '2023-12-11T15:30:00'.",
+    "simulated_now": "2023-12-11 09:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Documentation Strategy",
+          "start": "2023-12-11 09:00:00",
+          "end": "2023-12-11 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "fellow_writer@company.com",
+            "ux_designer@company.com"
+          ],
+          "id": "evt_cad811783a8e45d5812c450177ca4d8a"
+        },
+        {
+          "day": "Monday",
+          "summary": "API Documentation - Research & Outline",
+          "start": "2023-12-11 10:30:00",
+          "end": "2023-12-11 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f83e0e15ef494b49807007d22026d1c0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Interview - Senior Developer on New Feature",
+          "start": "2023-12-11 13:00:00",
+          "end": "2023-12-11 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "senior_dev@company.com"
+          ],
+          "id": "evt_5b63788279bb479a9a2bc3b976d22509"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Manual - Edit Draft",
+          "start": "2023-12-11 15:00:00",
+          "end": "2023-12-11 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fce0efd845294a55837ff81df45ffbca"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2023-12-11 18:30:00",
+          "end": "2023-12-11 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4cbe6b8a5bf8470da4fae1edb186d02b"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Documentation Strategy",
+          "start": "2023-12-11 09:00:00",
+          "end": "2023-12-11 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "fellow_writer@company.com",
+            "ux_designer@company.com"
+          ],
+          "id": "evt_cad811783a8e45d5812c450177ca4d8a"
+        },
+        {
+          "day": "Monday",
+          "summary": "API Documentation - Research & Outline",
+          "start": "2023-12-11 10:30:00",
+          "end": "2023-12-11 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f83e0e15ef494b49807007d22026d1c0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Interview - Senior Developer on New Feature",
+          "start": "2023-12-11 14:00:00",
+          "end": "2023-12-11 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "senior_dev@company.com"
+          ],
+          "id": "evt_5b63788279bb479a9a2bc3b976d22509"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Manual - Edit Draft",
+          "start": "2023-12-11 15:00:00",
+          "end": "2023-12-11 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fce0efd845294a55837ff81df45ffbca"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2023-12-11 18:30:00",
+          "end": "2023-12-11 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4cbe6b8a5bf8470da4fae1edb186d02b"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move my interview with the senior developer on Monday to 2 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. First, I'll find the event and then move it for you."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-11 09:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-12-11 00:00:00",
+          "time_max": "2023-12-11 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_cad811783a8e45d5812c450177ca4d8a | Team Meeting - Documentation Strategy \u2014 Mon 09:00-10:00\nid: evt_f83e0e15ef494b49807007d22026d1c0 | API Documentation - Research & Outline \u2014 Mon 10:30-12:00\nid: evt_5b63788279bb479a9a2bc3b976d22509 | Interview - Senior Developer on New Feature \u2014 Mon 13:00-14:30\nid: evt_fce0efd845294a55837ff81df45ffbca | User Manual - Edit Draft \u2014 Mon 15:00-16:00\nid: evt_4cbe6b8a5bf8470da4fae1edb186d02b | Yoga Class \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found the interview. It's currently scheduled from 1:00 PM to 2:30 PM. I will now move it to 2:00 PM for you."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2023-12-11 15:30:00",
+          "event_id": "evt_5b63788279bb479a9a2bc3b976d22509",
+          "start": "2023-12-11 14:00:00"
+        },
+        "result": "Event updated successfully.\nInterview - Senior Developer on New Feature\n  ID: evt_5b63788279bb479a9a2bc3b976d22509\n  Time: Mon Dec 11, 14:00 - 15:30\n  Attendees: senior_dev@company.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've moved your interview to 2:00 PM. It will now be from 2:00 PM to 3:30 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule my dinner with family on Tuesday to 7:30 PM instead.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events on Tuesday to find 'Dinner with Family'. Call update_event with the event id and update the start time to '2023-12-12T19:30:00' and the end time to '2023-12-12T21:00:00'.",
+    "simulated_now": "2023-12-12 14:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Review Meeting - Project Alpha Deliverables",
+          "start": "2023-12-12 09:00:00",
+          "end": "2023-12-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "project_manager@company.com"
+          ],
+          "id": "evt_0b4420eabaa84b9e926af08cdfc4485d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Write - User Manual Section on Installation",
+          "start": "2023-12-12 10:30:00",
+          "end": "2023-12-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dbb3c8a450b44ffe92ffa7fd3f8051ae"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Usability Testing Observation - Installation Guide",
+          "start": "2023-12-12 13:00:00",
+          "end": "2023-12-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_296fedab22f74f7692a6943bc2259200"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "API Documentation - Write Example Code Snippets",
+          "start": "2023-12-12 14:30:00",
+          "end": "2023-12-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_61528966eb054340a3c0d9139936dc1f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Family",
+          "start": "2023-12-12 19:00:00",
+          "end": "2023-12-12 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d78fa0e0e02c44d98f718951e446096c"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Review Meeting - Project Alpha Deliverables",
+          "start": "2023-12-12 09:00:00",
+          "end": "2023-12-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "project_manager@company.com"
+          ],
+          "id": "evt_0b4420eabaa84b9e926af08cdfc4485d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Write - User Manual Section on Installation",
+          "start": "2023-12-12 10:30:00",
+          "end": "2023-12-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dbb3c8a450b44ffe92ffa7fd3f8051ae"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Usability Testing Observation - Installation Guide",
+          "start": "2023-12-12 13:00:00",
+          "end": "2023-12-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_296fedab22f74f7692a6943bc2259200"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "API Documentation - Write Example Code Snippets",
+          "start": "2023-12-12 14:30:00",
+          "end": "2023-12-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_61528966eb054340a3c0d9139936dc1f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Family",
+          "start": "2023-12-12 19:30:00",
+          "end": "2023-12-12 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d78fa0e0e02c44d98f718951e446096c"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule my dinner with family on Tuesday to 7:30 PM instead."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-12 14:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-12-12 00:00:00",
+          "time_max": "2023-12-12 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_0b4420eabaa84b9e926af08cdfc4485d | Review Meeting - Project Alpha Deliverables \u2014 Tue 09:00-10:00\nid: evt_dbb3c8a450b44ffe92ffa7fd3f8051ae | Write - User Manual Section on Installation \u2014 Tue 10:30-12:00\nid: evt_296fedab22f74f7692a6943bc2259200 | Usability Testing Observation - Installation Guide \u2014 Tue 13:00-14:00\nid: evt_61528966eb054340a3c0d9139936dc1f | API Documentation - Write Example Code Snippets \u2014 Tue 14:30-16:00\nid: evt_d78fa0e0e02c44d98f718951e446096c | Dinner with Family \u2014 Tue 19:00-20:30"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2023-12-12 21:00:00",
+          "event_id": "evt_d78fa0e0e02c44d98f718951e446096c",
+          "start": "2023-12-12 19:30:00"
+        },
+        "result": "Event updated successfully.\nDinner with Family\n  ID: evt_d78fa0e0e02c44d98f718951e446096c\n  Time: Tue Dec 12, 19:30 - 21:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've rescheduled your \"Dinner with Family\" to 7:30 PM this Tuesday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time does my book club meeting start on Wednesday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events for Wednesday and find the event 'Book Club Meeting'. Respond with the start time of 6 PM.",
+    "simulated_now": "2023-12-13 08:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Knowledge Base Update - Review & Prioritize",
+          "start": "2023-12-13 09:00:00",
+          "end": "2023-12-13 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_66d51a517a1844d791b562af43d0cfeb"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Training Material - Create Quiz Questions",
+          "start": "2023-12-13 10:30:00",
+          "end": "2023-12-13 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_71c193d7dfa34e839c6e9268860ba7b0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting - Discuss Documentation Feedback",
+          "start": "2023-12-13 13:00:00",
+          "end": "2023-12-13 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "product_manager@company.com"
+          ],
+          "id": "evt_422bd9a5e86447c1bdb11d1fc20dd9ac"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Edit - Training Module on Advanced Features",
+          "start": "2023-12-13 15:00:00",
+          "end": "2023-12-13 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_53da4e6eaf2a44da859ee40e90990684"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2023-12-13 18:00:00",
+          "end": "2023-12-13 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bae80b1d074a4b8fb9e18db01bd1e866"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Knowledge Base Update - Review & Prioritize",
+          "start": "2023-12-13 09:00:00",
+          "end": "2023-12-13 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_66d51a517a1844d791b562af43d0cfeb"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Training Material - Create Quiz Questions",
+          "start": "2023-12-13 10:30:00",
+          "end": "2023-12-13 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_71c193d7dfa34e839c6e9268860ba7b0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting - Discuss Documentation Feedback",
+          "start": "2023-12-13 13:00:00",
+          "end": "2023-12-13 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "product_manager@company.com"
+          ],
+          "id": "evt_422bd9a5e86447c1bdb11d1fc20dd9ac"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Edit - Training Module on Advanced Features",
+          "start": "2023-12-13 15:00:00",
+          "end": "2023-12-13 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_53da4e6eaf2a44da859ee40e90990684"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2023-12-13 18:00:00",
+          "end": "2023-12-13 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bae80b1d074a4b8fb9e18db01bd1e866"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time does my book club meeting start on Wednesday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-13 08:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-12-13 00:00:00",
+          "time_max": "2023-12-13 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_66d51a517a1844d791b562af43d0cfeb | Knowledge Base Update - Review & Prioritize \u2014 Wed 09:00-10:00\nid: evt_71c193d7dfa34e839c6e9268860ba7b0 | Training Material - Create Quiz Questions \u2014 Wed 10:30-12:00\nid: evt_422bd9a5e86447c1bdb11d1fc20dd9ac | Meeting - Discuss Documentation Feedback \u2014 Wed 13:00-14:30\nid: evt_53da4e6eaf2a44da859ee40e90990684 | Edit - Training Module on Advanced Features \u2014 Wed 15:00-16:30\nid: evt_bae80b1d074a4b8fb9e18db01bd1e866 | Book Club Meeting \u2014 Wed 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Your book club meeting is scheduled to start at 18:00 on Wednesday.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can you schedule a meeting with project_manager@company.com for 30 minutes on Friday? I want it to be after my retrospective but before 3 PM.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Call list_events to find the Project Retrospective event on Friday. Calculate the available time slot between the end of the retrospective and 3 PM. Then call create_event with project_manager@company.com as attendee and the available 30 minute slot.",
+    "simulated_now": "2023-12-10 23:59:59",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Project Retrospective - Documentation Process",
+          "start": "2023-12-15 09:00:00",
+          "end": "2023-12-15 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "project_manager@company.com",
+            "fellow_writer@company.com"
+          ],
+          "id": "evt_dfff5163b8554846a5dd0bd13bc03fde"
+        },
+        {
+          "day": "Friday",
+          "summary": "Knowledge Base - Update with FAQ",
+          "start": "2023-12-15 10:30:00",
+          "end": "2023-12-15 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_374bcda1e5734743ba69e99c3127eb50"
+        },
+        {
+          "day": "Friday",
+          "summary": "Draft - Internal Announcement of Documentation Changes",
+          "start": "2023-12-15 13:00:00",
+          "end": "2023-12-15 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e9e7eaf4c63f4eba9f6497ace195b363"
+        },
+        {
+          "day": "Friday",
+          "summary": "Professional Development - Online Technical Writing Course",
+          "start": "2023-12-15 15:00:00",
+          "end": "2023-12-15 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1cc1b36260f04b1fb478e39920611772"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner and a Movie with Friends",
+          "start": "2023-12-15 19:00:00",
+          "end": "2023-12-15 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e9e3626819c14244ab9656e0b61b1159"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Project Retrospective - Documentation Process",
+          "start": "2023-12-15 09:00:00",
+          "end": "2023-12-15 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "project_manager@company.com",
+            "fellow_writer@company.com"
+          ],
+          "id": "evt_dfff5163b8554846a5dd0bd13bc03fde"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meeting with Project Manager",
+          "start": "2023-12-15 10:00:00",
+          "end": "2023-12-15 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "project_manager@company.com"
+          ],
+          "id": "evt_e19a6968a8ff4ba5949b1bcc5ade5def"
+        },
+        {
+          "day": "Friday",
+          "summary": "Knowledge Base - Update with FAQ",
+          "start": "2023-12-15 10:30:00",
+          "end": "2023-12-15 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_374bcda1e5734743ba69e99c3127eb50"
+        },
+        {
+          "day": "Friday",
+          "summary": "Draft - Internal Announcement of Documentation Changes",
+          "start": "2023-12-15 13:00:00",
+          "end": "2023-12-15 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e9e7eaf4c63f4eba9f6497ace195b363"
+        },
+        {
+          "day": "Friday",
+          "summary": "Professional Development - Online Technical Writing Course",
+          "start": "2023-12-15 15:00:00",
+          "end": "2023-12-15 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1cc1b36260f04b1fb478e39920611772"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner and a Movie with Friends",
+          "start": "2023-12-15 19:00:00",
+          "end": "2023-12-15 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e9e3626819c14244ab9656e0b61b1159"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can you schedule a meeting with project_manager@company.com for 30 minutes on Friday? I want it to be after my retrospective but before 3 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. I'll schedule a 30-minute meeting with project_manager@company.com for you on Friday, after your retrospective and before 3 PM. I'll start by checking the current time to determine the correct date for Friday and find your retrospective."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-10 23:59:59 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "Got it. Current time is Sunday, December 10, 2023, so Friday is December 15, 2023. Now, I'll check for your retrospective event on that day to find out when it ends."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-12-15 23:59:59",
+          "time_min": "2023-12-15 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_dfff5163b8554846a5dd0bd13bc03fde | Project Retrospective - Documentation Process \u2014 Fri 09:00-10:00\nid: evt_374bcda1e5734743ba69e99c3127eb50 | Knowledge Base - Update with FAQ \u2014 Fri 10:30-12:00\nid: evt_e9e7eaf4c63f4eba9f6497ace195b363 | Draft - Internal Announcement of Documentation Changes \u2014 Fri 13:00-14:00\nid: evt_1cc1b36260f04b1fb478e39920611772 | Professional Development - Online Technical Writing Course \u2014 Fri 15:00-16:00\nid: evt_e9e3626819c14244ab9656e0b61b1159 | Dinner and a Movie with Friends \u2014 Fri 19:00-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I see the \"Project Retrospective - Documentation Process\" ends at 10:00 AM on Friday, December 15th. I'll schedule your 30-minute meeting immediately after, from 10:00 AM to 10:30 AM, to be before your 3:00 PM deadline. I'll create the event now."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Meeting with Project Manager",
+          "end": "2023-12-15 10:30:00",
+          "attendees": [
+            "project_manager@company.com"
+          ],
+          "start": "2023-12-15 10:00:00"
+        },
+        "result": "Event created successfully.\nMeeting with Project Manager\n  ID: evt_e19a6968a8ff4ba5949b1bcc5ade5def\n  Time: Fri Dec 15, 10:00 - 10:30\n  Attendees: project_manager@company.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've scheduled the meeting for you. It's a 30-minute meeting with project_manager@company.com on Friday, December 15th, from 10:00 AM to 10:30 AM, right after your retrospective. The event has been created successfully."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on my schedule today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events with time_min set to '2023-12-13T00:00:00' and time_max to '2023-12-13T23:59:59'.",
+    "simulated_now": "2023-12-13 08:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Knowledge Base Update - Review & Prioritize",
+          "start": "2023-12-13 09:00:00",
+          "end": "2023-12-13 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cd3cbeff4d63403cb6e86273f5264540"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Training Material - Create Quiz Questions",
+          "start": "2023-12-13 10:30:00",
+          "end": "2023-12-13 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_933dfedac842446f8168345086b62401"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting - Discuss Documentation Feedback",
+          "start": "2023-12-13 13:00:00",
+          "end": "2023-12-13 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "product_manager@company.com"
+          ],
+          "id": "evt_6bcf6219ea274976a32ab50144cf9784"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Edit - Training Module on Advanced Features",
+          "start": "2023-12-13 15:00:00",
+          "end": "2023-12-13 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2fa6ada942df4391bb9838c02b001e84"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2023-12-13 18:00:00",
+          "end": "2023-12-13 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a7834c1ef8da43a8890f625080dd9e22"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Knowledge Base Update - Review & Prioritize",
+          "start": "2023-12-13 09:00:00",
+          "end": "2023-12-13 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_cd3cbeff4d63403cb6e86273f5264540"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Training Material - Create Quiz Questions",
+          "start": "2023-12-13 10:30:00",
+          "end": "2023-12-13 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_933dfedac842446f8168345086b62401"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting - Discuss Documentation Feedback",
+          "start": "2023-12-13 13:00:00",
+          "end": "2023-12-13 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "product_manager@company.com"
+          ],
+          "id": "evt_6bcf6219ea274976a32ab50144cf9784"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Edit - Training Module on Advanced Features",
+          "start": "2023-12-13 15:00:00",
+          "end": "2023-12-13 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2fa6ada942df4391bb9838c02b001e84"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2023-12-13 18:00:00",
+          "end": "2023-12-13 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a7834c1ef8da43a8890f625080dd9e22"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on my schedule today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-13 08:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-12-13 00:00:00",
+          "time_max": "2023-12-13 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_cd3cbeff4d63403cb6e86273f5264540 | Knowledge Base Update - Review & Prioritize \u2014 Wed 09:00-10:00\nid: evt_933dfedac842446f8168345086b62401 | Training Material - Create Quiz Questions \u2014 Wed 10:30-12:00\nid: evt_6bcf6219ea274976a32ab50144cf9784 | Meeting - Discuss Documentation Feedback \u2014 Wed 13:00-14:30\nid: evt_2fa6ada942df4391bb9838c02b001e84 | Edit - Training Module on Advanced Features \u2014 Wed 15:00-16:30\nid: evt_a7834c1ef8da43a8890f625080dd9e22 | Book Club Meeting \u2014 Wed 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today, Wednesday, December 13, 2023, you have 5 events on your calendar:\n\n*   **9am - 10am**: Knowledge Base Update - Review & Prioritize\n*   **10:30am - 12pm**: Training Material - Create Quiz Questions\n*   **1pm - 2:30pm**: Meeting - Discuss Documentation Feedback\n*   **3pm - 4:30pm**: Edit - Training Module on Advanced Features\n*   **6pm - 7pm**: Book Club Meeting"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing tomorrow evening?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events with time_min set to '2023-12-15T18:00:00' and time_max set to '2023-12-15T23:59:59'.",
+    "simulated_now": "2023-12-14 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Project Retrospective - Documentation Process",
+          "start": "2023-12-15 09:00:00",
+          "end": "2023-12-15 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "project_manager@company.com",
+            "fellow_writer@company.com"
+          ],
+          "id": "evt_c5ad378ec7414629b5dc4ae5fe554683"
+        },
+        {
+          "day": "Friday",
+          "summary": "Knowledge Base - Update with FAQ",
+          "start": "2023-12-15 10:30:00",
+          "end": "2023-12-15 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_343c1ab3147b485faf282dba668b2f0f"
+        },
+        {
+          "day": "Friday",
+          "summary": "Draft - Internal Announcement of Documentation Changes",
+          "start": "2023-12-15 13:00:00",
+          "end": "2023-12-15 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_74bfadcdd46c4bc3b84aad334850ea9d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Professional Development - Online Technical Writing Course",
+          "start": "2023-12-15 15:00:00",
+          "end": "2023-12-15 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a5c5c91a9ead4acb82f1f5601e3f8b1b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner and a Movie with Friends",
+          "start": "2023-12-15 19:00:00",
+          "end": "2023-12-15 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d403538f2afc4cd3a0c6d6eb4e52a99f"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Project Retrospective - Documentation Process",
+          "start": "2023-12-15 09:00:00",
+          "end": "2023-12-15 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "project_manager@company.com",
+            "fellow_writer@company.com"
+          ],
+          "id": "evt_c5ad378ec7414629b5dc4ae5fe554683"
+        },
+        {
+          "day": "Friday",
+          "summary": "Knowledge Base - Update with FAQ",
+          "start": "2023-12-15 10:30:00",
+          "end": "2023-12-15 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_343c1ab3147b485faf282dba668b2f0f"
+        },
+        {
+          "day": "Friday",
+          "summary": "Draft - Internal Announcement of Documentation Changes",
+          "start": "2023-12-15 13:00:00",
+          "end": "2023-12-15 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_74bfadcdd46c4bc3b84aad334850ea9d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Professional Development - Online Technical Writing Course",
+          "start": "2023-12-15 15:00:00",
+          "end": "2023-12-15 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a5c5c91a9ead4acb82f1f5601e3f8b1b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner and a Movie with Friends",
+          "start": "2023-12-15 19:00:00",
+          "end": "2023-12-15 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d403538f2afc4cd3a0c6d6eb4e52a99f"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing tomorrow evening?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify the date for \"tomorrow\". Then, I will list the events for tomorrow evening to answer your question."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-12-14 10:00:00 | Thursday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-12-15 18:00:00",
+          "time_max": "2023-12-15 22:00:00"
+        },
+        "result": "Found 1 events:\nid: evt_d403538f2afc4cd3a0c6d6eb4e52a99f | Dinner and a Movie with Friends \u2014 Fri 19:00-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have \"Dinner and a Movie with Friends\" from 7:00 PM to 9:00 PM tomorrow."
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

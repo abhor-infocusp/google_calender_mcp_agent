@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting called 'Discuss Project Alpha' for this Wednesday at 3:30 PM for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event titled 'Discuss Project Alpha' on Wednesday, March 5, 2025, from 3:30 PM to 4:30 PM with no attendees.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-02-23T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you add a dentist appointment to my calendar for this Thursday at 10:00 AM?",
+        "complexity": "Low",
+        "expected_behavior": "Create an event titled 'Dentist Appointment' on Thursday, March 6, 2025, at 10:00 AM for an unspecified duration with no attendees.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-02-23T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Monday after my accountant call?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Call with Accountant' event on Monday, March 3, 2025, determine its end time (12:30 PM), then find any events scheduled after that time on the same day. Return the 'Property Photoshoot - 123 Main St' event.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-03-03T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Who is joining me at Oak Ave?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event containing 'Oak Ave' on Tuesday, March 4, 2025, and return the list of attendees, which is agent3@email.com.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-03-04T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move the photoshoot at 123 Main St to 3 PM on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Property Photoshoot - 123 Main St' event on Monday, March 3, 2025, and update its start time to 3:00 PM, keeping the same duration. Also, keep the attendee agent1@email.com.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-03-03T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update the dinner with friends to start at 6:30 PM on Saturday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Friends' event on Saturday, March 8, 2025, and update the start time to 6:30 PM, keeping the same duration and attendees (spouse@email.com, friend1@email.com).",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-03-08T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my call with the freelance assistant?",
+        "complexity": "Low",
+        "expected_behavior": "Search the calendar for an event containing 'Call with Freelance Assistant'. Return the start time, which is 2:00 PM on Wednesday, March 5, 2025.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-03-05T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is invited to the Commercial Property photoshoot?",
+        "complexity": "Low",
+        "expected_behavior": "Search the calendar for an event containing 'Commercial Property Photoshoot' on Thursday, March 6, 2025, and return the list of attendees, which is propertymanager@email.com.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-03-06T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I need to move the meeting with agent2@email.com to Saturday at 11 AM, but make sure it doesn't overlap with the birthday party.",
+        "complexity": "High",
+        "expected_behavior": "First, find the 'Real Estate Agent Coffee Meeting' with agent2@email.com on Tuesday, March 4, 2025. Then find the 'Kid's Birthday Party' event on Saturday, March 8, 2025. Check if moving the meeting to Saturday at 11:00 AM would conflict with the birthday party (1:00 PM - 3:00 PM). Determine there is no conflict, and update the 'Real Estate Agent Coffee Meeting' to Saturday, March 8, 2025, at 11:00 AM.",
+        "addressed_days": [
+            "Tuesday",
+            "Saturday"
+        ],
+        "current_time": "2025-03-04T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "If I decline the meeting with the stager, will I have time to finish the website updates on Thursday?",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Discuss Staging for Next Photoshoot' event on Thursday, March 6, 2025, and determine its duration (2:30 PM - 3:30 PM).  Find the 'Website Updates and Maintenance' which occurs from 9:00 AM - 11:00 AM. Determine the total free time if the 'Discuss Staging' event is declined (the time from 11:00 AM to 2:30 PM), and inform the user that there is time to continue working on the website on Thursday.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-03-06T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Oak Ave...",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event related to 'Oak Ave' on Tuesday, March 4, 2025. Since no new time is provided, ask the user for the desired new time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-03-04T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner on Wednesday...",
+        "complexity": "Low",
+        "expected_behavior": "Find the event containing 'Dinner' on Wednesday, March 5, 2025. Respond with the event details, which is 'Dinner with Family from 6:30 PM to 8:00 PM'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-03-05T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What is on my schedule today?",
+        "complexity": "Low",
+        "expected_behavior": "Using the current time to determine that 'today' is Monday, March 3, 2025, find all events on that day and return them.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-03-03T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Using the current time to determine that 'tomorrow' is Wednesday, March 5, 2025, find all events on that day and return them.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-03-04T20:00:00"
+    }
+]

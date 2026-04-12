@@ -1,0 +1,1036 @@
+[
+  {
+    "query": "Add a doctor's appointment on Tuesday at 3 PM for one hour.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event called 'Doctor's Appointment' on Tuesday from 3 PM to 4 PM.",
+    "simulated_now": "2025-12-28 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Equipment Check & Maintenance Coordination",
+          "start": "2025-12-30 07:00:00",
+          "end": "2025-12-30 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6302c42510d54b52a8d5f483c25c7ead"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Subcontractor - Paving Schedule",
+          "start": "2025-12-30 09:00:00",
+          "end": "2025-12-30 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pavingboss@roadbuilders.com"
+          ],
+          "id": "evt_b12c1160acca4151b71f0d76e727791d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Roadwork Progress Monitoring - Section A",
+          "start": "2025-12-30 10:30:00",
+          "end": "2025-12-30 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_80bf59f3b97142d2a62973bc20905f1e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Conference (Child's School)",
+          "start": "2025-12-30 18:00:00",
+          "end": "2025-12-30 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8c3b08ed689548f4a0f893f2a2139431"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Equipment Check & Maintenance Coordination",
+          "start": "2025-12-30 07:00:00",
+          "end": "2025-12-30 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6302c42510d54b52a8d5f483c25c7ead"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Subcontractor - Paving Schedule",
+          "start": "2025-12-30 09:00:00",
+          "end": "2025-12-30 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pavingboss@roadbuilders.com"
+          ],
+          "id": "evt_b12c1160acca4151b71f0d76e727791d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Roadwork Progress Monitoring - Section A",
+          "start": "2025-12-30 10:30:00",
+          "end": "2025-12-30 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_80bf59f3b97142d2a62973bc20905f1e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Doctor's Appointment",
+          "start": "2025-12-30 15:00:00",
+          "end": "2025-12-30 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_80bc34e80e254ddfa867d3004c477dcf"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Conference (Child's School)",
+          "start": "2025-12-30 18:00:00",
+          "end": "2025-12-30 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8c3b08ed689548f4a0f893f2a2139431"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Add a doctor's appointment on Tuesday at 3 PM for one hour."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. I'll add a one-hour doctor's appointment for you on Tuesday at 3 PM. I will assume this is for the upcoming Tuesday. If you meant a different Tuesday, please let me know.\n"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-12-28 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2025-12-30 15:00:00",
+          "end": "2025-12-30 16:00:00",
+          "summary": "Doctor's Appointment"
+        },
+        "result": "Event created successfully.\nDoctor's Appointment\n  ID: evt_80bc34e80e254ddfa867d3004c477dcf\n  Time: Tue Dec 30, 15:00 - 16:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've added a doctor's appointment to your calendar for Tuesday, December 30th, from 3:00 PM to 4:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move the meeting with the surveyor team back by an hour on Friday.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Meeting with Surveyor Team' event on Friday and update its start time to 9:30 AM.",
+    "simulated_now": "2025-12-28 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Weekly Safety Inspection",
+          "start": "2026-01-02 07:00:00",
+          "end": "2026-01-02 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e9d47a12f3274402bbcdac58ae40fd37"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meeting with Surveyor Team",
+          "start": "2026-01-02 08:30:00",
+          "end": "2026-01-02 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "surveyorlead@mapping.com"
+          ],
+          "id": "evt_da420d5fe6e84220bdee587db53b0204"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Weekly Report",
+          "start": "2026-01-02 10:30:00",
+          "end": "2026-01-02 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_847db4a7b9104915b4ea3c8eb1b8bed9"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Children",
+          "start": "2026-01-02 19:00:00",
+          "end": "2026-01-02 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d38db6ad264f440f97444386b73b6588"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Weekly Safety Inspection",
+          "start": "2026-01-02 07:00:00",
+          "end": "2026-01-02 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e9d47a12f3274402bbcdac58ae40fd37"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meeting with Surveyor Team",
+          "start": "2026-01-02 09:30:00",
+          "end": "2026-01-02 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "surveyorlead@mapping.com"
+          ],
+          "id": "evt_da420d5fe6e84220bdee587db53b0204"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Weekly Report",
+          "start": "2026-01-02 10:30:00",
+          "end": "2026-01-02 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_847db4a7b9104915b4ea3c8eb1b8bed9"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Children",
+          "start": "2026-01-02 19:00:00",
+          "end": "2026-01-02 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d38db6ad264f440f97444386b73b6588"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move the meeting with the surveyor team back by an hour on Friday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-12-28 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2026-01-02 00:00:00",
+          "time_max": "2026-01-02 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_e9d47a12f3274402bbcdac58ae40fd37 | Weekly Safety Inspection \u2014 Fri 07:00-08:00\nid: evt_da420d5fe6e84220bdee587db53b0204 | Meeting with Surveyor Team \u2014 Fri 08:30-10:00\nid: evt_847db4a7b9104915b4ea3c8eb1b8bed9 | Finalize Weekly Report \u2014 Fri 10:30-12:00\nid: evt_d38db6ad264f440f97444386b73b6588 | Movie Night with Children \u2014 Fri 19:00-21:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_da420d5fe6e84220bdee587db53b0204",
+          "end": "2026-01-02 11:00:00",
+          "start": "2026-01-02 09:30:00"
+        },
+        "result": "Event updated successfully.\nMeeting with Surveyor Team\n  ID: evt_da420d5fe6e84220bdee587db53b0204\n  Time: Fri Jan 02, 09:30 - 11:00\n  Attendees: surveyorlead@mapping.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved the meeting with the surveyor team to 9:30 AM on Friday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change my dinner with children to 6 PM on Monday.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Dinner with Children' event on Monday and update the start time to 6 PM.",
+    "simulated_now": "2025-12-28 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Site Safety Briefing",
+          "start": "2025-12-29 07:00:00",
+          "end": "2025-12-29 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "safetyofficer@buildsafe.com"
+          ],
+          "id": "evt_c3da2e176eb64bbf8675a0b245088a4e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Review Bridge Blueprint Revisions",
+          "start": "2025-12-29 08:30:00",
+          "end": "2025-12-29 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineer1@structure.com",
+            "projectmanager@buildfirm.com"
+          ],
+          "id": "evt_cc5140581f7b48b1be844615eb04e9f9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Concrete Pour Supervision - South Pier",
+          "start": "2025-12-29 10:30:00",
+          "end": "2025-12-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_faec4ffdccd042e6bd0dcbcb53b9036f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Children",
+          "start": "2025-12-29 17:30:00",
+          "end": "2025-12-29 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5fd0f78c6cb1493ab7c52d20a32363d4"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Site Safety Briefing",
+          "start": "2025-12-29 07:00:00",
+          "end": "2025-12-29 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "safetyofficer@buildsafe.com"
+          ],
+          "id": "evt_c3da2e176eb64bbf8675a0b245088a4e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Review Bridge Blueprint Revisions",
+          "start": "2025-12-29 08:30:00",
+          "end": "2025-12-29 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineer1@structure.com",
+            "projectmanager@buildfirm.com"
+          ],
+          "id": "evt_cc5140581f7b48b1be844615eb04e9f9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Concrete Pour Supervision - South Pier",
+          "start": "2025-12-29 10:30:00",
+          "end": "2025-12-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_faec4ffdccd042e6bd0dcbcb53b9036f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Children",
+          "start": "2025-12-29 18:00:00",
+          "end": "2025-12-29 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5fd0f78c6cb1493ab7c52d20a32363d4"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change my dinner with children to 6 PM on Monday."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. First, I need to know today's date."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-12-28 10:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will search for the event in the calendar."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-12-28 10:00:00",
+          "time_max": "2026-01-05 10:00:00"
+        },
+        "result": "Found 25 events:\nid: evt_c3da2e176eb64bbf8675a0b245088a4e | Site Safety Briefing \u2014 Mon 07:00-08:00\nid: evt_cc5140581f7b48b1be844615eb04e9f9 | Review Bridge Blueprint Revisions \u2014 Mon 08:30-10:00\nid: evt_faec4ffdccd042e6bd0dcbcb53b9036f | Concrete Pour Supervision - South Pier \u2014 Mon 10:30-12:00\nid: evt_5fd0f78c6cb1493ab7c52d20a32363d4 | Dinner with Children \u2014 Mon 17:30-19:00\nid: evt_6f583a2b673e4913b946927f47c92961 | Equipment Check & Maintenance Coordination \u2014 Tue 07:00-08:00\nid: evt_ce71a30e2b3c4db1bc08fc816d33efc1 | Meeting with Subcontractor - Paving Schedule \u2014 Tue 09:00-10:00\nid: evt_6a88d58f494543d7991f5220addfc0c6 | Roadwork Progress Monitoring - Section A \u2014 Tue 10:30-12:00\nid: evt_1705dfb5819448afad97d957277df13e | Parent-Teacher Conference (Child's School) \u2014 Tue 18:00-19:30\nid: evt_662e070d310844baa85944a7dddf9356 | Review Daily Reports \u2014 Wed 07:00-08:00\nid: evt_a7c6d1d9e78f4bbbae23993ef99d3858 | Tunnel Excavation Strategy Meeting \u2014 Wed 08:30-10:00\nid: evt_546d3c4537d94e5295aa68dc1a248541 | Inspect Tunnel Reinforcement \u2014 Wed 10:30-12:00\nid: evt_eb6259f71e934ed8a03b849c2b97a2e2 | Gardening Club Meeting \u2014 Wed 18:30-20:00\nid: evt_43d9a1c5d6c04eb5a8b4e0aa7d340e6d | Site Walkthrough with Client \u2014 Thu 07:00-08:00\nid: evt_be4b9a549ff240ceb5f746666761b967 | Budget Review Meeting \u2014 Thu 09:00-10:00\nid: evt_78eaeec42713403d8d34f6fc348fa9d5 | Material Delivery Coordination \u2014 Thu 10:30-12:00\nid: evt_ef8f451601a6408a9a3ce106912a40d9 | Pick up Groceries \u2014 Thu 18:00-19:00\nid: evt_7e7c9740e1e444baace5e27716713abb | Weekly Safety Inspection \u2014 Fri 07:00-08:00\nid: evt_9c1cb9ab31754db4a04c398b6e6d3465 | Meeting with Surveyor Team \u2014 Fri 08:30-10:00\nid: evt_e415d46ce8364580a94c1880a1f8d23b | Finalize Weekly Report \u2014 Fri 10:30-12:00\nid: evt_8cafc1f179ad45009622a036255243b5 | Movie Night with Children \u2014 Fri 19:00-21:00\nid: evt_f61610da92dd4e99b3d2c402e497c401 | Gardening - Planting Vegetables \u2014 Sat 09:00-12:00\nid: evt_a0893b89ff6d4172b304037bbb373565 | Children's Soccer Game \u2014 Sat 13:00-15:00\nid: evt_13049c3a862b4664aeefaeea2a26d4d7 | Dinner at Mother's House \u2014 Sat 18:00-20:00\nid: evt_9fd6fdf1ca9340da8b016b002879c34f | Church \u2014 Sun 10:00-12:00\nid: evt_b5a241340fc54513b77d75afd5dff64b | Family Picnic at Park \u2014 Sun 13:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've found the dinner event. I'm updating it to 6:00 PM on Monday now."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2025-12-29 19:30:00",
+          "event_id": "evt_5fd0f78c6cb1493ab7c52d20a32363d4",
+          "start": "2025-12-29 18:00:00"
+        },
+        "result": "Event updated successfully.\nDinner with Children\n  ID: evt_5fd0f78c6cb1493ab7c52d20a32363d4\n  Time: Mon Dec 29, 18:00 - 19:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've moved your dinner with children to 6:00 PM on Monday, December 29th. It will now end at 7:30 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is the site safety briefing?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Site Safety Briefing' event and return its start time.",
+    "simulated_now": "2025-12-28 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Site Safety Briefing",
+          "start": "2025-12-29 07:00:00",
+          "end": "2025-12-29 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "safetyofficer@buildsafe.com"
+          ],
+          "id": "evt_5c83d47489734bba98ca61764d9bd7a3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Review Bridge Blueprint Revisions",
+          "start": "2025-12-29 08:30:00",
+          "end": "2025-12-29 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineer1@structure.com",
+            "projectmanager@buildfirm.com"
+          ],
+          "id": "evt_08eda221be5749768e1aa4b3d247b172"
+        },
+        {
+          "day": "Monday",
+          "summary": "Concrete Pour Supervision - South Pier",
+          "start": "2025-12-29 10:30:00",
+          "end": "2025-12-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7ca88770b2d5467dbbde36972ff53dae"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Children",
+          "start": "2025-12-29 17:30:00",
+          "end": "2025-12-29 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7c2e4111d03c49a49d039bec35260e03"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Site Safety Briefing",
+          "start": "2025-12-29 07:00:00",
+          "end": "2025-12-29 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "safetyofficer@buildsafe.com"
+          ],
+          "id": "evt_5c83d47489734bba98ca61764d9bd7a3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Review Bridge Blueprint Revisions",
+          "start": "2025-12-29 08:30:00",
+          "end": "2025-12-29 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineer1@structure.com",
+            "projectmanager@buildfirm.com"
+          ],
+          "id": "evt_08eda221be5749768e1aa4b3d247b172"
+        },
+        {
+          "day": "Monday",
+          "summary": "Concrete Pour Supervision - South Pier",
+          "start": "2025-12-29 10:30:00",
+          "end": "2025-12-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7ca88770b2d5467dbbde36972ff53dae"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Children",
+          "start": "2025-12-29 17:30:00",
+          "end": "2025-12-29 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7c2e4111d03c49a49d039bec35260e03"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is the site safety briefing?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find an event called \"site safety briefing\". I will search your calendar for it."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_5c83d47489734bba98ca61764d9bd7a3 | Site Safety Briefing \u2014 Mon 07:00-08:00\nid: evt_08eda221be5749768e1aa4b3d247b172 | Review Bridge Blueprint Revisions \u2014 Mon 08:30-10:00\nid: evt_7ca88770b2d5467dbbde36972ff53dae | Concrete Pour Supervision - South Pier \u2014 Mon 10:30-12:00\nid: evt_7c2e4111d03c49a49d039bec35260e03 | Dinner with Children \u2014 Mon 17:30-19:00\nid: evt_cea4b21a4c2a4b1b98bf835ab6b032f9 | Equipment Check & Maintenance Coordination \u2014 Tue 07:00-08:00\nid: evt_813586fe74eb4f17975577d41e3d9ebf | Meeting with Subcontractor - Paving Schedule \u2014 Tue 09:00-10:00\nid: evt_b21f5328493c46acad81fc9af1b77001 | Roadwork Progress Monitoring - Section A \u2014 Tue 10:30-12:00\nid: evt_38e0becbdf5c4e7f85ee567c20d423c3 | Parent-Teacher Conference (Child's School) \u2014 Tue 18:00-19:30\nid: evt_7a3e806231eb481da6efe8f80f816a38 | Review Daily Reports \u2014 Wed 07:00-08:00\nid: evt_da0f86fab97d43acbadb402e1f65ea54 | Tunnel Excavation Strategy Meeting \u2014 Wed 08:30-10:00\nid: evt_1b5cdfc43e784db9be02c57cb27aea11 | Inspect Tunnel Reinforcement \u2014 Wed 10:30-12:00\nid: evt_6e592fcac6db449fa9b8daddc7e3048e | Gardening Club Meeting \u2014 Wed 18:30-20:00\nid: evt_7fbe683088a047998d1ad57aaaae057b | Site Walkthrough with Client \u2014 Thu 07:00-08:00\nid: evt_712fb150b4514895906382441d920292 | Budget Review Meeting \u2014 Thu 09:00-10:00\nid: evt_06707fb66e304f3aa534c8c9c68832f1 | Material Delivery Coordination \u2014 Thu 10:30-12:00\nid: evt_bea6aed06a5a421385a8cda3022e5c6b | Pick up Groceries \u2014 Thu 18:00-19:00\nid: evt_fd19e927fc6c46948baf22bfdceeb474 | Weekly Safety Inspection \u2014 Fri 07:00-08:00\nid: evt_db8d146c9be94580b8a903003506de14 | Meeting with Surveyor Team \u2014 Fri 08:30-10:00\nid: evt_f31bce3640ef45adad8cc815a3c0195b | Finalize Weekly Report \u2014 Fri 10:30-12:00\nid: evt_a0b4d55f807147a4934f3cbbb7f058da | Movie Night with Children \u2014 Fri 19:00-21:00\nid: evt_b3facb9d0269411899a3280538c3101f | Gardening - Planting Vegetables \u2014 Sat 09:00-12:00\nid: evt_9ba51d3b1e834241804036cbb674cf35 | Children's Soccer Game \u2014 Sat 13:00-15:00\nid: evt_d081d12ca98b472da3e6b13e958ab353 | Dinner at Mother's House \u2014 Sat 18:00-20:00\nid: evt_b710fb648a5a4dad8557fe3809bfd66d | Church \u2014 Sun 10:00-12:00\nid: evt_372f41738c8045d49f7a780f3498828b | Family Picnic at Park \u2014 Sun 13:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "The Site Safety Briefing is on Monday from 7:00 AM to 8:00 AM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the roadwork progress monitoring?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Roadwork Progress Monitoring - Section A' event and return the list of attendees. Since there are no listed attendees, return 'No attendees listed'.",
+    "simulated_now": "2025-12-28 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Equipment Check & Maintenance Coordination",
+          "start": "2025-12-30 07:00:00",
+          "end": "2025-12-30 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6e3067fc7220411fadc392df4cffe5cc"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Subcontractor - Paving Schedule",
+          "start": "2025-12-30 09:00:00",
+          "end": "2025-12-30 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pavingboss@roadbuilders.com"
+          ],
+          "id": "evt_e82b4baed21446adb7c7136080087508"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Roadwork Progress Monitoring - Section A",
+          "start": "2025-12-30 10:30:00",
+          "end": "2025-12-30 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_11306de824d14c4ba3958088ea21f94d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Conference (Child's School)",
+          "start": "2025-12-30 18:00:00",
+          "end": "2025-12-30 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7cce635972f44bd0a4b10cdfcb9b866d"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Equipment Check & Maintenance Coordination",
+          "start": "2025-12-30 07:00:00",
+          "end": "2025-12-30 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6e3067fc7220411fadc392df4cffe5cc"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Subcontractor - Paving Schedule",
+          "start": "2025-12-30 09:00:00",
+          "end": "2025-12-30 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pavingboss@roadbuilders.com"
+          ],
+          "id": "evt_e82b4baed21446adb7c7136080087508"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Roadwork Progress Monitoring - Section A",
+          "start": "2025-12-30 10:30:00",
+          "end": "2025-12-30 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_11306de824d14c4ba3958088ea21f94d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Conference (Child's School)",
+          "start": "2025-12-30 18:00:00",
+          "end": "2025-12-30 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7cce635972f44bd0a4b10cdfcb9b866d"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the roadwork progress monitoring?"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_c9394d72b3b74b2e84305c755d01b175 | Site Safety Briefing \u2014 Mon 07:00-08:00\nid: evt_7dd94449c44f40d4acf57fac0013b7a0 | Review Bridge Blueprint Revisions \u2014 Mon 08:30-10:00\nid: evt_41ce4f61342e48cf8ec1961348c4c938 | Concrete Pour Supervision - South Pier \u2014 Mon 10:30-12:00\nid: evt_73ec66d91b7d4987894fea5a22e31545 | Dinner with Children \u2014 Mon 17:30-19:00\nid: evt_6e3067fc7220411fadc392df4cffe5cc | Equipment Check & Maintenance Coordination \u2014 Tue 07:00-08:00\nid: evt_e82b4baed21446adb7c7136080087508 | Meeting with Subcontractor - Paving Schedule \u2014 Tue 09:00-10:00\nid: evt_11306de824d14c4ba3958088ea21f94d | Roadwork Progress Monitoring - Section A \u2014 Tue 10:30-12:00\nid: evt_7cce635972f44bd0a4b10cdfcb9b866d | Parent-Teacher Conference (Child's School) \u2014 Tue 18:00-19:30\nid: evt_2766dff7d8db4101ada09ecdecfe328d | Review Daily Reports \u2014 Wed 07:00-08:00\nid: evt_258de39ca0e14853a6c3e25621c3aef6 | Tunnel Excavation Strategy Meeting \u2014 Wed 08:30-10:00\nid: evt_96f1d56f8c27444eb865cc3a9ffe7f2d | Inspect Tunnel Reinforcement \u2014 Wed 10:30-12:00\nid: evt_66a19ff8dfe4464dbbb3a0237353d70f | Gardening Club Meeting \u2014 Wed 18:30-20:00\nid: evt_04f75fa30224438f886e48be22cf7f43 | Site Walkthrough with Client \u2014 Thu 07:00-08:00\nid: evt_16cdc7dffb71429590f7cb11044abdfb | Budget Review Meeting \u2014 Thu 09:00-10:00\nid: evt_d42ed377e56847df93a73d9f1fca5982 | Material Delivery Coordination \u2014 Thu 10:30-12:00\nid: evt_1dc62c483310416eb18ace0f9a6f3e50 | Pick up Groceries \u2014 Thu 18:00-19:00\nid: evt_3fae068a888740e6b1b481b0924a7531 | Weekly Safety Inspection \u2014 Fri 07:00-08:00\nid: evt_f84bc617f2d24d5cbf9f745ee8b1f921 | Meeting with Surveyor Team \u2014 Fri 08:30-10:00\nid: evt_093e8b2399784ad6aa8e03bbec192f61 | Finalize Weekly Report \u2014 Fri 10:30-12:00\nid: evt_96a45ae6ef3a422cbebb467b87b7ae15 | Movie Night with Children \u2014 Fri 19:00-21:00\nid: evt_b192096174eb49739dfa37bc4a039844 | Gardening - Planting Vegetables \u2014 Sat 09:00-12:00\nid: evt_a6fb455634f24fd695b6eb76e6d867ed | Children's Soccer Game \u2014 Sat 13:00-15:00\nid: evt_2aa379eef61c461490d15f8cb19d9484 | Dinner at Mother's House \u2014 Sat 18:00-20:00\nid: evt_2623142614ef49bcad621ce84581dd16 | Church \u2014 Sun 10:00-12:00\nid: evt_9acbf1af62d54cbaac49f0c26d39ab4d | Family Picnic at Park \u2014 Sun 13:00-16:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_11306de824d14c4ba3958088ea21f94d"
+        },
+        "result": "Roadwork Progress Monitoring - Section A\n  ID: evt_11306de824d14c4ba3958088ea21f94d\n  Time: Tue Dec 30, 10:30 - 12:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I can't tell you who is attending the \"Roadwork Progress Monitoring - Section A\" event, because there are no attendees listed."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule the client site walkthrough to when I'm free on Thursday morning.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Find the 'Site Walkthrough with Client' event on Thursday. Check available time slots on Thursday morning and suggest a new time to the user.",
+    "simulated_now": "2025-12-28 10:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Site Walkthrough with Client",
+          "start": "2026-01-01 07:00:00",
+          "end": "2026-01-01 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "clientrep@cityhall.gov"
+          ],
+          "id": "evt_7d55b7961bac45d19ae4c8eab0df1ff7"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Budget Review Meeting",
+          "start": "2026-01-01 09:00:00",
+          "end": "2026-01-01 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "projectmanager@buildfirm.com",
+            "accountant@buildfirm.com"
+          ],
+          "id": "evt_832261cb628244858ef7045798c7738c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Material Delivery Coordination",
+          "start": "2026-01-01 10:30:00",
+          "end": "2026-01-01 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8aa42215e4e84e2bb2cc4c6fc1e40df7"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Pick up Groceries",
+          "start": "2026-01-01 18:00:00",
+          "end": "2026-01-01 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_69a82b4f242845ce8111f71934fe3eb6"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Site Walkthrough with Client",
+          "start": "2026-01-01 08:00:00",
+          "end": "2026-01-01 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "clientrep@cityhall.gov"
+          ],
+          "id": "evt_7d55b7961bac45d19ae4c8eab0df1ff7"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Budget Review Meeting",
+          "start": "2026-01-01 09:00:00",
+          "end": "2026-01-01 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "projectmanager@buildfirm.com",
+            "accountant@buildfirm.com"
+          ],
+          "id": "evt_832261cb628244858ef7045798c7738c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Material Delivery Coordination",
+          "start": "2026-01-01 10:30:00",
+          "end": "2026-01-01 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8aa42215e4e84e2bb2cc4c6fc1e40df7"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Pick up Groceries",
+          "start": "2026-01-01 18:00:00",
+          "end": "2026-01-01 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_69a82b4f242845ce8111f71934fe3eb6"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule the client site walkthrough to when I'm free on Thursday morning."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. First, I'll find the \"client site walkthrough\" event and then look for a free slot on Thursday morning to move it to."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-12-28 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_596bb0f296d142fcb2d32f0d863e4b6c | Site Safety Briefing \u2014 Mon 07:00-08:00\nid: evt_a72be0058ace4e42a20644c0f65b25bb | Review Bridge Blueprint Revisions \u2014 Mon 08:30-10:00\nid: evt_e749d96454b44ce89b2c956a92cda206 | Concrete Pour Supervision - South Pier \u2014 Mon 10:30-12:00\nid: evt_6bbd594f758945619b773f5296d1f21c | Dinner with Children \u2014 Mon 17:30-19:00\nid: evt_31498a12be444d8da3bfe79ce6f0b590 | Equipment Check & Maintenance Coordination \u2014 Tue 07:00-08:00\nid: evt_2b5d5c644a7347d4b60908cabdb42b50 | Meeting with Subcontractor - Paving Schedule \u2014 Tue 09:00-10:00\nid: evt_1d4134f6b42e4638b6e4ad2c6535f440 | Roadwork Progress Monitoring - Section A \u2014 Tue 10:30-12:00\nid: evt_9cb9c7af29d64a7e92694f14d04f37f7 | Parent-Teacher Conference (Child's School) \u2014 Tue 18:00-19:30\nid: evt_a8be5fd2d06e40da881cbeed96de94aa | Review Daily Reports \u2014 Wed 07:00-08:00\nid: evt_24549574ccd547dea93cdd131fec8d8d | Tunnel Excavation Strategy Meeting \u2014 Wed 08:30-10:00\nid: evt_5fa47bdd6c61490595ad5176def187f2 | Inspect Tunnel Reinforcement \u2014 Wed 10:30-12:00\nid: evt_27b2583cec6d4513a4d0ab53c1c9f262 | Gardening Club Meeting \u2014 Wed 18:30-20:00\nid: evt_7d55b7961bac45d19ae4c8eab0df1ff7 | Site Walkthrough with Client \u2014 Thu 07:00-08:00\nid: evt_832261cb628244858ef7045798c7738c | Budget Review Meeting \u2014 Thu 09:00-10:00\nid: evt_8aa42215e4e84e2bb2cc4c6fc1e40df7 | Material Delivery Coordination \u2014 Thu 10:30-12:00\nid: evt_69a82b4f242845ce8111f71934fe3eb6 | Pick up Groceries \u2014 Thu 18:00-19:00\nid: evt_340bc9a13a484cfeac9b3e00723c3c46 | Weekly Safety Inspection \u2014 Fri 07:00-08:00\nid: evt_6241dbfbd5224790809d1b8344b372d5 | Meeting with Surveyor Team \u2014 Fri 08:30-10:00\nid: evt_ca5d8f75e55f481d9953b9031637e2e1 | Finalize Weekly Report \u2014 Fri 10:30-12:00\nid: evt_685ebca543ce46739a9063fd021ad748 | Movie Night with Children \u2014 Fri 19:00-21:00\nid: evt_8f061f34a26943c0ab4c92df1bce33b2 | Gardening - Planting Vegetables \u2014 Sat 09:00-12:00\nid: evt_aa56a92b2acc4ff790831cb6a96bd4df | Children's Soccer Game \u2014 Sat 13:00-15:00\nid: evt_7f2ea4344d9f425d970449625b78ffe0 | Dinner at Mother's House \u2014 Sat 18:00-20:00\nid: evt_af72a97a77f340b3849e871d429dcf06 | Church \u2014 Sun 10:00-12:00\nid: evt_d528f6f74ff74fdc8d8213301d67d50e | Family Picnic at Park \u2014 Sun 13:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I've found a free slot for you. I'm rescheduling the walkthrough to 8:00 AM on Thursday."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_7d55b7961bac45d19ae4c8eab0df1ff7",
+          "start": "2026-01-01 08:00:00",
+          "end": "2026-01-01 09:00:00"
+        },
+        "result": "Event updated successfully.\nSite Walkthrough with Client\n  ID: evt_7d55b7961bac45d19ae4c8eab0df1ff7\n  Time: Thu Jan 01, 08:00 - 09:00\n  Attendees: clientrep@cityhall.gov\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have moved the client site walkthrough to Thursday at 8:00 AM. It is now on your calendar for 8:00 AM to 9:00 AM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "delete weekly...",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "Search for events containing the word 'weekly' and ask the user which one should be deleted. If more than one event is found, list them for the user to choose.",
+    "simulated_now": "2026-01-03 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Weekly Safety Inspection",
+          "start": "2026-01-02 07:00:00",
+          "end": "2026-01-02 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_06a44036ccbe4bdf99bd4a048df2344e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meeting with Surveyor Team",
+          "start": "2026-01-02 08:30:00",
+          "end": "2026-01-02 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "surveyorlead@mapping.com"
+          ],
+          "id": "evt_2a915f0c67804d48bf68c8eb9913f76a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Weekly Report",
+          "start": "2026-01-02 10:30:00",
+          "end": "2026-01-02 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_16c1d10225d5459eb65b16af2b346d74"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Children",
+          "start": "2026-01-02 19:00:00",
+          "end": "2026-01-02 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ae852caf27ba47c5b7c904e18b560bde"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Weekly Safety Inspection",
+          "start": "2026-01-02 07:00:00",
+          "end": "2026-01-02 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_06a44036ccbe4bdf99bd4a048df2344e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meeting with Surveyor Team",
+          "start": "2026-01-02 08:30:00",
+          "end": "2026-01-02 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "surveyorlead@mapping.com"
+          ],
+          "id": "evt_2a915f0c67804d48bf68c8eb9913f76a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Finalize Weekly Report",
+          "start": "2026-01-02 10:30:00",
+          "end": "2026-01-02 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_16c1d10225d5459eb65b16af2b346d74"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Children",
+          "start": "2026-01-02 19:00:00",
+          "end": "2026-01-02 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ae852caf27ba47c5b7c904e18b560bde"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "delete weekly..."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_6029f542405a46288b84c1fc8e3f4f12 | Site Safety Briefing \u2014 Mon 07:00-08:00\nid: evt_4f26de7dedf14b92a1c67ec7749f499b | Review Bridge Blueprint Revisions \u2014 Mon 08:30-10:00\nid: evt_957eb6e5343e47a684bd6b50ef080b3b | Concrete Pour Supervision - South Pier \u2014 Mon 10:30-12:00\nid: evt_a2f454a14bab43b286b1c7c4cf50551f | Dinner with Children \u2014 Mon 17:30-19:00\nid: evt_4701093ff4644949b8809e56334600e9 | Equipment Check & Maintenance Coordination \u2014 Tue 07:00-08:00\nid: evt_5da4ac1d8fd94b2da9732ed5d54865e1 | Meeting with Subcontractor - Paving Schedule \u2014 Tue 09:00-10:00\nid: evt_c5732d96e10c4ea687236524399767b3 | Roadwork Progress Monitoring - Section A \u2014 Tue 10:30-12:00\nid: evt_36e07fbfe6444e5cbd50659f0d18f9a6 | Parent-Teacher Conference (Child's School) \u2014 Tue 18:00-19:30\nid: evt_d1366f886abc4153b1e7d3209b6919a1 | Review Daily Reports \u2014 Wed 07:00-08:00\nid: evt_f55a84c8da8448cb8415d3539b053e2e | Tunnel Excavation Strategy Meeting \u2014 Wed 08:30-10:00\nid: evt_c4d6b68aec4a40bbb490a0854e2961af | Inspect Tunnel Reinforcement \u2014 Wed 10:30-12:00\nid: evt_b7f4c3f8e91942a28965a5553c2bb375 | Gardening Club Meeting \u2014 Wed 18:30-20:00\nid: evt_94b6aa3cb8ea4c3d85d5e9c8f849a1e7 | Site Walkthrough with Client \u2014 Thu 07:00-08:00\nid: evt_7ad3b165b0e041b28fe87bdfd0750fe9 | Budget Review Meeting \u2014 Thu 09:00-10:00\nid: evt_af8d199f75504905b62dbb08d859a8ed | Material Delivery Coordination \u2014 Thu 10:30-12:00\nid: evt_7891e6c1b4dd4fb0ba016004627212f6 | Pick up Groceries \u2014 Thu 18:00-19:00\nid: evt_06a44036ccbe4bdf99bd4a048df2344e | Weekly Safety Inspection \u2014 Fri 07:00-08:00\nid: evt_2a915f0c67804d48bf68c8eb9913f76a | Meeting with Surveyor Team \u2014 Fri 08:30-10:00\nid: evt_16c1d10225d5459eb65b16af2b346d74 | Finalize Weekly Report \u2014 Fri 10:30-12:00\nid: evt_ae852caf27ba47c5b7c904e18b560bde | Movie Night with Children \u2014 Fri 19:00-21:00\nid: evt_b3d4f3457138415b93fb5922a07193f4 | Gardening - Planting Vegetables \u2014 Sat 09:00-12:00\nid: evt_8c606609a6e84e78935d7495b0b96286 | Children's Soccer Game \u2014 Sat 13:00-15:00\nid: evt_b4b54b0f106d4352b82c8ee6533bf96c | Dinner at Mother's House \u2014 Sat 18:00-20:00\nid: evt_aa76ca193d5b45eaaf87286ce93b2309 | Church \u2014 Sun 10:00-12:00\nid: evt_9f77f7065f774c9bb03e6045bc946542 | Family Picnic at Park \u2014 Sun 13:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I see two events with \"weekly\" in the title: \"Weekly Safety Inspection\" and \"Finalize Weekly Report\". Which one would you like to delete?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References",
+    "complexity": "Low",
+    "expected_behavior": "List all events for the current day.",
+    "simulated_now": "2025-12-29 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Site Safety Briefing",
+          "start": "2025-12-29 07:00:00",
+          "end": "2025-12-29 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "safetyofficer@buildsafe.com"
+          ],
+          "id": "evt_97c2a1be5f9145409d881903da11b2fd"
+        },
+        {
+          "day": "Monday",
+          "summary": "Review Bridge Blueprint Revisions",
+          "start": "2025-12-29 08:30:00",
+          "end": "2025-12-29 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineer1@structure.com",
+            "projectmanager@buildfirm.com"
+          ],
+          "id": "evt_bc7f1ea903a745c799edc27752356183"
+        },
+        {
+          "day": "Monday",
+          "summary": "Concrete Pour Supervision - South Pier",
+          "start": "2025-12-29 10:30:00",
+          "end": "2025-12-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4f2459c2154c4f349a5ab2d59fa2ef82"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Children",
+          "start": "2025-12-29 17:30:00",
+          "end": "2025-12-29 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d68d3aa78b504151a9692e30b8704067"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Site Safety Briefing",
+          "start": "2025-12-29 07:00:00",
+          "end": "2025-12-29 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "safetyofficer@buildsafe.com"
+          ],
+          "id": "evt_97c2a1be5f9145409d881903da11b2fd"
+        },
+        {
+          "day": "Monday",
+          "summary": "Review Bridge Blueprint Revisions",
+          "start": "2025-12-29 08:30:00",
+          "end": "2025-12-29 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineer1@structure.com",
+            "projectmanager@buildfirm.com"
+          ],
+          "id": "evt_bc7f1ea903a745c799edc27752356183"
+        },
+        {
+          "day": "Monday",
+          "summary": "Concrete Pour Supervision - South Pier",
+          "start": "2025-12-29 10:30:00",
+          "end": "2025-12-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4f2459c2154c4f349a5ab2d59fa2ef82"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Children",
+          "start": "2025-12-29 17:30:00",
+          "end": "2025-12-29 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d68d3aa78b504151a9692e30b8704067"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "assistant",
+        "content": "I'll first get the current time to identify today's date, and then I'll list all of today's events to let you know what you have scheduled."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-12-29 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-12-29 00:00:00",
+          "time_max": "2025-12-29 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_97c2a1be5f9145409d881903da11b2fd | Site Safety Briefing \u2014 Mon 07:00-08:00\nid: evt_bc7f1ea903a745c799edc27752356183 | Review Bridge Blueprint Revisions \u2014 Mon 08:30-10:00\nid: evt_4f2459c2154c4f349a5ab2d59fa2ef82 | Concrete Pour Supervision - South Pier \u2014 Mon 10:30-12:00\nid: evt_d68d3aa78b504151a9692e30b8704067 | Dinner with Children \u2014 Mon 17:30-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Today is Monday, December 29, 2025. Here is your schedule for the day:\n\n*   **07:00-08:00:** Site Safety Briefing\n*   **08:30-10:00:** Review Bridge Blueprint Revisions\n*   **10:30-12:00:** Concrete Pour Supervision - South Pier\n*   **17:30-19:00:** Dinner with Children"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

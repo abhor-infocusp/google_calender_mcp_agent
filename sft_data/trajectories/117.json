@@ -1,0 +1,964 @@
+[
+  {
+    "query": "Create an event called 'Team Lunch' for this Wednesday at 12:30 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event named 'Team Lunch' that starts at 12:30 PM and ends at 1:30 PM on Wednesday.",
+    "simulated_now": "2023-10-01 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Review Accessibility Consultant Report",
+          "start": "2023-10-11 10:00:00",
+          "end": "2023-10-11 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accessibility_consultant@external.com"
+          ],
+          "id": "evt_11856bac0dde4ad598b8adc5635fa02d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Brainstorm Session: Addressing Accessibility Resistance",
+          "start": "2023-10-11 11:30:00",
+          "end": "2023-10-11 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a4ec931af4ba43319552c481741942cc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Product Manager - Accessibility Roadmap",
+          "start": "2023-10-11 14:00:00",
+          "end": "2023-10-11 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pm@email.com"
+          ],
+          "id": "evt_ffe52c8e3cfd44a1a0683d7a28ad1376"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Online accessibility webinar",
+          "start": "2023-10-11 18:00:00",
+          "end": "2023-10-11 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8fd4365a9a0f44c491a66cade3aabb84"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Team Lunch",
+          "start": "2023-10-04 12:30:00",
+          "end": "2023-10-04 13:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_08abe81424ed43d5a9ed5bf002ab447f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review Accessibility Consultant Report",
+          "start": "2023-10-11 10:00:00",
+          "end": "2023-10-11 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accessibility_consultant@external.com"
+          ],
+          "id": "evt_11856bac0dde4ad598b8adc5635fa02d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Brainstorm Session: Addressing Accessibility Resistance",
+          "start": "2023-10-11 11:30:00",
+          "end": "2023-10-11 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a4ec931af4ba43319552c481741942cc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Product Manager - Accessibility Roadmap",
+          "start": "2023-10-11 14:00:00",
+          "end": "2023-10-11 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pm@email.com"
+          ],
+          "id": "evt_ffe52c8e3cfd44a1a0683d7a28ad1376"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Online accessibility webinar",
+          "start": "2023-10-11 18:00:00",
+          "end": "2023-10-11 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8fd4365a9a0f44c491a66cade3aabb84"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Team Lunch' for this Wednesday at 12:30 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-10-01 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Team Lunch",
+          "start": "2023-10-04 12:30:00",
+          "end": "2023-10-04 13:30:00"
+        },
+        "result": "Event created successfully.\nTeam Lunch\n  ID: evt_08abe81424ed43d5a9ed5bf002ab447f\n  Time: Wed Oct 04, 12:30 - 13:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've scheduled \"Team Lunch\" for this Wednesday, October 4th, from 12:30 PM to 1:30 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Book me a meeting next Friday at 3 pm with the title 'Client Presentation'.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event named 'Client Presentation' that starts at 3:00 PM and ends at 4:00 PM next Friday.",
+    "simulated_now": "2023-10-01 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Meeting - Accessibility Wins & Challenges",
+          "start": "2023-10-13 09:00:00",
+          "end": "2023-10-13 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_team@email.com"
+          ],
+          "id": "evt_6f168b8b1f6a40439bf97fb3f1b47267"
+        },
+        {
+          "day": "Friday",
+          "summary": "Accessibility Bug Review with Development Team",
+          "start": "2023-10-13 10:30:00",
+          "end": "2023-10-13 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "front_end@email.com"
+          ],
+          "id": "evt_d6481afc4ed24d05866a05a725267273"
+        },
+        {
+          "day": "Friday",
+          "summary": "Documentation Update - Accessible Design Patterns",
+          "start": "2023-10-13 14:00:00",
+          "end": "2023-10-13 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1f56706068254298903da5e429d9631a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Relaxing night in with family",
+          "start": "2023-10-13 19:00:00",
+          "end": "2023-10-13 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7f75d3a8c6024fb09c9decfc32c1c0ff"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Client Presentation",
+          "start": "2023-10-06 15:00:00",
+          "end": "2023-10-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d37ed91748134215831d6b7a17ad8cf8"
+        },
+        {
+          "day": "Friday",
+          "summary": "Team Meeting - Accessibility Wins & Challenges",
+          "start": "2023-10-13 09:00:00",
+          "end": "2023-10-13 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_team@email.com"
+          ],
+          "id": "evt_6f168b8b1f6a40439bf97fb3f1b47267"
+        },
+        {
+          "day": "Friday",
+          "summary": "Accessibility Bug Review with Development Team",
+          "start": "2023-10-13 10:30:00",
+          "end": "2023-10-13 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "front_end@email.com"
+          ],
+          "id": "evt_d6481afc4ed24d05866a05a725267273"
+        },
+        {
+          "day": "Friday",
+          "summary": "Documentation Update - Accessible Design Patterns",
+          "start": "2023-10-13 14:00:00",
+          "end": "2023-10-13 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1f56706068254298903da5e429d9631a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Relaxing night in with family",
+          "start": "2023-10-13 19:00:00",
+          "end": "2023-10-13 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7f75d3a8c6024fb09c9decfc32c1c0ff"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Book me a meeting next Friday at 3 pm with the title 'Client Presentation'."
+      },
+      {
+        "role": "assistant",
+        "content": "My plan is to first get the current time to identify the date of next Friday. Then, I will use this information to schedule a 'Client Presentation' for an hour, starting at 3 PM, as you requested."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-10-01 10:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will now create the event for next Friday, October 6th, 2023."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Client Presentation",
+          "end": "2023-10-06 16:00:00",
+          "start": "2023-10-06 15:00:00"
+        },
+        "result": "Event created successfully.\nClient Presentation\n  ID: evt_d37ed91748134215831d6b7a17ad8cf8\n  Time: Fri Oct 06, 15:00 - 16:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've booked a 'Client Presentation' for you for next Friday. It's scheduled for October 6th, from 3 PM to 4 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule the 'Accessibility Review Meeting' to 10:30 AM Monday.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Accessibility Review Meeting' event on Monday and update its start time to 10:30 AM and end time to 11:30 AM.",
+    "simulated_now": "2023-10-01 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Accessibility Review Meeting",
+          "start": "2023-10-09 09:00:00",
+          "end": "2023-10-09 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.chen@email.com",
+            "david.lee@email.com"
+          ],
+          "id": "evt_c988a6eeed2c4aed8c709893aa5d5cd0"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Testing Session - Screen Reader Users",
+          "start": "2023-10-09 10:30:00",
+          "end": "2023-10-09 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "assistive_tech_user1@external.com",
+            "ux_research@email.com"
+          ],
+          "id": "evt_9cf68567691240a09438198240245fa5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Design System Accessibility Audit",
+          "start": "2023-10-09 14:00:00",
+          "end": "2023-10-09 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d5a862d3d21d4ba9aa603c1817051d39"
+        },
+        {
+          "day": "Monday",
+          "summary": "Volunteer at Disability Center",
+          "start": "2023-10-09 18:30:00",
+          "end": "2023-10-09 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c6eeb161372d4a2f9051921245776604"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Accessibility Review Meeting",
+          "start": "2023-10-02 10:30:00",
+          "end": "2023-10-02 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.chen@email.com",
+            "david.lee@email.com"
+          ],
+          "id": "evt_c988a6eeed2c4aed8c709893aa5d5cd0"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Testing Session - Screen Reader Users",
+          "start": "2023-10-09 10:30:00",
+          "end": "2023-10-09 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "assistive_tech_user1@external.com",
+            "ux_research@email.com"
+          ],
+          "id": "evt_9cf68567691240a09438198240245fa5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Design System Accessibility Audit",
+          "start": "2023-10-09 14:00:00",
+          "end": "2023-10-09 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d5a862d3d21d4ba9aa603c1817051d39"
+        },
+        {
+          "day": "Monday",
+          "summary": "Volunteer at Disability Center",
+          "start": "2023-10-09 18:30:00",
+          "end": "2023-10-09 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c6eeb161372d4a2f9051921245776604"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule the 'Accessibility Review Meeting' to 10:30 AM Monday."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. I'll reschedule the 'Accessibility Review Meeting' to 10:30 AM on Monday. I'll just need to find it first."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-10-01 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_c988a6eeed2c4aed8c709893aa5d5cd0 | Accessibility Review Meeting \u2014 Mon 09:00-10:00\nid: evt_9cf68567691240a09438198240245fa5 | User Testing Session - Screen Reader Users \u2014 Mon 10:30-12:00\nid: evt_d5a862d3d21d4ba9aa603c1817051d39 | Design System Accessibility Audit \u2014 Mon 14:00-15:00\nid: evt_c6eeb161372d4a2f9051921245776604 | Volunteer at Disability Center \u2014 Mon 18:30-20:00\nid: evt_9c7a8a8dc2274667926a0ea5e6b8b67c | Meeting with Legal Counsel - WCAG 2.2 Updates \u2014 Tue 09:30-11:00\nid: evt_1a04d11bd8084363bd7add5df4078295 | Accessibility Training Follow-up Q&A \u2014 Tue 11:30-12:30\nid: evt_c3da7bdde4e445c6b9cede04fbec2de5 | Project Kick-off Meeting - Accessible Checkout Flow \u2014 Tue 15:00-16:00\nid: evt_701e79ab79e445459b99a5e5afc837ba | Dinner with friends \u2014 Tue 19:00-20:00\nid: evt_8ccd00b8e3ad49f28644af1f0d96ded6 | Review Accessibility Consultant Report \u2014 Wed 10:00-11:00\nid: evt_f482a26c90f94f84ba4f797528b6ea2c | Brainstorm Session: Addressing Accessibility Resistance \u2014 Wed 11:30-13:00\nid: evt_8d2d1c4290ed4de48602852bfb419fa5 | Meeting with Product Manager - Accessibility Roadmap \u2014 Wed 14:00-15:00\nid: evt_8f6b2e567056420c85a61b51489bbb26 | Online accessibility webinar \u2014 Wed 18:00-19:00\nid: evt_051ca5b381cc4677a19df151f96e99a1 | User Testing Synthesis - Mobile App \u2014 Thu 09:00-10:30\nid: evt_c6eaa9af57c5486a881e936fe54c3528 | Discuss New Accessibility Standard Experts \u2014 Thu 11:00-12:00\nid: evt_9e158b2407b64e4aa2d4565a069c85c4 | Create training modules \u2014 Thu 14:00-15:00\nid: evt_3c275c5a9a97480f86042c5538154dee | Hiking group meetup \u2014 Thu 18:00-19:30\nid: evt_09c461efb56842f2972be9dbce3e3c0b | Team Meeting - Accessibility Wins & Challenges \u2014 Fri 09:00-10:00\nid: evt_b729d386b4fe4c97a965c6783169cbc5 | Accessibility Bug Review with Development Team \u2014 Fri 10:30-12:00\nid: evt_6460fec1483940a5837009517a4c7870 | Documentation Update - Accessible Design Patterns \u2014 Fri 14:00-15:00\nid: evt_dd31b3a142d34235abff7e22cbbdfe0d | Relaxing night in with family \u2014 Fri 19:00-21:00\nid: evt_95360c880d2d4a429eb30bc35a64d7c3 | Hike with hiking group \u2014 Sat 10:00-12:00\nid: evt_03384e8614b1448a8d8ba9ee59da1022 | Lunch with hiking group \u2014 Sat 13:00-14:00\nid: evt_6d2acac1a13b42ee950592f8c0124a46 | Visit local farmers market \u2014 Sat 15:00-17:00\nid: evt_ab5c04a491ab4927b8edb0501df83efb | Brunch with family \u2014 Sun 10:00-11:00\nid: evt_92cec2c4ac194a009d0044cb5a626df2 | Volunteer at Disability Center \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_c988a6eeed2c4aed8c709893aa5d5cd0",
+          "start": "2023-10-02 10:30:00",
+          "end": "2023-10-02 11:30:00"
+        },
+        "result": "Event updated successfully.\nAccessibility Review Meeting\n  ID: evt_c988a6eeed2c4aed8c709893aa5d5cd0\n  Time: Mon Oct 02, 10:30 - 11:30\n  Attendees: sarah.chen@email.com, david.lee@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've rescheduled the 'Accessibility Review Meeting' to Monday at 10:30 AM for you. The new time is 10:30 AM to 11:30 AM on Monday, October 2nd."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the accessibility review meeting?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Accessibility Review Meeting' event and respond with the attendees: sarah.chen@email.com, david.lee@email.com.",
+    "simulated_now": "2023-10-01 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Accessibility Review Meeting",
+          "start": "2023-10-09 09:00:00",
+          "end": "2023-10-09 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.chen@email.com",
+            "david.lee@email.com"
+          ],
+          "id": "evt_dfa65227b19f4967874a0017602e8976"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Testing Session - Screen Reader Users",
+          "start": "2023-10-09 10:30:00",
+          "end": "2023-10-09 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "assistive_tech_user1@external.com",
+            "ux_research@email.com"
+          ],
+          "id": "evt_d219ea65b1ed4ca680b5d7001e095b42"
+        },
+        {
+          "day": "Monday",
+          "summary": "Design System Accessibility Audit",
+          "start": "2023-10-09 14:00:00",
+          "end": "2023-10-09 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_855807c1a3dc455582674bcea8c2cab3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Volunteer at Disability Center",
+          "start": "2023-10-09 18:30:00",
+          "end": "2023-10-09 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1176cd69371d492c83b27949979105d8"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Accessibility Review Meeting",
+          "start": "2023-10-09 09:00:00",
+          "end": "2023-10-09 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.chen@email.com",
+            "david.lee@email.com"
+          ],
+          "id": "evt_dfa65227b19f4967874a0017602e8976"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Testing Session - Screen Reader Users",
+          "start": "2023-10-09 10:30:00",
+          "end": "2023-10-09 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "assistive_tech_user1@external.com",
+            "ux_research@email.com"
+          ],
+          "id": "evt_d219ea65b1ed4ca680b5d7001e095b42"
+        },
+        {
+          "day": "Monday",
+          "summary": "Design System Accessibility Audit",
+          "start": "2023-10-09 14:00:00",
+          "end": "2023-10-09 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_855807c1a3dc455582674bcea8c2cab3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Volunteer at Disability Center",
+          "start": "2023-10-09 18:30:00",
+          "end": "2023-10-09 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1176cd69371d492c83b27949979105d8"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the accessibility review meeting?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-10-01 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-11-01 10:00:00",
+          "time_min": "2023-10-01 10:00:00"
+        },
+        "result": "Found 25 events:\nid: evt_dfa65227b19f4967874a0017602e8976 | Accessibility Review Meeting \u2014 Mon 09:00-10:00\nid: evt_d219ea65b1ed4ca680b5d7001e095b42 | User Testing Session - Screen Reader Users \u2014 Mon 10:30-12:00\nid: evt_855807c1a3dc455582674bcea8c2cab3 | Design System Accessibility Audit \u2014 Mon 14:00-15:00\nid: evt_1176cd69371d492c83b27949979105d8 | Volunteer at Disability Center \u2014 Mon 18:30-20:00\nid: evt_87bfbabf41954d9da813b28efab28ca6 | Meeting with Legal Counsel - WCAG 2.2 Updates \u2014 Tue 09:30-11:00\nid: evt_983b60ca2ba74172bcd372fcf2b28915 | Accessibility Training Follow-up Q&A \u2014 Tue 11:30-12:30\nid: evt_de89f66039ec4b22a644fe66f95ab0db | Project Kick-off Meeting - Accessible Checkout Flow \u2014 Tue 15:00-16:00\nid: evt_c81c85b53e274a7380ece8cc941b0816 | Dinner with friends \u2014 Tue 19:00-20:00\nid: evt_71160393ffb24f72b4732435a93077ad | Review Accessibility Consultant Report \u2014 Wed 10:00-11:00\nid: evt_051cf1b803794103922953e4976b931b | Brainstorm Session: Addressing Accessibility Resistance \u2014 Wed 11:30-13:00\nid: evt_15cec8d5577340bc880a12f272618a01 | Meeting with Product Manager - Accessibility Roadmap \u2014 Wed 14:00-15:00\nid: evt_4c19b980d49841679d7d784c94a809ac | Online accessibility webinar \u2014 Wed 18:00-19:00\nid: evt_66d9a5d4dc694c9b84fd058b61408524 | User Testing Synthesis - Mobile App \u2014 Thu 09:00-10:30\nid: evt_6119a840ce1b4a519d68aa31adaf17f6 | Discuss New Accessibility Standard Experts \u2014 Thu 11:00-12:00\nid: evt_78303588821042dd92745bc6b6d20f4e | Create training modules \u2014 Thu 14:00-15:00\nid: evt_0ed1e11182f1429ab2e30bf806947e34 | Hiking group meetup \u2014 Thu 18:00-19:30\nid: evt_2b6bc668a6ff4febb82ada1da97af6a5 | Team Meeting - Accessibility Wins & Challenges \u2014 Fri 09:00-10:00\nid: evt_d6b442e007804d8784832cff9f64d13a | Accessibility Bug Review with Development Team \u2014 Fri 10:30-12:00\nid: evt_ccecb63245734725b9240cbdada91982 | Documentation Update - Accessible Design Patterns \u2014 Fri 14:00-15:00\nid: evt_62ff939e5db34447a2ace51355b6fc1c | Relaxing night in with family \u2014 Fri 19:00-21:00\nid: evt_ec2b522659274232900378edfe2a84af | Hike with hiking group \u2014 Sat 10:00-12:00\nid: evt_39d491022e0b40b99eaa64a4309bb077 | Lunch with hiking group \u2014 Sat 13:00-14:00\nid: evt_dbe3a37b59f94e0d98ac64e8da3f5dcd | Visit local farmers market \u2014 Sat 15:00-17:00\nid: evt_2ffab9f94b144f6193d65ded0716736f | Brunch with family \u2014 Sun 10:00-11:00\nid: evt_6a800faacc834b9990b09bd9fa0f605b | Volunteer at Disability Center \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_dfa65227b19f4967874a0017602e8976"
+        },
+        "result": "Accessibility Review Meeting\n  ID: evt_dfa65227b19f4967874a0017602e8976\n  Time: Mon Oct 09, 09:00 - 10:00\n  Attendees: sarah.chen@email.com, david.lee@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "The attendees for the Accessibility Review Meeting are sarah.chen@email.com and david.lee@email.com."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is the meeting with legal counsel?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Meeting with Legal Counsel - WCAG 2.2 Updates' event and respond with the time: Tuesday at 9:30 AM.",
+    "simulated_now": "2023-10-01 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Legal Counsel - WCAG 2.2 Updates",
+          "start": "2023-10-10 09:30:00",
+          "end": "2023-10-10 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "legal@email.com",
+            "compliance@email.com"
+          ],
+          "id": "evt_32316d3d0a974b3cb47f0d415670b7b2"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Accessibility Training Follow-up Q&A",
+          "start": "2023-10-10 11:30:00",
+          "end": "2023-10-10 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designers@email.com"
+          ],
+          "id": "evt_0f727a286ae847f0abdb99102ad345f1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Project Kick-off Meeting - Accessible Checkout Flow",
+          "start": "2023-10-10 15:00:00",
+          "end": "2023-10-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pm@email.com",
+            "front_end@email.com"
+          ],
+          "id": "evt_ad2e2b4cf4ef4a1f9a491c250047a188"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with friends",
+          "start": "2023-10-10 19:00:00",
+          "end": "2023-10-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_cb8520f702bd44aa8ea8b8f90974be2f"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Legal Counsel - WCAG 2.2 Updates",
+          "start": "2023-10-10 09:30:00",
+          "end": "2023-10-10 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "legal@email.com",
+            "compliance@email.com"
+          ],
+          "id": "evt_32316d3d0a974b3cb47f0d415670b7b2"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Accessibility Training Follow-up Q&A",
+          "start": "2023-10-10 11:30:00",
+          "end": "2023-10-10 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designers@email.com"
+          ],
+          "id": "evt_0f727a286ae847f0abdb99102ad345f1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Project Kick-off Meeting - Accessible Checkout Flow",
+          "start": "2023-10-10 15:00:00",
+          "end": "2023-10-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pm@email.com",
+            "front_end@email.com"
+          ],
+          "id": "evt_ad2e2b4cf4ef4a1f9a491c250047a188"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with friends",
+          "start": "2023-10-10 19:00:00",
+          "end": "2023-10-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_cb8520f702bd44aa8ea8b8f90974be2f"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is the meeting with legal counsel?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first look for a meeting with \"legal counsel\" in the title and then share the time of the meeting with you."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_7c87024fe0f64904aaf04e1c9b20cff9 | Accessibility Review Meeting \u2014 Mon 09:00-10:00\nid: evt_60b80a19d2574b0099c46f609474b6e6 | User Testing Session - Screen Reader Users \u2014 Mon 10:30-12:00\nid: evt_c5f6c5ce1490417bb53cbe6d804bdf3f | Design System Accessibility Audit \u2014 Mon 14:00-15:00\nid: evt_60996099cce648abbc322cc11c49b16a | Volunteer at Disability Center \u2014 Mon 18:30-20:00\nid: evt_32316d3d0a974b3cb47f0d415670b7b2 | Meeting with Legal Counsel - WCAG 2.2 Updates \u2014 Tue 09:30-11:00\nid: evt_0f727a286ae847f0abdb99102ad345f1 | Accessibility Training Follow-up Q&A \u2014 Tue 11:30-12:30\nid: evt_ad2e2b4cf4ef4a1f9a491c250047a188 | Project Kick-off Meeting - Accessible Checkout Flow \u2014 Tue 15:00-16:00\nid: evt_cb8520f702bd44aa8ea8b8f90974be2f | Dinner with friends \u2014 Tue 19:00-20:00\nid: evt_3a7d3971bb914379b95d50ce166a4a41 | Review Accessibility Consultant Report \u2014 Wed 10:00-11:00\nid: evt_c25fe25f69f24360bc951628208fc7f5 | Brainstorm Session: Addressing Accessibility Resistance \u2014 Wed 11:30-13:00\nid: evt_d86a2d43b9c5408493ee537fe2896e37 | Meeting with Product Manager - Accessibility Roadmap \u2014 Wed 14:00-15:00\nid: evt_a12bd3027cd84ad5b37f0f411c47221b | Online accessibility webinar \u2014 Wed 18:00-19:00\nid: evt_6de4ff9c5eaa4517a201a3f0d6cb26f2 | User Testing Synthesis - Mobile App \u2014 Thu 09:00-10:30\nid: evt_19cb7c5b12b749d7b1983cef33c31d39 | Discuss New Accessibility Standard Experts \u2014 Thu 11:00-12:00\nid: evt_a9cbf08c80024842bea767f1f2ac5482 | Create training modules \u2014 Thu 14:00-15:00\nid: evt_21fad7b9aee74534a3f8213a86c89a6c | Hiking group meetup \u2014 Thu 18:00-19:30\nid: evt_87987ce7bdee43ef80fdcb7bdbe3143f | Team Meeting - Accessibility Wins & Challenges \u2014 Fri 09:00-10:00\nid: evt_48bd78b38e984a8d8f608dca26ff4ce9 | Accessibility Bug Review with Development Team \u2014 Fri 10:30-12:00\nid: evt_aa54c3e94d9447d3be708021579b61da | Documentation Update - Accessible Design Patterns \u2014 Fri 14:00-15:00\nid: evt_4a7a7437fe9a4f208d61dcd0c7f3c2a3 | Relaxing night in with family \u2014 Fri 19:00-21:00\nid: evt_311bf0606c2a45a89cad58702f60d861 | Hike with hiking group \u2014 Sat 10:00-12:00\nid: evt_4b5349da5e0f407a81f383748d415d5e | Lunch with hiking group \u2014 Sat 13:00-14:00\nid: evt_7316fe83553a4e16b116f692d0c8d5d7 | Visit local farmers market \u2014 Sat 15:00-17:00\nid: evt_ddd66878bdc04080957a5c7cb3c80897 | Brunch with family \u2014 Sun 10:00-11:00\nid: evt_1bf6c00e219e42a49410fe4497d50270 | Volunteer at Disability Center \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "The meeting with legal counsel is on Tuesday from 9:30 to 11:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Get the current date (e.g., Monday) and list all events scheduled for that day.",
+    "simulated_now": "2023-10-09 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Accessibility Review Meeting",
+          "start": "2023-10-09 09:00:00",
+          "end": "2023-10-09 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.chen@email.com",
+            "david.lee@email.com"
+          ],
+          "id": "evt_1df58546849e477c83ff824e2cd6eff8"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Testing Session - Screen Reader Users",
+          "start": "2023-10-09 10:30:00",
+          "end": "2023-10-09 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "assistive_tech_user1@external.com",
+            "ux_research@email.com"
+          ],
+          "id": "evt_f3860c98370d4995a087c14e688c8da6"
+        },
+        {
+          "day": "Monday",
+          "summary": "Design System Accessibility Audit",
+          "start": "2023-10-09 14:00:00",
+          "end": "2023-10-09 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_76b659ade0a34220b0c13ec870eb227f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Volunteer at Disability Center",
+          "start": "2023-10-09 18:30:00",
+          "end": "2023-10-09 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_643775e6785649bea61b740923705fc2"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Accessibility Review Meeting",
+          "start": "2023-10-09 09:00:00",
+          "end": "2023-10-09 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.chen@email.com",
+            "david.lee@email.com"
+          ],
+          "id": "evt_1df58546849e477c83ff824e2cd6eff8"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Testing Session - Screen Reader Users",
+          "start": "2023-10-09 10:30:00",
+          "end": "2023-10-09 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "assistive_tech_user1@external.com",
+            "ux_research@email.com"
+          ],
+          "id": "evt_f3860c98370d4995a087c14e688c8da6"
+        },
+        {
+          "day": "Monday",
+          "summary": "Design System Accessibility Audit",
+          "start": "2023-10-09 14:00:00",
+          "end": "2023-10-09 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_76b659ade0a34220b0c13ec870eb227f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Volunteer at Disability Center",
+          "start": "2023-10-09 18:30:00",
+          "end": "2023-10-09 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_643775e6785649bea61b740923705fc2"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify today's date. Then, I will fetch all events scheduled for today and list them for you."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-10-09 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-10-09 00:00:00",
+          "time_max": "2023-10-09 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_1df58546849e477c83ff824e2cd6eff8 | Accessibility Review Meeting \u2014 Mon 09:00-10:00\nid: evt_f3860c98370d4995a087c14e688c8da6 | User Testing Session - Screen Reader Users \u2014 Mon 10:30-12:00\nid: evt_76b659ade0a34220b0c13ec870eb227f | Design System Accessibility Audit \u2014 Mon 14:00-15:00\nid: evt_643775e6785649bea61b740923705fc2 | Volunteer at Disability Center \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today, Monday, October 9th, you have four events:\n\n*   9:00 AM: Accessibility Review Meeting\n*   10:30 AM: User Testing Session - Screen Reader Users\n*   2:00 PM: Design System Accessibility Audit\n*   6:30 PM: Volunteer at Disability Center"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Any meetings tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Get the date for tomorrow (Tuesday) and list all events scheduled for that day.",
+    "simulated_now": "2023-10-09 15:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Legal Counsel - WCAG 2.2 Updates",
+          "start": "2023-10-10 09:30:00",
+          "end": "2023-10-10 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "legal@email.com",
+            "compliance@email.com"
+          ],
+          "id": "evt_4f700f07d74041e1b267607d2c7d0bac"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Accessibility Training Follow-up Q&A",
+          "start": "2023-10-10 11:30:00",
+          "end": "2023-10-10 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designers@email.com"
+          ],
+          "id": "evt_720f9f6e36b04c4fbee87794b38c573b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Project Kick-off Meeting - Accessible Checkout Flow",
+          "start": "2023-10-10 15:00:00",
+          "end": "2023-10-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pm@email.com",
+            "front_end@email.com"
+          ],
+          "id": "evt_e0ffaf217ee24a5c9b37ba9c6d099349"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with friends",
+          "start": "2023-10-10 19:00:00",
+          "end": "2023-10-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_8e75f2a6092a4401ba93c991c9c53580"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Legal Counsel - WCAG 2.2 Updates",
+          "start": "2023-10-10 09:30:00",
+          "end": "2023-10-10 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "legal@email.com",
+            "compliance@email.com"
+          ],
+          "id": "evt_4f700f07d74041e1b267607d2c7d0bac"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Accessibility Training Follow-up Q&A",
+          "start": "2023-10-10 11:30:00",
+          "end": "2023-10-10 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designers@email.com"
+          ],
+          "id": "evt_720f9f6e36b04c4fbee87794b38c573b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Project Kick-off Meeting - Accessible Checkout Flow",
+          "start": "2023-10-10 15:00:00",
+          "end": "2023-10-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pm@email.com",
+            "front_end@email.com"
+          ],
+          "id": "evt_e0ffaf217ee24a5c9b37ba9c6d099349"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with friends",
+          "start": "2023-10-10 19:00:00",
+          "end": "2023-10-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_8e75f2a6092a4401ba93c991c9c53580"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Any meetings tomorrow?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out what \"tomorrow\" is. Then I can check for meetings on that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-10-09 15:00:00 | Monday"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, tomorrow is October 10, 2023. Let me check your calendar."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-10-10 23:59:59",
+          "time_min": "2023-10-10 00:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_4f700f07d74041e1b267607d2c7d0bac | Meeting with Legal Counsel - WCAG 2.2 Updates \u2014 Tue 09:30-11:00\nid: evt_720f9f6e36b04c4fbee87794b38c573b | Accessibility Training Follow-up Q&A \u2014 Tue 11:30-12:30\nid: evt_e0ffaf217ee24a5c9b37ba9c6d099349 | Project Kick-off Meeting - Accessible Checkout Flow \u2014 Tue 15:00-16:00\nid: evt_8e75f2a6092a4401ba93c991c9c53580 | Dinner with friends \u2014 Tue 19:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, you have four meetings tomorrow:\n\n*   **Meeting with Legal Counsel - WCAG 2.2 Updates** from 9:30 to 11:00.\n*   **Accessibility Training Follow-up Q&A** from 11:30 to 12:30.\n*   **Project Kick-off Meeting - Accessible Checkout Flow** from 15:00 to 16:00.\n*   **Dinner with friends** from 19:00 to 20:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

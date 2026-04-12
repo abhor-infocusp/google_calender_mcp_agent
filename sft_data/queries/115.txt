@@ -1,0 +1,153 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Strategy Meeting' for Tuesday at 1 PM with data_analyst@example.com and pm@example.com, describing it as 'Discuss Q3 strategies'.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event with the provided details: summary as 'Strategy Meeting', start time as Tuesday at 1 PM, end time as Tuesday at 2 PM, attendees as 'data_analyst@example.com, pm@example.com', and description as 'Discuss Q3 strategies'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-06-09T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a 'Marketing Presentation' on Wednesday at 3 PM for vendor@example.com.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event with the provided details: summary as 'Marketing Presentation', start time as Wednesday at 3 PM, end time as Wednesday at 4 PM, and attendee as 'vendor@example.com'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-06-09T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the calendar with the client this week?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent needs to understand 'client' refers to client_it@example.com, then list all events where client_it@example.com is an attendee for the current week (Monday to Sunday).",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-06-10T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Anything happening this week where I'm volunteering?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should identify the 'Coding Club Volunteer Session' on Monday and return the details of this event.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-06-12T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the Data Analysis Review to 2 PM on Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Data Analysis Review' event on Monday and update its start time to 2 PM and end time to 3 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-06-10T10:30:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update the Vendor Demo to include data_analyst@example.com.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Vendor Demo - Cloud Security Solutions' event on Monday and add data_analyst@example.com to the attendee list.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-06-10T14:30:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the Project Kick-off Meeting?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Project Kick-off Meeting' event and return its start and end times.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-06-10T11:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the IT Systems Assessment?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'IT Systems Assessment - Deep Dive' event and return its attendee list. Since no attendees are specified, the agent can state that no attendees are listed.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-06-11T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move my Project Manager 1:1 to 11 AM on Thursday and check if pm@example.com is available?",
+        "complexity": "High",
+        "expected_behavior": "The agent should find the 'Project Manager 1:1' event on Thursday, tentatively update its time to 11 AM, and check the calendar for pm@example.com's availability at that time. If pm@example.com has a conflict, communicate it to the user. If there is no conflict, confirm the rescheduling.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-06-09T20:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline the Cybersecurity Expert Consultation, and schedule a meeting with cyber@example.com on Friday at 10 AM.",
+        "complexity": "High",
+        "expected_behavior": "The agent should decline the 'Cybersecurity Expert Consultation' on Wednesday, and then create a new event on Friday at 10 AM with cyber@example.com.",
+        "addressed_days": [
+            "Wednesday",
+            "Friday"
+        ],
+        "current_time": "2024-06-11T15:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Delete... um... never mind. Forget about it.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should interpret this as a cancellation of a previous command or a request to do nothing and respond accordingly, perhaps with 'Okay, I have discarded the previous request.'",
+        "addressed_days": [],
+        "current_time": "2024-06-13T16:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change... the... status meeting.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should request clarification regarding what change is desired for the 'Client Status Update Meeting'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-06-11T13:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the current date (Thursday, June 13th) to list all events scheduled for that day.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-06-13T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Anything planned for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should check the calendar for Friday and list all events scheduled for that day.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-06-13T15:00:00"
+    }
+]

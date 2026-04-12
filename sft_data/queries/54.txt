@@ -1,0 +1,150 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Lunch' for Wednesday at 12:00 PM, lasting one hour, with consultant@accessibility.com as an attendee, and a description of 'Discuss project updates'.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Team Lunch' on Wednesday, December 3, 2025, from 12:00 PM to 1:00 PM, with consultant@accessibility.com as an attendee, and set the description to 'Discuss project updates'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-11-30T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting on Friday at 2 PM for 30 minutes called 'Client Demo'.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event named 'Client Demo' on Friday, December 5, 2025, from 2:00 PM to 2:30 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-11-30T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the calendar for the day I'm volunteering?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the day with the 'Volunteer at Disability Center' event and then list all events for that day (Tuesday, December 2, 2025).",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-12-02T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What meetings do I have with accessibility testers this week?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events between Monday, December 1, 2025, and Sunday, December 7, 2025, that include 'accessibility_tester@company.com' as an attendee.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-12-01T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the accessibility legal review meeting to 11:00 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Accessibility Legal Review' meeting on Tuesday and update its start time to 11:00 AM, keeping the duration the same.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-12-02T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of 'Dinner with Spouse' to 7 PM on Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Spouse' event on Monday and update its start time to 7:00 PM, keeping the duration the same.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-12-01T16:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the usability testing session on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Usability Testing Session with User with Visual Impairment' event on Tuesday and return its start time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-12-02T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the accessibility requirements meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Accessibility Requirements for New Product Page' meeting on Monday and return the list of attendees.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-12-01T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the meeting with the accessibility consultant. Decline the invite.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Accessibility Consultant' event on Wednesday and decline the invitation for the user.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-12-03T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule the 'Review ARIA Implementation' meeting on Monday to Wednesday at the same time.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Review ARIA Implementation with Front-End Team' meeting on Monday, then create an identical event on Wednesday at the same time, and finally delete the original event on Monday.",
+        "addressed_days": [
+            "Monday",
+            "Wednesday"
+        ],
+        "current_time": "2025-12-01T11:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting front end aria.",
+        "complexity": "Medium",
+        "expected_behavior": "Attempt to find an event that matches the keywords. Since 'Review ARIA Implementation with Front-End Team' includes the keywords 'front end' and 'ARIA', retrieve its details and ask for confirmation.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-12-01T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Accessibility best practices!",
+        "complexity": "Low",
+        "expected_behavior": "Attempt to interpret the request. Given the phrase 'Accessibility best practices', it aligns most closely with 'Team Meeting: Discuss Accessibility Best Practices'. Since this occurs multiple times, prompt to clarify which occurence.",
+        "addressed_days": [
+            "Wednesday",
+            "Friday"
+        ],
+        "current_time": "2025-12-04T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for the current day (Thursday, December 4, 2025).",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-12-04T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any meetings yesterday with accessibility testers?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for events on Wednesday, December 3, 2025, and determine if any included accessibility testers. If so, return those events.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-12-04T09:00:00"
+    }
+]

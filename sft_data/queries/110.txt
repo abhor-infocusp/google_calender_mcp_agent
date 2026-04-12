@@ -1,0 +1,148 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Dentist Appointment' for Tuesday at 10 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Call the create_event tool to create an event named 'Dentist Appointment' on Tuesday, October 14, 2025 at 10:00 AM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-10-12T18:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you add a meeting with John Smith on Friday at 2 PM regarding the new project?",
+        "complexity": "Low",
+        "expected_behavior": "Call the create_event tool to create an event named 'Meeting with John Smith' on Friday, October 17, 2025 at 2:00 PM, with John Smith as an attendee, concerning the new project.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-10-12T18:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing in the morning on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call the list_events tool to retrieve all events on Wednesday, October 15, 2025, between 7:00 AM and 12:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-10-15T06:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on for dinner this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Call the list_events tool to retrieve all events between Monday, October 13, 2025, and Sunday, October 19, 2025, that mention dinner.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-10-13T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the meeting on Friday to 3 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call the list_events tool to find an event on Friday, October 17, 2025. If a meeting is found, call the update_event tool to change its start time to 3:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-10-17T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the family dinner on Saturday to 7 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call the list_events tool to find an event on Saturday, October 18, 2025, that mentions 'family dinner'. If found, call the update_event tool to change its start time to 7:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-10-18T15:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the safety meeting on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Call the list_events tool to find an event on Tuesday, October 14, 2025, that contains the words 'safety meeting'. Then, return the start time of the meeting to the user.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-10-14T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What is happening on Thursday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Call the list_events tool to retrieve all events on Thursday, October 16, 2025, between 12:00 PM and 6:00 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-10-16T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the meeting on Monday. Decline it.",
+        "complexity": "Medium",
+        "expected_behavior": "Call the list_events tool to find an event on Monday, October 13, 2025, that is labeled 'meeting'. Then call the respond_to_event tool to decline this event.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-10-13T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "If I'm free on Wednesday afternoon, schedule a team lunch.",
+        "complexity": "High",
+        "expected_behavior": "Call the list_events tool to find events on Wednesday, October 15, 2025 between 12:00 PM and 2:00 PM. If no events are found, call create_event to schedule a team lunch at 1:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-10-15T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... Friday... wiring.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events for Friday, October 17, 2025, looking for an event with 'wiring'. If found, ask the user for clarification regarding the new time. Then, call the update_event tool to update the event's time based on user input.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-10-17T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Inspection Thursday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call the list_events tool to retrieve events on Thursday, October 16, 2025, that contains the word 'Inspection'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-10-16T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call the list_events tool to retrieve all events on Monday, October 13, 2025.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-10-13T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Anything happening tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call the list_events tool to retrieve all events on Wednesday, October 15, 2025.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-10-14T19:00:00"
+    }
+]

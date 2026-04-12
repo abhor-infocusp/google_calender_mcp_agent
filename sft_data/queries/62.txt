@@ -1,0 +1,144 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Project Brainstorm' for Tuesday at 9 AM for one hour with Michael.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event with the summary 'Project Brainstorm', start time of 2023-07-25T09:00:00, end time of 2023-07-25T10:00:00 and attendee Michael.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-23T18:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting with the University Librarian for Wednesday at 2:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event with the summary 'Meeting with University Librarian', start time of 2023-07-26T14:30:00, and end time of 2023-07-26T15:30:00.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-23T18:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the schedule for tomorrow afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should first determine that 'tomorrow' is Tuesday, July 25th. Then, it should list events occurring between 12:00 PM and 6:00 PM on that day.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-24T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Who am I having dinner with on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the event on Monday evening and retrieve the attendees, noting that the attendee is the English Department Professor.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-24T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the Faculty Meeting to 4 PM on Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the Faculty Meeting on Monday and update its start time to 2023-07-24T16:00:00 and end time to 2023-07-24T17:30:00.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-24T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my meeting with Sarah on Tuesday to 2 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Meeting with Graduate Student' with Sarah on Tuesday and update its start time to 2023-07-25T14:00:00 and its end time to 2023-07-25T15:00:00.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-25T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the French Film Screening on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should retrieve the event 'Attend French Film Screening' on Thursday and return the start time, 6:00 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-07-24T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the faculty meeting?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the faculty meeting and return the list of attendees: Dr. Smith, Dr. Jones, Dr. Brown.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-24T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make it to the dinner party on Saturday. Decline the invitation.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Dinner party at colleague's house' event on Saturday and respond to it with a 'DECLINE'.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-07-27T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is Dr. Smith at the University Librarian meeting?",
+        "complexity": "High",
+        "expected_behavior": "The agent should find the 'Meeting with University Librarian' event on Wednesday and confirm that Dr. Smith is not attending it. It should respond that Dr. Smith is not at the meeting.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-25T15:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Office hours?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should list the office hours from Monday, Wednesday and Friday.",
+        "addressed_days": [
+            "Monday",
+            "Wednesday",
+            "Friday"
+        ],
+        "current_time": "2023-07-24T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Bookstore this Saturday",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Trip to local bookstore' event on Saturday.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-07-27T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should list all events scheduled for today, Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-24T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What was on the schedule yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should list all events that occurred on Sunday.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2023-07-24T07:00:00"
+    }
+]

@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Lunch' on Wednesday at 12:30 PM with Emily, Mark, and David.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule 'Team Lunch' on Wednesday, September 3rd, 2025, from 12:30 PM to 1:30 PM with Emily, Mark, and David.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-08-31T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for me next Tuesday at 3 PM to discuss the New River Bridge.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule a meeting titled 'New River Bridge discussion' on Tuesday, September 2nd, 2025, from 3 PM to 4 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-08-31T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to list all events for Tuesday, September 2nd, 2025.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-09-01T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the schedule for this Sunday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to list all events for Sunday, September 7th, 2025.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2025-09-07T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the Project Kick-off Meeting on Monday back by one hour.",
+        "complexity": "Medium",
+        "expected_behavior": "Call get_event to find 'Project Kick-off Meeting' on Monday, then call update_event to change its start time to 10:00 AM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-09-01T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you change the yoga class on Wednesday to 7:30 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "Call get_event to find 'Yoga Class' on Wednesday, then call update_event to change the start time to 7:30 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-09-03T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me who is expected to be at the site inspection on Monday.",
+        "complexity": "Low",
+        "expected_behavior": "Call get_event to find the 'Site Inspection - Greenway Bridge Location' event on Monday, and then return the attendees, Frank.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-09-01T07:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time does the community garden volunteering start?",
+        "complexity": "Low",
+        "expected_behavior": "Call get_event to find the 'Community Garden Volunteering' event on Monday, and then return the start time, 6:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-09-01T07:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the meeting with the City Planning Official. Decline it.",
+        "complexity": "Medium",
+        "expected_behavior": "Call get_event to find the 'Meeting with City Planning Official' on Tuesday, then call respond_to_event with 'DECLINE'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-09-02T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Please remove Mark from the project update meeting on Thursday and add Susan.",
+        "complexity": "High",
+        "expected_behavior": "Call get_event to find 'Project Update Meeting' on Thursday. Then, call update_event to remove Mark and add Susan to the attendees.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-09-04T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner Alex Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Call get_event to find 'Dinner with Alex' on Tuesday.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-09-02T19:30:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule bridge blueprints",
+        "complexity": "Medium",
+        "expected_behavior": "Call get_event to find the 'Review Bridge Design Blueprints' event on Monday.  Then respond that the tool requires a new time to reschedule.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-09-01T12:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to list all events for Monday, September 1st, 2025.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-09-01T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to list all events for Tuesday, September 2nd, 2025.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-09-01T08:00:00"
+    }
+]

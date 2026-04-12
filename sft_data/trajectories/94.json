@@ -1,0 +1,1412 @@
+[
+  {
+    "query": "Book a block for 'Dentist Appointment' on Wednesday at 11:00 AM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event with summary 'Dentist Appointment', start time 2025-05-21T11:00:00, end time 2025-05-21T12:00:00, no attendees, and no description.",
+    "simulated_now": "2025-05-18 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Team Check-in - Discussing challenges and successes",
+          "start": "2025-05-21 09:00:00",
+          "end": "2025-05-21 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "program_manager@nonprofit.org",
+            "advisor_1@nonprofit.org",
+            "advisor_2@nonprofit.org"
+          ],
+          "id": "evt_7a9ce25bad714ffdb16847d82f2164cf"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Advising Session - Analyzing financial situation",
+          "start": "2025-05-21 10:30:00",
+          "end": "2025-05-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_4@email.com"
+          ],
+          "id": "evt_e53d451fb86b4f2291e299c3a5b96b8e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Professional Development Webinar - Student Loan Policy Updates",
+          "start": "2025-05-21 13:00:00",
+          "end": "2025-05-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1407ce773bff4a6eb7dd36d18c80d5af"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Advising Session - Addressing client anxiety about debt",
+          "start": "2025-05-21 14:30:00",
+          "end": "2025-05-21 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_5@email.com"
+          ],
+          "id": "evt_88efb95956cf4fee84ee6145efcdabae"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Therapy Appointment",
+          "start": "2025-05-21 18:00:00",
+          "end": "2025-05-21 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@email.com"
+          ],
+          "id": "evt_06c5ca91768d452ba40108f832e1fe67"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Team Check-in - Discussing challenges and successes",
+          "start": "2025-05-21 09:00:00",
+          "end": "2025-05-21 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "program_manager@nonprofit.org",
+            "advisor_1@nonprofit.org",
+            "advisor_2@nonprofit.org"
+          ],
+          "id": "evt_7a9ce25bad714ffdb16847d82f2164cf"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Advising Session - Analyzing financial situation",
+          "start": "2025-05-21 10:30:00",
+          "end": "2025-05-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_4@email.com"
+          ],
+          "id": "evt_e53d451fb86b4f2291e299c3a5b96b8e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dentist Appointment",
+          "start": "2025-05-21 11:00:00",
+          "end": "2025-05-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ae41b6cc3dc740c3b1646040a661037a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Professional Development Webinar - Student Loan Policy Updates",
+          "start": "2025-05-21 13:00:00",
+          "end": "2025-05-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1407ce773bff4a6eb7dd36d18c80d5af"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Advising Session - Addressing client anxiety about debt",
+          "start": "2025-05-21 14:30:00",
+          "end": "2025-05-21 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_5@email.com"
+          ],
+          "id": "evt_88efb95956cf4fee84ee6145efcdabae"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Therapy Appointment",
+          "start": "2025-05-21 18:00:00",
+          "end": "2025-05-21 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@email.com"
+          ],
+          "id": "evt_06c5ca91768d452ba40108f832e1fe67"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Book a block for 'Dentist Appointment' on Wednesday at 11:00 AM."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. I'll first get the current time to determine the correct date for next Wednesday and then book the appointment."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-05-18 10:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Next Wednesday is May 21, 2025. I will now book a one-hour block for your \"Dentist Appointment\" at 11:00 AM on that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "end": "2025-05-21 12:00:00",
+          "summary": "Dentist Appointment",
+          "start": "2025-05-21 11:00:00"
+        },
+        "result": "Event created successfully.\nDentist Appointment\n  ID: evt_ae41b6cc3dc740c3b1646040a661037a\n  Time: Wed May 21, 11:00 - 12:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've booked the \"Dentist Appointment\" for you for this upcoming Wednesday, May 21st, from 11:00 AM to 12:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing on Monday?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Low",
+    "expected_behavior": "List all events on Monday, May 19, 2025.",
+    "simulated_now": "2025-05-19 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Discussing new loan forgiveness program updates",
+          "start": "2025-05-19 09:00:00",
+          "end": "2025-05-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "program_manager@nonprofit.org",
+            "advisor_1@nonprofit.org",
+            "advisor_2@nonprofit.org"
+          ],
+          "id": "evt_c4e548d998584eb5981735f3866b0c3e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Advising Session - Reviewing repayment options for recent graduate",
+          "start": "2025-05-19 10:30:00",
+          "end": "2025-05-19 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_1@email.com"
+          ],
+          "id": "evt_974eb52b292f4213aed6977f53af7bd8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Research - Updates on income-driven repayment plans",
+          "start": "2025-05-19 13:00:00",
+          "end": "2025-05-19 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b1e779f77c7c40e597395c84418dc8bc"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Advising Session - Assisting with loan consolidation application",
+          "start": "2025-05-19 14:30:00",
+          "end": "2025-05-19 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_2@email.com"
+          ],
+          "id": "evt_25a5abe60a5c4581a1b1b9930f443a88"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2025-05-19 18:30:00",
+          "end": "2025-05-19 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a864f74e2def43a6a2652d9ba107e806"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Discussing new loan forgiveness program updates",
+          "start": "2025-05-19 09:00:00",
+          "end": "2025-05-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "program_manager@nonprofit.org",
+            "advisor_1@nonprofit.org",
+            "advisor_2@nonprofit.org"
+          ],
+          "id": "evt_c4e548d998584eb5981735f3866b0c3e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Advising Session - Reviewing repayment options for recent graduate",
+          "start": "2025-05-19 10:30:00",
+          "end": "2025-05-19 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_1@email.com"
+          ],
+          "id": "evt_974eb52b292f4213aed6977f53af7bd8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Research - Updates on income-driven repayment plans",
+          "start": "2025-05-19 13:00:00",
+          "end": "2025-05-19 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b1e779f77c7c40e597395c84418dc8bc"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Advising Session - Assisting with loan consolidation application",
+          "start": "2025-05-19 14:30:00",
+          "end": "2025-05-19 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_2@email.com"
+          ],
+          "id": "evt_25a5abe60a5c4581a1b1b9930f443a88"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2025-05-19 18:30:00",
+          "end": "2025-05-19 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a864f74e2def43a6a2652d9ba107e806"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing on Monday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to determine the date for the upcoming Monday to check your calendar.\n"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-05-19 08:00:00 | Monday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will check for events on Monday, May 19th, 2025.\n"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-05-19 23:59:59",
+          "time_min": "2025-05-19 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_c4e548d998584eb5981735f3866b0c3e | Team Meeting - Discussing new loan forgiveness program updates \u2014 Mon 09:00-10:00\nid: evt_974eb52b292f4213aed6977f53af7bd8 | Client Advising Session - Reviewing repayment options for recent graduate \u2014 Mon 10:30-12:00\nid: evt_b1e779f77c7c40e597395c84418dc8bc | Research - Updates on income-driven repayment plans \u2014 Mon 13:00-14:00\nid: evt_25a5abe60a5c4581a1b1b9930f443a88 | Client Advising Session - Assisting with loan consolidation application \u2014 Mon 14:30-16:00\nid: evt_a864f74e2def43a6a2652d9ba107e806 | Yoga Class \u2014 Mon 18:30-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "On Monday, you have five events:\n\n*   **9:00 AM - 10:00 AM:** Team Meeting - Discussing new loan forgiveness program updates\n*   **10:30 AM - 12:00 PM:** Client Advising Session - Reviewing repayment options for recent graduate\n*   **1:00 PM - 2:00 PM:** Research - Updates on income-driven repayment plans\n*   **2:30 PM - 4:00 PM:** Client Advising Session - Assisting with loan consolidation application\n*   **6:30 PM - 7:30 PM:** Yoga Class"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What is on the schedule for Tuesday afternoon?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List all events between 12:00 PM and 6:00 PM on Tuesday, May 20, 2025.",
+    "simulated_now": "2025-05-20 09:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Respond to client inquiries - Email and Phone",
+          "start": "2025-05-20 09:00:00",
+          "end": "2025-05-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9433ca1582cf4bb8999b083fc3edc5ef"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Workshop Preparation - Student Loan Management",
+          "start": "2025-05-20 10:30:00",
+          "end": "2025-05-20 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b5566d69f56b45778a07edf4366bb2d7"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "University Financial Aid Office Meeting",
+          "start": "2025-05-20 13:00:00",
+          "end": "2025-05-20 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "financial_aid@university.edu"
+          ],
+          "id": "evt_bcbeb0409ca54aca8946b4b783593291"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Advising Session - Discussing Public Service Loan Forgiveness",
+          "start": "2025-05-20 15:00:00",
+          "end": "2025-05-20 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_3@email.com"
+          ],
+          "id": "evt_33f0650d54484dfe92ed740c1a3d5621"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Family",
+          "start": "2025-05-20 19:00:00",
+          "end": "2025-05-20 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8a06d161195d41749ba39921dcfa60ac"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Respond to client inquiries - Email and Phone",
+          "start": "2025-05-20 09:00:00",
+          "end": "2025-05-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9433ca1582cf4bb8999b083fc3edc5ef"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Workshop Preparation - Student Loan Management",
+          "start": "2025-05-20 10:30:00",
+          "end": "2025-05-20 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b5566d69f56b45778a07edf4366bb2d7"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "University Financial Aid Office Meeting",
+          "start": "2025-05-20 13:00:00",
+          "end": "2025-05-20 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "financial_aid@university.edu"
+          ],
+          "id": "evt_bcbeb0409ca54aca8946b4b783593291"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Advising Session - Discussing Public Service Loan Forgiveness",
+          "start": "2025-05-20 15:00:00",
+          "end": "2025-05-20 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_3@email.com"
+          ],
+          "id": "evt_33f0650d54484dfe92ed740c1a3d5621"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Family",
+          "start": "2025-05-20 19:00:00",
+          "end": "2025-05-20 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8a06d161195d41749ba39921dcfa60ac"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What is on the schedule for Tuesday afternoon?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-05-20 09:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-05-20 12:00:00",
+          "time_max": "2025-05-20 17:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_b5566d69f56b45778a07edf4366bb2d7 | Workshop Preparation - Student Loan Management \u2014 Tue 10:30-12:00\nid: evt_bcbeb0409ca54aca8946b4b783593291 | University Financial Aid Office Meeting \u2014 Tue 13:00-14:30\nid: evt_33f0650d54484dfe92ed740c1a3d5621 | Client Advising Session - Discussing Public Service Loan Forgiveness \u2014 Tue 15:00-16:30"
+      },
+      {
+        "role": "assistant",
+        "content": "You have two events scheduled for this afternoon. The first is the University Financial Aid Office Meeting from 13:00 to 14:30. After that, you have a Client Advising Session to discuss Public Service Loan Forgiveness from 15:00 to 16:30."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can you move my Yoga Class on Monday to 7:00 PM?",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Yoga Class' event on Monday and update its start time to 19:00 and end time to 20:00.",
+    "simulated_now": "2025-05-19 11:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Discussing new loan forgiveness program updates",
+          "start": "2025-05-19 09:00:00",
+          "end": "2025-05-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "program_manager@nonprofit.org",
+            "advisor_1@nonprofit.org",
+            "advisor_2@nonprofit.org"
+          ],
+          "id": "evt_ba325bd115b948b285b27023b3136607"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Advising Session - Reviewing repayment options for recent graduate",
+          "start": "2025-05-19 10:30:00",
+          "end": "2025-05-19 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_1@email.com"
+          ],
+          "id": "evt_8d5eeef1818245d59399d788d1ae61f5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Research - Updates on income-driven repayment plans",
+          "start": "2025-05-19 13:00:00",
+          "end": "2025-05-19 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_244ffd93eece41d7822aebc9f4ceb489"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Advising Session - Assisting with loan consolidation application",
+          "start": "2025-05-19 14:30:00",
+          "end": "2025-05-19 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_2@email.com"
+          ],
+          "id": "evt_e6f8bd3cbcdf4f03bb21891b254ebea3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2025-05-19 18:30:00",
+          "end": "2025-05-19 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_79d05cc0b646456bbc701838ec4a3501"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Discussing new loan forgiveness program updates",
+          "start": "2025-05-19 09:00:00",
+          "end": "2025-05-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "program_manager@nonprofit.org",
+            "advisor_1@nonprofit.org",
+            "advisor_2@nonprofit.org"
+          ],
+          "id": "evt_ba325bd115b948b285b27023b3136607"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Advising Session - Reviewing repayment options for recent graduate",
+          "start": "2025-05-19 10:30:00",
+          "end": "2025-05-19 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_1@email.com"
+          ],
+          "id": "evt_8d5eeef1818245d59399d788d1ae61f5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Research - Updates on income-driven repayment plans",
+          "start": "2025-05-19 13:00:00",
+          "end": "2025-05-19 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_244ffd93eece41d7822aebc9f4ceb489"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Advising Session - Assisting with loan consolidation application",
+          "start": "2025-05-19 14:30:00",
+          "end": "2025-05-19 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_2@email.com"
+          ],
+          "id": "evt_e6f8bd3cbcdf4f03bb21891b254ebea3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2025-05-19 19:00:00",
+          "end": "2025-05-19 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_79d05cc0b646456bbc701838ec4a3501"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can you move my Yoga Class on Monday to 7:00 PM?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-05-19 11:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-05-20 00:00:00",
+          "time_min": "2025-05-19 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_ba325bd115b948b285b27023b3136607 | Team Meeting - Discussing new loan forgiveness program updates \u2014 Mon 09:00-10:00\nid: evt_8d5eeef1818245d59399d788d1ae61f5 | Client Advising Session - Reviewing repayment options for recent graduate \u2014 Mon 10:30-12:00\nid: evt_244ffd93eece41d7822aebc9f4ceb489 | Research - Updates on income-driven repayment plans \u2014 Mon 13:00-14:00\nid: evt_e6f8bd3cbcdf4f03bb21891b254ebea3 | Client Advising Session - Assisting with loan consolidation application \u2014 Mon 14:30-16:00\nid: evt_79d05cc0b646456bbc701838ec4a3501 | Yoga Class \u2014 Mon 18:30-19:30"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2025-05-19 19:00:00",
+          "event_id": "evt_79d05cc0b646456bbc701838ec4a3501",
+          "end": "2025-05-19 20:00:00"
+        },
+        "result": "Event updated successfully.\nYoga Class\n  ID: evt_79d05cc0b646456bbc701838ec4a3501\n  Time: Mon May 19, 19:00 - 20:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved your Yoga Class to 7:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change the time of the meeting with the loan servicer on Thursday to 2 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Meeting with Loan Servicer' event on Thursday and update its start time to 14:00 and end time to 15:00.",
+    "simulated_now": "2025-05-18 10:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Respond to client inquiries - Email and Phone",
+          "start": "2025-05-22 09:00:00",
+          "end": "2025-05-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ff2313c152114219bf2e97361130eb6c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Student Loan Management Workshop",
+          "start": "2025-05-22 10:30:00",
+          "end": "2025-05-22 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2a49be794418478bba32438f1e6fd36a"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Loan Servicer",
+          "start": "2025-05-22 13:00:00",
+          "end": "2025-05-22 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "loan_servicer@email.com"
+          ],
+          "id": "evt_7c046cf481ca4142b55131fddd7438c1"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Client Advising Session - Reviewing income-driven repayment plans",
+          "start": "2025-05-22 14:30:00",
+          "end": "2025-05-22 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_6@email.com"
+          ],
+          "id": "evt_df507a09c99f472b92f049d32b63318a"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Book Club Meeting",
+          "start": "2025-05-22 19:00:00",
+          "end": "2025-05-22 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_b1a601102d2047e79b1df4210a415482"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Respond to client inquiries - Email and Phone",
+          "start": "2025-05-22 09:00:00",
+          "end": "2025-05-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ff2313c152114219bf2e97361130eb6c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Student Loan Management Workshop",
+          "start": "2025-05-22 10:30:00",
+          "end": "2025-05-22 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2a49be794418478bba32438f1e6fd36a"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Loan Servicer",
+          "start": "2025-05-22 14:00:00",
+          "end": "2025-05-22 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "loan_servicer@email.com"
+          ],
+          "id": "evt_7c046cf481ca4142b55131fddd7438c1"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Client Advising Session - Reviewing income-driven repayment plans",
+          "start": "2025-05-22 14:30:00",
+          "end": "2025-05-22 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_6@email.com"
+          ],
+          "id": "evt_df507a09c99f472b92f049d32b63318a"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Book Club Meeting",
+          "start": "2025-05-22 19:00:00",
+          "end": "2025-05-22 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_b1a601102d2047e79b1df4210a415482"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change the time of the meeting with the loan servicer on Thursday to 2 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-05-18 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-05-22 00:00:00",
+          "time_max": "2025-05-22 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_ff2313c152114219bf2e97361130eb6c | Respond to client inquiries - Email and Phone \u2014 Thu 09:00-10:00\nid: evt_2a49be794418478bba32438f1e6fd36a | Student Loan Management Workshop \u2014 Thu 10:30-12:00\nid: evt_7c046cf481ca4142b55131fddd7438c1 | Meeting with Loan Servicer \u2014 Thu 13:00-14:00\nid: evt_df507a09c99f472b92f049d32b63318a | Client Advising Session - Reviewing income-driven repayment plans \u2014 Thu 14:30-16:00\nid: evt_b1a601102d2047e79b1df4210a415482 | Book Club Meeting \u2014 Thu 19:00-21:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2025-05-22 14:00:00",
+          "event_id": "evt_7c046cf481ca4142b55131fddd7438c1",
+          "end": "2025-05-22 15:00:00"
+        },
+        "result": "Event updated successfully.\nMeeting with Loan Servicer\n  ID: evt_7c046cf481ca4142b55131fddd7438c1\n  Time: Thu May 22, 14:00 - 15:00\n  Attendees: loan_servicer@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've rescheduled your meeting with the loan servicer to 2 PM on Thursday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is the team meeting on Monday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Team Meeting' event on Monday and return its start time.",
+    "simulated_now": "2025-05-19 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Discussing new loan forgiveness program updates",
+          "start": "2025-05-19 09:00:00",
+          "end": "2025-05-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "program_manager@nonprofit.org",
+            "advisor_1@nonprofit.org",
+            "advisor_2@nonprofit.org"
+          ],
+          "id": "evt_f92b0be698464404a6cd706726cf5d15"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Advising Session - Reviewing repayment options for recent graduate",
+          "start": "2025-05-19 10:30:00",
+          "end": "2025-05-19 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_1@email.com"
+          ],
+          "id": "evt_4a56ef6186b84a468281bd35d598fed9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Research - Updates on income-driven repayment plans",
+          "start": "2025-05-19 13:00:00",
+          "end": "2025-05-19 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f083820013ee43d18b44e87c1f11cb12"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Advising Session - Assisting with loan consolidation application",
+          "start": "2025-05-19 14:30:00",
+          "end": "2025-05-19 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_2@email.com"
+          ],
+          "id": "evt_8411c6c3cca443a5b002c7c17ede2199"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2025-05-19 18:30:00",
+          "end": "2025-05-19 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c1f42fe35bba4447a5a0b9c3db84d8da"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Discussing new loan forgiveness program updates",
+          "start": "2025-05-19 09:00:00",
+          "end": "2025-05-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "program_manager@nonprofit.org",
+            "advisor_1@nonprofit.org",
+            "advisor_2@nonprofit.org"
+          ],
+          "id": "evt_f92b0be698464404a6cd706726cf5d15"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Advising Session - Reviewing repayment options for recent graduate",
+          "start": "2025-05-19 10:30:00",
+          "end": "2025-05-19 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_1@email.com"
+          ],
+          "id": "evt_4a56ef6186b84a468281bd35d598fed9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Research - Updates on income-driven repayment plans",
+          "start": "2025-05-19 13:00:00",
+          "end": "2025-05-19 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f083820013ee43d18b44e87c1f11cb12"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Advising Session - Assisting with loan consolidation application",
+          "start": "2025-05-19 14:30:00",
+          "end": "2025-05-19 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_2@email.com"
+          ],
+          "id": "evt_8411c6c3cca443a5b002c7c17ede2199"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2025-05-19 18:30:00",
+          "end": "2025-05-19 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c1f42fe35bba4447a5a0b9c3db84d8da"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is the team meeting on Monday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-05-19 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-05-19 00:00:00",
+          "time_max": "2025-05-19 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_f92b0be698464404a6cd706726cf5d15 | Team Meeting - Discussing new loan forgiveness program updates \u2014 Mon 09:00-10:00\nid: evt_4a56ef6186b84a468281bd35d598fed9 | Client Advising Session - Reviewing repayment options for recent graduate \u2014 Mon 10:30-12:00\nid: evt_f083820013ee43d18b44e87c1f11cb12 | Research - Updates on income-driven repayment plans \u2014 Mon 13:00-14:00\nid: evt_8411c6c3cca443a5b002c7c17ede2199 | Client Advising Session - Assisting with loan consolidation application \u2014 Mon 14:30-16:00\nid: evt_c1f42fe35bba4447a5a0b9c3db84d8da | Yoga Class \u2014 Mon 18:30-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "The team meeting on Monday is from 9:00 to 10:00.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Is there any overlap between the client advising session on Wednesday with client 5 and the webinar?",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Find the 'Client Advising Session' event with client 5 and the 'Professional Development Webinar' event on Wednesday, and check if their times overlap.",
+    "simulated_now": "2025-05-20 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Team Check-in - Discussing challenges and successes",
+          "start": "2025-05-21 09:00:00",
+          "end": "2025-05-21 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "program_manager@nonprofit.org",
+            "advisor_1@nonprofit.org",
+            "advisor_2@nonprofit.org"
+          ],
+          "id": "evt_f107250833a945efae77216e0a49ebb8"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Advising Session - Analyzing financial situation",
+          "start": "2025-05-21 10:30:00",
+          "end": "2025-05-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_4@email.com"
+          ],
+          "id": "evt_91610a2a5f2e42d88d576330bec16bc6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Professional Development Webinar - Student Loan Policy Updates",
+          "start": "2025-05-21 13:00:00",
+          "end": "2025-05-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ff6ecc9726324d489f8968ac7fce0371"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Advising Session - Addressing client anxiety about debt",
+          "start": "2025-05-21 14:30:00",
+          "end": "2025-05-21 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_5@email.com"
+          ],
+          "id": "evt_24cc9607db1b4b79ba330e9f6e9cf61c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Therapy Appointment",
+          "start": "2025-05-21 18:00:00",
+          "end": "2025-05-21 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@email.com"
+          ],
+          "id": "evt_fee1c0a323e144aea5d01e9cf349da5f"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Team Check-in - Discussing challenges and successes",
+          "start": "2025-05-21 09:00:00",
+          "end": "2025-05-21 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "program_manager@nonprofit.org",
+            "advisor_1@nonprofit.org",
+            "advisor_2@nonprofit.org"
+          ],
+          "id": "evt_f107250833a945efae77216e0a49ebb8"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Advising Session - Analyzing financial situation",
+          "start": "2025-05-21 10:30:00",
+          "end": "2025-05-21 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_4@email.com"
+          ],
+          "id": "evt_91610a2a5f2e42d88d576330bec16bc6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Professional Development Webinar - Student Loan Policy Updates",
+          "start": "2025-05-21 13:00:00",
+          "end": "2025-05-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ff6ecc9726324d489f8968ac7fce0371"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Advising Session - Addressing client anxiety about debt",
+          "start": "2025-05-21 14:30:00",
+          "end": "2025-05-21 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_5@email.com"
+          ],
+          "id": "evt_24cc9607db1b4b79ba330e9f6e9cf61c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Therapy Appointment",
+          "start": "2025-05-21 18:00:00",
+          "end": "2025-05-21 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@email.com"
+          ],
+          "id": "evt_fee1c0a323e144aea5d01e9cf349da5f"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Is there any overlap between the client advising session on Wednesday with client 5 and the webinar?"
+      },
+      {
+        "role": "assistant",
+        "content": "Here is my plan:\n\n1. I will call the `get_current_time` tool to get the current date and time.\n2. I will then call the `list_events` tool to get all the events scheduled for Wednesday.\n3. I will examine the event list to find the \"client advising session with client 5\" and the \"webinar\" and check if their times overlap.\n4. Finally, I will respond to the user with the information I found."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-05-20 10:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-05-21 00:00:00",
+          "time_max": "2025-05-21 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_f107250833a945efae77216e0a49ebb8 | Team Check-in - Discussing challenges and successes \u2014 Wed 09:00-10:00\nid: evt_91610a2a5f2e42d88d576330bec16bc6 | Client Advising Session - Analyzing financial situation \u2014 Wed 10:30-12:00\nid: evt_ff6ecc9726324d489f8968ac7fce0371 | Professional Development Webinar - Student Loan Policy Updates \u2014 Wed 13:00-14:00\nid: evt_24cc9607db1b4b79ba330e9f6e9cf61c | Client Advising Session - Addressing client anxiety about debt \u2014 Wed 14:30-16:00\nid: evt_fee1c0a323e144aea5d01e9cf349da5f | Therapy Appointment \u2014 Wed 18:00-19:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_91610a2a5f2e42d88d576330bec16bc6"
+        },
+        "result": "Client Advising Session - Analyzing financial situation\n  ID: evt_91610a2a5f2e42d88d576330bec16bc6\n  Time: Wed May 21, 10:30 - 12:00\n  Attendees: client_4@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_24cc9607db1b4b79ba330e9f6e9cf61c"
+        },
+        "result": "Client Advising Session - Addressing client anxiety about debt\n  ID: evt_24cc9607db1b4b79ba330e9f6e9cf61c\n  Time: Wed May 21, 14:30 - 16:00\n  Attendees: client_5@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "No, there is no overlap. The Client Advising Session with client 5 is scheduled for Wednesday from 2:30 PM to 4:00 PM, and the Professional Development Webinar is scheduled from 1:00 PM to 2:00 PM on the same day."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events for Monday, May 19, 2025.",
+    "simulated_now": "2025-05-19 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Discussing new loan forgiveness program updates",
+          "start": "2025-05-19 09:00:00",
+          "end": "2025-05-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "program_manager@nonprofit.org",
+            "advisor_1@nonprofit.org",
+            "advisor_2@nonprofit.org"
+          ],
+          "id": "evt_60f0fa33a9664e71ab4faaca9e1d8f9a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Advising Session - Reviewing repayment options for recent graduate",
+          "start": "2025-05-19 10:30:00",
+          "end": "2025-05-19 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_1@email.com"
+          ],
+          "id": "evt_259b32712db64921a73970396eb93a3b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Research - Updates on income-driven repayment plans",
+          "start": "2025-05-19 13:00:00",
+          "end": "2025-05-19 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_36e35e086ee14d1e8b8e2119002ac197"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Advising Session - Assisting with loan consolidation application",
+          "start": "2025-05-19 14:30:00",
+          "end": "2025-05-19 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_2@email.com"
+          ],
+          "id": "evt_2e1d9de7487b445eabf2396d7c0eae8a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2025-05-19 18:30:00",
+          "end": "2025-05-19 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2a7c50ac5c004b718662f47447ab35af"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Discussing new loan forgiveness program updates",
+          "start": "2025-05-19 09:00:00",
+          "end": "2025-05-19 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "program_manager@nonprofit.org",
+            "advisor_1@nonprofit.org",
+            "advisor_2@nonprofit.org"
+          ],
+          "id": "evt_60f0fa33a9664e71ab4faaca9e1d8f9a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Advising Session - Reviewing repayment options for recent graduate",
+          "start": "2025-05-19 10:30:00",
+          "end": "2025-05-19 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_1@email.com"
+          ],
+          "id": "evt_259b32712db64921a73970396eb93a3b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Research - Updates on income-driven repayment plans",
+          "start": "2025-05-19 13:00:00",
+          "end": "2025-05-19 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_36e35e086ee14d1e8b8e2119002ac197"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Advising Session - Assisting with loan consolidation application",
+          "start": "2025-05-19 14:30:00",
+          "end": "2025-05-19 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_2@email.com"
+          ],
+          "id": "evt_2e1d9de7487b445eabf2396d7c0eae8a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2025-05-19 18:30:00",
+          "end": "2025-05-19 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2a7c50ac5c004b718662f47447ab35af"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-05-19 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-05-19 23:59:59",
+          "time_min": "2025-05-19 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_60f0fa33a9664e71ab4faaca9e1d8f9a | Team Meeting - Discussing new loan forgiveness program updates \u2014 Mon 09:00-10:00\nid: evt_259b32712db64921a73970396eb93a3b | Client Advising Session - Reviewing repayment options for recent graduate \u2014 Mon 10:30-12:00\nid: evt_36e35e086ee14d1e8b8e2119002ac197 | Research - Updates on income-driven repayment plans \u2014 Mon 13:00-14:00\nid: evt_2e1d9de7487b445eabf2396d7c0eae8a | Client Advising Session - Assisting with loan consolidation application \u2014 Mon 14:30-16:00\nid: evt_2a7c50ac5c004b718662f47447ab35af | Yoga Class \u2014 Mon 18:30-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today, Monday, May 19, 2025, you have five entries in your calendar:\n- 9-10am: Team Meeting - Discussing new loan forgiveness program updates\n- 10:30am-12pm: Client Advising Session - Reviewing repayment options for recent graduate\n- 1-2pm: Research - Updates on income-driven repayment plans\n- 2:30-4pm: Client Advising Session - Assisting with loan consolidation application\n- 6:30-7:30pm: Yoga Class"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on for tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events for Tuesday, May 20, 2025.",
+    "simulated_now": "2025-05-19 20:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Respond to client inquiries - Email and Phone",
+          "start": "2025-05-20 09:00:00",
+          "end": "2025-05-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3d922b2df7e24fdd8129734f8ee7d7bd"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Workshop Preparation - Student Loan Management",
+          "start": "2025-05-20 10:30:00",
+          "end": "2025-05-20 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e9c75a65cba7474d804c558373055e6e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "University Financial Aid Office Meeting",
+          "start": "2025-05-20 13:00:00",
+          "end": "2025-05-20 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "financial_aid@university.edu"
+          ],
+          "id": "evt_0004f7425fe54a989146785dd20b110b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Advising Session - Discussing Public Service Loan Forgiveness",
+          "start": "2025-05-20 15:00:00",
+          "end": "2025-05-20 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_3@email.com"
+          ],
+          "id": "evt_978e90fd8cac4801b6438b29394c784f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Family",
+          "start": "2025-05-20 19:00:00",
+          "end": "2025-05-20 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c59172a89a19492e89f82ca2d4d956af"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Respond to client inquiries - Email and Phone",
+          "start": "2025-05-20 09:00:00",
+          "end": "2025-05-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3d922b2df7e24fdd8129734f8ee7d7bd"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Workshop Preparation - Student Loan Management",
+          "start": "2025-05-20 10:30:00",
+          "end": "2025-05-20 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e9c75a65cba7474d804c558373055e6e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "University Financial Aid Office Meeting",
+          "start": "2025-05-20 13:00:00",
+          "end": "2025-05-20 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "financial_aid@university.edu"
+          ],
+          "id": "evt_0004f7425fe54a989146785dd20b110b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Client Advising Session - Discussing Public Service Loan Forgiveness",
+          "start": "2025-05-20 15:00:00",
+          "end": "2025-05-20 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client_3@email.com"
+          ],
+          "id": "evt_978e90fd8cac4801b6438b29394c784f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Family",
+          "start": "2025-05-20 19:00:00",
+          "end": "2025-05-20 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c59172a89a19492e89f82ca2d4d956af"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on for tomorrow?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out what events are scheduled for tomorrow. First, I will get the current time to determine what \"tomorrow\" is, and then I will list the events for that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-05-19 20:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-05-20 00:00:00",
+          "time_max": "2025-05-20 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_3d922b2df7e24fdd8129734f8ee7d7bd | Respond to client inquiries - Email and Phone \u2014 Tue 09:00-10:00\nid: evt_e9c75a65cba7474d804c558373055e6e | Workshop Preparation - Student Loan Management \u2014 Tue 10:30-12:00\nid: evt_0004f7425fe54a989146785dd20b110b | University Financial Aid Office Meeting \u2014 Tue 13:00-14:30\nid: evt_978e90fd8cac4801b6438b29394c784f | Client Advising Session - Discussing Public Service Loan Forgiveness \u2014 Tue 15:00-16:30\nid: evt_c59172a89a19492e89f82ca2d4d956af | Dinner with Family \u2014 Tue 19:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Tomorrow, you have 5 events:\n- from 9am to 10am: Respond to client inquiries - Email and Phone\n- from 10:30am to 12pm: Workshop Preparation - Student Loan Management\n- from 1pm to 2:30pm: University Financial Aid Office Meeting\n- from 3pm to 4:30pm: Client Advising Session - Discussing Public Service Loan Forgiveness\n- from 7pm to 8pm: Dinner with Family"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

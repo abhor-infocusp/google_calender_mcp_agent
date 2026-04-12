@@ -1,0 +1,148 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Client Meeting' for Tuesday at 2:00 PM for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Client Meeting' on Tuesday, July 25, 2023, at 2:00 PM for one hour.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-23T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a family gathering for Sunday at 4 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'family gathering' on Sunday, July 30, 2023, at 4:00 PM.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2023-07-23T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Wednesday, July 26, 2023, between 12:00 PM and 6:00 PM to determine afternoon activities.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-26T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What meetings are happening this week?",
+        "complexity": "Medium",
+        "expected_behavior": "List events from Monday, July 24, 2023 to Sunday, July 30, 2023 that contain the word 'meeting'.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2023-07-23T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the dinner with my son to 7:00 PM on Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Son' event on Monday, July 24, 2023, and update the start time to 7:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-24T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the courtroom setup on Tuesday to start half an hour later.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Courtroom Setup for Afternoon Session' event on Tuesday, July 25, 2023, and update the start time to 12:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-25T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the case review meeting on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Case Review Meeting' event on Monday, July 24, 2023, and return the attendees.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-24T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my therapy session on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Therapy Session' event on Wednesday, July 26, 2023, and return the start time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-26T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my arraignment proceedings to 10:00 AM Wednesday, but check if I'm busy then.",
+        "complexity": "High",
+        "expected_behavior": "List events on Wednesday, July 26, 2023, at 10:00 AM. If no conflict, update 'Arraignment Proceedings' to start at 10:00 AM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-26T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Am I free Thursday evening? If so, schedule dinner with John.",
+        "complexity": "High",
+        "expected_behavior": "List events on Thursday, July 27, 2023, between 6:00 PM and 9:00 PM. If no events exist, create a new event called 'Dinner with John' on Thursday, July 27, 2023, at 7:00 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-07-27T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule trial prep.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Trial Prep - Case #2023-CV-456' event on Tuesday, July 25, 2023 and ask for a new time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-25T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel Thursday hearing.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Hearing - Case #2023-DR-789' event on Thursday, July 27, 2023, and delete it.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-07-27T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Tuesday, July 25, 2023.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-24T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Tuesday, July 25, 2023.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-26T10:00:00"
+    }
+]

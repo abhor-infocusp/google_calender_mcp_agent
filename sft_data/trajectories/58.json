@@ -1,0 +1,1166 @@
+[
+  {
+    "query": "Book a meeting on Wednesday at 3 PM called 'Project Brainstorm' with Bob at bob@example.com and Alice at alice@example.com.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event with the summary 'Project Brainstorm' on Wednesday, December 9, 2026, from 3:00 PM to 4:00 PM with attendees Bob and Alice.",
+    "simulated_now": "2026-12-06 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting: Retirement Plan Update",
+          "start": "2026-12-09 09:00:00",
+          "end": "2026-12-09 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "maria.r@email.com"
+          ],
+          "id": "evt_58afb33b01214778ac6453c45d7d07fc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Check in with CPA",
+          "start": "2026-12-09 10:30:00",
+          "end": "2026-12-09 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cpa@email.com"
+          ],
+          "id": "evt_761e2ec4e4284dcea1dc766901d6d428"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting: Review Portfolio Performance",
+          "start": "2026-12-09 13:00:00",
+          "end": "2026-12-09 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom.brown@email.com"
+          ],
+          "id": "evt_bcee7152d7e049878be16bfe7e294e45"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Seminar Preparation: Retirement Planning Basics",
+          "start": "2026-12-09 14:30:00",
+          "end": "2026-12-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6b91b7b9f2c84e5fb3c731ebb9a80577"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2026-12-09 19:00:00",
+          "end": "2026-12-09 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1466c576d1f74181b2432ec02e8b07fb"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting: Retirement Plan Update",
+          "start": "2026-12-09 09:00:00",
+          "end": "2026-12-09 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "maria.r@email.com"
+          ],
+          "id": "evt_58afb33b01214778ac6453c45d7d07fc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Check in with CPA",
+          "start": "2026-12-09 10:30:00",
+          "end": "2026-12-09 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cpa@email.com"
+          ],
+          "id": "evt_761e2ec4e4284dcea1dc766901d6d428"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting: Review Portfolio Performance",
+          "start": "2026-12-09 13:00:00",
+          "end": "2026-12-09 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom.brown@email.com"
+          ],
+          "id": "evt_bcee7152d7e049878be16bfe7e294e45"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Seminar Preparation: Retirement Planning Basics",
+          "start": "2026-12-09 14:30:00",
+          "end": "2026-12-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6b91b7b9f2c84e5fb3c731ebb9a80577"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Project Brainstorm",
+          "start": "2026-12-09 15:00:00",
+          "end": "2026-12-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bob@example.com",
+            "alice@example.com"
+          ],
+          "id": "evt_d0376bdee58a47e1be1a8b7ded5487fc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2026-12-09 19:00:00",
+          "end": "2026-12-09 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1466c576d1f74181b2432ec02e8b07fb"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Book a meeting on Wednesday at 3 PM called 'Project Brainstorm' with Bob at bob@example.com and Alice at alice@example.com."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I need to get the current date and time to schedule the meeting for this coming Wednesday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-12-06 10:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "Got it. I'll schedule the 'Project Brainstorm' meeting for this coming Wednesday, December 9th, from 3:00 PM to 4:00 PM with Bob and Alice."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2026-12-09 15:00:00",
+          "end": "2026-12-09 16:00:00",
+          "attendees": [
+            "bob@example.com",
+            "alice@example.com"
+          ],
+          "summary": "Project Brainstorm"
+        },
+        "result": "Event created successfully.\nProject Brainstorm\n  ID: evt_d0376bdee58a47e1be1a8b7ded5487fc\n  Time: Wed Dec 09, 15:00 - 16:00\n  Attendees: bob@example.com, alice@example.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've scheduled the \"Project Brainstorm\" for Wednesday, December 9th, from 3:00 PM to 4:00 PM with Bob and Alice. They have been invited to the event."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move the Portfolio Analysis to 3:30 PM on Monday.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Portfolio Analysis' event on Monday and update its start time to 3:30 PM.",
+    "simulated_now": "2026-12-07 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Voicemails",
+          "start": "2026-12-07 08:30:00",
+          "end": "2026-12-07 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ad184bfe111243fa988e8532b8130274"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting: Retirement Plan Review",
+          "start": "2026-12-07 09:00:00",
+          "end": "2026-12-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.123@email.com"
+          ],
+          "id": "evt_eab874bf7f1f4ceb88d912e872b9f71e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Team Meeting: Market Update and Strategy Discussion",
+          "start": "2026-12-07 10:30:00",
+          "end": "2026-12-07 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "invest@email.com",
+            "comp.off@email.com"
+          ],
+          "id": "evt_c8103ef60e1f4f87bbd5c2449eed5da1"
+        },
+        {
+          "day": "Monday",
+          "summary": "Prospect Meeting: Initial Consultation",
+          "start": "2026-12-07 13:30:00",
+          "end": "2026-12-07 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.doe@email.com"
+          ],
+          "id": "evt_84bd38bf199e4676a9120435b7bf8a1c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Portfolio Analysis: Review Client Accounts",
+          "start": "2026-12-07 15:00:00",
+          "end": "2026-12-07 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8d0da910ec0c4ee5a74d50dd4aa89070"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Spouse",
+          "start": "2026-12-07 18:30:00",
+          "end": "2026-12-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d4cfb6584fb24a27b467d079f979d4e0"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Voicemails",
+          "start": "2026-12-07 08:30:00",
+          "end": "2026-12-07 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ad184bfe111243fa988e8532b8130274"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting: Retirement Plan Review",
+          "start": "2026-12-07 09:00:00",
+          "end": "2026-12-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.123@email.com"
+          ],
+          "id": "evt_eab874bf7f1f4ceb88d912e872b9f71e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Team Meeting: Market Update and Strategy Discussion",
+          "start": "2026-12-07 10:30:00",
+          "end": "2026-12-07 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "invest@email.com",
+            "comp.off@email.com"
+          ],
+          "id": "evt_c8103ef60e1f4f87bbd5c2449eed5da1"
+        },
+        {
+          "day": "Monday",
+          "summary": "Prospect Meeting: Initial Consultation",
+          "start": "2026-12-07 13:30:00",
+          "end": "2026-12-07 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.doe@email.com"
+          ],
+          "id": "evt_84bd38bf199e4676a9120435b7bf8a1c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Portfolio Analysis: Review Client Accounts",
+          "start": "2026-12-07 15:30:00",
+          "end": "2026-12-07 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8d0da910ec0c4ee5a74d50dd4aa89070"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Spouse",
+          "start": "2026-12-07 18:30:00",
+          "end": "2026-12-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d4cfb6584fb24a27b467d079f979d4e0"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move the Portfolio Analysis to 3:30 PM on Monday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-12-07 10:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2026-12-07 00:00:00",
+          "time_max": "2026-12-07 23:59:59"
+        },
+        "result": "Found 6 events:\nid: evt_ad184bfe111243fa988e8532b8130274 | Check Emails and Voicemails \u2014 Mon 08:30-09:00\nid: evt_eab874bf7f1f4ceb88d912e872b9f71e | Client Meeting: Retirement Plan Review \u2014 Mon 09:00-10:00\nid: evt_c8103ef60e1f4f87bbd5c2449eed5da1 | Team Meeting: Market Update and Strategy Discussion \u2014 Mon 10:30-11:30\nid: evt_84bd38bf199e4676a9120435b7bf8a1c | Prospect Meeting: Initial Consultation \u2014 Mon 13:30-14:30\nid: evt_8d0da910ec0c4ee5a74d50dd4aa89070 | Portfolio Analysis: Review Client Accounts \u2014 Mon 15:00-16:00\nid: evt_d4cfb6584fb24a27b467d079f979d4e0 | Dinner with Spouse \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2026-12-07 15:30:00",
+          "end": "2026-12-07 16:30:00",
+          "event_id": "evt_8d0da910ec0c4ee5a74d50dd4aa89070"
+        },
+        "result": "Event updated successfully.\nPortfolio Analysis: Review Client Accounts\n  ID: evt_8d0da910ec0c4ee5a74d50dd4aa89070\n  Time: Mon Dec 07, 15:30 - 16:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved the \"Portfolio Analysis: Review Client Accounts\" to 3:30 PM on Monday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule the Client Meeting with Tom Brown and move it 30 minutes later.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Find the 'Client Meeting' event with Tom Brown on Wednesday. Update its start time to 1:30 PM and end time to 2:30 PM.",
+    "simulated_now": "2026-12-09 09:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting: Retirement Plan Update",
+          "start": "2026-12-09 09:00:00",
+          "end": "2026-12-09 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "maria.r@email.com"
+          ],
+          "id": "evt_a04aa77a1f3c4d8892bcd9e9bb0ac866"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Check in with CPA",
+          "start": "2026-12-09 10:30:00",
+          "end": "2026-12-09 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cpa@email.com"
+          ],
+          "id": "evt_07e4017304a94dfb98e11c71f6fc49dc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting: Review Portfolio Performance",
+          "start": "2026-12-09 13:00:00",
+          "end": "2026-12-09 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom.brown@email.com"
+          ],
+          "id": "evt_85bb2b610bfe41cab67493c7b45bca6e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Seminar Preparation: Retirement Planning Basics",
+          "start": "2026-12-09 14:30:00",
+          "end": "2026-12-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6e78936e06444b4882407f457769bf51"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2026-12-09 19:00:00",
+          "end": "2026-12-09 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7aa68e574f5c4424951dc05e4c50a2b0"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting: Retirement Plan Update",
+          "start": "2026-12-09 09:00:00",
+          "end": "2026-12-09 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "maria.r@email.com"
+          ],
+          "id": "evt_a04aa77a1f3c4d8892bcd9e9bb0ac866"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Check in with CPA",
+          "start": "2026-12-09 10:30:00",
+          "end": "2026-12-09 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cpa@email.com"
+          ],
+          "id": "evt_07e4017304a94dfb98e11c71f6fc49dc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Client Meeting: Review Portfolio Performance",
+          "start": "2026-12-09 13:30:00",
+          "end": "2026-12-09 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom.brown@email.com"
+          ],
+          "id": "evt_85bb2b610bfe41cab67493c7b45bca6e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Seminar Preparation: Retirement Planning Basics",
+          "start": "2026-12-09 14:30:00",
+          "end": "2026-12-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6e78936e06444b4882407f457769bf51"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2026-12-09 19:00:00",
+          "end": "2026-12-09 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7aa68e574f5c4424951dc05e4c50a2b0"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule the Client Meeting with Tom Brown and move it 30 minutes later."
+      },
+      {
+        "role": "assistant",
+        "content": "I will start by getting the current time, then I will look for the \"Client Meeting with Tom Brown\" in your calendar. Once I find it, I will reschedule it to be 30 minutes later."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-12-09 09:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 32 events:\nid: evt_49ea7edf91a9484abec159a3145f5173 | Check Emails and Voicemails \u2014 Mon 08:30-09:00\nid: evt_12d07cac5b9b448cbf9e2ae8e9d2dd12 | Client Meeting: Retirement Plan Review \u2014 Mon 09:00-10:00\nid: evt_c0c5e14fb65a40feb8b4a7fdeb1de8a1 | Team Meeting: Market Update and Strategy Discussion \u2014 Mon 10:30-11:30\nid: evt_50a04161de214ed4a718b5b45699b67d | Prospect Meeting: Initial Consultation \u2014 Mon 13:30-14:30\nid: evt_a829f8865f004be3b450bd05d32e7f5c | Portfolio Analysis: Review Client Accounts \u2014 Mon 15:00-16:00\nid: evt_5a74fb91c1cd49499676e5f1a8c2ff0e | Dinner with Spouse \u2014 Mon 18:30-20:00\nid: evt_0921baddb4f3494bbe7720e9ce62e024 | Client Meeting: Investment Strategy \u2014 Tue 09:00-10:00\nid: evt_72fac07873444db18a34658aa68b8536 | Compliance Training Webinar \u2014 Tue 10:30-11:30\nid: evt_ef06eb64f4e549619c21bb89e69f5ce3 | Meeting with Insurance Provider \u2014 Tue 13:00-14:00\nid: evt_8adb56eb8e344034857313c68396100e | Work on Retirement Plan Proposals \u2014 Tue 14:30-16:00\nid: evt_4afd1fbeb32041dc869896b8d7f6d306 | Parent-Teacher Conference \u2014 Tue 18:00-19:30\nid: evt_a04aa77a1f3c4d8892bcd9e9bb0ac866 | Client Meeting: Retirement Plan Update \u2014 Wed 09:00-10:00\nid: evt_07e4017304a94dfb98e11c71f6fc49dc | Check in with CPA \u2014 Wed 10:30-11:30\nid: evt_85bb2b610bfe41cab67493c7b45bca6e | Client Meeting: Review Portfolio Performance \u2014 Wed 13:00-14:00\nid: evt_6e78936e06444b4882407f457769bf51 | Seminar Preparation: Retirement Planning Basics \u2014 Wed 14:30-16:00\nid: evt_7aa68e574f5c4424951dc05e4c50a2b0 | Book Club Meeting \u2014 Wed 19:00-20:00\nid: evt_43704d756250438084d0ad3df36f44f4 | Client Meeting: Estate Planning Discussion \u2014 Thu 09:00-10:00\nid: evt_981e33654e644a1a874a6377ff852d5e | Consult with Estate Planning Attorney \u2014 Thu 10:30-11:30\nid: evt_07fcc1ca62004990ad9f06b715a5d23d | Check in with Financial Advisor \u2014 Thu 13:00-14:00\nid: evt_9f192c09fc9a4681b0149afb6d4b25b0 | Follow Up Calls to Clients \u2014 Thu 15:00-16:00\nid: evt_278997d81c9a46d48df07b1224e7f272 | Yoga Class \u2014 Thu 18:00-19:00\nid: evt_8edb92c9554e4bccb04b081ebf9a9840 | Check Emails and Voicemails \u2014 Fri 08:30-09:30\nid: evt_d4a2d3508aa64881be2f7478228bdaf9 | Client Meeting: Investment Strategy \u2014 Fri 09:30-10:30\nid: evt_05f5bd821f324349ac9a1ff611922ead | Team Lunch \u2014 Fri 11:00-12:00\nid: evt_267f3d496ed741339bea1043a2801cea | Work on Retirement Plan Proposals \u2014 Fri 13:30-14:30\nid: evt_837474124e6e4110bf64ee2b65d44caf | Review and Update Client Files \u2014 Fri 15:00-16:00\nid: evt_0862969af94e469f90d6845f10e5e54d | Dinner with Friends \u2014 Fri 19:00-21:00\nid: evt_aefbcee9663743528e7bdd88d3e7a8ba | Attend Kid's Soccer Game \u2014 Sat 10:00-12:00\nid: evt_d1fffc6dd43f4457a90b64579d50a64f | Grocery Shopping & Errands \u2014 Sat 13:00-15:00\nid: evt_0e552a4318ba44bd80091392eddc69e6 | Movie Night with Family \u2014 Sat 18:00-20:00\nid: evt_ac36f3b6b0744a38a0179a5f1db88609 | Brunch with family \u2014 Sun 10:00-11:00\nid: evt_855600bb142c4a848311c4a1668ba0b2 | Relaxing Time \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I've found a few \"Client Meeting\" events. I'll check the one for today, Wednesday at 9:00 AM, to see if Tom Brown is an attendee."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_a04aa77a1f3c4d8892bcd9e9bb0ac866"
+        },
+        "result": "Client Meeting: Retirement Plan Update\n  ID: evt_a04aa77a1f3c4d8892bcd9e9bb0ac866\n  Time: Wed Dec 09, 09:00 - 10:00\n  Attendees: maria.r@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "That event is with Maria, not Tom Brown. Let me check the other client meetings on Wednesday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_85bb2b610bfe41cab67493c7b45bca6e"
+        },
+        "result": "Client Meeting: Review Portfolio Performance\n  ID: evt_85bb2b610bfe41cab67493c7b45bca6e\n  Time: Wed Dec 09, 13:00 - 14:00\n  Attendees: tom.brown@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "Great, I've found the meeting with Tom Brown. It's today at 1:00 PM. I will move it to 1:30 PM as requested."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2026-12-09 13:30:00",
+          "end": "2026-12-09 14:30:00",
+          "event_id": "evt_85bb2b610bfe41cab67493c7b45bca6e"
+        },
+        "result": "Event updated successfully.\nClient Meeting: Review Portfolio Performance\n  ID: evt_85bb2b610bfe41cab67493c7b45bca6e\n  Time: Wed Dec 09, 13:30 - 14:30\n  Attendees: tom.brown@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have rescheduled the Client Meeting with Tom Brown to 1:30 PM - 2:30 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "I can't make it to the Compliance Training Webinar.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Find the 'Compliance Training Webinar' event on Tuesday and respond with DECLINE.",
+    "simulated_now": "2026-12-08 09:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Client Meeting: Investment Strategy",
+          "start": "2026-12-08 09:00:00",
+          "end": "2026-12-08 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@email.com"
+          ],
+          "id": "evt_4e9d6996fdfe414e870dec68f74537f9"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Compliance Training Webinar",
+          "start": "2026-12-08 10:30:00",
+          "end": "2026-12-08 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6ac8d14ef9fe4e26bdaea2a77fdacd00"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Insurance Provider",
+          "start": "2026-12-08 13:00:00",
+          "end": "2026-12-08 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ins.rep@email.com"
+          ],
+          "id": "evt_02b674f159814d9fa206596ea906b573"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work on Retirement Plan Proposals",
+          "start": "2026-12-08 14:30:00",
+          "end": "2026-12-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_14051c1651c543c49d5c952d37be8b9d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Conference",
+          "start": "2026-12-08 18:00:00",
+          "end": "2026-12-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4b5dfdbf8c6846d4ade76b9b369a3ecb"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Client Meeting: Investment Strategy",
+          "start": "2026-12-08 09:00:00",
+          "end": "2026-12-08 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@email.com"
+          ],
+          "id": "evt_4e9d6996fdfe414e870dec68f74537f9"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Compliance Training Webinar",
+          "start": "2026-12-08 10:30:00",
+          "end": "2026-12-08 11:30:00",
+          "attending": "DECLINE",
+          "attendees": [],
+          "id": "evt_6ac8d14ef9fe4e26bdaea2a77fdacd00"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Insurance Provider",
+          "start": "2026-12-08 13:00:00",
+          "end": "2026-12-08 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ins.rep@email.com"
+          ],
+          "id": "evt_02b674f159814d9fa206596ea906b573"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work on Retirement Plan Proposals",
+          "start": "2026-12-08 14:30:00",
+          "end": "2026-12-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_14051c1651c543c49d5c952d37be8b9d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Conference",
+          "start": "2026-12-08 18:00:00",
+          "end": "2026-12-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4b5dfdbf8c6846d4ade76b9b369a3ecb"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "I can't make it to the Compliance Training Webinar."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I'll find the event and then decline it."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 32 events:\nid: evt_80dfea680c18445ab07904af6bbe443c | Check Emails and Voicemails \u2014 Mon 08:30-09:00\nid: evt_2e58eff393fc430f9281ee0041e7668a | Client Meeting: Retirement Plan Review \u2014 Mon 09:00-10:00\nid: evt_43885c4688694c96838aee0c8952821f | Team Meeting: Market Update and Strategy Discussion \u2014 Mon 10:30-11:30\nid: evt_b02040f2d1ff4f07800970a15a261888 | Prospect Meeting: Initial Consultation \u2014 Mon 13:30-14:30\nid: evt_d80a46ab4ff046efbfbefdf8a1062fa2 | Portfolio Analysis: Review Client Accounts \u2014 Mon 15:00-16:00\nid: evt_dd18af4afea746b8bd27c09d5980b141 | Dinner with Spouse \u2014 Mon 18:30-20:00\nid: evt_4e9d6996fdfe414e870dec68f74537f9 | Client Meeting: Investment Strategy \u2014 Tue 09:00-10:00\nid: evt_6ac8d14ef9fe4e26bdaea2a77fdacd00 | Compliance Training Webinar \u2014 Tue 10:30-11:30\nid: evt_02b674f159814d9fa206596ea906b573 | Meeting with Insurance Provider \u2014 Tue 13:00-14:00\nid: evt_14051c1651c543c49d5c952d37be8b9d | Work on Retirement Plan Proposals \u2014 Tue 14:30-16:00\nid: evt_4b5dfdbf8c6846d4ade76b9b369a3ecb | Parent-Teacher Conference \u2014 Tue 18:00-19:30\nid: evt_4b9d32ce468640e187fdfcdb6f9eb564 | Client Meeting: Retirement Plan Update \u2014 Wed 09:00-10:00\nid: evt_06e2bfbbe1c34e36a0397fe79f69b64a | Check in with CPA \u2014 Wed 10:30-11:30\nid: evt_b89ae94a1c8c484cafa41256a9a750aa | Client Meeting: Review Portfolio Performance \u2014 Wed 13:00-14:00\nid: evt_0336cbeb27d043548ec7eb93a73c5362 | Seminar Preparation: Retirement Planning Basics \u2014 Wed 14:30-16:00\nid: evt_3f590bb7dd634535ba4a9bcf3c11b453 | Book Club Meeting \u2014 Wed 19:00-20:00\nid: evt_e28cfa4f132240dcaed3e8a868565251 | Client Meeting: Estate Planning Discussion \u2014 Thu 09:00-10:00\nid: evt_1f78e3197ed84ec19b924fdea9517091 | Consult with Estate Planning Attorney \u2014 Thu 10:30-11:30\nid: evt_ec9f624b77ba42b4bbbc7775db4d2034 | Check in with Financial Advisor \u2014 Thu 13:00-14:00\nid: evt_f05351486bca4bba9c15d668dfb68f78 | Follow Up Calls to Clients \u2014 Thu 15:00-16:00\nid: evt_cad17078430b4e1cab66716250bc53f3 | Yoga Class \u2014 Thu 18:00-19:00\nid: evt_bfebc2122dc14d4aae3840b79e3cfb5c | Check Emails and Voicemails \u2014 Fri 08:30-09:30\nid: evt_573e95087a2f4605af3712cce7c78bed | Client Meeting: Investment Strategy \u2014 Fri 09:30-10:30\nid: evt_c31e1488bdf5479e94dc57f99afebeab | Team Lunch \u2014 Fri 11:00-12:00\nid: evt_e2090f52c7794684947bcb861dcfc585 | Work on Retirement Plan Proposals \u2014 Fri 13:30-14:30\nid: evt_c6dcb23c02cc47e19767b9133b9ccbbf | Review and Update Client Files \u2014 Fri 15:00-16:00\nid: evt_51ff5af12ded49c196be58512e43ba88 | Dinner with Friends \u2014 Fri 19:00-21:00\nid: evt_6914abba58c643b485312e688602236f | Attend Kid's Soccer Game \u2014 Sat 10:00-12:00\nid: evt_e3f6cf49e4344c148ae5e7840c5b0bb5 | Grocery Shopping & Errands \u2014 Sat 13:00-15:00\nid: evt_1f9f8f0d388642cba54ac1d32efa90ed | Movie Night with Family \u2014 Sat 18:00-20:00\nid: evt_98821920c25044c3a3b23f68060b4903 | Brunch with family \u2014 Sun 10:00-11:00\nid: evt_e78a0fa287604488b76bb7d3a447f17d | Relaxing Time \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've found the \"Compliance Training Webinar\" on Tuesday from 10:30 to 11:30 AM. I will decline it for you now."
+      },
+      {
+        "role": "tool_call",
+        "name": "respond_to_event",
+        "args": {
+          "event_id": "evt_6ac8d14ef9fe4e26bdaea2a77fdacd00",
+          "attending": "DECLINE"
+        },
+        "result": "RSVP updated to DECLINE.\nCompliance Training Webinar\n  ID: evt_6ac8d14ef9fe4e26bdaea2a77fdacd00\n  Time: Tue Dec 08, 10:30 - 11:30\n  RSVP: DECLINE"
+      },
+      {
+        "role": "assistant",
+        "content": "I have declined the invitation to the Compliance Training Webinar. Is there anything else I can help you with?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change lunch.",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Team Lunch' event on Friday and prompt the user for what to change.",
+    "simulated_now": "2026-12-08 12:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Check Emails and Voicemails",
+          "start": "2026-12-11 08:30:00",
+          "end": "2026-12-11 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b23da35a29734080b5492f88b200e948"
+        },
+        {
+          "day": "Friday",
+          "summary": "Client Meeting: Investment Strategy",
+          "start": "2026-12-11 09:30:00",
+          "end": "2026-12-11 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "m.davis@email.com"
+          ],
+          "id": "evt_d1ba573925c64c9baf16685cf5ce018a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Team Lunch",
+          "start": "2026-12-11 11:00:00",
+          "end": "2026-12-11 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_97d88e5a1f084504b28a5bfa6ec37705"
+        },
+        {
+          "day": "Friday",
+          "summary": "Work on Retirement Plan Proposals",
+          "start": "2026-12-11 13:30:00",
+          "end": "2026-12-11 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b8a3c5b20315467585b464f412d62125"
+        },
+        {
+          "day": "Friday",
+          "summary": "Review and Update Client Files",
+          "start": "2026-12-11 15:00:00",
+          "end": "2026-12-11 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2da1e4bd91df47e5b21b381d67d2cd97"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2026-12-11 19:00:00",
+          "end": "2026-12-11 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_91f3cb77f8454c73b9c6682f225422ef"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Check Emails and Voicemails",
+          "start": "2026-12-11 08:30:00",
+          "end": "2026-12-11 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b23da35a29734080b5492f88b200e948"
+        },
+        {
+          "day": "Friday",
+          "summary": "Client Meeting: Investment Strategy",
+          "start": "2026-12-11 09:30:00",
+          "end": "2026-12-11 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "m.davis@email.com"
+          ],
+          "id": "evt_d1ba573925c64c9baf16685cf5ce018a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Team Lunch",
+          "start": "2026-12-11 11:00:00",
+          "end": "2026-12-11 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_97d88e5a1f084504b28a5bfa6ec37705"
+        },
+        {
+          "day": "Friday",
+          "summary": "Work on Retirement Plan Proposals",
+          "start": "2026-12-11 13:30:00",
+          "end": "2026-12-11 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b8a3c5b20315467585b464f412d62125"
+        },
+        {
+          "day": "Friday",
+          "summary": "Review and Update Client Files",
+          "start": "2026-12-11 15:00:00",
+          "end": "2026-12-11 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2da1e4bd91df47e5b21b381d67d2cd97"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2026-12-11 19:00:00",
+          "end": "2026-12-11 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_91f3cb77f8454c73b9c6682f225422ef"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change lunch."
+      },
+      {
+        "role": "assistant",
+        "content": "I can help with that. What would you like to change about it?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-12-08 12:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2026-12-08 00:00:00",
+          "time_max": "2026-12-08 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_3775f5c434c24b1d8503b7be38a81f86 | Client Meeting: Investment Strategy \u2014 Tue 09:00-10:00\nid: evt_6ee9f3b5498a4601b7b23a23a432b42d | Compliance Training Webinar \u2014 Tue 10:30-11:30\nid: evt_e177a9753a2947048bda2391ed6c3429 | Meeting with Insurance Provider \u2014 Tue 13:00-14:00\nid: evt_66a41ec1ced545c480ea563775f93479 | Work on Retirement Plan Proposals \u2014 Tue 14:30-16:00\nid: evt_8186662b68d74d43a9ba9669c9dac9c6 | Parent-Teacher Conference \u2014 Tue 18:00-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "I couldn't find a \"lunch\" event on your calendar for today. To help me find the right event, could you please tell me the date of the lunch you're referring to?"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 32 events:\nid: evt_cb7dcae9e34343cda33a658379cc6c82 | Check Emails and Voicemails \u2014 Mon 08:30-09:00\nid: evt_7741a186d84242818585d7b0d39214fa | Client Meeting: Retirement Plan Review \u2014 Mon 09:00-10:00\nid: evt_7d855718976149ad8a8e29e7a0ca4387 | Team Meeting: Market Update and Strategy Discussion \u2014 Mon 10:30-11:30\nid: evt_f97bc0e8e9fc4ddfaf77faac0a485327 | Prospect Meeting: Initial Consultation \u2014 Mon 13:30-14:30\nid: evt_ebde3a0bc4754a6f8e3203a80348e53f | Portfolio Analysis: Review Client Accounts \u2014 Mon 15:00-16:00\nid: evt_2c8d65959fa640649d6b25ea350ae6a1 | Dinner with Spouse \u2014 Mon 18:30-20:00\nid: evt_3775f5c434c24b1d8503b7be38a81f86 | Client Meeting: Investment Strategy \u2014 Tue 09:00-10:00\nid: evt_6ee9f3b5498a4601b7b23a23a432b42d | Compliance Training Webinar \u2014 Tue 10:30-11:30\nid: evt_e177a9753a2947048bda2391ed6c3429 | Meeting with Insurance Provider \u2014 Tue 13:00-14:00\nid: evt_66a41ec1ced545c480ea563775f93479 | Work on Retirement Plan Proposals \u2014 Tue 14:30-16:00\nid: evt_8186662b68d74d43a9ba9669c9dac9c6 | Parent-Teacher Conference \u2014 Tue 18:00-19:30\nid: evt_ccf4aee24a0a49018e092a96f9ba5754 | Client Meeting: Retirement Plan Update \u2014 Wed 09:00-10:00\nid: evt_3a580d568a82450cbc4e31da88a3cfa7 | Check in with CPA \u2014 Wed 10:30-11:30\nid: evt_916e401116c342198420ae25b4515b36 | Client Meeting: Review Portfolio Performance \u2014 Wed 13:00-14:00\nid: evt_8d4005475d6b4d9495b1f4001927e57d | Seminar Preparation: Retirement Planning Basics \u2014 Wed 14:30-16:00\nid: evt_b85ba638f7ef4e23a3f68ed1f3eca193 | Book Club Meeting \u2014 Wed 19:00-20:00\nid: evt_d5119fc9738346faa0787425b1ec6a7a | Client Meeting: Estate Planning Discussion \u2014 Thu 09:00-10:00\nid: evt_daf51504ec5840e2bb1328d51f6c125d | Consult with Estate Planning Attorney \u2014 Thu 10:30-11:30\nid: evt_c83a1f8c02474569a278d4c5f3c59158 | Check in with Financial Advisor \u2014 Thu 13:00-14:00\nid: evt_184552b7cccb44ceae77f1264fa8ee60 | Follow Up Calls to Clients \u2014 Thu 15:00-16:00\nid: evt_a410174e33e3418abc775d4583cf7385 | Yoga Class \u2014 Thu 18:00-19:00\nid: evt_b23da35a29734080b5492f88b200e948 | Check Emails and Voicemails \u2014 Fri 08:30-09:30\nid: evt_d1ba573925c64c9baf16685cf5ce018a | Client Meeting: Investment Strategy \u2014 Fri 09:30-10:30\nid: evt_97d88e5a1f084504b28a5bfa6ec37705 | Team Lunch \u2014 Fri 11:00-12:00\nid: evt_b8a3c5b20315467585b464f412d62125 | Work on Retirement Plan Proposals \u2014 Fri 13:30-14:30\nid: evt_2da1e4bd91df47e5b21b381d67d2cd97 | Review and Update Client Files \u2014 Fri 15:00-16:00\nid: evt_91f3cb77f8454c73b9c6682f225422ef | Dinner with Friends \u2014 Fri 19:00-21:00\nid: evt_71f25f96d625438fac4ebeebe49b6a3f | Attend Kid's Soccer Game \u2014 Sat 10:00-12:00\nid: evt_ac84d72342a94ccdbe883b832753e958 | Grocery Shopping & Errands \u2014 Sat 13:00-15:00\nid: evt_54750212c9074d70b7f61dbbe820b351 | Movie Night with Family \u2014 Sat 18:00-20:00\nid: evt_311e101fdfa345e08802bbfdc1f5eae2 | Brunch with family \u2014 Sun 10:00-11:00\nid: evt_e31c57d81e1c4852b502aec88626f619 | Relaxing Time \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found a \"Team Lunch\" event on Friday from 11:00 AM to 12:00 PM. What would you like to change about it?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events for Monday, December 7, 2026.",
+    "simulated_now": "2026-12-07 07:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Voicemails",
+          "start": "2026-12-07 08:30:00",
+          "end": "2026-12-07 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8f6755d6e48740baa648149e97231d35"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting: Retirement Plan Review",
+          "start": "2026-12-07 09:00:00",
+          "end": "2026-12-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.123@email.com"
+          ],
+          "id": "evt_d3f7a93e0e23425990c6dea93f69c61d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Team Meeting: Market Update and Strategy Discussion",
+          "start": "2026-12-07 10:30:00",
+          "end": "2026-12-07 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "invest@email.com",
+            "comp.off@email.com"
+          ],
+          "id": "evt_952640228b3e4fedaed6e2815375f508"
+        },
+        {
+          "day": "Monday",
+          "summary": "Prospect Meeting: Initial Consultation",
+          "start": "2026-12-07 13:30:00",
+          "end": "2026-12-07 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.doe@email.com"
+          ],
+          "id": "evt_cd74ee458f364b69a2305099acd764b2"
+        },
+        {
+          "day": "Monday",
+          "summary": "Portfolio Analysis: Review Client Accounts",
+          "start": "2026-12-07 15:00:00",
+          "end": "2026-12-07 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c9090fb42f0e4aa78d7cd4e88fb47e04"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Spouse",
+          "start": "2026-12-07 18:30:00",
+          "end": "2026-12-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9d55a98ea01948848a9cb6b6f9cdaa75"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Voicemails",
+          "start": "2026-12-07 08:30:00",
+          "end": "2026-12-07 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8f6755d6e48740baa648149e97231d35"
+        },
+        {
+          "day": "Monday",
+          "summary": "Client Meeting: Retirement Plan Review",
+          "start": "2026-12-07 09:00:00",
+          "end": "2026-12-07 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.123@email.com"
+          ],
+          "id": "evt_d3f7a93e0e23425990c6dea93f69c61d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Team Meeting: Market Update and Strategy Discussion",
+          "start": "2026-12-07 10:30:00",
+          "end": "2026-12-07 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "invest@email.com",
+            "comp.off@email.com"
+          ],
+          "id": "evt_952640228b3e4fedaed6e2815375f508"
+        },
+        {
+          "day": "Monday",
+          "summary": "Prospect Meeting: Initial Consultation",
+          "start": "2026-12-07 13:30:00",
+          "end": "2026-12-07 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.doe@email.com"
+          ],
+          "id": "evt_cd74ee458f364b69a2305099acd764b2"
+        },
+        {
+          "day": "Monday",
+          "summary": "Portfolio Analysis: Review Client Accounts",
+          "start": "2026-12-07 15:00:00",
+          "end": "2026-12-07 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c9090fb42f0e4aa78d7cd4e88fb47e04"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Spouse",
+          "start": "2026-12-07 18:30:00",
+          "end": "2026-12-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9d55a98ea01948848a9cb6b6f9cdaa75"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-12-07 07:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2026-12-07 23:59:59",
+          "time_min": "2026-12-07 00:00:00"
+        },
+        "result": "Found 6 events:\nid: evt_8f6755d6e48740baa648149e97231d35 | Check Emails and Voicemails \u2014 Mon 08:30-09:00\nid: evt_d3f7a93e0e23425990c6dea93f69c61d | Client Meeting: Retirement Plan Review \u2014 Mon 09:00-10:00\nid: evt_952640228b3e4fedaed6e2815375f508 | Team Meeting: Market Update and Strategy Discussion \u2014 Mon 10:30-11:30\nid: evt_cd74ee458f364b69a2305099acd764b2 | Prospect Meeting: Initial Consultation \u2014 Mon 13:30-14:30\nid: evt_c9090fb42f0e4aa78d7cd4e88fb47e04 | Portfolio Analysis: Review Client Accounts \u2014 Mon 15:00-16:00\nid: evt_9d55a98ea01948848a9cb6b6f9cdaa75 | Dinner with Spouse \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Good morning! You have a busy day ahead. Here is your schedule:\n\n*   8:30 AM - 9:00 AM: Check Emails and Voicemails\n*   9:00 AM - 10:00 AM: Client Meeting: Retirement Plan Review\n*   10:30 AM - 11:30 AM: Team Meeting: Market Update and Strategy Discussion\n*   1:30 PM - 2:30 PM: Prospect Meeting: Initial Consultation\n*   3:00 PM - 4:00 PM: Portfolio Analysis: Review Client Accounts\n*   6:30 PM - 8:00 PM: Dinner with Spouse"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Am I free tomorrow afternoon?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events for Tuesday, December 8, 2026, between 12:00 PM and 5:00 PM.",
+    "simulated_now": "2026-12-07 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Client Meeting: Investment Strategy",
+          "start": "2026-12-08 09:00:00",
+          "end": "2026-12-08 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@email.com"
+          ],
+          "id": "evt_85f620fbc6274c419df6a1b512288695"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Compliance Training Webinar",
+          "start": "2026-12-08 10:30:00",
+          "end": "2026-12-08 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d8a286943c7445b887566cb9af0a1194"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Insurance Provider",
+          "start": "2026-12-08 13:00:00",
+          "end": "2026-12-08 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ins.rep@email.com"
+          ],
+          "id": "evt_370611f0b1794c179b50450b7a2e485e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work on Retirement Plan Proposals",
+          "start": "2026-12-08 14:30:00",
+          "end": "2026-12-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_409160371ffa4515a32319a6415444a3"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Conference",
+          "start": "2026-12-08 18:00:00",
+          "end": "2026-12-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_356effe4966f4724bdc8c01f42d7d38b"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Client Meeting: Investment Strategy",
+          "start": "2026-12-08 09:00:00",
+          "end": "2026-12-08 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@email.com"
+          ],
+          "id": "evt_85f620fbc6274c419df6a1b512288695"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Compliance Training Webinar",
+          "start": "2026-12-08 10:30:00",
+          "end": "2026-12-08 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d8a286943c7445b887566cb9af0a1194"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Insurance Provider",
+          "start": "2026-12-08 13:00:00",
+          "end": "2026-12-08 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ins.rep@email.com"
+          ],
+          "id": "evt_370611f0b1794c179b50450b7a2e485e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work on Retirement Plan Proposals",
+          "start": "2026-12-08 14:30:00",
+          "end": "2026-12-08 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_409160371ffa4515a32319a6415444a3"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Conference",
+          "start": "2026-12-08 18:00:00",
+          "end": "2026-12-08 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_356effe4966f4724bdc8c01f42d7d38b"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Am I free tomorrow afternoon?"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I'll check your calendar. First, I need to get the current time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-12-07 10:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2026-12-08 17:00:00",
+          "time_min": "2026-12-08 12:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_370611f0b1794c179b50450b7a2e485e | Meeting with Insurance Provider \u2014 Tue 13:00-14:00\nid: evt_409160371ffa4515a32319a6415444a3 | Work on Retirement Plan Proposals \u2014 Tue 14:30-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You are not free tomorrow afternoon. You have two events scheduled: \"Meeting with Insurance Provider\" from 13:00 to 14:00 and \"Work on Retirement Plan Proposals\" from 14:30 to 16:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

@@ -1,0 +1,149 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a meeting on Wednesday with John to discuss project updates. He can be reached at john@example.com. Set the meeting for 2 PM for 30 minutes.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event called 'Meeting with John' for Wednesday at 2 PM with a duration of 30 minutes and invite john@example.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-11-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event on Friday called 'Team Lunch' from 12:30 PM to 1:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event titled 'Team Lunch' on Friday from 12:30 PM to 1:30 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-11-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Monday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "List events scheduled between 9:00 AM and 12:00 PM on Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-11-27T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What events do I have with caterer@email.com this week?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events this week (Monday to Sunday) that include caterer@email.com in the attendees.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2023-11-27T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my Accountant Meeting to 3:30 PM on Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Accountant Meeting' event on Monday and update its start time to 3:30 PM, keeping the duration the same.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-11-27T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the Florist Meeting on Tuesday to 2 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Florist Meeting' event on Tuesday and update the start time to 2 PM, keeping the duration the same.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-11-28T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the Italian Cooking Class?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Italian Cooking Class' event and return its start time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-11-27T11:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Rossi Wedding on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Rossi Wedding' event on Saturday and return a list of attendees.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-11-29T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the caterer tasting. Reschedule it for Friday at 10 AM, but only if assistantplanner@email.com is available then. Invite them to the new time.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Caterer Tasting & Menu Planning' event. Check if assistantplanner@email.com is available on Friday at 10 AM. If available, update the 'Caterer Tasting & Menu Planning' event to Friday at 10 AM and include assistantplanner@email.com as an attendee.",
+        "addressed_days": [
+            "Wednesday",
+            "Friday"
+        ],
+        "current_time": "2023-11-29T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline the Venue Virtual Tour. Instead, schedule a call with the venue manager for the same time.",
+        "complexity": "High",
+        "expected_behavior": "Decline the 'Venue Virtual Tour - Castello del Sole' event. Create a new event 'Call with Venue Manager' on Tuesday from 10:00 AM - 11:00 AM and invite venue manager@castellodelsole.com.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-11-28T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Rossi wedding?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event with 'Rossi Wedding' in the title and display its details.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-11-30T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Bianchi initial thing",
+        "complexity": "Low",
+        "expected_behavior": "Find the event with 'Bianchi Wedding Initial Consultation' in the title and display its details.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-11-30T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for today (Monday).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-11-27T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What is happening tomorrow morning?",
+        "complexity": "Medium",
+        "expected_behavior": "List events scheduled between 9:00 AM and 12:00 PM on Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-11-28T20:00:00"
+    }
+]

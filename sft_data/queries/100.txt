@@ -1,0 +1,148 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Finalize Presentation' for Wednesday at 2 PM with assistant@rossirealty.com and marketing@rossirealty.com as attendees.",
+        "complexity": "Low",
+        "expected_behavior": "Call the create_event tool to add 'Finalize Presentation' to the calendar with the specified time, attendees, and details.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-11-23T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for Friday at 11 AM to discuss Q4 projections with advisor@finance.com.",
+        "complexity": "Low",
+        "expected_behavior": "Call the create_event tool to create a 'Discuss Q4 projections' event for Friday at 11 AM with advisor@finance.com as an attendee.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-11-23T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Monday with clients?",
+        "complexity": "Medium",
+        "expected_behavior": "Call the list_events tool for Monday, then filter the results to only show events with client1@email.com or client2@email.com or client3@email.com",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-11-24T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What events do I have this week related to real estate?",
+        "complexity": "Medium",
+        "expected_behavior": "Call the list_events tool for the entire week (Monday to Sunday), then filter the results based on keywords like 'listing,' 'property,' 'staging,' 'showing,' 'open house,' and 'closing'.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-11-24T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the Team Meeting on Monday to 9:30 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Call the list_events tool to find the 'Team Meeting' event on Monday. Then, call the update_event tool to change the start time of that event to 9:30 AM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-11-24T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the Property Staging Consultation on Monday to 2:00 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call the list_events tool to find the 'Property Staging Consultation' event on Monday. Then, call the update_event tool to change the start time of that event to 2:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-11-24T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the showing of the Oceanfront Condo on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Call the list_events tool to find the 'Showing - Oceanfront Condo' event on Monday and return its start time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-11-24T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having lunch with on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Call the list_events tool to find the 'Lunch with Mortgage Broker' event on Wednesday and return the attendees.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-11-26T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the Financial Planning Meeting on Friday, decline it and reschedule it to next Monday at 9 AM",
+        "complexity": "High",
+        "expected_behavior": "Call the get_current_time tool to get the date, decline the 'Financial Planning Meeting' on Friday. Since next Monday is outside the scope, respond 'Sorry, I can only schedule within the current week.'",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-11-27T15:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is there a conflict if I move the Client Meeting - Offer Negotiation on Tuesday to 4:00 PM?",
+        "complexity": "High",
+        "expected_behavior": "Call the list_events tool to check if any events conflict with a potential Client Meeting - Offer Negotiation from 4:00 PM to 5:30 PM on Tuesday. Check current events. If there's a conflict with the Waterfront Villa at 4 PM on Tuesday, inform the user about the conflict.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-11-25T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule yoga.",
+        "complexity": "Medium",
+        "expected_behavior": "Call the list_events tool to find the Yoga Class event on Tuesday. Ask for clarification: 'To what day and time would you like to reschedule the Yoga Class?'",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-11-25T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel the meeting with the lawyer.",
+        "complexity": "Medium",
+        "expected_behavior": "Call the list_events tool to find the 'Meet with Real Estate Lawyer' event on Wednesday. Then call the delete_event tool to delete it.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-11-26T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Using get_current_time, determine the current day and call the list_events tool for that day to display all events.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-11-27T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Using get_current_time, determine the next day (tomorrow) and call the list_events tool for that day to display all events.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-11-25T14:00:00"
+    }
+]

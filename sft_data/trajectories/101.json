@@ -1,0 +1,2043 @@
+[
+  {
+    "query": "Book a meeting with Robert Downy for Thursday at 3 PM regarding a HVAC troubleshooting issue.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event with summary 'HVAC troubleshooting issue', start time 2024-12-05T15:00:00, end time 2024-12-05T16:00:00, and attendee robert.downy@example.com.",
+    "simulated_now": "2024-12-01 12:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Call for parts",
+          "start": "2024-12-05 08:00:00",
+          "end": "2024-12-05 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bob@hvacsupply.com"
+          ],
+          "id": "evt_aa20b48cbce1470b892ee3c70212c19c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Troubleshoot HVAC - Commercial Client",
+          "start": "2024-12-05 09:30:00",
+          "end": "2024-12-05 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "robert.downy@example.com"
+          ],
+          "id": "evt_f6d5b9e3341a4d7cb6be0fa4d45c15ac"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Networking Lunch with Contractors",
+          "start": "2024-12-05 12:00:00",
+          "end": "2024-12-05 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "adam.sandler@builders.com"
+          ],
+          "id": "evt_c8e8991672c24d0e9e17f212659ac50a"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Equipment Maintenance",
+          "start": "2024-12-05 14:00:00",
+          "end": "2024-12-05 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bd35e652c28e4307a7797aac9f2eb81b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Check in with Mother",
+          "start": "2024-12-05 19:00:00",
+          "end": "2024-12-05 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9acdcd58ef7f4fa28c2fe0044e73b458"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Call for parts",
+          "start": "2024-12-05 08:00:00",
+          "end": "2024-12-05 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bob@hvacsupply.com"
+          ],
+          "id": "evt_aa20b48cbce1470b892ee3c70212c19c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Troubleshoot HVAC - Commercial Client",
+          "start": "2024-12-05 09:30:00",
+          "end": "2024-12-05 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "robert.downy@example.com"
+          ],
+          "id": "evt_f6d5b9e3341a4d7cb6be0fa4d45c15ac"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Networking Lunch with Contractors",
+          "start": "2024-12-05 12:00:00",
+          "end": "2024-12-05 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "adam.sandler@builders.com"
+          ],
+          "id": "evt_c8e8991672c24d0e9e17f212659ac50a"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Equipment Maintenance",
+          "start": "2024-12-05 14:00:00",
+          "end": "2024-12-05 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bd35e652c28e4307a7797aac9f2eb81b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "HVAC troubleshooting issue",
+          "start": "2024-12-05 15:00:00",
+          "end": "2024-12-05 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "robert.downy@example.com"
+          ],
+          "id": "evt_3afacc4f7d67446d919aad5a32fd7801"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Check in with Mother",
+          "start": "2024-12-05 19:00:00",
+          "end": "2024-12-05 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9acdcd58ef7f4fa28c2fe0044e73b458"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Book a meeting with Robert Downy for Thursday at 3 PM regarding a HVAC troubleshooting issue."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I will book a meeting with Robert Downy for Thursday at 3 PM regarding an HVAC troubleshooting issue. First, I need to get the current time to determine the correct date for the meeting. Then, I will search for Robert's email address in my calendar. Finally, I will create the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-12-01 12:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "Now that I have the current date, I will find the upcoming Thursday and search for Robert's email address in my calendar events to invite him. Then I will schedule the meeting."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 28 events:\nid: evt_252c3c4665824bc4963518d2a729590c | Check Emails and Schedule \u2014 Mon 08:00-09:00\nid: evt_009d50e485af402a9cc8b93284e51d47 | HVAC Repair - Residential Client \u2014 Mon 09:30-11:30\nid: evt_f00ed060233842ebbdd377c76e28bf21 | Pick up HVAC parts \u2014 Mon 12:00-13:00\nid: evt_47029f689f1d4ed1a8006ecc4f662a78 | New Installation Quote - Commercial Building \u2014 Mon 14:00-16:00\nid: evt_8a2db98fbf7f433f9f1102dc1d02e79e | Dinner with Son \u2014 Mon 18:30-20:00\nid: evt_5bce67808a0d46df9401d7bf8ddee383 | Diagnose Issue - Restaurant HVAC \u2014 Tue 08:30-10:00\nid: evt_1c9d45497559499c88de3c724643f42e | HVAC Repair - Residential Client \u2014 Tue 10:30-12:30\nid: evt_8230a06f97064e93a78502bbe39d7dea | Lunch with business mentor \u2014 Tue 13:00-14:00\nid: evt_ed51570228dc4d84861efdb67df2d4ea | Prepare Invoices and Send \u2014 Tue 14:30-16:30\nid: evt_527833eaab71495f8a5ef759c4393864 | Regular HVAC Maintenance - Office Building \u2014 Wed 09:00-11:00\nid: evt_867e855e94f6436892ce195273ac75e3 | Order new tools. \u2014 Wed 11:30-12:30\nid: evt_3c9c7272477b4bc3850d85db897101bb | New HVAC Installation - Residential Client \u2014 Wed 13:30-15:30\nid: evt_7224394f1537473e86e550e68090d757 | Son's Basketball Practice \u2014 Wed 18:00-19:30\nid: evt_aa20b48cbce1470b892ee3c70212c19c | Call for parts \u2014 Thu 08:00-09:00\nid: evt_f6d5b9e3341a4d7cb6be0fa4d45c15ac | Troubleshoot HVAC - Commercial Client \u2014 Thu 09:30-11:30\nid: evt_c8e8991672c24d0e9e17f212659ac50a | Networking Lunch with Contractors \u2014 Thu 12:00-13:00\nid: evt_bd35e652c28e4307a7797aac9f2eb81b | Equipment Maintenance \u2014 Thu 14:00-16:00\nid: evt_9acdcd58ef7f4fa28c2fe0044e73b458 | Check in with Mother \u2014 Thu 19:00-20:00\nid: evt_129d7670a9614a9398e337efc6598153 | Finish installation \u2014 Fri 08:30-10:30\nid: evt_3fddc8fdbb774ff9a56e3e417b75b67e | Quick repair - Client \u2014 Fri 11:00-12:00\nid: evt_43c452817fd94109b6b1389796483f5d | Prepare payroll \u2014 Fri 12:00-13:00\nid: evt_8f5aede3babf4f15980ed9f6f8072a69 | Business Finances Review \u2014 Fri 14:00-16:00\nid: evt_35bfed4eb60540439a9606eca815f7b3 | Emergency HVAC Repair - Long-time Client \u2014 Sat 09:00-11:00\nid: evt_984296d63196451ab3903723c7da0289 | Son's Basketball Game \u2014 Sat 12:00-16:00\nid: evt_4feaba7bdc5f4174865e013109b0ff81 | Dinner with friends \u2014 Sat 18:00-20:00\nid: evt_a36d2f6342bc4a2a9177e448f7a3395c | Work on Business Plan \u2014 Sun 10:00-12:00\nid: evt_f4472190bbf947c0b2188d7c0a68199b | Relax \u2014 Sun 13:00-15:00\nid: evt_39ea81166b9949df87627fafee985de5 | Visit Mother \u2014 Sun 16:00-18:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I couldn't find any events with \"Robert\" in the title. I'll check the attendee lists of past business-related events to find his email. I'll start with the \"Networking Lunch with Contractors\" event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_c8e8991672c24d0e9e17f212659ac50a"
+        },
+        "result": "Networking Lunch with Contractors\n  ID: evt_c8e8991672c24d0e9e17f212659ac50a\n  Time: Thu Dec 05, 12:00 - 13:00\n  Attendees: adam.sandler@builders.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I didn't find Robert's email in the first event. I'll check a more relevant event: \"Troubleshoot HVAC - Commercial Client\"."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_f6d5b9e3341a4d7cb6be0fa4d45c15ac"
+        },
+        "result": "Troubleshoot HVAC - Commercial Client\n  ID: evt_f6d5b9e3341a4d7cb6be0fa4d45c15ac\n  Time: Thu Dec 05, 09:30 - 11:30\n  Attendees: robert.downy@example.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "Great, I found Robert Downy's email: robert.downy@example.com. I will now create the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "end": "2024-12-05 16:00:00",
+          "start": "2024-12-05 15:00:00",
+          "summary": "HVAC troubleshooting issue",
+          "attendees": [
+            "robert.downy@example.com"
+          ]
+        },
+        "result": "Event created successfully.\nHVAC troubleshooting issue\n  ID: evt_3afacc4f7d67446d919aad5a32fd7801\n  Time: Thu Dec 05, 15:00 - 16:00\n  Attendees: robert.downy@example.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have scheduled the meeting. The event is \"HVAC troubleshooting issue\" on Thursday, December 5th, from 3 PM to 4 PM, with Robert Downy."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What does the week look like?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List all events between Monday, December 2nd, 2024, and Sunday, December 8th, 2024.",
+    "simulated_now": "2024-12-02 07:00:00",
+    "addressed_days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Schedule",
+          "start": "2024-12-02 08:00:00",
+          "end": "2024-12-02 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "maria@hvac-solutions.com"
+          ],
+          "id": "evt_a4a1ea2092cc44aea1a7738ee1e169bf"
+        },
+        {
+          "day": "Monday",
+          "summary": "HVAC Repair - Residential Client",
+          "start": "2024-12-02 09:30:00",
+          "end": "2024-12-02 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_ec64951b349c4713aa7285c54cd37e00"
+        },
+        {
+          "day": "Monday",
+          "summary": "Pick up HVAC parts",
+          "start": "2024-12-02 12:00:00",
+          "end": "2024-12-02 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bob@hvacsupply.com"
+          ],
+          "id": "evt_ff395b3cb1014781a64a1aff2f0ccf25"
+        },
+        {
+          "day": "Monday",
+          "summary": "New Installation Quote - Commercial Building",
+          "start": "2024-12-02 14:00:00",
+          "end": "2024-12-02 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sue.smith@buildingco.com"
+          ],
+          "id": "evt_5fbd051c5a8e4322a1d3b1cf1037b984"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Son",
+          "start": "2024-12-02 18:30:00",
+          "end": "2024-12-02 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a34dd32d9cb84eb996e783b56a14f164"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Diagnose Issue - Restaurant HVAC",
+          "start": "2024-12-03 08:30:00",
+          "end": "2024-12-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.doe@restaurant.com"
+          ],
+          "id": "evt_808dbd067d4645a0b2baf4794db6f1d6"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "HVAC Repair - Residential Client",
+          "start": "2024-12-03 10:30:00",
+          "end": "2024-12-03 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sally.fields@example.com"
+          ],
+          "id": "evt_4b18e705aaa84e8ba1d8d1d05ce7d0ce"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lunch with business mentor",
+          "start": "2024-12-03 13:00:00",
+          "end": "2024-12-03 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@mentors.com"
+          ],
+          "id": "evt_18c6e4166c7e4b1cba4f2e4090dbf842"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Prepare Invoices and Send",
+          "start": "2024-12-03 14:30:00",
+          "end": "2024-12-03 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ea095f5178374323a17f504efe6ab618"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Regular HVAC Maintenance - Office Building",
+          "start": "2024-12-04 09:00:00",
+          "end": "2024-12-04 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom.jones@officebuilding.com"
+          ],
+          "id": "evt_ada1756b0490423d880b5f6e343c0072"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Order new tools.",
+          "start": "2024-12-04 11:30:00",
+          "end": "2024-12-04 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8cfdefee4461440295128fa205f1afcc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "New HVAC Installation - Residential Client",
+          "start": "2024-12-04 13:30:00",
+          "end": "2024-12-04 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ashley.williams@example.com"
+          ],
+          "id": "evt_2872159740a1496f933439f977165e7a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Son's Basketball Practice",
+          "start": "2024-12-04 18:00:00",
+          "end": "2024-12-04 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c2cc6fa79d924fd5a4d910609164db90"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Call for parts",
+          "start": "2024-12-05 08:00:00",
+          "end": "2024-12-05 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bob@hvacsupply.com"
+          ],
+          "id": "evt_0fa423984d4b4d4b8f68f0450392ea68"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Troubleshoot HVAC - Commercial Client",
+          "start": "2024-12-05 09:30:00",
+          "end": "2024-12-05 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "robert.downy@example.com"
+          ],
+          "id": "evt_199c55e938c34a98959dc05e5e1f50d7"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Networking Lunch with Contractors",
+          "start": "2024-12-05 12:00:00",
+          "end": "2024-12-05 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "adam.sandler@builders.com"
+          ],
+          "id": "evt_d03491997a574a628e2f66ac11754f87"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Equipment Maintenance",
+          "start": "2024-12-05 14:00:00",
+          "end": "2024-12-05 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_35a161c91a4d47b6a15d8962646b561b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Check in with Mother",
+          "start": "2024-12-05 19:00:00",
+          "end": "2024-12-05 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6d9b6796d698403c98e9a5216560c396"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Finish installation",
+          "start": "2024-12-06 08:30:00",
+          "end": "2024-12-06 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ashley.williams@example.com"
+          ],
+          "id": "evt_80b3a18c0307488e9ba53551f18bd036"
+        },
+        {
+          "day": "Friday",
+          "summary": "Quick repair - Client",
+          "start": "2024-12-06 11:00:00",
+          "end": "2024-12-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "chris.evans@example.com"
+          ],
+          "id": "evt_c8a6e7e026264632b7a9120348223231"
+        },
+        {
+          "day": "Friday",
+          "summary": "Prepare payroll",
+          "start": "2024-12-06 12:00:00",
+          "end": "2024-12-06 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8ecaf3d2902f4bc1a5d835a54c5ad2c3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Business Finances Review",
+          "start": "2024-12-06 14:00:00",
+          "end": "2024-12-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_541204bc93eb495ca36f07b9c976f86c"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Emergency HVAC Repair - Long-time Client",
+          "start": "2024-12-07 09:00:00",
+          "end": "2024-12-07 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "scarlett.jo@example.com"
+          ],
+          "id": "evt_251bbabc9613412482c097209ff200b5"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Son's Basketball Game",
+          "start": "2024-12-07 12:00:00",
+          "end": "2024-12-07 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3842be97ea9d42edb37851bc6a02c148"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with friends",
+          "start": "2024-12-07 18:00:00",
+          "end": "2024-12-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cameron.diaz@email.com"
+          ],
+          "id": "evt_70793b5d248d423d940605d1bd399242"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Work on Business Plan",
+          "start": "2024-12-08 10:00:00",
+          "end": "2024-12-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dbc8ec40f62e4dafbf9dba5bd71b9ae4"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Relax",
+          "start": "2024-12-08 13:00:00",
+          "end": "2024-12-08 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b75b15839efa423db4008facf7cee488"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Visit Mother",
+          "start": "2024-12-08 16:00:00",
+          "end": "2024-12-08 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6330cf4e438f4e4dace541bea147b674"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Schedule",
+          "start": "2024-12-02 08:00:00",
+          "end": "2024-12-02 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "maria@hvac-solutions.com"
+          ],
+          "id": "evt_a4a1ea2092cc44aea1a7738ee1e169bf"
+        },
+        {
+          "day": "Monday",
+          "summary": "HVAC Repair - Residential Client",
+          "start": "2024-12-02 09:30:00",
+          "end": "2024-12-02 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_ec64951b349c4713aa7285c54cd37e00"
+        },
+        {
+          "day": "Monday",
+          "summary": "Pick up HVAC parts",
+          "start": "2024-12-02 12:00:00",
+          "end": "2024-12-02 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bob@hvacsupply.com"
+          ],
+          "id": "evt_ff395b3cb1014781a64a1aff2f0ccf25"
+        },
+        {
+          "day": "Monday",
+          "summary": "New Installation Quote - Commercial Building",
+          "start": "2024-12-02 14:00:00",
+          "end": "2024-12-02 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sue.smith@buildingco.com"
+          ],
+          "id": "evt_5fbd051c5a8e4322a1d3b1cf1037b984"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Son",
+          "start": "2024-12-02 18:30:00",
+          "end": "2024-12-02 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a34dd32d9cb84eb996e783b56a14f164"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Diagnose Issue - Restaurant HVAC",
+          "start": "2024-12-03 08:30:00",
+          "end": "2024-12-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.doe@restaurant.com"
+          ],
+          "id": "evt_808dbd067d4645a0b2baf4794db6f1d6"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "HVAC Repair - Residential Client",
+          "start": "2024-12-03 10:30:00",
+          "end": "2024-12-03 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sally.fields@example.com"
+          ],
+          "id": "evt_4b18e705aaa84e8ba1d8d1d05ce7d0ce"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lunch with business mentor",
+          "start": "2024-12-03 13:00:00",
+          "end": "2024-12-03 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@mentors.com"
+          ],
+          "id": "evt_18c6e4166c7e4b1cba4f2e4090dbf842"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Prepare Invoices and Send",
+          "start": "2024-12-03 14:30:00",
+          "end": "2024-12-03 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ea095f5178374323a17f504efe6ab618"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Regular HVAC Maintenance - Office Building",
+          "start": "2024-12-04 09:00:00",
+          "end": "2024-12-04 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom.jones@officebuilding.com"
+          ],
+          "id": "evt_ada1756b0490423d880b5f6e343c0072"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Order new tools.",
+          "start": "2024-12-04 11:30:00",
+          "end": "2024-12-04 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8cfdefee4461440295128fa205f1afcc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "New HVAC Installation - Residential Client",
+          "start": "2024-12-04 13:30:00",
+          "end": "2024-12-04 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ashley.williams@example.com"
+          ],
+          "id": "evt_2872159740a1496f933439f977165e7a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Son's Basketball Practice",
+          "start": "2024-12-04 18:00:00",
+          "end": "2024-12-04 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c2cc6fa79d924fd5a4d910609164db90"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Call for parts",
+          "start": "2024-12-05 08:00:00",
+          "end": "2024-12-05 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bob@hvacsupply.com"
+          ],
+          "id": "evt_0fa423984d4b4d4b8f68f0450392ea68"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Troubleshoot HVAC - Commercial Client",
+          "start": "2024-12-05 09:30:00",
+          "end": "2024-12-05 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "robert.downy@example.com"
+          ],
+          "id": "evt_199c55e938c34a98959dc05e5e1f50d7"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Networking Lunch with Contractors",
+          "start": "2024-12-05 12:00:00",
+          "end": "2024-12-05 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "adam.sandler@builders.com"
+          ],
+          "id": "evt_d03491997a574a628e2f66ac11754f87"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Equipment Maintenance",
+          "start": "2024-12-05 14:00:00",
+          "end": "2024-12-05 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_35a161c91a4d47b6a15d8962646b561b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Check in with Mother",
+          "start": "2024-12-05 19:00:00",
+          "end": "2024-12-05 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6d9b6796d698403c98e9a5216560c396"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Finish installation",
+          "start": "2024-12-06 08:30:00",
+          "end": "2024-12-06 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ashley.williams@example.com"
+          ],
+          "id": "evt_80b3a18c0307488e9ba53551f18bd036"
+        },
+        {
+          "day": "Friday",
+          "summary": "Quick repair - Client",
+          "start": "2024-12-06 11:00:00",
+          "end": "2024-12-06 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "chris.evans@example.com"
+          ],
+          "id": "evt_c8a6e7e026264632b7a9120348223231"
+        },
+        {
+          "day": "Friday",
+          "summary": "Prepare payroll",
+          "start": "2024-12-06 12:00:00",
+          "end": "2024-12-06 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8ecaf3d2902f4bc1a5d835a54c5ad2c3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Business Finances Review",
+          "start": "2024-12-06 14:00:00",
+          "end": "2024-12-06 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_541204bc93eb495ca36f07b9c976f86c"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Emergency HVAC Repair - Long-time Client",
+          "start": "2024-12-07 09:00:00",
+          "end": "2024-12-07 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "scarlett.jo@example.com"
+          ],
+          "id": "evt_251bbabc9613412482c097209ff200b5"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Son's Basketball Game",
+          "start": "2024-12-07 12:00:00",
+          "end": "2024-12-07 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3842be97ea9d42edb37851bc6a02c148"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with friends",
+          "start": "2024-12-07 18:00:00",
+          "end": "2024-12-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cameron.diaz@email.com"
+          ],
+          "id": "evt_70793b5d248d423d940605d1bd399242"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Work on Business Plan",
+          "start": "2024-12-08 10:00:00",
+          "end": "2024-12-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dbc8ec40f62e4dafbf9dba5bd71b9ae4"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Relax",
+          "start": "2024-12-08 13:00:00",
+          "end": "2024-12-08 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b75b15839efa423db4008facf7cee488"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Visit Mother",
+          "start": "2024-12-08 16:00:00",
+          "end": "2024-12-08 18:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6330cf4e438f4e4dace541bea147b674"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What does the week look like?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time and then list all the events for the next 7 days to give you an overview of your week."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-12-02 07:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-12-09 07:00:00",
+          "time_min": "2024-12-02 07:00:00"
+        },
+        "result": "Found 28 events:\nid: evt_a4a1ea2092cc44aea1a7738ee1e169bf | Check Emails and Schedule \u2014 Mon 08:00-09:00\nid: evt_ec64951b349c4713aa7285c54cd37e00 | HVAC Repair - Residential Client \u2014 Mon 09:30-11:30\nid: evt_ff395b3cb1014781a64a1aff2f0ccf25 | Pick up HVAC parts \u2014 Mon 12:00-13:00\nid: evt_5fbd051c5a8e4322a1d3b1cf1037b984 | New Installation Quote - Commercial Building \u2014 Mon 14:00-16:00\nid: evt_a34dd32d9cb84eb996e783b56a14f164 | Dinner with Son \u2014 Mon 18:30-20:00\nid: evt_808dbd067d4645a0b2baf4794db6f1d6 | Diagnose Issue - Restaurant HVAC \u2014 Tue 08:30-10:00\nid: evt_4b18e705aaa84e8ba1d8d1d05ce7d0ce | HVAC Repair - Residential Client \u2014 Tue 10:30-12:30\nid: evt_18c6e4166c7e4b1cba4f2e4090dbf842 | Lunch with business mentor \u2014 Tue 13:00-14:00\nid: evt_ea095f5178374323a17f504efe6ab618 | Prepare Invoices and Send \u2014 Tue 14:30-16:30\nid: evt_ada1756b0490423d880b5f6e343c0072 | Regular HVAC Maintenance - Office Building \u2014 Wed 09:00-11:00\nid: evt_8cfdefee4461440295128fa205f1afcc | Order new tools. \u2014 Wed 11:30-12:30\nid: evt_2872159740a1496f933439f977165e7a | New HVAC Installation - Residential Client \u2014 Wed 13:30-15:30\nid: evt_c2cc6fa79d924fd5a4d910609164db90 | Son's Basketball Practice \u2014 Wed 18:00-19:30\nid: evt_0fa423984d4b4d4b8f68f0450392ea68 | Call for parts \u2014 Thu 08:00-09:00\nid: evt_199c55e938c34a98959dc05e5e1f50d7 | Troubleshoot HVAC - Commercial Client \u2014 Thu 09:30-11:30\nid: evt_d03491997a574a628e2f66ac11754f87 | Networking Lunch with Contractors \u2014 Thu 12:00-13:00\nid: evt_35a161c91a4d47b6a15d8962646b561b | Equipment Maintenance \u2014 Thu 14:00-16:00\nid: evt_6d9b6796d698403c98e9a5216560c396 | Check in with Mother \u2014 Thu 19:00-20:00\nid: evt_80b3a18c0307488e9ba53551f18bd036 | Finish installation \u2014 Fri 08:30-10:30\nid: evt_c8a6e7e026264632b7a9120348223231 | Quick repair - Client \u2014 Fri 11:00-12:00\nid: evt_8ecaf3d2902f4bc1a5d835a54c5ad2c3 | Prepare payroll \u2014 Fri 12:00-13:00\nid: evt_541204bc93eb495ca36f07b9c976f86c | Business Finances Review \u2014 Fri 14:00-16:00\nid: evt_251bbabc9613412482c097209ff200b5 | Emergency HVAC Repair - Long-time Client \u2014 Sat 09:00-11:00\nid: evt_3842be97ea9d42edb37851bc6a02c148 | Son's Basketball Game \u2014 Sat 12:00-16:00\nid: evt_70793b5d248d423d940605d1bd399242 | Dinner with friends \u2014 Sat 18:00-20:00\nid: evt_dbc8ec40f62e4dafbf9dba5bd71b9ae4 | Work on Business Plan \u2014 Sun 10:00-12:00\nid: evt_b75b15839efa423db4008facf7cee488 | Relax \u2014 Sun 13:00-15:00\nid: evt_6330cf4e438f4e4dace541bea147b674 | Visit Mother \u2014 Sun 16:00-18:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Here's a look at your week:\n\n**Monday (Today):**\n*   8:00 AM - 9:00 AM: Check Emails and Schedule\n*   9:30 AM - 11:30 AM: HVAC Repair - Residential Client\n*   12:00 PM - 1:00 PM: Pick up HVAC parts\n*   2:00 PM - 4:00 PM: New Installation Quote - Commercial Building\n*   6:30 PM - 8:00 PM: Dinner with Son\n\n**Tuesday:**\n*   8:30 AM - 10:00 AM: Diagnose Issue - Restaurant HVAC\n*   10:30 AM - 12:30 PM: HVAC Repair - Residential Client\n*   1:00 PM - 2:00 PM: Lunch with business mentor\n*   2:30 PM - 4:30 PM: Prepare Invoices and Send\n\n**Wednesday:**\n*   9:00 AM - 11:00 AM: Regular HVAC Maintenance - Office Building\n*   11:30 AM - 12:30 PM: Order new tools.\n*   1:30 PM - 3:30 PM: New HVAC Installation - Residential Client\n*   6:00 PM - 7:30 PM: Son's Basketball Practice\n\n**Thursday:**\n*   8:00 AM - 9:00 AM: Call for parts\n*   9:30 AM - 11:30 AM: Troubleshoot HVAC - Commercial Client\n*   12:00 PM - 1:00 PM: Networking Lunch with Contractors\n*   2:00 PM - 4:00 PM: Equipment Maintenance\n*   7:00 PM - 8:00 PM: Check in with Mother\n\n**Friday:**\n*   8:30 AM - 10:30 AM: Finish installation\n*   11:00 AM - 12:00 PM: Quick repair - Client\n*   12:00 PM - 1:00 PM: Prepare payroll\n*   2:00 PM - 4:00 PM: Business Finances Review\n\n**Saturday:**\n*   9:00 AM - 11:00 AM: Emergency HVAC Repair - Long-time Client\n*   12:00 PM - 4:00 PM: Son's Basketball Game\n*   6:00 PM - 8:00 PM: Dinner with friends\n\n**Sunday:**\n*   10:00 AM - 12:00 PM: Work on Business Plan\n*   1:00 PM - 3:00 PM: Relax\n*   4:00 PM - 6:00 PM: Visit Mother"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move the dinner with my son on Monday back by an hour.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the event 'Dinner with Son' on Monday, December 2nd, 2024, and update its start time to 7:30 PM.",
+    "simulated_now": "2024-12-02 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Schedule",
+          "start": "2024-12-02 08:00:00",
+          "end": "2024-12-02 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "maria@hvac-solutions.com"
+          ],
+          "id": "evt_3e16a90cc388421e9618027f4b8b5817"
+        },
+        {
+          "day": "Monday",
+          "summary": "HVAC Repair - Residential Client",
+          "start": "2024-12-02 09:30:00",
+          "end": "2024-12-02 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_995d255bfabb4b6eaf28ebba00f14bdb"
+        },
+        {
+          "day": "Monday",
+          "summary": "Pick up HVAC parts",
+          "start": "2024-12-02 12:00:00",
+          "end": "2024-12-02 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bob@hvacsupply.com"
+          ],
+          "id": "evt_4691dc0fd169462a9ffc2170690a05e6"
+        },
+        {
+          "day": "Monday",
+          "summary": "New Installation Quote - Commercial Building",
+          "start": "2024-12-02 14:00:00",
+          "end": "2024-12-02 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sue.smith@buildingco.com"
+          ],
+          "id": "evt_7c137345897e48da9f1cbfd5dd10a972"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Son",
+          "start": "2024-12-02 18:30:00",
+          "end": "2024-12-02 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4042b639b33c46a183709c60ff4216b3"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Schedule",
+          "start": "2024-12-02 08:00:00",
+          "end": "2024-12-02 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "maria@hvac-solutions.com"
+          ],
+          "id": "evt_3e16a90cc388421e9618027f4b8b5817"
+        },
+        {
+          "day": "Monday",
+          "summary": "HVAC Repair - Residential Client",
+          "start": "2024-12-02 09:30:00",
+          "end": "2024-12-02 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_995d255bfabb4b6eaf28ebba00f14bdb"
+        },
+        {
+          "day": "Monday",
+          "summary": "Pick up HVAC parts",
+          "start": "2024-12-02 12:00:00",
+          "end": "2024-12-02 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bob@hvacsupply.com"
+          ],
+          "id": "evt_4691dc0fd169462a9ffc2170690a05e6"
+        },
+        {
+          "day": "Monday",
+          "summary": "New Installation Quote - Commercial Building",
+          "start": "2024-12-02 14:00:00",
+          "end": "2024-12-02 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sue.smith@buildingco.com"
+          ],
+          "id": "evt_7c137345897e48da9f1cbfd5dd10a972"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Son",
+          "start": "2024-12-02 19:30:00",
+          "end": "2024-12-02 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4042b639b33c46a183709c60ff4216b3"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move the dinner with my son on Monday back by an hour."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I'll find the dinner with your son on Monday, and then I'll move it back by an hour."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-12-02 10:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-12-02 23:59:59",
+          "time_min": "2024-12-02 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_3e16a90cc388421e9618027f4b8b5817 | Check Emails and Schedule \u2014 Mon 08:00-09:00\nid: evt_995d255bfabb4b6eaf28ebba00f14bdb | HVAC Repair - Residential Client \u2014 Mon 09:30-11:30\nid: evt_4691dc0fd169462a9ffc2170690a05e6 | Pick up HVAC parts \u2014 Mon 12:00-13:00\nid: evt_7c137345897e48da9f1cbfd5dd10a972 | New Installation Quote - Commercial Building \u2014 Mon 14:00-16:00\nid: evt_4042b639b33c46a183709c60ff4216b3 | Dinner with Son \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_4042b639b33c46a183709c60ff4216b3",
+          "end": "2024-12-02 21:00:00",
+          "start": "2024-12-02 19:30:00"
+        },
+        "result": "Event updated successfully.\nDinner with Son\n  ID: evt_4042b639b33c46a183709c60ff4216b3\n  Time: Mon Dec 02, 19:30 - 21:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have moved the dinner with your son to 7:30 PM on Monday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change the time for the restaurant diagnosis on Tuesday to 9 AM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the event 'Diagnose Issue - Restaurant HVAC' on Tuesday, December 3rd, 2024, and update its start time to 9:00 AM.",
+    "simulated_now": "2024-12-03 07:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Diagnose Issue - Restaurant HVAC",
+          "start": "2024-12-03 08:30:00",
+          "end": "2024-12-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.doe@restaurant.com"
+          ],
+          "id": "evt_51c6b60d952b4668893875daa0286c16"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "HVAC Repair - Residential Client",
+          "start": "2024-12-03 10:30:00",
+          "end": "2024-12-03 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sally.fields@example.com"
+          ],
+          "id": "evt_3ff27928decd4e02801f4c904e15f55b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lunch with business mentor",
+          "start": "2024-12-03 13:00:00",
+          "end": "2024-12-03 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@mentors.com"
+          ],
+          "id": "evt_ba055f22c026436cb8f4c6558dced3ff"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Prepare Invoices and Send",
+          "start": "2024-12-03 14:30:00",
+          "end": "2024-12-03 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e88a6e3bb01b460e93ca5c23798ffa15"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Diagnose Issue - Restaurant HVAC",
+          "start": "2024-12-03 09:00:00",
+          "end": "2024-12-03 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "jane.doe@restaurant.com"
+          ],
+          "id": "evt_51c6b60d952b4668893875daa0286c16"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "HVAC Repair - Residential Client",
+          "start": "2024-12-03 10:30:00",
+          "end": "2024-12-03 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sally.fields@example.com"
+          ],
+          "id": "evt_3ff27928decd4e02801f4c904e15f55b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Lunch with business mentor",
+          "start": "2024-12-03 13:00:00",
+          "end": "2024-12-03 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@mentors.com"
+          ],
+          "id": "evt_ba055f22c026436cb8f4c6558dced3ff"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Prepare Invoices and Send",
+          "start": "2024-12-03 14:30:00",
+          "end": "2024-12-03 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e88a6e3bb01b460e93ca5c23798ffa15"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change the time for the restaurant diagnosis on Tuesday to 9 AM."
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find an event with \"restaurant diagnosis\" in the title on a Tuesday and change its time to 9 AM.\n\nFirst, I'll get the current time to determine the correct date for \"Tuesday\". Then, I'll search for the event on that day. Finally, I'll update the event time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-12-03 07:00:00 | Tuesday"
+      },
+      {
+        "role": "assistant",
+        "content": "OK, today is Tuesday, December 3rd. Now I'll search for the \"restaurant diagnosis\" event on this date to get its ID."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-12-03 23:59:59",
+          "time_min": "2024-12-03 00:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_51c6b60d952b4668893875daa0286c16 | Diagnose Issue - Restaurant HVAC \u2014 Tue 08:30-10:00\nid: evt_3ff27928decd4e02801f4c904e15f55b | HVAC Repair - Residential Client \u2014 Tue 10:30-12:30\nid: evt_ba055f22c026436cb8f4c6558dced3ff | Lunch with business mentor \u2014 Tue 13:00-14:00\nid: evt_e88a6e3bb01b460e93ca5c23798ffa15 | Prepare Invoices and Send \u2014 Tue 14:30-16:30"
+      },
+      {
+        "role": "assistant",
+        "content": "I found the event: \"Diagnose Issue - Restaurant HVAC\" from 8:30 AM to 10:00 AM. I will now change the time to 9:00 AM, keeping the 1.5-hour duration."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_51c6b60d952b4668893875daa0286c16",
+          "end": "2024-12-03 10:30:00",
+          "start": "2024-12-03 09:00:00"
+        },
+        "result": "Event updated successfully.\nDiagnose Issue - Restaurant HVAC\n  ID: evt_51c6b60d952b4668893875daa0286c16\n  Time: Tue Dec 03, 09:00 - 10:30\n  Attendees: jane.doe@restaurant.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've updated the \"Diagnose Issue - Restaurant HVAC\" event. It's now scheduled for 9:00 AM to 10:30 AM today."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Tell me about my Saturday.",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "List all events on Saturday, December 7th, 2024.",
+    "simulated_now": "2024-12-06 14:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Emergency HVAC Repair - Long-time Client",
+          "start": "2024-12-07 09:00:00",
+          "end": "2024-12-07 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "scarlett.jo@example.com"
+          ],
+          "id": "evt_ab76bd40857946119e23c16d2a2a731e"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Son's Basketball Game",
+          "start": "2024-12-07 12:00:00",
+          "end": "2024-12-07 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_296f2d0ee8584897b9a938b5d4be21ea"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with friends",
+          "start": "2024-12-07 18:00:00",
+          "end": "2024-12-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cameron.diaz@email.com"
+          ],
+          "id": "evt_24e131a237b64658b4e2ae36f0f23029"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Emergency HVAC Repair - Long-time Client",
+          "start": "2024-12-07 09:00:00",
+          "end": "2024-12-07 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "scarlett.jo@example.com"
+          ],
+          "id": "evt_ab76bd40857946119e23c16d2a2a731e"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Son's Basketball Game",
+          "start": "2024-12-07 12:00:00",
+          "end": "2024-12-07 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_296f2d0ee8584897b9a938b5d4be21ea"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with friends",
+          "start": "2024-12-07 18:00:00",
+          "end": "2024-12-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cameron.diaz@email.com"
+          ],
+          "id": "evt_24e131a237b64658b4e2ae36f0f23029"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Tell me about my Saturday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-12-06 14:00:00 | Friday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-12-07 23:59:59",
+          "time_min": "2024-12-07 00:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_ab76bd40857946119e23c16d2a2a731e | Emergency HVAC Repair - Long-time Client \u2014 Sat 09:00-11:00\nid: evt_296f2d0ee8584897b9a938b5d4be21ea | Son's Basketball Game \u2014 Sat 12:00-16:00\nid: evt_24e131a237b64658b4e2ae36f0f23029 | Dinner with friends \u2014 Sat 18:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have three events scheduled for this Saturday.\n- Emergency HVAC Repair - Long-time Client from 9am to 11am\n- Son's Basketball Game from 12pm to 4pm\n- Dinner with friends from 6pm to 8pm"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can I move the equipment maintenance on Thursday to 10 AM?",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Find the event 'Equipment Maintenance' on Thursday, December 5th, 2024. Check for conflicts between 10:00 AM and 12:00 PM. If no conflicts, update the event's start time to 10:00 AM.",
+    "simulated_now": "2024-12-05 07:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Call for parts",
+          "start": "2024-12-05 08:00:00",
+          "end": "2024-12-05 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bob@hvacsupply.com"
+          ],
+          "id": "evt_67b6eb431da143778a1a98dafecceed5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Troubleshoot HVAC - Commercial Client",
+          "start": "2024-12-05 09:30:00",
+          "end": "2024-12-05 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "robert.downy@example.com"
+          ],
+          "id": "evt_7318b30044ae45f483257420927fe88a"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Networking Lunch with Contractors",
+          "start": "2024-12-05 12:00:00",
+          "end": "2024-12-05 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "adam.sandler@builders.com"
+          ],
+          "id": "evt_df8e9bbb936f43418ac6663b56c42f97"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Equipment Maintenance",
+          "start": "2024-12-05 14:00:00",
+          "end": "2024-12-05 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b218c1c1cf5349b68e2d87d74acd50fb"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Check in with Mother",
+          "start": "2024-12-05 19:00:00",
+          "end": "2024-12-05 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5c432ff539cd41cf8a6c540f46e832eb"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Call for parts",
+          "start": "2024-12-05 08:00:00",
+          "end": "2024-12-05 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bob@hvacsupply.com"
+          ],
+          "id": "evt_67b6eb431da143778a1a98dafecceed5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Troubleshoot HVAC - Commercial Client",
+          "start": "2024-12-05 09:30:00",
+          "end": "2024-12-05 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "robert.downy@example.com"
+          ],
+          "id": "evt_7318b30044ae45f483257420927fe88a"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Equipment Maintenance",
+          "start": "2024-12-05 10:00:00",
+          "end": "2024-12-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b218c1c1cf5349b68e2d87d74acd50fb"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Networking Lunch with Contractors",
+          "start": "2024-12-05 12:00:00",
+          "end": "2024-12-05 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "adam.sandler@builders.com"
+          ],
+          "id": "evt_df8e9bbb936f43418ac6663b56c42f97"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Check in with Mother",
+          "start": "2024-12-05 19:00:00",
+          "end": "2024-12-05 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5c432ff539cd41cf8a6c540f46e832eb"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can I move the equipment maintenance on Thursday to 10 AM?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to know the date of the upcoming Thursday. Then, I will find the \"equipment maintenance\" event on that day and move it to 10 AM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-12-05 07:00:00 | Thursday"
+      },
+      {
+        "role": "assistant",
+        "content": "Great, today is Thursday, December 5th, 2024. Now I will look for the \"equipment maintenance\" event on my calendar to reschedule it."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-12-05 23:59:59",
+          "time_min": "2024-12-05 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_67b6eb431da143778a1a98dafecceed5 | Call for parts \u2014 Thu 08:00-09:00\nid: evt_7318b30044ae45f483257420927fe88a | Troubleshoot HVAC - Commercial Client \u2014 Thu 09:30-11:30\nid: evt_df8e9bbb936f43418ac6663b56c42f97 | Networking Lunch with Contractors \u2014 Thu 12:00-13:00\nid: evt_b218c1c1cf5349b68e2d87d74acd50fb | Equipment Maintenance \u2014 Thu 14:00-16:00\nid: evt_5c432ff539cd41cf8a6c540f46e832eb | Check in with Mother \u2014 Thu 19:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've found the \"Equipment Maintenance\" event, scheduled from 2:00 PM to 4:00 PM today. I will now move it to 10:00 AM, keeping the two-hour duration, so it will now be from 10:00 AM to 12:00 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2024-12-05 12:00:00",
+          "event_id": "evt_b218c1c1cf5349b68e2d87d74acd50fb",
+          "start": "2024-12-05 10:00:00"
+        },
+        "result": "Event updated successfully.\nEquipment Maintenance\n  ID: evt_b218c1c1cf5349b68e2d87d74acd50fb\n  Time: Thu Dec 05, 10:00 - 12:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I\u2019ve moved the Equipment Maintenance event to 10:00 AM today. It will now end at 12:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Is there time to schedule an hour-long call with a new client on Wednesday at 2 PM?",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Check for conflicts between 2:00 PM and 3:00 PM on Wednesday, December 4th, 2024.  Respond whether the time slot is available or not.",
+    "simulated_now": "2024-12-04 08:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Regular HVAC Maintenance - Office Building",
+          "start": "2024-12-04 09:00:00",
+          "end": "2024-12-04 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom.jones@officebuilding.com"
+          ],
+          "id": "evt_bbb0a18ee92c4930baf4840809008d92"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Order new tools.",
+          "start": "2024-12-04 11:30:00",
+          "end": "2024-12-04 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_349910f743074f7485aebc43b92cef2d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "New HVAC Installation - Residential Client",
+          "start": "2024-12-04 13:30:00",
+          "end": "2024-12-04 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ashley.williams@example.com"
+          ],
+          "id": "evt_3cf63060c39a46c58ce60e932ed2e9a3"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Son's Basketball Practice",
+          "start": "2024-12-04 18:00:00",
+          "end": "2024-12-04 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8801c4ba641d4a94b9eb4e1321463712"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Regular HVAC Maintenance - Office Building",
+          "start": "2024-12-04 09:00:00",
+          "end": "2024-12-04 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom.jones@officebuilding.com"
+          ],
+          "id": "evt_bbb0a18ee92c4930baf4840809008d92"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Order new tools.",
+          "start": "2024-12-04 11:30:00",
+          "end": "2024-12-04 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_349910f743074f7485aebc43b92cef2d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "New HVAC Installation - Residential Client",
+          "start": "2024-12-04 13:30:00",
+          "end": "2024-12-04 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ashley.williams@example.com"
+          ],
+          "id": "evt_3cf63060c39a46c58ce60e932ed2e9a3"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Son's Basketball Practice",
+          "start": "2024-12-04 18:00:00",
+          "end": "2024-12-04 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8801c4ba641d4a94b9eb4e1321463712"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Is there time to schedule an hour-long call with a new client on Wednesday at 2 PM?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify the date of the upcoming Wednesday and then check your calendar for any conflicting events."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-12-04 08:00:00 | Wednesday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will now check your calendar for events on Wednesday, December 4th between 2:00 PM and 3:00 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-12-04 14:00:00",
+          "time_max": "2024-12-04 15:00:00"
+        },
+        "result": "Found 1 events:\nid: evt_3cf63060c39a46c58ce60e932ed2e9a3 | New HVAC Installation - Residential Client \u2014 Wed 13:30-15:30"
+      },
+      {
+        "role": "assistant",
+        "content": "No, you are not free at that time. You have a \"New HVAC Installation - Residential Client\" meeting from 1:30 PM to 3:30 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Cancel basketball.",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the event that contains the word 'basketball' on either Wednesday, December 4th, 2024, or Saturday, December 7th, 2024, and ask to clarify which event to cancel.",
+    "simulated_now": "2024-12-04 10:00:00",
+    "addressed_days": [
+      "Wednesday",
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Regular HVAC Maintenance - Office Building",
+          "start": "2024-12-04 09:00:00",
+          "end": "2024-12-04 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom.jones@officebuilding.com"
+          ],
+          "id": "evt_048dca62462843d0b95496338518344a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Order new tools.",
+          "start": "2024-12-04 11:30:00",
+          "end": "2024-12-04 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4541047b3a414cc58a2c6f51f4d0e935"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "New HVAC Installation - Residential Client",
+          "start": "2024-12-04 13:30:00",
+          "end": "2024-12-04 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ashley.williams@example.com"
+          ],
+          "id": "evt_4268f250a7e54aea9f5dbf9b1383ebb7"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Son's Basketball Practice",
+          "start": "2024-12-04 18:00:00",
+          "end": "2024-12-04 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3162affcad8740a594c7f52af105d179"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Emergency HVAC Repair - Long-time Client",
+          "start": "2024-12-07 09:00:00",
+          "end": "2024-12-07 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "scarlett.jo@example.com"
+          ],
+          "id": "evt_eaa870dffd0a413ba9b076add124152e"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Son's Basketball Game",
+          "start": "2024-12-07 12:00:00",
+          "end": "2024-12-07 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4ce98a776dd24e75a8c0911e6d73a67b"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with friends",
+          "start": "2024-12-07 18:00:00",
+          "end": "2024-12-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cameron.diaz@email.com"
+          ],
+          "id": "evt_31c62d32631346d6b1f7b497997111b1"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Regular HVAC Maintenance - Office Building",
+          "start": "2024-12-04 09:00:00",
+          "end": "2024-12-04 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom.jones@officebuilding.com"
+          ],
+          "id": "evt_048dca62462843d0b95496338518344a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Order new tools.",
+          "start": "2024-12-04 11:30:00",
+          "end": "2024-12-04 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4541047b3a414cc58a2c6f51f4d0e935"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "New HVAC Installation - Residential Client",
+          "start": "2024-12-04 13:30:00",
+          "end": "2024-12-04 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ashley.williams@example.com"
+          ],
+          "id": "evt_4268f250a7e54aea9f5dbf9b1383ebb7"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Son's Basketball Practice",
+          "start": "2024-12-04 18:00:00",
+          "end": "2024-12-04 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3162affcad8740a594c7f52af105d179"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Emergency HVAC Repair - Long-time Client",
+          "start": "2024-12-07 09:00:00",
+          "end": "2024-12-07 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "scarlett.jo@example.com"
+          ],
+          "id": "evt_eaa870dffd0a413ba9b076add124152e"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Son's Basketball Game",
+          "start": "2024-12-07 12:00:00",
+          "end": "2024-12-07 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4ce98a776dd24e75a8c0911e6d73a67b"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with friends",
+          "start": "2024-12-07 18:00:00",
+          "end": "2024-12-07 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cameron.diaz@email.com"
+          ],
+          "id": "evt_31c62d32631346d6b1f7b497997111b1"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Cancel basketball."
+      },
+      {
+        "role": "assistant",
+        "content": "- I need to cancel a \"basketball\" event.\n- First, I will call `get_current_time` to know the current time.\n- Then, I will call `list_events` to find upcoming events and look for an event with \"basketball\" in the title to get its event ID.\n- Finally, I will call `delete_event` with the event ID to cancel the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-12-04 10:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-12-04 10:00:00"
+        },
+        "result": "Found 19 events:\nid: evt_048dca62462843d0b95496338518344a | Regular HVAC Maintenance - Office Building \u2014 Wed 09:00-11:00\nid: evt_4541047b3a414cc58a2c6f51f4d0e935 | Order new tools. \u2014 Wed 11:30-12:30\nid: evt_4268f250a7e54aea9f5dbf9b1383ebb7 | New HVAC Installation - Residential Client \u2014 Wed 13:30-15:30\nid: evt_3162affcad8740a594c7f52af105d179 | Son's Basketball Practice \u2014 Wed 18:00-19:30\nid: evt_7db597698edd491588fb8cf9d7cc05b5 | Call for parts \u2014 Thu 08:00-09:00\nid: evt_ea94b5e44045458aaf632560edfe2cf9 | Troubleshoot HVAC - Commercial Client \u2014 Thu 09:30-11:30\nid: evt_44973ec888194ae99735dba0e881c49e | Networking Lunch with Contractors \u2014 Thu 12:00-13:00\nid: evt_f9619d898fa64119b7c32e846944a903 | Equipment Maintenance \u2014 Thu 14:00-16:00\nid: evt_c1e96a4571694ff6a79aeb59c1b823dc | Check in with Mother \u2014 Thu 19:00-20:00\nid: evt_113aee8befc24c28af2c5296e85658f2 | Finish installation \u2014 Fri 08:30-10:30\nid: evt_836242ee8e7d4150ac2b360aac9dbad4 | Quick repair - Client \u2014 Fri 11:00-12:00\nid: evt_efef02cea2b246d5937ecadd06a3acd8 | Prepare payroll \u2014 Fri 12:00-13:00\nid: evt_62c12260546843738caf4c099f8d64d8 | Business Finances Review \u2014 Fri 14:00-16:00\nid: evt_eaa870dffd0a413ba9b076add124152e | Emergency HVAC Repair - Long-time Client \u2014 Sat 09:00-11:00\nid: evt_4ce98a776dd24e75a8c0911e6d73a67b | Son's Basketball Game \u2014 Sat 12:00-16:00\nid: evt_31c62d32631346d6b1f7b497997111b1 | Dinner with friends \u2014 Sat 18:00-20:00\nid: evt_707dba31325a40a0b4eaca0f4e600c15 | Work on Business Plan \u2014 Sun 10:00-12:00\nid: evt_7a4f2451ef4d408eb57997682190b7d3 | Relax \u2014 Sun 13:00-15:00\nid: evt_1d0340afc0d54c9b9e318a4237e8e039 | Visit Mother \u2014 Sun 16:00-18:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Of course. I see two upcoming basketball events: \"Son's Basketball Practice\" on Wednesday from 18:00 to 19:30 and \"Son's Basketball Game\" on Saturday from 12:00 to 16:00. Which one would you like to cancel?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events on Monday, December 2nd, 2024.",
+    "simulated_now": "2024-12-02 09:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Schedule",
+          "start": "2024-12-02 08:00:00",
+          "end": "2024-12-02 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "maria@hvac-solutions.com"
+          ],
+          "id": "evt_fed562495af64581b75098441f17dbaf"
+        },
+        {
+          "day": "Monday",
+          "summary": "HVAC Repair - Residential Client",
+          "start": "2024-12-02 09:30:00",
+          "end": "2024-12-02 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_68668ec552504e8197abfdc85a58b7bd"
+        },
+        {
+          "day": "Monday",
+          "summary": "Pick up HVAC parts",
+          "start": "2024-12-02 12:00:00",
+          "end": "2024-12-02 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bob@hvacsupply.com"
+          ],
+          "id": "evt_830e45263b604156a59bddb5093630d4"
+        },
+        {
+          "day": "Monday",
+          "summary": "New Installation Quote - Commercial Building",
+          "start": "2024-12-02 14:00:00",
+          "end": "2024-12-02 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sue.smith@buildingco.com"
+          ],
+          "id": "evt_5b48504e913143ada88f6c083877df0b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Son",
+          "start": "2024-12-02 18:30:00",
+          "end": "2024-12-02 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_33d14db0558f4f95b923710d149e0e78"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Check Emails and Schedule",
+          "start": "2024-12-02 08:00:00",
+          "end": "2024-12-02 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "maria@hvac-solutions.com"
+          ],
+          "id": "evt_fed562495af64581b75098441f17dbaf"
+        },
+        {
+          "day": "Monday",
+          "summary": "HVAC Repair - Residential Client",
+          "start": "2024-12-02 09:30:00",
+          "end": "2024-12-02 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "john.doe@example.com"
+          ],
+          "id": "evt_68668ec552504e8197abfdc85a58b7bd"
+        },
+        {
+          "day": "Monday",
+          "summary": "Pick up HVAC parts",
+          "start": "2024-12-02 12:00:00",
+          "end": "2024-12-02 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bob@hvacsupply.com"
+          ],
+          "id": "evt_830e45263b604156a59bddb5093630d4"
+        },
+        {
+          "day": "Monday",
+          "summary": "New Installation Quote - Commercial Building",
+          "start": "2024-12-02 14:00:00",
+          "end": "2024-12-02 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sue.smith@buildingco.com"
+          ],
+          "id": "evt_5b48504e913143ada88f6c083877df0b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Son",
+          "start": "2024-12-02 18:30:00",
+          "end": "2024-12-02 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_33d14db0558f4f95b923710d149e0e78"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-12-02 09:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-12-02 23:59:59",
+          "time_min": "2024-12-02 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_fed562495af64581b75098441f17dbaf | Check Emails and Schedule \u2014 Mon 08:00-09:00\nid: evt_68668ec552504e8197abfdc85a58b7bd | HVAC Repair - Residential Client \u2014 Mon 09:30-11:30\nid: evt_830e45263b604156a59bddb5093630d4 | Pick up HVAC parts \u2014 Mon 12:00-13:00\nid: evt_5b48504e913143ada88f6c083877df0b | New Installation Quote - Commercial Building \u2014 Mon 14:00-16:00\nid: evt_33d14db0558f4f95b923710d149e0e78 | Dinner with Son \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Today, you have 5 events on your calendar:\n\n*   8:00 - 9:00: Check Emails and Schedule\n*   9:30 - 11:30: HVAC Repair - Residential Client\n*   12:00 - 13:00: Pick up HVAC parts\n*   14:00 - 16:00: New Installation Quote - Commercial Building\n*   18:30 - 20:00: Dinner with Son"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on the schedule for tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events on Wednesday, December 4th, 2024.",
+    "simulated_now": "2024-12-03 16:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Regular HVAC Maintenance - Office Building",
+          "start": "2024-12-04 09:00:00",
+          "end": "2024-12-04 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom.jones@officebuilding.com"
+          ],
+          "id": "evt_c396c0c0d2804e41ab67db9bdc466f95"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Order new tools.",
+          "start": "2024-12-04 11:30:00",
+          "end": "2024-12-04 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c0ba1f21ea0c461ea53d8776f0aeba55"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "New HVAC Installation - Residential Client",
+          "start": "2024-12-04 13:30:00",
+          "end": "2024-12-04 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ashley.williams@example.com"
+          ],
+          "id": "evt_2af7c8b52bed43bf986b80ad0b50024c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Son's Basketball Practice",
+          "start": "2024-12-04 18:00:00",
+          "end": "2024-12-04 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_64737128d3d64782b87258c994113282"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Regular HVAC Maintenance - Office Building",
+          "start": "2024-12-04 09:00:00",
+          "end": "2024-12-04 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tom.jones@officebuilding.com"
+          ],
+          "id": "evt_c396c0c0d2804e41ab67db9bdc466f95"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Order new tools.",
+          "start": "2024-12-04 11:30:00",
+          "end": "2024-12-04 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c0ba1f21ea0c461ea53d8776f0aeba55"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "New HVAC Installation - Residential Client",
+          "start": "2024-12-04 13:30:00",
+          "end": "2024-12-04 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ashley.williams@example.com"
+          ],
+          "id": "evt_2af7c8b52bed43bf986b80ad0b50024c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Son's Basketball Practice",
+          "start": "2024-12-04 18:00:00",
+          "end": "2024-12-04 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_64737128d3d64782b87258c994113282"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on the schedule for tomorrow?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out the current date to identify what \"tomorrow\" is, and then list all the events scheduled for that day. I will use `get_current_time` and then `list_events`."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-12-03 16:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-12-04 23:59:59",
+          "time_min": "2024-12-04 00:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_c396c0c0d2804e41ab67db9bdc466f95 | Regular HVAC Maintenance - Office Building \u2014 Wed 09:00-11:00\nid: evt_c0ba1f21ea0c461ea53d8776f0aeba55 | Order new tools. \u2014 Wed 11:30-12:30\nid: evt_2af7c8b52bed43bf986b80ad0b50024c | New HVAC Installation - Residential Client \u2014 Wed 13:30-15:30\nid: evt_64737128d3d64782b87258c994113282 | Son's Basketball Practice \u2014 Wed 18:00-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "Here is your schedule for tomorrow, December 4th, 2024:\n\n*   **9:00 AM - 11:00 AM:** Regular HVAC Maintenance - Office Building\n*   **11:30 AM - 12:30 PM:** Order new tools.\n*   **1:30 PM - 3:30 PM:** New HVAC Installation - Residential Client\n*   **6:00 PM - 7:30 PM:** Son's Basketball Practice"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

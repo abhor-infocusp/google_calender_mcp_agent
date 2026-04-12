@@ -1,0 +1,1701 @@
+[
+  {
+    "query": "Create an event called 'Meet with John about irrigation' for Wednesday at 3 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call the create_event tool with summary 'Meet with John about irrigation', start set to Wednesday at 3 PM, and end set to Wednesday at 4 PM.",
+    "simulated_now": "2026-05-24 12:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-27 07:00:00",
+          "end": "2026-05-27 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a0adaf95b15e48e1be69b497a11cf8b0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Visit veterinarian (cattle vaccination)",
+          "start": "2026-05-27 09:00:00",
+          "end": "2026-05-27 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vet@animalhealth.com"
+          ],
+          "id": "evt_b06d1f828d004ff4ab1d81af23b3e5c5"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Check and repair irrigation system",
+          "start": "2026-05-27 10:30:00",
+          "end": "2026-05-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9917e6aa2df247458a2941cc878a64c1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review farm accounts",
+          "start": "2026-05-27 14:00:00",
+          "end": "2026-05-27 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e6b2f4855f224ece9712771a25120a31"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-27 07:00:00",
+          "end": "2026-05-27 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a0adaf95b15e48e1be69b497a11cf8b0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Visit veterinarian (cattle vaccination)",
+          "start": "2026-05-27 09:00:00",
+          "end": "2026-05-27 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vet@animalhealth.com"
+          ],
+          "id": "evt_b06d1f828d004ff4ab1d81af23b3e5c5"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Check and repair irrigation system",
+          "start": "2026-05-27 10:30:00",
+          "end": "2026-05-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9917e6aa2df247458a2941cc878a64c1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review farm accounts",
+          "start": "2026-05-27 14:00:00",
+          "end": "2026-05-27 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e6b2f4855f224ece9712771a25120a31"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meet with John about irrigation",
+          "start": "2026-05-27 15:00:00",
+          "end": "2026-05-27 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4e6d4f826a7743c08aa8550ff3eb4d15"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Meet with John about irrigation' for Wednesday at 3 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I will create an event called 'Meet with John about irrigation' for Wednesday at 3 PM. First, I need to get the current time to determine the correct date for this Wednesday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-05-24 12:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, scheduling \"Meet with John about irrigation\" for this coming Wednesday, May 27th, at 3:00 PM. It will be a 1-hour event."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Meet with John about irrigation",
+          "end": "2026-05-27 16:00:00",
+          "start": "2026-05-27 15:00:00"
+        },
+        "result": "Event created successfully.\nMeet with John about irrigation\n  ID: evt_4e6d4f826a7743c08aa8550ff3eb4d15\n  Time: Wed May 27, 15:00 - 16:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have created the event.\n\\\nEvent created: Meet with John about irrigation on Wednesday, May 27th, from 3:00 PM to 4:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Book a meeting for Friday to discuss the broken baler from 2 PM to 3 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call the create_event tool with summary related to 'broken baler discussion', start set to Friday at 2 PM, and end set to Friday at 3 PM.",
+    "simulated_now": "2026-05-24 12:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-29 07:00:00",
+          "end": "2026-05-29 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9f5326aa15c44496862ca51e3455e5a0"
+        },
+        {
+          "day": "Friday",
+          "summary": "Equipment Repair (broken baler)",
+          "start": "2026-05-29 09:00:00",
+          "end": "2026-05-29 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ff39d449c0044b18a8ae2da246645506"
+        },
+        {
+          "day": "Friday",
+          "summary": "Drive to local market",
+          "start": "2026-05-29 10:30:00",
+          "end": "2026-05-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_62409e3f87e1451aa5967af03d88e19c"
+        },
+        {
+          "day": "Friday",
+          "summary": "Sell produce and livestock at local market",
+          "start": "2026-05-29 13:00:00",
+          "end": "2026-05-29 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2c62e0da8ed34f0d9f708cefbd80a6ac"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-29 07:00:00",
+          "end": "2026-05-29 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9f5326aa15c44496862ca51e3455e5a0"
+        },
+        {
+          "day": "Friday",
+          "summary": "Equipment Repair (broken baler)",
+          "start": "2026-05-29 09:00:00",
+          "end": "2026-05-29 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ff39d449c0044b18a8ae2da246645506"
+        },
+        {
+          "day": "Friday",
+          "summary": "Drive to local market",
+          "start": "2026-05-29 10:30:00",
+          "end": "2026-05-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_62409e3f87e1451aa5967af03d88e19c"
+        },
+        {
+          "day": "Friday",
+          "summary": "Sell produce and livestock at local market",
+          "start": "2026-05-29 13:00:00",
+          "end": "2026-05-29 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2c62e0da8ed34f0d9f708cefbd80a6ac"
+        },
+        {
+          "day": "Friday",
+          "summary": "Broken baler discussion",
+          "start": "2026-05-29 14:00:00",
+          "end": "2026-05-29 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1c19b4f95db84ab39b7b6bcc2821064d"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Book a meeting for Friday to discuss the broken baler from 2 PM to 3 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. First, I need to get the current date to determine the correct date for this Friday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-05-24 12:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "Got it. The current date is May 24th, 2026, which is a Sunday. I will schedule the meeting for the upcoming Friday, May 29th."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2026-05-29 14:00:00",
+          "end": "2026-05-29 15:00:00",
+          "summary": "Broken baler discussion"
+        },
+        "result": "Event created successfully.\nBroken baler discussion\n  ID: evt_1c19b4f95db84ab39b7b6bcc2821064d\n  Time: Fri May 29, 14:00 - 15:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've scheduled \"Broken baler discussion\" for you on Friday, May 29th, from 2:00 PM to 3:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Am I busy on Wednesday morning?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Call the list_events tool with time_min set to Wednesday at 7 AM and time_max set to Wednesday at 12 PM. Analyze the results to determine if any events exist during that time and respond accordingly.",
+    "simulated_now": "2026-05-24 12:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-27 07:00:00",
+          "end": "2026-05-27 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bde027ef390f4c169a5059752bf0de59"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Visit veterinarian (cattle vaccination)",
+          "start": "2026-05-27 09:00:00",
+          "end": "2026-05-27 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vet@animalhealth.com"
+          ],
+          "id": "evt_d4f8bec4f8694b99a8bdba4ed794d897"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Check and repair irrigation system",
+          "start": "2026-05-27 10:30:00",
+          "end": "2026-05-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5213523395fb4c388ca4da556e026dab"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review farm accounts",
+          "start": "2026-05-27 14:00:00",
+          "end": "2026-05-27 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_27477956c4814074bd4e6918ee141305"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-27 07:00:00",
+          "end": "2026-05-27 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bde027ef390f4c169a5059752bf0de59"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Visit veterinarian (cattle vaccination)",
+          "start": "2026-05-27 09:00:00",
+          "end": "2026-05-27 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vet@animalhealth.com"
+          ],
+          "id": "evt_d4f8bec4f8694b99a8bdba4ed794d897"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Check and repair irrigation system",
+          "start": "2026-05-27 10:30:00",
+          "end": "2026-05-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5213523395fb4c388ca4da556e026dab"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review farm accounts",
+          "start": "2026-05-27 14:00:00",
+          "end": "2026-05-27 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_27477956c4814074bd4e6918ee141305"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Am I busy on Wednesday morning?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to check your calendar for Wednesday morning. First, I will get the current time to determine the correct date for this Wednesday. Then, I will list the events on that morning to see if you are busy."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-05-24 12:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2026-05-27 12:00:00",
+          "time_min": "2026-05-27 00:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_bde027ef390f4c169a5059752bf0de59 | Livestock Feeding and Health Check \u2014 Wed 07:00-08:00\nid: evt_d4f8bec4f8694b99a8bdba4ed794d897 | Visit veterinarian (cattle vaccination) \u2014 Wed 09:00-10:00\nid: evt_5213523395fb4c388ca4da556e026dab | Check and repair irrigation system \u2014 Wed 10:30-12:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, you are busy. You have three events scheduled:\n\n*   Livestock Feeding and Health Check: Wednesday 07:00-08:00\n*   Visit veterinarian (cattle vaccination): Wednesday 09:00-10:00\n*   Check and repair irrigation system: Wednesday 10:30-12:00"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing this Saturday afternoon?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Call the list_events tool with time_min set to Saturday at 12 PM and time_max set to Saturday at 6 PM. Analyze the results to determine the events and respond with the details.",
+    "simulated_now": "2026-05-24 12:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-30 08:00:00",
+          "end": "2026-05-30 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_87ea7639ba6d4601aaf234b50eaf31b0"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Visit family friend (neighboring farmer)",
+          "start": "2026-05-30 10:00:00",
+          "end": "2026-05-30 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "neighbor@farmmail.com"
+          ],
+          "id": "evt_ce5a00129b3c4ab1aa5caf1cb0ad2cc7"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Attend local farmer's market social event",
+          "start": "2026-05-30 14:00:00",
+          "end": "2026-05-30 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7a83a084920f43588c94d528f1a0b8ea"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-30 08:00:00",
+          "end": "2026-05-30 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_87ea7639ba6d4601aaf234b50eaf31b0"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Visit family friend (neighboring farmer)",
+          "start": "2026-05-30 10:00:00",
+          "end": "2026-05-30 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "neighbor@farmmail.com"
+          ],
+          "id": "evt_ce5a00129b3c4ab1aa5caf1cb0ad2cc7"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Attend local farmer's market social event",
+          "start": "2026-05-30 14:00:00",
+          "end": "2026-05-30 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7a83a084920f43588c94d528f1a0b8ea"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing this Saturday afternoon?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-05-24 12:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2026-05-30 12:00:00",
+          "time_max": "2026-05-30 17:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_ce5a00129b3c4ab1aa5caf1cb0ad2cc7 | Visit family friend (neighboring farmer) \u2014 Sat 10:00-12:00\nid: evt_7a83a084920f43588c94d528f1a0b8ea | Attend local farmer's market social event \u2014 Sat 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have a social event at the local farmer's market from 2:00 PM to 4:00 PM this Saturday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move the Equipment Maintenance on Monday to 3 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find the event 'Equipment Maintenance' on Monday. Then call update_event with the event ID and updated start and end times to Monday at 3 PM and 4 PM respectively.",
+    "simulated_now": "2026-05-24 12:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-25 07:00:00",
+          "end": "2026-05-25 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_648d263f396f4b55923c5987dcad43aa"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meet with Grain Co-op Manager (discussing wheat prices and delivery schedule)",
+          "start": "2026-05-25 09:00:00",
+          "end": "2026-05-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "grainmanager@localcoop.com"
+          ],
+          "id": "evt_484161c9742941f1a403db4616e42d8c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Field Inspection (assessing crop health)",
+          "start": "2026-05-25 10:30:00",
+          "end": "2026-05-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2e13c629a98047b0ae0d4a9d20e7b35e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Equipment Maintenance (tractor oil change)",
+          "start": "2026-05-25 14:00:00",
+          "end": "2026-05-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_34218263c36b45d89aa7c6581ae912e2"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-25 07:00:00",
+          "end": "2026-05-25 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_648d263f396f4b55923c5987dcad43aa"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meet with Grain Co-op Manager (discussing wheat prices and delivery schedule)",
+          "start": "2026-05-25 09:00:00",
+          "end": "2026-05-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "grainmanager@localcoop.com"
+          ],
+          "id": "evt_484161c9742941f1a403db4616e42d8c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Field Inspection (assessing crop health)",
+          "start": "2026-05-25 10:30:00",
+          "end": "2026-05-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2e13c629a98047b0ae0d4a9d20e7b35e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Equipment Maintenance (tractor oil change)",
+          "start": "2026-05-25 15:00:00",
+          "end": "2026-05-25 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_34218263c36b45d89aa7c6581ae912e2"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move the Equipment Maintenance on Monday to 3 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "I will move the \"Equipment Maintenance\" event on Monday to 3 PM. First, I need to know today's date to identify the correct Monday. Then, I will search for the event and reschedule it."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-05-24 12:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "It is currently Sunday, May 24th, 2026. I will now search for \"Equipment Maintenance\" on Monday, May 25th, and reschedule it to 3 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2026-05-25 23:59:59",
+          "time_min": "2026-05-25 00:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_648d263f396f4b55923c5987dcad43aa | Livestock Feeding and Health Check \u2014 Mon 07:00-08:00\nid: evt_484161c9742941f1a403db4616e42d8c | Meet with Grain Co-op Manager (discussing wheat prices and delivery schedule) \u2014 Mon 09:00-10:00\nid: evt_2e13c629a98047b0ae0d4a9d20e7b35e | Field Inspection (assessing crop health) \u2014 Mon 10:30-12:00\nid: evt_34218263c36b45d89aa7c6581ae912e2 | Equipment Maintenance (tractor oil change) \u2014 Mon 14:00-15:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I've found the \"Equipment Maintenance\" event, scheduled from 2:00 PM to 3:00 PM on Monday. I will now move it to 3:00 PM, with an end time of 4:00 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2026-05-25 16:00:00",
+          "start": "2026-05-25 15:00:00",
+          "event_id": "evt_34218263c36b45d89aa7c6581ae912e2"
+        },
+        "result": "Event updated successfully.\nEquipment Maintenance (tractor oil change)\n  ID: evt_34218263c36b45d89aa7c6581ae912e2\n  Time: Mon May 25, 15:00 - 16:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have moved the \"Equipment Maintenance\" event to 3:00 PM on Monday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change the time of the bank meeting on Thursday to 10 AM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find the event 'Meeting with Bank Loan Officer' on Thursday. Then call update_event with the event ID and updated start and end times to Thursday at 10 AM and 12 PM respectively.",
+    "simulated_now": "2026-05-24 12:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-28 07:00:00",
+          "end": "2026-05-28 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8dcf3421d42d41fd9bc59b0cf6f9d839"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Bank Loan Officer (discussing loan terms)",
+          "start": "2026-05-28 09:00:00",
+          "end": "2026-05-28 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bankloan@regionalbank.com"
+          ],
+          "id": "evt_c6ec4c11022243e49539f8c5068dc236"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Harvest Barley",
+          "start": "2026-05-28 13:00:00",
+          "end": "2026-05-28 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2d900ac2904742e79f31733759d4381e"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-28 07:00:00",
+          "end": "2026-05-28 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8dcf3421d42d41fd9bc59b0cf6f9d839"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Bank Loan Officer (discussing loan terms)",
+          "start": "2026-05-28 10:00:00",
+          "end": "2026-05-28 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bankloan@regionalbank.com"
+          ],
+          "id": "evt_c6ec4c11022243e49539f8c5068dc236"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Harvest Barley",
+          "start": "2026-05-28 13:00:00",
+          "end": "2026-05-28 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2d900ac2904742e79f31733759d4381e"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change the time of the bank meeting on Thursday to 10 AM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-05-24 12:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2026-05-29 00:00:00",
+          "time_min": "2026-05-28 00:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_8dcf3421d42d41fd9bc59b0cf6f9d839 | Livestock Feeding and Health Check \u2014 Thu 07:00-08:00\nid: evt_c6ec4c11022243e49539f8c5068dc236 | Meeting with Bank Loan Officer (discussing loan terms) \u2014 Thu 09:00-11:00\nid: evt_2d900ac2904742e79f31733759d4381e | Harvest Barley \u2014 Thu 13:00-15:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_c6ec4c11022243e49539f8c5068dc236",
+          "end": "2026-05-28 12:00:00",
+          "start": "2026-05-28 10:00:00"
+        },
+        "result": "Event updated successfully.\nMeeting with Bank Loan Officer (discussing loan terms)\n  ID: evt_c6ec4c11022243e49539f8c5068dc236\n  Time: Thu May 28, 10:00 - 12:00\n  Attendees: bankloan@regionalbank.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've moved the bank meeting to 10:00 AM for you."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is the barley harvest on Thursday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to find the event 'Harvest Barley' on Thursday. Extract the start time from the event details and respond with the time.",
+    "simulated_now": "2026-05-24 12:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-28 07:00:00",
+          "end": "2026-05-28 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f489026071854b56818666e0d5e19059"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Bank Loan Officer (discussing loan terms)",
+          "start": "2026-05-28 09:00:00",
+          "end": "2026-05-28 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bankloan@regionalbank.com"
+          ],
+          "id": "evt_6ae0b3ae479c410c9a959cc944ac6a40"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Harvest Barley",
+          "start": "2026-05-28 13:00:00",
+          "end": "2026-05-28 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f40e0063d04242bdba36c9def2cb177f"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-28 07:00:00",
+          "end": "2026-05-28 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f489026071854b56818666e0d5e19059"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Bank Loan Officer (discussing loan terms)",
+          "start": "2026-05-28 09:00:00",
+          "end": "2026-05-28 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bankloan@regionalbank.com"
+          ],
+          "id": "evt_6ae0b3ae479c410c9a959cc944ac6a40"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Harvest Barley",
+          "start": "2026-05-28 13:00:00",
+          "end": "2026-05-28 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f40e0063d04242bdba36c9def2cb177f"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is the barley harvest on Thursday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-05-24 12:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2026-05-28 23:59:59",
+          "time_min": "2026-05-28 00:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_f489026071854b56818666e0d5e19059 | Livestock Feeding and Health Check \u2014 Thu 07:00-08:00\nid: evt_6ae0b3ae479c410c9a959cc944ac6a40 | Meeting with Bank Loan Officer (discussing loan terms) \u2014 Thu 09:00-11:00\nid: evt_f40e0063d04242bdba36c9def2cb177f | Harvest Barley \u2014 Thu 13:00-15:00"
+      },
+      {
+        "role": "assistant",
+        "content": "The barley harvest is on Thursday from 13:00 to 15:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who will I be seeing this Tuesday morning?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events tool with time_min set to Tuesday at 7 AM and time_max set to Tuesday at 12 PM. Extract the attendees from the event details and respond.",
+    "simulated_now": "2026-05-24 12:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-26 07:00:00",
+          "end": "2026-05-26 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b56bac0a43444ff2bf4ee33f5f59ecfa"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Consult with Agricultural Consultant (reviewing soil test results and fertilizer plan)",
+          "start": "2026-05-26 09:00:00",
+          "end": "2026-05-26 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agconsultant@soilutions.com"
+          ],
+          "id": "evt_903e5ae0c242473d9acd6efa525c2e61"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with livestock feed supplier",
+          "start": "2026-05-26 13:00:00",
+          "end": "2026-05-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "feedsupplier@agriproducts.com"
+          ],
+          "id": "evt_96d027f07b8b4daeb378f34819b812cf"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Church Bible Study",
+          "start": "2026-05-26 19:00:00",
+          "end": "2026-05-26 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_24528e898aa8473a816cfcd6c83c9061"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-26 07:00:00",
+          "end": "2026-05-26 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b56bac0a43444ff2bf4ee33f5f59ecfa"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Consult with Agricultural Consultant (reviewing soil test results and fertilizer plan)",
+          "start": "2026-05-26 09:00:00",
+          "end": "2026-05-26 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agconsultant@soilutions.com"
+          ],
+          "id": "evt_903e5ae0c242473d9acd6efa525c2e61"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with livestock feed supplier",
+          "start": "2026-05-26 13:00:00",
+          "end": "2026-05-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "feedsupplier@agriproducts.com"
+          ],
+          "id": "evt_96d027f07b8b4daeb378f34819b812cf"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Church Bible Study",
+          "start": "2026-05-26 19:00:00",
+          "end": "2026-05-26 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_24528e898aa8473a816cfcd6c83c9061"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who will I be seeing this Tuesday morning?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to know the date of the upcoming Tuesday, then list all the events on that morning. After that, I will get the details of each event to identify the attendees."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-05-24 12:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2026-05-26 00:00:00",
+          "time_max": "2026-05-26 12:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_b56bac0a43444ff2bf4ee33f5f59ecfa | Livestock Feeding and Health Check \u2014 Tue 07:00-08:00\nid: evt_903e5ae0c242473d9acd6efa525c2e61 | Consult with Agricultural Consultant (reviewing soil test results and fertilizer plan) \u2014 Tue 09:00-11:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_b56bac0a43444ff2bf4ee33f5f59ecfa"
+        },
+        "result": "Livestock Feeding and Health Check\n  ID: evt_b56bac0a43444ff2bf4ee33f5f59ecfa\n  Time: Tue May 26, 07:00 - 08:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_903e5ae0c242473d9acd6efa525c2e61"
+        },
+        "result": "Consult with Agricultural Consultant (reviewing soil test results and fertilizer plan)\n  ID: evt_903e5ae0c242473d9acd6efa525c2e61\n  Time: Tue May 26, 09:00 - 11:00\n  Attendees: agconsultant@soilutions.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "This Tuesday morning, you have two events scheduled. From 7:00 AM to 8:00 AM, you have \"Livestock Feeding and Health Check.\" Then, from 9:00 AM to 11:00 AM, you have a meeting with the agricultural consultant at agconsultant@soilutions.com to review soil test results and fertilizer plans."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "I want to reschedule my visit with the vet on Wednesday so it ends an hour later.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Call list_events to find the event 'Visit veterinarian' on Wednesday. Call get_event to get current end time. Update end time to one hour later than current end time using update_event tool.",
+    "simulated_now": "2026-05-24 12:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-27 07:00:00",
+          "end": "2026-05-27 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3151a4568ced412dbdf59dbcb0e951af"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Visit veterinarian (cattle vaccination)",
+          "start": "2026-05-27 09:00:00",
+          "end": "2026-05-27 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vet@animalhealth.com"
+          ],
+          "id": "evt_6c430c4c6fab43fcbfe3fbd9a83f101c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Check and repair irrigation system",
+          "start": "2026-05-27 10:30:00",
+          "end": "2026-05-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bf487a8085ae46eda8a5b7a9b494110e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review farm accounts",
+          "start": "2026-05-27 14:00:00",
+          "end": "2026-05-27 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7c5b3184bd9a4c5daaf7d747e35c2b4e"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-27 07:00:00",
+          "end": "2026-05-27 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3151a4568ced412dbdf59dbcb0e951af"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Visit veterinarian (cattle vaccination)",
+          "start": "2026-05-27 09:00:00",
+          "end": "2026-05-27 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vet@animalhealth.com"
+          ],
+          "id": "evt_6c430c4c6fab43fcbfe3fbd9a83f101c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Check and repair irrigation system",
+          "start": "2026-05-27 10:30:00",
+          "end": "2026-05-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bf487a8085ae46eda8a5b7a9b494110e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review farm accounts",
+          "start": "2026-05-27 14:00:00",
+          "end": "2026-05-27 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7c5b3184bd9a4c5daaf7d747e35c2b4e"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "I want to reschedule my visit with the vet on Wednesday so it ends an hour later."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I'll get the current time to identify the correct date for this Wednesday, then I'll find the event and update it for you."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-05-24 12:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2026-05-27 00:00:00",
+          "time_max": "2026-05-27 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_3151a4568ced412dbdf59dbcb0e951af | Livestock Feeding and Health Check \u2014 Wed 07:00-08:00\nid: evt_6c430c4c6fab43fcbfe3fbd9a83f101c | Visit veterinarian (cattle vaccination) \u2014 Wed 09:00-10:00\nid: evt_bf487a8085ae46eda8a5b7a9b494110e | Check and repair irrigation system \u2014 Wed 10:30-12:00\nid: evt_7c5b3184bd9a4c5daaf7d747e35c2b4e | Review farm accounts \u2014 Wed 14:00-15:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I've found the event: \"Visit veterinarian (cattle vaccination)\" on Wednesday from 9:00 AM to 10:00 AM. I will now update it to end an hour later, at 11:00 AM."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2026-05-27 11:00:00",
+          "event_id": "evt_6c430c4c6fab43fcbfe3fbd9a83f101c"
+        },
+        "result": "Event updated successfully.\nVisit veterinarian (cattle vaccination)\n  ID: evt_6c430c4c6fab43fcbfe3fbd9a83f101c\n  Time: Wed May 27, 09:00 - 11:00\n  Attendees: vet@animalhealth.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have rescheduled your vet visit. It is now scheduled for Wednesday, May 27th, from 9:00 AM to 11:00 AM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule my morning event on Monday to Friday afternoon.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Call list_events to find the morning event on Monday ('Meet with Grain Co-op Manager'). Then call update_event with the event ID, updating the start and end times to Friday at 2 PM and 3 PM respectively.",
+    "simulated_now": "2026-05-24 12:00:00",
+    "addressed_days": [
+      "Monday",
+      "Friday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-25 07:00:00",
+          "end": "2026-05-25 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_01be4ccb14684ae9bd7d2be9f7378d38"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meet with Grain Co-op Manager (discussing wheat prices and delivery schedule)",
+          "start": "2026-05-25 09:00:00",
+          "end": "2026-05-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "grainmanager@localcoop.com"
+          ],
+          "id": "evt_c1a3c6165a0647eebab9c3cb7c1924aa"
+        },
+        {
+          "day": "Monday",
+          "summary": "Field Inspection (assessing crop health)",
+          "start": "2026-05-25 10:30:00",
+          "end": "2026-05-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_37644808a4ea43848d619f00b61c2fdd"
+        },
+        {
+          "day": "Monday",
+          "summary": "Equipment Maintenance (tractor oil change)",
+          "start": "2026-05-25 14:00:00",
+          "end": "2026-05-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_35fd2252d6e646c6b0e95a14ba2f789c"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-29 07:00:00",
+          "end": "2026-05-29 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_61f64f46349e4931a665be5c805379ae"
+        },
+        {
+          "day": "Friday",
+          "summary": "Equipment Repair (broken baler)",
+          "start": "2026-05-29 09:00:00",
+          "end": "2026-05-29 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_893e6f137b8a47c8959bee269993f574"
+        },
+        {
+          "day": "Friday",
+          "summary": "Drive to local market",
+          "start": "2026-05-29 10:30:00",
+          "end": "2026-05-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_36b60660e8f44087ade2d47d1d1b0d4c"
+        },
+        {
+          "day": "Friday",
+          "summary": "Sell produce and livestock at local market",
+          "start": "2026-05-29 13:00:00",
+          "end": "2026-05-29 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2bfe27b698d14ad98b78e9bfe454f837"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-25 07:00:00",
+          "end": "2026-05-25 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_01be4ccb14684ae9bd7d2be9f7378d38"
+        },
+        {
+          "day": "Monday",
+          "summary": "Field Inspection (assessing crop health)",
+          "start": "2026-05-25 10:30:00",
+          "end": "2026-05-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_37644808a4ea43848d619f00b61c2fdd"
+        },
+        {
+          "day": "Monday",
+          "summary": "Equipment Maintenance (tractor oil change)",
+          "start": "2026-05-25 14:00:00",
+          "end": "2026-05-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_35fd2252d6e646c6b0e95a14ba2f789c"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-29 07:00:00",
+          "end": "2026-05-29 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_61f64f46349e4931a665be5c805379ae"
+        },
+        {
+          "day": "Friday",
+          "summary": "Equipment Repair (broken baler)",
+          "start": "2026-05-29 09:00:00",
+          "end": "2026-05-29 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_893e6f137b8a47c8959bee269993f574"
+        },
+        {
+          "day": "Friday",
+          "summary": "Drive to local market",
+          "start": "2026-05-29 10:30:00",
+          "end": "2026-05-29 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_36b60660e8f44087ade2d47d1d1b0d4c"
+        },
+        {
+          "day": "Friday",
+          "summary": "Sell produce and livestock at local market",
+          "start": "2026-05-29 13:00:00",
+          "end": "2026-05-29 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2bfe27b698d14ad98b78e9bfe454f837"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meet with Grain Co-op Manager (discussing wheat prices and delivery schedule)",
+          "start": "2026-05-29 14:00:00",
+          "end": "2026-05-29 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "grainmanager@localcoop.com"
+          ],
+          "id": "evt_c1a3c6165a0647eebab9c3cb7c1924aa"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule my morning event on Monday to Friday afternoon."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. First, I need to know the current date and time to identify the correct event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-05-24 12:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "Right, it's Sunday, May 24th, 2026. I'll find your event on Monday morning and move it to Friday afternoon for you."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2026-05-25 12:00:00",
+          "time_min": "2026-05-25 00:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_01be4ccb14684ae9bd7d2be9f7378d38 | Livestock Feeding and Health Check \u2014 Mon 07:00-08:00\nid: evt_c1a3c6165a0647eebab9c3cb7c1924aa | Meet with Grain Co-op Manager (discussing wheat prices and delivery schedule) \u2014 Mon 09:00-10:00\nid: evt_37644808a4ea43848d619f00b61c2fdd | Field Inspection (assessing crop health) \u2014 Mon 10:30-12:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found three events on Monday morning: \"Livestock Feeding and Health Check\" at 7am, \"Meet with Grain Co-op Manager\" at 9am, and \"Field Inspection\" at 10:30am. I'll go ahead and reschedule the \"Meet with Grain Co-op Manager\" to this upcoming Friday at 2pm. If you'd like to move a different event, just let me know"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2026-05-29 15:00:00",
+          "start": "2026-05-29 14:00:00",
+          "event_id": "evt_c1a3c6165a0647eebab9c3cb7c1924aa"
+        },
+        "result": "Event updated successfully.\nMeet with Grain Co-op Manager (discussing wheat prices and delivery schedule)\n  ID: evt_c1a3c6165a0647eebab9c3cb7c1924aa\n  Time: Fri May 29, 14:00 - 15:00\n  Attendees: grainmanager@localcoop.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've rescheduled your \"Meet with Grain Co-op Manager\" event to Friday at 2pm. The other events on Monday morning, \"Livestock Feeding and Health Check\" and \"Field Inspection\", are still on your calendar. Do you need to make any other changes?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Barley?",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events for the week to identify events related to 'barley'. Respond with the details of the 'Harvest Barley' event on Thursday.",
+    "simulated_now": "2026-05-24 12:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-28 07:00:00",
+          "end": "2026-05-28 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7f99408ebaa84806a7c07c5dd927f122"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Bank Loan Officer (discussing loan terms)",
+          "start": "2026-05-28 09:00:00",
+          "end": "2026-05-28 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bankloan@regionalbank.com"
+          ],
+          "id": "evt_44e6c0075e3e49e0b47fa863122bbd74"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Harvest Barley",
+          "start": "2026-05-28 13:00:00",
+          "end": "2026-05-28 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fa8b767c41824f2a87e63ce798c4b4ea"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-28 07:00:00",
+          "end": "2026-05-28 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7f99408ebaa84806a7c07c5dd927f122"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Bank Loan Officer (discussing loan terms)",
+          "start": "2026-05-28 09:00:00",
+          "end": "2026-05-28 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "bankloan@regionalbank.com"
+          ],
+          "id": "evt_44e6c0075e3e49e0b47fa863122bbd74"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Harvest Barley",
+          "start": "2026-05-28 13:00:00",
+          "end": "2026-05-28 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fa8b767c41824f2a87e63ce798c4b4ea"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Barley?"
+      },
+      {
+        "role": "assistant",
+        "content": "I'm not sure what you mean by \"Barley?\". I'll search for events with similar names, like \"Braley,\" and let you know what I find."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 25 events:\nid: evt_ec8abda9631b4514a7100d24467a7dbc | Livestock Feeding and Health Check \u2014 Mon 07:00-08:00\nid: evt_4e19bd620609447f8ee5e337bcf711b5 | Meet with Grain Co-op Manager (discussing wheat prices and delivery schedule) \u2014 Mon 09:00-10:00\nid: evt_236f89ec63b84c2d886e748e10eb4ed9 | Field Inspection (assessing crop health) \u2014 Mon 10:30-12:00\nid: evt_bdcd62c6727948edbc405acce2ea2106 | Equipment Maintenance (tractor oil change) \u2014 Mon 14:00-15:00\nid: evt_78b7b67c8cc84b0585f1449f1d8ca398 | Livestock Feeding and Health Check \u2014 Tue 07:00-08:00\nid: evt_f8f06ad986bc4448a43c08c8337b3f40 | Consult with Agricultural Consultant (reviewing soil test results and fertilizer plan) \u2014 Tue 09:00-11:00\nid: evt_d276dc968ed344fba7af310e6e9f6220 | Call with livestock feed supplier \u2014 Tue 13:00-14:00\nid: evt_c6a0b8367bcf4b4dabcdf753fccd13e0 | Church Bible Study \u2014 Tue 19:00-20:00\nid: evt_545dd15549e74ff5bf62b330c1e9be3c | Livestock Feeding and Health Check \u2014 Wed 07:00-08:00\nid: evt_2295296dc1594fdcaab896dbf1b39aa7 | Visit veterinarian (cattle vaccination) \u2014 Wed 09:00-10:00\nid: evt_037e4998e59347f89c0e2d66cf33265c | Check and repair irrigation system \u2014 Wed 10:30-12:00\nid: evt_0b475b0aafa94d5cbc89ba330ef25a3d | Review farm accounts \u2014 Wed 14:00-15:00\nid: evt_7f99408ebaa84806a7c07c5dd927f122 | Livestock Feeding and Health Check \u2014 Thu 07:00-08:00\nid: evt_44e6c0075e3e49e0b47fa863122bbd74 | Meeting with Bank Loan Officer (discussing loan terms) \u2014 Thu 09:00-11:00\nid: evt_fa8b767c41824f2a87e63ce798c4b4ea | Harvest Barley \u2014 Thu 13:00-15:00\nid: evt_fac38bcf8eba4729876eb737d687cc17 | Livestock Feeding and Health Check \u2014 Fri 07:00-08:00\nid: evt_3a9fc51869a24243afc708964aef848c | Equipment Repair (broken baler) \u2014 Fri 09:00-10:00\nid: evt_407491734e554bffa86db3d5cff41c4a | Drive to local market \u2014 Fri 10:30-12:00\nid: evt_6804d395afc743b8a5314d46bedcffe3 | Sell produce and livestock at local market \u2014 Fri 13:00-16:00\nid: evt_42ac333497b94360920b1d6375209e11 | Livestock Feeding and Health Check \u2014 Sat 08:00-09:00\nid: evt_2d6712866bf542a984009c729dc750ee | Visit family friend (neighboring farmer) \u2014 Sat 10:00-12:00\nid: evt_97bc7427da5a4f06bd96027118e197ea | Attend local farmer's market social event \u2014 Sat 14:00-16:00\nid: evt_ffc88b78427f40f8bf37aeab2727f819 | Livestock Feeding and Health Check \u2014 Sun 08:00-09:00\nid: evt_8bf3a8622232496ca338fca0805de711 | Church Service \u2014 Sun 10:00-11:30\nid: evt_c9d83973d7524161a605e978230ee435 | Family Lunch \u2014 Sun 13:00-15:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found an event called \"Harvest Barley\" on Thursday from 13:00 to 15:00. Is that what you were looking for? I can give you the details if you'd like."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Call the list_events tool with time_min set to today at 00:00 and time_max set to today at 23:59. Analyze the results to determine the events and respond with the details.",
+    "simulated_now": "2026-05-25 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-25 07:00:00",
+          "end": "2026-05-25 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bd0fd683e7ec401ebcfb79fa0303869a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meet with Grain Co-op Manager (discussing wheat prices and delivery schedule)",
+          "start": "2026-05-25 09:00:00",
+          "end": "2026-05-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "grainmanager@localcoop.com"
+          ],
+          "id": "evt_0309e0cdc62c4597baa9d8e5150b5f33"
+        },
+        {
+          "day": "Monday",
+          "summary": "Field Inspection (assessing crop health)",
+          "start": "2026-05-25 10:30:00",
+          "end": "2026-05-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1966f880f759471ebeef12c78ea521ec"
+        },
+        {
+          "day": "Monday",
+          "summary": "Equipment Maintenance (tractor oil change)",
+          "start": "2026-05-25 14:00:00",
+          "end": "2026-05-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0e94831fb54d4f7cbfb271e4598f34e5"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-25 07:00:00",
+          "end": "2026-05-25 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bd0fd683e7ec401ebcfb79fa0303869a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meet with Grain Co-op Manager (discussing wheat prices and delivery schedule)",
+          "start": "2026-05-25 09:00:00",
+          "end": "2026-05-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "grainmanager@localcoop.com"
+          ],
+          "id": "evt_0309e0cdc62c4597baa9d8e5150b5f33"
+        },
+        {
+          "day": "Monday",
+          "summary": "Field Inspection (assessing crop health)",
+          "start": "2026-05-25 10:30:00",
+          "end": "2026-05-25 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1966f880f759471ebeef12c78ea521ec"
+        },
+        {
+          "day": "Monday",
+          "summary": "Equipment Maintenance (tractor oil change)",
+          "start": "2026-05-25 14:00:00",
+          "end": "2026-05-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0e94831fb54d4f7cbfb271e4598f34e5"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-05-25 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2026-05-25 00:00:00",
+          "time_max": "2026-05-25 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_bd0fd683e7ec401ebcfb79fa0303869a | Livestock Feeding and Health Check \u2014 Mon 07:00-08:00\nid: evt_0309e0cdc62c4597baa9d8e5150b5f33 | Meet with Grain Co-op Manager (discussing wheat prices and delivery schedule) \u2014 Mon 09:00-10:00\nid: evt_1966f880f759471ebeef12c78ea521ec | Field Inspection (assessing crop health) \u2014 Mon 10:30-12:00\nid: evt_0e94831fb54d4f7cbfb271e4598f34e5 | Equipment Maintenance (tractor oil change) \u2014 Mon 14:00-15:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Today you have four events scheduled:\n*   **7:00 AM - 8:00 AM:** Livestock Feeding and Health Check\n*   **9:00 AM - 10:00 AM:** Meet with Grain Co-op Manager (discussing wheat prices and delivery schedule)\n*   **10:30 AM - 12:00 PM:** Field Inspection (assessing crop health)\n*   **2:00 PM - 3:00 PM:** Equipment Maintenance (tractor oil change)"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Call the list_events tool with time_min set to tomorrow at 00:00 and time_max set to tomorrow at 23:59. Analyze the results to determine the events and respond with the details.",
+    "simulated_now": "2026-05-25 08:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-26 07:00:00",
+          "end": "2026-05-26 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0b088381cd444d459d367558da8adb89"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Consult with Agricultural Consultant (reviewing soil test results and fertilizer plan)",
+          "start": "2026-05-26 09:00:00",
+          "end": "2026-05-26 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agconsultant@soilutions.com"
+          ],
+          "id": "evt_02873f24308b4dc4815ae58e49d8f32f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with livestock feed supplier",
+          "start": "2026-05-26 13:00:00",
+          "end": "2026-05-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "feedsupplier@agriproducts.com"
+          ],
+          "id": "evt_7a40fa904e26421a82d2b1931969cd3d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Church Bible Study",
+          "start": "2026-05-26 19:00:00",
+          "end": "2026-05-26 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_be3c471ed96d4cb3bf9578eee50843af"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Livestock Feeding and Health Check",
+          "start": "2026-05-26 07:00:00",
+          "end": "2026-05-26 08:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0b088381cd444d459d367558da8adb89"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Consult with Agricultural Consultant (reviewing soil test results and fertilizer plan)",
+          "start": "2026-05-26 09:00:00",
+          "end": "2026-05-26 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agconsultant@soilutions.com"
+          ],
+          "id": "evt_02873f24308b4dc4815ae58e49d8f32f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Call with livestock feed supplier",
+          "start": "2026-05-26 13:00:00",
+          "end": "2026-05-26 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "feedsupplier@agriproducts.com"
+          ],
+          "id": "evt_7a40fa904e26421a82d2b1931969cd3d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Church Bible Study",
+          "start": "2026-05-26 19:00:00",
+          "end": "2026-05-26 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_be3c471ed96d4cb3bf9578eee50843af"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on tomorrow?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to check what's on your calendar for tomorrow. First, I'll get the current time to know what day it is, and then I will list all the events scheduled for the next day."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-05-25 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2026-05-26 23:59:59",
+          "time_min": "2026-05-26 00:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_0b088381cd444d459d367558da8adb89 | Livestock Feeding and Health Check \u2014 Tue 07:00-08:00\nid: evt_02873f24308b4dc4815ae58e49d8f32f | Consult with Agricultural Consultant (reviewing soil test results and fertilizer plan) \u2014 Tue 09:00-11:00\nid: evt_7a40fa904e26421a82d2b1931969cd3d | Call with livestock feed supplier \u2014 Tue 13:00-14:00\nid: evt_be3c471ed96d4cb3bf9578eee50843af | Church Bible Study \u2014 Tue 19:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Tomorrow, Tuesday, May 26, you have four entries:\n* from 7am to 8am: Livestock Feeding and Health Check\n* from 9am to 11am: Consult with Agricultural Consultant (reviewing soil test results and fertilizer plan)\n* from 1pm to 2pm: Call with livestock feed supplier\n* from 7pm to 8pm: Church Bible Study"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

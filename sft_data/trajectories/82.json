@@ -1,0 +1,2135 @@
+[
+  {
+    "query": "Schedule a meeting called 'New Project Kickoff' for next Tuesday at 3 PM with client3@example.com.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create an event named 'New Project Kickoff' for Tuesday, September 22, 2026, at 3 PM with client3@example.com as an attendee.",
+    "simulated_now": "2026-09-20 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-22 09:00:00",
+          "end": "2026-09-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client3@example.com"
+          ],
+          "id": "evt_8ce333e36cbe47e383845bd8f4272aa0"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-22 10:15:00",
+          "end": "2026-09-22 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client4@example.com"
+          ],
+          "id": "evt_ecc617678f8e45e693657c378e4d6089"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Consult with Addiction Specialist",
+          "start": "2026-09-22 13:00:00",
+          "end": "2026-09-22 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "specialist@addictions.org"
+          ],
+          "id": "evt_425c345b619d4b5bb407f22ae851c6e9"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Crisis Intervention Training",
+          "start": "2026-09-22 14:30:00",
+          "end": "2026-09-22 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b54847554f774829a633bbb96f7ee32d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Partner",
+          "start": "2026-09-22 19:00:00",
+          "end": "2026-09-22 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e6d0ce12b2504a00ac5365eb1ddb2d22"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-22 09:00:00",
+          "end": "2026-09-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client3@example.com"
+          ],
+          "id": "evt_8ce333e36cbe47e383845bd8f4272aa0"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-22 10:15:00",
+          "end": "2026-09-22 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client4@example.com"
+          ],
+          "id": "evt_ecc617678f8e45e693657c378e4d6089"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Consult with Addiction Specialist",
+          "start": "2026-09-22 13:00:00",
+          "end": "2026-09-22 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "specialist@addictions.org"
+          ],
+          "id": "evt_425c345b619d4b5bb407f22ae851c6e9"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Crisis Intervention Training",
+          "start": "2026-09-22 14:30:00",
+          "end": "2026-09-22 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b54847554f774829a633bbb96f7ee32d"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "New Project Kickoff",
+          "start": "2026-09-22 15:00:00",
+          "end": "2026-09-22 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client3@example.com"
+          ],
+          "id": "evt_663780ff3ae447d3a4305f66b1102a50"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Partner",
+          "start": "2026-09-22 19:00:00",
+          "end": "2026-09-22 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e6d0ce12b2504a00ac5365eb1ddb2d22"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Schedule a meeting called 'New Project Kickoff' for next Tuesday at 3 PM with client3@example.com."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I will schedule that. First, I need to get the current time. Then, I will create the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-09-20 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "New Project Kickoff",
+          "attendees": [
+            "client3@example.com"
+          ],
+          "end": "2026-09-22 16:00:00",
+          "start": "2026-09-22 15:00:00"
+        },
+        "result": "Event created successfully.\nNew Project Kickoff\n  ID: evt_663780ff3ae447d3a4305f66b1102a50\n  Time: Tue Sep 22, 15:00 - 16:00\n  Attendees: client3@example.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've scheduled \"New Project Kickoff\" for Tuesday, September 22nd, from 3:00 PM to 4:00 PM with client3@example.com."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Create an event on Friday at 4pm to discuss 'Marketing Campaign' with director@clinic.com",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create an event named 'Marketing Campaign' for Friday, September 25, 2026, at 4 PM with director@clinic.com as an attendee.",
+    "simulated_now": "2026-09-20 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-25 09:00:00",
+          "end": "2026-09-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client9@example.com"
+          ],
+          "id": "evt_287da72d636d4e5da9173620aadf0f80"
+        },
+        {
+          "day": "Friday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-25 10:15:00",
+          "end": "2026-09-25 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client10@example.com"
+          ],
+          "id": "evt_b6d56d41a5844426838c9723ee46af32"
+        },
+        {
+          "day": "Friday",
+          "summary": "Group Therapy Session",
+          "start": "2026-09-25 11:30:00",
+          "end": "2026-09-25 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "group_therapy@example.com"
+          ],
+          "id": "evt_cb2e8c0f5051478e9ea0ad11be68f3b5"
+        },
+        {
+          "day": "Friday",
+          "summary": "Case Review with Clinic Director",
+          "start": "2026-09-25 14:00:00",
+          "end": "2026-09-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "director@clinic.com"
+          ],
+          "id": "evt_362afa0cadca4e89bdf1b5397e44fb74"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Friends",
+          "start": "2026-09-25 19:30:00",
+          "end": "2026-09-25 21:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e6a20fad3f80490eb7a29315bec2d63f"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-25 09:00:00",
+          "end": "2026-09-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client9@example.com"
+          ],
+          "id": "evt_287da72d636d4e5da9173620aadf0f80"
+        },
+        {
+          "day": "Friday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-25 10:15:00",
+          "end": "2026-09-25 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client10@example.com"
+          ],
+          "id": "evt_b6d56d41a5844426838c9723ee46af32"
+        },
+        {
+          "day": "Friday",
+          "summary": "Group Therapy Session",
+          "start": "2026-09-25 11:30:00",
+          "end": "2026-09-25 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "group_therapy@example.com"
+          ],
+          "id": "evt_cb2e8c0f5051478e9ea0ad11be68f3b5"
+        },
+        {
+          "day": "Friday",
+          "summary": "Case Review with Clinic Director",
+          "start": "2026-09-25 14:00:00",
+          "end": "2026-09-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "director@clinic.com"
+          ],
+          "id": "evt_362afa0cadca4e89bdf1b5397e44fb74"
+        },
+        {
+          "day": "Friday",
+          "summary": "Marketing Campaign",
+          "start": "2026-09-25 16:00:00",
+          "end": "2026-09-25 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "director@clinic.com"
+          ],
+          "id": "evt_8c172c3b02854a8997a98cc4676c8b1a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Friends",
+          "start": "2026-09-25 19:30:00",
+          "end": "2026-09-25 21:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e6a20fad3f80490eb7a29315bec2d63f"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event on Friday at 4pm to discuss 'Marketing Campaign' with director@clinic.com"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I will create an event on Friday at 4pm to discuss 'Marketing Campaign' with director@clinic.com.\n\nPlan:\n1. Get the current time to determine the date of the upcoming Friday.\n2. Create the event with the provided details."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-09-20 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "attendees": [
+            "director@clinic.com"
+          ],
+          "summary": "Marketing Campaign",
+          "start": "2026-09-25 16:00:00",
+          "end": "2026-09-25 17:00:00"
+        },
+        "result": "Event created successfully.\nMarketing Campaign\n  ID: evt_8c172c3b02854a8997a98cc4676c8b1a\n  Time: Fri Sep 25, 16:00 - 17:00\n  Attendees: director@clinic.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I have created the event.\n\nMarketing Campaign\nTime: Fri Sep 25, 16:00 - 17:00\nAttendees: director@clinic.com"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Am I free for lunch with anyone tomorrow?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Check the calendar for free time slots on Tuesday, September 22, 2026, between 12 PM and 2 PM, then respond to the user. If the user means free for lunch with friends@email.com, the agent does not know this, and must not make this assumption.",
+    "simulated_now": "2026-09-21 09:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-22 09:00:00",
+          "end": "2026-09-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client3@example.com"
+          ],
+          "id": "evt_bfaed4a1af0e44408c76b2e22cf6bc5f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-22 10:15:00",
+          "end": "2026-09-22 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client4@example.com"
+          ],
+          "id": "evt_143c5ac5086c4d7db64f20d370d3d3c3"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Consult with Addiction Specialist",
+          "start": "2026-09-22 13:00:00",
+          "end": "2026-09-22 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "specialist@addictions.org"
+          ],
+          "id": "evt_a0c433dcadf347098cd2da4b3586e8db"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Crisis Intervention Training",
+          "start": "2026-09-22 14:30:00",
+          "end": "2026-09-22 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_888659783b514b248a471d0d761a5ed1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Partner",
+          "start": "2026-09-22 19:00:00",
+          "end": "2026-09-22 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_17e61ed97963447b821db9d9bf04a459"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-22 09:00:00",
+          "end": "2026-09-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client3@example.com"
+          ],
+          "id": "evt_bfaed4a1af0e44408c76b2e22cf6bc5f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-22 10:15:00",
+          "end": "2026-09-22 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client4@example.com"
+          ],
+          "id": "evt_143c5ac5086c4d7db64f20d370d3d3c3"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Consult with Addiction Specialist",
+          "start": "2026-09-22 13:00:00",
+          "end": "2026-09-22 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "specialist@addictions.org"
+          ],
+          "id": "evt_a0c433dcadf347098cd2da4b3586e8db"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Crisis Intervention Training",
+          "start": "2026-09-22 14:30:00",
+          "end": "2026-09-22 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_888659783b514b248a471d0d761a5ed1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Partner",
+          "start": "2026-09-22 19:00:00",
+          "end": "2026-09-22 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_17e61ed97963447b821db9d9bf04a459"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Am I free for lunch with anyone tomorrow?"
+      },
+      {
+        "role": "assistant",
+        "content": "- I need to determine if the user has any events scheduled for lunchtime tomorrow.\n- First, I will call `get_current_time` to find out the current date.\n- Then, I will call `list_events` for tomorrow between 12:00 and 14:00 to check for any existing lunch plans.\n- If there are no events, I will inform the user that they are free.\n- If there are events, I will get the event details to identify the attendees and inform the user about their scheduled lunch."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-09-21 09:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2026-09-22 14:00:00",
+          "time_min": "2026-09-22 12:00:00"
+        },
+        "result": "Found 1 events:\nid: evt_a0c433dcadf347098cd2da4b3586e8db | Consult with Addiction Specialist \u2014 Tue 13:00-14:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I have found an event tomorrow during lunchtime, \"Consult with Addiction Specialist\" from 13:00 to 14:00. I will now check the event details to see who the attendees are."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_a0c433dcadf347098cd2da4b3586e8db"
+        },
+        "result": "Consult with Addiction Specialist\n  ID: evt_a0c433dcadf347098cd2da4b3586e8db\n  Time: Tue Sep 22, 13:00 - 14:00\n  Attendees: specialist@addictions.org\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "No, you have a lunch meeting with specialist@addictions.org from 13:00 to 14:00 tomorrow."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What does my Wednesday look like?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Low",
+    "expected_behavior": "List all events scheduled for Wednesday, September 23, 2026, and present them to the user.",
+    "simulated_now": "2026-09-20 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-23 09:00:00",
+          "end": "2026-09-23 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client5@example.com"
+          ],
+          "id": "evt_5a72981825c14783a5cc01e28e5deb4c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-23 10:15:00",
+          "end": "2026-09-23 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client6@example.com"
+          ],
+          "id": "evt_ec107d4a9bf04260900cbf0ae9ca54cd"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Group Therapy Session",
+          "start": "2026-09-23 11:30:00",
+          "end": "2026-09-23 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "group_therapy@example.com"
+          ],
+          "id": "evt_fa3d608d107943908748934171272762"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Team Meeting",
+          "start": "2026-09-23 14:00:00",
+          "end": "2026-09-23 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "team@clinic.com"
+          ],
+          "id": "evt_b43e4622d6274490b8fe9e8546f108ff"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Personal Therapy Session",
+          "start": "2026-09-23 19:00:00",
+          "end": "2026-09-23 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@personal.com"
+          ],
+          "id": "evt_8bddb56526f84c6fa759724d1201a0c6"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-23 09:00:00",
+          "end": "2026-09-23 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client5@example.com"
+          ],
+          "id": "evt_5a72981825c14783a5cc01e28e5deb4c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-23 10:15:00",
+          "end": "2026-09-23 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client6@example.com"
+          ],
+          "id": "evt_ec107d4a9bf04260900cbf0ae9ca54cd"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Group Therapy Session",
+          "start": "2026-09-23 11:30:00",
+          "end": "2026-09-23 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "group_therapy@example.com"
+          ],
+          "id": "evt_fa3d608d107943908748934171272762"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Team Meeting",
+          "start": "2026-09-23 14:00:00",
+          "end": "2026-09-23 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "team@clinic.com"
+          ],
+          "id": "evt_b43e4622d6274490b8fe9e8546f108ff"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Personal Therapy Session",
+          "start": "2026-09-23 19:00:00",
+          "end": "2026-09-23 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@personal.com"
+          ],
+          "id": "evt_8bddb56526f84c6fa759724d1201a0c6"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What does my Wednesday look like?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-09-20 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2026-09-23 00:00:00",
+          "time_max": "2026-09-23 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_5a72981825c14783a5cc01e28e5deb4c | Individual Therapy Session \u2014 Wed 09:00-10:00\nid: evt_ec107d4a9bf04260900cbf0ae9ca54cd | Individual Therapy Session \u2014 Wed 10:15-11:15\nid: evt_fa3d608d107943908748934171272762 | Group Therapy Session \u2014 Wed 11:30-12:30\nid: evt_b43e4622d6274490b8fe9e8546f108ff | Team Meeting \u2014 Wed 14:00-15:00\nid: evt_8bddb56526f84c6fa759724d1201a0c6 | Personal Therapy Session \u2014 Wed 19:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Here is your schedule for Wednesday:\n\n*   9:00-10:00: Individual Therapy Session\n*   10:15-11:15: Individual Therapy Session\n*   11:30-12:30: Group Therapy Session\n*   14:00-15:00: Team Meeting\n*   19:00-20:00: Personal Therapy Session"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change the time of my meeting with the family member on Thursday to 2 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Meeting with Family Member of Client' event on Thursday, September 24, 2026, and update its start time to 2:00 PM and end time to 3:00 PM.",
+    "simulated_now": "2026-09-24 08:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-24 09:00:00",
+          "end": "2026-09-24 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client7@example.com"
+          ],
+          "id": "evt_4839bd99b5b741a9a0594c5fd141c75b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-24 10:15:00",
+          "end": "2026-09-24 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client8@example.com"
+          ],
+          "id": "evt_b59291f16ac14e818335e0419809ab1e"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Family Member of Client",
+          "start": "2026-09-24 13:00:00",
+          "end": "2026-09-24 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "family@example.com"
+          ],
+          "id": "evt_abf2180ab952420580362d13048af7c2"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Documentation and Progress Notes",
+          "start": "2026-09-24 14:30:00",
+          "end": "2026-09-24 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fb465f3da5fe451ca3aa537840c90953"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Book Club Meeting",
+          "start": "2026-09-24 18:00:00",
+          "end": "2026-09-24 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friends@email.com"
+          ],
+          "id": "evt_1f2261c633ae4e3397bbbff4f5f0037b"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-24 09:00:00",
+          "end": "2026-09-24 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client7@example.com"
+          ],
+          "id": "evt_4839bd99b5b741a9a0594c5fd141c75b"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-24 10:15:00",
+          "end": "2026-09-24 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client8@example.com"
+          ],
+          "id": "evt_b59291f16ac14e818335e0419809ab1e"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Family Member of Client",
+          "start": "2026-09-24 14:00:00",
+          "end": "2026-09-24 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "family@example.com"
+          ],
+          "id": "evt_abf2180ab952420580362d13048af7c2"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Documentation and Progress Notes",
+          "start": "2026-09-24 14:30:00",
+          "end": "2026-09-24 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fb465f3da5fe451ca3aa537840c90953"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Book Club Meeting",
+          "start": "2026-09-24 18:00:00",
+          "end": "2026-09-24 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friends@email.com"
+          ],
+          "id": "evt_1f2261c633ae4e3397bbbff4f5f0037b"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change the time of my meeting with the family member on Thursday to 2 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can help with that. First, I need to get the current time to determine the date for this coming Thursday. Then, I'll search for the event and update its time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-09-24 08:00:00 | Thursday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2026-09-24 23:59:59",
+          "time_min": "2026-09-24 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_4839bd99b5b741a9a0594c5fd141c75b | Individual Therapy Session \u2014 Thu 09:00-10:00\nid: evt_b59291f16ac14e818335e0419809ab1e | Individual Therapy Session \u2014 Thu 10:15-11:15\nid: evt_abf2180ab952420580362d13048af7c2 | Meeting with Family Member of Client \u2014 Thu 13:00-14:00\nid: evt_fb465f3da5fe451ca3aa537840c90953 | Documentation and Progress Notes \u2014 Thu 14:30-16:00\nid: evt_1f2261c633ae4e3397bbbff4f5f0037b | Book Club Meeting \u2014 Thu 18:00-19:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_abf2180ab952420580362d13048af7c2",
+          "start": "2026-09-24 14:00:00",
+          "end": "2026-09-24 15:00:00"
+        },
+        "result": "Event updated successfully.\nMeeting with Family Member of Client\n  ID: evt_abf2180ab952420580362d13048af7c2\n  Time: Thu Sep 24, 14:00 - 15:00\n  Attendees: family@example.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've moved your \"Meeting with Family Member of Client\" to 2:00 PM this Thursday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who am I meeting with on Friday at 2 PM?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the event scheduled for Friday, September 25, 2026, at 2 PM and return the attendees for that event.",
+    "simulated_now": "2026-09-25 08:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-25 09:00:00",
+          "end": "2026-09-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client9@example.com"
+          ],
+          "id": "evt_375d80079532489db8afe53ca08fb4fc"
+        },
+        {
+          "day": "Friday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-25 10:15:00",
+          "end": "2026-09-25 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client10@example.com"
+          ],
+          "id": "evt_cf5962dd15ca4f8a9ee8779a0745b61d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Group Therapy Session",
+          "start": "2026-09-25 11:30:00",
+          "end": "2026-09-25 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "group_therapy@example.com"
+          ],
+          "id": "evt_5137c411f9474fc5a37cd108067fe853"
+        },
+        {
+          "day": "Friday",
+          "summary": "Case Review with Clinic Director",
+          "start": "2026-09-25 14:00:00",
+          "end": "2026-09-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "director@clinic.com"
+          ],
+          "id": "evt_b7a77b30c38542688fdd15adb59c7277"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Friends",
+          "start": "2026-09-25 19:30:00",
+          "end": "2026-09-25 21:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_10522d08f4eb42438c53f8401340f4c1"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-25 09:00:00",
+          "end": "2026-09-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client9@example.com"
+          ],
+          "id": "evt_375d80079532489db8afe53ca08fb4fc"
+        },
+        {
+          "day": "Friday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-25 10:15:00",
+          "end": "2026-09-25 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client10@example.com"
+          ],
+          "id": "evt_cf5962dd15ca4f8a9ee8779a0745b61d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Group Therapy Session",
+          "start": "2026-09-25 11:30:00",
+          "end": "2026-09-25 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "group_therapy@example.com"
+          ],
+          "id": "evt_5137c411f9474fc5a37cd108067fe853"
+        },
+        {
+          "day": "Friday",
+          "summary": "Case Review with Clinic Director",
+          "start": "2026-09-25 14:00:00",
+          "end": "2026-09-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "director@clinic.com"
+          ],
+          "id": "evt_b7a77b30c38542688fdd15adb59c7277"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Friends",
+          "start": "2026-09-25 19:30:00",
+          "end": "2026-09-25 21:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_10522d08f4eb42438c53f8401340f4c1"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who am I meeting with on Friday at 2 PM?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-09-25 08:00:00 | Friday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2026-09-25 14:00:00",
+          "time_max": "2026-09-25 15:00:00"
+        },
+        "result": "Found 1 events:\nid: evt_b7a77b30c38542688fdd15adb59c7277 | Case Review with Clinic Director \u2014 Fri 14:00-15:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_b7a77b30c38542688fdd15adb59c7277"
+        },
+        "result": "Case Review with Clinic Director\n  ID: evt_b7a77b30c38542688fdd15adb59c7277\n  Time: Fri Sep 25, 14:00 - 15:00\n  Attendees: director@clinic.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "You are meeting with director@clinic.com for a 'Case Review with Clinic Director' at 2 PM on Friday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule therapy...",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "Ask for clarification regarding which therapy session the user wants to reschedule.",
+    "simulated_now": "2026-09-20 10:00:00",
+    "addressed_days": [],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-21 09:00:00",
+          "end": "2026-09-21 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client1@example.com"
+          ],
+          "id": "evt_53d964d6c12b413e9fad6ac2080f59d7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-21 10:15:00",
+          "end": "2026-09-21 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client2@example.com"
+          ],
+          "id": "evt_f57aaa737f7b4c30b0c77fc49bb83fbc"
+        },
+        {
+          "day": "Monday",
+          "summary": "Group Therapy Session",
+          "start": "2026-09-21 11:30:00",
+          "end": "2026-09-21 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "group_therapy@example.com"
+          ],
+          "id": "evt_2d8671d7230d4d3ab0fe2e584022c294"
+        },
+        {
+          "day": "Monday",
+          "summary": "Treatment Plan Review Meeting",
+          "start": "2026-09-21 14:00:00",
+          "end": "2026-09-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "psychiatrist@clinic.com",
+            "case_manager@clinic.com"
+          ],
+          "id": "evt_913dddfc881b4dacbee2dce7521a7502"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2026-09-21 18:30:00",
+          "end": "2026-09-21 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d9c5ad9b0e5c4444a04942726b6127b7"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-22 09:00:00",
+          "end": "2026-09-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client3@example.com"
+          ],
+          "id": "evt_e48f87973f8f4bfb8014ff972005cee1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-22 10:15:00",
+          "end": "2026-09-22 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client4@example.com"
+          ],
+          "id": "evt_f127e5b2a64545b0a91bc69abd05ac90"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Consult with Addiction Specialist",
+          "start": "2026-09-22 13:00:00",
+          "end": "2026-09-22 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "specialist@addictions.org"
+          ],
+          "id": "evt_503f1ecd1ec7435895d695823be890c2"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Crisis Intervention Training",
+          "start": "2026-09-22 14:30:00",
+          "end": "2026-09-22 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5b3140b9c2d545a9ba1397c4d80f6f91"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Partner",
+          "start": "2026-09-22 19:00:00",
+          "end": "2026-09-22 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_60784168e6984f99b1e20929bf6fd8e8"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-23 09:00:00",
+          "end": "2026-09-23 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client5@example.com"
+          ],
+          "id": "evt_f95f3137e6d44a4ea029f501c4aa5509"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-23 10:15:00",
+          "end": "2026-09-23 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client6@example.com"
+          ],
+          "id": "evt_031b4eb35ed044dd8645a353e4da049f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Group Therapy Session",
+          "start": "2026-09-23 11:30:00",
+          "end": "2026-09-23 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "group_therapy@example.com"
+          ],
+          "id": "evt_002c7378305544f9abbd9a7362817f87"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Team Meeting",
+          "start": "2026-09-23 14:00:00",
+          "end": "2026-09-23 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "team@clinic.com"
+          ],
+          "id": "evt_6e08bb5372cb443eafcaa2d419e6d7e0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Personal Therapy Session",
+          "start": "2026-09-23 19:00:00",
+          "end": "2026-09-23 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@personal.com"
+          ],
+          "id": "evt_3c44f40425e94e93bc84d5170217f321"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-24 09:00:00",
+          "end": "2026-09-24 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client7@example.com"
+          ],
+          "id": "evt_be3c54a4c7e746e899e18a36c8c4e8e4"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-24 10:15:00",
+          "end": "2026-09-24 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client8@example.com"
+          ],
+          "id": "evt_21cadfd734a249669879205afc7a4ba7"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Family Member of Client",
+          "start": "2026-09-24 13:00:00",
+          "end": "2026-09-24 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "family@example.com"
+          ],
+          "id": "evt_1aeeb562e7384128bcf03793d8f86131"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Documentation and Progress Notes",
+          "start": "2026-09-24 14:30:00",
+          "end": "2026-09-24 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ca80e5fb9ee1414581ef9ea0e48ea57d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Book Club Meeting",
+          "start": "2026-09-24 18:00:00",
+          "end": "2026-09-24 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friends@email.com"
+          ],
+          "id": "evt_4f28299cea994115b977ad25f2cb34dd"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-25 09:00:00",
+          "end": "2026-09-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client9@example.com"
+          ],
+          "id": "evt_d229c83ec1f84e31b94f12d67d2de2f1"
+        },
+        {
+          "day": "Friday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-25 10:15:00",
+          "end": "2026-09-25 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client10@example.com"
+          ],
+          "id": "evt_562d79591a0e451a9b35a567ae3f1603"
+        },
+        {
+          "day": "Friday",
+          "summary": "Group Therapy Session",
+          "start": "2026-09-25 11:30:00",
+          "end": "2026-09-25 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "group_therapy@example.com"
+          ],
+          "id": "evt_625f9f675e39452d81d61bdd4e311bbf"
+        },
+        {
+          "day": "Friday",
+          "summary": "Case Review with Clinic Director",
+          "start": "2026-09-25 14:00:00",
+          "end": "2026-09-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "director@clinic.com"
+          ],
+          "id": "evt_402772927cd94d178aff52748c965594"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Friends",
+          "start": "2026-09-25 19:30:00",
+          "end": "2026-09-25 21:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7deaf44627a948dbac5418a0e0ee5781"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "On-Call Shift",
+          "start": "2026-09-26 09:00:00",
+          "end": "2026-09-26 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d75d8642bb544d7ca330c1aaa70d52a1"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Hike with Partner",
+          "start": "2026-09-26 14:00:00",
+          "end": "2026-09-26 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7d6f1237c8154a1e95bed2778739b311"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner at New Restaurant",
+          "start": "2026-09-26 19:00:00",
+          "end": "2026-09-26 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_47279c1df0ee4af6823bc2dd862cf461"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Friends",
+          "start": "2026-09-27 10:00:00",
+          "end": "2026-09-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_628745f75863439c8ef1b878d587c7a3"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Volunteer at Local Charity",
+          "start": "2026-09-27 15:00:00",
+          "end": "2026-09-27 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bd3db917943e4f2d8ef3bd306ad622df"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-21 09:00:00",
+          "end": "2026-09-21 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client1@example.com"
+          ],
+          "id": "evt_53d964d6c12b413e9fad6ac2080f59d7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-21 10:15:00",
+          "end": "2026-09-21 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client2@example.com"
+          ],
+          "id": "evt_f57aaa737f7b4c30b0c77fc49bb83fbc"
+        },
+        {
+          "day": "Monday",
+          "summary": "Group Therapy Session",
+          "start": "2026-09-21 11:30:00",
+          "end": "2026-09-21 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "group_therapy@example.com"
+          ],
+          "id": "evt_2d8671d7230d4d3ab0fe2e584022c294"
+        },
+        {
+          "day": "Monday",
+          "summary": "Treatment Plan Review Meeting",
+          "start": "2026-09-21 14:00:00",
+          "end": "2026-09-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "psychiatrist@clinic.com",
+            "case_manager@clinic.com"
+          ],
+          "id": "evt_913dddfc881b4dacbee2dce7521a7502"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2026-09-21 18:30:00",
+          "end": "2026-09-21 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d9c5ad9b0e5c4444a04942726b6127b7"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-22 09:00:00",
+          "end": "2026-09-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client3@example.com"
+          ],
+          "id": "evt_e48f87973f8f4bfb8014ff972005cee1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-22 10:15:00",
+          "end": "2026-09-22 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client4@example.com"
+          ],
+          "id": "evt_f127e5b2a64545b0a91bc69abd05ac90"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Consult with Addiction Specialist",
+          "start": "2026-09-22 13:00:00",
+          "end": "2026-09-22 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "specialist@addictions.org"
+          ],
+          "id": "evt_503f1ecd1ec7435895d695823be890c2"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Crisis Intervention Training",
+          "start": "2026-09-22 14:30:00",
+          "end": "2026-09-22 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5b3140b9c2d545a9ba1397c4d80f6f91"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Dinner with Partner",
+          "start": "2026-09-22 19:00:00",
+          "end": "2026-09-22 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_60784168e6984f99b1e20929bf6fd8e8"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-23 09:00:00",
+          "end": "2026-09-23 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client5@example.com"
+          ],
+          "id": "evt_f95f3137e6d44a4ea029f501c4aa5509"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-23 10:15:00",
+          "end": "2026-09-23 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client6@example.com"
+          ],
+          "id": "evt_031b4eb35ed044dd8645a353e4da049f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Group Therapy Session",
+          "start": "2026-09-23 11:30:00",
+          "end": "2026-09-23 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "group_therapy@example.com"
+          ],
+          "id": "evt_002c7378305544f9abbd9a7362817f87"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Team Meeting",
+          "start": "2026-09-23 14:00:00",
+          "end": "2026-09-23 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "team@clinic.com"
+          ],
+          "id": "evt_6e08bb5372cb443eafcaa2d419e6d7e0"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Personal Therapy Session",
+          "start": "2026-09-23 19:00:00",
+          "end": "2026-09-23 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@personal.com"
+          ],
+          "id": "evt_3c44f40425e94e93bc84d5170217f321"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-24 09:00:00",
+          "end": "2026-09-24 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client7@example.com"
+          ],
+          "id": "evt_be3c54a4c7e746e899e18a36c8c4e8e4"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-24 10:15:00",
+          "end": "2026-09-24 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client8@example.com"
+          ],
+          "id": "evt_21cadfd734a249669879205afc7a4ba7"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with Family Member of Client",
+          "start": "2026-09-24 13:00:00",
+          "end": "2026-09-24 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "family@example.com"
+          ],
+          "id": "evt_1aeeb562e7384128bcf03793d8f86131"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Documentation and Progress Notes",
+          "start": "2026-09-24 14:30:00",
+          "end": "2026-09-24 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ca80e5fb9ee1414581ef9ea0e48ea57d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Book Club Meeting",
+          "start": "2026-09-24 18:00:00",
+          "end": "2026-09-24 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friends@email.com"
+          ],
+          "id": "evt_4f28299cea994115b977ad25f2cb34dd"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-25 09:00:00",
+          "end": "2026-09-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client9@example.com"
+          ],
+          "id": "evt_d229c83ec1f84e31b94f12d67d2de2f1"
+        },
+        {
+          "day": "Friday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-25 10:15:00",
+          "end": "2026-09-25 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client10@example.com"
+          ],
+          "id": "evt_562d79591a0e451a9b35a567ae3f1603"
+        },
+        {
+          "day": "Friday",
+          "summary": "Group Therapy Session",
+          "start": "2026-09-25 11:30:00",
+          "end": "2026-09-25 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "group_therapy@example.com"
+          ],
+          "id": "evt_625f9f675e39452d81d61bdd4e311bbf"
+        },
+        {
+          "day": "Friday",
+          "summary": "Case Review with Clinic Director",
+          "start": "2026-09-25 14:00:00",
+          "end": "2026-09-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "director@clinic.com"
+          ],
+          "id": "evt_402772927cd94d178aff52748c965594"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Friends",
+          "start": "2026-09-25 19:30:00",
+          "end": "2026-09-25 21:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7deaf44627a948dbac5418a0e0ee5781"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "On-Call Shift",
+          "start": "2026-09-26 09:00:00",
+          "end": "2026-09-26 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d75d8642bb544d7ca330c1aaa70d52a1"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Hike with Partner",
+          "start": "2026-09-26 14:00:00",
+          "end": "2026-09-26 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7d6f1237c8154a1e95bed2778739b311"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner at New Restaurant",
+          "start": "2026-09-26 19:00:00",
+          "end": "2026-09-26 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_47279c1df0ee4af6823bc2dd862cf461"
+        }
+      ],
+      "Sunday": [
+        {
+          "day": "Sunday",
+          "summary": "Brunch with Friends",
+          "start": "2026-09-27 10:00:00",
+          "end": "2026-09-27 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_628745f75863439c8ef1b878d587c7a3"
+        },
+        {
+          "day": "Sunday",
+          "summary": "Volunteer at Local Charity",
+          "start": "2026-09-27 15:00:00",
+          "end": "2026-09-27 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bd3db917943e4f2d8ef3bd306ad622df"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule therapy..."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. When would you like to reschedule it to?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-09-20 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 30 events:\nid: evt_53d964d6c12b413e9fad6ac2080f59d7 | Individual Therapy Session \u2014 Mon 09:00-10:00\nid: evt_f57aaa737f7b4c30b0c77fc49bb83fbc | Individual Therapy Session \u2014 Mon 10:15-11:15\nid: evt_2d8671d7230d4d3ab0fe2e584022c294 | Group Therapy Session \u2014 Mon 11:30-12:30\nid: evt_913dddfc881b4dacbee2dce7521a7502 | Treatment Plan Review Meeting \u2014 Mon 14:00-15:00\nid: evt_d9c5ad9b0e5c4444a04942726b6127b7 | Yoga Class \u2014 Mon 18:30-19:30\nid: evt_e48f87973f8f4bfb8014ff972005cee1 | Individual Therapy Session \u2014 Tue 09:00-10:00\nid: evt_f127e5b2a64545b0a91bc69abd05ac90 | Individual Therapy Session \u2014 Tue 10:15-11:15\nid: evt_503f1ecd1ec7435895d695823be890c2 | Consult with Addiction Specialist \u2014 Tue 13:00-14:00\nid: evt_5b3140b9c2d545a9ba1397c4d80f6f91 | Crisis Intervention Training \u2014 Tue 14:30-16:00\nid: evt_60784168e6984f99b1e20929bf6fd8e8 | Dinner with Partner \u2014 Tue 19:00-21:00\nid: evt_f95f3137e6d44a4ea029f501c4aa5509 | Individual Therapy Session \u2014 Wed 09:00-10:00\nid: evt_031b4eb35ed044dd8645a353e4da049f | Individual Therapy Session \u2014 Wed 10:15-11:15\nid: evt_002c7378305544f9abbd9a7362817f87 | Group Therapy Session \u2014 Wed 11:30-12:30\nid: evt_6e08bb5372cb443eafcaa2d419e6d7e0 | Team Meeting \u2014 Wed 14:00-15:00\nid: evt_3c44f40425e94e93bc84d5170217f321 | Personal Therapy Session \u2014 Wed 19:00-20:00\nid: evt_be3c54a4c7e746e899e18a36c8c4e8e4 | Individual Therapy Session \u2014 Thu 09:00-10:00\nid: evt_21cadfd734a249669879205afc7a4ba7 | Individual Therapy Session \u2014 Thu 10:15-11:15\nid: evt_1aeeb562e7384128bcf03793d8f86131 | Meeting with Family Member of Client \u2014 Thu 13:00-14:00\nid: evt_ca80e5fb9ee1414581ef9ea0e48ea57d | Documentation and Progress Notes \u2014 Thu 14:30-16:00\nid: evt_4f28299cea994115b977ad25f2cb34dd | Book Club Meeting \u2014 Thu 18:00-19:00\nid: evt_d229c83ec1f84e31b94f12d67d2de2f1 | Individual Therapy Session \u2014 Fri 09:00-10:00\nid: evt_562d79591a0e451a9b35a567ae3f1603 | Individual Therapy Session \u2014 Fri 10:15-11:15\nid: evt_625f9f675e39452d81d61bdd4e311bbf | Group Therapy Session \u2014 Fri 11:30-12:30\nid: evt_402772927cd94d178aff52748c965594 | Case Review with Clinic Director \u2014 Fri 14:00-15:00\nid: evt_7deaf44627a948dbac5418a0e0ee5781 | Movie Night with Friends \u2014 Fri 19:30-21:30\nid: evt_d75d8642bb544d7ca330c1aaa70d52a1 | On-Call Shift \u2014 Sat 09:00-12:00\nid: evt_7d6f1237c8154a1e95bed2778739b311 | Hike with Partner \u2014 Sat 14:00-16:00\nid: evt_47279c1df0ee4af6823bc2dd862cf461 | Dinner at New Restaurant \u2014 Sat 19:00-21:00\nid: evt_628745f75863439c8ef1b878d587c7a3 | Brunch with Friends \u2014 Sun 10:00-12:00\nid: evt_bd3db917943e4f2d8ef3bd306ad622df | Volunteer at Local Charity \u2014 Sun 15:00-17:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I see several therapy sessions in your calendar. Which one would you like to reschedule, and when would you like to move it to?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Friday meeting?",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "List all events on Friday, September 25, 2026.",
+    "simulated_now": "2026-09-25 14:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-25 09:00:00",
+          "end": "2026-09-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client9@example.com"
+          ],
+          "id": "evt_e5870959f5094f09ba689cc95e0c501f"
+        },
+        {
+          "day": "Friday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-25 10:15:00",
+          "end": "2026-09-25 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client10@example.com"
+          ],
+          "id": "evt_f251b7676ab740748419bb97db48a8ea"
+        },
+        {
+          "day": "Friday",
+          "summary": "Group Therapy Session",
+          "start": "2026-09-25 11:30:00",
+          "end": "2026-09-25 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "group_therapy@example.com"
+          ],
+          "id": "evt_10ded2b174104bdd9e82ed2600be5d45"
+        },
+        {
+          "day": "Friday",
+          "summary": "Case Review with Clinic Director",
+          "start": "2026-09-25 14:00:00",
+          "end": "2026-09-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "director@clinic.com"
+          ],
+          "id": "evt_4219319c7329416db943cbcea477f3e1"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Friends",
+          "start": "2026-09-25 19:30:00",
+          "end": "2026-09-25 21:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_168046269b9c4b12922ee5034455ec56"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-25 09:00:00",
+          "end": "2026-09-25 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client9@example.com"
+          ],
+          "id": "evt_e5870959f5094f09ba689cc95e0c501f"
+        },
+        {
+          "day": "Friday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-25 10:15:00",
+          "end": "2026-09-25 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client10@example.com"
+          ],
+          "id": "evt_f251b7676ab740748419bb97db48a8ea"
+        },
+        {
+          "day": "Friday",
+          "summary": "Group Therapy Session",
+          "start": "2026-09-25 11:30:00",
+          "end": "2026-09-25 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "group_therapy@example.com"
+          ],
+          "id": "evt_10ded2b174104bdd9e82ed2600be5d45"
+        },
+        {
+          "day": "Friday",
+          "summary": "Case Review with Clinic Director",
+          "start": "2026-09-25 14:00:00",
+          "end": "2026-09-25 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "director@clinic.com"
+          ],
+          "id": "evt_4219319c7329416db943cbcea477f3e1"
+        },
+        {
+          "day": "Friday",
+          "summary": "Movie Night with Friends",
+          "start": "2026-09-25 19:30:00",
+          "end": "2026-09-25 21:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_168046269b9c4b12922ee5034455ec56"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Friday meeting?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can help with that. First, I need to know the current date to find the upcoming Friday's meetings."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-09-25 14:00:00 | Friday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2026-09-25 00:00:00",
+          "time_max": "2026-09-25 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_e5870959f5094f09ba689cc95e0c501f | Individual Therapy Session \u2014 Fri 09:00-10:00\nid: evt_f251b7676ab740748419bb97db48a8ea | Individual Therapy Session \u2014 Fri 10:15-11:15\nid: evt_10ded2b174104bdd9e82ed2600be5d45 | Group Therapy Session \u2014 Fri 11:30-12:30\nid: evt_4219319c7329416db943cbcea477f3e1 | Case Review with Clinic Director \u2014 Fri 14:00-15:00\nid: evt_168046269b9c4b12922ee5034455ec56 | Movie Night with Friends \u2014 Fri 19:30-21:30"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today is Friday, September 25, 2026. You have 5 events on your calendar:\n- 9-10am: Individual Therapy Session\n- 10:15-11:15am: Individual Therapy Session\n- 11:30am-12:30pm: Group Therapy Session\n- 2-3pm: Case Review with Clinic Director\n- 7:30-9:30pm: Movie Night with Friends"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events for Monday, September 21, 2026.",
+    "simulated_now": "2026-09-21 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-21 09:00:00",
+          "end": "2026-09-21 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client1@example.com"
+          ],
+          "id": "evt_529c46a4f3904ef6842ab18f65b901d0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-21 10:15:00",
+          "end": "2026-09-21 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client2@example.com"
+          ],
+          "id": "evt_3fc137c77b2d49679b67dc65ef5ae604"
+        },
+        {
+          "day": "Monday",
+          "summary": "Group Therapy Session",
+          "start": "2026-09-21 11:30:00",
+          "end": "2026-09-21 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "group_therapy@example.com"
+          ],
+          "id": "evt_827ea8e9b6f54a8bbcbefaccc090daa7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Treatment Plan Review Meeting",
+          "start": "2026-09-21 14:00:00",
+          "end": "2026-09-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "psychiatrist@clinic.com",
+            "case_manager@clinic.com"
+          ],
+          "id": "evt_48396d07b63b40b3a89392698e5e4cd5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2026-09-21 18:30:00",
+          "end": "2026-09-21 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_380742bfcc5849658515a9427a1a2b88"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-21 09:00:00",
+          "end": "2026-09-21 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client1@example.com"
+          ],
+          "id": "evt_529c46a4f3904ef6842ab18f65b901d0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-21 10:15:00",
+          "end": "2026-09-21 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client2@example.com"
+          ],
+          "id": "evt_3fc137c77b2d49679b67dc65ef5ae604"
+        },
+        {
+          "day": "Monday",
+          "summary": "Group Therapy Session",
+          "start": "2026-09-21 11:30:00",
+          "end": "2026-09-21 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "group_therapy@example.com"
+          ],
+          "id": "evt_827ea8e9b6f54a8bbcbefaccc090daa7"
+        },
+        {
+          "day": "Monday",
+          "summary": "Treatment Plan Review Meeting",
+          "start": "2026-09-21 14:00:00",
+          "end": "2026-09-21 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "psychiatrist@clinic.com",
+            "case_manager@clinic.com"
+          ],
+          "id": "evt_48396d07b63b40b3a89392698e5e4cd5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Yoga Class",
+          "start": "2026-09-21 18:30:00",
+          "end": "2026-09-21 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_380742bfcc5849658515a9427a1a2b88"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify today's date. Then, I will list all the events scheduled for today to let you know what you have planned."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-09-21 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2026-09-21 23:59:59",
+          "time_min": "2026-09-21 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_529c46a4f3904ef6842ab18f65b901d0 | Individual Therapy Session \u2014 Mon 09:00-10:00\nid: evt_3fc137c77b2d49679b67dc65ef5ae604 | Individual Therapy Session \u2014 Mon 10:15-11:15\nid: evt_827ea8e9b6f54a8bbcbefaccc090daa7 | Group Therapy Session \u2014 Mon 11:30-12:30\nid: evt_48396d07b63b40b3a89392698e5e4cd5 | Treatment Plan Review Meeting \u2014 Mon 14:00-15:00\nid: evt_380742bfcc5849658515a9427a1a2b88 | Yoga Class \u2014 Mon 18:30-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today is Monday, September 21, 2026. Here is your schedule:\n\n*   9:00-10:00: Individual Therapy Session\n*   10:15-11:15: Individual Therapy Session\n*   11:30-12:30: Group Therapy Session\n*   14:00-15:00: Treatment Plan Review Meeting\n*   18:30-19:30: Yoga Class"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on the schedule for tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events for Wednesday, September 23, 2026.",
+    "simulated_now": "2026-09-22 21:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-23 09:00:00",
+          "end": "2026-09-23 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client5@example.com"
+          ],
+          "id": "evt_03d3640bb5344494bfd472423478b27d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-23 10:15:00",
+          "end": "2026-09-23 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client6@example.com"
+          ],
+          "id": "evt_31a9f0234466422fa7abd980071554a1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Group Therapy Session",
+          "start": "2026-09-23 11:30:00",
+          "end": "2026-09-23 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "group_therapy@example.com"
+          ],
+          "id": "evt_ca476d597fec497fae82787a4f815e81"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Team Meeting",
+          "start": "2026-09-23 14:00:00",
+          "end": "2026-09-23 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "team@clinic.com"
+          ],
+          "id": "evt_31620b8576064f908295b82ec2ee96b4"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Personal Therapy Session",
+          "start": "2026-09-23 19:00:00",
+          "end": "2026-09-23 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@personal.com"
+          ],
+          "id": "evt_b8ba4fc25b7248669475c87f6372e536"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-23 09:00:00",
+          "end": "2026-09-23 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client5@example.com"
+          ],
+          "id": "evt_03d3640bb5344494bfd472423478b27d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Individual Therapy Session",
+          "start": "2026-09-23 10:15:00",
+          "end": "2026-09-23 11:15:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "client6@example.com"
+          ],
+          "id": "evt_31a9f0234466422fa7abd980071554a1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Group Therapy Session",
+          "start": "2026-09-23 11:30:00",
+          "end": "2026-09-23 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "group_therapy@example.com"
+          ],
+          "id": "evt_ca476d597fec497fae82787a4f815e81"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Team Meeting",
+          "start": "2026-09-23 14:00:00",
+          "end": "2026-09-23 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "team@clinic.com"
+          ],
+          "id": "evt_31620b8576064f908295b82ec2ee96b4"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Personal Therapy Session",
+          "start": "2026-09-23 19:00:00",
+          "end": "2026-09-23 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "therapist@personal.com"
+          ],
+          "id": "evt_b8ba4fc25b7248669475c87f6372e536"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on the schedule for tomorrow?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out the current date to understand what \"tomorrow\" is. Then I'll list all the events scheduled for that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2026-09-22 21:00:00 | Tuesday"
+      },
+      {
+        "role": "assistant",
+        "content": "Now that I know the current date, I can list the events for tomorrow, which is September 23, 2026."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2026-09-23 00:00:00",
+          "time_max": "2026-09-23 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_03d3640bb5344494bfd472423478b27d | Individual Therapy Session \u2014 Wed 09:00-10:00\nid: evt_31a9f0234466422fa7abd980071554a1 | Individual Therapy Session \u2014 Wed 10:15-11:15\nid: evt_ca476d597fec497fae82787a4f815e81 | Group Therapy Session \u2014 Wed 11:30-12:30\nid: evt_31620b8576064f908295b82ec2ee96b4 | Team Meeting \u2014 Wed 14:00-15:00\nid: evt_b8ba4fc25b7248669475c87f6372e536 | Personal Therapy Session \u2014 Wed 19:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Here is your schedule for tomorrow, September 23, 2026:\n\n*   **9:00 AM - 10:00 AM:** Individual Therapy Session\n*   **10:15 AM - 11:15 AM:** Individual Therapy Session\n*   **11:30 AM - 12:30 PM:** Group Therapy Session\n*   **2:00 PM - 3:00 PM:** Team Meeting\n*   **7:00 PM - 8:00 PM:** Personal Therapy Session"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Discuss Q1 budget' for Tuesday at 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with the summary 'Discuss Q1 budget' on Tuesday, January 3rd, 2023, starting at 3:00 PM and ending at 4:00 PM. No attendees are specified.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-01-01T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting for Friday at 2 PM to talk about the sales strategy.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with the summary 'Talk about the sales strategy' on Friday, January 6th, 2023, starting at 2:00 PM and ending at 3:00 PM. No attendees are specified.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-01-01T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Monday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Monday, January 2nd, 2023, between 9:00 AM and 12:00 PM to determine the user's morning activities.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-01-02T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the agenda for Wednesday evening?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Wednesday, January 4th, 2023, between 6:00 PM and 10:00 PM to determine the user's evening plans.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-01-04T17:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move the Marrakech product launch client consultation to 4 PM on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Client Consultation - Marrakech Product Launch' event on Monday and update its start time to 4:00 PM and end time to 5:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-01-02T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the Santorini catering call on Monday to 1 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Vendor Call - Catering Options, Santorini Wedding' event on Monday and update its start time to 1:00 PM and end time to 2:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-01-02T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Tuscany retreat debrief?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Team Meeting - Tuscany Retreat Debrief' event and return the list of attendees: event_coordinator1@example.com, event_coordinator2@example.com.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-01-02T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the insurance review on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Insurance Review - International Event Coverage' event on Friday and return the start time: 11:00 AM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-01-06T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting with the travel agent about the hotel block in Marrakech, but only if it doesn't overlap with the site visit on Wednesday.",
+        "complexity": "High",
+        "expected_behavior": "Check if there is a conflict with the 'Site Visit - New Barcelona Venue' event on Wednesday. If there is no conflict, create a new event with 'Call with Travel Agent - Hotel Block, Marrakech' at a time that doesn't overlap with the site visit.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-01-03T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule the budget reconciliation for the Santorini Wedding to Thursday at 3:30 PM if it does not overlap with the virtual meeting.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Budget Reconciliation - Santorini Wedding' event on Thursday and check if rescheduling it to 3:30 PM overlaps with the 'Virtual Meeting - Destination Marketing Org., Marrakech' event. If no overlap, update the 'Budget Reconciliation - Santorini Wedding' start time to 3:30 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-01-05T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Move... catering... Monday...",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Vendor Call - Catering Options, Santorini Wedding' event on Monday and prompt the user for the new time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-01-02T10:30:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Delete...Barcelona...networking",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Networking Event - Barcelona Event Planners' event on Tuesday and ask the user if they want to delete it. If yes, then delete the event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-01-03T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for today, January 5th, 2023.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-01-05T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on my schedule tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for tomorrow, January 7th, 2023.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-01-06T20:00:00"
+    }
+]

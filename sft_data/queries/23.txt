@@ -1,0 +1,148 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Discuss marketing campaign' for Tuesday at 4 PM lasting 30 minutes.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Discuss marketing campaign' on Tuesday, February 3, 2026, from 4:00 PM to 4:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-02-01T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me a meeting on Friday to discuss the project proposal with the team at 10:00 AM for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Discuss project proposal' on Friday, February 6, 2026, from 10:00 AM to 11:00 AM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-02-01T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Is my afternoon free on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "List events between 12:00 PM and 6:00 PM on Wednesday, February 4, 2026. If no events are listed, respond that the afternoon is free.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-02-01T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Saturday evening?",
+        "complexity": "Medium",
+        "expected_behavior": "List events between 6:00 PM and 11:59 PM on Saturday, February 7, 2026.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-02-01T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my dinner with my family on Monday back by an hour.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Family' event on Monday, February 2, 2026, and update its start time to 7:30 PM and end time to 9:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-02-01T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the Historical Society Meeting on Saturday to 3:00 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Attend Historical Society Meeting' event on Saturday, February 7, 2026, and update its start time to 3:00 PM and end time to 5:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-02-01T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me who is attending the Vatican Library Restoration meeting on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Client Meeting - Update on Vatican Library Restoration' event on Friday, February 6, 2026, and respond with the attendees: giovanni.angelo@vaticano.va.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-02-01T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What is the topic of the meeting with Junior Architects on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Meeting with Junior Architects' event on Monday, February 2, 2026, and respond with the summary: Discuss Colosseum Project Progress.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-02-01T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule the Palatine Hill project meeting on Thursday to 2 PM but only if I'm not busy then.",
+        "complexity": "High",
+        "expected_behavior": "List events on Thursday, February 5, 2026, between 2:00 PM and 3:30 PM. If no events are found, update the 'Meeting with Contractors - Cost Estimates for Palatine Hill Project' event's start time to 2:00 PM and end time to 3:30 PM. If there is a conflict, inform the user about the conflict.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-02-01T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule lunch with Luca Bianchi and Sofia Conti this week, is there any time we are all free?",
+        "complexity": "High",
+        "expected_behavior": "List all available timeslots this week (Monday, February 2, 2026 to Sunday, February 8, 2026) where there are no conflicting events for any of the attendees: luca.bianchi@email.it, sofia.conti@email.it. Respond with a suggested list of timeslots. Do not create an event.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-02-01T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change Thursday... meeting... to 4pm",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Contractors - Cost Estimates for Palatine Hill Project' event on Thursday, February 5, 2026, and update its start time to 4:00 PM and end time to 5:30 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-02-01T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Basilica",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Historical Preservation Society - San Clemente Basilica Proposal' event on Tuesday, February 3, 2026 and prompt user for a new date and time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-02-01T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Monday, February 2, 2026.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-02-02T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Anything on for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Wednesday, February 4, 2026.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-02-03T12:00:00"
+    }
+]

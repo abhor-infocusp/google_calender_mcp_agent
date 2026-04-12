@@ -1,0 +1,1489 @@
+[
+  {
+    "query": "Create an event called 'Gardening' for this Wednesday at 4 PM for one hour.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event with the summary 'Gardening' on Wednesday, April 12, 2023, at 4:00 PM and ending at 5:00 PM. The description should include 'Gardening'.",
+    "simulated_now": "2023-04-09 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Analyze Usage Statistics",
+          "start": "2023-04-12 09:00:00",
+          "end": "2023-04-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_45994e5955b942ed89fda6245d9d83c9"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Digital Content Training for Staff",
+          "start": "2023-04-12 10:30:00",
+          "end": "2023-04-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_44cc701f30574c86ab0a9ae16b8599b6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Library System Administrators",
+          "start": "2023-04-12 14:00:00",
+          "end": "2023-04-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "systemadmin@librarysystem.org"
+          ],
+          "id": "evt_8b18efd3df2847578745d6f00a493f34"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend Tech Meetup (AI in Libraries)",
+          "start": "2023-04-12 18:00:00",
+          "end": "2023-04-12 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a6aa939adf9d4ead855451387c0e4234"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Analyze Usage Statistics",
+          "start": "2023-04-12 09:00:00",
+          "end": "2023-04-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_45994e5955b942ed89fda6245d9d83c9"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Digital Content Training for Staff",
+          "start": "2023-04-12 10:30:00",
+          "end": "2023-04-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_44cc701f30574c86ab0a9ae16b8599b6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Library System Administrators",
+          "start": "2023-04-12 14:00:00",
+          "end": "2023-04-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "systemadmin@librarysystem.org"
+          ],
+          "id": "evt_8b18efd3df2847578745d6f00a493f34"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Gardening",
+          "start": "2023-04-12 16:00:00",
+          "end": "2023-04-12 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c707c5f0620543728ff15f9e3beb2e6b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend Tech Meetup (AI in Libraries)",
+          "start": "2023-04-12 18:00:00",
+          "end": "2023-04-12 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a6aa939adf9d4ead855451387c0e4234"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Gardening' for this Wednesday at 4 PM for one hour."
+      },
+      {
+        "role": "assistant",
+        "content": "This is my plan:\n\nFirst, I will call the `get_current_time` function to get the current date and time. This will help me determine the exact date for \"this Wednesday\".\n\nSecond, I will call the `create_event` function to create the event. I will use \"Gardening\" as the summary, the determined date for this coming Wednesday at 4 PM as the start time, and since the event is for one hour, the end time will be 5 PM on the same day."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-09 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "end": "2023-04-12 17:00:00",
+          "start": "2023-04-12 16:00:00",
+          "summary": "Gardening"
+        },
+        "result": "Event created successfully.\nGardening\n  ID: evt_c707c5f0620543728ff15f9e3beb2e6b\n  Time: Wed Apr 12, 16:00 - 17:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've added \"Gardening\" to your calendar for Wednesday, April 12th, from 4:00 PM to 5:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Am I busy Wednesday evening?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Check the calendar for events on Wednesday, April 12, 2023, between 6:00 PM and 11:59 PM. Return the event called 'Attend Tech Meetup (AI in Libraries)' that is scheduled for Wednesday at 6 PM.",
+    "simulated_now": "2023-04-12 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Analyze Usage Statistics",
+          "start": "2023-04-12 09:00:00",
+          "end": "2023-04-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3603b4ef9ceb42aaaf5f545cd3ffa830"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Digital Content Training for Staff",
+          "start": "2023-04-12 10:30:00",
+          "end": "2023-04-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_db17e07cda4744e6a5fb6a2edc13b083"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Library System Administrators",
+          "start": "2023-04-12 14:00:00",
+          "end": "2023-04-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "systemadmin@librarysystem.org"
+          ],
+          "id": "evt_9ab5a9d23b064b148f457e9f3a09b471"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend Tech Meetup (AI in Libraries)",
+          "start": "2023-04-12 18:00:00",
+          "end": "2023-04-12 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a1afacb1ebe44263a8081d0af0c893b8"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Analyze Usage Statistics",
+          "start": "2023-04-12 09:00:00",
+          "end": "2023-04-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3603b4ef9ceb42aaaf5f545cd3ffa830"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Digital Content Training for Staff",
+          "start": "2023-04-12 10:30:00",
+          "end": "2023-04-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_db17e07cda4744e6a5fb6a2edc13b083"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Library System Administrators",
+          "start": "2023-04-12 14:00:00",
+          "end": "2023-04-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "systemadmin@librarysystem.org"
+          ],
+          "id": "evt_9ab5a9d23b064b148f457e9f3a09b471"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend Tech Meetup (AI in Libraries)",
+          "start": "2023-04-12 18:00:00",
+          "end": "2023-04-12 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a1afacb1ebe44263a8081d0af0c893b8"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Am I busy Wednesday evening?"
+      },
+      {
+        "role": "assistant",
+        "content": "My plan is to first get the current time to know the date of this coming Wednesday. Then, I will list all the events on Wednesday evening to check if you are busy. I will consider \"evening\" to be from 6 PM to 10 PM. Finally, I will let you know if you have any events scheduled during that time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-12 10:00:00 | Wednesday"
+      },
+      {
+        "role": "assistant",
+        "content": "Now that I know today is Wednesday, April 12th, I will check for events on this evening between 6 PM and 10 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-04-12 22:00:00",
+          "time_min": "2023-04-12 18:00:00"
+        },
+        "result": "Found 1 events:\nid: evt_a1afacb1ebe44263a8081d0af0c893b8 | Attend Tech Meetup (AI in Libraries) \u2014 Wed 18:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, you have one event scheduled for this evening: the \"Attend Tech Meetup (AI in Libraries)\" from 6:00 PM to 8:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What is happening for dinner on Saturday?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Check the calendar for events on Saturday, April 15, 2023, that include the word 'dinner'. Return the event called 'Dinner at Local Restaurant' that is scheduled for Saturday at 6 PM.",
+    "simulated_now": "2023-04-15 10:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Hiking",
+          "start": "2023-04-15 10:00:00",
+          "end": "2023-04-15 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0ce315610ae347a1bd6a86acfeddb546"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner at Local Restaurant",
+          "start": "2023-04-15 18:00:00",
+          "end": "2023-04-15 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a5804593f5bb4b4b92403667a4414b4d"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Hiking",
+          "start": "2023-04-15 10:00:00",
+          "end": "2023-04-15 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0ce315610ae347a1bd6a86acfeddb546"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner at Local Restaurant",
+          "start": "2023-04-15 18:00:00",
+          "end": "2023-04-15 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a5804593f5bb4b4b92403667a4414b4d"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What is happening for dinner on Saturday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-15 10:00:00 | Saturday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-04-15 23:59:59",
+          "time_min": "2023-04-15 10:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_0ce315610ae347a1bd6a86acfeddb546 | Hiking \u2014 Sat 10:00-12:00\nid: evt_a5804593f5bb4b4b92403667a4414b4d | Dinner at Local Restaurant \u2014 Sat 18:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Dinner is scheduled at a local restaurant from 18:00 to 20:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move the accessibility audit follow-up to 3 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the event called 'Accessibility Audit Follow-up' on Monday, April 10, 2023, and update the start time to 3:00 PM and the end time to 4:00 PM.",
+    "simulated_now": "2023-04-10 12:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Digital Resource Strategy",
+          "start": "2023-04-10 09:00:00",
+          "end": "2023-04-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "otherlibrarians@library.org"
+          ],
+          "id": "evt_cb8590255a7441da8f59a295989739a2"
+        },
+        {
+          "day": "Monday",
+          "summary": "E-book Vendor Demo",
+          "start": "2023-04-10 10:30:00",
+          "end": "2023-04-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vendorrep@ebookprovider.com"
+          ],
+          "id": "evt_c15e586d652243f48497d22f5c714aae"
+        },
+        {
+          "day": "Monday",
+          "summary": "Accessibility Audit Follow-up",
+          "start": "2023-04-10 14:00:00",
+          "end": "2023-04-10 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accessibilityconsultant@ada.com"
+          ],
+          "id": "evt_0283c7619cb64389a33240a896d944eb"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Partner",
+          "start": "2023-04-10 18:30:00",
+          "end": "2023-04-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5b34c0ae43a049dd821237fc20f24744"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Digital Resource Strategy",
+          "start": "2023-04-10 09:00:00",
+          "end": "2023-04-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "otherlibrarians@library.org"
+          ],
+          "id": "evt_cb8590255a7441da8f59a295989739a2"
+        },
+        {
+          "day": "Monday",
+          "summary": "E-book Vendor Demo",
+          "start": "2023-04-10 10:30:00",
+          "end": "2023-04-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vendorrep@ebookprovider.com"
+          ],
+          "id": "evt_c15e586d652243f48497d22f5c714aae"
+        },
+        {
+          "day": "Monday",
+          "summary": "Accessibility Audit Follow-up",
+          "start": "2023-04-10 15:00:00",
+          "end": "2023-04-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accessibilityconsultant@ada.com"
+          ],
+          "id": "evt_0283c7619cb64389a33240a896d944eb"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Partner",
+          "start": "2023-04-10 18:30:00",
+          "end": "2023-04-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5b34c0ae43a049dd821237fc20f24744"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move the accessibility audit follow-up to 3 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. First, I need to know today's date. Then I'll find the event and move it to 3 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-10 12:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-04-10 00:00:00",
+          "time_max": "2023-04-10 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_cb8590255a7441da8f59a295989739a2 | Team Meeting - Digital Resource Strategy \u2014 Mon 09:00-10:00\nid: evt_c15e586d652243f48497d22f5c714aae | E-book Vendor Demo \u2014 Mon 10:30-12:00\nid: evt_0283c7619cb64389a33240a896d944eb | Accessibility Audit Follow-up \u2014 Mon 14:00-15:00\nid: evt_5b34c0ae43a049dd821237fc20f24744 | Dinner with Partner \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_0283c7619cb64389a33240a896d944eb",
+          "start": "2023-04-10 15:00:00",
+          "end": "2023-04-10 16:00:00"
+        },
+        "result": "Event updated successfully.\nAccessibility Audit Follow-up\n  ID: evt_0283c7619cb64389a33240a896d944eb\n  Time: Mon Apr 10, 15:00 - 16:00\n  Attendees: accessibilityconsultant@ada.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved the Accessibility Audit Follow-up to 3 PM today."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "I need to decline the library system administrators meeting this Wednesday.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the event called 'Meeting with Library System Administrators' on Wednesday, April 12, 2023, and respond with DECLINE.",
+    "simulated_now": "2023-04-12 12:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Analyze Usage Statistics",
+          "start": "2023-04-12 09:00:00",
+          "end": "2023-04-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d3e7fb66fda341c1b5adfb42d84e8fd3"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Digital Content Training for Staff",
+          "start": "2023-04-12 10:30:00",
+          "end": "2023-04-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_10058db8903b4a1b9524501cf34af9a1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Library System Administrators",
+          "start": "2023-04-12 14:00:00",
+          "end": "2023-04-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "systemadmin@librarysystem.org"
+          ],
+          "id": "evt_28bdcb2f5c164aec9bd28191f239d999"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend Tech Meetup (AI in Libraries)",
+          "start": "2023-04-12 18:00:00",
+          "end": "2023-04-12 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b525c04824de4dd5b2fcc104654752f5"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Analyze Usage Statistics",
+          "start": "2023-04-12 09:00:00",
+          "end": "2023-04-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d3e7fb66fda341c1b5adfb42d84e8fd3"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Digital Content Training for Staff",
+          "start": "2023-04-12 10:30:00",
+          "end": "2023-04-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_10058db8903b4a1b9524501cf34af9a1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Library System Administrators",
+          "start": "2023-04-12 14:00:00",
+          "end": "2023-04-12 15:00:00",
+          "attending": "DECLINE",
+          "attendees": [
+            "systemadmin@librarysystem.org"
+          ],
+          "id": "evt_28bdcb2f5c164aec9bd28191f239d999"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend Tech Meetup (AI in Libraries)",
+          "start": "2023-04-12 18:00:00",
+          "end": "2023-04-12 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b525c04824de4dd5b2fcc104654752f5"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "I need to decline the library system administrators meeting this Wednesday."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. First, I need to find the event in your calendar."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-12 12:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-04-12 00:00:00",
+          "time_max": "2023-04-12 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_d3e7fb66fda341c1b5adfb42d84e8fd3 | Analyze Usage Statistics \u2014 Wed 09:00-10:00\nid: evt_10058db8903b4a1b9524501cf34af9a1 | Digital Content Training for Staff \u2014 Wed 10:30-12:00\nid: evt_28bdcb2f5c164aec9bd28191f239d999 | Meeting with Library System Administrators \u2014 Wed 14:00-15:00\nid: evt_b525c04824de4dd5b2fcc104654752f5 | Attend Tech Meetup (AI in Libraries) \u2014 Wed 18:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found the \"Meeting with Library System Administrators\" on Wednesday at 2pm. I will decline it for you now."
+      },
+      {
+        "role": "tool_call",
+        "name": "respond_to_event",
+        "args": {
+          "event_id": "evt_28bdcb2f5c164aec9bd28191f239d999",
+          "attending": "DECLINE"
+        },
+        "result": "RSVP updated to DECLINE.\nMeeting with Library System Administrators\n  ID: evt_28bdcb2f5c164aec9bd28191f239d999\n  Time: Wed Apr 12, 14:00 - 15:00\n  Attendees: systemadmin@librarysystem.org\n  RSVP: DECLINE"
+      },
+      {
+        "role": "assistant",
+        "content": "I have declined the invitation to the \"Meeting with Library System Administrators\". Is there anything else?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the e-book vendor demo?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the event called 'E-book Vendor Demo' on Monday, April 10, 2023, and return the attendees. Respond with vendorrep@ebookprovider.com.",
+    "simulated_now": "2023-04-10 09:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Digital Resource Strategy",
+          "start": "2023-04-10 09:00:00",
+          "end": "2023-04-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "otherlibrarians@library.org"
+          ],
+          "id": "evt_30a88f25e4344da8896d87c8ab228ed2"
+        },
+        {
+          "day": "Monday",
+          "summary": "E-book Vendor Demo",
+          "start": "2023-04-10 10:30:00",
+          "end": "2023-04-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vendorrep@ebookprovider.com"
+          ],
+          "id": "evt_f97fe2247c6b4c81bfa31f1c7f2fffa4"
+        },
+        {
+          "day": "Monday",
+          "summary": "Accessibility Audit Follow-up",
+          "start": "2023-04-10 14:00:00",
+          "end": "2023-04-10 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accessibilityconsultant@ada.com"
+          ],
+          "id": "evt_b0fa0dc429594bd99a72701d42ab4110"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Partner",
+          "start": "2023-04-10 18:30:00",
+          "end": "2023-04-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3787908da12244f388b2c6ffc7f8f0d3"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Digital Resource Strategy",
+          "start": "2023-04-10 09:00:00",
+          "end": "2023-04-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "otherlibrarians@library.org"
+          ],
+          "id": "evt_30a88f25e4344da8896d87c8ab228ed2"
+        },
+        {
+          "day": "Monday",
+          "summary": "E-book Vendor Demo",
+          "start": "2023-04-10 10:30:00",
+          "end": "2023-04-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vendorrep@ebookprovider.com"
+          ],
+          "id": "evt_f97fe2247c6b4c81bfa31f1c7f2fffa4"
+        },
+        {
+          "day": "Monday",
+          "summary": "Accessibility Audit Follow-up",
+          "start": "2023-04-10 14:00:00",
+          "end": "2023-04-10 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accessibilityconsultant@ada.com"
+          ],
+          "id": "evt_b0fa0dc429594bd99a72701d42ab4110"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Partner",
+          "start": "2023-04-10 18:30:00",
+          "end": "2023-04-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3787908da12244f388b2c6ffc7f8f0d3"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the e-book vendor demo?"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-08-13 09:00:00",
+          "time_max": "2024-08-13 17:00:00"
+        },
+        "result": "Found 0 events:"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 24 events:\nid: evt_30a88f25e4344da8896d87c8ab228ed2 | Team Meeting - Digital Resource Strategy \u2014 Mon 09:00-10:00\nid: evt_f97fe2247c6b4c81bfa31f1c7f2fffa4 | E-book Vendor Demo \u2014 Mon 10:30-12:00\nid: evt_b0fa0dc429594bd99a72701d42ab4110 | Accessibility Audit Follow-up \u2014 Mon 14:00-15:00\nid: evt_3787908da12244f388b2c6ffc7f8f0d3 | Dinner with Partner \u2014 Mon 18:30-20:00\nid: evt_9b90d7c23bd9418ea1951ef63bb1cd01 | Troubleshooting Access Issues \u2014 Tue 09:30-11:00\nid: evt_422098ee91e742fe990c9fe10d1d77b6 | Update Library Website \u2014 Tue 11:00-12:00\nid: evt_a1c27de57581495a9e7b769091bbae45 | Digital Privacy Workshop Planning \u2014 Tue 14:00-15:00\nid: evt_9976a44c842d448484cf88cd9acb9c24 | Book Club Meeting \u2014 Tue 19:00-20:30\nid: evt_c84c7b9ecab246f99002b313246795c8 | Analyze Usage Statistics \u2014 Wed 09:00-10:00\nid: evt_78da8e77420148b9934e34d87cc9aeba | Digital Content Training for Staff \u2014 Wed 10:30-12:00\nid: evt_59702f0b924247dfad333a0454cb2017 | Meeting with Library System Administrators \u2014 Wed 14:00-15:00\nid: evt_c400020df44247039c92d986b104fb88 | Attend Tech Meetup (AI in Libraries) \u2014 Wed 18:00-20:00\nid: evt_36e0c9dfad2e40109fb54056537c69c8 | Update Library Website \u2014 Thu 09:30-11:00\nid: evt_93adb64500034ad7adcae241fb2fd4d4 | Fact-Checking Organizations meeting \u2014 Thu 11:00-12:00\nid: evt_2c752681fce34482ae52a528e4f9c202 | Review New Digital Content \u2014 Thu 14:00-15:00\nid: evt_4dd875241e8c4a09b422b5714f35caba | Yoga Class \u2014 Thu 19:00-20:00\nid: evt_ead83cd0615141be8467ac1c8a9a84f0 | Team Meeting - Digital Resource Strategy \u2014 Fri 09:00-10:00\nid: evt_825d9a018b784575bd985e702db3ebd4 | Negotiating Vendor Contracts \u2014 Fri 10:30-12:00\nid: evt_eca9257b61b4455797251f36dcab7a33 | Plan digital resource promotion with marketing team. \u2014 Fri 15:00-16:00\nid: evt_dbfb9fd513924e20bb7743f76a4902ea | Dinner with Friends \u2014 Fri 19:00-21:00\nid: evt_0d53fe151638428883718aec8d5d3865 | Hiking \u2014 Sat 10:00-12:00\nid: evt_4fb2077476604b1a871d668b12feb18e | Dinner at Local Restaurant \u2014 Sat 18:00-20:00\nid: evt_05d4fe9b53344edbb6a4353625620440 | Brunch with Partner \u2014 Sun 11:00-13:00\nid: evt_e46e43a5775d46ee8a3d4552e6b44e66 | Relaxing at home \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_f97fe2247c6b4c81bfa31f1c7f2fffa4"
+        },
+        "result": "E-book Vendor Demo\n  ID: evt_f97fe2247c6b4c81bfa31f1c7f2fffa4\n  Time: Mon Apr 10, 10:30 - 12:00\n  Attendees: vendorrep@ebookprovider.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "The e-book vendor demo will be attended by vendorrep@ebookprovider.com."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is dinner with friends on Friday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the event called 'Dinner with Friends' on Friday, April 14, 2023, and return the start time. Respond with 7:00 PM.",
+    "simulated_now": "2023-04-14 09:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Meeting - Digital Resource Strategy",
+          "start": "2023-04-14 09:00:00",
+          "end": "2023-04-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "otherlibrarians@library.org"
+          ],
+          "id": "evt_08d074b98cb64ead9838331de2acfd5e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Negotiating Vendor Contracts",
+          "start": "2023-04-14 10:30:00",
+          "end": "2023-04-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_66b72f0357154fde8b77b81f268f0560"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan digital resource promotion with marketing team.",
+          "start": "2023-04-14 15:00:00",
+          "end": "2023-04-14 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "marketingstaff@library.org"
+          ],
+          "id": "evt_52b5404ba2e345eb95db1cea96ce38c0"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2023-04-14 19:00:00",
+          "end": "2023-04-14 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2c789d6e907043879f226551123fa184"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Meeting - Digital Resource Strategy",
+          "start": "2023-04-14 09:00:00",
+          "end": "2023-04-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "otherlibrarians@library.org"
+          ],
+          "id": "evt_08d074b98cb64ead9838331de2acfd5e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Negotiating Vendor Contracts",
+          "start": "2023-04-14 10:30:00",
+          "end": "2023-04-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_66b72f0357154fde8b77b81f268f0560"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan digital resource promotion with marketing team.",
+          "start": "2023-04-14 15:00:00",
+          "end": "2023-04-14 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "marketingstaff@library.org"
+          ],
+          "id": "evt_52b5404ba2e345eb95db1cea96ce38c0"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2023-04-14 19:00:00",
+          "end": "2023-04-14 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2c789d6e907043879f226551123fa184"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is dinner with friends on Friday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-14 09:00:00 | Friday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-04-14 00:00:00",
+          "time_max": "2023-04-14 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_08d074b98cb64ead9838331de2acfd5e | Team Meeting - Digital Resource Strategy \u2014 Fri 09:00-10:00\nid: evt_66b72f0357154fde8b77b81f268f0560 | Negotiating Vendor Contracts \u2014 Fri 10:30-12:00\nid: evt_52b5404ba2e345eb95db1cea96ce38c0 | Plan digital resource promotion with marketing team. \u2014 Fri 15:00-16:00\nid: evt_2c789d6e907043879f226551123fa184 | Dinner with Friends \u2014 Fri 19:00-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Dinner with friends is scheduled for 19:00-21:00 on Friday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can you move the Friday team meeting to Thursday at the same time?",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Find the event called 'Team Meeting - Digital Resource Strategy' on Friday, April 14, 2023, and check if there is a conflict on Thursday, April 13, 2023, at the same time (9:00 AM - 10:00 AM). If there is no conflict, delete the Friday event and create an event called 'Team Meeting - Digital Resource Strategy' on Thursday from 9:00 AM to 10:00 AM.",
+    "simulated_now": "2023-04-10 14:00:00",
+    "addressed_days": [
+      "Friday",
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Update Library Website",
+          "start": "2023-04-13 09:30:00",
+          "end": "2023-04-13 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9b2467ee890846d0860beae4a6e7c80d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Fact-Checking Organizations meeting",
+          "start": "2023-04-13 11:00:00",
+          "end": "2023-04-13 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "factcheck@org.com"
+          ],
+          "id": "evt_5885854320ff42558816905c11238ee5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Review New Digital Content",
+          "start": "2023-04-13 14:00:00",
+          "end": "2023-04-13 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b346a9439f674b088d229b1d07bd72a5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Yoga Class",
+          "start": "2023-04-13 19:00:00",
+          "end": "2023-04-13 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0ac18c36a5734ea79e8e09ec21900579"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Team Meeting - Digital Resource Strategy",
+          "start": "2023-04-14 09:00:00",
+          "end": "2023-04-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "otherlibrarians@library.org"
+          ],
+          "id": "evt_496b5784ad744417bad9e614a9453b0c"
+        },
+        {
+          "day": "Friday",
+          "summary": "Negotiating Vendor Contracts",
+          "start": "2023-04-14 10:30:00",
+          "end": "2023-04-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_56c8453dfe65469b80b2af480f24d8da"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan digital resource promotion with marketing team.",
+          "start": "2023-04-14 15:00:00",
+          "end": "2023-04-14 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "marketingstaff@library.org"
+          ],
+          "id": "evt_96999044d57c4e14b11f2e467263e2f0"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2023-04-14 19:00:00",
+          "end": "2023-04-14 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_177cd61d310d42b288323602f0502ee4"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Team Meeting - Digital Resource Strategy",
+          "start": "2023-04-13 09:00:00",
+          "end": "2023-04-13 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "otherlibrarians@library.org"
+          ],
+          "id": "evt_496b5784ad744417bad9e614a9453b0c"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Update Library Website",
+          "start": "2023-04-13 09:30:00",
+          "end": "2023-04-13 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9b2467ee890846d0860beae4a6e7c80d"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Fact-Checking Organizations meeting",
+          "start": "2023-04-13 11:00:00",
+          "end": "2023-04-13 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "factcheck@org.com"
+          ],
+          "id": "evt_5885854320ff42558816905c11238ee5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Review New Digital Content",
+          "start": "2023-04-13 14:00:00",
+          "end": "2023-04-13 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b346a9439f674b088d229b1d07bd72a5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Yoga Class",
+          "start": "2023-04-13 19:00:00",
+          "end": "2023-04-13 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0ac18c36a5734ea79e8e09ec21900579"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Negotiating Vendor Contracts",
+          "start": "2023-04-14 10:30:00",
+          "end": "2023-04-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_56c8453dfe65469b80b2af480f24d8da"
+        },
+        {
+          "day": "Friday",
+          "summary": "Plan digital resource promotion with marketing team.",
+          "start": "2023-04-14 15:00:00",
+          "end": "2023-04-14 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "marketingstaff@library.org"
+          ],
+          "id": "evt_96999044d57c4e14b11f2e467263e2f0"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2023-04-14 19:00:00",
+          "end": "2023-04-14 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_177cd61d310d42b288323602f0502ee4"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can you move the Friday team meeting to Thursday at the same time?"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. First, I need to get the current time to identify the upcoming Friday team meeting."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-10 14:00:00 | Monday"
+      },
+      {
+        "role": "assistant",
+        "content": "Got it. The current date is April 10th, 2023. Now I'll look for a \"team meeting\" on the upcoming Friday, April 14th, to move it to Thursday, April 13th."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-04-14 00:00:00",
+          "time_max": "2023-04-15 00:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_496b5784ad744417bad9e614a9453b0c | Team Meeting - Digital Resource Strategy \u2014 Fri 09:00-10:00\nid: evt_56c8453dfe65469b80b2af480f24d8da | Negotiating Vendor Contracts \u2014 Fri 10:30-12:00\nid: evt_96999044d57c4e14b11f2e467263e2f0 | Plan digital resource promotion with marketing team. \u2014 Fri 15:00-16:00\nid: evt_177cd61d310d42b288323602f0502ee4 | Dinner with Friends \u2014 Fri 19:00-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've found the \"Team Meeting - Digital Resource Strategy\" on Friday, April 14th, from 9:00 to 10:00. I will now move it to Thursday, April 13th, at the same time."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2023-04-13 09:00:00",
+          "event_id": "evt_496b5784ad744417bad9e614a9453b0c",
+          "end": "2023-04-13 10:00:00"
+        },
+        "result": "Event updated successfully.\nTeam Meeting - Digital Resource Strategy\n  ID: evt_496b5784ad744417bad9e614a9453b0c\n  Time: Thu Apr 13, 09:00 - 10:00\n  Attendees: otherlibrarians@library.org\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I\u2019ve moved the Team Meeting - Digital Resource Strategy to Thursday, April 13th, from 9:00 to 10:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Accessibility follow up?",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "Find the event called 'Accessibility Audit Follow-up' on Monday, April 10, 2023 and return the details.",
+    "simulated_now": "2023-04-10 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Digital Resource Strategy",
+          "start": "2023-04-10 09:00:00",
+          "end": "2023-04-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "otherlibrarians@library.org"
+          ],
+          "id": "evt_d00ea61fa22e42bc8eef5ccb396a47b6"
+        },
+        {
+          "day": "Monday",
+          "summary": "E-book Vendor Demo",
+          "start": "2023-04-10 10:30:00",
+          "end": "2023-04-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vendorrep@ebookprovider.com"
+          ],
+          "id": "evt_250f54da4f83429c8ee28cb95c900d01"
+        },
+        {
+          "day": "Monday",
+          "summary": "Accessibility Audit Follow-up",
+          "start": "2023-04-10 14:00:00",
+          "end": "2023-04-10 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accessibilityconsultant@ada.com"
+          ],
+          "id": "evt_7c027d09a9f94e67bc2c9eeed18a3c62"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Partner",
+          "start": "2023-04-10 18:30:00",
+          "end": "2023-04-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_81c76db9540a4a09bfcadecb7f221124"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Digital Resource Strategy",
+          "start": "2023-04-10 09:00:00",
+          "end": "2023-04-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "otherlibrarians@library.org"
+          ],
+          "id": "evt_d00ea61fa22e42bc8eef5ccb396a47b6"
+        },
+        {
+          "day": "Monday",
+          "summary": "E-book Vendor Demo",
+          "start": "2023-04-10 10:30:00",
+          "end": "2023-04-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vendorrep@ebookprovider.com"
+          ],
+          "id": "evt_250f54da4f83429c8ee28cb95c900d01"
+        },
+        {
+          "day": "Monday",
+          "summary": "Accessibility Audit Follow-up",
+          "start": "2023-04-10 14:00:00",
+          "end": "2023-04-10 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accessibilityconsultant@ada.com"
+          ],
+          "id": "evt_7c027d09a9f94e67bc2c9eeed18a3c62"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Partner",
+          "start": "2023-04-10 18:30:00",
+          "end": "2023-04-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_81c76db9540a4a09bfcadecb7f221124"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Accessibility follow up?"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 24 events:\nid: evt_d00ea61fa22e42bc8eef5ccb396a47b6 | Team Meeting - Digital Resource Strategy \u2014 Mon 09:00-10:00\nid: evt_250f54da4f83429c8ee28cb95c900d01 | E-book Vendor Demo \u2014 Mon 10:30-12:00\nid: evt_7c027d09a9f94e67bc2c9eeed18a3c62 | Accessibility Audit Follow-up \u2014 Mon 14:00-15:00\nid: evt_81c76db9540a4a09bfcadecb7f221124 | Dinner with Partner \u2014 Mon 18:30-20:00\nid: evt_778b5a96b81349deb16cb5e70403b982 | Troubleshooting Access Issues \u2014 Tue 09:30-11:00\nid: evt_b9d7ecb5647d4055b565c1881a1f9425 | Update Library Website \u2014 Tue 11:00-12:00\nid: evt_72123a727c75461183eba0238a324eb4 | Digital Privacy Workshop Planning \u2014 Tue 14:00-15:00\nid: evt_28700b7bb5c345e2b405402f025d668d | Book Club Meeting \u2014 Tue 19:00-20:30\nid: evt_671cbb8ca8344689aac8f77af1d38783 | Analyze Usage Statistics \u2014 Wed 09:00-10:00\nid: evt_480d66fd53a84563af345018f3fc723c | Digital Content Training for Staff \u2014 Wed 10:30-12:00\nid: evt_de38e2025845442ebc6087ecd14d8d20 | Meeting with Library System Administrators \u2014 Wed 14:00-15:00\nid: evt_84138edb35974d4d88e155b854a29654 | Attend Tech Meetup (AI in Libraries) \u2014 Wed 18:00-20:00\nid: evt_363d5b76633e4e6697844af8c366b4be | Update Library Website \u2014 Thu 09:30-11:00\nid: evt_492c607de43c4f8199a627bd879072e4 | Fact-Checking Organizations meeting \u2014 Thu 11:00-12:00\nid: evt_3e86311da3834f6b9652918293a167e9 | Review New Digital Content \u2014 Thu 14:00-15:00\nid: evt_c47f02b16d9e4052bdbe2577c88d15c3 | Yoga Class \u2014 Thu 19:00-20:00\nid: evt_69bb16b8b0dd4d4db052f67c231cd96c | Team Meeting - Digital Resource Strategy \u2014 Fri 09:00-10:00\nid: evt_17aa73a08e1d46dcbca922b97a35fe34 | Negotiating Vendor Contracts \u2014 Fri 10:30-12:00\nid: evt_07bffdc2ce9b4feba1a89aa46d70bda2 | Plan digital resource promotion with marketing team. \u2014 Fri 15:00-16:00\nid: evt_904d6e86aeb249c983b20f6c43f6b94f | Dinner with Friends \u2014 Fri 19:00-21:00\nid: evt_21054bb9b80f4cc0aa55fbb626f8d8df | Hiking \u2014 Sat 10:00-12:00\nid: evt_bf33c0d2bbc24bb696494944fe6ee487 | Dinner at Local Restaurant \u2014 Sat 18:00-20:00\nid: evt_e3315343c73748b183e26fbfa7f6366c | Brunch with Partner \u2014 Sun 11:00-13:00\nid: evt_93dbb31db21748709bb42a1ba35c9b02 | Relaxing at home \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_7c027d09a9f94e67bc2c9eeed18a3c62"
+        },
+        "result": "Accessibility Audit Follow-up\n  ID: evt_7c027d09a9f94e67bc2c9eeed18a3c62\n  Time: Mon Apr 10, 14:00 - 15:00\n  Attendees: accessibilityconsultant@ada.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I see you have an event, 'Accessibility Audit Follow-up', on Monday at 14:00-15:00 with accessibilityconsultant@ada.com. Is there anything you would like to change about the event?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What meetings do I have today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Check the calendar for events on Monday, April 10, 2023, and list all events.",
+    "simulated_now": "2023-04-10 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Digital Resource Strategy",
+          "start": "2023-04-10 09:00:00",
+          "end": "2023-04-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "otherlibrarians@library.org"
+          ],
+          "id": "evt_ce302e52233c4804abe08bf7360bcb21"
+        },
+        {
+          "day": "Monday",
+          "summary": "E-book Vendor Demo",
+          "start": "2023-04-10 10:30:00",
+          "end": "2023-04-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vendorrep@ebookprovider.com"
+          ],
+          "id": "evt_d3a8ecbec4ad494c8fac36ee38c220a5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Accessibility Audit Follow-up",
+          "start": "2023-04-10 14:00:00",
+          "end": "2023-04-10 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accessibilityconsultant@ada.com"
+          ],
+          "id": "evt_b24399c8c8524289bf5942d56711790c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Partner",
+          "start": "2023-04-10 18:30:00",
+          "end": "2023-04-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1f6593aaa5634e629aa1ba768e1e2aee"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Team Meeting - Digital Resource Strategy",
+          "start": "2023-04-10 09:00:00",
+          "end": "2023-04-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "otherlibrarians@library.org"
+          ],
+          "id": "evt_ce302e52233c4804abe08bf7360bcb21"
+        },
+        {
+          "day": "Monday",
+          "summary": "E-book Vendor Demo",
+          "start": "2023-04-10 10:30:00",
+          "end": "2023-04-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "vendorrep@ebookprovider.com"
+          ],
+          "id": "evt_d3a8ecbec4ad494c8fac36ee38c220a5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Accessibility Audit Follow-up",
+          "start": "2023-04-10 14:00:00",
+          "end": "2023-04-10 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accessibilityconsultant@ada.com"
+          ],
+          "id": "evt_b24399c8c8524289bf5942d56711790c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Partner",
+          "start": "2023-04-10 18:30:00",
+          "end": "2023-04-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1f6593aaa5634e629aa1ba768e1e2aee"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What meetings do I have today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-10 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-04-10 00:00:00",
+          "time_max": "2023-04-10 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_ce302e52233c4804abe08bf7360bcb21 | Team Meeting - Digital Resource Strategy \u2014 Mon 09:00-10:00\nid: evt_d3a8ecbec4ad494c8fac36ee38c220a5 | E-book Vendor Demo \u2014 Mon 10:30-12:00\nid: evt_b24399c8c8524289bf5942d56711790c | Accessibility Audit Follow-up \u2014 Mon 14:00-15:00\nid: evt_1f6593aaa5634e629aa1ba768e1e2aee | Dinner with Partner \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today, Monday, April 10, 2023, you have 4 meetings:\n- Team Meeting - Digital Resource Strategy from 9am to 10am\n- E-book Vendor Demo from 10:30am to 12pm\n- Accessibility Audit Follow-up from 2pm to 3pm\n- Dinner with Partner from 6:30pm to 8pm"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Did I schedule anything for tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Check the calendar for events on Wednesday, April 12, 2023, and list all events.",
+    "simulated_now": "2023-04-11 20:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Analyze Usage Statistics",
+          "start": "2023-04-12 09:00:00",
+          "end": "2023-04-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4a5d1748014c43f9962c84d12212adff"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Digital Content Training for Staff",
+          "start": "2023-04-12 10:30:00",
+          "end": "2023-04-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d0330d8bf5554b95a3901c840ae62a13"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Library System Administrators",
+          "start": "2023-04-12 14:00:00",
+          "end": "2023-04-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "systemadmin@librarysystem.org"
+          ],
+          "id": "evt_1ad592da956545d5933ed2b8ff68aa95"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend Tech Meetup (AI in Libraries)",
+          "start": "2023-04-12 18:00:00",
+          "end": "2023-04-12 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_01c842dd4fa14d2d852a46e6899eafda"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Analyze Usage Statistics",
+          "start": "2023-04-12 09:00:00",
+          "end": "2023-04-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4a5d1748014c43f9962c84d12212adff"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Digital Content Training for Staff",
+          "start": "2023-04-12 10:30:00",
+          "end": "2023-04-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d0330d8bf5554b95a3901c840ae62a13"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Library System Administrators",
+          "start": "2023-04-12 14:00:00",
+          "end": "2023-04-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "systemadmin@librarysystem.org"
+          ],
+          "id": "evt_1ad592da956545d5933ed2b8ff68aa95"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend Tech Meetup (AI in Libraries)",
+          "start": "2023-04-12 18:00:00",
+          "end": "2023-04-12 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_01c842dd4fa14d2d852a46e6899eafda"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Did I schedule anything for tomorrow?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to check your calendar for tomorrow's events. First, I need to know what day it is today. Then I will search for the events on your calendar for tomorrow and get back to you."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-11 20:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-04-12 23:59:59",
+          "time_min": "2023-04-12 00:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_4a5d1748014c43f9962c84d12212adff | Analyze Usage Statistics \u2014 Wed 09:00-10:00\nid: evt_d0330d8bf5554b95a3901c840ae62a13 | Digital Content Training for Staff \u2014 Wed 10:30-12:00\nid: evt_1ad592da956545d5933ed2b8ff68aa95 | Meeting with Library System Administrators \u2014 Wed 14:00-15:00\nid: evt_01c842dd4fa14d2d852a46e6899eafda | Attend Tech Meetup (AI in Libraries) \u2014 Wed 18:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, you have four events scheduled for tomorrow, April 12, 2023:\n\n*   Analyze Usage Statistics from 9:00 AM to 10:00 AM.\n*   Digital Content Training for Staff from 10:30 AM to 12:00 PM.\n*   Meeting with Library System Administrators from 2:00 PM to 3:00 PM.\n*   Attend Tech Meetup (AI in Libraries) from 6:00 PM to 8:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

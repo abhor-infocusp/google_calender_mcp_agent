@@ -1,0 +1,1862 @@
+[
+  {
+    "query": "Create an event called 'Meeting with John' on August 22nd at 3 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event to create a new event with summary 'Meeting with John', start time '2024-08-22T15:00:00', and end time '2024-08-22T16:00:00'.",
+    "simulated_now": "2024-08-18 12:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Low-Impact Aerobics",
+          "start": "2024-08-22 09:00:00",
+          "end": "2024-08-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Recreation Center"
+          ],
+          "id": "evt_4e18611f95ba4a70a0f6967e493651a3"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-22 10:30:00",
+          "end": "2024-08-22 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_869ee15751764db2afc7da575b356010"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Discuss Client Progress with Physical Therapist",
+          "start": "2024-08-22 14:00:00",
+          "end": "2024-08-22 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Jones",
+            "dr.jones@email.com"
+          ],
+          "id": "evt_a06fa7bf6f6e48e3adbe48b0fba5ec02"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Low-Impact Aerobics",
+          "start": "2024-08-22 09:00:00",
+          "end": "2024-08-22 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Recreation Center"
+          ],
+          "id": "evt_4e18611f95ba4a70a0f6967e493651a3"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-22 10:30:00",
+          "end": "2024-08-22 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_869ee15751764db2afc7da575b356010"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Discuss Client Progress with Physical Therapist",
+          "start": "2024-08-22 14:00:00",
+          "end": "2024-08-22 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Jones",
+            "dr.jones@email.com"
+          ],
+          "id": "evt_a06fa7bf6f6e48e3adbe48b0fba5ec02"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meeting with John",
+          "start": "2024-08-22 15:00:00",
+          "end": "2024-08-22 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d39835233af043f1b73f2b579020c0cf"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Meeting with John' on August 22nd at 3 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. I'll create a 1-hour event for \"Meeting with John\" on August 22nd at 3 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-08-18 12:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2024-08-22 15:00:00",
+          "end": "2024-08-22 16:00:00",
+          "summary": "Meeting with John"
+        },
+        "result": "Event created successfully.\nMeeting with John\n  ID: evt_d39835233af043f1b73f2b579020c0cf\n  Time: Thu Aug 22, 15:00 - 16:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've added \"Meeting with John\" to your calendar for Thursday, August 22nd, from 3:00 PM to 4:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can you book me in for a 'Strategy Session' on August 20th at 11:00 AM?",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event to create a new event with summary 'Strategy Session', start time '2024-08-20T11:00:00', and end time '2024-08-20T12:00:00'.",
+    "simulated_now": "2024-08-18 12:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Chair Yoga Class",
+          "start": "2024-08-20 09:00:00",
+          "end": "2024-08-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Recreation Center"
+          ],
+          "id": "evt_5ab4df1fb5104a7389ba25f95f975ad0"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-20 10:30:00",
+          "end": "2024-08-20 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_c93762fe84e84875821c2d6db058213e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Consult with Geriatric Specialist",
+          "start": "2024-08-20 14:00:00",
+          "end": "2024-08-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith",
+            "dr.smith@email.com"
+          ],
+          "id": "evt_4277aaccf27d4483a98d293bd864a8e7"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Chair Yoga Class",
+          "start": "2024-08-20 09:00:00",
+          "end": "2024-08-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Recreation Center"
+          ],
+          "id": "evt_5ab4df1fb5104a7389ba25f95f975ad0"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-20 10:30:00",
+          "end": "2024-08-20 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_c93762fe84e84875821c2d6db058213e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Strategy Session",
+          "start": "2024-08-20 11:00:00",
+          "end": "2024-08-20 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0435ff9e7b6c43e1bf832ed86f648e07"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Consult with Geriatric Specialist",
+          "start": "2024-08-20 14:00:00",
+          "end": "2024-08-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith",
+            "dr.smith@email.com"
+          ],
+          "id": "evt_4277aaccf27d4483a98d293bd864a8e7"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can you book me in for a 'Strategy Session' on August 20th at 11:00 AM?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. I'll schedule a 1-hour 'Strategy Session' for you on August 20th, 2024, at 11:00 AM. Does that sound right?\n\nIf so, I will proceed with creating the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2024-08-20 11:00:00",
+          "summary": "Strategy Session",
+          "end": "2024-08-20 12:00:00"
+        },
+        "result": "Event created successfully.\nStrategy Session\n  ID: evt_0435ff9e7b6c43e1bf832ed86f648e07\n  Time: Tue Aug 20, 11:00 - 12:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've booked that in for you.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing Wednesday afternoon?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find events on '2024-08-21' between 12:00:00 and 17:00:00. Return the events to the user.",
+    "simulated_now": "2024-08-21 09:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Senior Fitness Assessment",
+          "start": "2024-08-21 08:00:00",
+          "end": "2024-08-21 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_97a0797e68c14288b11c396351560a9e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-21 09:30:00",
+          "end": "2024-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_339fd093a8434f63b5f60b15f5ed46bc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Program Design & Client Communication",
+          "start": "2024-08-21 13:00:00",
+          "end": "2024-08-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_db540f88aa254b64ad84f8cbdb64306d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2024-08-21 19:00:00",
+          "end": "2024-08-21 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Friend 1",
+            "friend1@email.com",
+            "Friend 2",
+            "friend2@email.com"
+          ],
+          "id": "evt_0fce9c328e2f4f1ab2fa0e163ae2e9a6"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Senior Fitness Assessment",
+          "start": "2024-08-21 08:00:00",
+          "end": "2024-08-21 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_97a0797e68c14288b11c396351560a9e"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-21 09:30:00",
+          "end": "2024-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_339fd093a8434f63b5f60b15f5ed46bc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Program Design & Client Communication",
+          "start": "2024-08-21 13:00:00",
+          "end": "2024-08-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_db540f88aa254b64ad84f8cbdb64306d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2024-08-21 19:00:00",
+          "end": "2024-08-21 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Friend 1",
+            "friend1@email.com",
+            "Friend 2",
+            "friend2@email.com"
+          ],
+          "id": "evt_0fce9c328e2f4f1ab2fa0e163ae2e9a6"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing Wednesday afternoon?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify the date of the upcoming Wednesday. Then, I will list the events on that day to see what you have scheduled in the afternoon."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-08-21 09:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-08-21 12:00:00",
+          "time_max": "2024-08-21 17:00:00"
+        },
+        "result": "Found 1 events:\nid: evt_db540f88aa254b64ad84f8cbdb64306d | Program Design & Client Communication \u2014 Wed 13:00-14:00"
+      },
+      {
+        "role": "assistant",
+        "content": "This afternoon at 13:00 you have a meeting: Program Design & Client Communication."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What does my Friday look like?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find all events scheduled for '2024-08-23'. Present the events found to the user.",
+    "simulated_now": "2024-08-23 07:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Senior Fitness Assessment",
+          "start": "2024-08-23 08:00:00",
+          "end": "2024-08-23 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_dcf34e1190564c678d47f37f2d59ad2a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-23 09:30:00",
+          "end": "2024-08-23 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_5e203656080049f68b223b84453e5dd8"
+        },
+        {
+          "day": "Friday",
+          "summary": "Program Design & Client Communication",
+          "start": "2024-08-23 13:00:00",
+          "end": "2024-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ed82263eb3b9405c91f2867acff8458d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2024-08-23 18:00:00",
+          "end": "2024-08-23 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Friend 3",
+            "friend3@email.com",
+            "Friend 4",
+            "friend4@email.com"
+          ],
+          "id": "evt_62b5730678c94f39990b06c5b5e87e27"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Senior Fitness Assessment",
+          "start": "2024-08-23 08:00:00",
+          "end": "2024-08-23 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_dcf34e1190564c678d47f37f2d59ad2a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-23 09:30:00",
+          "end": "2024-08-23 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_5e203656080049f68b223b84453e5dd8"
+        },
+        {
+          "day": "Friday",
+          "summary": "Program Design & Client Communication",
+          "start": "2024-08-23 13:00:00",
+          "end": "2024-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ed82263eb3b9405c91f2867acff8458d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2024-08-23 18:00:00",
+          "end": "2024-08-23 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Friend 3",
+            "friend3@email.com",
+            "Friend 4",
+            "friend4@email.com"
+          ],
+          "id": "evt_62b5730678c94f39990b06c5b5e87e27"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What does my Friday look like?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-08-23 07:00:00 | Friday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-08-23 00:00:00",
+          "time_max": "2024-08-23 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_dcf34e1190564c678d47f37f2d59ad2a | Senior Fitness Assessment \u2014 Fri 08:00-09:00\nid: evt_5e203656080049f68b223b84453e5dd8 | Individual Client Session \u2014 Fri 09:30-10:30\nid: evt_ed82263eb3b9405c91f2867acff8458d | Program Design & Client Communication \u2014 Fri 13:00-14:00\nid: evt_62b5730678c94f39990b06c5b5e87e27 | Dinner with Friends \u2014 Fri 18:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have four events scheduled for today, Friday, August 23rd:\n\n*   **8:00 AM - 9:00 AM:** Senior Fitness Assessment\n*   **9:30 AM - 10:30 AM:** Individual Client Session\n*   **1:00 PM - 2:00 PM:** Program Design & Client Communication\n*   **6:00 PM - 8:00 PM:** Dinner with Friends"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can you move my 'Individual Client Session' on Monday to 10:00 AM?",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find the 'Individual Client Session' on '2024-08-19'. Call update_event to update the start time to '2024-08-19T10:00:00' and end time to '2024-08-19T11:00:00'.",
+    "simulated_now": "2024-08-19 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Senior Fitness Assessment",
+          "start": "2024-08-19 08:00:00",
+          "end": "2024-08-19 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_f32d5674aebb4a0fa1742f419a253c57"
+        },
+        {
+          "day": "Monday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-19 09:30:00",
+          "end": "2024-08-19 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_80ddaeaa3ab0431a93ed06f3df0138d3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Program Design & Client Communication",
+          "start": "2024-08-19 13:00:00",
+          "end": "2024-08-19 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a295a7f7717a4769aadc429a1f2f5c47"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Husband",
+          "start": "2024-08-19 18:30:00",
+          "end": "2024-08-19 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8f1d3d2c71fe4e3096262db00b46e23a"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Senior Fitness Assessment",
+          "start": "2024-08-19 08:00:00",
+          "end": "2024-08-19 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_f32d5674aebb4a0fa1742f419a253c57"
+        },
+        {
+          "day": "Monday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-19 10:00:00",
+          "end": "2024-08-19 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_80ddaeaa3ab0431a93ed06f3df0138d3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Program Design & Client Communication",
+          "start": "2024-08-19 13:00:00",
+          "end": "2024-08-19 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a295a7f7717a4769aadc429a1f2f5c47"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Husband",
+          "start": "2024-08-19 18:30:00",
+          "end": "2024-08-19 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8f1d3d2c71fe4e3096262db00b46e23a"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can you move my 'Individual Client Session' on Monday to 10:00 AM?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-08-19 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-08-19 00:00:00",
+          "time_max": "2024-08-19 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_f32d5674aebb4a0fa1742f419a253c57 | Senior Fitness Assessment \u2014 Mon 08:00-09:00\nid: evt_80ddaeaa3ab0431a93ed06f3df0138d3 | Individual Client Session \u2014 Mon 09:30-10:30\nid: evt_a295a7f7717a4769aadc429a1f2f5c47 | Program Design & Client Communication \u2014 Mon 13:00-14:00\nid: evt_8f1d3d2c71fe4e3096262db00b46e23a | Dinner with Husband \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2024-08-19 10:00:00",
+          "end": "2024-08-19 11:00:00",
+          "event_id": "evt_80ddaeaa3ab0431a93ed06f3df0138d3"
+        },
+        "result": "Event updated successfully.\nIndividual Client Session\n  ID: evt_80ddaeaa3ab0431a93ed06f3df0138d3\n  Time: Mon Aug 19, 10:00 - 11:00\n  Attendees: Client, client@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've moved your 'Individual Client Session' to 10:00 AM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change the time of the 'Dinner with Friends' on Friday by one hour earlier.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find 'Dinner with Friends' on '2024-08-23'. Call update_event to update the start time to '2024-08-23T17:00:00' and end time to '2024-08-23T19:00:00'.",
+    "simulated_now": "2024-08-23 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Senior Fitness Assessment",
+          "start": "2024-08-23 08:00:00",
+          "end": "2024-08-23 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_07fed9c604514b49b006a29e7928d1ee"
+        },
+        {
+          "day": "Friday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-23 09:30:00",
+          "end": "2024-08-23 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_5bb65b08fbac4b1594279ba79784ef66"
+        },
+        {
+          "day": "Friday",
+          "summary": "Program Design & Client Communication",
+          "start": "2024-08-23 13:00:00",
+          "end": "2024-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0f3be39703ae4b4a83094ba6c9d3916e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2024-08-23 18:00:00",
+          "end": "2024-08-23 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Friend 3",
+            "friend3@email.com",
+            "Friend 4",
+            "friend4@email.com"
+          ],
+          "id": "evt_80e37cb0ac5f486a94d24e31bce57f48"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Senior Fitness Assessment",
+          "start": "2024-08-23 08:00:00",
+          "end": "2024-08-23 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_07fed9c604514b49b006a29e7928d1ee"
+        },
+        {
+          "day": "Friday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-23 09:30:00",
+          "end": "2024-08-23 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_5bb65b08fbac4b1594279ba79784ef66"
+        },
+        {
+          "day": "Friday",
+          "summary": "Program Design & Client Communication",
+          "start": "2024-08-23 13:00:00",
+          "end": "2024-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0f3be39703ae4b4a83094ba6c9d3916e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2024-08-23 17:00:00",
+          "end": "2024-08-23 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Friend 3",
+            "friend3@email.com",
+            "Friend 4",
+            "friend4@email.com"
+          ],
+          "id": "evt_80e37cb0ac5f486a94d24e31bce57f48"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change the time of the 'Dinner with Friends' on Friday by one hour earlier."
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time, then find the \"Dinner with Friends\" event on the upcoming Friday, and move it one hour earlier."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-08-23 10:00:00 | Friday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will now search for the \"Dinner with Friends\" event on Friday, August 23rd to reschedule it."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-08-23 00:00:00",
+          "time_max": "2024-08-23 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_07fed9c604514b49b006a29e7928d1ee | Senior Fitness Assessment \u2014 Fri 08:00-09:00\nid: evt_5bb65b08fbac4b1594279ba79784ef66 | Individual Client Session \u2014 Fri 09:30-10:30\nid: evt_0f3be39703ae4b4a83094ba6c9d3916e | Program Design & Client Communication \u2014 Fri 13:00-14:00\nid: evt_80e37cb0ac5f486a94d24e31bce57f48 | Dinner with Friends \u2014 Fri 18:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Found it. The \"Dinner with Friends\" is scheduled for 18:00-20:00. I will now move it one hour earlier to 17:00-19:00."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2024-08-23 17:00:00",
+          "event_id": "evt_80e37cb0ac5f486a94d24e31bce57f48",
+          "end": "2024-08-23 19:00:00"
+        },
+        "result": "Event updated successfully.\nDinner with Friends\n  ID: evt_80e37cb0ac5f486a94d24e31bce57f48\n  Time: Fri Aug 23, 17:00 - 19:00\n  Attendees: Friend 3, friend3@email.com, Friend 4, friend4@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "Done. I've moved the \"Dinner with Friends\" to 17:00-19:00 this Friday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the 'Book Club Meeting' this Wednesday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to find the 'Book Club Meeting' on '2024-08-21'. Call get_event to get the event details and extract the attendees. Return the attendees to the user.",
+    "simulated_now": "2024-08-21 08:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Senior Fitness Assessment",
+          "start": "2024-08-21 08:00:00",
+          "end": "2024-08-21 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_f0e659b7ca094aca93f7fd293367a200"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-21 09:30:00",
+          "end": "2024-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_94f8aa304f8a40bda2f00745c6292180"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Program Design & Client Communication",
+          "start": "2024-08-21 13:00:00",
+          "end": "2024-08-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a2773e383bc74d17bf84b46abdb674d7"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2024-08-21 19:00:00",
+          "end": "2024-08-21 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Friend 1",
+            "friend1@email.com",
+            "Friend 2",
+            "friend2@email.com"
+          ],
+          "id": "evt_fe1b2bb9bb2e4a5fb08d2d1e306f3d70"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Senior Fitness Assessment",
+          "start": "2024-08-21 08:00:00",
+          "end": "2024-08-21 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_f0e659b7ca094aca93f7fd293367a200"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-21 09:30:00",
+          "end": "2024-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_94f8aa304f8a40bda2f00745c6292180"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Program Design & Client Communication",
+          "start": "2024-08-21 13:00:00",
+          "end": "2024-08-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a2773e383bc74d17bf84b46abdb674d7"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2024-08-21 19:00:00",
+          "end": "2024-08-21 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Friend 1",
+            "friend1@email.com",
+            "Friend 2",
+            "friend2@email.com"
+          ],
+          "id": "evt_fe1b2bb9bb2e4a5fb08d2d1e306f3d70"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the 'Book Club Meeting' this Wednesday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-08-21 08:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-08-21 23:59:59",
+          "time_min": "2024-08-21 08:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_f0e659b7ca094aca93f7fd293367a200 | Senior Fitness Assessment \u2014 Wed 08:00-09:00\nid: evt_94f8aa304f8a40bda2f00745c6292180 | Individual Client Session \u2014 Wed 09:30-10:30\nid: evt_a2773e383bc74d17bf84b46abdb674d7 | Program Design & Client Communication \u2014 Wed 13:00-14:00\nid: evt_fe1b2bb9bb2e4a5fb08d2d1e306f3d70 | Book Club Meeting \u2014 Wed 19:00-20:30"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_fe1b2bb9bb2e4a5fb08d2d1e306f3d70"
+        },
+        "result": "Book Club Meeting\n  ID: evt_fe1b2bb9bb2e4a5fb08d2d1e306f3d70\n  Time: Wed Aug 21, 19:00 - 20:30\n  Attendees: Friend 1, friend1@email.com, Friend 2, friend2@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "Friend 1 (friend1@email.com) and Friend 2 (friend2@email.com) are attending the 'Book Club Meeting' this Wednesday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is the 'Balance Training Class' on Saturday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to find the 'Balance Training Class' on '2024-08-24'. Call get_event to get the event details and extract the start time. Return the start time to the user.",
+    "simulated_now": "2024-08-24 07:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Balance Training Class",
+          "start": "2024-08-24 09:00:00",
+          "end": "2024-08-24 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Recreation Center"
+          ],
+          "id": "evt_11f4730aead547ec84c3bd78acf1564f"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Brunch with Husband",
+          "start": "2024-08-24 11:00:00",
+          "end": "2024-08-24 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e98e955cdd7546c38114f2d8aa00d2ea"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Balance Training Class",
+          "start": "2024-08-24 09:00:00",
+          "end": "2024-08-24 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Recreation Center"
+          ],
+          "id": "evt_11f4730aead547ec84c3bd78acf1564f"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Brunch with Husband",
+          "start": "2024-08-24 11:00:00",
+          "end": "2024-08-24 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e98e955cdd7546c38114f2d8aa00d2ea"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is the 'Balance Training Class' on Saturday?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-08-24 07:00:00 | Saturday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-08-24 00:00:00",
+          "time_max": "2024-08-24 23:59:59"
+        },
+        "result": "Found 2 events:\nid: evt_11f4730aead547ec84c3bd78acf1564f | Balance Training Class \u2014 Sat 09:00-10:00\nid: evt_e98e955cdd7546c38114f2d8aa00d2ea | Brunch with Husband \u2014 Sat 11:00-13:00"
+      },
+      {
+        "role": "assistant",
+        "content": "The Balance Training Class is from 09:00 to 10:00 on Saturday.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "I cannot attend the 'Consult with Geriatric Specialist' on Tuesday. Please decline.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Call list_events to find the 'Consult with Geriatric Specialist' on '2024-08-20'. Call respond_to_event to decline the event.",
+    "simulated_now": "2024-08-20 08:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Chair Yoga Class",
+          "start": "2024-08-20 09:00:00",
+          "end": "2024-08-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Recreation Center"
+          ],
+          "id": "evt_beab5ae7312643ab9df6ce7c1acd0c8f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-20 10:30:00",
+          "end": "2024-08-20 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_706dac2400a141079365296487d20196"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Consult with Geriatric Specialist",
+          "start": "2024-08-20 14:00:00",
+          "end": "2024-08-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith",
+            "dr.smith@email.com"
+          ],
+          "id": "evt_3ddd237e5dc34245b66c65b91c35f27c"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Chair Yoga Class",
+          "start": "2024-08-20 09:00:00",
+          "end": "2024-08-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Recreation Center"
+          ],
+          "id": "evt_beab5ae7312643ab9df6ce7c1acd0c8f"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-20 10:30:00",
+          "end": "2024-08-20 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_706dac2400a141079365296487d20196"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Consult with Geriatric Specialist",
+          "start": "2024-08-20 14:00:00",
+          "end": "2024-08-20 15:00:00",
+          "attending": "DECLINE",
+          "attendees": [
+            "Dr. Smith",
+            "dr.smith@email.com"
+          ],
+          "id": "evt_3ddd237e5dc34245b66c65b91c35f27c"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "I cannot attend the 'Consult with Geriatric Specialist' on Tuesday. Please decline."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I need to find the event in your calendar."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-08-20 08:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-08-21 08:00:00",
+          "time_min": "2024-08-20 08:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_beab5ae7312643ab9df6ce7c1acd0c8f | Chair Yoga Class \u2014 Tue 09:00-10:00\nid: evt_706dac2400a141079365296487d20196 | Individual Client Session \u2014 Tue 10:30-11:30\nid: evt_3ddd237e5dc34245b66c65b91c35f27c | Consult with Geriatric Specialist \u2014 Tue 14:00-15:00\nid: evt_6f4b30cd5af042018188b34ecbf419d1 | Senior Fitness Assessment \u2014 Wed 08:00-09:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I've found the event. Now I will decline it for you."
+      },
+      {
+        "role": "tool_call",
+        "name": "respond_to_event",
+        "args": {
+          "attending": "DECLINE",
+          "event_id": "evt_3ddd237e5dc34245b66c65b91c35f27c"
+        },
+        "result": "RSVP updated to DECLINE.\nConsult with Geriatric Specialist\n  ID: evt_3ddd237e5dc34245b66c65b91c35f27c\n  Time: Tue Aug 20, 14:00 - 15:00\n  Attendees: Dr. Smith, dr.smith@email.com\n  RSVP: DECLINE"
+      },
+      {
+        "role": "assistant",
+        "content": "I have declined the invitation to \"Consult with Geriatric Specialist\" on Tuesday, August 20th from 2:00 PM to 3:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule my first 'Individual Client Session' on Friday to 2:30 PM.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Call list_events to find the first 'Individual Client Session' on '2024-08-23'. Call update_event to update the start time to '2024-08-23T14:30:00' and end time to '2024-08-23T15:30:00'.",
+    "simulated_now": "2024-08-23 08:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Senior Fitness Assessment",
+          "start": "2024-08-23 08:00:00",
+          "end": "2024-08-23 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_3fd5d979548046ed88dd074a074ad0b8"
+        },
+        {
+          "day": "Friday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-23 09:30:00",
+          "end": "2024-08-23 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_cff41fd6af7a40dc92e16afa1348335a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Program Design & Client Communication",
+          "start": "2024-08-23 13:00:00",
+          "end": "2024-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c99c2e1dae5e49a7906ad9d797def031"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2024-08-23 18:00:00",
+          "end": "2024-08-23 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Friend 3",
+            "friend3@email.com",
+            "Friend 4",
+            "friend4@email.com"
+          ],
+          "id": "evt_8a44277589274af181a5adc6112a9300"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Senior Fitness Assessment",
+          "start": "2024-08-23 08:00:00",
+          "end": "2024-08-23 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_3fd5d979548046ed88dd074a074ad0b8"
+        },
+        {
+          "day": "Friday",
+          "summary": "Program Design & Client Communication",
+          "start": "2024-08-23 13:00:00",
+          "end": "2024-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c99c2e1dae5e49a7906ad9d797def031"
+        },
+        {
+          "day": "Friday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-23 14:30:00",
+          "end": "2024-08-23 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_cff41fd6af7a40dc92e16afa1348335a"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2024-08-23 18:00:00",
+          "end": "2024-08-23 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Friend 3",
+            "friend3@email.com",
+            "Friend 4",
+            "friend4@email.com"
+          ],
+          "id": "evt_8a44277589274af181a5adc6112a9300"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule my first 'Individual Client Session' on Friday to 2:30 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to determine the date of the upcoming Friday. Then, I will search for the first \"Individual Client Session\" on that day. Once I find it, I will reschedule it to 2:30 PM while keeping the original duration."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-08-23 08:00:00 | Friday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will now list all events scheduled for today, which is Friday, August 23, 2024, to find the first \"Individual Client Session.\""
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-08-23 00:00:00",
+          "time_max": "2024-08-23 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_3fd5d979548046ed88dd074a074ad0b8 | Senior Fitness Assessment \u2014 Fri 08:00-09:00\nid: evt_cff41fd6af7a40dc92e16afa1348335a | Individual Client Session \u2014 Fri 09:30-10:30\nid: evt_c99c2e1dae5e49a7906ad9d797def031 | Program Design & Client Communication \u2014 Fri 13:00-14:00\nid: evt_8a44277589274af181a5adc6112a9300 | Dinner with Friends \u2014 Fri 18:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I've found the \"Individual Client Session\" scheduled from 9:30 AM to 10:30 AM. I will now reschedule it to 2:30 PM, with the new end time at 3:30 PM to maintain the original one-hour duration."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2024-08-23 14:30:00",
+          "end": "2024-08-23 15:30:00",
+          "event_id": "evt_cff41fd6af7a40dc92e16afa1348335a"
+        },
+        "result": "Event updated successfully.\nIndividual Client Session\n  ID: evt_cff41fd6af7a40dc92e16afa1348335a\n  Time: Fri Aug 23, 14:30 - 15:30\n  Attendees: Client, client@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have rescheduled your first \"Individual Client Session\" on Friday to 2:30 PM. The event will now take place from 2:30 PM to 3:30 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Dinner Friday?",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find any event with 'dinner' in the title on '2024-08-23'. Return the results to the user.",
+    "simulated_now": "2024-08-23 12:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Senior Fitness Assessment",
+          "start": "2024-08-23 08:00:00",
+          "end": "2024-08-23 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_06eba734ce7444068de0bf97408e453e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-23 09:30:00",
+          "end": "2024-08-23 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_493d292c8cad42deb255c86bb6591f34"
+        },
+        {
+          "day": "Friday",
+          "summary": "Program Design & Client Communication",
+          "start": "2024-08-23 13:00:00",
+          "end": "2024-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d0bfd052424344b2904db1ca5a8006bb"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2024-08-23 18:00:00",
+          "end": "2024-08-23 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Friend 3",
+            "friend3@email.com",
+            "Friend 4",
+            "friend4@email.com"
+          ],
+          "id": "evt_398c52e10092478fa280e05a11709e84"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Senior Fitness Assessment",
+          "start": "2024-08-23 08:00:00",
+          "end": "2024-08-23 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_06eba734ce7444068de0bf97408e453e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-23 09:30:00",
+          "end": "2024-08-23 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_493d292c8cad42deb255c86bb6591f34"
+        },
+        {
+          "day": "Friday",
+          "summary": "Program Design & Client Communication",
+          "start": "2024-08-23 13:00:00",
+          "end": "2024-08-23 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d0bfd052424344b2904db1ca5a8006bb"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with Friends",
+          "start": "2024-08-23 18:00:00",
+          "end": "2024-08-23 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Friend 3",
+            "friend3@email.com",
+            "Friend 4",
+            "friend4@email.com"
+          ],
+          "id": "evt_398c52e10092478fa280e05a11709e84"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Dinner Friday?"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can help with that. First, I'll check your calendar for any existing dinner plans on Friday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-08-23 12:00:00 | Friday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-08-23 00:00:00",
+          "time_max": "2024-08-23 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_06eba734ce7444068de0bf97408e453e | Senior Fitness Assessment \u2014 Fri 08:00-09:00\nid: evt_493d292c8cad42deb255c86bb6591f34 | Individual Client Session \u2014 Fri 09:30-10:30\nid: evt_d0bfd052424344b2904db1ca5a8006bb | Program Design & Client Communication \u2014 Fri 13:00-14:00\nid: evt_398c52e10092478fa280e05a11709e84 | Dinner with Friends \u2014 Fri 18:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I see you have \"Dinner with Friends\" scheduled for 6:00 PM to 8:00 PM on Friday. Are you asking about this event? Or would you like to schedule a new dinner?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change yoga class.",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find the 'Chair Yoga Class' on '2024-08-20'. Ask the user to provide further details regarding what changes they would like to make.",
+    "simulated_now": "2024-08-20 14:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Chair Yoga Class",
+          "start": "2024-08-20 09:00:00",
+          "end": "2024-08-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Recreation Center"
+          ],
+          "id": "evt_2ab8e66d4f1e480db875cff38e8c6e9c"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-20 10:30:00",
+          "end": "2024-08-20 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_ae2d13aed2c142d5bf37abb5fc7cc4e6"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Consult with Geriatric Specialist",
+          "start": "2024-08-20 14:00:00",
+          "end": "2024-08-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith",
+            "dr.smith@email.com"
+          ],
+          "id": "evt_63a4fceca0a8452389a3658e602bd156"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Chair Yoga Class",
+          "start": "2024-08-20 09:00:00",
+          "end": "2024-08-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Recreation Center"
+          ],
+          "id": "evt_2ab8e66d4f1e480db875cff38e8c6e9c"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-20 10:30:00",
+          "end": "2024-08-20 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_ae2d13aed2c142d5bf37abb5fc7cc4e6"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Consult with Geriatric Specialist",
+          "start": "2024-08-20 14:00:00",
+          "end": "2024-08-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith",
+            "dr.smith@email.com"
+          ],
+          "id": "evt_63a4fceca0a8452389a3658e602bd156"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change yoga class."
+      },
+      {
+        "role": "assistant",
+        "content": "I can help with that. First, I need to find the yoga class you're referring to. I'll search your calendar for all of your events."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 22 events:\nid: evt_d4cb26d18c744dbc8ea3286c22b0f26d | Senior Fitness Assessment \u2014 Mon 08:00-09:00\nid: evt_2a6704fa4d584950a28fb494a0a4975c | Individual Client Session \u2014 Mon 09:30-10:30\nid: evt_bc36969e50614e58a32b0a0119b899f7 | Program Design & Client Communication \u2014 Mon 13:00-14:00\nid: evt_6c0343ff24cb4782a9749ad1d9da3772 | Dinner with Husband \u2014 Mon 18:30-20:00\nid: evt_2ab8e66d4f1e480db875cff38e8c6e9c | Chair Yoga Class \u2014 Tue 09:00-10:00\nid: evt_ae2d13aed2c142d5bf37abb5fc7cc4e6 | Individual Client Session \u2014 Tue 10:30-11:30\nid: evt_63a4fceca0a8452389a3658e602bd156 | Consult with Geriatric Specialist \u2014 Tue 14:00-15:00\nid: evt_bfd7492346b145c4beb694f5f1e19080 | Senior Fitness Assessment \u2014 Wed 08:00-09:00\nid: evt_d7da9c5166de49b091c2bb6f59024e9c | Individual Client Session \u2014 Wed 09:30-10:30\nid: evt_e740d11149e542a3af9acad502fada48 | Program Design & Client Communication \u2014 Wed 13:00-14:00\nid: evt_7c92aacbf8eb4aa5a111b361f4532ef8 | Book Club Meeting \u2014 Wed 19:00-20:30\nid: evt_4261ea1346d549e68ce48e9ec9ac0712 | Low-Impact Aerobics \u2014 Thu 09:00-10:00\nid: evt_92c005568d49452783e15ce7937552c5 | Individual Client Session \u2014 Thu 10:30-11:30\nid: evt_ea0d2bd63b35414dab859614429445a4 | Discuss Client Progress with Physical Therapist \u2014 Thu 14:00-15:00\nid: evt_d676bddd3f65416a972ff07d222ba2c0 | Senior Fitness Assessment \u2014 Fri 08:00-09:00\nid: evt_f615ce6f6de945178c494628af5a6b5c | Individual Client Session \u2014 Fri 09:30-10:30\nid: evt_813dc53fb7754f4fb86308fcf7bb03bf | Program Design & Client Communication \u2014 Fri 13:00-14:00\nid: evt_5a7ed58104e042fcbf2754b4579c976d | Dinner with Friends \u2014 Fri 18:00-20:00\nid: evt_22d75bcb77f944b4a767cc59c48c15bf | Balance Training Class \u2014 Sat 09:00-10:00\nid: evt_4f2f78288a8e4fe9b3d50ff986919b40 | Brunch with Husband \u2014 Sat 11:00-13:00\nid: evt_0bc21e91e2fd4c4f9643dbaa99296aa3 | Gardening \u2014 Sun 10:00-11:00\nid: evt_c4c7d3a59873413280beef5673203bfb | Visit Grandchildren \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found a \"Chair Yoga Class\" on your calendar. Is this the class you'd like to change? If so, what changes would you like to make?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to find all events scheduled for '2024-08-20'. Present the events found to the user.",
+    "simulated_now": "2024-08-20 07:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Chair Yoga Class",
+          "start": "2024-08-20 09:00:00",
+          "end": "2024-08-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Recreation Center"
+          ],
+          "id": "evt_93f5b12884a348f0986dbc9c29022f7e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-20 10:30:00",
+          "end": "2024-08-20 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_f5bb0769d2474bed982f363ba4229706"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Consult with Geriatric Specialist",
+          "start": "2024-08-20 14:00:00",
+          "end": "2024-08-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith",
+            "dr.smith@email.com"
+          ],
+          "id": "evt_93b4c78efb6e4934afd826e19e62d2d0"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Chair Yoga Class",
+          "start": "2024-08-20 09:00:00",
+          "end": "2024-08-20 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Recreation Center"
+          ],
+          "id": "evt_93f5b12884a348f0986dbc9c29022f7e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-20 10:30:00",
+          "end": "2024-08-20 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_f5bb0769d2474bed982f363ba4229706"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Consult with Geriatric Specialist",
+          "start": "2024-08-20 14:00:00",
+          "end": "2024-08-20 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Dr. Smith",
+            "dr.smith@email.com"
+          ],
+          "id": "evt_93b4c78efb6e4934afd826e19e62d2d0"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify today's date. Then, I will list all the events scheduled for today to let you know what you are doing."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-08-20 07:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2024-08-20 23:59:59",
+          "time_min": "2024-08-20 00:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_93f5b12884a348f0986dbc9c29022f7e | Chair Yoga Class \u2014 Tue 09:00-10:00\nid: evt_f5bb0769d2474bed982f363ba4229706 | Individual Client Session \u2014 Tue 10:30-11:30\nid: evt_93b4c78efb6e4934afd826e19e62d2d0 | Consult with Geriatric Specialist \u2014 Tue 14:00-15:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have three events scheduled for today:\n\n*   **Chair Yoga Class** from 9:00 AM to 10:00 AM.\n*   **Individual Client Session** from 10:30 AM to 11:30 AM.\n*   **Consult with Geriatric Specialist** from 2:00 PM to 3:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Anything on for me tomorrow morning?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to find events scheduled for '2024-08-21' between 00:00:00 and 12:00:00. Present the events found to the user.",
+    "simulated_now": "2024-08-20 15:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Senior Fitness Assessment",
+          "start": "2024-08-21 08:00:00",
+          "end": "2024-08-21 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_2372627a1ee24f5991c487f6c15a8cf9"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-21 09:30:00",
+          "end": "2024-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_0ae607c2e0bb4b8085feaaa23fe96b5b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Program Design & Client Communication",
+          "start": "2024-08-21 13:00:00",
+          "end": "2024-08-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8e5314379fe041759680f8e9e954225b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2024-08-21 19:00:00",
+          "end": "2024-08-21 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Friend 1",
+            "friend1@email.com",
+            "Friend 2",
+            "friend2@email.com"
+          ],
+          "id": "evt_402e4946d82b4e88b68025cbf6691c42"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Senior Fitness Assessment",
+          "start": "2024-08-21 08:00:00",
+          "end": "2024-08-21 09:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_2372627a1ee24f5991c487f6c15a8cf9"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Individual Client Session",
+          "start": "2024-08-21 09:30:00",
+          "end": "2024-08-21 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Client",
+            "client@email.com"
+          ],
+          "id": "evt_0ae607c2e0bb4b8085feaaa23fe96b5b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Program Design & Client Communication",
+          "start": "2024-08-21 13:00:00",
+          "end": "2024-08-21 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8e5314379fe041759680f8e9e954225b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Book Club Meeting",
+          "start": "2024-08-21 19:00:00",
+          "end": "2024-08-21 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Friend 1",
+            "friend1@email.com",
+            "Friend 2",
+            "friend2@email.com"
+          ],
+          "id": "evt_402e4946d82b4e88b68025cbf6691c42"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Anything on for me tomorrow morning?"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can check that for you.\n\nFirst, I'll get the current time to know what \"tomorrow\" is. Then, I'll check for events on your calendar for tomorrow morning."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2024-08-20 15:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-08-21 00:00:00",
+          "time_max": "2024-08-21 12:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_2372627a1ee24f5991c487f6c15a8cf9 | Senior Fitness Assessment \u2014 Wed 08:00-09:00\nid: evt_0ae607c2e0bb4b8085feaaa23fe96b5b | Individual Client Session \u2014 Wed 09:30-10:30"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, you have two events scheduled for tomorrow morning.\n\nFirst, you have a \"Senior Fitness Assessment\" from 8am to 9am.\nThen, you have an \"Individual Client Session\" from 9:30am to 10:30am."
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

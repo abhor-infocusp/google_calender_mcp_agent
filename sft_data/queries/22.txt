@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Lunch' for Tuesday at 12:00 PM, ending at 1:00 PM. Invite program_manager@nonprofit.org.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event with the title 'Team Lunch' on Tuesday, February 13, 2024, from 12:00 PM to 1:00 PM, with program_manager@nonprofit.org as an attendee.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-02-11T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting titled 'Final Project Discussion' for Friday from 3:00 PM to 4:00 PM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event titled 'Final Project Discussion' on Friday, February 16, 2024, from 3:00 PM to 4:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-02-11T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the calendar for the person I meet with on Wednesday mornings?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent needs to infer that the user is referring to the 'Call with Grant Writer' at 3:00 PM on Wednesday. It should then extract the email from the event.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-02-11T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after the content calendar planning meeting?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent needs to find the Content Calendar Planning event on Tuesday, determine its end time (11:00 AM), and then identify the next event after that time, which is 'Meeting with Program Manager' at 1:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-02-11T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the Marketing Team Meeting to 9:30 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Marketing Team Meeting' on Monday and update its start time to 9:30 AM, keeping the duration the same.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-02-11T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you add social_media@nonprofit.org to the meeting with the program manager?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Meeting with Program Manager' event on Tuesday and add social_media@nonprofit.org to the attendees list.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-02-11T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the meeting with the volunteer coordinator?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Meeting with Volunteer Coordinator' on Wednesday and return its start time, which is 1:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-02-11T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the social media strategy review?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Social Media Strategy Review' on Thursday and return the attendees, if specified, or indicate no attendees are explicitly listed.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-02-11T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule the yoga class for an hour earlier.",
+        "complexity": "High",
+        "expected_behavior": "The agent should locate the yoga class on Monday. It should then change the start time to 5:30 PM and the end time to 6:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-02-11T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I'm going to be late to the meeting with the executive director. Push it back by 30 minutes.",
+        "complexity": "High",
+        "expected_behavior": "The agent should find the 'Meeting with Executive Director' on Monday. It should then change the start time to 2:30 PM and the end time to 3:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-02-12T13:30:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "The meeting... board member... change it",
+        "complexity": "High",
+        "expected_behavior": "The agent should use the available context to identify the 'Meeting with Board Member' on Thursday. It should ask for clarification on what the user wants to change (time, attendees, etc.)",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-02-11T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner... family...",
+        "complexity": "Low",
+        "expected_behavior": "The agent should locate the 'Dinner with Family' on Saturday. It should ask a clarifying question to understand what the user wants to do with this event.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-02-11T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should identify the current day (Monday, February 12, 2024) and list all events scheduled for that day. These include 'Marketing Team Meeting', 'Reviewing Q3 Marketing Campaign Performance', 'Meeting with Executive Director', and 'Yoga Class'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-02-12T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should identify the day after the current day (Monday, February 12, 2024), which is Tuesday, February 13, 2024, and list all events scheduled for that day. These include 'Content Calendar Planning', 'Meeting with Program Manager', and 'Brainstorm Session: Fall Fundraising Campaign', and 'Dinner with Friends'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-02-12T15:00:00"
+    }
+]

@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Lunch' for Wednesday at 12:00 PM lasting one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Team Lunch' on Wednesday, May 28, 2025, from 12:00 PM to 1:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-05-25T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for Friday to discuss project timelines from 9:00 AM to 10:00 AM with projectlead@foodcorp.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event named 'Discuss Project Timelines' on Friday, May 30, 2025, from 9:00 AM to 10:00 AM, with attendee projectlead@foodcorp.com.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-05-25T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Reschedule my dinner this week.",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Thursday to find 'Dinner with Spouse', then prompt the user for a new time. If the user provides a time, update the event with the new time.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-05-29T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I want to confirm my plans on Saturday.",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled for Saturday, May 31, 2025.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-05-31T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the product development meeting on Wednesday to 2 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Product Development Team' meeting on Wednesday and update its start time to 2:00 PM and end time to 3:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-05-28T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the ingredient sourcing call on Tuesday to 4:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Call: Discuss Ingredient Sourcing' event on Tuesday and update its start time to 4:30 PM and end time to 5:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-05-27T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the Future Foods meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event named 'Project \"Future Foods\" Update' and return its start and end times.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-05-26T09:30:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the health claims meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Discuss Health Claims for New Snack Line' meeting on Tuesday and return the list of attendees.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-05-27T09:30:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Am I free between 10 AM and 11 AM on Thursday?",
+        "complexity": "High",
+        "expected_behavior": "List events on Thursday, May 29, 2025, between 10:00 AM and 11:00 AM.  If no events are found, respond that the user is free. Otherwise, list the conflicting events.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-05-29T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline the team meeting on Friday and schedule a yoga class for that time.",
+        "complexity": "High",
+        "expected_behavior": "Decline the 'Team Meeting' event on Friday, May 30, 2025. Then, create a new event named 'Yoga Class' for Friday, May 30, 2025, from 3:00 PM to 4:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-05-30T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change dinner.",
+        "complexity": "Medium",
+        "expected_behavior": "List the 'Dinner with Spouse' event on Thursday to ask what day or time it should be changed to, then respond based on user's answer.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-05-29T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Friday meeting to next week.",
+        "complexity": "Low",
+        "expected_behavior": "Apologize and state that I can only reschedule the meetings within the current work week.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-05-30T11:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Monday, May 26, 2025.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-05-26T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Is anything scheduled for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Tuesday, May 27, 2025.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-05-26T14:00:00"
+    }
+]

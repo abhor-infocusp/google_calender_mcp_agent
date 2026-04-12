@@ -1,0 +1,140 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Board Game Night' on Friday at 8 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Board Game Night', start '2023-12-15T20:00:00', end '2023-12-15T22:00:00'. Attendees and description should be empty.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-12-10T23:59:59"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me a doctor's appointment for Tuesday at 11:00 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Doctor's Appointment', start '2023-12-12T11:00:00', end '2023-12-12T12:00:00'. Attendees and description should be empty.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-12-10T23:59:59"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I free after my usability testing observation on Tuesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to '2023-12-12T13:00:00'. The agent checks if there are any conflicting events scheduled after the usability testing observation.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-12-12T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing before Yoga Class on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_max set to '2023-12-11T18:30:00'. The agent checks the calendar for any events scheduled before the Yoga Class on Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-12-11T17:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my interview with the senior developer on Monday to 2 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event with the attendee 'senior_dev@company.com' on Monday. Then call update_event with event_id and updates to start '2023-12-11T14:00:00' and end '2023-12-11T15:30:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-12-11T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule my dinner with family on Tuesday to 7:30 PM instead.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events on Tuesday to find 'Dinner with Family'. Call update_event with the event id and update the start time to '2023-12-12T19:30:00' and the end time to '2023-12-12T21:00:00'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-12-12T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I interviewing on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for Thursday. Check events for 'Interview' in the summary. Respond with QA Tester, qa_tester@company.com.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-12-14T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time does my book club meeting start on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for Wednesday and find the event 'Book Club Meeting'. Respond with the start time of 6 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-12-13T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you schedule a meeting with project_manager@company.com for 30 minutes on Friday? I want it to be after my retrospective but before 3 PM.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the Project Retrospective event on Friday. Calculate the available time slot between the end of the retrospective and 3 PM. Then call create_event with project_manager@company.com as attendee and the available 30 minute slot.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-12-10T23:59:59"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my brunch with family on Sunday. Is 1 PM available?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events for Sunday to find Brunch with Family. Call list_events with time_min='2023-12-17T13:00:00' and time_max='2023-12-17T14:00:00'. Check for any conflicts. If no conflicts, ask for confirmation to move the event.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2023-12-16T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule...the... meeting... Thursday... QA...",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events on Thursday for events with attendee 'qa_tester@company.com'. Assume the user wants to reschedule it and ask for new time.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-12-14T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Documentation... API...",
+        "complexity": "Low",
+        "expected_behavior": "This query is too vague. Respond with a clarifying question like, 'Are you looking for the API documentation or do you want to schedule time to work on it?'",
+        "addressed_days": [],
+        "current_time": "2023-12-10T23:59:59"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on my schedule today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to '2023-12-13T00:00:00' and time_max to '2023-12-13T23:59:59'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-12-13T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow evening?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to '2023-12-15T18:00:00' and time_max set to '2023-12-15T23:59:59'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-12-14T10:00:00"
+    }
+]

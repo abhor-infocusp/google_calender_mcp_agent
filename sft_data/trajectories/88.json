@@ -1,0 +1,1408 @@
+[
+  {
+    "query": "What am I doing on Monday after my accountant call?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Call with Accountant' event on Monday, March 3, 2025, determine its end time (12:30 PM), then find any events scheduled after that time on the same day. Return the 'Property Photoshoot - 123 Main St' event.",
+    "simulated_now": "2025-03-03 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Photo Editing",
+          "start": "2025-03-03 09:00:00",
+          "end": "2025-03-03 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fd48f9639a99436385a7a68994bd2225"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call with Accountant",
+          "start": "2025-03-03 11:30:00",
+          "end": "2025-03-03 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@email.com"
+          ],
+          "id": "evt_14e9d78d96b14cf39f014854006e655d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Property Photoshoot - 123 Main St",
+          "start": "2025-03-03 14:00:00",
+          "end": "2025-03-03 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent1@email.com"
+          ],
+          "id": "evt_b78d610eaf1e475a813f5aa1cdb5275a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2025-03-03 18:00:00",
+          "end": "2025-03-03 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9927482a85a94cd1a1f31de57afec611"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Photo Editing",
+          "start": "2025-03-03 09:00:00",
+          "end": "2025-03-03 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_fd48f9639a99436385a7a68994bd2225"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call with Accountant",
+          "start": "2025-03-03 11:30:00",
+          "end": "2025-03-03 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@email.com"
+          ],
+          "id": "evt_14e9d78d96b14cf39f014854006e655d"
+        },
+        {
+          "day": "Monday",
+          "summary": "Property Photoshoot - 123 Main St",
+          "start": "2025-03-03 14:00:00",
+          "end": "2025-03-03 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent1@email.com"
+          ],
+          "id": "evt_b78d610eaf1e475a813f5aa1cdb5275a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2025-03-03 18:00:00",
+          "end": "2025-03-03 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9927482a85a94cd1a1f31de57afec611"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing on Monday after my accountant call?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-03 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-03-03 00:00:00",
+          "time_max": "2025-03-03 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_fd48f9639a99436385a7a68994bd2225 | Photo Editing \u2014 Mon 09:00-11:00\nid: evt_14e9d78d96b14cf39f014854006e655d | Call with Accountant \u2014 Mon 11:30-12:30\nid: evt_b78d610eaf1e475a813f5aa1cdb5275a | Property Photoshoot - 123 Main St \u2014 Mon 14:00-16:00\nid: evt_9927482a85a94cd1a1f31de57afec611 | Kids' Soccer Practice \u2014 Mon 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "After your call with the accountant, you have a property photoshoot at 123 Main St from 14:00 to 16:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is joining me at Oak Ave?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the event containing 'Oak Ave' on Tuesday, March 4, 2025, and return the list of attendees, which is agent3@email.com.",
+    "simulated_now": "2025-03-04 09:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Real Estate Agent Coffee Meeting",
+          "start": "2025-03-04 09:30:00",
+          "end": "2025-03-04 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent2@email.com"
+          ],
+          "id": "evt_4f2bb7af81754157992f2c51b6b078b3"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Property Photoshoot - 456 Oak Ave",
+          "start": "2025-03-04 10:30:00",
+          "end": "2025-03-04 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent3@email.com"
+          ],
+          "id": "evt_2f1ac5c0877c4651831269d13cfccfac"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Photo Editing, Client 456 Oak Ave",
+          "start": "2025-03-04 13:00:00",
+          "end": "2025-03-04 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_96b4fe144c72464e9a27968ac4183891"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Meeting",
+          "start": "2025-03-04 19:30:00",
+          "end": "2025-03-04 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "spouse@email.com"
+          ],
+          "id": "evt_bc817f2cfac34ae18834e4164937c02e"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Real Estate Agent Coffee Meeting",
+          "start": "2025-03-04 09:30:00",
+          "end": "2025-03-04 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent2@email.com"
+          ],
+          "id": "evt_4f2bb7af81754157992f2c51b6b078b3"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Property Photoshoot - 456 Oak Ave",
+          "start": "2025-03-04 10:30:00",
+          "end": "2025-03-04 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent3@email.com"
+          ],
+          "id": "evt_2f1ac5c0877c4651831269d13cfccfac"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Photo Editing, Client 456 Oak Ave",
+          "start": "2025-03-04 13:00:00",
+          "end": "2025-03-04 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_96b4fe144c72464e9a27968ac4183891"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Meeting",
+          "start": "2025-03-04 19:30:00",
+          "end": "2025-03-04 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "spouse@email.com"
+          ],
+          "id": "evt_bc817f2cfac34ae18834e4164937c02e"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is joining me at Oak Ave?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find out which event the user is referring to. I will search for events with \"Oak Ave\" in the summary, description, or location. Then, I will get the event details to see who is attending."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 26 events:\nid: evt_c225d219a60144848fd95f77b7c3e2a4 | Photo Editing \u2014 Mon 09:00-11:00\nid: evt_5eaedcae674147dd890a34d0efdf0472 | Call with Accountant \u2014 Mon 11:30-12:30\nid: evt_e876bc31805a4ccc85f7d215830a36c0 | Property Photoshoot - 123 Main St \u2014 Mon 14:00-16:00\nid: evt_11a660791a1040618ae42ce119b24969 | Kids' Soccer Practice \u2014 Mon 18:00-19:00\nid: evt_4f2bb7af81754157992f2c51b6b078b3 | Real Estate Agent Coffee Meeting \u2014 Tue 09:30-10:00\nid: evt_2f1ac5c0877c4651831269d13cfccfac | Property Photoshoot - 456 Oak Ave \u2014 Tue 10:30-12:30\nid: evt_96b4fe144c72464e9a27968ac4183891 | Photo Editing, Client 456 Oak Ave \u2014 Tue 13:00-15:00\nid: evt_bc817f2cfac34ae18834e4164937c02e | Parent-Teacher Meeting \u2014 Tue 19:30-20:30\nid: evt_9d1f624262ab43b6b74465af19a415ba | Schedule Content on Social Media \u2014 Wed 09:00-10:00\nid: evt_a9c3da85c8cb46dba7c47491e4f232ae | Property Photoshoot - 789 Pine Ln \u2014 Wed 10:30-12:30\nid: evt_0dc3d5064bdd419c9a2c51682e9a7779 | Call with Freelance Assistant \u2014 Wed 14:00-15:00\nid: evt_c3f4ad5e8c0c40cf96cc82b4b8f5e221 | Dinner with Family \u2014 Wed 18:30-20:00\nid: evt_71173fb2272d4dedb38c6095e52a5f5e | Photo Editing \u2014 Thu 09:00-11:00\nid: evt_c4a6cf95421c47c7bf013b0f899460c1 | Photoshoot - Commercial Property \u2014 Thu 11:30-13:30\nid: evt_b6387868c7544e5cb1a6377969833d8f | Discuss Staging for Next Photoshoot \u2014 Thu 14:30-15:30\nid: evt_3888429287dd45ff8cd558660e257033 | Children's Bedtime \u2014 Thu 19:00-20:00\nid: evt_7ff61a77abbc482d90ec4bd0a815f48c | Website Updates and Maintenance \u2014 Fri 09:00-11:00\nid: evt_64fe44a85da446cfa86155e7d27c06f8 | Property Photoshoot - 101 Elm St \u2014 Fri 11:30-13:30\nid: evt_b8022906cf9e4add86c97beb878a47e7 | Wrap up loose ends \u2014 Fri 15:00-16:00\nid: evt_9388ef09aa4641bcba238f749cf47b77 | Pizza Night with Family \u2014 Fri 18:00-20:00\nid: evt_d06bc54b8bed439084e01493bdde356b | Quick Photoshoot - New Listing \u2014 Sat 10:00-12:00\nid: evt_3e95f2ad00fa4f698d0b58a118d18c8e | Kid's Birthday Party \u2014 Sat 13:00-15:00\nid: evt_98873207df2c4c5787121cb0b99a0a22 | Dinner with Friends \u2014 Sat 19:00-21:00\nid: evt_fdca1ea8a1be4c2ca0223ba30acdd65c | Family Brunch \u2014 Sun 10:00-12:00\nid: evt_27fd2c6e61d74f818d529c559f44bc3b | Photo Editing/Admin Time (Catch Up) \u2014 Sun 14:00-16:00\nid: evt_8cb6dfa3acfb490b971f13d35cbed1a4 | Plan Week Ahead \u2014 Sun 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found two events related to \"Oak Ave.\" I will check them both for attendees."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_2f1ac5c0877c4651831269d13cfccfac"
+        },
+        "result": "Property Photoshoot - 456 Oak Ave\n  ID: evt_2f1ac5c0877c4651831269d13cfccfac\n  Time: Tue Mar 04, 10:30 - 12:30\n  Attendees: agent3@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK, agent3@email.com is attending the photoshoot. Now I'll check the second \"Oak Ave\" event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_96b4fe144c72464e9a27968ac4183891"
+        },
+        "result": "Photo Editing, Client 456 Oak Ave\n  ID: evt_96b4fe144c72464e9a27968ac4183891\n  Time: Tue Mar 04, 13:00 - 15:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "error",
+        "content": "The model response did not complete successfully.\nFinish reason: 9.\nFinish message: Malformed function call: For the \"Property Photoshoot at 456 Oak Ave\", agent3@email.com will be joining you. The \"Photo Editing, Client 456 Oak Ave\" event has no other attendees..\nSafety ratings: [].\nTo protect the integrity of the chat session, the request and response were not added to chat history.\nTo skip the response validation, specify `model.start_chat(response_validation=False)`.\nNote that letting blocked or otherwise incomplete responses into chat history might lead to future interactions being blocked by the service."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Can you move the photoshoot at 123 Main St to 3 PM on Monday?",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Property Photoshoot - 123 Main St' event on Monday, March 3, 2025, and update its start time to 3:00 PM, keeping the same duration. Also, keep the attendee agent1@email.com.",
+    "simulated_now": "2025-03-03 10:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Photo Editing",
+          "start": "2025-03-03 09:00:00",
+          "end": "2025-03-03 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f9bb5cf6f31c4b90a755f90e08c8c637"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call with Accountant",
+          "start": "2025-03-03 11:30:00",
+          "end": "2025-03-03 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@email.com"
+          ],
+          "id": "evt_1c3c6250fa2c4f8288b9e2eb399f0cb1"
+        },
+        {
+          "day": "Monday",
+          "summary": "Property Photoshoot - 123 Main St",
+          "start": "2025-03-03 14:00:00",
+          "end": "2025-03-03 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent1@email.com"
+          ],
+          "id": "evt_4e1e46efcd12422a9f874a5f7f2f2013"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2025-03-03 18:00:00",
+          "end": "2025-03-03 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8d46c9eedc9e44febdc9d23bc64f1612"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Photo Editing",
+          "start": "2025-03-03 09:00:00",
+          "end": "2025-03-03 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f9bb5cf6f31c4b90a755f90e08c8c637"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call with Accountant",
+          "start": "2025-03-03 11:30:00",
+          "end": "2025-03-03 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@email.com"
+          ],
+          "id": "evt_1c3c6250fa2c4f8288b9e2eb399f0cb1"
+        },
+        {
+          "day": "Monday",
+          "summary": "Property Photoshoot - 123 Main St",
+          "start": "2025-03-03 15:00:00",
+          "end": "2025-03-03 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent1@email.com"
+          ],
+          "id": "evt_4e1e46efcd12422a9f874a5f7f2f2013"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2025-03-03 18:00:00",
+          "end": "2025-03-03 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8d46c9eedc9e44febdc9d23bc64f1612"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Can you move the photoshoot at 123 Main St to 3 PM on Monday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I'll search for the event you mentioned."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 26 events:\nid: evt_f9bb5cf6f31c4b90a755f90e08c8c637 | Photo Editing \u2014 Mon 09:00-11:00\nid: evt_1c3c6250fa2c4f8288b9e2eb399f0cb1 | Call with Accountant \u2014 Mon 11:30-12:30\nid: evt_4e1e46efcd12422a9f874a5f7f2f2013 | Property Photoshoot - 123 Main St \u2014 Mon 14:00-16:00\nid: evt_8d46c9eedc9e44febdc9d23bc64f1612 | Kids' Soccer Practice \u2014 Mon 18:00-19:00\nid: evt_4f80f907c8b64aa3b40bd5dc684d72cb | Real Estate Agent Coffee Meeting \u2014 Tue 09:30-10:00\nid: evt_81abea30f4004bc18332d0cb827e718b | Property Photoshoot - 456 Oak Ave \u2014 Tue 10:30-12:30\nid: evt_bd03b527613d4357b459b8eb4be29522 | Photo Editing, Client 456 Oak Ave \u2014 Tue 13:00-15:00\nid: evt_4022ab9876a0458c9938a951575fdcf5 | Parent-Teacher Meeting \u2014 Tue 19:30-20:30\nid: evt_78e93692792a45b0a3e1a8e609c728d4 | Schedule Content on Social Media \u2014 Wed 09:00-10:00\nid: evt_a0c9d8f501604b128020bf7f95e37f96 | Property Photoshoot - 789 Pine Ln \u2014 Wed 10:30-12:30\nid: evt_2c75571dfcf34c5787dfd52f5d5d6537 | Call with Freelance Assistant \u2014 Wed 14:00-15:00\nid: evt_ad552a4f75e74f64b1fcaa5be82765ac | Dinner with Family \u2014 Wed 18:30-20:00\nid: evt_342a414685954929b0c1abbbf1ce87e2 | Photo Editing \u2014 Thu 09:00-11:00\nid: evt_9905d80efb534ba2b96a5048493a6edb | Photoshoot - Commercial Property \u2014 Thu 11:30-13:30\nid: evt_5e1048eae69c41cab505555573094906 | Discuss Staging for Next Photoshoot \u2014 Thu 14:30-15:30\nid: evt_c3104f0278e7417c83a3ccef62d46aea | Children's Bedtime \u2014 Thu 19:00-20:00\nid: evt_041924e130c84defae2cae6876413fe8 | Website Updates and Maintenance \u2014 Fri 09:00-11:00\nid: evt_0203d4456ea84e67b0b075274191db8f | Property Photoshoot - 101 Elm St \u2014 Fri 11:30-13:30\nid: evt_2fc8857b33044a5794451cb9a7c6c6d5 | Wrap up loose ends \u2014 Fri 15:00-16:00\nid: evt_8289a9d06a484230a2f38dc31fba9b15 | Pizza Night with Family \u2014 Fri 18:00-20:00\nid: evt_ecde96b2c20140eda69f50a6c5e12852 | Quick Photoshoot - New Listing \u2014 Sat 10:00-12:00\nid: evt_70bfac83613542149eca5626d7610cc2 | Kid's Birthday Party \u2014 Sat 13:00-15:00\nid: evt_bb147ee2fe5a40289b3254aaf2443935 | Dinner with Friends \u2014 Sat 19:00-21:00\nid: evt_2a70ecdfe5e7416cb90e66580008f7dd | Family Brunch \u2014 Sun 10:00-12:00\nid: evt_bd3188f54cd24e7cb119c747935c5a28 | Photo Editing/Admin Time (Catch Up) \u2014 Sun 14:00-16:00\nid: evt_eaf4f591f8514b91831c5ade0c174d2e | Plan Week Ahead \u2014 Sun 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've found the \"Property Photoshoot - 123 Main St\" event. I'll move it to 3 PM on Monday for you."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-03 10:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_4e1e46efcd12422a9f874a5f7f2f2013",
+          "start": "2025-03-03 15:00:00",
+          "end": "2025-03-03 17:00:00"
+        },
+        "result": "Event updated successfully.\nProperty Photoshoot - 123 Main St\n  ID: evt_4e1e46efcd12422a9f874a5f7f2f2013\n  Time: Mon Mar 03, 15:00 - 17:00\n  Attendees: agent1@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've moved the photoshoot at 123 Main St to 3:00 PM - 5:00 PM on Monday, March 3rd."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Update the dinner with friends to start at 6:30 PM on Saturday.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Dinner with Friends' event on Saturday, March 8, 2025, and update the start time to 6:30 PM, keeping the same duration and attendees (spouse@email.com, friend1@email.com).",
+    "simulated_now": "2025-03-08 09:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Quick Photoshoot - New Listing",
+          "start": "2025-03-08 10:00:00",
+          "end": "2025-03-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent2@email.com"
+          ],
+          "id": "evt_3c613ec3d9d244bdb2f945666d1f59f8"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Kid's Birthday Party",
+          "start": "2025-03-08 13:00:00",
+          "end": "2025-03-08 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "spouse@email.com"
+          ],
+          "id": "evt_ddb0f8fa1ed946cfbe77feff4217fa60"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with Friends",
+          "start": "2025-03-08 19:00:00",
+          "end": "2025-03-08 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "spouse@email.com",
+            "friend1@email.com"
+          ],
+          "id": "evt_de4704ffa59b46778a799d8472caf333"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Quick Photoshoot - New Listing",
+          "start": "2025-03-08 10:00:00",
+          "end": "2025-03-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent2@email.com"
+          ],
+          "id": "evt_3c613ec3d9d244bdb2f945666d1f59f8"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Kid's Birthday Party",
+          "start": "2025-03-08 13:00:00",
+          "end": "2025-03-08 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "spouse@email.com"
+          ],
+          "id": "evt_ddb0f8fa1ed946cfbe77feff4217fa60"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with Friends",
+          "start": "2025-03-08 18:30:00",
+          "end": "2025-03-08 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "spouse@email.com",
+            "friend1@email.com"
+          ],
+          "id": "evt_de4704ffa59b46778a799d8472caf333"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Update the dinner with friends to start at 6:30 PM on Saturday."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I need to find the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-08 09:00:00 | Saturday"
+      },
+      {
+        "role": "assistant",
+        "content": "I'll list the events for today, March 8, 2025, to find the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-03-08 00:00:00",
+          "time_max": "2025-03-09 00:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_3c613ec3d9d244bdb2f945666d1f59f8 | Quick Photoshoot - New Listing \u2014 Sat 10:00-12:00\nid: evt_ddb0f8fa1ed946cfbe77feff4217fa60 | Kid's Birthday Party \u2014 Sat 13:00-15:00\nid: evt_de4704ffa59b46778a799d8472caf333 | Dinner with Friends \u2014 Sat 19:00-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I'll update the event to start at 6:30 PM and end at 8:30 PM, keeping the original two-hour duration."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2025-03-08 18:30:00",
+          "end": "2025-03-08 20:30:00",
+          "event_id": "evt_de4704ffa59b46778a799d8472caf333"
+        },
+        "result": "Event updated successfully.\nDinner with Friends\n  ID: evt_de4704ffa59b46778a799d8472caf333\n  Time: Sat Mar 08, 18:30 - 20:30\n  Attendees: spouse@email.com, friend1@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've updated the event. The dinner with friends is now scheduled to start at 6:30 PM on Saturday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is my call with the freelance assistant?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Search the calendar for an event containing 'Call with Freelance Assistant'. Return the start time, which is 2:00 PM on Wednesday, March 5, 2025.",
+    "simulated_now": "2025-03-05 08:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Schedule Content on Social Media",
+          "start": "2025-03-05 09:00:00",
+          "end": "2025-03-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a1bc9fcf6e80485cad78b9532936b2a4"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Property Photoshoot - 789 Pine Ln",
+          "start": "2025-03-05 10:30:00",
+          "end": "2025-03-05 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent1@email.com"
+          ],
+          "id": "evt_41d8b0cc74394ed4960f60c126272674"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Call with Freelance Assistant",
+          "start": "2025-03-05 14:00:00",
+          "end": "2025-03-05 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "assistant@email.com"
+          ],
+          "id": "evt_183e5e6e65a042fe9a92ef63070015f8"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Family",
+          "start": "2025-03-05 18:30:00",
+          "end": "2025-03-05 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7fae3fa5000b4297b7a12a4d2507275b"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Schedule Content on Social Media",
+          "start": "2025-03-05 09:00:00",
+          "end": "2025-03-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a1bc9fcf6e80485cad78b9532936b2a4"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Property Photoshoot - 789 Pine Ln",
+          "start": "2025-03-05 10:30:00",
+          "end": "2025-03-05 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent1@email.com"
+          ],
+          "id": "evt_41d8b0cc74394ed4960f60c126272674"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Call with Freelance Assistant",
+          "start": "2025-03-05 14:00:00",
+          "end": "2025-03-05 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "assistant@email.com"
+          ],
+          "id": "evt_183e5e6e65a042fe9a92ef63070015f8"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Family",
+          "start": "2025-03-05 18:30:00",
+          "end": "2025-03-05 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7fae3fa5000b4297b7a12a4d2507275b"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is my call with the freelance assistant?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to know the date and time, and then I will search for a call with the freelance assistant in your calendar."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-05 08:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-03-05 08:00:00"
+        },
+        "result": "Found 18 events:\nid: evt_a1bc9fcf6e80485cad78b9532936b2a4 | Schedule Content on Social Media \u2014 Wed 09:00-10:00\nid: evt_41d8b0cc74394ed4960f60c126272674 | Property Photoshoot - 789 Pine Ln \u2014 Wed 10:30-12:30\nid: evt_183e5e6e65a042fe9a92ef63070015f8 | Call with Freelance Assistant \u2014 Wed 14:00-15:00\nid: evt_7fae3fa5000b4297b7a12a4d2507275b | Dinner with Family \u2014 Wed 18:30-20:00\nid: evt_5680990778bf4b67bbdd1191c4339cf6 | Photo Editing \u2014 Thu 09:00-11:00\nid: evt_a2ebcb3f263c4e369d6d5658cabd9d51 | Photoshoot - Commercial Property \u2014 Thu 11:30-13:30\nid: evt_fda1e81449d44ab79297f2fb4ca68d79 | Discuss Staging for Next Photoshoot \u2014 Thu 14:30-15:30\nid: evt_c10af2fc191648579b61e7b9a171ec13 | Children's Bedtime \u2014 Thu 19:00-20:00\nid: evt_43de2650e2d140c9a7d31d633671176c | Website Updates and Maintenance \u2014 Fri 09:00-11:00\nid: evt_e62ec962fd6243c2a3635b9afb910c81 | Property Photoshoot - 101 Elm St \u2014 Fri 11:30-13:30\nid: evt_598acf4b0a044b9d97d651d1c96d9388 | Wrap up loose ends \u2014 Fri 15:00-16:00\nid: evt_dc52806de5b649aab341fbd74795dfe2 | Pizza Night with Family \u2014 Fri 18:00-20:00\nid: evt_971d39cfc7f84bc4a1aa5014665fe046 | Quick Photoshoot - New Listing \u2014 Sat 10:00-12:00\nid: evt_acf00e4b288145db8fa9f8aa973106ec | Kid's Birthday Party \u2014 Sat 13:00-15:00\nid: evt_ac7946d6979c4a749922d8c73b551143 | Dinner with Friends \u2014 Sat 19:00-21:00\nid: evt_887d2e955ebf4accb5059be404a14da5 | Family Brunch \u2014 Sun 10:00-12:00\nid: evt_cd7432f5aa03423386ff0de683cd41ae | Photo Editing/Admin Time (Catch Up) \u2014 Sun 14:00-16:00\nid: evt_c9f31af0a88a4a3b89bfdcbb3448eea5 | Plan Week Ahead \u2014 Sun 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Your call with the freelance assistant is today from 14:00 to 15:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is invited to the Commercial Property photoshoot?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Search the calendar for an event containing 'Commercial Property Photoshoot' on Thursday, March 6, 2025, and return the list of attendees, which is propertymanager@email.com.",
+    "simulated_now": "2025-03-06 08:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Photo Editing",
+          "start": "2025-03-06 09:00:00",
+          "end": "2025-03-06 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a1b020bbb95644af941d7ecf47d19cf4"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Photoshoot - Commercial Property",
+          "start": "2025-03-06 11:30:00",
+          "end": "2025-03-06 13:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "propertymanager@email.com"
+          ],
+          "id": "evt_349c5074b7944a57871c0a07c46e7397"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Discuss Staging for Next Photoshoot",
+          "start": "2025-03-06 14:30:00",
+          "end": "2025-03-06 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "stager@email.com"
+          ],
+          "id": "evt_dbb92da5f5444aeca3204540d5de8764"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Children's Bedtime",
+          "start": "2025-03-06 19:00:00",
+          "end": "2025-03-06 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_104d3f8640a544dcad2890f186af036b"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Photo Editing",
+          "start": "2025-03-06 09:00:00",
+          "end": "2025-03-06 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a1b020bbb95644af941d7ecf47d19cf4"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Photoshoot - Commercial Property",
+          "start": "2025-03-06 11:30:00",
+          "end": "2025-03-06 13:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "propertymanager@email.com"
+          ],
+          "id": "evt_349c5074b7944a57871c0a07c46e7397"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Discuss Staging for Next Photoshoot",
+          "start": "2025-03-06 14:30:00",
+          "end": "2025-03-06 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "stager@email.com"
+          ],
+          "id": "evt_dbb92da5f5444aeca3204540d5de8764"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Children's Bedtime",
+          "start": "2025-03-06 19:00:00",
+          "end": "2025-03-06 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_104d3f8640a544dcad2890f186af036b"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is invited to the Commercial Property photoshoot?"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 26 events:\nid: evt_751b322e1fad4c8ab1bc11a480ee5c47 | Photo Editing \u2014 Mon 09:00-11:00\nid: evt_c87914a8d97c4821958aefb7519c853e | Call with Accountant \u2014 Mon 11:30-12:30\nid: evt_2964408c42df445f8cfd792075668a69 | Property Photoshoot - 123 Main St \u2014 Mon 14:00-16:00\nid: evt_d54ee961193c4837a9d03bc944d16bea | Kids' Soccer Practice \u2014 Mon 18:00-19:00\nid: evt_c837952ff893434fb291dcb95abd7898 | Real Estate Agent Coffee Meeting \u2014 Tue 09:30-10:00\nid: evt_3eb4d82f6e934e8abfa3067f10612d85 | Property Photoshoot - 456 Oak Ave \u2014 Tue 10:30-12:30\nid: evt_6a3a1955058c4760ae7ae1bb84ea8675 | Photo Editing, Client 456 Oak Ave \u2014 Tue 13:00-15:00\nid: evt_e0f521dc05694d15a64e48c8d0fb785e | Parent-Teacher Meeting \u2014 Tue 19:30-20:30\nid: evt_0664dbffa34d4e2b8a277ae5d94b03e5 | Schedule Content on Social Media \u2014 Wed 09:00-10:00\nid: evt_46754f469c3d49d89b28e99bd795fe40 | Property Photoshoot - 789 Pine Ln \u2014 Wed 10:30-12:30\nid: evt_e8160d3e7d47430ba45678b9d30d44cb | Call with Freelance Assistant \u2014 Wed 14:00-15:00\nid: evt_2164577dcbd74c998f34052ec3550318 | Dinner with Family \u2014 Wed 18:30-20:00\nid: evt_a1b020bbb95644af941d7ecf47d19cf4 | Photo Editing \u2014 Thu 09:00-11:00\nid: evt_349c5074b7944a57871c0a07c46e7397 | Photoshoot - Commercial Property \u2014 Thu 11:30-13:30\nid: evt_dbb92da5f5444aeca3204540d5de8764 | Discuss Staging for Next Photoshoot \u2014 Thu 14:30-15:30\nid: evt_104d3f8640a544dcad2890f186af036b | Children's Bedtime \u2014 Thu 19:00-20:00\nid: evt_dd325a4ccf8f4d418f806d07532ebb14 | Website Updates and Maintenance \u2014 Fri 09:00-11:00\nid: evt_e3859aac24f24269b748500f6812e227 | Property Photoshoot - 101 Elm St \u2014 Fri 11:30-13:30\nid: evt_4461b1c153274e1c8965e18ac8b4965a | Wrap up loose ends \u2014 Fri 15:00-16:00\nid: evt_8870f2c252534e91a114fbfdc10ebd4c | Pizza Night with Family \u2014 Fri 18:00-20:00\nid: evt_1940637be59c48a7baaeb7713cb079db | Quick Photoshoot - New Listing \u2014 Sat 10:00-12:00\nid: evt_d45fc2041b9f4691b243501cffbf4cd2 | Kid's Birthday Party \u2014 Sat 13:00-15:00\nid: evt_70a5d46895e74afab3d312f8d00053ec | Dinner with Friends \u2014 Sat 19:00-21:00\nid: evt_e60e0107ea8940cab228002b61623d3d | Family Brunch \u2014 Sun 10:00-12:00\nid: evt_566806172fbe45db8d8b211c6834c10f | Photo Editing/Admin Time (Catch Up) \u2014 Sun 14:00-16:00\nid: evt_b185b7793bb44037ae6c5a500c04ccbb | Plan Week Ahead \u2014 Sun 18:00-19:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_349c5074b7944a57871c0a07c46e7397"
+        },
+        "result": "Photoshoot - Commercial Property\n  ID: evt_349c5074b7944a57871c0a07c46e7397\n  Time: Thu Mar 06, 11:30 - 13:30\n  Attendees: propertymanager@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "The person invited to the Commercial Property photoshoot is propertymanager@email.com."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "I need to move the meeting with agent2@email.com to Saturday at 11 AM, but make sure it doesn't overlap with the birthday party.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "First, find the 'Real Estate Agent Coffee Meeting' with agent2@email.com on Tuesday, March 4, 2025. Then find the 'Kid's Birthday Party' event on Saturday, March 8, 2025. Check if moving the meeting to Saturday at 11:00 AM would conflict with the birthday party (1:00 PM - 3:00 PM). Determine there is no conflict, and update the 'Real Estate Agent Coffee Meeting' to Saturday, March 8, 2025, at 11:00 AM.",
+    "simulated_now": "2025-03-04 08:00:00",
+    "addressed_days": [
+      "Tuesday",
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Real Estate Agent Coffee Meeting",
+          "start": "2025-03-04 09:30:00",
+          "end": "2025-03-04 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent2@email.com"
+          ],
+          "id": "evt_cd6e6af26480442d81e28ed60e243f41"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Property Photoshoot - 456 Oak Ave",
+          "start": "2025-03-04 10:30:00",
+          "end": "2025-03-04 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent3@email.com"
+          ],
+          "id": "evt_87f49b345b524629afa872dfafcb7d43"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Photo Editing, Client 456 Oak Ave",
+          "start": "2025-03-04 13:00:00",
+          "end": "2025-03-04 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ef1eab6c99dc4aecb4550748064231e1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Meeting",
+          "start": "2025-03-04 19:30:00",
+          "end": "2025-03-04 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "spouse@email.com"
+          ],
+          "id": "evt_945f21948faa4de6b4d32d78878792a0"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Quick Photoshoot - New Listing",
+          "start": "2025-03-08 10:00:00",
+          "end": "2025-03-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent2@email.com"
+          ],
+          "id": "evt_947da47c307f489b8f0612c2d33c72f7"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Kid's Birthday Party",
+          "start": "2025-03-08 13:00:00",
+          "end": "2025-03-08 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "spouse@email.com"
+          ],
+          "id": "evt_5451de6d39d14f56bdc2d3071abf74f0"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with Friends",
+          "start": "2025-03-08 19:00:00",
+          "end": "2025-03-08 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "spouse@email.com",
+            "friend1@email.com"
+          ],
+          "id": "evt_d4bc4594abeb4984a1e31fc17d8700a3"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Property Photoshoot - 456 Oak Ave",
+          "start": "2025-03-04 10:30:00",
+          "end": "2025-03-04 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent3@email.com"
+          ],
+          "id": "evt_87f49b345b524629afa872dfafcb7d43"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Photo Editing, Client 456 Oak Ave",
+          "start": "2025-03-04 13:00:00",
+          "end": "2025-03-04 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ef1eab6c99dc4aecb4550748064231e1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Parent-Teacher Meeting",
+          "start": "2025-03-04 19:30:00",
+          "end": "2025-03-04 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "spouse@email.com"
+          ],
+          "id": "evt_945f21948faa4de6b4d32d78878792a0"
+        }
+      ],
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Quick Photoshoot - New Listing",
+          "start": "2025-03-08 10:00:00",
+          "end": "2025-03-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent2@email.com"
+          ],
+          "id": "evt_947da47c307f489b8f0612c2d33c72f7"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Real Estate Agent Coffee Meeting",
+          "start": "2025-03-08 11:00:00",
+          "end": "2025-03-08 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent2@email.com"
+          ],
+          "id": "evt_cd6e6af26480442d81e28ed60e243f41"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Kid's Birthday Party",
+          "start": "2025-03-08 13:00:00",
+          "end": "2025-03-08 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "spouse@email.com"
+          ],
+          "id": "evt_5451de6d39d14f56bdc2d3071abf74f0"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Dinner with Friends",
+          "start": "2025-03-08 19:00:00",
+          "end": "2025-03-08 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "spouse@email.com",
+            "friend1@email.com"
+          ],
+          "id": "evt_d4bc4594abeb4984a1e31fc17d8700a3"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "I need to move the meeting with agent2@email.com to Saturday at 11 AM, but make sure it doesn't overlap with the birthday party."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. I'll move your meeting with agent2@email.com to Saturday at 11 AM, and I'll double-check that it doesn't clash with the birthday party. First, I need to get the current time to understand which Saturday you're referring to."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-04 08:00:00 | Tuesday"
+      },
+      {
+        "role": "assistant",
+        "content": "Got it. Today is Tuesday, March 4th, 2025, so the upcoming Saturday is March 8th. Now, I'll check your calendar for the meeting with agent2@email.com and the birthday party."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 26 events:\nid: evt_db9f746ecd7447fbb16f9cd95ed35a3e | Photo Editing \u2014 Mon 09:00-11:00\nid: evt_3ab1af4adb6340958d218298869d18d3 | Call with Accountant \u2014 Mon 11:30-12:30\nid: evt_556f74daf1344b3b90c72091088c23ba | Property Photoshoot - 123 Main St \u2014 Mon 14:00-16:00\nid: evt_9e21b4ae83b14eab88fd49d112ba75a9 | Kids' Soccer Practice \u2014 Mon 18:00-19:00\nid: evt_cd6e6af26480442d81e28ed60e243f41 | Real Estate Agent Coffee Meeting \u2014 Tue 09:30-10:00\nid: evt_87f49b345b524629afa872dfafcb7d43 | Property Photoshoot - 456 Oak Ave \u2014 Tue 10:30-12:30\nid: evt_ef1eab6c99dc4aecb4550748064231e1 | Photo Editing, Client 456 Oak Ave \u2014 Tue 13:00-15:00\nid: evt_945f21948faa4de6b4d32d78878792a0 | Parent-Teacher Meeting \u2014 Tue 19:30-20:30\nid: evt_edd1d79392e641c0b7eca561d387edbf | Schedule Content on Social Media \u2014 Wed 09:00-10:00\nid: evt_32c17893fb4e48958644e556efb2926c | Property Photoshoot - 789 Pine Ln \u2014 Wed 10:30-12:30\nid: evt_390456a63d134b03a2e805c50a7c76e5 | Call with Freelance Assistant \u2014 Wed 14:00-15:00\nid: evt_b02d96431c9749fa901a99bfec40a628 | Dinner with Family \u2014 Wed 18:30-20:00\nid: evt_6dba297d671d40f5b3c29ffda3319125 | Photo Editing \u2014 Thu 09:00-11:00\nid: evt_b73c2d2c8a014c2a9fa683b99dea5d40 | Photoshoot - Commercial Property \u2014 Thu 11:30-13:30\nid: evt_f5490a639de642bfa7ec4caf0d428ceb | Discuss Staging for Next Photoshoot \u2014 Thu 14:30-15:30\nid: evt_3176851b5cdb4db99b726eebbc7dde28 | Children's Bedtime \u2014 Thu 19:00-20:00\nid: evt_08fd1fddc47844259b99074867239afa | Website Updates and Maintenance \u2014 Fri 09:00-11:00\nid: evt_31eade087a1a4b668568807f5b6d04c7 | Property Photoshoot - 101 Elm St \u2014 Fri 11:30-13:30\nid: evt_247c98fbf3b94da29a842aecb37cccaf | Wrap up loose ends \u2014 Fri 15:00-16:00\nid: evt_5d83193ff87c43ea864ae67c55fd8ac9 | Pizza Night with Family \u2014 Fri 18:00-20:00\nid: evt_947da47c307f489b8f0612c2d33c72f7 | Quick Photoshoot - New Listing \u2014 Sat 10:00-12:00\nid: evt_5451de6d39d14f56bdc2d3071abf74f0 | Kid's Birthday Party \u2014 Sat 13:00-15:00\nid: evt_d4bc4594abeb4984a1e31fc17d8700a3 | Dinner with Friends \u2014 Sat 19:00-21:00\nid: evt_b5e65975f8f84256a11bb62cd6f26835 | Family Brunch \u2014 Sun 10:00-12:00\nid: evt_9014fc285baf426d978f7b9a79c5df07 | Photo Editing/Admin Time (Catch Up) \u2014 Sun 14:00-16:00\nid: evt_81d9dd99c6ac4a908530f55c86fa48fd | Plan Week Ahead \u2014 Sun 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I've found a \"Real Estate Agent Coffee Meeting\" on Tuesday and a \"Kid's Birthday Party\" on Saturday from 1:00 PM to 3:00 PM.\n\nFirst, I'll verify that the \"Real Estate Agent Coffee Meeting\" is the one you want to move by checking if agent2@email.com is an attendee."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_cd6e6af26480442d81e28ed60e243f41"
+        },
+        "result": "Real Estate Agent Coffee Meeting\n  ID: evt_cd6e6af26480442d81e28ed60e243f41\n  Time: Tue Mar 04, 09:30 - 10:00\n  Attendees: agent2@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "Great, I've confirmed that the \"Real Estate Agent Coffee Meeting\" is the correct one, and it's 30 minutes long. The new time of Saturday, March 8th, from 11:00 AM to 11:30 AM does not conflict with the \"Kid's Birthday Party\" from 1:00 PM to 3:00 PM.\n\nI will now move the meeting."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2025-03-08 11:30:00",
+          "start": "2025-03-08 11:00:00",
+          "event_id": "evt_cd6e6af26480442d81e28ed60e243f41"
+        },
+        "result": "Event updated successfully.\nReal Estate Agent Coffee Meeting\n  ID: evt_cd6e6af26480442d81e28ed60e243f41\n  Time: Sat Mar 08, 11:00 - 11:30\n  Attendees: agent2@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have successfully moved your meeting with agent2@email.com to Saturday, March 8th, at 11:00 AM. It is now scheduled for 30 minutes and will not overlap with the Kid's Birthday Party."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Dinner on Wednesday...",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Low",
+    "expected_behavior": "Find the event containing 'Dinner' on Wednesday, March 5, 2025. Respond with the event details, which is 'Dinner with Family from 6:30 PM to 8:00 PM'.",
+    "simulated_now": "2025-03-05 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Schedule Content on Social Media",
+          "start": "2025-03-05 09:00:00",
+          "end": "2025-03-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ce7d4f0344fd4d54ab8e5ff7e9c0908f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Property Photoshoot - 789 Pine Ln",
+          "start": "2025-03-05 10:30:00",
+          "end": "2025-03-05 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent1@email.com"
+          ],
+          "id": "evt_882441566f9e4afe80cb85a5c2a5af79"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Call with Freelance Assistant",
+          "start": "2025-03-05 14:00:00",
+          "end": "2025-03-05 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "assistant@email.com"
+          ],
+          "id": "evt_341c5dc9444847849d44051fd1cf7b55"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Family",
+          "start": "2025-03-05 18:30:00",
+          "end": "2025-03-05 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_23ce489556c643b7a8a5f68292483188"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Schedule Content on Social Media",
+          "start": "2025-03-05 09:00:00",
+          "end": "2025-03-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ce7d4f0344fd4d54ab8e5ff7e9c0908f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Property Photoshoot - 789 Pine Ln",
+          "start": "2025-03-05 10:30:00",
+          "end": "2025-03-05 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent1@email.com"
+          ],
+          "id": "evt_882441566f9e4afe80cb85a5c2a5af79"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Call with Freelance Assistant",
+          "start": "2025-03-05 14:00:00",
+          "end": "2025-03-05 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "assistant@email.com"
+          ],
+          "id": "evt_341c5dc9444847849d44051fd1cf7b55"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Family",
+          "start": "2025-03-05 18:30:00",
+          "end": "2025-03-05 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_23ce489556c643b7a8a5f68292483188"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Dinner on Wednesday..."
+      },
+      {
+        "role": "assistant",
+        "content": "I can help with that. First, I need to know the current date and time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-05 10:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-03-05 23:00:00",
+          "time_min": "2025-03-05 17:00:00"
+        },
+        "result": "Found 1 events:\nid: evt_23ce489556c643b7a8a5f68292483188 | Dinner with Family \u2014 Wed 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have one dinner scheduled for this Wednesday: \"Dinner with Family\" from 18:30 to 20:00.\n\nDid you want to do something else?"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What is on my schedule today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Using the current time to determine that 'today' is Monday, March 3, 2025, find all events on that day and return them.",
+    "simulated_now": "2025-03-03 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Photo Editing",
+          "start": "2025-03-03 09:00:00",
+          "end": "2025-03-03 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_86328f7fb91043db8b41dc2020c38197"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call with Accountant",
+          "start": "2025-03-03 11:30:00",
+          "end": "2025-03-03 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@email.com"
+          ],
+          "id": "evt_fe7abdfe690f48be9c0fbe39965c2c56"
+        },
+        {
+          "day": "Monday",
+          "summary": "Property Photoshoot - 123 Main St",
+          "start": "2025-03-03 14:00:00",
+          "end": "2025-03-03 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent1@email.com"
+          ],
+          "id": "evt_90eb602ed46a4646aea9d9987324d505"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2025-03-03 18:00:00",
+          "end": "2025-03-03 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9a7f88cc346f404ab6e29881cc19342b"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Photo Editing",
+          "start": "2025-03-03 09:00:00",
+          "end": "2025-03-03 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_86328f7fb91043db8b41dc2020c38197"
+        },
+        {
+          "day": "Monday",
+          "summary": "Call with Accountant",
+          "start": "2025-03-03 11:30:00",
+          "end": "2025-03-03 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "accountant@email.com"
+          ],
+          "id": "evt_fe7abdfe690f48be9c0fbe39965c2c56"
+        },
+        {
+          "day": "Monday",
+          "summary": "Property Photoshoot - 123 Main St",
+          "start": "2025-03-03 14:00:00",
+          "end": "2025-03-03 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent1@email.com"
+          ],
+          "id": "evt_90eb602ed46a4646aea9d9987324d505"
+        },
+        {
+          "day": "Monday",
+          "summary": "Kids' Soccer Practice",
+          "start": "2025-03-03 18:00:00",
+          "end": "2025-03-03 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9a7f88cc346f404ab6e29881cc19342b"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What is on my schedule today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-03 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-03-03 00:00:00",
+          "time_max": "2025-03-03 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_86328f7fb91043db8b41dc2020c38197 | Photo Editing \u2014 Mon 09:00-11:00\nid: evt_fe7abdfe690f48be9c0fbe39965c2c56 | Call with Accountant \u2014 Mon 11:30-12:30\nid: evt_90eb602ed46a4646aea9d9987324d505 | Property Photoshoot - 123 Main St \u2014 Mon 14:00-16:00\nid: evt_9a7f88cc346f404ab6e29881cc19342b | Kids' Soccer Practice \u2014 Mon 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Here is your schedule for today, March 3rd, 2025:\n\n*   9:00 AM - 11:00 AM: Photo Editing\n*   11:30 AM - 12:30 PM: Call with Accountant\n*   2:00 PM - 4:00 PM: Property Photoshoot - 123 Main St\n*   6:00 PM - 7:00 PM: Kids' Soccer Practice"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Using the current time to determine that 'tomorrow' is Wednesday, March 5, 2025, find all events on that day and return them.",
+    "simulated_now": "2025-03-04 20:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Schedule Content on Social Media",
+          "start": "2025-03-05 09:00:00",
+          "end": "2025-03-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_525b8551cc9b4939946bd54636a0f0d3"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Property Photoshoot - 789 Pine Ln",
+          "start": "2025-03-05 10:30:00",
+          "end": "2025-03-05 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent1@email.com"
+          ],
+          "id": "evt_aae5a9f8ce524a0d99f09f310a2664c5"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Call with Freelance Assistant",
+          "start": "2025-03-05 14:00:00",
+          "end": "2025-03-05 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "assistant@email.com"
+          ],
+          "id": "evt_04973c5e8ecd4811bc044f675dd12cd6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Family",
+          "start": "2025-03-05 18:30:00",
+          "end": "2025-03-05 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d59f503bb3fe49cc9031dcdbacc09425"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Schedule Content on Social Media",
+          "start": "2025-03-05 09:00:00",
+          "end": "2025-03-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_525b8551cc9b4939946bd54636a0f0d3"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Property Photoshoot - 789 Pine Ln",
+          "start": "2025-03-05 10:30:00",
+          "end": "2025-03-05 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "agent1@email.com"
+          ],
+          "id": "evt_aae5a9f8ce524a0d99f09f310a2664c5"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Call with Freelance Assistant",
+          "start": "2025-03-05 14:00:00",
+          "end": "2025-03-05 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "assistant@email.com"
+          ],
+          "id": "evt_04973c5e8ecd4811bc044f675dd12cd6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Family",
+          "start": "2025-03-05 18:30:00",
+          "end": "2025-03-05 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d59f503bb3fe49cc9031dcdbacc09425"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing tomorrow?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to determine what day it is, and then I will get all of tomorrow's events."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-03-04 20:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-03-06 00:00:00",
+          "time_min": "2025-03-05 00:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_525b8551cc9b4939946bd54636a0f0d3 | Schedule Content on Social Media \u2014 Wed 09:00-10:00\nid: evt_aae5a9f8ce524a0d99f09f310a2664c5 | Property Photoshoot - 789 Pine Ln \u2014 Wed 10:30-12:30\nid: evt_04973c5e8ecd4811bc044f675dd12cd6 | Call with Freelance Assistant \u2014 Wed 14:00-15:00\nid: evt_d59f503bb3fe49cc9031dcdbacc09425 | Dinner with Family \u2014 Wed 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Tomorrow you have four events:\n\n*   Schedule Content on Social Media from 09:00 to 10:00.\n*   Property Photoshoot - 789 Pine Ln from 10:30 to 12:30.\n*   Call with Freelance Assistant from 14:00 to 15:00.\n*   Dinner with Family from 18:30 to 20:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

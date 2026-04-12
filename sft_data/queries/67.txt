@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Marketing Presentation' for Wednesday at 2 PM, lasting one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to add 'Marketing Presentation' to the calendar on Wednesday, April 12, 2023, from 2 PM to 3 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-09T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me a slot for a meeting with John this Friday at 1 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to add the meeting with John to the calendar on Friday, April 14, 2023, at 1 PM. Since duration isn't specified, it should be set to the default of 1 hour.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-04-09T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's happening later on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find events on Wednesday, April 12, 2023, after the current time. Current time needs to be simulated in this case.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-12T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I free for dinner on Sunday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to check for any events on Sunday, April 16, 2023, between 6 PM and 9 PM to determine if the user is free for dinner.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2023-04-09T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my physical therapy appointment on Monday to 3:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Physical Therapy Appointment' on Monday, April 10, 2023, then call update_event to change its start time to 3:30 PM and infer the end time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-10T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you change the sectional rehearsal time on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to identify the 'Sectional Rehearsal' on Wednesday, April 12, 2023. Then ask for the new time since it is ambiguous. Finally, call update_event to update the start and end times of the event.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-12T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What am I doing on Friday morning?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to retrieve all events scheduled for Friday, April 14, 2023, between 9 AM and 12 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-04-09T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me who is joining me for dinner after the performance on Friday.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find 'Post-Performance Dinner' on Friday, April 14, 2023. Then call get_event to get the event details and list the attendees.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-04-09T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the orchestra rehearsal on Tuesday. Decline it.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find 'Orchestra Rehearsal' on Tuesday, April 11, 2023, then call respond_to_event to decline the event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-04-11T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule my individual practice on Thursday to 3 PM, but only if it doesn't conflict with anything else.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to check for conflicts on Thursday, April 13, 2023, at 3 PM. If no conflicts, find the 'Individual Practice' event and call update_event to reschedule it.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-04-09T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Wednesday doctor",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Doctor's Appointment' on Wednesday, April 12, 2023. Then ask the user for the new time and reschedule using update_event.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-12T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner Friday, change to Saturday",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find any dinner events on Friday, April 14, 2023. Ask the user for clarification if multiple dinner events are found. Then, move the dinner to Saturday, April 15, 2023 using update_event, and ask for the new time of the dinner since that information is missing.",
+        "addressed_days": [
+            "Friday",
+            "Saturday"
+        ],
+        "current_time": "2023-04-14T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to retrieve all events scheduled for the current day, Monday, April 10, 2023.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-10T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What do I have tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to retrieve all events scheduled for tomorrow, Wednesday, April 12, 2023.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-11T20:00:00"
+    }
+]

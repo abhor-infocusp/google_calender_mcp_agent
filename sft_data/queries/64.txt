@@ -1,0 +1,148 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create a meeting called 'Discuss Budget' for Tuesday at 3 PM, lasting one hour, with Robert Johnson.",
+        "complexity": "Low",
+        "expected_behavior": "Call the create_event tool with summary 'Discuss Budget', start '2023-08-01T15:00:00', end '2023-08-01T16:00:00', attendees 'robert.johnson@hospital.com', description ''.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-30T08:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a Sepsis Prediction model review for Thursday at 1 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call the create_event tool with summary 'Sepsis Prediction model review', start '2023-08-03T13:00:00', end '2023-08-03T14:00:00', attendees '', description ''.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-07-30T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I meeting with Ben this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find all events this week and filter results to see if Dr. Ben Carter is attending any of them.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2023-07-30T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find all events on Wednesday between 12:00 PM and 6:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-30T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move the data security training to 3 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event 'Data Security Training' on Tuesday. If found, call update_event to change the start time to 2023-08-01T15:00:00 and the end time to 2023-08-01T16:00:00.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-30T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update the Heart Disease Risk Factors report writing to start at 1 PM on Wednesday.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event 'Report Writing - Summarizing Findings on Heart Disease Risk Factors' on Wednesday. If found, call update_event to change the start time to 2023-08-02T13:00:00 and the end time to 2023-08-02T03:00:00.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-30T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time does the project kickoff meeting start on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event 'Project Kickoff Meeting - Predictive Model for Diabetes' on Monday. If found, return its start time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-30T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the weekly research meeting on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event 'Weekly Research Meeting - Presenting Preliminary Results' on Friday. If found, return the list of attendees.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-07-30T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I have a conflict at 10:30 on Wednesday. What is it?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find any events scheduled for Wednesday between 10:30 AM and 11:30 AM. Return the name of any such events.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-30T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is Dr. Carter at the bias meeting?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the event 'Address Bias in Predictions - Working Group' on Wednesday. If found, check if Dr. Ben Carter is in the list of attendees. He is not, so the answer is no.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-30T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule kickoff",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event 'Project Kickoff Meeting - Predictive Model for Diabetes' on Monday. Respond that the user needs to provide a new date and time to reschedule.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-30T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "cancel dinner party.",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event 'Dinner Party at Friend's House' on Saturday. Then call delete_event.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-07-30T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find all events scheduled for today (Monday).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-31T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find all events scheduled for tomorrow (Wednesday).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-08-01T08:00:00"
+    }
+]

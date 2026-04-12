@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Discuss Q1 earnings' for next Tuesday at 3 PM for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule a meeting called 'Discuss Q1 earnings' on Tuesday, January 17, 2023, at 3 PM for one hour. No attendees.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-01-15T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for Friday at 2 PM to review marketing proposals.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule a meeting called 'review marketing proposals' on Friday, January 20, 2023, at 2 PM. No attendees.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-01-15T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Wednesday around lunchtime?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find events on Wednesday, January 18, 2023, between 11:00 AM and 1:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-01-18T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Who is Sarah meeting with next Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find events on Monday, January 16, 2023, then check attendees to see if Sarah Miller is attending. If yes, return the name of the event, the list of attendees, and the time of the event.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-01-16T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my client meeting next Monday back by an hour.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find 'Client Meeting - Divorce Case' on Monday, January 16, 2023. Find event_id, call update_event to update start time to 9:30 AM and end time to 11:00 AM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-01-16T07:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the Parent-teacher conference this Tuesday to 6:30 PM.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the 'Parent-teacher conference' event on Tuesday, January 17, 2023. Find the event_id, then call update_event to update the start time to 6:30 PM and end time to 8:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-01-17T11:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What meetings do I have next Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to retrieve all events on Friday, January 20, 2023.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-01-15T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me who I'm having dinner with on Wednesday.",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event on Wednesday, January 18, 2023, called 'Dinner with friends'. Return the attendees of the event.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-01-18T11:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my Friday Team Meeting to when I am having lunch with Micheal.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the 'Team Meeting' event on Friday, January 20, 2023 and the 'Networking Lunch with Financial Advisor' event. Get their event IDs. Then call update_event to change the Team Meeting to 1:30 PM to 3:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-01-20T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule the Domestic Violence Case court appearance for Thursday at 9:00 AM.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the 'Court Appearance - Domestic Violence Case' event on Wednesday, January 18, 2023. Then call delete_event to delete it. Then call create_event to create a new event with the name 'Court Appearance - Domestic Violence Case' for Thursday, January 19, 2023, at 9:00 AM.",
+        "addressed_days": [
+            "Wednesday",
+            "Thursday"
+        ],
+        "current_time": "2023-01-18T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule adoption.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Client Consultation - Adoption' event on Tuesday, January 17, 2023. Return the event details and ask for the new date and time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-01-17T14:30:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel soccer.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Kids Soccer Practice' event on Thursday, January 19, 2023. Call delete_event with the event_id to cancel the event.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-01-19T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to retrieve all events on Monday, January 16, 2023.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-01-16T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Anything on tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to retrieve all events on Wednesday, January 18, 2023.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-01-17T23:00:00"
+    }
+]

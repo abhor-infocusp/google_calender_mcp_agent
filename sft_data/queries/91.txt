@@ -1,0 +1,148 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Gardening' on Tuesday at 3 PM for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Gardening', start '2025-10-07T15:00:00', end '2025-10-07T16:00:00' and no attendees or description.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-09-28T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for Friday at 1 PM to discuss project updates with admin1@hospital.com and admin2@hospital.com.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Discuss project updates', start '2025-10-10T13:00:00', end '2025-10-10T14:00:00', attendees 'admin1@hospital.com, admin2@hospital.com' and no description.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-09-28T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Can you schedule a meeting with my insurance representative?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Insurance Representative' event on Monday, October 6th, and respond by confirming the event details to the user.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-09-28T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "When am I meeting with Dr. Smith this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Search for events with Dr. Smith's email (smith@hospital.com) in the attendees. Identify two meetings (Monday at 8:30 AM and Thursday at 2:00 PM) and inform the user of both.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-09-28T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule my dinner with my husband on Monday to 8 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Husband' event on Monday, October 6th and update its start time to 8 PM and end time to 9 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-09-28T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update the Patient Assessment for Mr. Johnson on Monday to start a half hour earlier.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Patient Assessment - Mr. Johnson' event on Monday, October 6th, and update its start time to 9:30 AM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-09-28T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the discharge planning meeting for Mrs. Garcia?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Discharge Planning Meeting - Mrs. Garcia' event on Monday and return its start time, 11:30 AM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-09-28T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the team meeting on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Team Meeting' event on Thursday and return the attendees: Dr. Smith - smith@hospital.com, Nurse Jones - jones@hospital.com.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-09-28T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my meeting with the community organization staff to the time I was supposed to be at my doctor's appointment.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Meeting with community organization staff' event and 'Doctor's Appointment' event on Wednesday.  Update the start time of 'Meeting with community organization staff' to 4:00 PM and the end time to 5:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-09-28T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the check-in with the support group on Sunday; can you decline the invitation?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Check in with Support Group' event on Sunday and call respond_to_event with attending set to DECLINE.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2025-09-28T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting with insurance...",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Meeting with Insurance Representative' event on Monday, October 6th, and respond by confirming the event details to the user.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-09-28T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Davis...",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Discharge Planning - Mr. Davis' event on Thursday, October 9th and ask the user to provide the new time to reschedule to.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-09-28T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Using the current time, determine today's date, then search the calendar for events on that day. If it is Monday, respond with 'Team Meeting at 8:30 AM, Patient Assessment at 10:00 AM, Discharge Planning Meeting at 11:30 AM, Meeting with Insurance Representative at 3:00 PM, and Dinner with Husband at 6:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-10-06T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Using the current time, determine tomorrow's date, then search the calendar for events on that day. If it is Monday, respond with 'Meeting with patient's family regarding care options at 9:00 AM, Crisis Intervention at 10:30 AM, and Home Healthcare Coordination at 2:00 PM, and Support Group Meeting at 7:00 PM'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-10-06T18:00:00"
+    }
+]

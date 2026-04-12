@@ -1,0 +1,149 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Lunch' for this Wednesday at 12:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Team Lunch' that starts at 12:30 PM and ends at 1:30 PM on Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-10-01T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me a meeting next Friday at 3 pm with the title 'Client Presentation'.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Client Presentation' that starts at 3:00 PM and ends at 4:00 PM next Friday.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-10-01T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "When am I meeting about accessibility?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the events related to accessibility. The agent should identify 'Accessibility Review Meeting', 'User Testing Session - Screen Reader Users', 'Design System Accessibility Audit', 'Meeting with Legal Counsel - WCAG 2.2 Updates', 'Accessibility Training Follow-up Q&A', 'Review Accessibility Consultant Report', 'Meeting with Product Manager - Accessibility Roadmap', 'User Testing Synthesis - Mobile App', 'Discuss New Accessibility Standard Experts', 'Team Meeting - Accessibility Wins & Challenges', and 'Accessibility Bug Review with Development Team' and respond with the times of these meetings.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2023-10-01T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing with friends this week?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should identify the event 'Dinner with friends' on Tuesday at 7:00 PM and respond with this information.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-10-01T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the 'Accessibility Review Meeting' to 10:30 AM Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Accessibility Review Meeting' event on Monday and update its start time to 10:30 AM and end time to 11:30 AM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-10-01T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move dinner with friends to Wednesday at 6pm?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with friends' event and update the start time to Wednesday at 6:00 PM and end time to 7:00 PM.",
+        "addressed_days": [
+            "Tuesday",
+            "Wednesday"
+        ],
+        "current_time": "2023-10-01T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the accessibility review meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Accessibility Review Meeting' event and respond with the attendees: sarah.chen@email.com, david.lee@email.com.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-10-01T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the meeting with legal counsel?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Meeting with Legal Counsel - WCAG 2.2 Updates' event and respond with the time: Tuesday at 9:30 AM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-10-01T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline all events this week with ux_research@email.com but accept the user testing session",
+        "complexity": "High",
+        "expected_behavior": "Find all events with ux_research@email.com as an attendee. Decline all except 'User Testing Session - Screen Reader Users'. For 'User Testing Session - Screen Reader Users', respond to the event by accepting.",
+        "addressed_days": [
+            "Monday",
+            "Thursday"
+        ],
+        "current_time": "2023-10-01T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I am double booked on Friday. What meetings overlap?",
+        "complexity": "High",
+        "expected_behavior": "Identify all meetings on Friday ('Team Meeting - Accessibility Wins & Challenges', 'Accessibility Bug Review with Development Team', 'Documentation Update - Accessible Design Patterns') and determine if any times overlap. The agent will determine 'Team Meeting - Accessibility Wins & Challenges' (9:00 AM - 10:00 AM) and 'Accessibility Bug Review with Development Team' (10:30 AM - 12:00 PM) do not overlap. Documentation Update (2:00PM-3:00PM) does not overlap.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-10-01T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Accessibility on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "Find all events related to accessibility on Monday. The agent should identify 'Accessibility Review Meeting', and 'User Testing Session - Screen Reader Users' and 'Design System Accessibility Audit' and respond with the times of these meetings.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-10-01T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel Hiking.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Hiking group meetup' on Thursday and 'Hike with hiking group' on Saturday, then delete them.",
+        "addressed_days": [
+            "Thursday",
+            "Saturday"
+        ],
+        "current_time": "2023-10-01T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Get the current date (e.g., Monday) and list all events scheduled for that day.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-10-09T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Any meetings tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Get the date for tomorrow (Tuesday) and list all events scheduled for that day.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-10-09T15:00:00"
+    }
+]

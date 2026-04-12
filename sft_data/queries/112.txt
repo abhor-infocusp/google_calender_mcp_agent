@@ -1,0 +1,167 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Lunch' on Tuesday at 12:00 PM, lasting for one hour. Invite it_support@example.com and network_engineer@example.com. The description should be 'Discuss project progress'.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the given details using the create_event tool. The summary should be 'Team Lunch', start time should be 2026-11-10T12:00:00, end time should be 2026-11-10T13:00:00, attendees should be it_support@example.com and network_engineer@example.com, and the description should be 'Discuss project progress'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-11-08T18:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting with the legal counsel this Thursday at 3pm for 30 minutes to discuss NDAs.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the given details using the create_event tool. The summary should be 'Meeting with Legal Counsel', start time should be 2026-11-12T15:00:00, end time should be 2026-11-12T15:30:00, the attendees should be Legal Counsel, and the description should be 'Discuss NDAs'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-11-08T18:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy on Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events on Wednesday between 12:00 PM and 6:00 PM using the list_events tool. If any events are found, respond that the user is busy. Otherwise, respond that they are free.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-11-08T18:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the agenda for my meeting on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events on Monday using the list_events tool, and then respond with details from each event.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-11-08T18:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the meeting with the Compliance Officer on Monday to 3:00 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "First list the events on Monday to find the event with the Compliance Officer. Once found, update the start time to 2026-11-09T15:00:00 and end time to 2026-11-09T16:00:00 using the update_event tool.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-11-08T18:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the Security Tools Demo on Wednesday to include the network engineers in the attendees.",
+        "complexity": "Medium",
+        "expected_behavior": "First list the events on Wednesday to find the Security Tools Demo event. Then, using the get_event tool, get the existing attendees and add network_engineer@example.com to the attendee list. Finally, update the event with the new attendee list using the update_event tool.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-11-08T18:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the photography club meeting?",
+        "complexity": "Low",
+        "expected_behavior": "List all events to find the 'Photography Club Meeting'. Return the start and end time of that event.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-11-08T18:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me more about the Incident Response Planning session.",
+        "complexity": "Low",
+        "expected_behavior": "Search for 'Incident Response Planning' in the event list and then respond with the event description, date, time and attendees.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-11-08T18:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the Security Policy Update on Wednesday. Delete it, and schedule a new one for Friday at the same time instead.",
+        "complexity": "High",
+        "expected_behavior": "First, list events on Wednesday to find 'Security Policy Update' and delete it using delete_event. Then, create a new event on Friday at 10:30 AM with the same details as the original event using create_event tool.",
+        "addressed_days": [
+            "Wednesday",
+            "Friday"
+        ],
+        "current_time": "2026-11-08T18:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I will decline the Yoga class, and also create a new entry at the same time for a meeting with the hiking buddies to discuss the next excursion.",
+        "complexity": "High",
+        "expected_behavior": "First, locate the yoga class event on Wednesday and decline it using the respond_to_event tool. Then, create a new event on Wednesday at 6:00 PM for a meeting with the hiking buddies using the create_event tool.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-11-08T18:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Security meeting?",
+        "complexity": "Medium",
+        "expected_behavior": "List any events whose summary contain the word Security, then return all of the located events. ",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-11-08T18:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... Incident?",
+        "complexity": "Medium",
+        "expected_behavior": "List any events whose summary contains the word Incident, then ask the user to clarify which event they want to reschedule and to what time.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-11-08T18:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Use the get_current_time tool to get the current date. Then list the events for the current day using the list_events tool.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-11-09T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Anything on tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List the events for Tuesday using the list_events tool.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-11-09T20:00:00"
+    }
+]

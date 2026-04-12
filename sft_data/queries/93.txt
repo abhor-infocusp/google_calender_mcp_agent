@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Meeting with John' on August 22nd at 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to create a new event with summary 'Meeting with John', start time '2024-08-22T15:00:00', and end time '2024-08-22T16:00:00'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-08-18T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you book me in for a 'Strategy Session' on August 20th at 11:00 AM?",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to create a new event with summary 'Strategy Session', start time '2024-08-20T11:00:00', and end time '2024-08-20T12:00:00'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-08-18T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find events on '2024-08-21' between 12:00:00 and 17:00:00. Return the events to the user.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-08-21T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Friday look like?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find all events scheduled for '2024-08-23'. Present the events found to the user.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-08-23T07:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my 'Individual Client Session' on Monday to 10:00 AM?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Individual Client Session' on '2024-08-19'. Call update_event to update the start time to '2024-08-19T10:00:00' and end time to '2024-08-19T11:00:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-08-19T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the 'Dinner with Friends' on Friday by one hour earlier.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find 'Dinner with Friends' on '2024-08-23'. Call update_event to update the start time to '2024-08-23T17:00:00' and end time to '2024-08-23T19:00:00'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-08-23T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the 'Book Club Meeting' this Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Book Club Meeting' on '2024-08-21'. Call get_event to get the event details and extract the attendees. Return the attendees to the user.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-08-21T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the 'Balance Training Class' on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Balance Training Class' on '2024-08-24'. Call get_event to get the event details and extract the start time. Return the start time to the user.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-08-24T07:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I cannot attend the 'Consult with Geriatric Specialist' on Tuesday. Please decline.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the 'Consult with Geriatric Specialist' on '2024-08-20'. Call respond_to_event to decline the event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-08-20T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule my first 'Individual Client Session' on Friday to 2:30 PM.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the first 'Individual Client Session' on '2024-08-23'. Call update_event to update the start time to '2024-08-23T14:30:00' and end time to '2024-08-23T15:30:00'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-08-23T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner Friday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find any event with 'dinner' in the title on '2024-08-23'. Return the results to the user.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-08-23T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change yoga class.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Chair Yoga Class' on '2024-08-20'. Ask the user to provide further details regarding what changes they would like to make.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-08-20T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find all events scheduled for '2024-08-20'. Present the events found to the user.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-08-20T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Anything on for me tomorrow morning?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find events scheduled for '2024-08-21' between 00:00:00 and 12:00:00. Present the events found to the user.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-08-20T15:00:00"
+    }
+]

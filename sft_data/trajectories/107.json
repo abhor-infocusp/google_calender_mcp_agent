@@ -1,0 +1,1162 @@
+[
+  {
+    "query": "Book a haircut appointment for next Tuesday at 11 AM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create an event named 'haircut appointment' on Tuesday, July 4th, 2023, at 11 AM and set the end time to one hour later.",
+    "simulated_now": "2023-07-02 10:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Open Shop, Inventory Check",
+          "start": "2023-07-04 09:00:00",
+          "end": "2023-07-04 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d005be08f1a2415c9cd8f3e9f0772824"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Assemble New Bike - \"The Racer\"",
+          "start": "2023-07-04 10:30:00",
+          "end": "2023-07-04 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ecc1fc510ad14dc38d8bd310938094ae"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Customer Service - Assist walk-in customers",
+          "start": "2023-07-04 13:30:00",
+          "end": "2023-07-04 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ca1ae2766c244063a3437461a393bfd1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work with Mentro on business plan",
+          "start": "2023-07-04 15:30:00",
+          "end": "2023-07-04 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6a5a3bbbad544184a26417a38ad4c28e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Update shop Instagram",
+          "start": "2023-07-04 18:00:00",
+          "end": "2023-07-04 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1c46743107c44affbc591c522d2a96b9"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Open Shop, Inventory Check",
+          "start": "2023-07-04 09:00:00",
+          "end": "2023-07-04 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d005be08f1a2415c9cd8f3e9f0772824"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Assemble New Bike - \"The Racer\"",
+          "start": "2023-07-04 10:30:00",
+          "end": "2023-07-04 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ecc1fc510ad14dc38d8bd310938094ae"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Customer Service - Assist walk-in customers",
+          "start": "2023-07-04 13:30:00",
+          "end": "2023-07-04 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ca1ae2766c244063a3437461a393bfd1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work with Mentro on business plan",
+          "start": "2023-07-04 15:30:00",
+          "end": "2023-07-04 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_6a5a3bbbad544184a26417a38ad4c28e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Update shop Instagram",
+          "start": "2023-07-04 18:00:00",
+          "end": "2023-07-04 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1c46743107c44affbc591c522d2a96b9"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Haircut",
+          "start": "2023-07-11 11:00:00",
+          "end": "2023-07-11 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4f06baacdd354c20ab4fcc684af611c1"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Book a haircut appointment for next Tuesday at 11 AM."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I will book a haircut appointment for you.\n\nFirst, I need to get the current time to determine the date of next Tuesday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-02 10:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "Got it. Next Tuesday is July 11th. I will now book your haircut appointment for that day at 11 AM."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2023-07-11 11:00:00",
+          "end": "2023-07-11 12:00:00",
+          "summary": "Haircut"
+        },
+        "result": "Event created successfully.\nHaircut\n  ID: evt_4f06baacdd354c20ab4fcc684af611c1\n  Time: Tue Jul 11, 11:00 - 12:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've scheduled your haircut for next Tuesday at 11 AM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing Wednesday afternoon?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "List events on Wednesday, July 5th, 2023, between 12 PM and 6 PM.",
+    "simulated_now": "2023-07-05 08:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Open Shop, Review Finances",
+          "start": "2023-07-05 09:00:00",
+          "end": "2023-07-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3954f59272074de49d12a4bd3fbb85c9"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Diagnose Bike Repairs",
+          "start": "2023-07-05 10:30:00",
+          "end": "2023-07-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f27b029245644ca5a8d9d092ec7886d3"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Repair: Brake replacement - Mike L.",
+          "start": "2023-07-05 13:00:00",
+          "end": "2023-07-05 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_85edee5259af4ac18ef78aca93903e36"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend Cycling Advocacy Group Meeting",
+          "start": "2023-07-05 15:00:00",
+          "end": "2023-07-05 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3d2d056f6343469b92bfed1dd862d374"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Open Shop, Review Finances",
+          "start": "2023-07-05 09:00:00",
+          "end": "2023-07-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3954f59272074de49d12a4bd3fbb85c9"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Diagnose Bike Repairs",
+          "start": "2023-07-05 10:30:00",
+          "end": "2023-07-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f27b029245644ca5a8d9d092ec7886d3"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Repair: Brake replacement - Mike L.",
+          "start": "2023-07-05 13:00:00",
+          "end": "2023-07-05 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_85edee5259af4ac18ef78aca93903e36"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend Cycling Advocacy Group Meeting",
+          "start": "2023-07-05 15:00:00",
+          "end": "2023-07-05 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_3d2d056f6343469b92bfed1dd862d374"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing Wednesday afternoon?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify the upcoming Wednesday. Then, I will list the events on that day between 12:00 and 17:00 to cover the afternoon. Finally, I will answer your question."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-05 08:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-07-05 12:00:00",
+          "time_max": "2023-07-05 17:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_f27b029245644ca5a8d9d092ec7886d3 | Diagnose Bike Repairs \u2014 Wed 10:30-12:00\nid: evt_85edee5259af4ac18ef78aca93903e36 | Repair: Brake replacement - Mike L. \u2014 Wed 13:00-14:30\nid: evt_3d2d056f6343469b92bfed1dd862d374 | Attend Cycling Advocacy Group Meeting \u2014 Wed 15:00-17:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have two events scheduled for Wednesday afternoon. From 13:00 to 14:30, you have \"Repair: Brake replacement - Mike L.\", and from 15:00 to 17:00, you are scheduled to \"Attend Cycling Advocacy Group Meeting\"."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on the schedule for Saturday?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Low",
+    "expected_behavior": "List all events scheduled for Saturday, July 8th, 2023.",
+    "simulated_now": "2023-07-08 09:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Shop open - assist customers",
+          "start": "2023-07-08 10:00:00",
+          "end": "2023-07-08 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_aaa226486fce4297a23bce7097094c63"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Group Bike Ride with Cycling Club",
+          "start": "2023-07-08 14:00:00",
+          "end": "2023-07-08 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cyclingclub@email.com"
+          ],
+          "id": "evt_d1de367ad7f742bca6d6687d05d1d5b3"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Relax",
+          "start": "2023-07-08 19:00:00",
+          "end": "2023-07-08 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f55c26e7fbba4d78a4d05e28ca3a2474"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Shop open - assist customers",
+          "start": "2023-07-08 10:00:00",
+          "end": "2023-07-08 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_aaa226486fce4297a23bce7097094c63"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Group Bike Ride with Cycling Club",
+          "start": "2023-07-08 14:00:00",
+          "end": "2023-07-08 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cyclingclub@email.com"
+          ],
+          "id": "evt_d1de367ad7f742bca6d6687d05d1d5b3"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Relax",
+          "start": "2023-07-08 19:00:00",
+          "end": "2023-07-08 21:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f55c26e7fbba4d78a4d05e28ca3a2474"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on the schedule for Saturday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first find out the current date and time. Then, I will determine the date of this coming Saturday and search for all events on that day. Finally, I will list all the events scheduled for this Saturday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-08 09:00:00 | Saturday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will now check for events on Saturday."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-07-08 00:00:00",
+          "time_max": "2023-07-08 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_aaa226486fce4297a23bce7097094c63 | Shop open - assist customers \u2014 Sat 10:00-13:00\nid: evt_d1de367ad7f742bca6d6687d05d1d5b3 | Group Bike Ride with Cycling Club \u2014 Sat 14:00-17:00\nid: evt_f55c26e7fbba4d78a4d05e28ca3a2474 | Relax \u2014 Sat 19:00-21:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have three events scheduled for Saturday:\n\n*   **10:00 AM - 1:00 PM:** Shop open - assist customers\n*   **2:00 PM - 5:00 PM:** Group Bike Ride with Cycling Club\n*   **7:00 PM - 9:00 PM:** Relax"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change the brake replacement repair time on Wednesday to 2 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Brake replacement' event on Wednesday, July 5th, 2023, and update the start time to 2 PM.",
+    "simulated_now": "2023-07-05 09:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Open Shop, Review Finances",
+          "start": "2023-07-05 09:00:00",
+          "end": "2023-07-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_add3995b736645b8b15915e85173a039"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Diagnose Bike Repairs",
+          "start": "2023-07-05 10:30:00",
+          "end": "2023-07-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_de9f13b4316946e48efa2d8ce8122f61"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Repair: Brake replacement - Mike L.",
+          "start": "2023-07-05 13:00:00",
+          "end": "2023-07-05 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8fca13660f6e48d4a4f8434ee7392989"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend Cycling Advocacy Group Meeting",
+          "start": "2023-07-05 15:00:00",
+          "end": "2023-07-05 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7cd640bb00a1475c8b50d26169b3f9be"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Open Shop, Review Finances",
+          "start": "2023-07-05 09:00:00",
+          "end": "2023-07-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_add3995b736645b8b15915e85173a039"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Diagnose Bike Repairs",
+          "start": "2023-07-05 10:30:00",
+          "end": "2023-07-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_de9f13b4316946e48efa2d8ce8122f61"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Repair: Brake replacement - Mike L.",
+          "start": "2023-07-05 14:00:00",
+          "end": "2023-07-05 15:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8fca13660f6e48d4a4f8434ee7392989"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend Cycling Advocacy Group Meeting",
+          "start": "2023-07-05 15:00:00",
+          "end": "2023-07-05 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7cd640bb00a1475c8b50d26169b3f9be"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change the brake replacement repair time on Wednesday to 2 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "The user wants to change the time of an event.\nFirst I need to find the event.\nThen I need to update the event with the new time.\n\nPlan:\n1. Get the current time to find out what day it is.\n2. List events on Wednesday to find the brake replacement event.\n3. Get the full event details to find out the original duration.\n4. Update the event with the new start time, preserving the original duration.\n5. Respond to the user with a confirmation."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-05 09:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-07-05 00:00:00",
+          "time_max": "2023-07-05 23:59:59"
+        },
+        "result": "Found 4 events:\nid: evt_add3995b736645b8b15915e85173a039 | Open Shop, Review Finances \u2014 Wed 09:00-10:00\nid: evt_de9f13b4316946e48efa2d8ce8122f61 | Diagnose Bike Repairs \u2014 Wed 10:30-12:00\nid: evt_8fca13660f6e48d4a4f8434ee7392989 | Repair: Brake replacement - Mike L. \u2014 Wed 13:00-14:30\nid: evt_7cd640bb00a1475c8b50d26169b3f9be | Attend Cycling Advocacy Group Meeting \u2014 Wed 15:00-17:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found the event \"Repair: Brake replacement - Mike L.\" on Wednesday, July 5th from 1:00 PM to 2:30 PM. I will now update the event to start at 2:00 PM, while preserving the original 1.5-hour duration, so the new end time will be 3:30 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2023-07-05 15:30:00",
+          "event_id": "evt_8fca13660f6e48d4a4f8434ee7392989",
+          "start": "2023-07-05 14:00:00"
+        },
+        "result": "Event updated successfully.\nRepair: Brake replacement - Mike L.\n  ID: evt_8fca13660f6e48d4a4f8434ee7392989\n  Time: Wed Jul 05, 14:00 - 15:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've changed the brake replacement repair time to 2:00 PM - 3:30 PM on Wednesday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Tell me the details of the dinner on Monday.",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Dinner with cycling friends' event on Monday, July 3rd, 2023, and return the event details.",
+    "simulated_now": "2023-07-03 14:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Open Shop, Check Voicemail & Emails",
+          "start": "2023-07-03 09:00:00",
+          "end": "2023-07-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e20a1824e4ae4eb3a148c733ca4b2812"
+        },
+        {
+          "day": "Monday",
+          "summary": "Diagnose Bike Repairs, Quote customers",
+          "start": "2023-07-03 10:30:00",
+          "end": "2023-07-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dfaab3bd9cc747d6b301cfb7abcabd7c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Repair: Tune-up - Sarah J.",
+          "start": "2023-07-03 13:00:00",
+          "end": "2023-07-03 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_57a98455d7a74882b37c76e09bad194f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Order parts from \"Bike Parts Unlimited\"",
+          "start": "2023-07-03 15:00:00",
+          "end": "2023-07-03 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_632f35c4cfa44a5da322df6a38b37816"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with cycling friends",
+          "start": "2023-07-03 19:00:00",
+          "end": "2023-07-03 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Tom - tom@email.com",
+            "Alice - alice@email.com"
+          ],
+          "id": "evt_40cdf05ce7f7442fb31b9277852dffc1"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Open Shop, Check Voicemail & Emails",
+          "start": "2023-07-03 09:00:00",
+          "end": "2023-07-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e20a1824e4ae4eb3a148c733ca4b2812"
+        },
+        {
+          "day": "Monday",
+          "summary": "Diagnose Bike Repairs, Quote customers",
+          "start": "2023-07-03 10:30:00",
+          "end": "2023-07-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_dfaab3bd9cc747d6b301cfb7abcabd7c"
+        },
+        {
+          "day": "Monday",
+          "summary": "Repair: Tune-up - Sarah J.",
+          "start": "2023-07-03 13:00:00",
+          "end": "2023-07-03 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_57a98455d7a74882b37c76e09bad194f"
+        },
+        {
+          "day": "Monday",
+          "summary": "Order parts from \"Bike Parts Unlimited\"",
+          "start": "2023-07-03 15:00:00",
+          "end": "2023-07-03 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_632f35c4cfa44a5da322df6a38b37816"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with cycling friends",
+          "start": "2023-07-03 19:00:00",
+          "end": "2023-07-03 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Tom - tom@email.com",
+            "Alice - alice@email.com"
+          ],
+          "id": "evt_40cdf05ce7f7442fb31b9277852dffc1"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Tell me the details of the dinner on Monday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-03 14:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-07-03 00:00:00",
+          "time_max": "2023-07-03 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_e20a1824e4ae4eb3a148c733ca4b2812 | Open Shop, Check Voicemail & Emails \u2014 Mon 09:00-10:00\nid: evt_dfaab3bd9cc747d6b301cfb7abcabd7c | Diagnose Bike Repairs, Quote customers \u2014 Mon 10:30-12:00\nid: evt_57a98455d7a74882b37c76e09bad194f | Repair: Tune-up - Sarah J. \u2014 Mon 13:00-14:30\nid: evt_632f35c4cfa44a5da322df6a38b37816 | Order parts from \"Bike Parts Unlimited\" \u2014 Mon 15:00-16:00\nid: evt_40cdf05ce7f7442fb31b9277852dffc1 | Dinner with cycling friends \u2014 Mon 19:00-20:30"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_40cdf05ce7f7442fb31b9277852dffc1"
+        },
+        "result": "Dinner with cycling friends\n  ID: evt_40cdf05ce7f7442fb31b9277852dffc1\n  Time: Mon Jul 03, 19:00 - 20:30\n  Attendees: Tom - tom@email.com, Alice - alice@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "Dinner with your cycling friends is scheduled for Monday, July 3rd, from 7:00 PM to 8:30 PM. The attendees are Tom and Alice."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is the cycling advocacy meeting?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Cycling Advocacy Group Meeting' event on Wednesday, July 5th, 2023, and return the start time.",
+    "simulated_now": "2023-07-05 11:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Open Shop, Review Finances",
+          "start": "2023-07-05 09:00:00",
+          "end": "2023-07-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d40d733803754980811a9724e1b0a463"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Diagnose Bike Repairs",
+          "start": "2023-07-05 10:30:00",
+          "end": "2023-07-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_56bb7d2881d34ff09c36287f914b0a34"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Repair: Brake replacement - Mike L.",
+          "start": "2023-07-05 13:00:00",
+          "end": "2023-07-05 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ae00d4b320e948ef92beb0ca1f5ae8dc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend Cycling Advocacy Group Meeting",
+          "start": "2023-07-05 15:00:00",
+          "end": "2023-07-05 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ad9bd00f057a4f47bfeeec394ef38cf2"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Open Shop, Review Finances",
+          "start": "2023-07-05 09:00:00",
+          "end": "2023-07-05 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d40d733803754980811a9724e1b0a463"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Diagnose Bike Repairs",
+          "start": "2023-07-05 10:30:00",
+          "end": "2023-07-05 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_56bb7d2881d34ff09c36287f914b0a34"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Repair: Brake replacement - Mike L.",
+          "start": "2023-07-05 13:00:00",
+          "end": "2023-07-05 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ae00d4b320e948ef92beb0ca1f5ae8dc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend Cycling Advocacy Group Meeting",
+          "start": "2023-07-05 15:00:00",
+          "end": "2023-07-05 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ad9bd00f057a4f47bfeeec394ef38cf2"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is the cycling advocacy meeting?"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 27 events:\nid: evt_0f943193cea4421e94b317e1497156fd | Open Shop, Check Voicemail & Emails \u2014 Mon 09:00-10:00\nid: evt_5633a4e09114489489a14ff6c14cd30e | Diagnose Bike Repairs, Quote customers \u2014 Mon 10:30-12:00\nid: evt_39946bf7c4984c35b2f71126c467bf63 | Repair: Tune-up - Sarah J. \u2014 Mon 13:00-14:30\nid: evt_86d4efb0c13f41c281e20cbcec64fec3 | Order parts from \"Bike Parts Unlimited\" \u2014 Mon 15:00-16:00\nid: evt_7001ffca9b4f40b1a84d17492874862d | Dinner with cycling friends \u2014 Mon 19:00-20:30\nid: evt_28a2dcf9f73e43af86f025d401b1179a | Open Shop, Inventory Check \u2014 Tue 09:00-10:00\nid: evt_ee1d7bf2037842e3a5b024cde6e27cf8 | Assemble New Bike - \"The Racer\" \u2014 Tue 10:30-12:30\nid: evt_bf1ec533ce194da1a86a9a063c018adb | Customer Service - Assist walk-in customers \u2014 Tue 13:30-15:00\nid: evt_ce4d076c8d0d4fb89d74787f20269d7a | Work with Mentro on business plan \u2014 Tue 15:30-17:00\nid: evt_b728e5e194a540d786ed2c4b7564946f | Update shop Instagram \u2014 Tue 18:00-19:00\nid: evt_d40d733803754980811a9724e1b0a463 | Open Shop, Review Finances \u2014 Wed 09:00-10:00\nid: evt_56bb7d2881d34ff09c36287f914b0a34 | Diagnose Bike Repairs \u2014 Wed 10:30-12:00\nid: evt_ae00d4b320e948ef92beb0ca1f5ae8dc | Repair: Brake replacement - Mike L. \u2014 Wed 13:00-14:30\nid: evt_ad9bd00f057a4f47bfeeec394ef38cf2 | Attend Cycling Advocacy Group Meeting \u2014 Wed 15:00-17:00\nid: evt_9b5bbbd630694e41bc2cdda24dd6e391 | Open Shop, Respond to online inquiries. \u2014 Thu 09:00-10:00\nid: evt_ed665f7318544d0d893e5818f7ee2c58 | Assemble E-bike \u2014 Thu 10:30-12:30\nid: evt_a3b077a915b94ad5bc4f44b2b6d1693a | Discuss marketing strategies with assistant \u2014 Thu 13:30-15:00\nid: evt_e7e5d03489bd4f269637de46d8955de5 | Meet with Bicycle Manufacturers Rep \u2014 Thu 15:30-17:00\nid: evt_17a6e767d5094643a21ccf2d81aebc97 | Open Shop, Check Inventory \u2014 Fri 09:00-10:00\nid: evt_2ca8322f661744d699e0c102b40ce43f | Diagnose Bike Repairs, Quote customers \u2014 Fri 10:30-12:00\nid: evt_f6fc3a0dc7d149c8bffdb03f72db8f09 | Repair: Flat tire fixes \u2014 Fri 13:00-14:30\nid: evt_c23a4a184bb04573939b0ae34e5044c1 | Payroll \u2014 Fri 15:00-16:00\nid: evt_4a4c509323be48568aa69dd5d029f7e8 | Shop open - assist customers \u2014 Sat 10:00-13:00\nid: evt_0a69bccdd33f467883020eb170a9a753 | Group Bike Ride with Cycling Club \u2014 Sat 14:00-17:00\nid: evt_c918cb0784154d40bdb9b603dc4ce5d9 | Relax \u2014 Sat 19:00-21:00\nid: evt_fa6fd72c2766418093d161cc646091af | Brunch with friends \u2014 Sun 11:00-13:00\nid: evt_b81e798099844b66afe0949cf475b99a | Relax \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "The Cycling Advocacy Group Meeting is scheduled for Wednesday from 15:00 to 17:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Will the meeting with the bike manufacturers rep conflict with discussing marketing with my assistant?",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "List the 'Discuss marketing strategies with assistant' event, then list the 'Meet with Bicycle Manufacturers Rep' event, then compare if they overlap on Thursday, July 6th, 2023.",
+    "simulated_now": "2023-07-06 08:00:00",
+    "addressed_days": [
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Open Shop, Respond to online inquiries.",
+          "start": "2023-07-06 09:00:00",
+          "end": "2023-07-06 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7919f889dd284c67bd966b0a301dd407"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Assemble E-bike",
+          "start": "2023-07-06 10:30:00",
+          "end": "2023-07-06 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_be6df2e5de084edaa5a777c6462850bc"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Discuss marketing strategies with assistant",
+          "start": "2023-07-06 13:30:00",
+          "end": "2023-07-06 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d06d14957787484b897794523638a0f5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meet with Bicycle Manufacturers Rep",
+          "start": "2023-07-06 15:30:00",
+          "end": "2023-07-06 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "rep@bikemfg.com"
+          ],
+          "id": "evt_d31f958806004d8ea66b99b4807f13bf"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Open Shop, Respond to online inquiries.",
+          "start": "2023-07-06 09:00:00",
+          "end": "2023-07-06 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7919f889dd284c67bd966b0a301dd407"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Assemble E-bike",
+          "start": "2023-07-06 10:30:00",
+          "end": "2023-07-06 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_be6df2e5de084edaa5a777c6462850bc"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Discuss marketing strategies with assistant",
+          "start": "2023-07-06 13:30:00",
+          "end": "2023-07-06 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d06d14957787484b897794523638a0f5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Meet with Bicycle Manufacturers Rep",
+          "start": "2023-07-06 15:30:00",
+          "end": "2023-07-06 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "rep@bikemfg.com"
+          ],
+          "id": "evt_d31f958806004d8ea66b99b4807f13bf"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Will the meeting with the bike manufacturers rep conflict with discussing marketing with my assistant?"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 27 events:\nid: evt_7058128d9ea740b6b365699a6e88cc98 | Open Shop, Check Voicemail & Emails \u2014 Mon 09:00-10:00\nid: evt_607d6b5e028b42b695b07d7126cbb982 | Diagnose Bike Repairs, Quote customers \u2014 Mon 10:30-12:00\nid: evt_d3fd88bbd2ff49359d7596a6c63903a9 | Repair: Tune-up - Sarah J. \u2014 Mon 13:00-14:30\nid: evt_84ff0ae8602549bfb9e62d620c85571c | Order parts from \"Bike Parts Unlimited\" \u2014 Mon 15:00-16:00\nid: evt_1101e22b863841e9884aa8ba37d351ac | Dinner with cycling friends \u2014 Mon 19:00-20:30\nid: evt_dd736990c0ac49489d183574124ae344 | Open Shop, Inventory Check \u2014 Tue 09:00-10:00\nid: evt_9f4f2cfdb3594ea98b736e9f97525eb0 | Assemble New Bike - \"The Racer\" \u2014 Tue 10:30-12:30\nid: evt_828c1965d64949f780440785ff69bc9a | Customer Service - Assist walk-in customers \u2014 Tue 13:30-15:00\nid: evt_b8ea8751e4484cdab516f4ee55551d9d | Work with Mentro on business plan \u2014 Tue 15:30-17:00\nid: evt_fee7c0c411e746dabff0dcb889f39765 | Update shop Instagram \u2014 Tue 18:00-19:00\nid: evt_917a407a9829483ba20a2f28eb5b7636 | Open Shop, Review Finances \u2014 Wed 09:00-10:00\nid: evt_b25e1520a8ea4eb8b4c407882c9e232e | Diagnose Bike Repairs \u2014 Wed 10:30-12:00\nid: evt_eb44677da32746688730d1e1e75be4b8 | Repair: Brake replacement - Mike L. \u2014 Wed 13:00-14:30\nid: evt_be4e5f2b38134e7f8749895b7513bad9 | Attend Cycling Advocacy Group Meeting \u2014 Wed 15:00-17:00\nid: evt_7919f889dd284c67bd966b0a301dd407 | Open Shop, Respond to online inquiries. \u2014 Thu 09:00-10:00\nid: evt_be6df2e5de084edaa5a777c6462850bc | Assemble E-bike \u2014 Thu 10:30-12:30\nid: evt_d06d14957787484b897794523638a0f5 | Discuss marketing strategies with assistant \u2014 Thu 13:30-15:00\nid: evt_d31f958806004d8ea66b99b4807f13bf | Meet with Bicycle Manufacturers Rep \u2014 Thu 15:30-17:00\nid: evt_6f2277aa22a24fd3823dc9fbe3b212c9 | Open Shop, Check Inventory \u2014 Fri 09:00-10:00\nid: evt_ce7e467a67da49ce9a52e1b4983cda26 | Diagnose Bike Repairs, Quote customers \u2014 Fri 10:30-12:00\nid: evt_58905ce9b276458b904d1f73ad4819cc | Repair: Flat tire fixes \u2014 Fri 13:00-14:30\nid: evt_08f167a160444b76bc94e3f3b1dbae17 | Payroll \u2014 Fri 15:00-16:00\nid: evt_5c14140660894af1a3aed1476dd00432 | Shop open - assist customers \u2014 Sat 10:00-13:00\nid: evt_1e7600ce315c48de9af3a9bea95e4db9 | Group Bike Ride with Cycling Club \u2014 Sat 14:00-17:00\nid: evt_5fb62887da234f8e92c88d35844d01e9 | Relax \u2014 Sat 19:00-21:00\nid: evt_90b1139ee97a4be2b1ded745fc720de4 | Brunch with friends \u2014 Sun 11:00-13:00\nid: evt_14e61562c208483fa919897cf505ce9e | Relax \u2014 Sun 14:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "No, the meeting with the bike manufacturers rep is from 15:30 to 17:00 on Thursday, and the meeting to discuss marketing with your assistant is from 13:30 to 15:00 on Thursday, so they do not conflict."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events scheduled for Monday, July 3rd, 2023.",
+    "simulated_now": "2023-07-03 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Open Shop, Check Voicemail & Emails",
+          "start": "2023-07-03 09:00:00",
+          "end": "2023-07-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_914bfb8e489e4c3899089f0d3c886b49"
+        },
+        {
+          "day": "Monday",
+          "summary": "Diagnose Bike Repairs, Quote customers",
+          "start": "2023-07-03 10:30:00",
+          "end": "2023-07-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f115b4bfaa4d4511aa9a6c0b936159b0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Repair: Tune-up - Sarah J.",
+          "start": "2023-07-03 13:00:00",
+          "end": "2023-07-03 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0f34c7bbee784e72b67c287fcb83d58e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Order parts from \"Bike Parts Unlimited\"",
+          "start": "2023-07-03 15:00:00",
+          "end": "2023-07-03 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_27d89c74342147e89cdf573e1c13a9d4"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with cycling friends",
+          "start": "2023-07-03 19:00:00",
+          "end": "2023-07-03 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Tom - tom@email.com",
+            "Alice - alice@email.com"
+          ],
+          "id": "evt_62d397d286a948ba9e4a3ae45c3bf1dc"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Open Shop, Check Voicemail & Emails",
+          "start": "2023-07-03 09:00:00",
+          "end": "2023-07-03 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_914bfb8e489e4c3899089f0d3c886b49"
+        },
+        {
+          "day": "Monday",
+          "summary": "Diagnose Bike Repairs, Quote customers",
+          "start": "2023-07-03 10:30:00",
+          "end": "2023-07-03 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f115b4bfaa4d4511aa9a6c0b936159b0"
+        },
+        {
+          "day": "Monday",
+          "summary": "Repair: Tune-up - Sarah J.",
+          "start": "2023-07-03 13:00:00",
+          "end": "2023-07-03 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_0f34c7bbee784e72b67c287fcb83d58e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Order parts from \"Bike Parts Unlimited\"",
+          "start": "2023-07-03 15:00:00",
+          "end": "2023-07-03 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_27d89c74342147e89cdf573e1c13a9d4"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with cycling friends",
+          "start": "2023-07-03 19:00:00",
+          "end": "2023-07-03 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "Tom - tom@email.com",
+            "Alice - alice@email.com"
+          ],
+          "id": "evt_62d397d286a948ba9e4a3ae45c3bf1dc"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-03 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-07-03 00:00:00",
+          "time_max": "2023-07-03 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_914bfb8e489e4c3899089f0d3c886b49 | Open Shop, Check Voicemail & Emails \u2014 Mon 09:00-10:00\nid: evt_f115b4bfaa4d4511aa9a6c0b936159b0 | Diagnose Bike Repairs, Quote customers \u2014 Mon 10:30-12:00\nid: evt_0f34c7bbee784e72b67c287fcb83d58e | Repair: Tune-up - Sarah J. \u2014 Mon 13:00-14:30\nid: evt_27d89c74342147e89cdf573e1c13a9d4 | Order parts from \"Bike Parts Unlimited\" \u2014 Mon 15:00-16:00\nid: evt_62d397d286a948ba9e4a3ae45c3bf1dc | Dinner with cycling friends \u2014 Mon 19:00-20:30"
+      },
+      {
+        "role": "assistant",
+        "content": "You have 5 events scheduled for today:\n- Open Shop, Check Voicemail & Emails from 09:00 to 10:00\n- Diagnose Bike Repairs, Quote customers from 10:30 to 12:00\n- Repair: Tune-up - Sarah J. from 13:00 to 14:30\n- Order parts from \"Bike Parts Unlimited\" from 15:00 to 16:00\n- Dinner with cycling friends from 19:00 to 20:30"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What does tomorrow look like?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events scheduled for Tuesday, July 4th, 2023.",
+    "simulated_now": "2023-07-03 20:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Open Shop, Inventory Check",
+          "start": "2023-07-04 09:00:00",
+          "end": "2023-07-04 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_873ae2bad0544e2790583ce2b0805ade"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Assemble New Bike - \"The Racer\"",
+          "start": "2023-07-04 10:30:00",
+          "end": "2023-07-04 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_798ac9b297be4cfc940f5b42854dc218"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Customer Service - Assist walk-in customers",
+          "start": "2023-07-04 13:30:00",
+          "end": "2023-07-04 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_314db06b2b3642d0b5345fe2f2c65361"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work with Mentro on business plan",
+          "start": "2023-07-04 15:30:00",
+          "end": "2023-07-04 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1d948186c0df4d8abc510fc3595f540e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Update shop Instagram",
+          "start": "2023-07-04 18:00:00",
+          "end": "2023-07-04 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7d82ed6bb9904747bbd785b9b698d875"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Open Shop, Inventory Check",
+          "start": "2023-07-04 09:00:00",
+          "end": "2023-07-04 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_873ae2bad0544e2790583ce2b0805ade"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Assemble New Bike - \"The Racer\"",
+          "start": "2023-07-04 10:30:00",
+          "end": "2023-07-04 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_798ac9b297be4cfc940f5b42854dc218"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Customer Service - Assist walk-in customers",
+          "start": "2023-07-04 13:30:00",
+          "end": "2023-07-04 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_314db06b2b3642d0b5345fe2f2c65361"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Work with Mentro on business plan",
+          "start": "2023-07-04 15:30:00",
+          "end": "2023-07-04 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1d948186c0df4d8abc510fc3595f540e"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Update shop Instagram",
+          "start": "2023-07-04 18:00:00",
+          "end": "2023-07-04 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7d82ed6bb9904747bbd785b9b698d875"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What does tomorrow look like?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify tomorrow's date. Then, I will list all events scheduled for tomorrow to give you an overview of your day."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-03 20:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-07-04 23:59:59",
+          "time_min": "2023-07-04 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_873ae2bad0544e2790583ce2b0805ade | Open Shop, Inventory Check \u2014 Tue 09:00-10:00\nid: evt_798ac9b297be4cfc940f5b42854dc218 | Assemble New Bike - \"The Racer\" \u2014 Tue 10:30-12:30\nid: evt_314db06b2b3642d0b5345fe2f2c65361 | Customer Service - Assist walk-in customers \u2014 Tue 13:30-15:00\nid: evt_1d948186c0df4d8abc510fc3595f540e | Work with Mentro on business plan \u2014 Tue 15:30-17:00\nid: evt_7d82ed6bb9904747bbd785b9b698d875 | Update shop Instagram \u2014 Tue 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Tomorrow, you have 5 events scheduled:\n- Open Shop, Inventory Check \u2014 Tue 09:00-10:00\n- Assemble New Bike - \"The Racer\" \u2014 Tue 10:30-12:30\n- Customer Service - Assist walk-in customers \u2014 Tue 13:30-15:00\n- Work with Mentro on business plan \u2014 Tue 15:30-17:00\n- Update shop Instagram \u2014 Tue 18:00-19:00\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Board Game Night' for this Saturday at 7 PM lasting three hours.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call create_event with summary 'Board Game Night', start time Saturday 7:00 PM, end time Saturday 10:00 PM and no attendees or description.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-02-11T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a meeting to my calendar for Thursday at 10 AM called 'Project Brainstorm'.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call create_event with summary 'Project Brainstorm', start time Thursday 10:00 AM, and end time Thursday 11:00 AM, with no attendees or description.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-02-11T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy on Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should call list_events for Wednesday between 12:00 PM and 6:00 PM and then respond to the user about the findings.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-02-12T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's happening tomorrow morning?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should call list_events for Tuesday between 8:00 AM and 12:00 PM and then respond to the user about the findings.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-02-12T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the Court Appearance on Monday to 2:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should call list_events for Monday and find the 'Court Appearance - Status Hearing' event, then call update_event to change its start time to 2:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-02-11T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the Yoga Class to 6:30 PM on Wednesday.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should call list_events for Wednesday and find the 'Yoga Class' event, then call update_event to change its start time to 6:30 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-02-11T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my dinner with friends on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call list_events for Friday and find the 'Dinner with Friends' event, then respond to the user with the time: 7:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-02-11T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the mediation session on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call list_events for Tuesday and find the 'Mediation Session - Child Support' event, then respond to the user with the attendees: client1@email.com, opposingcounsel@email.com, mediator@email.com.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-02-11T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you schedule a meeting with my paralegal on Friday, but only if it doesn't overlap with the Negotiation?",
+        "complexity": "High",
+        "expected_behavior": "The agent should call list_events for Friday to find 'Negotiation with Opposing Counsel'. Based on time, it should determine if there's a conflict if it schedules 'Meeting with Paralegal - Case Preparation'. If no conflict, call create_event; otherwise, inform the user of the conflict.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-02-11T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move the Client Consultation on Monday so it does not overlap with drafting the legal document.",
+        "complexity": "High",
+        "expected_behavior": "The agent should list_events for Monday to find the 'Client Consultation' and 'Draft Legal Document'. It should then determine the possible times for the 'Client Consultation', avoiding the time slot occupied by the 'Draft Legal Document'. Then, update the event with the new time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-02-11T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner with friends, cancel",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should list_events for Friday and identify the dinner with friends, then call the delete_event tool.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-02-11T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting with social worker, reschedule later.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should list_events for Thursday to find 'Meeting with Social Worker', then prompt the user to provide a specific time to reschedule.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-02-11T12:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should call list_events for Monday (today) and then respond to the user about the findings.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-02-12T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any court appearances yesterday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should call list_events for Wednesday (yesterday) and check for events with 'Court Appearance' in the title and respond to the user about the findings.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-02-14T08:00:00"
+    }
+]

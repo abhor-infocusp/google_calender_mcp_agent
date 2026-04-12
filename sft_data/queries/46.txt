@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Project Meeting' on Wednesday at 1 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Project Meeting' on Wednesday, July 17, 2024, at 1:00 PM and lasting for a reasonable duration (e.g., 1 hour).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-14T20:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a dentist appointment for me this Friday at 2:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event called 'Dentist Appointment' on Friday, July 19, 2024, at 2:30 PM and lasting for a reasonable duration (e.g., 1 hour).",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-07-14T20:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I have a meeting with the Superintendent this week. Add David Lee to it.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Superintendent' event on Monday, July 15, 2024, and add david.lee@school.edu as an attendee.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-14T20:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "My book club meeting needs to be moved up by an hour.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Book Club Meeting' event on Tuesday, July 16, 2024, and update its start time to 6:00 PM and its end time to 7:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-14T20:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the Student Disciplinary Meeting to 1 PM on Monday.",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Student Disciplinary Meeting' event on Monday, July 15, 2024, and update its start time to 1:00 PM and its end time to 2:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-14T20:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the Staff Meeting this Friday to 9:30 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Staff Meeting' event on Friday, July 19, 2024, and update its start time to 9:30 AM and its end time to 10:30 AM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-07-14T20:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Department Head Meeting on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Department Head Meeting' event on Monday, July 15, 2024, and respond with the list of attendees (sarah.johnson@school.edu, mark.williams@school.edu, david.lee@school.edu).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-14T20:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my yoga class this week?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Yoga Class' event on Wednesday, July 17, 2024, and respond with its start time (6:00 PM).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-14T20:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I need to cancel dinner with my spouse, and instead have a meeting with the District Administrators at that same time.",
+        "complexity": "High",
+        "expected_behavior": "Delete the 'Dinner with Spouse' event on Friday, July 19, 2024. Then, create a new event called 'Meeting with District Administrators' on Friday, July 19, 2024, from 7:00 PM to 9:00 PM, attendees districtadmin@district.edu.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-07-14T20:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline the meeting with the superintendent and schedule a meeting with the union rep for that same day.",
+        "complexity": "High",
+        "expected_behavior": "Decline the 'Meeting with Superintendent' event on Monday, July 15, 2024. Then, create a new event called 'Meeting with Union Representative' on Monday, July 15, 2024 at 10:45 AM for 1 hour, and list unionrep@email.com as attendee.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-14T20:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting with school board",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with School Board Member' event on Tuesday, July 16, 2024. Respond with its details (time and attendees).",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-14T20:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "dinner?",
+        "complexity": "Low",
+        "expected_behavior": "List all events with the word 'dinner' in their title. Respond with the event called 'Dinner with Family' on Monday, July 15, 2024 and the event called 'Dinner with Spouse' on Friday, July 19, 2024.",
+        "addressed_days": [
+            "Monday",
+            "Friday"
+        ],
+        "current_time": "2024-07-14T20:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have today?",
+        "complexity": "Low",
+        "expected_behavior": "Based on the current time, if today is Monday, July 15, 2024, list all events scheduled for that day: Morning Announcements & School Walk-through, Department Head Meeting, Meeting with Superintendent, Student Disciplinary Meeting, and Dinner with Family.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-15T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow's schedule?",
+        "complexity": "Low",
+        "expected_behavior": "Based on the current time, if today is Monday, July 15, 2024, then 'tomorrow' is Tuesday, July 16, 2024. List all events scheduled for that day: Faculty Observation, Special Education Team Meeting, Meeting with School Board Member, Parent-Teacher Conference, and Book Club Meeting.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-15T20:00:00"
+    }
+]

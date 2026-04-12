@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting called 'Project Brainstorm' for Wednesday at 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event named 'Project Brainstorm' on March 5, 2025, from 3:00 PM to 4:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-03-02T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you create an entry on Friday for a 'Marketing Review' at 2 in the afternoon?",
+        "complexity": "Low",
+        "expected_behavior": "Create an event named 'Marketing Review' on March 7, 2025, from 2:00 PM to 3:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-03-02T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I'd like to move my appointment regarding the new listing presentation.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Client Meeting - New Listing Presentation' event on Monday and ask the user what time they would like to reschedule the meeting to.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-03-03T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Please update my first meeting on Wednesday. I need to add stager@email.com to the list of attendees.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the first event on Wednesday, which is 'Staging Consultation', and add stager@email.com to the attendee list.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-03-05T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the showing at the waterfront estate to begin 30 minutes later.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Showing - Waterfront Estate' event on Tuesday and update the start time to 10:00 AM and the end time to 11:30 AM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-03-04T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "I can't make the dinner with friends on Thursday, decline the invite.",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Dinner with Friends' event on Thursday and decline the user's attendance.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-03-06T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What is happening at 10 AM on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event on Wednesday that starts at 10 AM and tell the user that the 'Staging Consultation' event is scheduled.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-03-05T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having lunch with this Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Networking Lunch' event on Wednesday and tell the user they are having lunch with architect@email.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-03-05T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move the property photoshoot to Thursday at 3 PM.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Property Photoshoot - Luxury Condo' event currently scheduled for Thursday at 9:00 AM. Check if there are any conflicts with scheduling it at 3:00 PM on Thursday. Inform the user of any conflicts or confirm the rescheduling.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-03-06T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you schedule the client call with client3@email.com for Friday at 11 AM instead of Thursday?",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Client Call - Offer Review' event on Thursday. Check if there are any conflicts with scheduling it for Friday at 11:00 AM. Inform the user of any conflicts or confirm the rescheduling.",
+        "addressed_days": [
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2025-03-06T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Team meeting, but make it later.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Team Meeting' event on Monday and ask the user what time they would like to reschedule the meeting to.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-03-03T09:15:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner with daughter?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Dinner with Daughter' event on Monday and ask the user if they want to know more about it, reschedule, or cancel it.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-03-03T12:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Tuesday, March 4, 2025.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-03-03T18:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any client meetings yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Check if any events on Tuesday, March 4, 2025, have 'client' in the title or attendees.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-03-05T08:00:00"
+    }
+]

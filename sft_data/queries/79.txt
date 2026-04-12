@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please schedule a meeting with John Smith for Tuesday at 2 PM regarding the new marketing campaign.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with John Smith on Tuesday, October 24th at 2 PM to discuss the new marketing campaign.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-10-22T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you put an event on my calendar for Friday at 11 AM to discuss project updates with the team?",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event on Friday, October 27th at 11 AM for a project update meeting with the team.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-10-22T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I need to arrange something with my wife this week.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the existing event 'Dinner with Wife' on Monday at 6:30 PM and ask the user to confirm or suggest an alternative time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-10-22T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I need to schedule some time to talk to my junior mechanic.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Mentor Junior Mechanic' on Tuesday at 4 PM and ask the user to confirm or suggest an alternative time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-10-22T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my dinner with my wife to 7:00 PM on Monday.",
+        "complexity": "Low",
+        "expected_behavior": "Find the event 'Dinner with Wife' on Monday, October 23rd and update the start time to 7:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-10-23T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the birthday party on Saturday to start at 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Find the event 'Grandkid's Birthday Party' on Saturday, October 28th and update the start time to 3:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-10-28T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What am I doing on Wednesday afternoon?",
+        "complexity": "Low",
+        "expected_behavior": "List events on Wednesday, October 25th between 12:00 PM and 6:00 PM to identify afternoon activities.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-10-25T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the routine maintenance on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Routine Maintenance - Truck Fleet X' event on Tuesday, October 24th and return the list of attendees: fleetmanager@trucking.com.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-10-24T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move my welding repair on Wednesday to 9 AM?",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Welding Repair - Trailer Frame' event on Wednesday, October 25th. Check for conflicts at 9 AM. If no conflicts, update the event's start time to 9 AM. If conflicts exist, inform the user about the conflict and ask for an alternative time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-10-24T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to push my Friday meetings back by one hour.",
+        "complexity": "High",
+        "expected_behavior": "List events on Friday, October 27th. For each event (Inspect & Test Repaired Trucks, Discuss Shop Schedule with Foreman, Finalize Paperwork for the Week, Prepare Shop for Weekend), check for conflicts if moved back by one hour. If conflicts are found, skip the event. After checking all events, modify the remaining events to begin one hour later.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-10-26T15:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... electrical...",
+        "complexity": "Medium",
+        "expected_behavior": "Determine if 'electrical' likely refers to 'Diagnose & Repair Electrical Problem - Bay 2'. If so, ask the user for clarification on desired new time. If not, respond that query is not understood.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-10-24T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Parts autoparts.com Thursday afternoon",
+        "complexity": "Medium",
+        "expected_behavior": "Determine if 'Parts autoparts.com Thursday afternoon' likely refers to 'Order Parts for Electrical Repair'. If so, ask the user to clarify what modification they want to make. If not, respond that query is not understood.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-10-24T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Wednesday, October 25th.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-10-25T07:30:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow morning?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Thursday, October 26th, between 7:00 AM and 12:00 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-10-25T15:00:00"
+    }
+]

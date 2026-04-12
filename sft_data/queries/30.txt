@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting on Tuesday to discuss project updates from 3:00 PM to 4:00 PM with John and Jane.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with summary 'Discuss project updates', start time 2026-04-21T15:00:00, end time 2026-04-21T16:00:00, and attendees John and Jane.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-04-19T23:59:59"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add an event on Wednesday at 1 PM for a doctor's appointment.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with summary 'Doctor's appointment', start time 2026-04-22T13:00:00, and end time 2026-04-22T14:00:00 (assuming a one-hour appointment).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-04-19T23:59:59"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "When am I meeting with the social worker?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Tuesday and find the meeting with socialworker@county.org, then respond with the time of that meeting.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-04-21T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Saturday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Saturday between 9:00 AM and 12:00 PM and respond with the event details.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-04-25T07:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the heart failure education visit to Wednesday at 2:00 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Home Visit - Heart Failure Education for Patient & Family' event on Wednesday and update its start time to 2026-04-22T14:00:00 and end time to 2026-04-22T15:30:00 (assuming duration remains the same).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-04-22T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my soccer practice on Monday back an hour?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Children's Soccer Practice' event on Monday and update its start time to 2026-04-20T19:00:00 and end time to 2026-04-20T20:00:00 (assuming duration remains the same).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-04-20T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me about my appointments on Thursday.",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Thursday and respond with the details of each event.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-04-23T07:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What is the phone number for the pharmacist I'm meeting with on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "List the attendees for the appointment with pharmacist@localpharmacy.com, then state that the agent cannot directly provide phone numbers.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-04-22T07:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a new patient assessment at 2:30 PM on Friday but check if I'm free first.",
+        "complexity": "High",
+        "expected_behavior": "List events on Friday at 2:30 PM. If there are no conflicts, create a new event with summary 'New Patient Assessment - Referral from Local Clinic', start time 2026-04-24T14:30:00, and end time 2026-04-24T16:00:00.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-04-23T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Move the team huddle on Monday to 9 AM, but only if it doesn't conflict with anything else.",
+        "complexity": "High",
+        "expected_behavior": "List events on Monday at 9:00 AM. If there are no conflicts, update the 'Team Huddle - Discussing Patient Cases' event to start at 2026-04-20T09:00:00 and end at 2026-04-20T09:30:00.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-04-19T23:59:59"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner Friday?",
+        "complexity": "Low",
+        "expected_behavior": "List events on Friday with the word 'dinner' and show the details.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-04-24T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting county Tuesday",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Tuesday, and then find the event containing 'county', and respond with the details.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-04-21T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for the current day and respond with the event details.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-04-20T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Anything happening tomorrow morning?",
+        "complexity": "Low",
+        "expected_behavior": "List events on Tuesday between 8:00 AM and 12:00 PM and respond with the event details.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-04-20T20:00:00"
+    }
+]

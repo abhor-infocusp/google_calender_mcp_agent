@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a doctor's appointment on Tuesday at 3 PM for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event called 'Doctor's Appointment' on Tuesday from 3 PM to 4 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-12-28T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you schedule a meeting with Sarah on Friday at 2 PM to discuss the project?",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event called 'Meeting with Sarah' on Friday at 2 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-12-28T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I need to reschedule my evening activity on Saturday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner at Mother's House' event on Saturday and ask the user what time it should be rescheduled to.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-01-03T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Wednesday morning?",
+        "complexity": "Low",
+        "expected_behavior": "List the events on Wednesday between 7 AM and 12 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-01-03T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the meeting with the surveyor team back by an hour on Friday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Surveyor Team' event on Friday and update its start time to 9:30 AM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-12-28T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change my dinner with children to 6 PM on Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Children' event on Monday and update the start time to 6 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-12-28T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the site safety briefing?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Site Safety Briefing' event and return its start time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-12-28T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the roadwork progress monitoring?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Roadwork Progress Monitoring - Section A' event and return the list of attendees. Since there are no listed attendees, return 'No attendees listed'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-12-28T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting from 8 AM to 10 AM on Wednesday. If I'm busy, move my existing meeting.",
+        "complexity": "High",
+        "expected_behavior": "Check for conflicts between 8 AM and 10 AM on Wednesday. Find the 'Tunnel Excavation Strategy Meeting' which conflicts with the time. Ask user for confirmation to move the Tunnel Excavation Strategy Meeting.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-12-28T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule the client site walkthrough to when I'm free on Thursday morning.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Site Walkthrough with Client' event on Thursday. Check available time slots on Thursday morning and suggest a new time to the user.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-12-28T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Budget...",
+        "complexity": "Low",
+        "expected_behavior": "Search for events containing the word 'budget' and list the events found.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-01-03T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "delete weekly...",
+        "complexity": "Low",
+        "expected_behavior": "Search for events containing the word 'weekly' and ask the user which one should be deleted. If more than one event is found, list them for the user to choose.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-01-03T10:00:00"
+    },
+    {
+        "category": "Relative Time References",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for the current day.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-12-29T08:00:00"
+    },
+    {
+        "category": "Relative Time References",
+        "query": "Did I have any meetings yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events from yesterday.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-12-30T08:00:00"
+    }
+]

@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Board Meeting' for Wednesday at 3:30 PM for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Board Meeting', start time 2023-07-19T15:30:00, end time 2023-07-19T16:30:00, and no attendees or description.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-16T23:59:59"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a vet appointment for Friday with Dr. Miller at 11:00 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Vet Appointment with Dr. Miller', start time 2023-07-21T11:00:00, end time is not specified, and no attendees or description.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-07-16T23:59:59"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Wednesday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to 2023-07-19T00:00:00 and time_max set to 2023-07-19T12:00:00 to check the schedule for Wednesday morning.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-19T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to 2023-07-22T00:00:00 and time_max set to 2023-07-22T23:59:59 to determine if there are any events scheduled for Saturday.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-07-22T07:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my dental float appointment with Mary Brown to 9:30 AM?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Dental Float' event with client Mary Brown and update_event to change the start time to 2023-07-18T09:30:00.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-18T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the Colic Case surgery to start an hour later.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the surgery with summary 'Colic Case'. Then, call update_event to update the start time to 2023-07-17T14:00:00 and end time to 2023-07-17T15:00:00.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-17T11:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the Trail Ride with Gus?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find 'Trail Ride with Gus' and then return the start and end times: start 2023-07-17T18:30:00 and end 2023-07-17T20:00:00.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-17T15:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is the specialist for the Arthroscopy surgery on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events on Thursday to find Arthroscopy surgery, then check the description to find specialist@email.com.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-07-20T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my Follow-up Appointment on Friday to the same time as my Trail Ride with Gus on Monday. Is that possible?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events on Friday to find the Follow-up Appointments, call list_events on Monday to find the Trail Ride with Gus. Check if the new time conflicts with existing events on Monday. If there are no conflicts, call update_event to change the Follow-up Appointment to start at 2023-07-17T18:30:00.",
+        "addressed_days": [
+            "Friday",
+            "Monday"
+        ],
+        "current_time": "2023-07-19T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Schedule a meeting with receptionist@email.com and manager@email.com for 30 minutes on Friday. Make sure it doesn't conflict with the staff meeting.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events on Friday to find the Staff Meeting. Then, find a time slot on Friday that does not conflict with the Staff Meeting and call create_event with the new meeting details.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-07-20T16:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule...the wound care...",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find 'Farm Call - Wound Care' and prompt for clarification about the new time, asking 'What day and time would you like to reschedule it to?'",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-18T15:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Arthroscopy...who's?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events on Thursday to find 'Surgery - Arthroscopy' and check the description to find specialist@email.com and vet_tech1@email.com.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-07-20T11:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call get_current_time to get the current date, then call list_events for that date.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-18T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to 2023-07-19T00:00:00 and time_max set to 2023-07-19T23:59:59.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-18T16:00:00"
+    }
+]

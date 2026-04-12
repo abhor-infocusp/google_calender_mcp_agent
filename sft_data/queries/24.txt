@@ -1,0 +1,140 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a vet appointment for Wednesday at 11:00 AM to check on a sick calf.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule the vet appointment with summary 'Vet Visit - Calf Checkup', start time 2024-07-31T11:00:00, and end time 2024-07-31T12:00:00.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-28T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you create an event for Friday to pick up supplies?",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule the supply pickup with summary 'Order Supplies', start time 2024-08-02T09:30:00, and end time 2024-08-02T10:30:00, since the schedule already has that time set.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-07-28T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I need to meet with someone about a loan this week.",
+        "complexity": "Medium",
+        "expected_behavior": "Call create_event to schedule meeting with the loan officer with summary 'Meeting with Bank Loan Officer', start time 2024-08-01T10:00:00, and end time 2024-08-01T11:00:00.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-07-28T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "When am I meeting to discuss sustainable practices?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Meeting with Agricultural Extension Agent' event and read out the time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-28T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the vet visit to 10:00 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Vet Visit - Calf Vaccinations' event on Wednesday, then call update_event with the event ID to change the start time to 2024-07-31T10:00:00 and the end time to 2024-07-31T11:00:00.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-31T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move family game night to 7:30 PM instead?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Family Game Night' event on Thursday, then call update_event with the event ID to change the start time to 2024-08-01T19:30:00 and end time to 2024-08-01T20:30:00.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-08-01T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is dinner at the neighbor's house on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Dinner at Neighbor's' event on Friday and then read out the time.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-08-02T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What meetings do I have on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find any events on Thursday and then read out the names and times of the meeting events.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-08-01T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I will be at the Farmer's Market on Saturday. Remind me to schedule it for next week as well.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the 'Farmer's Market - Sell Dairy Products' event on Saturday and then read out the time.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-08-03T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I need to talk about sustainability, but not during the time I rotate the pasture.",
+        "complexity": "High",
+        "expected_behavior": "Call create_event to schedule meeting with the agricultural extension agent with summary 'Meeting with Agricultural Extension Agent', start time 2024-07-30T11:30:00, and end time 2024-07-30T12:30:00.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-28T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Vet on Wednesday",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule the vet appointment with summary 'Vet Visit', start time 2024-07-31T09:30:00, and end time 2024-07-31T10:30:00, since the schedule already has that time set.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-28T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule...",
+        "complexity": "Low",
+        "expected_behavior": "Acknowledge the request is incomplete and ask for clarification. Return 'Which event would you like to reschedule?'",
+        "addressed_days": [],
+        "current_time": "2024-07-28T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find any events on Monday and then read out the names and times of the events.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-29T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find any events on Wednesday and then read out the names and times of the events.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-30T20:00:00"
+    }
+]

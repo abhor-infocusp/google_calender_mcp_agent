@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Client Meeting' for Tuesday at 1 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with summary 'Client Meeting' on 2025-01-21 from 13:00 to 14:00 with no attendees or description.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-01-19T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a dentist appointment this Wednesday at 2:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with summary 'Dentist Appointment' on 2025-01-22 from 14:30 to 15:30 with no attendees or description.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-01-19T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Monday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on 2025-01-20 between 08:00 and 12:00.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-01-20T07:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Anything happening this Saturday evening?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on 2025-01-25 between 17:00 and 23:00.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-01-25T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my yoga class on Monday to 7 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Yoga Class at Studio' event on 2025-01-20 and update its start time to 19:00 and end time to 20:00.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-01-20T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of my Tuesday progress report review to 1 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Progress Report Review' event on 2025-01-21 and update its start time to 13:00 and end time to 14:00.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-01-21T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my consultation with John Smith?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Patient Consultation - John Smith' event on 2025-01-20 and return the start and end time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-01-20T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the discussion about patient progress this Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Discuss Patient Progress' event on 2025-01-22 and return the attendees list.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-01-22T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Am I free on Thursday from 10 AM to 11 AM?",
+        "complexity": "High",
+        "expected_behavior": "List events on 2025-01-23 between 10:00 and 11:00 to determine if there are any conflicts.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-01-23T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you schedule me for a meeting with David Lee this Monday at 10 AM?",
+        "complexity": "High",
+        "expected_behavior": "List events on 2025-01-20 between 10:00 and 11:00 to check for conflicts. If no conflict, create a new event 'Meeting with David Lee' on 2025-01-20 from 10:00 to 11:00 with attendee davidlee@clinic.com.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-01-20T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Sarah Lee.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Rehabilitation Session - Sarah Lee' event on 2025-01-20 and ask the user for the new date and time to reschedule.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-01-20T13:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel the meeting with the insurance adjuster.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Call with Insurance Adjuster' event on 2025-01-24 and delete it.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-01-24T12:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on 2025-01-22.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-01-22T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on 2025-01-24.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-01-23T18:00:00"
+    }
+]

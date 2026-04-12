@@ -1,0 +1,1001 @@
+[
+  {
+    "query": "Create an event called 'Marketing Presentation' for Wednesday at 2 PM, lasting one hour.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event to add 'Marketing Presentation' to the calendar on Wednesday, April 12, 2023, from 2 PM to 3 PM.",
+    "simulated_now": "2023-04-09 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Sectional Rehearsal",
+          "start": "2023-04-12 11:00:00",
+          "end": "2023-04-12 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.jones@email.com",
+            "michael.brown@email.com"
+          ],
+          "id": "evt_a995c43341024ebcb952c76498ff74e6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Doctor's Appointment (Knee Injury Follow-up)",
+          "start": "2023-04-12 15:00:00",
+          "end": "2023-04-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e00740b2e378447d83606acdcfa7ff7b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend local concert",
+          "start": "2023-04-12 19:30:00",
+          "end": "2023-04-12 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1d4cd9e1f18c40ceb690a11fff78e218"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Sectional Rehearsal",
+          "start": "2023-04-12 11:00:00",
+          "end": "2023-04-12 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.jones@email.com",
+            "michael.brown@email.com"
+          ],
+          "id": "evt_a995c43341024ebcb952c76498ff74e6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Marketing Presentation",
+          "start": "2023-04-12 14:00:00",
+          "end": "2023-04-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_26cb5226af6a4645857aed6c7a00b6ec"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Doctor's Appointment (Knee Injury Follow-up)",
+          "start": "2023-04-12 15:00:00",
+          "end": "2023-04-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_e00740b2e378447d83606acdcfa7ff7b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend local concert",
+          "start": "2023-04-12 19:30:00",
+          "end": "2023-04-12 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_1d4cd9e1f18c40ceb690a11fff78e218"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Marketing Presentation' for Wednesday at 2 PM, lasting one hour."
+      },
+      {
+        "role": "assistant",
+        "content": "The user wants to create an event on Wednesday at 2 PM. I'll start by getting the current date and time to determine the correct date for this Wednesday, and then I'll create the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-09 10:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. This coming Wednesday is April 12, 2023. I will create a 'Marketing Presentation' event for 2 PM to 3 PM on that day."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "summary": "Marketing Presentation",
+          "start": "2023-04-12 14:00:00",
+          "end": "2023-04-12 15:00:00"
+        },
+        "result": "Event created successfully.\nMarketing Presentation\n  ID: evt_26cb5226af6a4645857aed6c7a00b6ec\n  Time: Wed Apr 12, 14:00 - 15:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've created the event \"Marketing Presentation\" for you on Wednesday, April 12th, from 2:00 PM to 3:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Book me a slot for a meeting with John this Friday at 1 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Call create_event to add the meeting with John to the calendar on Friday, April 14, 2023, at 1 PM. Since duration isn't specified, it should be set to the default of 1 hour.",
+    "simulated_now": "2023-04-09 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Practice with Pianist",
+          "start": "2023-04-14 09:30:00",
+          "end": "2023-04-14 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pianist@email.com"
+          ],
+          "id": "evt_ea92d44e2b20471790963f6a65cfbed4"
+        },
+        {
+          "day": "Friday",
+          "summary": "Orchestra Performance",
+          "start": "2023-04-14 19:30:00",
+          "end": "2023-04-14 22:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a84c1558141d4313ae398aff09e7c80b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Post-Performance Dinner",
+          "start": "2023-04-14 22:30:00",
+          "end": "2023-04-14 23:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@email.com"
+          ],
+          "id": "evt_6cdff2b25a11458b97e6d3123e84cdd7"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Practice with Pianist",
+          "start": "2023-04-14 09:30:00",
+          "end": "2023-04-14 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pianist@email.com"
+          ],
+          "id": "evt_ea92d44e2b20471790963f6a65cfbed4"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meeting with John",
+          "start": "2023-04-14 13:00:00",
+          "end": "2023-04-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_c229a81649b9445296c04702cf95241b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Orchestra Performance",
+          "start": "2023-04-14 19:30:00",
+          "end": "2023-04-14 22:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a84c1558141d4313ae398aff09e7c80b"
+        },
+        {
+          "day": "Friday",
+          "summary": "Post-Performance Dinner",
+          "start": "2023-04-14 22:30:00",
+          "end": "2023-04-14 23:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@email.com"
+          ],
+          "id": "evt_6cdff2b25a11458b97e6d3123e84cdd7"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Book me a slot for a meeting with John this Friday at 1 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to find the date for this Friday. Then, I will search for events with \"John\" to find his email address. Finally, I will book a one-hour meeting with John for this Friday at 1 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-09 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 17 events:\nid: evt_8dfa0d2a1038491fa77e0ddc4bf06645 | Individual Practice (Focus: Technical Exercises) \u2014 Mon 10:00-12:00\nid: evt_8d06a5e147464aa6a1edbba070823221 | Physical Therapy Appointment (Knee Rehabilitation) \u2014 Mon 14:00-15:00\nid: evt_c287a0c00f114118961bd2468103a0a1 | Dinner with Friends \u2014 Mon 18:00-19:00\nid: evt_6074422e5aea4f0fa5c42e6bd8709e39 | Individual Practice (Focus: Repertoire) \u2014 Tue 10:00-12:00\nid: evt_bccb49d173c446bcb9230500237687df | Orchestra Rehearsal \u2014 Tue 18:30-21:30\nid: evt_5eb3224f50424771ae65f7aae18cb155 | Sectional Rehearsal \u2014 Wed 11:00-13:00\nid: evt_ab90ed54bfd24e17866f566dd2520095 | Doctor's Appointment (Knee Injury Follow-up) \u2014 Wed 15:00-16:00\nid: evt_4081d16980954b8ca59d037e652e6848 | Attend local concert \u2014 Wed 19:30-20:30\nid: evt_8b0545505f164f499e95b5b2c727e7c5 | Individual Practice (Focus: Difficult Passages) \u2014 Thu 10:00-12:00\nid: evt_3e16eaac3a1c47a4a6acc3f3ce3bc159 | Orchestra Rehearsal \u2014 Thu 18:30-21:30\nid: evt_ea92d44e2b20471790963f6a65cfbed4 | Practice with Pianist \u2014 Fri 09:30-11:00\nid: evt_a84c1558141d4313ae398aff09e7c80b | Orchestra Performance \u2014 Fri 19:30-22:00\nid: evt_6cdff2b25a11458b97e6d3123e84cdd7 | Post-Performance Dinner \u2014 Fri 22:30-23:30\nid: evt_e770d674a2a543a7a570332f77ffbbfa | Orchestra Performance \u2014 Sat 19:30-22:00\nid: evt_7b4797ba782c48699fdd8ec871d35159 | Brunch with Family \u2014 Sat 10:30-12:00\nid: evt_9f87ebaf018c4a9c8fe3c3ade4e79310 | Visit Local Art Museum \u2014 Sun 11:00-13:00\nid: evt_c6232b0929384d5f8c62cab27009218d | Dinner and Movie Night with friends \u2014 Sun 18:00-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I couldn't find John's email in your calendar. I will create the event without inviting him."
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2023-04-14 13:00:00",
+          "end": "2023-04-14 14:00:00",
+          "summary": "Meeting with John"
+        },
+        "result": "Event created successfully.\nMeeting with John\n  ID: evt_c229a81649b9445296c04702cf95241b\n  Time: Fri Apr 14, 13:00 - 14:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I have created the event for you. As I mentioned, I could not find John's email so please add him to the event. The event is \"Meeting with John\" on Friday, April 14th from 1 PM to 2 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's happening later on Wednesday?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find events on Wednesday, April 12, 2023, after the current time. Current time needs to be simulated in this case.",
+    "simulated_now": "2023-04-12 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Sectional Rehearsal",
+          "start": "2023-04-12 11:00:00",
+          "end": "2023-04-12 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.jones@email.com",
+            "michael.brown@email.com"
+          ],
+          "id": "evt_b873b576e41346adbdb609dd4927bed6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Doctor's Appointment (Knee Injury Follow-up)",
+          "start": "2023-04-12 15:00:00",
+          "end": "2023-04-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_01ea33a4dfaf44bd880b7c9bfbef5323"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend local concert",
+          "start": "2023-04-12 19:30:00",
+          "end": "2023-04-12 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_421aa9f3a6f54aa284573f474d37cba1"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Sectional Rehearsal",
+          "start": "2023-04-12 11:00:00",
+          "end": "2023-04-12 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.jones@email.com",
+            "michael.brown@email.com"
+          ],
+          "id": "evt_b873b576e41346adbdb609dd4927bed6"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Doctor's Appointment (Knee Injury Follow-up)",
+          "start": "2023-04-12 15:00:00",
+          "end": "2023-04-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_01ea33a4dfaf44bd880b7c9bfbef5323"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend local concert",
+          "start": "2023-04-12 19:30:00",
+          "end": "2023-04-12 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_421aa9f3a6f54aa284573f474d37cba1"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's happening later on Wednesday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to determine what \"later on Wednesday\" means. Then, I will list all events on Wednesday that are scheduled after the current time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-12 10:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-04-12 23:59:59",
+          "time_min": "2023-04-12 10:00:00"
+        },
+        "result": "Found 3 events:\nid: evt_b873b576e41346adbdb609dd4927bed6 | Sectional Rehearsal \u2014 Wed 11:00-13:00\nid: evt_01ea33a4dfaf44bd880b7c9bfbef5323 | Doctor's Appointment (Knee Injury Follow-up) \u2014 Wed 15:00-16:00\nid: evt_421aa9f3a6f54aa284573f474d37cba1 | Attend local concert \u2014 Wed 19:30-20:30"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. This afternoon, you have a doctor's appointment for your knee injury from 3:00 to 4:00 PM. Later this evening, you're attending a local concert at 7:30 PM. Also, you have a sectional rehearsal from 11:00 AM to 1:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move my physical therapy appointment on Monday to 3:30 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find the 'Physical Therapy Appointment' on Monday, April 10, 2023, then call update_event to change its start time to 3:30 PM and infer the end time.",
+    "simulated_now": "2023-04-10 09:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Individual Practice (Focus: Technical Exercises)",
+          "start": "2023-04-10 10:00:00",
+          "end": "2023-04-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9d40b4c0d9514091a3d0dfe37fe7a76b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Physical Therapy Appointment (Knee Rehabilitation)",
+          "start": "2023-04-10 14:00:00",
+          "end": "2023-04-10 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bc6efa39e1934c3890df68d135b02d47"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Friends",
+          "start": "2023-04-10 18:00:00",
+          "end": "2023-04-10 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d08b11e9ed96473387c58bcbc37f1616"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Individual Practice (Focus: Technical Exercises)",
+          "start": "2023-04-10 10:00:00",
+          "end": "2023-04-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9d40b4c0d9514091a3d0dfe37fe7a76b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Physical Therapy Appointment (Knee Rehabilitation)",
+          "start": "2023-04-10 15:30:00",
+          "end": "2023-04-10 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bc6efa39e1934c3890df68d135b02d47"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Friends",
+          "start": "2023-04-10 18:00:00",
+          "end": "2023-04-10 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_d08b11e9ed96473387c58bcbc37f1616"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move my physical therapy appointment on Monday to 3:30 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "I will move your physical therapy appointment on Monday to 3:30 PM. First, I need to know today's date so I can find the upcoming Monday. Then, I will search for the appointment on that day to reschedule it."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-10 09:00:00 | Monday"
+      },
+      {
+        "role": "assistant",
+        "content": "I have the current date. Now I will look for your physical therapy appointment on that Monday to reschedule it."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-04-10 00:00:00",
+          "time_max": "2023-04-10 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_9d40b4c0d9514091a3d0dfe37fe7a76b | Individual Practice (Focus: Technical Exercises) \u2014 Mon 10:00-12:00\nid: evt_bc6efa39e1934c3890df68d135b02d47 | Physical Therapy Appointment (Knee Rehabilitation) \u2014 Mon 14:00-15:00\nid: evt_d08b11e9ed96473387c58bcbc37f1616 | Dinner with Friends \u2014 Mon 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've found your Physical Therapy Appointment from 2:00 PM to 3:00 PM on Monday. I will now move it to 3:30 PM, keeping the one-hour duration."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2023-04-10 16:30:00",
+          "event_id": "evt_bc6efa39e1934c3890df68d135b02d47",
+          "start": "2023-04-10 15:30:00"
+        },
+        "result": "Event updated successfully.\nPhysical Therapy Appointment (Knee Rehabilitation)\n  ID: evt_bc6efa39e1934c3890df68d135b02d47\n  Time: Mon Apr 10, 15:30 - 16:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have moved your physical therapy appointment to 3:30 PM. It is now scheduled from 3:30 PM to 4:30 PM on Monday, April 10th."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing on Friday morning?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to retrieve all events scheduled for Friday, April 14, 2023, between 9 AM and 12 PM.",
+    "simulated_now": "2023-04-09 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Practice with Pianist",
+          "start": "2023-04-14 09:30:00",
+          "end": "2023-04-14 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pianist@email.com"
+          ],
+          "id": "evt_d2386de472304472bc5611ab68524c0d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Orchestra Performance",
+          "start": "2023-04-14 19:30:00",
+          "end": "2023-04-14 22:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_88f59c15e9054cdd9c2a405ba67e7e92"
+        },
+        {
+          "day": "Friday",
+          "summary": "Post-Performance Dinner",
+          "start": "2023-04-14 22:30:00",
+          "end": "2023-04-14 23:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@email.com"
+          ],
+          "id": "evt_33d357703ab6459fb583039499f03660"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Practice with Pianist",
+          "start": "2023-04-14 09:30:00",
+          "end": "2023-04-14 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pianist@email.com"
+          ],
+          "id": "evt_d2386de472304472bc5611ab68524c0d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Orchestra Performance",
+          "start": "2023-04-14 19:30:00",
+          "end": "2023-04-14 22:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_88f59c15e9054cdd9c2a405ba67e7e92"
+        },
+        {
+          "day": "Friday",
+          "summary": "Post-Performance Dinner",
+          "start": "2023-04-14 22:30:00",
+          "end": "2023-04-14 23:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@email.com"
+          ],
+          "id": "evt_33d357703ab6459fb583039499f03660"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing on Friday morning?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify the upcoming Friday's date. Then, I will list all events on that Friday morning and tell you what you have scheduled."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-09 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-04-14 12:00:00",
+          "time_min": "2023-04-14 00:00:00"
+        },
+        "result": "Found 1 events:\nid: evt_d2386de472304472bc5611ab68524c0d | Practice with Pianist \u2014 Fri 09:30-11:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have a \"Practice with Pianist\" from 9:30 to 11:00 on Friday morning."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Tell me who is joining me for dinner after the performance on Friday.",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find 'Post-Performance Dinner' on Friday, April 14, 2023. Then call get_event to get the event details and list the attendees.",
+    "simulated_now": "2023-04-09 10:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Practice with Pianist",
+          "start": "2023-04-14 09:30:00",
+          "end": "2023-04-14 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pianist@email.com"
+          ],
+          "id": "evt_951425974cd84c7f939092bb622bd45e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Orchestra Performance",
+          "start": "2023-04-14 19:30:00",
+          "end": "2023-04-14 22:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b0c6dcd1df4c4425bad471cc073a00a3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Post-Performance Dinner",
+          "start": "2023-04-14 22:30:00",
+          "end": "2023-04-14 23:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@email.com"
+          ],
+          "id": "evt_6b1d0de934a74356b1ede24044af893b"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Practice with Pianist",
+          "start": "2023-04-14 09:30:00",
+          "end": "2023-04-14 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "pianist@email.com"
+          ],
+          "id": "evt_951425974cd84c7f939092bb622bd45e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Orchestra Performance",
+          "start": "2023-04-14 19:30:00",
+          "end": "2023-04-14 22:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b0c6dcd1df4c4425bad471cc073a00a3"
+        },
+        {
+          "day": "Friday",
+          "summary": "Post-Performance Dinner",
+          "start": "2023-04-14 22:30:00",
+          "end": "2023-04-14 23:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "david.lee@email.com"
+          ],
+          "id": "evt_6b1d0de934a74356b1ede24044af893b"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Tell me who is joining me for dinner after the performance on Friday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-09 10:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-04-14 00:00:00",
+          "time_max": "2023-04-14 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_951425974cd84c7f939092bb622bd45e | Practice with Pianist \u2014 Fri 09:30-11:00\nid: evt_b0c6dcd1df4c4425bad471cc073a00a3 | Orchestra Performance \u2014 Fri 19:30-22:00\nid: evt_6b1d0de934a74356b1ede24044af893b | Post-Performance Dinner \u2014 Fri 22:30-23:30"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_6b1d0de934a74356b1ede24044af893b"
+        },
+        "result": "Post-Performance Dinner\n  ID: evt_6b1d0de934a74356b1ede24044af893b\n  Time: Fri Apr 14, 22:30 - 23:30\n  Attendees: david.lee@email.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "David Lee is joining you for dinner after the performance on Friday."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "I can't make the orchestra rehearsal on Tuesday. Decline it.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "Medium",
+    "expected_behavior": "Call list_events to find 'Orchestra Rehearsal' on Tuesday, April 11, 2023, then call respond_to_event to decline the event.",
+    "simulated_now": "2023-04-11 08:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Individual Practice (Focus: Repertoire)",
+          "start": "2023-04-11 10:00:00",
+          "end": "2023-04-11 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8c2ddc7affce4404a1c282103a1dc18c"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Orchestra Rehearsal",
+          "start": "2023-04-11 18:30:00",
+          "end": "2023-04-11 21:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_68843a76a6d540baa96ffe1626080afe"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Individual Practice (Focus: Repertoire)",
+          "start": "2023-04-11 10:00:00",
+          "end": "2023-04-11 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_8c2ddc7affce4404a1c282103a1dc18c"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Orchestra Rehearsal",
+          "start": "2023-04-11 18:30:00",
+          "end": "2023-04-11 21:30:00",
+          "attending": "DECLINE",
+          "attendees": [],
+          "id": "evt_68843a76a6d540baa96ffe1626080afe"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "I can't make the orchestra rehearsal on Tuesday. Decline it."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-11 08:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-04-11 23:59:59",
+          "time_min": "2023-04-11 00:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_8c2ddc7affce4404a1c282103a1dc18c | Individual Practice (Focus: Repertoire) \u2014 Tue 10:00-12:00\nid: evt_68843a76a6d540baa96ffe1626080afe | Orchestra Rehearsal \u2014 Tue 18:30-21:30"
+      },
+      {
+        "role": "tool_call",
+        "name": "respond_to_event",
+        "args": {
+          "event_id": "evt_68843a76a6d540baa96ffe1626080afe",
+          "attending": "DECLINE"
+        },
+        "result": "RSVP updated to DECLINE.\nOrchestra Rehearsal\n  ID: evt_68843a76a6d540baa96ffe1626080afe\n  Time: Tue Apr 11, 18:30 - 21:30\n  RSVP: DECLINE"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've declined the orchestra rehearsal for you."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What's on the schedule for today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to retrieve all events scheduled for the current day, Monday, April 10, 2023.",
+    "simulated_now": "2023-04-10 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Individual Practice (Focus: Technical Exercises)",
+          "start": "2023-04-10 10:00:00",
+          "end": "2023-04-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bfa252e124004286a0ab7dd0b527db20"
+        },
+        {
+          "day": "Monday",
+          "summary": "Physical Therapy Appointment (Knee Rehabilitation)",
+          "start": "2023-04-10 14:00:00",
+          "end": "2023-04-10 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_90178604e53c44d698a44b28d052ec87"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Friends",
+          "start": "2023-04-10 18:00:00",
+          "end": "2023-04-10 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2e2d82d0101448e9a87124ef51fe8375"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Individual Practice (Focus: Technical Exercises)",
+          "start": "2023-04-10 10:00:00",
+          "end": "2023-04-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bfa252e124004286a0ab7dd0b527db20"
+        },
+        {
+          "day": "Monday",
+          "summary": "Physical Therapy Appointment (Knee Rehabilitation)",
+          "start": "2023-04-10 14:00:00",
+          "end": "2023-04-10 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_90178604e53c44d698a44b28d052ec87"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Friends",
+          "start": "2023-04-10 18:00:00",
+          "end": "2023-04-10 19:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_2e2d82d0101448e9a87124ef51fe8375"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What's on the schedule for today?"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-10 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-04-10 00:00:00",
+          "time_max": "2023-04-10 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_bfa252e124004286a0ab7dd0b527db20 | Individual Practice (Focus: Technical Exercises) \u2014 Mon 10:00-12:00\nid: evt_90178604e53c44d698a44b28d052ec87 | Physical Therapy Appointment (Knee Rehabilitation) \u2014 Mon 14:00-15:00\nid: evt_2e2d82d0101448e9a87124ef51fe8375 | Dinner with Friends \u2014 Mon 18:00-19:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today, Monday, April 10, 2023, you have three entries on your calendar:\n\n- 10:00 AM to 12:00 PM: Individual Practice (Focus: Technical Exercises)\n- 2:00 PM to 3:00 PM: Physical Therapy Appointment (Knee Rehabilitation)\n- 6:00 PM to 7:00 PM: Dinner with Friends"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What do I have tomorrow?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "Call list_events to retrieve all events scheduled for tomorrow, Wednesday, April 12, 2023.",
+    "simulated_now": "2023-04-11 20:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Sectional Rehearsal",
+          "start": "2023-04-12 11:00:00",
+          "end": "2023-04-12 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.jones@email.com",
+            "michael.brown@email.com"
+          ],
+          "id": "evt_42922591f02f42359605ad0e1a138dd2"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Doctor's Appointment (Knee Injury Follow-up)",
+          "start": "2023-04-12 15:00:00",
+          "end": "2023-04-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_15ff7a05fab945fe913d2da0652ff093"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend local concert",
+          "start": "2023-04-12 19:30:00",
+          "end": "2023-04-12 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_842c56c7cf404b1cbd5460b042f62439"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Sectional Rehearsal",
+          "start": "2023-04-12 11:00:00",
+          "end": "2023-04-12 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "sarah.jones@email.com",
+            "michael.brown@email.com"
+          ],
+          "id": "evt_42922591f02f42359605ad0e1a138dd2"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Doctor's Appointment (Knee Injury Follow-up)",
+          "start": "2023-04-12 15:00:00",
+          "end": "2023-04-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_15ff7a05fab945fe913d2da0652ff093"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Attend local concert",
+          "start": "2023-04-12 19:30:00",
+          "end": "2023-04-12 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_842c56c7cf404b1cbd5460b042f62439"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What do I have tomorrow?"
+      },
+      {
+        "role": "assistant",
+        "content": "I can help with that. First, I need to know what day it is today."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-04-11 20:00:00 | Tuesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-04-12 00:00:00",
+          "time_max": "2023-04-12 23:59:59"
+        },
+        "result": "Found 3 events:\nid: evt_42922591f02f42359605ad0e1a138dd2 | Sectional Rehearsal \u2014 Wed 11:00-13:00\nid: evt_15ff7a05fab945fe913d2da0652ff093 | Doctor's Appointment (Knee Injury Follow-up) \u2014 Wed 15:00-16:00\nid: evt_842c56c7cf404b1cbd5460b042f62439 | Attend local concert \u2014 Wed 19:30-20:30"
+      },
+      {
+        "role": "assistant",
+        "content": "Tomorrow you have:\n- Sectional Rehearsal from 11:00 to 13:00\n- Doctor's Appointment (Knee Injury Follow-up) from 15:00 to 16:00\n- Attend local concert from 19:30 to 20:30"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

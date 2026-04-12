@@ -1,0 +1,2243 @@
+[
+  {
+    "query": "Create an event called 'Team Lunch' for Tuesday at 12:00 PM for one hour with customer_support_lead@company.com.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event with summary 'Team Lunch', start time Tuesday at 12:00 PM, end time Tuesday at 1:00 PM and attendee customer_support_lead@company.com.",
+    "simulated_now": "2025-09-07 18:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-09 09:00:00",
+          "end": "2025-09-09 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_b1022b77737d4e959527c37b7e42af6b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Customer Support",
+          "start": "2025-09-09 10:00:00",
+          "end": "2025-09-09 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "customer_support_lead@company.com"
+          ],
+          "id": "evt_7ff26799ff9a465a8dc6a316ddb07eae"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Cloud Scalability Discussion",
+          "start": "2025-09-09 13:00:00",
+          "end": "2025-09-09 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cloud_architect@company.com",
+            "devops_engineer@company.com"
+          ],
+          "id": "evt_7c383e0aec07499eac403f3de0060557"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Documentation Review",
+          "start": "2025-09-09 15:00:00",
+          "end": "2025-09-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tech_writer@company.com"
+          ],
+          "id": "evt_f46bf8a7cdc94105b5292e6eb9179bc5"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-09 09:00:00",
+          "end": "2025-09-09 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_b1022b77737d4e959527c37b7e42af6b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Customer Support",
+          "start": "2025-09-09 10:00:00",
+          "end": "2025-09-09 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "customer_support_lead@company.com"
+          ],
+          "id": "evt_7ff26799ff9a465a8dc6a316ddb07eae"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Team Lunch",
+          "start": "2025-09-09 12:00:00",
+          "end": "2025-09-09 13:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "customer_support_lead@company.com"
+          ],
+          "id": "evt_cb4f8a36708149f9bb4d45272def1489"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Cloud Scalability Discussion",
+          "start": "2025-09-09 13:00:00",
+          "end": "2025-09-09 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cloud_architect@company.com",
+            "devops_engineer@company.com"
+          ],
+          "id": "evt_7c383e0aec07499eac403f3de0060557"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Documentation Review",
+          "start": "2025-09-09 15:00:00",
+          "end": "2025-09-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tech_writer@company.com"
+          ],
+          "id": "evt_f46bf8a7cdc94105b5292e6eb9179bc5"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Team Lunch' for Tuesday at 12:00 PM for one hour with customer_support_lead@company.com."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I will create an event called \"Team Lunch\" for Tuesday at 12:00 PM for one hour with customer_support_lead@company.com. First, I need to get the current time to determine the correct date for next Tuesday."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-09-07 18:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "end": "2025-09-09 13:00:00",
+          "start": "2025-09-09 12:00:00",
+          "summary": "Team Lunch",
+          "attendees": [
+            "customer_support_lead@company.com"
+          ]
+        },
+        "result": "Event created successfully.\nTeam Lunch\n  ID: evt_cb4f8a36708149f9bb4d45272def1489\n  Time: Tue Sep 09, 12:00 - 13:00\n  Attendees: customer_support_lead@company.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I have created the event."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Book a meeting named 'Marketing Review' on Friday from 2 PM to 3 PM. No attendees are needed.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "Create a new event with summary 'Marketing Review', start time Friday at 2 PM, and end time Friday at 3 PM.",
+    "simulated_now": "2025-09-07 18:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-12 09:00:00",
+          "end": "2025-09-12 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_f3155ce17ef6450c94acef7d61b545d1"
+        },
+        {
+          "day": "Friday",
+          "summary": "All-Hands Meeting",
+          "start": "2025-09-12 10:00:00",
+          "end": "2025-09-12 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_af5fbd5ad1824c1fa59c282d034b0771"
+        },
+        {
+          "day": "Friday",
+          "summary": "1:1 with Engineering Lead",
+          "start": "2025-09-12 13:00:00",
+          "end": "2025-09-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_c66f20f9776c44bea3cd2af2104fcc2d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Sprint Planning Meeting",
+          "start": "2025-09-12 15:00:00",
+          "end": "2025-09-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com",
+            "ux_designer@company.com",
+            "tech_writer@company.com"
+          ],
+          "id": "evt_3dc9923da4df4091b3a965df1ea2ac13"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-12 09:00:00",
+          "end": "2025-09-12 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_f3155ce17ef6450c94acef7d61b545d1"
+        },
+        {
+          "day": "Friday",
+          "summary": "All-Hands Meeting",
+          "start": "2025-09-12 10:00:00",
+          "end": "2025-09-12 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_af5fbd5ad1824c1fa59c282d034b0771"
+        },
+        {
+          "day": "Friday",
+          "summary": "1:1 with Engineering Lead",
+          "start": "2025-09-12 13:00:00",
+          "end": "2025-09-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_c66f20f9776c44bea3cd2af2104fcc2d"
+        },
+        {
+          "day": "Friday",
+          "summary": "Marketing Review",
+          "start": "2025-09-12 14:00:00",
+          "end": "2025-09-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_ea2f5b8a9c7f4c69867bd43ec697d6e7"
+        },
+        {
+          "day": "Friday",
+          "summary": "Sprint Planning Meeting",
+          "start": "2025-09-12 15:00:00",
+          "end": "2025-09-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com",
+            "ux_designer@company.com",
+            "tech_writer@company.com"
+          ],
+          "id": "evt_3dc9923da4df4091b3a965df1ea2ac13"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Book a meeting named 'Marketing Review' on Friday from 2 PM to 3 PM. No attendees are needed."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. First, I need to get the current date and time to schedule the meeting on the correct Friday. Then, I will create the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-09-07 18:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2025-09-12 14:00:00",
+          "end": "2025-09-12 15:00:00",
+          "summary": "Marketing Review"
+        },
+        "result": "Event created successfully.\nMarketing Review\n  ID: evt_ea2f5b8a9c7f4c69867bd43ec697d6e7\n  Time: Fri Sep 12, 14:00 - 15:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've booked \"Marketing Review\" for this Friday, September 12th, from 2 PM to 3 PM. Is there anything else?\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Move the Platform Roadmap Review to 11:00 AM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Platform Roadmap Review' event and update its start time to 11:00 AM and end time to 12:00 PM on Monday.",
+    "simulated_now": "2025-09-07 18:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-08 09:00:00",
+          "end": "2025-09-08 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_932036dfd798456dadc3142ead4994d9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Platform Roadmap Review",
+          "start": "2025-09-08 10:00:00",
+          "end": "2025-09-08 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cto@company.com",
+            "head_of_infrastructure@company.com",
+            "product_manager1@company.com",
+            "product_manager2@company.com"
+          ],
+          "id": "evt_03483dd34b514d60a80a659599c94945"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Interview - New Feature",
+          "start": "2025-09-08 11:30:00",
+          "end": "2025-09-08 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_2260e9ac327a4c4ca6c47bdc5d390dfd"
+        },
+        {
+          "day": "Monday",
+          "summary": "Tech Debt Prioritization Meeting",
+          "start": "2025-09-08 14:00:00",
+          "end": "2025-09-08 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_91021e5bfb7c4070b5d6d92ae53d30cb"
+        },
+        {
+          "day": "Monday",
+          "summary": "Coding Camp Volunteer Planning Session",
+          "start": "2025-09-08 18:30:00",
+          "end": "2025-09-08 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "volunteer1@email.com",
+            "volunteer2@email.com"
+          ],
+          "id": "evt_09ac68cfd3704715863b9e1adaa198dc"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-08 09:00:00",
+          "end": "2025-09-08 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_932036dfd798456dadc3142ead4994d9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Platform Roadmap Review",
+          "start": "2025-09-08 11:00:00",
+          "end": "2025-09-08 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cto@company.com",
+            "head_of_infrastructure@company.com",
+            "product_manager1@company.com",
+            "product_manager2@company.com"
+          ],
+          "id": "evt_03483dd34b514d60a80a659599c94945"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Interview - New Feature",
+          "start": "2025-09-08 11:30:00",
+          "end": "2025-09-08 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_2260e9ac327a4c4ca6c47bdc5d390dfd"
+        },
+        {
+          "day": "Monday",
+          "summary": "Tech Debt Prioritization Meeting",
+          "start": "2025-09-08 14:00:00",
+          "end": "2025-09-08 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_91021e5bfb7c4070b5d6d92ae53d30cb"
+        },
+        {
+          "day": "Monday",
+          "summary": "Coding Camp Volunteer Planning Session",
+          "start": "2025-09-08 18:30:00",
+          "end": "2025-09-08 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "volunteer1@email.com",
+            "volunteer2@email.com"
+          ],
+          "id": "evt_09ac68cfd3704715863b9e1adaa198dc"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Move the Platform Roadmap Review to 11:00 AM."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I will move the Platform Roadmap Review to 11:00 AM. First, I need to know the current date and time.\n"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-09-07 18:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "I have the current time. Now I will list the events to find the \"Platform Roadmap Review\" event."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-09-07 18:00:00",
+          "time_max": "2025-09-08 18:00:00"
+        },
+        "result": "Found 4 events:\nid: evt_932036dfd798456dadc3142ead4994d9 | Engineering Stand-up \u2014 Mon 09:00-09:30\nid: evt_03483dd34b514d60a80a659599c94945 | Platform Roadmap Review \u2014 Mon 10:00-11:00\nid: evt_2260e9ac327a4c4ca6c47bdc5d390dfd | User Interview - New Feature \u2014 Mon 11:30-12:30\nid: evt_91021e5bfb7c4070b5d6d92ae53d30cb | Tech Debt Prioritization Meeting \u2014 Mon 14:00-15:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I've found the \"Platform Roadmap Review\" event. I will now move it to 11:00 AM."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2025-09-08 12:00:00",
+          "event_id": "evt_03483dd34b514d60a80a659599c94945",
+          "start": "2025-09-08 11:00:00"
+        },
+        "result": "Event updated successfully.\nPlatform Roadmap Review\n  ID: evt_03483dd34b514d60a80a659599c94945\n  Time: Mon Sep 08, 11:00 - 12:00\n  Attendees: cto@company.com, head_of_infrastructure@company.com, product_manager1@company.com, product_manager2@company.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've moved the Platform Roadmap Review to 11:00 AM for you. It's now scheduled from 11:00 AM to 12:00 PM on Monday, September 8th."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "The coding camp session on Saturday needs to be only two hours.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "Find the 'Coding Camp - Teaching Session' event on Saturday and update the end time to 11:00 AM.",
+    "simulated_now": "2025-09-07 18:00:00",
+    "addressed_days": [
+      "Saturday"
+    ],
+    "calendar_before": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Coding Camp - Teaching Session",
+          "start": "2025-09-13 09:00:00",
+          "end": "2025-09-13 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a8c8bbe25c28439abc8ae0e377fb61d9"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Hike with Group",
+          "start": "2025-09-13 14:00:00",
+          "end": "2025-09-13 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend3@email.com",
+            "friend4@email.com"
+          ],
+          "id": "evt_fe2232ea17954f79935e5fa4f9fb86fb"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Saturday": [
+        {
+          "day": "Saturday",
+          "summary": "Coding Camp - Teaching Session",
+          "start": "2025-09-13 09:00:00",
+          "end": "2025-09-13 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a8c8bbe25c28439abc8ae0e377fb61d9"
+        },
+        {
+          "day": "Saturday",
+          "summary": "Hike with Group",
+          "start": "2025-09-13 14:00:00",
+          "end": "2025-09-13 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend3@email.com",
+            "friend4@email.com"
+          ],
+          "id": "evt_fe2232ea17954f79935e5fa4f9fb86fb"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "The coding camp session on Saturday needs to be only two hours."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can help with that. I will find the coding camp session on Saturday and update its duration to two hours."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-09-07 18:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-09-13 00:00:00",
+          "time_max": "2025-09-13 23:59:59"
+        },
+        "result": "Found 2 events:\nid: evt_a8c8bbe25c28439abc8ae0e377fb61d9 | Coding Camp - Teaching Session \u2014 Sat 09:00-12:00\nid: evt_fe2232ea17954f79935e5fa4f9fb86fb | Hike with Group \u2014 Sat 14:00-17:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_a8c8bbe25c28439abc8ae0e377fb61d9",
+          "end": "2025-09-13 11:00:00",
+          "start": "2025-09-13 09:00:00"
+        },
+        "result": "Event updated successfully.\nCoding Camp - Teaching Session\n  ID: evt_a8c8bbe25c28439abc8ae0e377fb61d9\n  Time: Sat Sep 13, 09:00 - 11:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I have updated the \"Coding Camp - Teaching Session\" on Saturday. It is now scheduled from 9:00 to 11:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is the User Interview on Monday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'User Interview - New Feature' event on Monday and return its start time.",
+    "simulated_now": "2025-09-07 18:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-08 09:00:00",
+          "end": "2025-09-08 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_2d99ef6001da46e8b7febd7be6e07c24"
+        },
+        {
+          "day": "Monday",
+          "summary": "Platform Roadmap Review",
+          "start": "2025-09-08 10:00:00",
+          "end": "2025-09-08 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cto@company.com",
+            "head_of_infrastructure@company.com",
+            "product_manager1@company.com",
+            "product_manager2@company.com"
+          ],
+          "id": "evt_31fa4a6816074bf585445fdd610e6b07"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Interview - New Feature",
+          "start": "2025-09-08 11:30:00",
+          "end": "2025-09-08 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_358904b9303f47b98706bc43e380383a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Tech Debt Prioritization Meeting",
+          "start": "2025-09-08 14:00:00",
+          "end": "2025-09-08 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_91ffb566ff5844a887c7cce3f9823607"
+        },
+        {
+          "day": "Monday",
+          "summary": "Coding Camp Volunteer Planning Session",
+          "start": "2025-09-08 18:30:00",
+          "end": "2025-09-08 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "volunteer1@email.com",
+            "volunteer2@email.com"
+          ],
+          "id": "evt_8a013adc8c3147ad8f21d537869cedb3"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-08 09:00:00",
+          "end": "2025-09-08 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_2d99ef6001da46e8b7febd7be6e07c24"
+        },
+        {
+          "day": "Monday",
+          "summary": "Platform Roadmap Review",
+          "start": "2025-09-08 10:00:00",
+          "end": "2025-09-08 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cto@company.com",
+            "head_of_infrastructure@company.com",
+            "product_manager1@company.com",
+            "product_manager2@company.com"
+          ],
+          "id": "evt_31fa4a6816074bf585445fdd610e6b07"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Interview - New Feature",
+          "start": "2025-09-08 11:30:00",
+          "end": "2025-09-08 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_358904b9303f47b98706bc43e380383a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Tech Debt Prioritization Meeting",
+          "start": "2025-09-08 14:00:00",
+          "end": "2025-09-08 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_91ffb566ff5844a887c7cce3f9823607"
+        },
+        {
+          "day": "Monday",
+          "summary": "Coding Camp Volunteer Planning Session",
+          "start": "2025-09-08 18:30:00",
+          "end": "2025-09-08 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "volunteer1@email.com",
+            "volunteer2@email.com"
+          ],
+          "id": "evt_8a013adc8c3147ad8f21d537869cedb3"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is the User Interview on Monday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first look up the current time, then I will find the User Interview on Monday and let you know what time it is."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-09-07 18:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "OK, tomorrow is Monday, September 8th. Let me check the calendar for the User Interview."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-09-08 00:00:00",
+          "time_max": "2025-09-08 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_2d99ef6001da46e8b7febd7be6e07c24 | Engineering Stand-up \u2014 Mon 09:00-09:30\nid: evt_31fa4a6816074bf585445fdd610e6b07 | Platform Roadmap Review \u2014 Mon 10:00-11:00\nid: evt_358904b9303f47b98706bc43e380383a | User Interview - New Feature \u2014 Mon 11:30-12:30\nid: evt_91ffb566ff5844a887c7cce3f9823607 | Tech Debt Prioritization Meeting \u2014 Mon 14:00-15:00\nid: evt_8a013adc8c3147ad8f21d537869cedb3 | Coding Camp Volunteer Planning Session \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "The User Interview is on Monday from 11:30 AM to 12:30 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the Cloud Scalability Discussion?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "Find the 'Cloud Scalability Discussion' event on Tuesday and return a list of attendees.",
+    "simulated_now": "2025-09-07 18:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-09 09:00:00",
+          "end": "2025-09-09 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_20289d97d1174d24b81d57f281fc23c5"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Customer Support",
+          "start": "2025-09-09 10:00:00",
+          "end": "2025-09-09 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "customer_support_lead@company.com"
+          ],
+          "id": "evt_c823981d08b8455491aef1340d1dc653"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Cloud Scalability Discussion",
+          "start": "2025-09-09 13:00:00",
+          "end": "2025-09-09 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cloud_architect@company.com",
+            "devops_engineer@company.com"
+          ],
+          "id": "evt_ed9482af82d9464ba78fae0f2f7457fc"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Documentation Review",
+          "start": "2025-09-09 15:00:00",
+          "end": "2025-09-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tech_writer@company.com"
+          ],
+          "id": "evt_7c98054ee32049508e3273d3eccd51e5"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-09 09:00:00",
+          "end": "2025-09-09 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_20289d97d1174d24b81d57f281fc23c5"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Customer Support",
+          "start": "2025-09-09 10:00:00",
+          "end": "2025-09-09 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "customer_support_lead@company.com"
+          ],
+          "id": "evt_c823981d08b8455491aef1340d1dc653"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Cloud Scalability Discussion",
+          "start": "2025-09-09 13:00:00",
+          "end": "2025-09-09 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cloud_architect@company.com",
+            "devops_engineer@company.com"
+          ],
+          "id": "evt_ed9482af82d9464ba78fae0f2f7457fc"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Documentation Review",
+          "start": "2025-09-09 15:00:00",
+          "end": "2025-09-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tech_writer@company.com"
+          ],
+          "id": "evt_7c98054ee32049508e3273d3eccd51e5"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the Cloud Scalability Discussion?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find the event titled \"Cloud Scalability Discussion\" and then get the details of the event to see who is attending.\n\n1. **Find the event:** I will use `list_events` to search for \"Cloud Scalability Discussion\" and get its event ID.\n2. **Get event details:** I will use `get_event` with the event ID to get the full details, including the attendee list.\n3. **Respond to the user:** I will provide the user with the list of attendees."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2024-08-12 08:00:00",
+          "time_max": "2024-08-12 11:59:00"
+        },
+        "result": "Found 0 events:"
+      },
+      {
+        "role": "assistant",
+        "content": "I could not find the event in the time range I searched. I will now search all events to find the \"Cloud Scalability Discussion\", get its event ID, and then get the event details to find the attendees."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-09-07 18:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "I will search for the \"Cloud Scalability Discussion\" event in all of your events, and then I will get the event's details to tell you who is attending."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 26 events:\nid: evt_045020c7a9ce4c10b1ec279832b00e54 | Engineering Stand-up \u2014 Mon 09:00-09:30\nid: evt_e07bb7585c0745888b49d19947034043 | Platform Roadmap Review \u2014 Mon 10:00-11:00\nid: evt_7fe73e47b5fa44feb68bb80f8f1bf844 | User Interview - New Feature \u2014 Mon 11:30-12:30\nid: evt_aabeab45423045abba88aa40f30ee2f3 | Tech Debt Prioritization Meeting \u2014 Mon 14:00-15:00\nid: evt_cc142fe784a54c42b0ae55376bd74f2e | Coding Camp Volunteer Planning Session \u2014 Mon 18:30-20:00\nid: evt_20289d97d1174d24b81d57f281fc23c5 | Engineering Stand-up \u2014 Tue 09:00-09:30\nid: evt_c823981d08b8455491aef1340d1dc653 | Meeting with Customer Support \u2014 Tue 10:00-11:00\nid: evt_ed9482af82d9464ba78fae0f2f7457fc | Cloud Scalability Discussion \u2014 Tue 13:00-14:00\nid: evt_7c98054ee32049508e3273d3eccd51e5 | Documentation Review \u2014 Tue 15:00-16:00\nid: evt_b2eda283a07a4b3f88fcfeef0dc0d801 | Engineering Stand-up \u2014 Wed 09:00-09:30\nid: evt_f2daab1729704e13ab0d2fe154bf02dc | Partner Integration Meeting \u2014 Wed 10:00-11:00\nid: evt_fe38fe4d667f4f9d8b5a616ba95b1019 | Platform Performance Metrics Analysis \u2014 Wed 14:00-15:00\nid: evt_958dc5535b544b38a02672b1d911c1ec | Team Brainstorm - Q3 Initiatives \u2014 Wed 16:00-17:00\nid: evt_803dfbe352eb4c668dfc635f3604abf4 | Dinner with Hiking Group \u2014 Wed 19:00-20:00\nid: evt_49a57d2256a34b0a93fa0b3063b25233 | Engineering Stand-up \u2014 Thu 09:00-09:30\nid: evt_b33ba2fc8cf44c5aaf5e9bfa17a959a3 | Infrastructure Planning Meeting \u2014 Thu 10:00-11:00\nid: evt_11f7349ca2c9452791e6b267b4ff9852 | UX Feedback Review \u2014 Thu 13:00-14:00\nid: evt_feb488ea86814657a6f5fe809c9f8095 | Incident Retrospective \u2014 Thu 15:00-16:00\nid: evt_abea5d514aa7410394ca7c5e54f528ef | Engineering Stand-up \u2014 Fri 09:00-09:30\nid: evt_3ca1ab1a8f7c405a9ced35bbe88a4f85 | All-Hands Meeting \u2014 Fri 10:00-11:00\nid: evt_71b3f3df98454b90ad87f5b23d48516e | 1:1 with Engineering Lead \u2014 Fri 13:00-14:00\nid: evt_9aec058652304d16b152c4d20ec7bb60 | Sprint Planning Meeting \u2014 Fri 15:00-16:00\nid: evt_759cbf69e2a845eb8f515e5ddd9398ad | Coding Camp - Teaching Session \u2014 Sat 09:00-12:00\nid: evt_2b7bd02bdd2240e38e8b68aad0de654b | Hike with Group \u2014 Sat 14:00-17:00\nid: evt_fadaf5be0327403a964afaf4c6a68cd4 | Brunch with Friends \u2014 Sun 10:00-11:00\nid: evt_f6e5b80217b04a8aa52f629934b8afd4 | Personal Project Time \u2014 Sun 13:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I've found the \"Cloud Scalability Discussion\" event. Now I will get the event details to find out who is attending."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_ed9482af82d9464ba78fae0f2f7457fc"
+        },
+        "result": "Cloud Scalability Discussion\n  ID: evt_ed9482af82d9464ba78fae0f2f7457fc\n  Time: Tue Sep 09, 13:00 - 14:00\n  Attendees: cloud_architect@company.com, devops_engineer@company.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "The attendees for the Cloud Scalability Discussion are: cloud_architect@company.com and devops_engineer@company.com."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Decline the dinner with the hiking group because I have a conflicting meeting. Then move the team brainstorm to 5:30 PM",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Decline attending the 'Dinner with Hiking Group' event on Wednesday. Find the 'Team Brainstorm - Q3 Initiatives' event and update its start time to 5:30 PM and end time to 6:30 PM on Wednesday.",
+    "simulated_now": "2025-09-07 18:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-10 09:00:00",
+          "end": "2025-09-10 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_e5b1730e9ccc450d88a467d1dfd5bf7a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Partner Integration Meeting",
+          "start": "2025-09-10 10:00:00",
+          "end": "2025-09-10 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "partner_manager@company.com"
+          ],
+          "id": "evt_9284bbb7c4d04ae7b71b0740ba54b5cc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Platform Performance Metrics Analysis",
+          "start": "2025-09-10 14:00:00",
+          "end": "2025-09-10 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_67989c2c74b24b25b3863715f5936594"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Team Brainstorm - Q3 Initiatives",
+          "start": "2025-09-10 16:00:00",
+          "end": "2025-09-10 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com",
+            "ux_designer@company.com",
+            "tech_writer@company.com"
+          ],
+          "id": "evt_c144160e56744922ad07cb847b99af5b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Hiking Group",
+          "start": "2025-09-10 19:00:00",
+          "end": "2025-09-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_88c60f3e4d4347bababbd31c357f9cbd"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-10 09:00:00",
+          "end": "2025-09-10 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_e5b1730e9ccc450d88a467d1dfd5bf7a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Partner Integration Meeting",
+          "start": "2025-09-10 10:00:00",
+          "end": "2025-09-10 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "partner_manager@company.com"
+          ],
+          "id": "evt_9284bbb7c4d04ae7b71b0740ba54b5cc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Platform Performance Metrics Analysis",
+          "start": "2025-09-10 14:00:00",
+          "end": "2025-09-10 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_67989c2c74b24b25b3863715f5936594"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Team Brainstorm - Q3 Initiatives",
+          "start": "2025-09-10 17:30:00",
+          "end": "2025-09-10 18:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com",
+            "ux_designer@company.com",
+            "tech_writer@company.com"
+          ],
+          "id": "evt_c144160e56744922ad07cb847b99af5b"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Hiking Group",
+          "start": "2025-09-10 19:00:00",
+          "end": "2025-09-10 20:00:00",
+          "attending": "DECLINE",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_88c60f3e4d4347bababbd31c357f9cbd"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Decline the dinner with the hiking group because I have a conflicting meeting. Then move the team brainstorm to 5:30 PM"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to decline a dinner invitation and reschedule a team meeting. First, I'll get the current time to understand the context. Then, I will list all upcoming events to identify the \"dinner with the hiking group\" and the \"team brainstorm.\" Once I have the event details, I will find the conflicting meeting, decline the dinner, and finally, I'll move the team brainstorm to 5:30 PM, making sure to keep its original duration."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-09-07 18:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, it's Sunday, September 7th, 2025, at 6:00 PM. Now I'll check the calendar for the \"dinner with the hiking group\" and the \"team brainstorm\" events to resolve the conflict and reschedule the brainstorm."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 26 events:\nid: evt_457b8b761e534a97bc0f53cdde6ce18b | Engineering Stand-up \u2014 Mon 09:00-09:30\nid: evt_d58ee4f1ea994927941bf0ab7112167c | Platform Roadmap Review \u2014 Mon 10:00-11:00\nid: evt_3e48d5889cf84373b8dfcdc0ebced1bc | User Interview - New Feature \u2014 Mon 11:30-12:30\nid: evt_3461419f44ca463f81540c1fcfd7c32f | Tech Debt Prioritization Meeting \u2014 Mon 14:00-15:00\nid: evt_2b42c15248c046f0a73ae75bd34c5ece | Coding Camp Volunteer Planning Session \u2014 Mon 18:30-20:00\nid: evt_1855b563426643939bd28591c28c27a6 | Engineering Stand-up \u2014 Tue 09:00-09:30\nid: evt_cd5d3119b63a4affa6070c0b6cbde492 | Meeting with Customer Support \u2014 Tue 10:00-11:00\nid: evt_4ebf280bec2c4a05869dd2e8de9c15b9 | Cloud Scalability Discussion \u2014 Tue 13:00-14:00\nid: evt_048f6664d9b64a33b7e81cdf96796157 | Documentation Review \u2014 Tue 15:00-16:00\nid: evt_e5b1730e9ccc450d88a467d1dfd5bf7a | Engineering Stand-up \u2014 Wed 09:00-09:30\nid: evt_9284bbb7c4d04ae7b71b0740ba54b5cc | Partner Integration Meeting \u2014 Wed 10:00-11:00\nid: evt_67989c2c74b24b25b3863715f5936594 | Platform Performance Metrics Analysis \u2014 Wed 14:00-15:00\nid: evt_c144160e56744922ad07cb847b99af5b | Team Brainstorm - Q3 Initiatives \u2014 Wed 16:00-17:00\nid: evt_88c60f3e4d4347bababbd31c357f9cbd | Dinner with Hiking Group \u2014 Wed 19:00-20:00\nid: evt_4a0ffd61329742349c6fb8f0e313660c | Engineering Stand-up \u2014 Thu 09:00-09:30\nid: evt_3c82c2eb4f824b6b976e073f67b04d86 | Infrastructure Planning Meeting \u2014 Thu 10:00-11:00\nid: evt_531649977818447e90b0da58a352d6f6 | UX Feedback Review \u2014 Thu 13:00-14:00\nid: evt_c514a2cb9d5f4388bcc32aed8f3195b9 | Incident Retrospective \u2014 Thu 15:00-16:00\nid: evt_9b21143cd3d14864b2d09f5f9b66bdff | Engineering Stand-up \u2014 Fri 09:00-09:30\nid: evt_22d9bba577ee402e8b6e184401ed777e | All-Hands Meeting \u2014 Fri 10:00-11:00\nid: evt_39420e4271e84814a67a49b2c6de8d8f | 1:1 with Engineering Lead \u2014 Fri 13:00-14:00\nid: evt_aec4ccf7a8cb49b6887ea32b665f6cbc | Sprint Planning Meeting \u2014 Fri 15:00-16:00\nid: evt_e7620252f3344803aed4f467705b3a3c | Coding Camp - Teaching Session \u2014 Sat 09:00-12:00\nid: evt_385a3cc10a314b599edbaa3165a2446c | Hike with Group \u2014 Sat 14:00-17:00\nid: evt_1afe25a90bec4d5da86d40ce6babb9ee | Brunch with Friends \u2014 Sun 10:00-11:00\nid: evt_0f74f616f71c49ae9b21a32109c3aa94 | Personal Project Time \u2014 Sun 13:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I've located the \"Dinner with Hiking Group\" on Wednesday from 7:00 PM to 8:00 PM and the \"Team Brainstorm\" on the same day from 4:00 PM to 5:00 PM. I'll assume the rescheduled brainstorm is the conflict you mentioned. I will now decline the dinner invitation and then move the brainstorm to Wednesday at 5:30 PM, keeping its one-hour duration. First, I'll decline the dinner."
+      },
+      {
+        "role": "tool_call",
+        "name": "respond_to_event",
+        "args": {
+          "attending": "DECLINE",
+          "event_id": "evt_88c60f3e4d4347bababbd31c357f9cbd"
+        },
+        "result": "RSVP updated to DECLINE.\nDinner with Hiking Group\n  ID: evt_88c60f3e4d4347bababbd31c357f9cbd\n  Time: Wed Sep 10, 19:00 - 20:00\n  Attendees: friend1@email.com, friend2@email.com\n  RSVP: DECLINE"
+      },
+      {
+        "role": "assistant",
+        "content": "I've declined the dinner invitation. Now, I'm rescheduling the \"Team Brainstorm - Q3 Initiatives\" to 5:30 PM today, Wednesday, September 10th, making the new time 5:30 PM to 6:30 PM. I'm updating the event now."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "start": "2025-09-10 17:30:00",
+          "end": "2025-09-10 18:30:00",
+          "event_id": "evt_c144160e56744922ad07cb847b99af5b"
+        },
+        "result": "Event updated successfully.\nTeam Brainstorm - Q3 Initiatives\n  ID: evt_c144160e56744922ad07cb847b99af5b\n  Time: Wed Sep 10, 17:30 - 18:30\n  Attendees: engineering_lead@company.com, ux_designer@company.com, tech_writer@company.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I've declined the dinner invitation and rescheduled the team brainstorm. I will now summarize the changes for you."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Delete the Tech Debt meeting, then reschedule the UX review for Thursday at 2:00 PM.",
+    "category": "Complex Logic & Conflict (Advanced)",
+    "complexity": "High",
+    "expected_behavior": "Delete the 'Tech Debt Prioritization Meeting' event on Monday. Find the 'UX Feedback Review' event on Thursday and update its start time to 2:00 PM and end time to 3:00 PM.",
+    "simulated_now": "2025-09-07 18:00:00",
+    "addressed_days": [
+      "Monday",
+      "Thursday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-08 09:00:00",
+          "end": "2025-09-08 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_d395cf88f8a74a9c87a5548d242132fc"
+        },
+        {
+          "day": "Monday",
+          "summary": "Platform Roadmap Review",
+          "start": "2025-09-08 10:00:00",
+          "end": "2025-09-08 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cto@company.com",
+            "head_of_infrastructure@company.com",
+            "product_manager1@company.com",
+            "product_manager2@company.com"
+          ],
+          "id": "evt_473302c24368482abb1dfcc5ea1e4d88"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Interview - New Feature",
+          "start": "2025-09-08 11:30:00",
+          "end": "2025-09-08 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_32d9d76a6ca14374b5c49068d7d59fe8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Tech Debt Prioritization Meeting",
+          "start": "2025-09-08 14:00:00",
+          "end": "2025-09-08 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_a0a71007f1354f2d9c202f257bb25fd4"
+        },
+        {
+          "day": "Monday",
+          "summary": "Coding Camp Volunteer Planning Session",
+          "start": "2025-09-08 18:30:00",
+          "end": "2025-09-08 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "volunteer1@email.com",
+            "volunteer2@email.com"
+          ],
+          "id": "evt_3801e7f4213d4b9587273abc5ae75201"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-11 09:00:00",
+          "end": "2025-09-11 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_682d93c6ccf14ea4afc14c2ebcde45ba"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Infrastructure Planning Meeting",
+          "start": "2025-09-11 10:00:00",
+          "end": "2025-09-11 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "head_of_infrastructure@company.com"
+          ],
+          "id": "evt_ca082afb2bc74359905019c510b4be12"
+        },
+        {
+          "day": "Thursday",
+          "summary": "UX Feedback Review",
+          "start": "2025-09-11 13:00:00",
+          "end": "2025-09-11 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_e673bb3d44d242cc8cfe04ebdf7c6b8a"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Incident Retrospective",
+          "start": "2025-09-11 15:00:00",
+          "end": "2025-09-11 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com",
+            "devops_engineer@company.com"
+          ],
+          "id": "evt_2c7ddb09b6e24e778b5edabab1985ce6"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-08 09:00:00",
+          "end": "2025-09-08 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_d395cf88f8a74a9c87a5548d242132fc"
+        },
+        {
+          "day": "Monday",
+          "summary": "Platform Roadmap Review",
+          "start": "2025-09-08 10:00:00",
+          "end": "2025-09-08 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cto@company.com",
+            "head_of_infrastructure@company.com",
+            "product_manager1@company.com",
+            "product_manager2@company.com"
+          ],
+          "id": "evt_473302c24368482abb1dfcc5ea1e4d88"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Interview - New Feature",
+          "start": "2025-09-08 11:30:00",
+          "end": "2025-09-08 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_32d9d76a6ca14374b5c49068d7d59fe8"
+        },
+        {
+          "day": "Monday",
+          "summary": "Coding Camp Volunteer Planning Session",
+          "start": "2025-09-08 18:30:00",
+          "end": "2025-09-08 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "volunteer1@email.com",
+            "volunteer2@email.com"
+          ],
+          "id": "evt_3801e7f4213d4b9587273abc5ae75201"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-11 09:00:00",
+          "end": "2025-09-11 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_682d93c6ccf14ea4afc14c2ebcde45ba"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Infrastructure Planning Meeting",
+          "start": "2025-09-11 10:00:00",
+          "end": "2025-09-11 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "head_of_infrastructure@company.com"
+          ],
+          "id": "evt_ca082afb2bc74359905019c510b4be12"
+        },
+        {
+          "day": "Thursday",
+          "summary": "UX Feedback Review",
+          "start": "2025-09-11 14:00:00",
+          "end": "2025-09-11 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_e673bb3d44d242cc8cfe04ebdf7c6b8a"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Incident Retrospective",
+          "start": "2025-09-11 15:00:00",
+          "end": "2025-09-11 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com",
+            "devops_engineer@company.com"
+          ],
+          "id": "evt_2c7ddb09b6e24e778b5edabab1985ce6"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Delete the Tech Debt meeting, then reschedule the UX review for Thursday at 2:00 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. First, I need to get the current time to understand which Thursday you're referring to. Then, I'll find the \"Tech Debt meeting\" and the \"UX review\" in your calendar. After deleting the first event, I'll retrieve the current duration of the \"UX review\" to ensure the rescheduled event has the same length. Finally, I'll update the \"UX review\" to its new time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-09-07 18:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 26 events:\nid: evt_d395cf88f8a74a9c87a5548d242132fc | Engineering Stand-up \u2014 Mon 09:00-09:30\nid: evt_473302c24368482abb1dfcc5ea1e4d88 | Platform Roadmap Review \u2014 Mon 10:00-11:00\nid: evt_32d9d76a6ca14374b5c49068d7d59fe8 | User Interview - New Feature \u2014 Mon 11:30-12:30\nid: evt_a0a71007f1354f2d9c202f257bb25fd4 | Tech Debt Prioritization Meeting \u2014 Mon 14:00-15:00\nid: evt_3801e7f4213d4b9587273abc5ae75201 | Coding Camp Volunteer Planning Session \u2014 Mon 18:30-20:00\nid: evt_a958da8adc0540d390a473016448e3a7 | Engineering Stand-up \u2014 Tue 09:00-09:30\nid: evt_8db59a64420f4de29ad1d89871bb41bc | Meeting with Customer Support \u2014 Tue 10:00-11:00\nid: evt_f9b805a8fc3b442ca441e26058ee359d | Cloud Scalability Discussion \u2014 Tue 13:00-14:00\nid: evt_c23e86f0b8e24fc0a571414c319ef9d8 | Documentation Review \u2014 Tue 15:00-16:00\nid: evt_f3eb3298662c4c61879a59a9db4edd48 | Engineering Stand-up \u2014 Wed 09:00-09:30\nid: evt_936e3c808c42497da290654250e7a58f | Partner Integration Meeting \u2014 Wed 10:00-11:00\nid: evt_c034082e4f44427ab75d85964eff0281 | Platform Performance Metrics Analysis \u2014 Wed 14:00-15:00\nid: evt_7f8a753687c6478d93fca4c17a1d8f07 | Team Brainstorm - Q3 Initiatives \u2014 Wed 16:00-17:00\nid: evt_792227acdc1e4807bab0301d4a3ee8f5 | Dinner with Hiking Group \u2014 Wed 19:00-20:00\nid: evt_682d93c6ccf14ea4afc14c2ebcde45ba | Engineering Stand-up \u2014 Thu 09:00-09:30\nid: evt_ca082afb2bc74359905019c510b4be12 | Infrastructure Planning Meeting \u2014 Thu 10:00-11:00\nid: evt_e673bb3d44d242cc8cfe04ebdf7c6b8a | UX Feedback Review \u2014 Thu 13:00-14:00\nid: evt_2c7ddb09b6e24e778b5edabab1985ce6 | Incident Retrospective \u2014 Thu 15:00-16:00\nid: evt_67465396038b444eab3deb14bad62c10 | Engineering Stand-up \u2014 Fri 09:00-09:30\nid: evt_5103966d10424fa0b51dab01b51e653e | All-Hands Meeting \u2014 Fri 10:00-11:00\nid: evt_21fb32f0264c4fbead1156f4d1e117a0 | 1:1 with Engineering Lead \u2014 Fri 13:00-14:00\nid: evt_2626da33ae8442eda7690543fa851c2b | Sprint Planning Meeting \u2014 Fri 15:00-16:00\nid: evt_c813dd283bd84d05994a1d2bc5874924 | Coding Camp - Teaching Session \u2014 Sat 09:00-12:00\nid: evt_52bd3544d20f4b14b9d74bed581bab75 | Hike with Group \u2014 Sat 14:00-17:00\nid: evt_e3c18cd0df6b4942963e6ffeeb2348aa | Brunch with Friends \u2014 Sun 10:00-11:00\nid: evt_149ad1c4f22b406f9b7291768b241ab0 | Personal Project Time \u2014 Sun 13:00-16:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "delete_event",
+        "args": {
+          "event_id": "evt_a0a71007f1354f2d9c202f257bb25fd4"
+        },
+        "result": "Event deleted: id: evt_a0a71007f1354f2d9c202f257bb25fd4 | Tech Debt Prioritization Meeting \u2014 Mon 14:00-15:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_e673bb3d44d242cc8cfe04ebdf7c6b8a"
+        },
+        "result": "UX Feedback Review\n  ID: evt_e673bb3d44d242cc8cfe04ebdf7c6b8a\n  Time: Thu Sep 11, 13:00 - 14:00\n  Attendees: ux_designer@company.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "event_id": "evt_e673bb3d44d242cc8cfe04ebdf7c6b8a",
+          "end": "2025-09-11 15:00:00",
+          "start": "2025-09-11 14:00:00"
+        },
+        "result": "Event updated successfully.\nUX Feedback Review\n  ID: evt_e673bb3d44d242cc8cfe04ebdf7c6b8a\n  Time: Thu Sep 11, 14:00 - 15:00\n  Attendees: ux_designer@company.com\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "Done. I've deleted the \"Tech Debt Prioritization Meeting\" and moved the \"UX Feedback Review\" to Thursday from 2:00 PM to 3:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule engineering standup.",
+    "category": "Human Chaos (Edge Cases/Fragments)",
+    "complexity": "Medium",
+    "expected_behavior": "List all Engineering Stand-up events for the week (Monday, Tuesday, Wednesday, Thursday, and Friday) to ask the user to confirm which one they want to reschedule.",
+    "simulated_now": "2025-09-07 18:00:00",
+    "addressed_days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-08 09:00:00",
+          "end": "2025-09-08 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_7665b7d5150243f3adec2a11a2624c0e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Platform Roadmap Review",
+          "start": "2025-09-08 10:00:00",
+          "end": "2025-09-08 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cto@company.com",
+            "head_of_infrastructure@company.com",
+            "product_manager1@company.com",
+            "product_manager2@company.com"
+          ],
+          "id": "evt_6c4bd73549aa4fe49de2ec94fa202021"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Interview - New Feature",
+          "start": "2025-09-08 11:30:00",
+          "end": "2025-09-08 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_02d34861c89b429489aac6b2b87952f3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Tech Debt Prioritization Meeting",
+          "start": "2025-09-08 14:00:00",
+          "end": "2025-09-08 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_14540e2b6369450e8a29e3688843f14a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Coding Camp Volunteer Planning Session",
+          "start": "2025-09-08 18:30:00",
+          "end": "2025-09-08 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "volunteer1@email.com",
+            "volunteer2@email.com"
+          ],
+          "id": "evt_590be68a1f014635b5a838836b39dc37"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-09 09:00:00",
+          "end": "2025-09-09 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_1f8b0f55a9ba4becba25983d552a0af1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Customer Support",
+          "start": "2025-09-09 10:00:00",
+          "end": "2025-09-09 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "customer_support_lead@company.com"
+          ],
+          "id": "evt_45076d52d9df4aaf838a244763b46c3a"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Cloud Scalability Discussion",
+          "start": "2025-09-09 13:00:00",
+          "end": "2025-09-09 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cloud_architect@company.com",
+            "devops_engineer@company.com"
+          ],
+          "id": "evt_ac3e4d8bf137431c9fc089aac3d58042"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Documentation Review",
+          "start": "2025-09-09 15:00:00",
+          "end": "2025-09-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tech_writer@company.com"
+          ],
+          "id": "evt_dbed1505ea2546e0ac7252d11940a17e"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-10 09:00:00",
+          "end": "2025-09-10 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_8868e902581e49e59afb4543e7c01386"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Partner Integration Meeting",
+          "start": "2025-09-10 10:00:00",
+          "end": "2025-09-10 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "partner_manager@company.com"
+          ],
+          "id": "evt_5c9967b12f024ed8a625b58f4c0b4c32"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Platform Performance Metrics Analysis",
+          "start": "2025-09-10 14:00:00",
+          "end": "2025-09-10 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9ad72c1ee1a24e9cb085780c94741787"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Team Brainstorm - Q3 Initiatives",
+          "start": "2025-09-10 16:00:00",
+          "end": "2025-09-10 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com",
+            "ux_designer@company.com",
+            "tech_writer@company.com"
+          ],
+          "id": "evt_4f43597375394fceb7c1ef926302d8c2"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Hiking Group",
+          "start": "2025-09-10 19:00:00",
+          "end": "2025-09-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_38a1f4efc36e47c09e9e7225801dcbca"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-11 09:00:00",
+          "end": "2025-09-11 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_6088f79c52964f35903fbddd5f56de78"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Infrastructure Planning Meeting",
+          "start": "2025-09-11 10:00:00",
+          "end": "2025-09-11 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "head_of_infrastructure@company.com"
+          ],
+          "id": "evt_b2ab499a3a904675b987eb9ab30aeea5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "UX Feedback Review",
+          "start": "2025-09-11 13:00:00",
+          "end": "2025-09-11 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_92e6b5370f104b978ec9ecaecfdcd702"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Incident Retrospective",
+          "start": "2025-09-11 15:00:00",
+          "end": "2025-09-11 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com",
+            "devops_engineer@company.com"
+          ],
+          "id": "evt_e907330710f74d42b398cb5dc0b585ec"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-12 09:00:00",
+          "end": "2025-09-12 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_730cdc9a72f44b74910fa2c680685828"
+        },
+        {
+          "day": "Friday",
+          "summary": "All-Hands Meeting",
+          "start": "2025-09-12 10:00:00",
+          "end": "2025-09-12 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f18b1d80af44402aa62b21761c5277d4"
+        },
+        {
+          "day": "Friday",
+          "summary": "1:1 with Engineering Lead",
+          "start": "2025-09-12 13:00:00",
+          "end": "2025-09-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_884f60b75eab475e9cb822994e9346ff"
+        },
+        {
+          "day": "Friday",
+          "summary": "Sprint Planning Meeting",
+          "start": "2025-09-12 15:00:00",
+          "end": "2025-09-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com",
+            "ux_designer@company.com",
+            "tech_writer@company.com"
+          ],
+          "id": "evt_084b14c3bd614bf894859eb1cbad5d0f"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-08 09:00:00",
+          "end": "2025-09-08 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_7665b7d5150243f3adec2a11a2624c0e"
+        },
+        {
+          "day": "Monday",
+          "summary": "Platform Roadmap Review",
+          "start": "2025-09-08 10:00:00",
+          "end": "2025-09-08 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cto@company.com",
+            "head_of_infrastructure@company.com",
+            "product_manager1@company.com",
+            "product_manager2@company.com"
+          ],
+          "id": "evt_6c4bd73549aa4fe49de2ec94fa202021"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Interview - New Feature",
+          "start": "2025-09-08 11:30:00",
+          "end": "2025-09-08 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_02d34861c89b429489aac6b2b87952f3"
+        },
+        {
+          "day": "Monday",
+          "summary": "Tech Debt Prioritization Meeting",
+          "start": "2025-09-08 14:00:00",
+          "end": "2025-09-08 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_14540e2b6369450e8a29e3688843f14a"
+        },
+        {
+          "day": "Monday",
+          "summary": "Coding Camp Volunteer Planning Session",
+          "start": "2025-09-08 18:30:00",
+          "end": "2025-09-08 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "volunteer1@email.com",
+            "volunteer2@email.com"
+          ],
+          "id": "evt_590be68a1f014635b5a838836b39dc37"
+        }
+      ],
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-09 09:00:00",
+          "end": "2025-09-09 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_1f8b0f55a9ba4becba25983d552a0af1"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Customer Support",
+          "start": "2025-09-09 10:00:00",
+          "end": "2025-09-09 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "customer_support_lead@company.com"
+          ],
+          "id": "evt_45076d52d9df4aaf838a244763b46c3a"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Cloud Scalability Discussion",
+          "start": "2025-09-09 13:00:00",
+          "end": "2025-09-09 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cloud_architect@company.com",
+            "devops_engineer@company.com"
+          ],
+          "id": "evt_ac3e4d8bf137431c9fc089aac3d58042"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Documentation Review",
+          "start": "2025-09-09 15:00:00",
+          "end": "2025-09-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tech_writer@company.com"
+          ],
+          "id": "evt_dbed1505ea2546e0ac7252d11940a17e"
+        }
+      ],
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-10 09:00:00",
+          "end": "2025-09-10 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_8868e902581e49e59afb4543e7c01386"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Partner Integration Meeting",
+          "start": "2025-09-10 10:00:00",
+          "end": "2025-09-10 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "partner_manager@company.com"
+          ],
+          "id": "evt_5c9967b12f024ed8a625b58f4c0b4c32"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Platform Performance Metrics Analysis",
+          "start": "2025-09-10 14:00:00",
+          "end": "2025-09-10 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_9ad72c1ee1a24e9cb085780c94741787"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Team Brainstorm - Q3 Initiatives",
+          "start": "2025-09-10 16:00:00",
+          "end": "2025-09-10 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com",
+            "ux_designer@company.com",
+            "tech_writer@company.com"
+          ],
+          "id": "evt_4f43597375394fceb7c1ef926302d8c2"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Dinner with Hiking Group",
+          "start": "2025-09-10 19:00:00",
+          "end": "2025-09-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "friend1@email.com",
+            "friend2@email.com"
+          ],
+          "id": "evt_38a1f4efc36e47c09e9e7225801dcbca"
+        }
+      ],
+      "Thursday": [
+        {
+          "day": "Thursday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-11 09:00:00",
+          "end": "2025-09-11 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_6088f79c52964f35903fbddd5f56de78"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Infrastructure Planning Meeting",
+          "start": "2025-09-11 10:00:00",
+          "end": "2025-09-11 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "head_of_infrastructure@company.com"
+          ],
+          "id": "evt_b2ab499a3a904675b987eb9ab30aeea5"
+        },
+        {
+          "day": "Thursday",
+          "summary": "UX Feedback Review",
+          "start": "2025-09-11 13:00:00",
+          "end": "2025-09-11 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_92e6b5370f104b978ec9ecaecfdcd702"
+        },
+        {
+          "day": "Thursday",
+          "summary": "Incident Retrospective",
+          "start": "2025-09-11 15:00:00",
+          "end": "2025-09-11 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com",
+            "devops_engineer@company.com"
+          ],
+          "id": "evt_e907330710f74d42b398cb5dc0b585ec"
+        }
+      ],
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-12 09:00:00",
+          "end": "2025-09-12 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_730cdc9a72f44b74910fa2c680685828"
+        },
+        {
+          "day": "Friday",
+          "summary": "All-Hands Meeting",
+          "start": "2025-09-12 10:00:00",
+          "end": "2025-09-12 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f18b1d80af44402aa62b21761c5277d4"
+        },
+        {
+          "day": "Friday",
+          "summary": "1:1 with Engineering Lead",
+          "start": "2025-09-12 13:00:00",
+          "end": "2025-09-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_884f60b75eab475e9cb822994e9346ff"
+        },
+        {
+          "day": "Friday",
+          "summary": "Sprint Planning Meeting",
+          "start": "2025-09-12 15:00:00",
+          "end": "2025-09-12 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com",
+            "ux_designer@company.com",
+            "tech_writer@company.com"
+          ],
+          "id": "evt_084b14c3bd614bf894859eb1cbad5d0f"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule engineering standup."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. When would you like to move it to?"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 26 events:\nid: evt_7665b7d5150243f3adec2a11a2624c0e | Engineering Stand-up \u2014 Mon 09:00-09:30\nid: evt_6c4bd73549aa4fe49de2ec94fa202021 | Platform Roadmap Review \u2014 Mon 10:00-11:00\nid: evt_02d34861c89b429489aac6b2b87952f3 | User Interview - New Feature \u2014 Mon 11:30-12:30\nid: evt_14540e2b6369450e8a29e3688843f14a | Tech Debt Prioritization Meeting \u2014 Mon 14:00-15:00\nid: evt_590be68a1f014635b5a838836b39dc37 | Coding Camp Volunteer Planning Session \u2014 Mon 18:30-20:00\nid: evt_1f8b0f55a9ba4becba25983d552a0af1 | Engineering Stand-up \u2014 Tue 09:00-09:30\nid: evt_45076d52d9df4aaf838a244763b46c3a | Meeting with Customer Support \u2014 Tue 10:00-11:00\nid: evt_ac3e4d8bf137431c9fc089aac3d58042 | Cloud Scalability Discussion \u2014 Tue 13:00-14:00\nid: evt_dbed1505ea2546e0ac7252d11940a17e | Documentation Review \u2014 Tue 15:00-16:00\nid: evt_8868e902581e49e59afb4543e7c01386 | Engineering Stand-up \u2014 Wed 09:00-09:30\nid: evt_5c9967b12f024ed8a625b58f4c0b4c32 | Partner Integration Meeting \u2014 Wed 10:00-11:00\nid: evt_9ad72c1ee1a24e9cb085780c94741787 | Platform Performance Metrics Analysis \u2014 Wed 14:00-15:00\nid: evt_4f43597375394fceb7c1ef926302d8c2 | Team Brainstorm - Q3 Initiatives \u2014 Wed 16:00-17:00\nid: evt_38a1f4efc36e47c09e9e7225801dcbca | Dinner with Hiking Group \u2014 Wed 19:00-20:00\nid: evt_6088f79c52964f35903fbddd5f56de78 | Engineering Stand-up \u2014 Thu 09:00-09:30\nid: evt_b2ab499a3a904675b987eb9ab30aeea5 | Infrastructure Planning Meeting \u2014 Thu 10:00-11:00\nid: evt_92e6b5370f104b978ec9ecaecfdcd702 | UX Feedback Review \u2014 Thu 13:00-14:00\nid: evt_e907330710f74d42b398cb5dc0b585ec | Incident Retrospective \u2014 Thu 15:00-16:00\nid: evt_730cdc9a72f44b74910fa2c680685828 | Engineering Stand-up \u2014 Fri 09:00-09:30\nid: evt_f18b1d80af44402aa62b21761c5277d4 | All-Hands Meeting \u2014 Fri 10:00-11:00\nid: evt_884f60b75eab475e9cb822994e9346ff | 1:1 with Engineering Lead \u2014 Fri 13:00-14:00\nid: evt_084b14c3bd614bf894859eb1cbad5d0f | Sprint Planning Meeting \u2014 Fri 15:00-16:00\nid: evt_4ba31d105e7140c9aea6e0cad41fc724 | Coding Camp - Teaching Session \u2014 Sat 09:00-12:00\nid: evt_cdb05bd3f9ee483ebf289b48465d4aa1 | Hike with Group \u2014 Sat 14:00-17:00\nid: evt_ea36f7c9c3244d779da0037d801f94d3 | Brunch with Friends \u2014 Sun 10:00-11:00\nid: evt_40a19ad9a6a1490c99141dce7324a084 | Personal Project Time \u2014 Sun 13:00-16:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I see a few \"Engineering Stand-up\" meetings on the calendar. Which one would you like to reschedule? There's one on Monday, Tuesday, Wednesday, Thursday, and Friday, all from 9:00 to 9:30 AM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What meetings are scheduled for me today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "List all events for the current day (Monday, September 8, 2025) that include the user as an attendee.",
+    "simulated_now": "2025-09-08 08:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-08 09:00:00",
+          "end": "2025-09-08 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_12408a362c504e549922deb1ab29cd00"
+        },
+        {
+          "day": "Monday",
+          "summary": "Platform Roadmap Review",
+          "start": "2025-09-08 10:00:00",
+          "end": "2025-09-08 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cto@company.com",
+            "head_of_infrastructure@company.com",
+            "product_manager1@company.com",
+            "product_manager2@company.com"
+          ],
+          "id": "evt_dce0beb82a3048968e0e7ff63c18a094"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Interview - New Feature",
+          "start": "2025-09-08 11:30:00",
+          "end": "2025-09-08 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_a9ac835abcac421fbee5739c54edfa23"
+        },
+        {
+          "day": "Monday",
+          "summary": "Tech Debt Prioritization Meeting",
+          "start": "2025-09-08 14:00:00",
+          "end": "2025-09-08 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_bcbc0c4eba934bcf8ca8a1f63012c813"
+        },
+        {
+          "day": "Monday",
+          "summary": "Coding Camp Volunteer Planning Session",
+          "start": "2025-09-08 18:30:00",
+          "end": "2025-09-08 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "volunteer1@email.com",
+            "volunteer2@email.com"
+          ],
+          "id": "evt_7c9d812b4a90492daffbca0b78a79880"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-08 09:00:00",
+          "end": "2025-09-08 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_12408a362c504e549922deb1ab29cd00"
+        },
+        {
+          "day": "Monday",
+          "summary": "Platform Roadmap Review",
+          "start": "2025-09-08 10:00:00",
+          "end": "2025-09-08 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cto@company.com",
+            "head_of_infrastructure@company.com",
+            "product_manager1@company.com",
+            "product_manager2@company.com"
+          ],
+          "id": "evt_dce0beb82a3048968e0e7ff63c18a094"
+        },
+        {
+          "day": "Monday",
+          "summary": "User Interview - New Feature",
+          "start": "2025-09-08 11:30:00",
+          "end": "2025-09-08 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "ux_designer@company.com"
+          ],
+          "id": "evt_a9ac835abcac421fbee5739c54edfa23"
+        },
+        {
+          "day": "Monday",
+          "summary": "Tech Debt Prioritization Meeting",
+          "start": "2025-09-08 14:00:00",
+          "end": "2025-09-08 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_bcbc0c4eba934bcf8ca8a1f63012c813"
+        },
+        {
+          "day": "Monday",
+          "summary": "Coding Camp Volunteer Planning Session",
+          "start": "2025-09-08 18:30:00",
+          "end": "2025-09-08 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "volunteer1@email.com",
+            "volunteer2@email.com"
+          ],
+          "id": "evt_7c9d812b4a90492daffbca0b78a79880"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What meetings are scheduled for me today?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time to identify today's date. Then, I will call `list_events` to get all meetings scheduled for today and show them to you."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-09-08 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2025-09-08 23:59:59",
+          "time_min": "2025-09-08 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_12408a362c504e549922deb1ab29cd00 | Engineering Stand-up \u2014 Mon 09:00-09:30\nid: evt_dce0beb82a3048968e0e7ff63c18a094 | Platform Roadmap Review \u2014 Mon 10:00-11:00\nid: evt_a9ac835abcac421fbee5739c54edfa23 | User Interview - New Feature \u2014 Mon 11:30-12:30\nid: evt_bcbc0c4eba934bcf8ca8a1f63012c813 | Tech Debt Prioritization Meeting \u2014 Mon 14:00-15:00\nid: evt_7c9d812b4a90492daffbca0b78a79880 | Coding Camp Volunteer Planning Session \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. Today, Monday, September 8, 2025, you have 5 meetings:\n- Engineering Stand-up from 09:00 to 09:30.\n- Platform Roadmap Review from 10:00 to 11:00.\n- User Interview - New Feature from 11:30 to 12:30.\n- Tech Debt Prioritization Meeting from 14:00 to 15:00.\n- Coding Camp Volunteer Planning Session from 18:30 to 20:00."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Am I free tomorrow at 10 AM?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Medium",
+    "expected_behavior": "List events for Tuesday, September 9, 2025, between 10:00 AM and 11:00 AM to check for conflicts.",
+    "simulated_now": "2025-09-08 08:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-09 09:00:00",
+          "end": "2025-09-09 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_991a95aeef714ea6b9b8e1cbf66b753b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Customer Support",
+          "start": "2025-09-09 10:00:00",
+          "end": "2025-09-09 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "customer_support_lead@company.com"
+          ],
+          "id": "evt_487a1b0678d24ad6aed82baf6199c578"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Cloud Scalability Discussion",
+          "start": "2025-09-09 13:00:00",
+          "end": "2025-09-09 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cloud_architect@company.com",
+            "devops_engineer@company.com"
+          ],
+          "id": "evt_d940b21107b24c0ea63cbf17c4ea60e0"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Documentation Review",
+          "start": "2025-09-09 15:00:00",
+          "end": "2025-09-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tech_writer@company.com"
+          ],
+          "id": "evt_f1b2a4387ee14074ba238c9fcd044568"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Engineering Stand-up",
+          "start": "2025-09-09 09:00:00",
+          "end": "2025-09-09 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "engineering_lead@company.com"
+          ],
+          "id": "evt_991a95aeef714ea6b9b8e1cbf66b753b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Customer Support",
+          "start": "2025-09-09 10:00:00",
+          "end": "2025-09-09 11:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "customer_support_lead@company.com"
+          ],
+          "id": "evt_487a1b0678d24ad6aed82baf6199c578"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Cloud Scalability Discussion",
+          "start": "2025-09-09 13:00:00",
+          "end": "2025-09-09 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "cloud_architect@company.com",
+            "devops_engineer@company.com"
+          ],
+          "id": "evt_d940b21107b24c0ea63cbf17c4ea60e0"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Documentation Review",
+          "start": "2025-09-09 15:00:00",
+          "end": "2025-09-09 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "tech_writer@company.com"
+          ],
+          "id": "evt_f1b2a4387ee14074ba238c9fcd044568"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Am I free tomorrow at 10 AM?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to check your calendar for tomorrow at 10 AM. First, I will get the current time to determine what \"tomorrow\" is, and then I will check for any events at that time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2025-09-08 08:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2025-09-09 10:00:00",
+          "time_max": "2025-09-09 11:00:00"
+        },
+        "result": "Found 1 events:\nid: evt_487a1b0678d24ad6aed82baf6199c578 | Meeting with Customer Support \u2014 Tue 10:00-11:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have a \"Meeting with Customer Support\" scheduled from 10:00 AM to 11:00 AM tomorrow."
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]

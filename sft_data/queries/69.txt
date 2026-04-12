@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting with John for Wednesday at 10 AM regarding project budget.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with summary 'Meeting with John', start '2023-12-13T10:00:00', end '2023-12-13T11:00:00', and attendees 'John'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-12-10T20:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you add a doctor's appointment to my calendar for Friday at 3 PM?",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with summary 'Doctor's Appointment', start '2023-12-15T15:00:00', and end '2023-12-15T16:00:00'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-12-10T20:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy on Thursday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List events between 2023-12-14T12:00:00 and 2023-12-14T17:00:00 to determine if the user has any afternoon appointments.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-12-10T20:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Saturday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "List events between 2023-12-16T08:00:00 and 2023-12-16T12:00:00 to determine the user's morning activities.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-12-10T20:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the meeting with the project manager on Monday to 3 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event with the summary 'Meeting with Project Manager' on 2023-12-11 and update the start time to '2023-12-11T15:00:00' and end time to '2023-12-11T16:30:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-12-10T20:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the budget review meeting on Thursday to 11:30 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event with the summary 'Budget Review Meeting' on 2023-12-14 and update the start time to '2023-12-14T11:30:00' and end time to '2023-12-14T12:30:00'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-12-10T20:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my dinner with my wife this week?",
+        "complexity": "Low",
+        "expected_behavior": "List events between 2023-12-11 and 2023-12-17 that have 'Dinner with Wife' in the title. Display the start time of the found event.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-12-10T20:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I meeting with on Wednesday at 2 PM?",
+        "complexity": "Low",
+        "expected_behavior": "List events on 2023-12-13 that start at 2 PM. Display the attendees of the found event.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-12-10T20:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Schedule a meeting with Bob on Tuesday at 2 PM, but only if I'm not already busy.",
+        "complexity": "High",
+        "expected_behavior": "List events on 2023-12-12 at 2 PM. If there are no events, create an event with summary 'Meeting with Bob', start '2023-12-12T14:00:00', end '2023-12-12T15:00:00', and attendees 'Bob'. If there is an event, inform the user of the conflict.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-12-10T20:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "If the site walkthrough on Thursday is less than two hours, book me for a haircut afterwards.",
+        "complexity": "High",
+        "expected_behavior": "Get the event with the summary 'Government Inspector Site Walkthrough' on 2023-12-14. If the event's duration is less than two hours, create an event with summary 'Haircut', start '2023-12-14T16:00:00', and end '2023-12-14T17:00:00'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-12-10T20:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Safety check Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event with the summary 'Site Safety Check' on 2023-12-11 and return the event details (start/end time).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-12-10T20:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Resurfacing project briefing!",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event with the summary 'Crew Briefing: Road Resurfacing Project' on 2023-12-11 and return the event details (start/end time).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-12-10T20:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on 2023-12-11.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-12-11T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Is Jenny available tomorrow morning?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on 2023-12-14 between 08:00 and 12:00, and then check if Jenny is attending any of those events.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-12-13T14:00:00"
+    }
+]

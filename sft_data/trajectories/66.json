@@ -1,0 +1,1290 @@
+[
+  {
+    "query": "Create an event called 'Meet John' on Wednesday at 1 PM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "The agent should create a new event named 'Meet John' on Wednesday, July 12, 2023, at 1:00 PM and ending an hour later.",
+    "simulated_now": "2023-07-09 18:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Communications Director",
+          "start": "2023-07-12 09:00:00",
+          "end": "2023-07-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "communications@cityhall.gov"
+          ],
+          "id": "evt_bd19088d46704e70a13bfa6b297a3c50"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Developers: Sustainable Building Project",
+          "start": "2023-07-12 10:30:00",
+          "end": "2023-07-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "developer1@developmentco.com",
+            "developer2@developmentco.com"
+          ],
+          "id": "evt_3e17e25423474dcfbd4d9b835034c1f1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review and Sign Official Documents",
+          "start": "2023-07-12 14:00:00",
+          "end": "2023-07-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bde0cc5606bc4df4a4a77a51cf3c155a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Regional Government Officials",
+          "start": "2023-07-12 15:30:00",
+          "end": "2023-07-12 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "regionalofficial@regionalgov.org"
+          ],
+          "id": "evt_b6e4a8d3a3974a81af54761fb4f6856c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Volunteer at Local Soup Kitchen",
+          "start": "2023-07-12 18:00:00",
+          "end": "2023-07-12 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f1781e876427474a885f53b66ad6bc0b"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Communications Director",
+          "start": "2023-07-12 09:00:00",
+          "end": "2023-07-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "communications@cityhall.gov"
+          ],
+          "id": "evt_bd19088d46704e70a13bfa6b297a3c50"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Developers: Sustainable Building Project",
+          "start": "2023-07-12 10:30:00",
+          "end": "2023-07-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "developer1@developmentco.com",
+            "developer2@developmentco.com"
+          ],
+          "id": "evt_3e17e25423474dcfbd4d9b835034c1f1"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meet John",
+          "start": "2023-07-12 13:00:00",
+          "end": "2023-07-12 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a1457fb13b8e44308fe1c0a733e6e8cc"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review and Sign Official Documents",
+          "start": "2023-07-12 14:00:00",
+          "end": "2023-07-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_bde0cc5606bc4df4a4a77a51cf3c155a"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Regional Government Officials",
+          "start": "2023-07-12 15:30:00",
+          "end": "2023-07-12 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "regionalofficial@regionalgov.org"
+          ],
+          "id": "evt_b6e4a8d3a3974a81af54761fb4f6856c"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Volunteer at Local Soup Kitchen",
+          "start": "2023-07-12 18:00:00",
+          "end": "2023-07-12 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f1781e876427474a885f53b66ad6bc0b"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Create an event called 'Meet John' on Wednesday at 1 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "I can do that. I'll first get the current time to schedule the event for the upcoming Wednesday, and then create the event."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-09 18:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2023-07-12 13:00:00",
+          "end": "2023-07-12 14:00:00",
+          "summary": "Meet John"
+        },
+        "result": "Event created successfully.\nMeet John\n  ID: evt_a1457fb13b8e44308fe1c0a733e6e8cc\n  Time: Wed Jul 12, 13:00 - 14:00\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've added \"Meet John\" to your calendar for Wednesday, July 12, from 1:00 PM to 2:00 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Schedule a dentist appointment for me on Friday at 11:30 AM.",
+    "category": "Schedule a Single Event",
+    "complexity": "Low",
+    "expected_behavior": "The agent should create a new event named 'Dentist Appointment' on Friday, July 14, 2023, at 11:30 AM and ending an hour later.",
+    "simulated_now": "2023-07-09 18:00:00",
+    "addressed_days": [
+      "Friday"
+    ],
+    "calendar_before": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Follow up meeting with Head of Local Construction Union",
+          "start": "2023-07-14 09:00:00",
+          "end": "2023-07-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "unionleader@localconstruction.org"
+          ],
+          "id": "evt_36a34a39a25f4535a4a9d3b40b846bb6"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meeting with Fire Chief",
+          "start": "2023-07-14 10:30:00",
+          "end": "2023-07-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "firechief@cityhall.gov"
+          ],
+          "id": "evt_2c88b1b8130d433da033ae33875ade8e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Review and Finalize Weekly Reports",
+          "start": "2023-07-14 13:00:00",
+          "end": "2023-07-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a377c2d894014008b4b731f5f8147976"
+        },
+        {
+          "day": "Friday",
+          "summary": "Community Engagement Strategy Session",
+          "start": "2023-07-14 14:30:00",
+          "end": "2023-07-14 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "communications@cityhall.gov",
+            "communityleader@email.com"
+          ],
+          "id": "evt_94f9c1b6a602407b9cabfa59caf8eced"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with friends",
+          "start": "2023-07-14 18:00:00",
+          "end": "2023-07-14 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5652c945578d432a86a0b8855c8af7d6"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Friday": [
+        {
+          "day": "Friday",
+          "summary": "Follow up meeting with Head of Local Construction Union",
+          "start": "2023-07-14 09:00:00",
+          "end": "2023-07-14 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "unionleader@localconstruction.org"
+          ],
+          "id": "evt_36a34a39a25f4535a4a9d3b40b846bb6"
+        },
+        {
+          "day": "Friday",
+          "summary": "Meeting with Fire Chief",
+          "start": "2023-07-14 10:30:00",
+          "end": "2023-07-14 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "firechief@cityhall.gov"
+          ],
+          "id": "evt_2c88b1b8130d433da033ae33875ade8e"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dentist Appointment",
+          "start": "2023-07-14 11:30:00",
+          "end": "2023-07-14 12:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_f1a1179921ab4afebd9bd38dd60f47c0"
+        },
+        {
+          "day": "Friday",
+          "summary": "Review and Finalize Weekly Reports",
+          "start": "2023-07-14 13:00:00",
+          "end": "2023-07-14 14:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a377c2d894014008b4b731f5f8147976"
+        },
+        {
+          "day": "Friday",
+          "summary": "Community Engagement Strategy Session",
+          "start": "2023-07-14 14:30:00",
+          "end": "2023-07-14 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "communications@cityhall.gov",
+            "communityleader@email.com"
+          ],
+          "id": "evt_94f9c1b6a602407b9cabfa59caf8eced"
+        },
+        {
+          "day": "Friday",
+          "summary": "Dinner with friends",
+          "start": "2023-07-14 18:00:00",
+          "end": "2023-07-14 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_5652c945578d432a86a0b8855c8af7d6"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Schedule a dentist appointment for me on Friday at 11:30 AM."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I will schedule a dentist appointment for you. I'll set it for 1 hour. If you need a different duration, just let me know.\n\nPlan:\n- Get the current time to know today's date.\n- Create a new event on Friday at 11:30 AM for the dentist appointment."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-09 18:00:00 | Sunday"
+      },
+      {
+        "role": "tool_call",
+        "name": "create_event",
+        "args": {
+          "start": "2023-07-14 11:30:00",
+          "end": "2023-07-14 12:30:00",
+          "summary": "Dentist Appointment"
+        },
+        "result": "Event created successfully.\nDentist Appointment\n  ID: evt_f1a1179921ab4afebd9bd38dd60f47c0\n  Time: Fri Jul 14, 11:30 - 12:30\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "OK. I've scheduled a dentist appointment for you on Friday, July 14th, from 11:30 AM to 12:30 PM.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Am I busy tomorrow morning?",
+    "category": "Vague & Contextual (Reasoning Required)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should check the calendar for Tuesday morning and see if there are any events scheduled between 8:00 AM and 12:00 PM.",
+    "simulated_now": "2023-07-10 18:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Planning Department: Downtown Development Proposal",
+          "start": "2023-07-11 08:30:00",
+          "end": "2023-07-11 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "planningdirector@cityhall.gov"
+          ],
+          "id": "evt_adb4b5453d8b4823b61cdd30b340582b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "City Council Meeting Preparation",
+          "start": "2023-07-11 10:00:00",
+          "end": "2023-07-11 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7fefd990cd67410e9c4d2298fc9b37f3"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "City Council Meeting",
+          "start": "2023-07-11 13:00:00",
+          "end": "2023-07-11 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "citycouncil1@cityhall.gov",
+            "citycouncil2@cityhall.gov",
+            "citycouncil3@cityhall.gov"
+          ],
+          "id": "evt_25ece17f38ac45e1899ffbf1630a7652"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Constituent Meeting",
+          "start": "2023-07-11 15:30:00",
+          "end": "2023-07-11 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "concernedcitizen@email.com"
+          ],
+          "id": "evt_4b633c3e79e54d7ca09bd95ddad85081"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Community Town Hall: Discussing Parks and Recreation Improvements",
+          "start": "2023-07-11 19:00:00",
+          "end": "2023-07-11 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b1e07fee3d15452daebe5e72f5d9e90c"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Planning Department: Downtown Development Proposal",
+          "start": "2023-07-11 08:30:00",
+          "end": "2023-07-11 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "planningdirector@cityhall.gov"
+          ],
+          "id": "evt_adb4b5453d8b4823b61cdd30b340582b"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "City Council Meeting Preparation",
+          "start": "2023-07-11 10:00:00",
+          "end": "2023-07-11 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7fefd990cd67410e9c4d2298fc9b37f3"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "City Council Meeting",
+          "start": "2023-07-11 13:00:00",
+          "end": "2023-07-11 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "citycouncil1@cityhall.gov",
+            "citycouncil2@cityhall.gov",
+            "citycouncil3@cityhall.gov"
+          ],
+          "id": "evt_25ece17f38ac45e1899ffbf1630a7652"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Constituent Meeting",
+          "start": "2023-07-11 15:30:00",
+          "end": "2023-07-11 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "concernedcitizen@email.com"
+          ],
+          "id": "evt_4b633c3e79e54d7ca09bd95ddad85081"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Community Town Hall: Discussing Parks and Recreation Improvements",
+          "start": "2023-07-11 19:00:00",
+          "end": "2023-07-11 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_b1e07fee3d15452daebe5e72f5d9e90c"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Am I busy tomorrow morning?"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I'll check your calendar."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-10 18:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-07-11 12:00:00",
+          "time_min": "2023-07-11 08:00:00"
+        },
+        "result": "Found 2 events:\nid: evt_adb4b5453d8b4823b61cdd30b340582b | Meeting with Planning Department: Downtown Development Proposal \u2014 Tue 08:30-09:30\nid: evt_7fefd990cd67410e9c4d2298fc9b37f3 | City Council Meeting Preparation \u2014 Tue 10:00-11:30"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, you have two entries in your calendar for tomorrow morning: \"Meeting with Planning Department: Downtown Development Proposal\" from 8:30am to 9:30am and \"City Council Meeting Preparation\" from 10am to 11:30am."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Reschedule my meeting with the Planning Department to 9:30 AM on Tuesday.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should find the 'Meeting with Planning Department: Downtown Development Proposal' event on Tuesday and update its start time to 9:30 AM.",
+    "simulated_now": "2023-07-10 18:00:00",
+    "addressed_days": [
+      "Tuesday"
+    ],
+    "calendar_before": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Planning Department: Downtown Development Proposal",
+          "start": "2023-07-11 08:30:00",
+          "end": "2023-07-11 09:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "planningdirector@cityhall.gov"
+          ],
+          "id": "evt_c64d8a3ebf95470dab11113c18aa33e4"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "City Council Meeting Preparation",
+          "start": "2023-07-11 10:00:00",
+          "end": "2023-07-11 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_944071d4d2b5437589d4971f7b2498ef"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "City Council Meeting",
+          "start": "2023-07-11 13:00:00",
+          "end": "2023-07-11 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "citycouncil1@cityhall.gov",
+            "citycouncil2@cityhall.gov",
+            "citycouncil3@cityhall.gov"
+          ],
+          "id": "evt_db33ef9b0ace49d0874f19491e4df953"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Constituent Meeting",
+          "start": "2023-07-11 15:30:00",
+          "end": "2023-07-11 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "concernedcitizen@email.com"
+          ],
+          "id": "evt_9593be593ac8459ebc4d647040afe8ca"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Community Town Hall: Discussing Parks and Recreation Improvements",
+          "start": "2023-07-11 19:00:00",
+          "end": "2023-07-11 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4da85221b7fe4ccba86cc338b2f1db4a"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Tuesday": [
+        {
+          "day": "Tuesday",
+          "summary": "Meeting with Planning Department: Downtown Development Proposal",
+          "start": "2023-07-11 09:30:00",
+          "end": "2023-07-11 10:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "planningdirector@cityhall.gov"
+          ],
+          "id": "evt_c64d8a3ebf95470dab11113c18aa33e4"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "City Council Meeting Preparation",
+          "start": "2023-07-11 10:00:00",
+          "end": "2023-07-11 11:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_944071d4d2b5437589d4971f7b2498ef"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "City Council Meeting",
+          "start": "2023-07-11 13:00:00",
+          "end": "2023-07-11 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "citycouncil1@cityhall.gov",
+            "citycouncil2@cityhall.gov",
+            "citycouncil3@cityhall.gov"
+          ],
+          "id": "evt_db33ef9b0ace49d0874f19491e4df953"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Constituent Meeting",
+          "start": "2023-07-11 15:30:00",
+          "end": "2023-07-11 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "concernedcitizen@email.com"
+          ],
+          "id": "evt_9593be593ac8459ebc4d647040afe8ca"
+        },
+        {
+          "day": "Tuesday",
+          "summary": "Community Town Hall: Discussing Parks and Recreation Improvements",
+          "start": "2023-07-11 19:00:00",
+          "end": "2023-07-11 20:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_4da85221b7fe4ccba86cc338b2f1db4a"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Reschedule my meeting with the Planning Department to 9:30 AM on Tuesday."
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, I can do that. First, I'll find the event you're referring to, and then I'll reschedule it."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-10 18:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-07-10 18:00:00"
+        },
+        "result": "Found 27 events:\nid: evt_47488fdd6bbb488ab5012891fabbf6c8 | Dinner with Spouse \u2014 Mon 18:30-20:00\nid: evt_c64d8a3ebf95470dab11113c18aa33e4 | Meeting with Planning Department: Downtown Development Proposal \u2014 Tue 08:30-09:30\nid: evt_944071d4d2b5437589d4971f7b2498ef | City Council Meeting Preparation \u2014 Tue 10:00-11:30\nid: evt_db33ef9b0ace49d0874f19491e4df953 | City Council Meeting \u2014 Tue 13:00-15:00\nid: evt_9593be593ac8459ebc4d647040afe8ca | Constituent Meeting \u2014 Tue 15:30-16:30\nid: evt_4da85221b7fe4ccba86cc338b2f1db4a | Community Town Hall: Discussing Parks and Recreation Improvements \u2014 Tue 19:00-20:30\nid: evt_bed9c9e6810b4258bb95743953845e60 | Meeting with Communications Director \u2014 Wed 09:00-10:00\nid: evt_d71113b5a8e442b6b1ad3863c2c3a44b | Meeting with Developers: Sustainable Building Project \u2014 Wed 10:30-12:00\nid: evt_f2658bc9a5214e7187d00047e83ab0a3 | Review and Sign Official Documents \u2014 Wed 14:00-15:00\nid: evt_bee602b9760644beabc2b9b1c8e58c96 | Meeting with Regional Government Officials \u2014 Wed 15:30-17:00\nid: evt_2e0a4e39858c49d6b4061c182469841e | Volunteer at Local Soup Kitchen \u2014 Wed 18:00-19:30\nid: evt_914f8b58ddab41d9942f09a9f9aafe25 | Meeting with Police Chief \u2014 Thu 09:00-10:30\nid: evt_ba811407d1eb4543893e4900dc8d2161 | Strategy Session with City Manager \u2014 Thu 11:00-12:00\nid: evt_c202e367e687456f95c591be526a61b0 | Site Visit: Proposed Location for New Community Center \u2014 Thu 13:30-15:00\nid: evt_cb0beb4118d74ae19e6442f17626e254 | Meeting with Local Business Owners \u2014 Thu 15:30-17:00\nid: evt_a1dfbdf6148748bf8cc70d4c52bd64ac | School Board Meeting \u2014 Thu 19:00-20:00\nid: evt_b435f4eb92b8498ab7bc41816ae2d4ee | Follow up meeting with Head of Local Construction Union \u2014 Fri 09:00-10:00\nid: evt_cfb1b20e9347421194314e827510fc54 | Meeting with Fire Chief \u2014 Fri 10:30-12:00\nid: evt_a5ee5551d929440e87a32feb39ee568e | Review and Finalize Weekly Reports \u2014 Fri 13:00-14:00\nid: evt_f6ba9646d5c342b8bfe75c9f7776b5c8 | Community Engagement Strategy Session \u2014 Fri 14:30-16:00\nid: evt_24fa0e66585245f197a262159913e35d | Dinner with friends \u2014 Fri 18:00-20:00\nid: evt_d8439ce7ef614e6daa8e202f21d13648 | Attend Farmer's Market and meet with constituents \u2014 Sat 10:00-12:00\nid: evt_32bd912339064bfba91a60202249675b | Children's Soccer Game \u2014 Sat 14:00-16:00\nid: evt_854d99e74bdf4ea1a1f37fb56bdf6dc6 | Fundraising Gala for Local Charity \u2014 Sat 19:00-21:00\nid: evt_b5088fa9845b46c787fa6a0d673acdc8 | Religious Service \u2014 Sun 10:00-11:00\nid: evt_a441fd885e9d4cdb91c00e3c62d106b7 | Family Brunch \u2014 Sun 12:30-14:00\nid: evt_526b2c3a307744bfa22fc0cf37aa4e61 | Visit Elderly Parent/Relative \u2014 Sun 15:00-17:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I've found the meeting. I'll reschedule it for 9:30 AM on Tuesday."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2023-07-11 10:30:00",
+          "event_id": "evt_c64d8a3ebf95470dab11113c18aa33e4",
+          "start": "2023-07-11 09:30:00"
+        },
+        "result": "Event updated successfully.\nMeeting with Planning Department: Downtown Development Proposal\n  ID: evt_c64d8a3ebf95470dab11113c18aa33e4\n  Time: Tue Jul 11, 09:30 - 10:30\n  Attendees: planningdirector@cityhall.gov\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I\u2019ve rescheduled your meeting with the Planning Department to 9:30 AM on Tuesday. It is now scheduled from 9:30 to 10:30 AM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Change the time of the press conference on Monday to 3:30 PM.",
+    "category": "Modifier & Correction (Rescheduling/Updates)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should find the 'Press Conference: Announcing New Affordable Housing Initiative' event on Monday and update its start time to 3:30 PM.",
+    "simulated_now": "2023-07-09 18:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Meeting with City Manager",
+          "start": "2023-07-10 09:00:00",
+          "end": "2023-07-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "citymanager@cityhall.gov"
+          ],
+          "id": "evt_38d5de960cdf4b50806e952e18e4b501"
+        },
+        {
+          "day": "Monday",
+          "summary": "Department Heads Meeting: Budget Review",
+          "start": "2023-07-10 10:30:00",
+          "end": "2023-07-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "policechief@cityhall.gov",
+            "firechief@cityhall.gov",
+            "planningdirector@cityhall.gov"
+          ],
+          "id": "evt_03d8e58cd0eb4c8bbc08ba4dd78f95ab"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Head of Local Construction Union",
+          "start": "2023-07-10 13:00:00",
+          "end": "2023-07-10 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "unionleader@localconstruction.org"
+          ],
+          "id": "evt_e48dcd69f5b441a587b00cc1a32a7af5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Press Conference: Announcing New Affordable Housing Initiative",
+          "start": "2023-07-10 15:00:00",
+          "end": "2023-07-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "communications@cityhall.gov"
+          ],
+          "id": "evt_d0b26d3ff4ec498cbce8bfeb2b077ae5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Spouse",
+          "start": "2023-07-10 18:30:00",
+          "end": "2023-07-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7e28bf2b9b624702a6b9bd2f2d85230c"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Meeting with City Manager",
+          "start": "2023-07-10 09:00:00",
+          "end": "2023-07-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "citymanager@cityhall.gov"
+          ],
+          "id": "evt_38d5de960cdf4b50806e952e18e4b501"
+        },
+        {
+          "day": "Monday",
+          "summary": "Department Heads Meeting: Budget Review",
+          "start": "2023-07-10 10:30:00",
+          "end": "2023-07-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "policechief@cityhall.gov",
+            "firechief@cityhall.gov",
+            "planningdirector@cityhall.gov"
+          ],
+          "id": "evt_03d8e58cd0eb4c8bbc08ba4dd78f95ab"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Head of Local Construction Union",
+          "start": "2023-07-10 13:00:00",
+          "end": "2023-07-10 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "unionleader@localconstruction.org"
+          ],
+          "id": "evt_e48dcd69f5b441a587b00cc1a32a7af5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Press Conference: Announcing New Affordable Housing Initiative",
+          "start": "2023-07-10 15:30:00",
+          "end": "2023-07-10 16:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "communications@cityhall.gov"
+          ],
+          "id": "evt_d0b26d3ff4ec498cbce8bfeb2b077ae5"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Spouse",
+          "start": "2023-07-10 18:30:00",
+          "end": "2023-07-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_7e28bf2b9b624702a6b9bd2f2d85230c"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Change the time of the press conference on Monday to 3:30 PM."
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find the \"press conference\" event on Monday to update its time. First, I will get the current time to determine the correct date for Monday. Then, I will list all events on that Monday to find the event ID for the press conference. Finally, I will update the event to the new time of 3:30 PM."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-09 18:00:00 | Sunday"
+      },
+      {
+        "role": "assistant",
+        "content": "Okay, the current date is Sunday, July 9th, 2023, so the Monday in question is July 10th, 2023. I will now search for a \"press conference\" on that day to get its event ID."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-07-10 00:00:00",
+          "time_max": "2023-07-11 00:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_38d5de960cdf4b50806e952e18e4b501 | Meeting with City Manager \u2014 Mon 09:00-10:00\nid: evt_03d8e58cd0eb4c8bbc08ba4dd78f95ab | Department Heads Meeting: Budget Review \u2014 Mon 10:30-12:00\nid: evt_e48dcd69f5b441a587b00cc1a32a7af5 | Meeting with Head of Local Construction Union \u2014 Mon 13:00-14:30\nid: evt_d0b26d3ff4ec498cbce8bfeb2b077ae5 | Press Conference: Announcing New Affordable Housing Initiative \u2014 Mon 15:00-16:00\nid: evt_7e28bf2b9b624702a6b9bd2f2d85230c | Dinner with Spouse \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "I found the press conference, it's from 3:00 PM to 4:00 PM on Monday. I will now move it to 3:30 PM, keeping the one-hour duration."
+      },
+      {
+        "role": "tool_call",
+        "name": "update_event",
+        "args": {
+          "end": "2023-07-10 16:30:00",
+          "event_id": "evt_d0b26d3ff4ec498cbce8bfeb2b077ae5",
+          "start": "2023-07-10 15:30:00"
+        },
+        "result": "Event updated successfully.\nPress Conference: Announcing New Affordable Housing Initiative\n  ID: evt_d0b26d3ff4ec498cbce8bfeb2b077ae5\n  Time: Mon Jul 10, 15:30 - 16:30\n  Attendees: communications@cityhall.gov\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "I\u2019ve updated the press conference to the new time. It is now scheduled for Monday at 3:30 PM."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "Who is attending the budget review meeting?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should find the 'Department Heads Meeting: Budget Review' event and return the list of attendees.",
+    "simulated_now": "2023-07-09 18:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Meeting with City Manager",
+          "start": "2023-07-10 09:00:00",
+          "end": "2023-07-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "citymanager@cityhall.gov"
+          ],
+          "id": "evt_0039a34d7230478a83abf50942b008d1"
+        },
+        {
+          "day": "Monday",
+          "summary": "Department Heads Meeting: Budget Review",
+          "start": "2023-07-10 10:30:00",
+          "end": "2023-07-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "policechief@cityhall.gov",
+            "firechief@cityhall.gov",
+            "planningdirector@cityhall.gov"
+          ],
+          "id": "evt_84ce8bb57a49437fab9e0500a74c7efc"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Head of Local Construction Union",
+          "start": "2023-07-10 13:00:00",
+          "end": "2023-07-10 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "unionleader@localconstruction.org"
+          ],
+          "id": "evt_5e96fb0e1bc44ca88e28a6e13c34ec55"
+        },
+        {
+          "day": "Monday",
+          "summary": "Press Conference: Announcing New Affordable Housing Initiative",
+          "start": "2023-07-10 15:00:00",
+          "end": "2023-07-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "communications@cityhall.gov"
+          ],
+          "id": "evt_ad6e91a506b044118cd1b55fcd37182b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Spouse",
+          "start": "2023-07-10 18:30:00",
+          "end": "2023-07-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_40ef2e6df79d44599cb91b6934e80155"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Meeting with City Manager",
+          "start": "2023-07-10 09:00:00",
+          "end": "2023-07-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "citymanager@cityhall.gov"
+          ],
+          "id": "evt_0039a34d7230478a83abf50942b008d1"
+        },
+        {
+          "day": "Monday",
+          "summary": "Department Heads Meeting: Budget Review",
+          "start": "2023-07-10 10:30:00",
+          "end": "2023-07-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "policechief@cityhall.gov",
+            "firechief@cityhall.gov",
+            "planningdirector@cityhall.gov"
+          ],
+          "id": "evt_84ce8bb57a49437fab9e0500a74c7efc"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Head of Local Construction Union",
+          "start": "2023-07-10 13:00:00",
+          "end": "2023-07-10 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "unionleader@localconstruction.org"
+          ],
+          "id": "evt_5e96fb0e1bc44ca88e28a6e13c34ec55"
+        },
+        {
+          "day": "Monday",
+          "summary": "Press Conference: Announcing New Affordable Housing Initiative",
+          "start": "2023-07-10 15:00:00",
+          "end": "2023-07-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "communications@cityhall.gov"
+          ],
+          "id": "evt_ad6e91a506b044118cd1b55fcd37182b"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Spouse",
+          "start": "2023-07-10 18:30:00",
+          "end": "2023-07-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_40ef2e6df79d44599cb91b6934e80155"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "Who is attending the budget review meeting?"
+      },
+      {
+        "role": "assistant",
+        "content": "I need to find the event and check the attendee list."
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {},
+        "result": "Found 31 events:\nid: evt_0039a34d7230478a83abf50942b008d1 | Meeting with City Manager \u2014 Mon 09:00-10:00\nid: evt_84ce8bb57a49437fab9e0500a74c7efc | Department Heads Meeting: Budget Review \u2014 Mon 10:30-12:00\nid: evt_5e96fb0e1bc44ca88e28a6e13c34ec55 | Meeting with Head of Local Construction Union \u2014 Mon 13:00-14:30\nid: evt_ad6e91a506b044118cd1b55fcd37182b | Press Conference: Announcing New Affordable Housing Initiative \u2014 Mon 15:00-16:00\nid: evt_40ef2e6df79d44599cb91b6934e80155 | Dinner with Spouse \u2014 Mon 18:30-20:00\nid: evt_764e689031e94b25a599043c8685a026 | Meeting with Planning Department: Downtown Development Proposal \u2014 Tue 08:30-09:30\nid: evt_3020322c83c54d1881d08c7bf9982c5a | City Council Meeting Preparation \u2014 Tue 10:00-11:30\nid: evt_5f4a49d846e845b3a0158a6fe7a7c0c6 | City Council Meeting \u2014 Tue 13:00-15:00\nid: evt_2ffe0a488dd14cb4984bebe966d722dd | Constituent Meeting \u2014 Tue 15:30-16:30\nid: evt_2872d154f97343dbb7ddebb4f516fdfb | Community Town Hall: Discussing Parks and Recreation Improvements \u2014 Tue 19:00-20:30\nid: evt_b22c46855e9042f0a4833fb7a8cfe3f8 | Meeting with Communications Director \u2014 Wed 09:00-10:00\nid: evt_ca8c7cb77baf48ba9f9be09521d4339e | Meeting with Developers: Sustainable Building Project \u2014 Wed 10:30-12:00\nid: evt_c6b431502c9043fb899205ca5a2fc6bb | Review and Sign Official Documents \u2014 Wed 14:00-15:00\nid: evt_5fdc7d0eebb84e0dbafdca29fcf51147 | Meeting with Regional Government Officials \u2014 Wed 15:30-17:00\nid: evt_6302c24d56544a2b8cd3377a480e2c7b | Volunteer at Local Soup Kitchen \u2014 Wed 18:00-19:30\nid: evt_acd1fb615cf348f08c045b947ba6a21c | Meeting with Police Chief \u2014 Thu 09:00-10:30\nid: evt_f2f89c67937f490899f0d873403ee2fd | Strategy Session with City Manager \u2014 Thu 11:00-12:00\nid: evt_3eb297e7e95945dba98c583a355d82ef | Site Visit: Proposed Location for New Community Center \u2014 Thu 13:30-15:00\nid: evt_fad4f58e7f6d440d81cc419c1e6784ca | Meeting with Local Business Owners \u2014 Thu 15:30-17:00\nid: evt_46051eaaa0064a6ca4730a6cf8ba504e | School Board Meeting \u2014 Thu 19:00-20:00\nid: evt_6b82127160014b5186665f6096f65cbd | Follow up meeting with Head of Local Construction Union \u2014 Fri 09:00-10:00\nid: evt_f759bff20c9d4a19a62e6ceacf0dd1aa | Meeting with Fire Chief \u2014 Fri 10:30-12:00\nid: evt_57fb9ce4eda64e2c9d3e6b34631a3bf6 | Review and Finalize Weekly Reports \u2014 Fri 13:00-14:00\nid: evt_1f07bac7af5f4033beb8c2b29509362e | Community Engagement Strategy Session \u2014 Fri 14:30-16:00\nid: evt_fa4be7f719954dbdbbc7eaa7c520b9e3 | Dinner with friends \u2014 Fri 18:00-20:00\nid: evt_58f9480aef3643c985a8d9a7f797d831 | Attend Farmer's Market and meet with constituents \u2014 Sat 10:00-12:00\nid: evt_5a020df31b574db28c7baeedc1921750 | Children's Soccer Game \u2014 Sat 14:00-16:00\nid: evt_b48e11a049e24a909732ee2b71548e16 | Fundraising Gala for Local Charity \u2014 Sat 19:00-21:00\nid: evt_07aa856d83114c1c84cd6e2eddf0bea9 | Religious Service \u2014 Sun 10:00-11:00\nid: evt_064ace450c6943c79dfa520ded24176a | Family Brunch \u2014 Sun 12:30-14:00\nid: evt_3ff7433c8e8a48bfb8af6e0ac2e870b3 | Visit Elderly Parent/Relative \u2014 Sun 15:00-17:00"
+      },
+      {
+        "role": "tool_call",
+        "name": "get_event",
+        "args": {
+          "event_id": "evt_84ce8bb57a49437fab9e0500a74c7efc"
+        },
+        "result": "Department Heads Meeting: Budget Review\n  ID: evt_84ce8bb57a49437fab9e0500a74c7efc\n  Time: Mon Jul 10, 10:30 - 12:00\n  Attendees: policechief@cityhall.gov, firechief@cityhall.gov, planningdirector@cityhall.gov\n  RSVP: ACCEPT"
+      },
+      {
+        "role": "assistant",
+        "content": "The attendees for the Department Heads Meeting: Budget Review are: policechief@cityhall.gov, firechief@cityhall.gov, and planningdirector@cityhall.gov."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What time is my last meeting on Wednesday?",
+    "category": "Information Retrieval (Querying)",
+    "complexity": "Medium",
+    "expected_behavior": "The agent should retrieve all meetings for Wednesday, identify the one that ends latest, and return its ending time.",
+    "simulated_now": "2023-07-12 10:00:00",
+    "addressed_days": [
+      "Wednesday"
+    ],
+    "calendar_before": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Communications Director",
+          "start": "2023-07-12 09:00:00",
+          "end": "2023-07-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "communications@cityhall.gov"
+          ],
+          "id": "evt_6c4de6868b0548e593faf7b7c4e48c9f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Developers: Sustainable Building Project",
+          "start": "2023-07-12 10:30:00",
+          "end": "2023-07-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "developer1@developmentco.com",
+            "developer2@developmentco.com"
+          ],
+          "id": "evt_3011862e716c442495f78302760f2df3"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review and Sign Official Documents",
+          "start": "2023-07-12 14:00:00",
+          "end": "2023-07-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_550fa613b9734309a371174cb05b6737"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Regional Government Officials",
+          "start": "2023-07-12 15:30:00",
+          "end": "2023-07-12 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "regionalofficial@regionalgov.org"
+          ],
+          "id": "evt_188191ff2e0e491ba89ee2c4b075113d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Volunteer at Local Soup Kitchen",
+          "start": "2023-07-12 18:00:00",
+          "end": "2023-07-12 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a04920eaa27d4817aaed3a992bf65c2b"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Wednesday": [
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Communications Director",
+          "start": "2023-07-12 09:00:00",
+          "end": "2023-07-12 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "communications@cityhall.gov"
+          ],
+          "id": "evt_6c4de6868b0548e593faf7b7c4e48c9f"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Developers: Sustainable Building Project",
+          "start": "2023-07-12 10:30:00",
+          "end": "2023-07-12 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "developer1@developmentco.com",
+            "developer2@developmentco.com"
+          ],
+          "id": "evt_3011862e716c442495f78302760f2df3"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Review and Sign Official Documents",
+          "start": "2023-07-12 14:00:00",
+          "end": "2023-07-12 15:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_550fa613b9734309a371174cb05b6737"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Meeting with Regional Government Officials",
+          "start": "2023-07-12 15:30:00",
+          "end": "2023-07-12 17:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "regionalofficial@regionalgov.org"
+          ],
+          "id": "evt_188191ff2e0e491ba89ee2c4b075113d"
+        },
+        {
+          "day": "Wednesday",
+          "summary": "Volunteer at Local Soup Kitchen",
+          "start": "2023-07-12 18:00:00",
+          "end": "2023-07-12 19:30:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_a04920eaa27d4817aaed3a992bf65c2b"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What time is my last meeting on Wednesday?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first find out the current date and time. Then, I will list all the events scheduled for this coming Wednesday to identify your last meeting and provide you with its time."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-12 10:00:00 | Wednesday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_max": "2023-07-12 23:59:59",
+          "time_min": "2023-07-12 10:00:00"
+        },
+        "result": "Found 5 events:\nid: evt_6c4de6868b0548e593faf7b7c4e48c9f | Meeting with Communications Director \u2014 Wed 09:00-10:00\nid: evt_3011862e716c442495f78302760f2df3 | Meeting with Developers: Sustainable Building Project \u2014 Wed 10:30-12:00\nid: evt_550fa613b9734309a371174cb05b6737 | Review and Sign Official Documents \u2014 Wed 14:00-15:00\nid: evt_188191ff2e0e491ba89ee2c4b075113d | Meeting with Regional Government Officials \u2014 Wed 15:30-17:00\nid: evt_a04920eaa27d4817aaed3a992bf65c2b | Volunteer at Local Soup Kitchen \u2014 Wed 18:00-19:30"
+      },
+      {
+        "role": "assistant",
+        "content": "Your last meeting on Wednesday is \"Volunteer at Local Soup Kitchen\" from 18:00 to 19:30."
+      }
+    ],
+    "eval_verdict": "Correct"
+  },
+  {
+    "query": "What am I doing today?",
+    "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+    "complexity": "Low",
+    "expected_behavior": "The agent should retrieve all events for the current day and display them.",
+    "simulated_now": "2023-07-10 07:00:00",
+    "addressed_days": [
+      "Monday"
+    ],
+    "calendar_before": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Meeting with City Manager",
+          "start": "2023-07-10 09:00:00",
+          "end": "2023-07-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "citymanager@cityhall.gov"
+          ],
+          "id": "evt_bc38e408e77f4f2aab8c56f492e79184"
+        },
+        {
+          "day": "Monday",
+          "summary": "Department Heads Meeting: Budget Review",
+          "start": "2023-07-10 10:30:00",
+          "end": "2023-07-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "policechief@cityhall.gov",
+            "firechief@cityhall.gov",
+            "planningdirector@cityhall.gov"
+          ],
+          "id": "evt_b62daafd1533410a9cb9db7890f98082"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Head of Local Construction Union",
+          "start": "2023-07-10 13:00:00",
+          "end": "2023-07-10 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "unionleader@localconstruction.org"
+          ],
+          "id": "evt_041fba767d2e4c9285e1295b20338061"
+        },
+        {
+          "day": "Monday",
+          "summary": "Press Conference: Announcing New Affordable Housing Initiative",
+          "start": "2023-07-10 15:00:00",
+          "end": "2023-07-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "communications@cityhall.gov"
+          ],
+          "id": "evt_cf0d9028e36a4437913957ae8f6ce0c9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Spouse",
+          "start": "2023-07-10 18:30:00",
+          "end": "2023-07-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_55b049bf30d5415f95a06f16d47159f7"
+        }
+      ]
+    },
+    "calendar_after": {
+      "Monday": [
+        {
+          "day": "Monday",
+          "summary": "Meeting with City Manager",
+          "start": "2023-07-10 09:00:00",
+          "end": "2023-07-10 10:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "citymanager@cityhall.gov"
+          ],
+          "id": "evt_bc38e408e77f4f2aab8c56f492e79184"
+        },
+        {
+          "day": "Monday",
+          "summary": "Department Heads Meeting: Budget Review",
+          "start": "2023-07-10 10:30:00",
+          "end": "2023-07-10 12:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "policechief@cityhall.gov",
+            "firechief@cityhall.gov",
+            "planningdirector@cityhall.gov"
+          ],
+          "id": "evt_b62daafd1533410a9cb9db7890f98082"
+        },
+        {
+          "day": "Monday",
+          "summary": "Meeting with Head of Local Construction Union",
+          "start": "2023-07-10 13:00:00",
+          "end": "2023-07-10 14:30:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "unionleader@localconstruction.org"
+          ],
+          "id": "evt_041fba767d2e4c9285e1295b20338061"
+        },
+        {
+          "day": "Monday",
+          "summary": "Press Conference: Announcing New Affordable Housing Initiative",
+          "start": "2023-07-10 15:00:00",
+          "end": "2023-07-10 16:00:00",
+          "attending": "ACCEPT",
+          "attendees": [
+            "communications@cityhall.gov"
+          ],
+          "id": "evt_cf0d9028e36a4437913957ae8f6ce0c9"
+        },
+        {
+          "day": "Monday",
+          "summary": "Dinner with Spouse",
+          "start": "2023-07-10 18:30:00",
+          "end": "2023-07-10 20:00:00",
+          "attending": "ACCEPT",
+          "attendees": [],
+          "id": "evt_55b049bf30d5415f95a06f16d47159f7"
+        }
+      ]
+    },
+    "trajectory": [
+      {
+        "role": "user",
+        "content": "What am I doing today?"
+      },
+      {
+        "role": "assistant",
+        "content": "I will first get the current time, and then I will list all of your events for today."
+      },
+      {
+        "role": "tool_call",
+        "name": "get_current_time",
+        "args": {},
+        "result": "2023-07-10 07:00:00 | Monday"
+      },
+      {
+        "role": "tool_call",
+        "name": "list_events",
+        "args": {
+          "time_min": "2023-07-10 00:00:00",
+          "time_max": "2023-07-10 23:59:59"
+        },
+        "result": "Found 5 events:\nid: evt_bc38e408e77f4f2aab8c56f492e79184 | Meeting with City Manager \u2014 Mon 09:00-10:00\nid: evt_b62daafd1533410a9cb9db7890f98082 | Department Heads Meeting: Budget Review \u2014 Mon 10:30-12:00\nid: evt_041fba767d2e4c9285e1295b20338061 | Meeting with Head of Local Construction Union \u2014 Mon 13:00-14:30\nid: evt_cf0d9028e36a4437913957ae8f6ce0c9 | Press Conference: Announcing New Affordable Housing Initiative \u2014 Mon 15:00-16:00\nid: evt_55b049bf30d5415f95a06f16d47159f7 | Dinner with Spouse \u2014 Mon 18:30-20:00"
+      },
+      {
+        "role": "assistant",
+        "content": "You have 5 events scheduled for today:\n- Meeting with City Manager from 09:00 to 10:00.\n- Department Heads Meeting: Budget Review from 10:30 to 12:00.\n- Meeting with Head of Local Construction Union from 13:00 to 14:30.\n- Press Conference: Announcing New Affordable Housing Initiative from 15:00 to 16:00.\n- Dinner with Spouse from 18:30 to 20:00.\n"
+      }
+    ],
+    "eval_verdict": "Correct"
+  }
+]
