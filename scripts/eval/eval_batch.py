@@ -26,16 +26,17 @@ from calendar_agent.core import (
     DAY_NAMES, compute_fallback_now,
     dispatch_tool_call, filter_by_days, get_query_now, snapshot_events,
 )
-from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, evaluate_trajectory
+from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, evaluate_trajectory, format_day_state_text
 from calendar_agent.paths import SFT_DATA_DIR, RL_DATA_DIR, CREDENTIALS_PATH
-from calendar_agent.tools import get_openai_tools_minimal, serialize_tool_result
+from calendar_agent.core import format_tool_result
+from calendar_agent.tools import get_openai_tools_minimal
 
 OPENAI_TOOLS = get_openai_tools_minimal()
 
 
 # ── Agent loop ───────────────────────────────────────────────
 
-def run_query(client, model_name, tools, system_prompt, env, query, max_turns=4):
+def run_query(client, model_name, tools, system_prompt, env, query, max_turns=8):
     """Run a single query, return trajectory."""
     trajectory = []
     messages = []
@@ -77,11 +78,9 @@ def run_query(client, model_name, tools, system_prompt, env, query, max_turns=4)
                 args = {}
 
             result = dispatch_tool_call(env, tool_name, args)
-            if result is None:
-                result = {"status": "ok"}
-            result = serialize_tool_result(result)
-            trajectory.append({"role": "tool_call", "name": tool_name, "args": args, "result": result})
-            messages.append({"role": "tool", "tool_call_id": tc.id, "content": json.dumps(result, default=str)})
+            result_str = format_tool_result(result)
+            trajectory.append({"role": "tool_call", "name": tool_name, "args": args, "result": result_str})
+            messages.append({"role": "tool", "tool_call_id": tc.id, "content": result_str})
 
     return trajectory
 
@@ -150,6 +149,8 @@ def eval_tasks(client, model_name, eval_model, tasks, base_dir, label):
     correct = 0
     incorrect = 0
     error = 0
+    consecutive_errors = 0
+    MAX_CONSECUTIVE_ERRORS = 10
 
     cat_results = defaultdict(lambda: {"correct": 0, "total": 0})
 
@@ -182,11 +183,15 @@ def eval_tasks(client, model_name, eval_model, tasks, base_dir, label):
             # If trajectory has errors (e.g. context overflow), skip judge — score as Incorrect
             has_error = any(s["role"] == "error" for s in trajectory)
             if has_error:
+                err_msg = next((s["content"] for s in trajectory if s["role"] == "error"), "unknown")
                 incorrect += 1
+                consecutive_errors += 1
                 cat_results[category]["total"] += 1
-                print(f"Incorrect (agent error)", flush=True)
-                results.append({"cal": cal_idx, "qi": qi, "category": category, "verdict": "Incorrect"})
+                print(f"Incorrect (agent error: {err_msg[:120]})", flush=True)
+                results.append({"cal": cal_idx, "qi": qi, "category": category, "verdict": "Incorrect",
+                                "query": query_text, "expected": expected, "trajectory": trajectory})
             else:
+                consecutive_errors = 0
                 after = snapshot_events(env)
                 after_days = filter_by_days(after, display_days)
 
@@ -194,7 +199,10 @@ def eval_tasks(client, model_name, eval_model, tasks, base_dir, label):
                     (s["content"] for s in reversed(trajectory) if s["role"] == "assistant"), ""
                 )
 
-                verdict = evaluate_trajectory(eval_model, query_text, final_output, expected, before_days, after_days)
+                verdict, reasoning = evaluate_trajectory(eval_model, query_text, final_output, expected, before_days, after_days)
+
+                before_text = format_day_state_text(before_days)
+                after_text = format_day_state_text(after_days)
 
                 if verdict == "Correct":
                     correct += 1
@@ -206,19 +214,30 @@ def eval_tasks(client, model_name, eval_model, tasks, base_dir, label):
                         incorrect += 1
 
                 cat_results[category]["total"] += 1
-                results.append({"cal": cal_idx, "qi": qi, "category": category, "verdict": verdict})
+                results.append({"cal": cal_idx, "qi": qi, "category": category, "verdict": verdict,
+                                "query": query_text, "expected": expected, "final_output": final_output,
+                                "trajectory": trajectory, "before": before_text, "after": after_text,
+                                "judge_reasoning": reasoning})
 
         except TimeoutError:
             error += 1
+            consecutive_errors += 1
             print(f"TIMEOUT", flush=True)
-            results.append({"cal": cal_idx, "qi": qi, "category": category, "verdict": "Error"})
+            results.append({"cal": cal_idx, "qi": qi, "category": category, "verdict": "Error",
+                            "query": query_text, "expected": expected})
         except Exception as e:
             error += 1
+            consecutive_errors += 1
             print(f"ERROR: {e}", flush=True)
-            results.append({"cal": cal_idx, "qi": qi, "category": category, "verdict": "Error"})
+            results.append({"cal": cal_idx, "qi": qi, "category": category, "verdict": "Error",
+                            "query": query_text, "expected": expected, "error": str(e)})
         finally:
             signal.alarm(0)
             signal.signal(signal.SIGALRM, old_handler)
+
+        if consecutive_errors >= MAX_CONSECUTIVE_ERRORS:
+            print(f"\n  !!! {MAX_CONSECUTIVE_ERRORS} consecutive errors — vLLM likely hung, aborting eval !!!")
+            break
 
         time.sleep(0.1)
 

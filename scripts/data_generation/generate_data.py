@@ -6,7 +6,6 @@ import glob
 import json
 import os
 import random
-import shutil
 from datetime import date, timedelta
 
 import tqdm
@@ -34,17 +33,16 @@ TEXT_CALENDER_DIR = str(PROJECT_ROOT / "data" / "calender")
 JSON_CALENDER_DIR = str(PROJECT_ROOT / "data" / "json_calender")
 QUERY_DIR = str(PROJECT_ROOT / "data" / "queries")
 
-DATA_SIZE = 50
+DATA_SIZE = 100
+START_INDEX = 20  # Start numbering from 20 to avoid overwriting existing 0-19
 
 if __name__ == "__main__":
     ########
     # Init #
     ########
 
-    # Make sure all the dir's exist and are empty
+    # Make sure all the dir's exist (don't wipe — we may be appending)
     for dir in (PERSONA_DIR, TEXT_CALENDER_DIR, JSON_CALENDER_DIR, QUERY_DIR):
-        if os.path.exists(dir):
-            shutil.rmtree(dir)
         os.makedirs(dir, exist_ok=True)
 
     # Init genai model
@@ -71,22 +69,40 @@ if __name__ == "__main__":
     # Data Generation #
     ###################
 
-    # A list of professions to start from
-    # Without this in the code, the model tends to produce very similar professions on each personal prompt
-    professions = "Teacher, Accountant, Nurse, Driver, Engineer, Manager, Clerk, Salesperson, Analyst, Technician, Plumber, Electrician, Chef, Artist, Writer, Lawyer, Doctor, Pilot, Farmer, Guard".split(
-        ", "
-    )
+    # 50 professions for diverse calendar generation
+    professions = [
+        "Teacher", "Accountant", "Nurse", "Driver", "Engineer",
+        "Manager", "Clerk", "Salesperson", "Analyst", "Technician",
+        "Plumber", "Electrician", "Chef", "Artist", "Writer",
+        "Lawyer", "Doctor", "Pilot", "Farmer", "Guard",
+        "Architect", "Dentist", "Journalist", "Librarian", "Mechanic",
+        "Musician", "Pharmacist", "Photographer", "Professor", "Therapist",
+        "Veterinarian", "Firefighter", "Politician", "Researcher", "Consultant",
+        "Social Worker", "Real Estate Agent", "Personal Trainer", "Event Planner", "Paramedic",
+        "Data Scientist", "Product Manager", "UX Designer", "Recruiter", "Marketing Director",
+        "Construction Foreman", "Translator", "Financial Advisor", "Nonprofit Director", "School Principal",
+    ]
 
     # 1. generate persona
-    print("Generating personas")
-    for num in tqdm.tqdm(range(DATA_SIZE)):
-        prof = professions[random.randint(0, len(professions) - 1)]
+    print(f"Generating {DATA_SIZE} personas (indices {START_INDEX}-{START_INDEX + DATA_SIZE - 1})")
+    for num in tqdm.tqdm(range(START_INDEX, START_INDEX + DATA_SIZE)):
+        out_path = f"{PERSONA_DIR}/{num}.txt"
+        if os.path.exists(out_path):
+            continue
+        prof = random.choice(professions)
         response = model.generate_content(persona_prompt.substitute(profession=prof))
-        open(f"{PERSONA_DIR}/{num}.txt", "w").write(response.text)
+        open(out_path, "w").write(response.text)
 
     # 2. Generate text calender
     print("Generating text calenders")
-    for file in tqdm.tqdm(glob.glob(f"{PERSONA_DIR}/*")):
+    new_personas = [f"{PERSONA_DIR}/{num}.txt" for num in range(START_INDEX, START_INDEX + DATA_SIZE)]
+    for file in tqdm.tqdm(new_personas):
+        if not os.path.exists(file):
+            continue
+        out_path = file.replace(PERSONA_DIR, TEXT_CALENDER_DIR)
+        if os.path.exists(out_path):
+            continue
+
         # Extract persona
         persona = open(file, "r").read()
         if "#" not in persona:
@@ -110,13 +126,20 @@ if __name__ == "__main__":
         ]
         if not all(day in response for day in required_days):
             continue
-        open(file.replace(PERSONA_DIR, TEXT_CALENDER_DIR), "w").write(response)
+        open(out_path, "w").write(response)
 
     # 3. Convert text calender to json
     # Save the Monday date per file so step 4 can use the same dates
     monday_dates = {}
     print("Converting text calenders to json")
-    for file in tqdm.tqdm(glob.glob(f"{TEXT_CALENDER_DIR}/*")):
+    new_text_cals = [f"{TEXT_CALENDER_DIR}/{num}.txt" for num in range(START_INDEX, START_INDEX + DATA_SIZE)]
+    for file in tqdm.tqdm(new_text_cals):
+        if not os.path.exists(file):
+            continue
+        json_path = file.replace(TEXT_CALENDER_DIR, JSON_CALENDER_DIR)
+        if os.path.exists(json_path):
+            continue
+
         calender = open(file, "r").read()
 
         config = GenerationConfig(
@@ -133,16 +156,22 @@ if __name__ == "__main__":
         except json.JSONDecodeError:
             print(f"  Skipping {file} (invalid JSON from model)")
             continue
-        with open(
-            file.replace(TEXT_CALENDER_DIR, JSON_CALENDER_DIR), "w", encoding="utf-8"
-        ) as f:
+        with open(json_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4, ensure_ascii=False)
 
     # 4. Generate queries
     # Pass the Monday date so Gemini generates current_time values that match
     # the actual calendar event dates from step 3.
     print("Generating queries")
-    for file in tqdm.tqdm(glob.glob(f"{TEXT_CALENDER_DIR}/*")):
+    for file in tqdm.tqdm(new_text_cals):
+        if not os.path.exists(file):
+            continue
+        if file not in monday_dates:
+            continue  # JSON conversion failed for this calendar
+        query_path = file.replace(TEXT_CALENDER_DIR, QUERY_DIR)
+        if os.path.exists(query_path):
+            continue
+
         calender = open(file, "r").read()
         monday = monday_dates[file]
 
@@ -158,7 +187,5 @@ if __name__ == "__main__":
         except json.JSONDecodeError:
             print(f"  Skipping {file} (invalid JSON from model)")
             continue
-        with open(
-            file.replace(TEXT_CALENDER_DIR, QUERY_DIR), "w", encoding="utf-8"
-        ) as f:
+        with open(query_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4, ensure_ascii=False)

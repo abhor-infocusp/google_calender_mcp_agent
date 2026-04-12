@@ -7,14 +7,17 @@ EVAL_SYSTEM_PROMPT = """\
 You evaluate a calendar assistant that has tools to search, create, update, \
 and delete calendar events. Judge whether it completed the user's task.
 
-Rules:
-- The assistant MUST use its tools to look up calendar data before responding. \
-Asking the user for information that is already on the calendar is Incorrect.
-- For action tasks (create/update/delete): the calendar state AFTER must \
-reflect the expected changes. No change when one was expected = Incorrect.
-- For info tasks (queries/lookups): the response must match the calendar data \
-and the expected behavior.
-- Partial completion is Incorrect.
+First, determine which case applies:
+1. The query has enough information for the agent to complete the task using \
+its tools and the calendar data.
+2. The query is ambiguous or incomplete — the agent cannot proceed without \
+asking the user for clarification.
+
+Then judge the agent's response accordingly. For case 1, check the BEFORE and \
+AFTER calendar states — the state change is the ground truth. For case 2, the \
+agent should have looked up candidates and asked the user to clarify.
+
+Think step by step. Explain your reasoning in detail before giving a verdict.
 
 On the very last line output exactly one word:
 Correct
@@ -48,10 +51,10 @@ def evaluate_trajectory(
     expected: str,
     before_days: dict,
     after_days: dict,
-) -> str:
+) -> tuple[str, str]:
     """Ask the model to evaluate whether the trajectory was correct.
 
-    Returns one of: 'Correct', 'Incorrect'.
+    Returns (verdict, reasoning) where verdict is 'Correct' or 'Incorrect'.
     """
     before_text = format_day_state_text(before_days)
     after_text = format_day_state_text(after_days)
@@ -78,25 +81,25 @@ Was the task completed correctly? End with one word: Correct or Incorrect."""
             raise TimeoutError("Gemini eval timed out")
 
         old_handler = signal.signal(signal.SIGALRM, _timeout_handler)
-        signal.alarm(30)
+        signal.alarm(60)
         try:
             response = eval_model.generate_content(prompt)
-            verdict = response.text.strip()
+            full_response = response.text.strip()
         finally:
             signal.alarm(0)
             signal.signal(signal.SIGALRM, old_handler)
-        lines = [l.strip() for l in verdict.splitlines() if l.strip()]
+        lines = [l.strip() for l in full_response.splitlines() if l.strip()]
         for line in reversed(lines):
             line_lower = line.lower()
             for token in ("Incorrect", "Correct"):
                 if line_lower == token.lower():
-                    return token
+                    return token, full_response
         for line in reversed(lines):
             line_lower = line.lower()
             for token in ("Incorrect", "Correct"):
                 if token.lower() in line_lower:
-                    return token
-        return "Incorrect"
+                    return token, full_response
+        return "Incorrect", full_response
     except Exception as e:
         print(f"  [EVAL ERROR]  {e}")
-        return "Incorrect"
+        return "Incorrect", str(e)

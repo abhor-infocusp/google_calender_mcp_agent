@@ -49,11 +49,10 @@ def run_single(model, eval_model, cal_path, query_dict, max_turns=10):
     """Run a single trajectory and return verdict. Identical to compare_teachers.py."""
     from calendar_agent.environment import CalendarEnvironment
     from calendar_agent.core import (
-        compute_fallback_now, dispatch_tool_call, snapshot_events,
-        filter_by_days, get_query_now, DAY_NAMES,
+        compute_fallback_now, dispatch_tool_call, format_tool_result,
+        snapshot_events, filter_by_days, get_query_now, DAY_NAMES,
     )
-    from calendar_agent.evaluation import evaluate_trajectory
-    from calendar_agent.tools import serialize_tool_result
+    from calendar_agent.evaluation import format_day_state_text
 
     events = CalendarEnvironment.load_json_calendar(cal_path)
     fallback_now = compute_fallback_now(cal_path)
@@ -73,9 +72,17 @@ def run_single(model, eval_model, cal_path, query_dict, max_turns=10):
     try:
         response = chat.send_message(query_text)
     except Exception as e:
-        return "Error"
+        print(f"\n    [INIT ERROR] {type(e).__name__}: {e}", flush=True)
+        return "Error", None
 
     for turn in range(1, max_turns + 1):
+        # Log raw response for debugging
+        finish_reason = None
+        try:
+            finish_reason = response.candidates[0].finish_reason
+        except Exception:
+            pass
+
         function_calls = []
         text_parts = []
         for part in response.candidates[0].content.parts:
@@ -95,15 +102,15 @@ def run_single(model, eval_model, cal_path, query_dict, max_turns=10):
             trajectory.append({"role": "assistant", "content": "\n".join(text_parts)})
 
         if not function_calls:
+            if finish_reason and str(finish_reason) != "1" and str(finish_reason) != "FinishReason.STOP":
+                trajectory.append({"role": "assistant", "content": f"[RESPONSE CUT OFF: finish_reason={finish_reason}, turn={turn}]"})
             break
 
         response_parts = []
         for fc in function_calls:
             args = dict(fc.args)
             result = dispatch_tool_call(env, fc.name, args)
-            if result is None:
-                result = {"status": "ok"}
-            result = serialize_tool_result(result)
+            result = format_tool_result(result)
             trajectory.append({"role": "tool_call", "name": fc.name, "args": args, "result": result})
             resp_for_vertex = result if isinstance(result, dict) else {"result": result}
             response_parts.append(Part.from_function_response(name=fc.name, response=resp_for_vertex))
@@ -111,6 +118,7 @@ def run_single(model, eval_model, cal_path, query_dict, max_turns=10):
         try:
             response = chat.send_message(response_parts)
         except Exception as e:
+            trajectory.append({"role": "assistant", "content": f"[SEND ERROR: {type(e).__name__}: {e}]"})
             break
 
     after = snapshot_events(env)
@@ -120,13 +128,72 @@ def run_single(model, eval_model, cal_path, query_dict, max_turns=10):
     )
     expected = query_dict.get("expected_behavior", "")
 
-    verdict = evaluate_trajectory(eval_model, query_text, final_output, expected, before_days, after_days)
-    return verdict
+    # Inline eval to capture full judge reasoning
+    before_text = format_day_state_text(before_days)
+    after_text = format_day_state_text(after_days)
+    eval_prompt = f"""\
+Query: {query_text}
+
+Response: {final_output if final_output else "(no response)"}
+
+Expected: {expected if expected else "(not specified)"}
+
+Before:
+{before_text}
+
+After:
+{after_text}
+
+Was the task completed correctly? First explain your reasoning in 2-3 sentences. Then on the very last line output exactly one word: Correct or Incorrect."""
+
+    judge_raw = ""
+    verdict = "Incorrect"
+    try:
+        import signal
+        def _timeout_handler(signum, frame):
+            raise TimeoutError("Gemini eval timed out")
+        old_handler = signal.signal(signal.SIGALRM, _timeout_handler)
+        signal.alarm(30)
+        try:
+            response = eval_model.generate_content(eval_prompt)
+            judge_raw = response.text.strip()
+        finally:
+            signal.alarm(0)
+            signal.signal(signal.SIGALRM, old_handler)
+        lines = [l.strip() for l in judge_raw.splitlines() if l.strip()]
+        for line in reversed(lines):
+            if line.lower() == "incorrect":
+                verdict = "Incorrect"; break
+            if line.lower() == "correct":
+                verdict = "Correct"; break
+        else:
+            for line in reversed(lines):
+                if "incorrect" in line.lower():
+                    verdict = "Incorrect"; break
+                if "correct" in line.lower():
+                    verdict = "Correct"; break
+    except Exception as e:
+        judge_raw = f"[EVAL ERROR] {e}"
+
+    traj_data = {
+        "query": query_text,
+        "category": query_dict.get("category", ""),
+        "complexity": query_dict.get("complexity", ""),
+        "expected_behavior": expected,
+        "simulated_now": now,
+        "addressed_days": addressed_days,
+        "calendar_before": before_days,
+        "calendar_after": after_days,
+        "trajectory": trajectory,
+        "eval_verdict": verdict,
+        "judge_reasoning": judge_raw,
+    }
+    return verdict, traj_data
 
 
 def main():
     parser = argparse.ArgumentParser(description="Fast prompt tuning for Gemini teacher models")
-    parser.add_argument("--model", default="gemini-2.5-pro", help="Model to test (default: gemini-2.5-pro)")
+    parser.add_argument("--model", default="gemini-2.0-flash-001", help="Model to test (default: gemini-2.0-flash-001)")
     parser.add_argument("--categories", nargs="+", default=None, help="Filter to categories (substring match)")
     parser.add_argument("--calendars", nargs="+", type=int, default=None, help="Calendar indices (default: 0 2 3 4 5)")
     parser.add_argument("--prompt-file", default=None, help="Path to custom system prompt .txt file")
@@ -192,6 +259,16 @@ def main():
     cat_results = defaultdict(lambda: {"correct": 0, "total": 0, "queries": []})
     total_correct = 0
 
+    # Save trajectories to per-run directory
+    run_dir = os.path.join(SFT_DATA_DIR, "tuning_runs", prompt_id)
+    os.makedirs(run_dir, exist_ok=True)
+    log_path = os.path.join(run_dir, "run.log")
+    log_file = open(log_path, "w")
+    log_file.write(f"Model: {args.model}\nPrompt: {args.prompt_file}\nPrompt ID: {prompt_id}\n")
+    log_file.write(f"Calendars: {calendars}\nCategories: {args.categories or 'all'}\nQueries: {len(tasks)}\n")
+    log_file.write("=" * 80 + "\n\n")
+    log_file.flush()
+
     for i, task in enumerate(tasks):
         # Refresh token if needed
         if not creds.valid or creds.expired:
@@ -207,14 +284,55 @@ def main():
 
         print(f"  [{i+1}/{len(tasks)}] cal={task['cal_idx']} [{cat_short[:20]}] {q['query'][:50]}...", end=" ", flush=True)
 
-        try:
-            verdict = run_single(gen_model, eval_model, task["cal_path"], q)
-            print(verdict, flush=True)
-        except Exception as e:
-            verdict = "Error"
-            print(f"ERROR: {type(e).__name__}: {e}", flush=True)
-            import traceback
-            traceback.print_exc()
+        max_attempts = 3
+        verdict = "Incorrect"
+        traj_data = None
+        for attempt in range(1, max_attempts + 1):
+            attempt_traj = None
+            try:
+                attempt_verdict, attempt_traj = run_single(gen_model, eval_model, task["cal_path"], q)
+            except Exception as e:
+                attempt_verdict = "Error"
+                print(f"ERROR: {type(e).__name__}: {e}", flush=True)
+                import traceback
+                traceback.print_exc()
+
+            # Log every attempt
+            if attempt_traj:
+                log_file.write(f"[{i+1}/{len(tasks)}] cal={task['cal_idx']} q={task['qi']} | {cat_short} | attempt {attempt}/{max_attempts} | {attempt_verdict}\n")
+                log_file.write(f"  Query: {q['query']}\n")
+                log_file.write(f"  Expected: {q.get('expected_behavior', '')}\n")
+                for step in attempt_traj["trajectory"]:
+                    if step["role"] == "user":
+                        log_file.write(f"  USER: {step['content']}\n")
+                    elif step["role"] == "assistant":
+                        log_file.write(f"  ASSISTANT: {step['content']}\n")
+                    elif step["role"] == "tool_call":
+                        args_str = json.dumps(step["args"], default=str, indent=2)
+                        result_str = json.dumps(step["result"], default=str, indent=2)
+                        log_file.write(f"  TOOL: {step['name']}\n")
+                        log_file.write(f"    ARGS: {args_str}\n")
+                        log_file.write(f"    RESULT: {result_str}\n")
+                log_file.write(f"  JUDGE: {attempt_traj.get('judge_reasoning', '')}\n")
+                log_file.write(f"  VERDICT: {attempt_verdict}\n")
+                log_file.write(f"{'─'*80}\n\n")
+                log_file.flush()
+
+            if attempt_verdict == "Correct":
+                verdict = "Correct"
+                traj_data = attempt_traj
+                if attempt > 1:
+                    print(f"Correct (attempt {attempt})", flush=True)
+                else:
+                    print("Correct", flush=True)
+                break
+            else:
+                traj_data = attempt_traj  # keep last attempt for reference
+                if attempt < max_attempts:
+                    print(f"retry {attempt}...", end=" ", flush=True)
+                    time.sleep(0.3)
+                else:
+                    print(f"Incorrect ({max_attempts}/{max_attempts})", flush=True)
 
         cat_results[cat]["total"] += 1
         cat_results[cat]["queries"].append({
@@ -226,6 +344,9 @@ def main():
             total_correct += 1
 
         time.sleep(0.3)
+
+    log_file.close()
+    print(f"\nRun log saved to {log_path}")
 
     # Summary
     print(f"\n{'='*60}")

@@ -38,13 +38,13 @@ MODEL_NAME = "gemini-2.0-flash-001"
 
 # ── Category-weighted paraphrase counts ──────────────────────
 CATEGORY_PARAPHRASE_COUNTS = {
-    "Human Chaos (Edge Cases/Fragments)": 10,
-    "Complex Logic & Conflict (Advanced)": 5,
-    "Information Retrieval (Querying)": 3,
+    "Human Chaos (Edge Cases/Fragments)": 5,
+    "Complex Logic & Conflict (Advanced)": 4,
+    "Information Retrieval (Querying)": 2,
     "Schedule a Single Event": 3,
     "Vague & Contextual (Reasoning Required)": 3,
     "Modifier & Correction (Rescheduling/Updates)": 3,
-    "Relative Time References (today, tomorrow, yesterday, this week)": 3,
+    "Relative Time References (today, tomorrow, yesterday, this week)": 2,
 }
 DEFAULT_PARAPHRASE_COUNT = 3
 N_ENTITY_VARIANTS = 2
@@ -133,10 +133,23 @@ def extract_entities(traj: dict) -> dict:
     # Also from trajectory steps (tool call results)
     for step in traj.get("trajectory", []):
         if step.get("role") == "tool_call" and step.get("result"):
-            result_str = json.dumps(step["result"], default=str)
-            # Look for summary fields in result
-            for m in re.finditer(r'"summary":\s*"([^"]+)"', result_str):
-                summaries.add(m.group(1))
+            # Skip get_current_time — its result is a timestamp, not a summary
+            if step.get("name") == "get_current_time":
+                continue
+            result = step["result"]
+            if isinstance(result, str):
+                # New compact format: extract summaries from "id: evt_x | Summary — Day HH:MM-HH:MM" lines
+                for m in re.finditer(r'id:\s*evt_[a-f0-9]+\s*\|\s*(.+?)\s*—', result):
+                    summaries.add(m.group(1).strip())
+                # Also extract from detail block first line (summary is the first line)
+                lines = result.split('\n')
+                if lines and not lines[0].startswith(('Found ', 'Event ', 'Error', 'RSVP ', 'id:')):
+                    summaries.add(lines[0].strip())
+            else:
+                result_str = json.dumps(result, default=str)
+                # Look for summary fields in result (legacy dict format)
+                for m in re.finditer(r'"summary":\s*"([^"]+)"', result_str):
+                    summaries.add(m.group(1))
 
     return {"emails": emails, "summaries": summaries, "event_ids": event_ids}
 

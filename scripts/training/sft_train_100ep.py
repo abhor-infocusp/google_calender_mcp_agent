@@ -20,11 +20,13 @@ import random
 os.environ["VLLM_WORKER_MULTIPROC_METHOD"] = "spawn"
 
 from unsloth import FastLanguageModel
-from trl import SFTTrainer, SFTConfig, DataCollatorForCompletionOnlyLM
+import torch
+from trl import SFTTrainer, SFTConfig
 from datasets import Dataset
 from transformers import TrainerCallback
 
-from calendar_agent.tools import get_openai_tools_minimal, compact_tool_result
+from calendar_agent.core import format_tool_result
+from calendar_agent.tools import get_openai_tools_minimal
 from calendar_agent.paths import SFT_DATA_DIR as _SFT_DATA_DIR, SFT_OUTPUT_DIR as _SFT_OUTPUT_DIR
 
 random.seed(42)
@@ -56,23 +58,30 @@ def trajectory_to_messages(traj: dict) -> list[dict]:
             messages.append({"role": "user", "content": step["content"]})
             i += 1
         elif step["role"] == "tool_call":
+            # Check if previous step was assistant narration — merge it as content
+            narration = ""
+            if messages and messages[-1]["role"] == "assistant" and "tool_calls" not in messages[-1]:
+                narration = messages.pop()["content"]
+
             call_index = 0
             while i < len(steps) and steps[i]["role"] == "tool_call":
                 tc = steps[i]
                 tool_call_id = f"call_{call_index}"
                 messages.append({
-                    "role": "assistant", "content": "",
+                    "role": "assistant",
+                    "content": narration if call_index == 0 else "",
                     "tool_calls": [{
                         "type": "function", "id": tool_call_id,
                         "function": {"name": tc["name"], "arguments": tc["args"]},
                     }],
                 })
-                compacted = compact_tool_result(tc["name"], tc["result"])
+                compacted = format_tool_result(tc["result"])
                 messages.append({
                     "role": "tool",
-                    "content": json.dumps(compacted, default=str),
+                    "content": compacted if isinstance(compacted, str) else json.dumps(compacted, default=str),
                     "tool_call_id": tool_call_id,
                 })
+                narration = ""  # only first tool call gets the narration
                 call_index += 1
                 i += 1
         elif step["role"] == "assistant":
@@ -81,6 +90,58 @@ def trajectory_to_messages(traj: dict) -> list[dict]:
         else:
             i += 1
     return messages
+
+
+def compute_assistant_labels(input_ids: list[int], assistant_header_ids: list[int], im_end_id: int) -> list[int]:
+    """Build labels that train only on assistant content (not user/system/tool).
+
+    Scans for <|im_start|>assistant\\n ... <|im_end|> sections and unmasks
+    the content + <|im_end|> token. Everything else is masked (-100).
+    """
+    labels = [-100] * len(input_ids)
+    marker_len = len(assistant_header_ids)
+    i = 0
+    while i <= len(input_ids) - marker_len:
+        if input_ids[i : i + marker_len] == assistant_header_ids:
+            content_start = i + marker_len
+            j = content_start
+            while j < len(input_ids):
+                if input_ids[j] == im_end_id:
+                    # Unmask assistant content + <|im_end|> token
+                    for k in range(content_start, j + 1):
+                        labels[k] = input_ids[k]
+                    i = j + 1
+                    break
+                j += 1
+            else:
+                # No <|im_end|> found — unmask to end
+                for k in range(content_start, len(input_ids)):
+                    labels[k] = input_ids[k]
+                break
+        else:
+            i += 1
+    return labels
+
+
+class AssistantOnlyCollator:
+    """Pads input_ids, attention_mask, and pre-computed labels."""
+
+    def __init__(self, pad_token_id: int):
+        self.pad_token_id = pad_token_id
+
+    def __call__(self, examples):
+        max_len = max(len(e["input_ids"]) for e in examples)
+        input_ids, attention_mask, labels = [], [], []
+        for e in examples:
+            pad_len = max_len - len(e["input_ids"])
+            input_ids.append(e["input_ids"] + [self.pad_token_id] * pad_len)
+            attention_mask.append(e["attention_mask"] + [0] * pad_len)
+            labels.append(e["labels"] + [-100] * pad_len)
+        return {
+            "input_ids": torch.tensor(input_ids),
+            "attention_mask": torch.tensor(attention_mask),
+            "labels": torch.tensor(labels),
+        }
 
 
 def load_trajectories() -> list[dict]:
@@ -95,12 +156,27 @@ def load_trajectories() -> list[dict]:
 
 def build_dataset(tokenizer) -> Dataset:
     trajs = load_trajectories()
+    # Filter out error-ending trajectories (teacher model failures)
+    before = len(trajs)
+    trajs = [t for t in trajs if not any(
+        s.get("role") == "error" for s in t.get("trajectory", [])
+    )]
+    if len(trajs) < before:
+        print(f"Filtered {before - len(trajs)} error-ending trajectories")
     random.shuffle(trajs)
     print(f"Loaded {len(trajs)} solved trajectories")
 
+    # Build marker token sequences for assistant-only label masking
+    im_start_id = tokenizer.convert_tokens_to_ids("<|im_start|>")
+    im_end_id = tokenizer.convert_tokens_to_ids("<|im_end|>")
+    assistant_nl_ids = tokenizer.encode("assistant\n", add_special_tokens=False)
+    assistant_header_ids = [im_start_id] + assistant_nl_ids
+    print(f"  Assistant header IDs: {assistant_header_ids} (len={len(assistant_header_ids)})")
+    print(f"  <|im_end|> ID: {im_end_id}")
+
     all_input_ids = []
     all_attention_mask = []
-    texts_for_verify = []  # keep a few raw texts for loss masking verification
+    all_labels = []
     skipped = 0
     long_skipped = 0
     for traj in trajs:
@@ -115,56 +191,43 @@ def build_dataset(tokenizer) -> Dataset:
                 print(f"  Skipped trajectory: {e}")
             continue
 
-        tokens = tokenizer(text, truncation=True, max_length=MAX_SEQ_LENGTH,
-                           padding=False, return_tensors=None)
+        tokens = tokenizer(text, truncation=False, padding=False, return_tensors=None)
         if len(tokens["input_ids"]) > MAX_SEQ_LENGTH:
             long_skipped += 1
             continue
 
-        all_input_ids.append(tokens["input_ids"])
+        input_ids = tokens["input_ids"]
+        labels = compute_assistant_labels(input_ids, assistant_header_ids, im_end_id)
+
+        all_input_ids.append(input_ids)
         all_attention_mask.append(tokens["attention_mask"])
-        if len(texts_for_verify) < 3:
-            texts_for_verify.append(text)
+        all_labels.append(labels)
 
     total = len(all_input_ids)
     print(f"Converted & tokenized {total} trajectories ({skipped} skipped, {long_skipped} too long)")
 
+    # Verify label masking on first example
+    if total > 0:
+        sample_labels = all_labels[0]
+        sample_ids = all_input_ids[0]
+        trained = sum(1 for l in sample_labels if l != -100)
+        masked = sum(1 for l in sample_labels if l == -100)
+        pct = trained / (trained + masked) * 100
+        print(f"\n  Loss masking verification (sample 0):")
+        print(f"    Trained tokens:  {trained} ({pct:.1f}%)")
+        print(f"    Masked tokens:   {masked} ({100-pct:.1f}%)")
+        trained_ids = [sample_ids[i] for i, l in enumerate(sample_labels) if l != -100]
+        if trained_ids:
+            snippet = tokenizer.decode(trained_ids[:50])
+            print(f"    First trained tokens: '{snippet[:120]}...'")
+
     ds = Dataset.from_dict({
         "input_ids": all_input_ids,
         "attention_mask": all_attention_mask,
+        "labels": all_labels,
     })
-    # Stash raw texts for verification (not part of dataset)
-    ds._texts_for_verify = texts_for_verify
     return ds
 
-
-# ── Verify Loss Masking ───────────────────────────────────
-
-def verify_loss_masking(collator, tokenizer, dataset):
-    """Check that the collator correctly masks non-assistant tokens."""
-    import torch
-    sample = dataset[0]
-    input_ids = torch.tensor(sample["input_ids"])
-    attention_mask = torch.tensor(sample["attention_mask"])
-    batch = collator([{"input_ids": input_ids, "attention_mask": attention_mask}])
-    labels = batch["labels"][0]
-
-    total = (labels != -100).sum().item()
-    masked = (labels == -100).sum().item()
-    pct = total / (total + masked) * 100 if (total + masked) > 0 else 0
-
-    print(f"\n  Loss masking verification:")
-    print(f"    Trained tokens:  {total} ({pct:.1f}%)")
-    print(f"    Masked tokens:   {masked} ({100-pct:.1f}%)")
-
-    # Show a few trained token spans for sanity check
-    input_ids = batch["input_ids"][0]
-    trained_ids = input_ids[labels != -100]
-    if len(trained_ids) > 0:
-        snippet = tokenizer.decode(trained_ids[:50])
-        print(f"    First trained tokens: '{snippet[:120]}...'")
-
-    return pct
 
 
 # ── Epoch Loss Logger Callback ─────────────────────────────
@@ -219,7 +282,7 @@ def main():
 
     print("=" * 60)
     print(f"SFT Training: {MODEL_NAME} — {NUM_EPOCHS} epochs")
-    print(f"  Loss masking: assistant-only (DataCollatorForCompletionOnlyLM)")
+    print(f"  Loss masking: assistant-only (pre-computed labels)")
     print(f"  LR schedule:  cosine_with_restarts (10 cycles)")
     print(f"  LoRA rank:    {LORA_RANK}")
     print(f"  Output:       {OUTPUT_DIR}")
@@ -263,24 +326,8 @@ def main():
     val_dataset = split["test"]
     print(f"Train: {len(train_dataset)}, Val: {len(val_dataset)}")
 
-    # ── Loss masking collator ──
-    # Qwen2.5 chat template marks assistant turns with "<|im_start|>assistant\n"
-    # and user/tool turns with "<|im_start|>user\n".
-    # DataCollatorForCompletionOnlyLM masks everything except assistant responses.
-    response_template = "<|im_start|>assistant\n"
-    instruction_template = "<|im_start|>user\n"
-
-    collator = DataCollatorForCompletionOnlyLM(
-        tokenizer=tokenizer,
-        response_template=response_template,
-        instruction_template=instruction_template,
-    )
-
-    # Verify masking works before training
-    trained_pct = verify_loss_masking(collator, tokenizer, train_dataset)
-    if trained_pct < 1:
-        print("  WARNING: No tokens being trained! Check templates.")
-        return
+    # ── Collator (labels pre-computed in dataset) ──
+    collator = AssistantOnlyCollator(pad_token_id=tokenizer.pad_token_id)
 
     steps_per_epoch = max(1, len(train_dataset) // 4)  # batch=1, grad_accum=4
     print(f"\nSteps per epoch: ~{steps_per_epoch}")

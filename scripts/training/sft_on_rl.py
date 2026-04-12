@@ -20,7 +20,8 @@ from unsloth import FastLanguageModel
 from trl import SFTTrainer, SFTConfig, DataCollatorForCompletionOnlyLM
 from datasets import Dataset
 
-from calendar_agent.tools import get_openai_tools_minimal, compact_tool_result
+from calendar_agent.core import format_tool_result
+from calendar_agent.tools import get_openai_tools_minimal
 from calendar_agent.paths import SFT_DATA_DIR as _SFT_DATA_DIR
 
 random.seed(42)
@@ -63,7 +64,7 @@ def trajectory_to_messages(traj: dict) -> list[dict]:
                         "function": {"name": tc["name"], "arguments": tc["args"]},
                     }],
                 })
-                compacted = compact_tool_result(tc["name"], tc["result"])
+                compacted = format_tool_result(tc["result"])
                 messages.append({
                     "role": "tool",
                     "content": json.dumps(compacted, default=str),

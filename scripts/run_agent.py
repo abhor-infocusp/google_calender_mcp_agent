@@ -42,7 +42,7 @@ from calendar_agent.core import (
 from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, evaluate_trajectory
 from calendar_agent.environment import CalendarEnvironment
 from calendar_agent.paths import CREDENTIALS_PATH
-from calendar_agent.tools import serialize_tool_result
+from calendar_agent.core import format_tool_result
 
 
 # ── Core Agent Loop ──────────────────────────────────────────
@@ -97,9 +97,7 @@ def run_query(
             print_tool_call(fc.name, args)
 
             result = dispatch_tool_call(env, fc.name, args)
-            if result is None:
-                result = {"status": "ok"}
-            result = serialize_tool_result(result)
+            result = format_tool_result(result)
 
             print_tool_result(result)
             trajectory.append(

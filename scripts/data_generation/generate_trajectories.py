@@ -38,11 +38,15 @@ from calendar_agent.core import (
 )
 from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, evaluate_trajectory
 from calendar_agent.paths import SFT_DATA_DIR as _SFT_DATA_DIR, SFT_JSON_CALENDAR_DIR, SFT_QUERY_DIR, CREDENTIALS_PATH
-from calendar_agent.tools import serialize_tool_result
+from calendar_agent.core import format_tool_result
 
 sys.stdout.reconfigure(line_buffering=True)
 
-DEFAULT_MODEL = "gemini-2.5-pro"
+DEFAULT_MODEL = "gemini-2.0-flash-001"
+
+# COST GUARD: gemini-2.5-pro used 20x monthly budget in 1 day during Phase 3.
+# Block pro models unless explicitly overridden with --allow-pro.
+_BLOCKED_MODELS = {"gemini-2.5-pro", "gemini-1.5-pro", "gemini-2.5-pro-preview-05-06"}
 DEFAULT_PROMPT = os.path.join(os.path.dirname(__file__), "../../prompts/v11_reason_act.txt")
 MAX_TURNS = 10
 MAX_ATTEMPTS = 3
@@ -105,9 +109,7 @@ def run_single_trajectory(model, eval_model, cal_path, query_dict, max_turns=MAX
         for fc in function_calls:
             args = dict(fc.args)
             result = dispatch_tool_call(env, fc.name, args)
-            if result is None:
-                result = {"status": "ok"}
-            result = serialize_tool_result(result)
+            result = format_tool_result(result)
             trajectory.append({
                 "role": "tool_call",
                 "name": fc.name,
@@ -160,7 +162,13 @@ def main():
     parser.add_argument("--model", default=DEFAULT_MODEL, help=f"Teacher model (default: {DEFAULT_MODEL})")
     parser.add_argument("--prompt-file", default=DEFAULT_PROMPT, help="System prompt file")
     parser.add_argument("--max-attempts", type=int, default=MAX_ATTEMPTS, help="Max retry attempts per query (default: 3)")
+    parser.add_argument("--allow-pro", action="store_true", help="Override pro model cost guard")
     args = parser.parse_args()
+
+    if args.model in _BLOCKED_MODELS and not args.allow_pro:
+        print(f"ERROR: {args.model} is blocked — used 20x monthly budget in 1 day.")
+        print(f"  Use --allow-pro to override, or switch to gemini-2.0-flash-001.")
+        sys.exit(1)
 
     os.makedirs(TRAJ_DIR, exist_ok=True)
 

@@ -10,6 +10,7 @@ from calendar_agent.core import (
     filter_by_days,
     fmt_args,
     format_day_state,
+    format_tool_result,
     get_query_now,
     load_calendar_and_queries,
     snapshot_events,
@@ -23,8 +24,6 @@ from calendar_agent.tools import (
     RETURN_FINAL_ANSWER_TOOL,
     RETURN_FINAL_ANSWER_TOOL_MINIMAL,
     VERTEX_TO_OPENAI_TYPES,
-    compact_tool_result,
     get_openai_tools,
     get_openai_tools_minimal,
-    serialize_tool_result,
 )

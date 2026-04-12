@@ -48,7 +48,8 @@ from calendar_agent.core import (
 )
 from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, evaluate_trajectory
 from calendar_agent.paths import SFT_DATA_DIR, DATA_DIR, RL_DATA_DIR, CREDENTIALS_PATH
-from calendar_agent.tools import get_openai_tools_minimal, RETURN_FINAL_ANSWER_TOOL_MINIMAL, serialize_tool_result
+from calendar_agent.core import format_tool_result
+from calendar_agent.tools import get_openai_tools_minimal, RETURN_FINAL_ANSWER_TOOL_MINIMAL
 
 import vertexai
 from vertexai.generative_models import GenerativeModel
@@ -180,9 +181,7 @@ def run_query_openai(
             print_tool_call(tool_name, args)
 
             result = dispatch_tool_call(env, tool_name, args)
-            if result is None:
-                result = {"status": "ok"}
-            result = serialize_tool_result(result)
+            result = format_tool_result(result)
 
             print_tool_result(result)
             trajectory.append(
@@ -198,7 +197,7 @@ def run_query_openai(
                 {
                     "role": "tool",
                     "tool_call_id": tc.id,
-                    "content": json.dumps(result, default=str),
+                    "content": result if isinstance(result, str) else json.dumps(result, default=str),
                 }
             )
 

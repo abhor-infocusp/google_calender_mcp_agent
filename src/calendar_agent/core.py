@@ -242,6 +242,19 @@ def dispatch_tool_call(env: CalendarEnvironment, name: str, args: dict) -> dict:
         return f"Error: {type(e).__name__}: {e}"
 
 
+def format_tool_result(result) -> str:
+    """Format a tool result for the model.
+
+    Single canonical formatter — all pipelines (SFT, eval, RL) must use this
+    so the model always sees the same format it was trained on.
+    """
+    if result is None:
+        return "ok"
+    if isinstance(result, str):
+        return result
+    return json.dumps(result, default=str)
+
+
 # ── Display Helpers ──────────────────────────────────────────
 
 

@@ -53,6 +53,7 @@ from calendar_agent.core import (
     compute_fallback_now,
     dispatch_tool_call,
     filter_by_days,
+    format_tool_result,
     snapshot_events,
 )
 from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, format_day_state_text
@@ -340,7 +341,7 @@ async def rollout(
 
                 # Dispatch to CalendarEnvironment via run_trajectory helper
                 result = dispatch_tool_call(env, tool_name, tool_args)
-                result_str = json.dumps(result, default=str)
+                result_str = format_tool_result(result)
                 traj.messages_and_choices.append(
                     {
                         "role": "tool",

@@ -1,20 +1,12 @@
 """Shared tool conversion utilities and constants.
 
-Centralizes Vertex AI -> OpenAI tool format conversion, the return_final_answer
-tool definition, and compact tool result formatting used across training and eval scripts.
+Centralizes Vertex AI -> OpenAI tool format conversion and the return_final_answer
+tool definition used across training and eval scripts.
 """
 
 import json
-import re
 
 from calendar_agent.core import TOOL_DECLARATIONS
-
-
-def serialize_tool_result(result):
-    """Serialize tool result. Strings pass through; dicts get datetime conversion."""
-    if isinstance(result, str):
-        return result
-    return json.loads(json.dumps(result, default=str))
 
 
 # ── Vertex AI -> OpenAI type mapping ──────────────────────
@@ -138,64 +130,3 @@ def get_openai_tools_minimal(include_final_answer: bool = False) -> list[dict]:
     if include_final_answer:
         tools.append(RETURN_FINAL_ANSWER_TOOL_MINIMAL)
     return tools
-
-
-# ── Compact tool results ─────────────────────────────────
-
-
-def _extract_emails(attendees: list) -> list[str]:
-    """Extract email addresses from attendee objects or repr strings."""
-    emails = []
-    for a in attendees:
-        if isinstance(a, dict) and "user" in a:
-            emails.append(a["user"]["email"])
-        elif isinstance(a, str):
-            m = re.search(r"email='([^']+)'", a)
-            if m:
-                emails.append(m.group(1))
-    return emails
-
-
-def _compact_event(evt_raw) -> dict:
-    """Strip redundant fields from an event dict, flatten attendees to emails."""
-    evt = json.loads(evt_raw) if isinstance(evt_raw, str) else evt_raw
-    start = str(evt["start"]).replace(" ", "T")
-    end = str(evt["end"]).replace(" ", "T")
-    ce = {"id": evt["id"], "summary": evt["summary"], "start": start, "end": end}
-    desc = evt.get("description")
-    if desc:
-        ce["description"] = desc
-    attendees = evt.get("attendees", [])
-    if attendees:
-        emails = _extract_emails(attendees)
-        if emails:
-            ce["attendees"] = emails
-    return ce
-
-
-def compact_tool_result(name: str, result):
-    """Compact a tool call result to reduce token count for training.
-
-    New-format results are already strings — pass through.
-    Old-format dict results get compacted for backward compatibility.
-    """
-    if isinstance(result, str):
-        return result
-    # Legacy dict format
-    if name == "list_events":
-        events = result.get("events", result) if isinstance(result, dict) else result
-        if isinstance(events, list):
-            return [_compact_event(e) for e in events]
-        return result
-    if name == "get_event":
-        evt = result.get("event", result) if isinstance(result, dict) else result
-        return _compact_event(evt)
-    if name in ("create_event", "update_event", "delete_event"):
-        ce = {"message": result.get("message", "")}
-        evt = result.get("event")
-        if evt:
-            ce.update(_compact_event(evt))
-        else:
-            ce.update(_compact_event(result))
-        return ce
-    return result
