@@ -58,8 +58,8 @@ rl_data/                      # RL training data (tracked)
 
 ## Key Imports
 ```python
-from calendar_agent.core import SYSTEM_PROMPT, TOOL_DECLARATIONS, CALENDAR_TOOL, dispatch_tool_call, snapshot_events, filter_by_days, compute_fallback_now, DAY_NAMES, C
-from calendar_agent.tools import get_openai_tools, RETURN_FINAL_ANSWER_TOOL, compact_tool_result
+from calendar_agent.core import SYSTEM_PROMPT, TOOL_DECLARATIONS, CALENDAR_TOOL, dispatch_tool_call, format_tool_result, snapshot_events, filter_by_days, compute_fallback_now, DAY_NAMES, C
+from calendar_agent.tools import get_openai_tools, RETURN_FINAL_ANSWER_TOOL
 from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, evaluate_trajectory, format_day_state_text
 from calendar_agent.environment import CalendarEnvironment
 from calendar_agent.paths import PROJECT_ROOT, DATA_DIR, SFT_DATA_DIR, RL_DATA_DIR, CREDENTIALS_PATH
@@ -75,12 +75,10 @@ Each trajectory has steps:
 - `{"role": "assistant", "content": "..."}` — Final response
 Consecutive `tool_call` steps = parallel calls from one model turn.
 
-### Compact Tool Results
-Tool results use a compact event format (avg 859 tokens/trajectory, down from 1469):
-- Attendees are flat email strings, not `{"email": "..."}` objects
-- No double-serialized JSON — dicts are native
-- Verbose fields stripped: creator, organizer, htmlLink, etag, kind, sequence, reminders, iCalUID
-- Environment returns compact format via `CalendarEnvironment._compact_event()`
+### Tool Result Formatting
+All pipelines (SFT, eval, RL) use `format_tool_result()` from `core.py` to format tool results.
+Environment methods return human-readable strings; `format_tool_result` passes them through.
+This ensures the model always sees the same format it was trained on.
 
 ## Evaluation
 Uses Gemini as judge model. Compares calendar state before/after against expected behavior.

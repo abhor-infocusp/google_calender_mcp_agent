@@ -1,7 +1,7 @@
 # SFT Data Enhancement Plan
 
 > **Created:** 2026-03-28
-> **Status:** Phase 1 complete (2.5-pro + v11 prompt + 3-attempt retry = 84.3%), Phase 2 next
+> **Status:** Phases 1-4 complete. 6,947 augmented trajectories from 114 calendars. Phase 5 (SFT training) next.
 
 ---
 
@@ -130,87 +130,114 @@ Added 3-attempt retry: each query gets up to 3 tries, counted as Correct if any 
 - Tuning script: `scripts/data_generation/tune_prompt.py`
 - Trajectory generation: `scripts/data_generation/generate_trajectories.py`
 - Winning prompt: `prompts/v11_reason_act.txt`
-- Legacy prompt: `prompts/best_25pro.txt` (v4, 72.9%)
 - Results log: `sft_data/prompt_tuning_log.jsonl`
 - Best run: `sft_data/tuning_runs/v11_retry3/`
 
 ---
 
-## Phase 2: Generate 100 New Calendars
+## Phase 2: Generate 100 New Calendars — COMPLETE
 
 **Goal:** Create 100 fresh calendars with personas, text calendars, JSON calendars, and queries.
 
-### Steps
+### Results
 
-1. **Expand profession list** in `generate_data.py`
-   - Current: 20 professions
-   - Target: 50+ (add: chef, lawyer, artist, musician, pilot, firefighter, pharmacist, veterinarian, architect, journalist, librarian, plumber, electrician, therapist, dentist, professor, photographer, farmer, mechanic, politician, etc.)
-   - Each profession → 2 personas → 100 calendars
-
-2. **Run generation pipeline** (`generate_data.py` with `DATA_SIZE=100`)
-   - Personas → text calendars → JSON calendars → queries
-   - Expected: 100 calendars × 14 queries = 1,400 queries
-   - Model: gemini-2.0-flash-001 (calendar/query generation, not trajectories)
-
-3. **Validate outputs**
-   - All 100 calendars have valid JSON with 7 days
-   - All queries have proper category/complexity fields
+- Expanded profession list from 20 → 50 in `generate_data.py`
+- Generated 100 calendars (indices 20-119), 97 with complete calendar+query pairs (missing 37, 42, 48)
+- Combined with existing 0-19: **115 total calendars**, 1,616 queries
+- Model: gemini-2.0-flash-001
 
 **Files:** `scripts/data_generation/generate_data.py`
 
 ---
 
-## Phase 3: Generate Trajectories
+## Phase 3: Generate Trajectories — COMPLETE
 
-**Goal:** Run the winning teacher model on all 1,400 queries.
+**Goal:** Run the winning teacher model on all 1,616 queries.
 
 ### Token Budget Constraint
 
-Qwen training uses `MAX_SEQ_LENGTH=3076`. Trajectories exceeding this are dropped.
+Qwen training uses `MAX_SEQ_LENGTH=3076`. Trajectories exceeding this are dropped during training.
 
-Tool returns are now human-readable strings (not JSON dicts), which significantly reduces token count:
+Tool returns are human-readable strings (not JSON dicts), reducing token count:
 - `list_events`: one line per event (`id: evt_x | Summary — Day HH:MM-HH:MM`)
 - `get_event`: compact multi-line block (ID, Time, Description, Attendees, RSVP)
 - Other tools return similar compact strings
 
-**Post-processing may still be needed** for calendars with 30+ events where unfiltered `list_events` produces long output. Solution: replace unfiltered `list_events` results with filtered versions containing only events on `addressed_days`.
+### Results
 
-### Steps
+| Metric | Value |
+|---|---|
+| Total queries | 1,616 |
+| Correct (saved) | 1,164 (72.0%) |
+| Incorrect/skipped | 452 |
+| Errors | 0 |
+| Calendars with trajectories | 114 |
 
-1. **Run trajectory generation** (`generate_trajectories.py`)
-   - Model: **gemini-2.5-pro** with v11 prompt (`prompts/v11_reason_act.txt`)
-   - 3-attempt retry per query (correct on any attempt = saved)
-   - 1,400 queries, rate limited at 0.5s between queries
-   - Expected: ~1,180 correct trajectories (at ~84% solve rate)
-   - Output: `sft_data/trajectories/`
+**Solve rate by category:**
 
-2. **Post-process: filter list_events results (if needed)**
-   - For trajectories exceeding 3076 tokens, replace unfiltered `list_events` results with filtered versions
-   - Tool returns are already compact strings, so this may not be needed for most trajectories
+| Category | Count | % of total |
+|---|---|---|
+| Information Retrieval | 203 | 17.4% |
+| Relative Time References | 200 | 17.2% |
+| Schedule a Single Event | 179 | 15.4% |
+| Modifier & Correction | 172 | 14.8% |
+| Vague & Contextual | 163 | 14.0% |
+| Complex Logic & Conflict | 131 | 11.3% |
+| Human Chaos | 116 | 10.0% |
 
-3. **Analyze solve rates** per category
-   - Human Chaos (~50%) and Relative Time (~70%) are expected weak spots
+**Notes:**
+- Solve rate (72%) below the 84.3% benchmark because benchmark was on 5 well-tested calendars; new calendars have harder edge cases
+- Human Chaos improved from 6.3% → 10.0% of dataset (still lowest, but 116 trajectories is solid base for augmentation)
+- 3-attempt retry recovered ~15% of initially-incorrect queries
 
-**Files:** `scripts/data_generation/generate_trajectories.py`
+### Critical bug fix during Phase 3
+
+Discovered and fixed `json.dumps()` double-encoding of compact string tool results in 4 downstream files:
+- `scripts/training/sft_train_100ep.py` — training data preparation
+- `scripts/eval/eval_qwen.py` — inference-time tool result passing
+- `scripts/eval/eval_batch.py` — batch eval tool result passing
+- `scripts/data_generation/augment_trajectories.py` — summary extraction regex
+
+Fix: `result if isinstance(result, str) else json.dumps(result, default=str)` — prevents wrapping strings in extra quotes and escaping newlines.
+
+**Files:** `scripts/data_generation/generate_trajectories.py`, `sft_data/trajectories/`
 
 ---
 
-## Phase 4: Augmentation
+## Phase 4: Augmentation — COMPLETE
 
 **Goal:** Expand trajectories via entity substitution + paraphrasing.
 
-### Steps
+### Config
 
-1. **Run augmentation** (`augment_trajectories.py`)
-   - Model: gemini-2.0-flash-001 (proven and stable for paraphrasing)
-   - Entity substitution: 2 variants per trajectory
-   - Paraphrasing: category-weighted (Human Chaos: 10x, Complex Logic: 5x, others: 3x)
-   - Expected: ~1,020 originals × ~5x = ~5,000 augmented trajectories
+- Paraphrase model: gemini-2.0-flash-001
+- Entity substitution: 2 variants per trajectory (programmatic)
+- Paraphrasing: category-weighted multipliers:
+  - Human Chaos: 5, Complex Logic: 4, Schedule/Modifier/Vague: 3, IR/RelTime: 2
+- Input: 1,164 original trajectories from 114 calendars
 
-2. **Validate**
-   - Token lengths fit within 3076 context
-   - Category distribution is balanced
-   - Final dataset stats reported
+### Results
+
+| Metric | Value |
+|---|---|
+| Total augmented trajectories | 6,947 (6.0x expansion) |
+| Median tokens | 596 |
+| P95 tokens | 2,146 |
+| P99 tokens | 2,704 |
+| Max tokens | 3,746 |
+| Over 3076 budget | 19 (0.27%, dropped at training time) |
+
+**Category balance (augmented):**
+
+| Category | Count |
+|---|---|
+| Schedule a Single Event | 1,074 |
+| Modifier & Correction | 1,032 |
+| Information Retrieval | 1,015 |
+| Relative Time References | 1,003 |
+| Vague & Contextual | 978 |
+| Human Chaos | 928 |
+| Complex Logic & Conflict | 917 |
 
 **Output:** `sft_data/trajectories_augmented/`
 
@@ -241,7 +268,9 @@ Tool returns are now human-readable strings (not JSON dicts), which significantl
 
 ---
 
-## Current SFT Data Snapshot (for reference)
+## Data Snapshots
+
+### Previous SFT Data (v3, 20 calendars)
 
 | Metric | Value |
 |---|---|
@@ -249,17 +278,36 @@ Tool returns are now human-readable strings (not JSON dicts), which significantl
 | Augmented trajectories | 1,039 (6.5x expansion) |
 | Calendars | 20 |
 | Categories | 7 (unbalanced: Human Chaos only 6.3%) |
-| Avg tool calls/trajectory | 2.28 |
 | Token budget | 3076 max |
 
-### Category Distribution (augmented)
+### Current Raw Trajectories (Phase 3 output, pre-augmentation)
+
+| Metric | Value |
+|---|---|
+| Raw trajectories | 1,164 (from 1,616 queries, 72.0% solve rate) |
+| Calendars | 114 (indices 0-119, missing 1/37/42/48) |
+| Teacher model | gemini-2.5-pro + v11 prompt + 3-attempt retry |
+| Tool result format | Compact strings (not JSON dicts) |
+| Token budget | 3076 max |
+
+### Category Distribution (raw, pre-augmentation)
 
 | Category | Count | % |
 |---|---|---|
-| Information Retrieval | 174 | 16.7% |
-| Schedule a Single Event | 162 | 15.6% |
-| Modifier & Correction | 162 | 15.6% |
-| Relative Time References | 162 | 15.6% |
-| Vague & Contextual | 162 | 15.6% |
-| Complex Logic & Conflict | 152 | 14.6% |
-| Human Chaos | 65 | 6.3% |
+| Information Retrieval | 203 | 17.4% |
+| Relative Time References | 200 | 17.2% |
+| Schedule a Single Event | 179 | 15.4% |
+| Modifier & Correction | 172 | 14.8% |
+| Vague & Contextual | 163 | 14.0% |
+| Complex Logic & Conflict | 131 | 11.3% |
+| Human Chaos | 116 | 10.0% |
+
+### Current Augmented Data (Phase 4 output, ready for SFT)
+
+| Metric | Value |
+|---|---|
+| Total trajectories | 6,947 (6.0x from 1,164 raw) |
+| Calendars | 114 |
+| Categories | 7 (balanced: 917-1,074 per category) |
+| Token budget | 3076 max (19 over, 0.27%) |
+| Median tokens | 596 |

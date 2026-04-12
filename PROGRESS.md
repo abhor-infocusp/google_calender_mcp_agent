@@ -1,7 +1,7 @@
 # Training Pipeline Progress
 
-> **Last updated:** 2026-03-28
-> **Current phase:** SFT Enhancement — Teacher model tuned (gemini-2.5-pro + v11 prompt + retry = 84.3%); compact tool returns implemented; ready for Phase 2 (100 new calendars)
+> **Last updated:** 2026-04-12
+> **Current phase:** SFT v5 eval complete. Best checkpoint: epoch 4 (74.6%). Ready for RL training.
 
 ---
 
@@ -16,12 +16,12 @@ Compact Data → Re-Augment → SFT Training v3 → Merge LoRA → Evaluate → 
 
 ### 1. Data Preparation — DONE
 
-**Original SFT data (compact):** `sft_data/trajectories/` — 161 trajectories
-- Compacted tool results: avg 1469 → 859 tokens/trajectory (41% reduction)
-- 159/161 fit within 3076 tokens (up from 4096 needed for verbose)
+**Original SFT data (compact):** `sft_data/trajectories/` — 1,164 trajectories (114 calendars, gemini-2.5-pro teacher)
+- Compact string tool results (not JSON dicts), median 596 tokens/trajectory
 
-**Augmented data:** `sft_data/trajectories_augmented/` — 1,039 trajectories
-- 161 original + 556 paraphrased + 322 entity-substituted
+**Augmented data:** `sft_data/trajectories_augmented/` — 6,947 trajectories
+- 1,164 original + entity substitution (2x) + category-weighted paraphrasing (2-5x)
+- 7 categories balanced at 917-1,074 each; 19 over 3076 token budget (0.27%)
 
 **RL data:** `rl_data/` — 622 scenarios across 50 calendars, 7 categories
 
@@ -178,29 +178,68 @@ Validation (n=5, noisy): oscillates 0-40%, no clear trend due to small sample.
 
 ---
 
-### 5. SFT Enhancement — Teacher Model Tuning — COMPLETE
+### 5. SFT Enhancement — Phases 1-6 COMPLETE
 
-Tuned the teacher model configuration for higher-quality trajectory generation.
+Full details in `sft_enhancement.md`. Summary of each phase:
 
-**Changes:**
-- Compact tool returns: JSON dicts → human-readable strings (list_events = summary lines, get_event = detail block with RSVP)
-- Prompt v11 ("plan once, execute"): simpler than v4, with "search YOUR calendar" instruction and tool return format examples
-- 3-attempt retry: absorbs Gemini stochasticity and judge inconsistency
+**Phase 1 — Teacher model tuning:** gemini-2.5-pro + v11 prompt + 3-attempt retry = 84.3% (59/70 queries)
+**Phase 2 — Calendar generation:** 100 new calendars (indices 20-119), 115 total with existing 0-19
+**Phase 3 — Trajectory generation:** 1,164 trajectories from 1,616 queries (72% solve rate), 114 calendars
+**Phase 4 — Augmentation:** 6,947 balanced trajectories (6.0x expansion), 917-1,074 per category
+**Phase 5 — SFT Training v5:** 10 epochs, narration merge fix, 6,901 trajectories
+**Phase 6 — Full eval (all 10 checkpoints):** Best = epoch 4 at 74.6%
 
-**Results (70-query benchmark, 5 calendars × 14 queries):**
+#### Phase 4 Bug Fix (2026-04-01)
 
-| Category | v4 single (72.9%) | v11 + retry (84.3%) |
-|---|---|---|
-| Schedule a Single Event | 8/10 | **10/10 (100%)** |
-| Vague & Contextual | 10/10 | **10/10 (100%)** |
-| Modifier & Correction | 7/10 | **10/10 (100%)** |
-| Information Retrieval | 8/10 | **9/10 (90%)** |
-| Complex Logic & Conflict | 6/10 | **8/10 (80%)** |
-| Relative Time References | 7/10 | **7/10 (70%)** |
-| Human Chaos | 5/10 | **5/10 (50%)** |
+Entity substitution augmentation had a critical bug: `extract_entities()` incorrectly treated `get_current_time` results (timestamps like `"2024-08-04 10:00:00 | Sunday"`) as event summaries and replaced them with random event names (e.g. `"Onboarding"`). **29.4% of training data (2,044/6,947) was corrupted.**
 
-**Config:** gemini-2.5-pro, prompt `prompts/v11_reason_act.txt`, eval judge gemini-2.0-flash-001
-**Next:** Phase 2 — generate 100 new calendars, then run trajectory generation with this config
+First training run on corrupted data scored **20.7% (epoch 1) and 18.6% (epoch 2)** on RL data vs 42.5% SFT v3 baseline. Model learned to narrate intent ("I will first get the current time...") instead of calling tools.
+
+Fix: added `get_current_time` name check in `extract_entities()` to skip timestamp results. Re-generated all 2,328 entity_substitution variants. Also added error-ending trajectory filter in training script (removes 46 trajectories with teacher model failures).
+
+#### Phase 5 — SFT Training v5
+
+- **6,901 trajectories** (46 error-ending filtered), 6,832 tokenized (69 too long)
+- 6,151 train / 684 val, ~1,538 steps/epoch, 10 epochs
+- Config: LoRA rank 64, loss masking, cosine_with_restarts (5 cycles), lr=2e-4
+- **Narration merge fix:** `trajectory_to_messages()` merges assistant narration into tool_call messages. Previously separate messages taught model to stop after narrating instead of calling tools (70% of data affected).
+- Training completed 2026-04-11, all 10 checkpoints + final model saved
+
+#### Phase 6 — SFT v5 Eval (all 10 checkpoints, RL data, 280 queries)
+
+| Epoch | Ckpt | Eval Loss | **Overall** | Complex | Chaos | IR | Modifier | RelTime | Schedule | Vague |
+|-------|------|-----------|-------------|---------|-------|----|----------|---------|----------|-------|
+| 1 | 1538 | 0.172 | 63.9% | 10/40 | 28/40 | 32/40 | 22/40 | 37/40 | 29/40 | 21/40 |
+| 2 | 3076 | 0.097 | 68.9% | 14/40 | 26/40 | 35/40 | 25/40 | 39/40 | 29/40 | 25/40 |
+| 3 | 4614 | 0.117 | 67.1% | 10/40 | 28/40 | 37/40 | 27/40 | 39/40 | 27/40 | 20/40 |
+| **4** | **6152** | **0.086** | **74.6%** | 13/40 | 31/40 | 38/40 | 30/40 | 37/40 | 35/40 | 25/40 |
+| 5 | 7690 | 0.106 | 64.6% | 9/40 | 25/40 | 34/40 | 21/40 | 38/40 | 32/40 | 22/40 |
+| 6 | 9228 | 0.088 | 73.2% | 13/40 | 32/40 | 36/40 | 29/40 | 38/40 | 32/40 | 25/40 |
+| 7 | 10766 | 0.095 | 68.2% | 11/40 | 30/40 | 32/40 | 26/40 | 39/40 | 30/40 | 23/40 |
+| 8 | 12304 | 0.095 | 70.4% | 13/40 | 30/40 | 35/40 | 28/40 | 37/40 | 32/40 | 22/40 |
+| 9 | 13842 | 0.101 | 67.1% | 11/40 | 29/40 | 35/40 | 23/40 | 37/40 | 31/40 | 22/40 |
+| 10 | 15370 | 0.101 | 69.6% | 11/40 | 30/40 | 34/40 | 29/40 | 38/40 | 26/40 | 27/40 |
+
+**Key findings:**
+- **Best checkpoint: epoch 4 (ckpt 6152) at 74.6%** — up from v3's 42.5% (+32pp)
+- Even/odd cosine pattern: epochs 2,4,6,8 consistently beat 3,5,7,9 (LR restart effect)
+- Performance peaks at epoch 4, overfits thereafter despite cosine restarts
+- Strongest categories: IR (95%), RelTime (92.5%), Schedule (87.5%) at epoch 4
+- Weakest: Complex (32.5%), Vague (62.5%) — candidates for RL improvement
+
+**Best checkpoint for RL:** epoch 4 (checkpoint-6152), merged to `sft_output/merged_tmp`
+
+Source: `sft_output/eval/summary.csv`, per-checkpoint details in `sft_output/eval/checkpoint-*.json`
+
+#### Eval Infrastructure Fixes (2026-04-01)
+
+- **vLLM pipe buffer deadlock:** `eval_all_checkpoints.py` piped vLLM stdout to `subprocess.PIPE` without reading it. After ~7-8 queries the 64KB buffer filled, vLLM blocked on write, all subsequent requests timed out. Fix: redirect to log file.
+- **max_model_len 3076→4096:** Tool definitions use ~509 tokens, leaving insufficient room for multi-turn conversations at 3076. Increased to 4096 for eval serving.
+- **HF_HUB_OFFLINE=1:** Added to merge subprocess to avoid HuggingFace connectivity issues on shared systems.
+- **Agent error logging:** eval_batch now shows actual error messages instead of generic "agent error".
+- **Unified tool result formatting:** All pipelines (SFT, eval, RL) use single `format_tool_result()` from `core.py`.
+
+**Augmented data:** `sft_data/trajectories_augmented/` — 6,947 trajectories (fixed), 114 calendars, 7 balanced categories
 
 ---
 
