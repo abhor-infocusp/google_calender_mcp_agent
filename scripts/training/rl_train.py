@@ -34,8 +34,8 @@ except ImportError:
 
 import calendar_agent.art_patches  # noqa: F401 — must be before art imports
 
-# Inject RL LoRA weights from previous run into the fresh adapter
-calendar_agent.art_patches.INJECT_LORA_CHECKPOINT = "rl_runs/single_category_modifier_correction/checkpoint"
+# No LoRA injection — starting fresh from SFT v5 baseline (74.6%)
+# calendar_agent.art_patches.INJECT_LORA_CHECKPOINT = "rl_runs/single_category_modifier_correction/checkpoint"
 
 import art
 import torch
@@ -524,7 +524,7 @@ async def main():
     all_scenarios = load_all_scenarios()
 
     # Filter to single category for focused training
-    CATEGORY_FILTER = "Information Retrieval"  # Set to "" to use all categories
+    CATEGORY_FILTER = "Vague & Contextual"  # Set to "" to use all categories
     if CATEGORY_FILTER:
         all_scenarios = [s for s in all_scenarios if CATEGORY_FILTER in s.category]
         print(f"Filtered to '{CATEGORY_FILTER}': {len(all_scenarios)} scenarios")
@@ -745,3 +745,5 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+    # ART/vLLM daemon threads don't shut down cleanly — force exit to free GPU
+    os._exit(0)
