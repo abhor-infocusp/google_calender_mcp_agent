@@ -1,7 +1,7 @@
 # Training Pipeline Progress
 
-> **Last updated:** 2026-04-12
-> **Current phase:** SFT v5 eval complete. Best checkpoint: epoch 4 (74.6%). Ready for RL training.
+> **Last updated:** 2026-04-14
+> **Current phase:** RL3 complete (no improvement). Planning migration to 24 GiB + larger model.
 
 ---
 
@@ -49,7 +49,7 @@ Compact Data → Re-Augment → SFT Training v3 → Merge LoRA → Evaluate → 
 
 Source: `rl_runs/single_category_modifier_correction/eval/eval_sft_baseline_rl.json`
 
-### 4. RL Training — IN PROGRESS
+### 4. RL Training — COMPLETE (no further improvement)
 
 #### Curriculum Sampler — ABANDONED
 
@@ -154,6 +154,65 @@ Validation (n=5, noisy): oscillates 0-40%, no clear trend due to small sample.
 
 **Archive:** `rl_runs/single_category_ir/` (checkpoint, eval JSONs, diagnostics, logs, README)
 
+#### Run: Vague & Contextual focused (from SFT v5) — COMPLETE, NO IMPROVEMENT
+
+- **88 scenarios** (all Vague from 50 calendars), starting fresh from SFT v5 baseline (74.6%)
+- **440 steps** (5 epochs), ~28 hours, no LoRA injection from prior RL runs
+- Config: same hyperparams as RL1/RL2, `beta=0.0`
+
+**Per-epoch accuracy (training rollouts, 8 per group):**
+
+| Epoch | Avg Accuracy | Skip Rate | Trained Steps |
+|---|---|---|---|
+| 0 | 65.9% | 51% | 43/88 |
+| 1 | 69.2% | 58% | 37/88 |
+| 2 | 67.2% | 58% | 37/88 |
+| 3 | 69.0% | 55% | 33/88 |
+| 4 | 69.2% | 52% | 42/88 |
+
+**Result:** Flat at 66-69% across all epochs. No eval run (no improvement to evaluate). Run deleted (no archive).
+
+#### Trajectory Analysis (2,464 trajectories from RL3)
+
+Deep analysis of all rollouts to understand model failure modes:
+
+**Failure mode breakdown (806 incorrect trajectories):**
+
+| Failure Mode | Count | % |
+|---|---|---|
+| Incomplete/wrong answer (right tools, wrong interpretation) | 638 | 79% |
+| Action instead of query (create/update when should read) | 131 | 16% |
+| No final answer (hit max turns) | 24 | 3% |
+| Malformed output (raw XML in content) | 13 | 1.6% |
+
+**Key correlations:**
+- `list_events` with time filter: **72.7%** accuracy vs **38.7%** without filter
+- Short tool results (≤1500 chars): **79.6%** accuracy vs **32.8%** for long (>1500 chars)
+- 5 scenarios at permanent 0% accuracy — require multi-step reasoning or user clarification
+
+**What the 1.5B model learned from SFT:**
+- ✓ Tool calling format, when to call which tool, multi-turn flow
+- ✓ Time filter construction (76% of correct trajectories)
+- ✗ Semantic reasoning over tool results ("for fun", "with clients", "related to real estate")
+- ✗ Multi-step inference ("what's after my networking event" → find it → filter)
+- ✗ Create vs query distinction (16% of failures)
+
+**Root cause:** Model learned the *procedure* (tool calling patterns) but not *comprehension* (interpreting results). This is a 1.5B capacity ceiling — the teacher model (Gemini) does this via semantic reasoning the small model cannot replicate.
+
+#### RL Conclusions
+
+After 4 RL runs (Mixed, Modifier, IR, Vague), GRPO on 1.5B with binary rewards is not viable:
+1. **Bimodal skip rate (50-65%)** — model too deterministic (entropy 0.02-0.05)
+2. **Catastrophic forgetting** — `beta=0.0`, no KL regularization
+3. **Capacity ceiling** — failures are comprehension, not procedure
+4. **Hardware limits** — 12 GiB restricts LoRA rank to 8, rollouts to 8, num_generations to 2
+
+**Alternatives to explore:**
+- **RFT/Expert Iteration** — generate rollouts, filter correct ones, SFT. Avoids skip problem entirely.
+- **Larger model (7B-14B)** — addresses comprehension gap. QLoRA: 14B needs only 8.5 GiB (Unsloth).
+- **Non-zero beta** — KL penalty prevents catastrophic forgetting
+- **Dr. GRPO / DAPO** — fixes advantage computation for binary rewards
+
 #### Experiment: SFT Recovery on RL1 — FAILED
 
 - 1 epoch SFT on top of RL1 Modifier checkpoint (merged to fp16, then 4-bit + fresh rank-64 LoRA)
@@ -178,7 +237,19 @@ Validation (n=5, noisy): oscillates 0-40%, no clear trend due to small sample.
 
 ---
 
-### 5. SFT Enhancement — Phases 1-6 COMPLETE
+### 5. Next Steps — Migration to 24 GiB
+
+**Hardware:** Moving to 24 GiB GPU system. Enables 7B-14B model training via QLoRA.
+
+**Plan:**
+1. **Larger model SFT** — Train Qwen2.5-7B or 14B-Instruct on existing 6,947 augmented trajectories. QLoRA 14B needs only 8.5 GiB (Unsloth). Addresses the comprehension gap (79% of failures).
+2. **Consider RFT/Expert Iteration** — Generate rollouts from trained model, filter correct ones via Gemini judge, SFT on them. Iterative. Avoids GRPO skip problem. Works on any VRAM.
+3. **Consider `_format_summary` enhancement** — Add attendees/description to list_events output. Helps queries needing attendee info. Requires trajectory regeneration.
+4. **If revisiting RL** — Use `beta>0` (KL penalty), Dr. GRPO (leave-one-out baseline), higher temperature for exploration.
+
+---
+
+### 6. SFT Enhancement — Phases 1-6 COMPLETE
 
 Full details in `sft_enhancement.md`. Summary of each phase:
 
