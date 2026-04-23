@@ -629,19 +629,19 @@ class StepTimer:
 async def main():
     # ── Model & Backend ──
     model = art.TrainableModel(
-        name="calendar-agent-001",
-        project="calendar-agent",
-        base_model="Qwen/Qwen3-14B",
+        name="calendar-agent-small-001",
+        project="calendar-agent-small",
+        base_model="Qwen/Qwen2.5-0.5B-Instruct",
         _internal_config=dev.InternalModelConfig(
             init_args=dev.InitArgs(
                 load_in_4bit=True,
-                max_lora_rank=64,
+                max_lora_rank=32,
             ),
             engine_args=dev.EngineArgs(
-                max_model_len=4096,
-                max_num_batched_tokens=4096,
+                max_model_len=2048,
+                max_num_batched_tokens=2048,
                 max_num_seqs=16,
-                gpu_memory_utilization=0.85,
+                gpu_memory_utilization=0.70,
                 enforce_eager=True,
                 enable_sleep_mode=True,
                 quantization="bitsandbytes",
@@ -665,7 +665,7 @@ async def main():
     backend = LocalBackend(in_process=True)
     from art.dev.openai_server import OpenAIServerConfig, ServerArgs
     await model.register(backend, _openai_client_config=OpenAIServerConfig(
-        server_args=ServerArgs(port=8005),
+        server_args=ServerArgs(port=8010),
     ))
 
     # ── Load Data ──
