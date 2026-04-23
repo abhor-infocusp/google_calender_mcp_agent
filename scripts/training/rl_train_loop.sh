@@ -15,10 +15,10 @@ export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 RUN_DIR="runs/rl_qwen3_14b_20260420"
 mkdir -p "${RUN_DIR}/logs/debug"
 
-# Patch G: back to 300s baseline — 30s/120s both thrashed under restart-loop
-# (first ~10 steps after a restart look slow due to vLLM wake + cold queue).
-export ART_DEADLOCK_TIMEOUT_S="${ART_DEADLOCK_TIMEOUT_S:-300}"
-# Keep deadlock log alongside the run's other logs
+# Patch G v2: per-attempt timeout + smart retry. 600s above p99 rollouts
+# duration (431s observed). Hard ceiling at 1800s = genuine pathology.
+export ART_DEADLOCK_TIMEOUT_S="${ART_DEADLOCK_TIMEOUT_S:-600}"
+export ART_DEADLOCK_HARD_CEILING_S="${ART_DEADLOCK_HARD_CEILING_S:-1800}"
 export ART_DEADLOCK_LOG_PATH="${RUN_DIR}/logs/debug/deadlock_detected.jsonl"
 
 # No restart cap — let it ride through as many deadlocks as needed.

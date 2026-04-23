@@ -201,97 +201,205 @@ def _patch_lora_injection():
     _log("F: UnslothState.__init__ — LoRA checkpoint injection")
 
 
-# ── Patch G: deadlock timeout on _async_prepare_inputs ────────────────
+# ── Patch G (v2): smart-retry timeout on _async_prepare_inputs ─────────
+
+# Optional callable set by the training script so Patch G can read
+# phase state when deciding retry vs real deadlock. Shape:
+#   () -> {"phase": str, "phase_age_s": float} | None
+_phase_getter = None
+
+
+def register_phase_getter(fn):
+    """Training script registers a callable that returns current phase info.
+
+    The patched _prepare_inputs uses it on timeout to distinguish a
+    legitimate inter-call wait (phase != model_train) from a real
+    in-step hang. Safe to never register — patch falls back to
+    conservative behavior (retry up to hard ceiling, then exit).
+    """
+    global _phase_getter
+    _phase_getter = fn
 
 
 def _patch_deadlock_timeout():
-    """Add a timeout to inputs_queue.get() inside _async_prepare_inputs.
+    """Timeout + smart retry on inputs_queue.get() inside _async_prepare_inputs.
 
-    ART's training bridge (service.py:988-996) has HF Trainer's sync
-    `_prepare_inputs` call into an asyncio.Queue via nest_asyncio. Under
-    race conditions the wakeup doesn't propagate and the get() blocks
-    forever. Observed in practice at steps 112, 1640, 2325, 2437 of our
-    training — same stack each time.
+    BACKGROUND
+    ART's training bridge (art/unsloth/service.py:984-998) has HF Trainer's
+    sync `_prepare_inputs` pull from an asyncio.Queue via nest_asyncio
+    (nested asyncio.run). Two failure modes exist:
 
-    This patch wraps the get() in asyncio.wait_for(timeout=300s). On
-    timeout, we've confirmed the process is deadlocked (normal step is
-    5-15s); we os._exit(42) so the outer shell can restart. ART
-    auto-resumes from the last saved checkpoint.
+    1. SPURIOUS TIMEOUTS (~93% of historical events, benign). The train_task
+       is long-lived across all model.train() calls; HF trainer.train runs
+       forever on a 10M-row dataset and calls `_prepare_inputs` in a loop.
+       Between model.train() calls, no one is putting on inputs_queue —
+       the next get() legitimately waits until the next gather completes
+       and the next model.train() starts producing. If that inter-call
+       gap (rollouts + judge + gc + checkpoint_delete) exceeds the
+       configured timeout, we see a timeout on a completely healthy
+       process. Observed: p99 rollouts duration = 431s, max = 560s.
 
-    Mirrors the pattern used upstream in PR #429 (OpenPipe/ART) which
-    applies the same timeout+recover treatment to results_queue.join()
-    (a sibling deadlock site in the same queue protocol).
+    2. REAL DEADLOCKS (rare, 57-hour hang on 2026-04-17). nest_asyncio +
+       asyncio.Queue can lose a wakeup signal between producer/consumer
+       when the producer runs on the outer loop and the consumer runs
+       on a nested-reentrant invocation. Detectable by: phase stuck at
+       "model_train" for >> per-attempt timeout AND no puts have happened
+       in that window.
+
+    STRATEGY
+    - Per-attempt timeout: ART_DEADLOCK_TIMEOUT_S (default 600s). On timeout,
+      collect diagnostics (queue size, time-since-last-put, current phase
+      and phase age) and DECIDE:
+        * If phase == "model_train" AND phase_age > timeout AND no puts in
+          > timeout → genuine hang. Emit "deadlock_exit" event, os._exit(42).
+        * Else → spurious (we're between model.train() calls or phase is
+          progressing). Emit "timeout_retry" event, loop and re-await.
+    - Hard ceiling: ART_DEADLOCK_HARD_CEILING_S (default 1800s total waited
+      across all retries). If we blow through it regardless of phase signals,
+      assume pathology and exit(42). Belt-and-suspenders.
+    - All events are written as JSON lines to ART_DEADLOCK_LOG_PATH. The
+      log can be mined later to track real deadlock rate vs spurious rate.
+
+    DOES NOT FIX THE UNDERLYING NEST_ASYNCIO RACE. For that, the
+    asyncio.Queue bridge in art.unsloth.service needs to be replaced with
+    a threading-based one (trainer.train moved to its own thread). Planned
+    as Patch I when/if real deadlock rate warrants the complexity.
     """
     import os
     import sys
+    import time
     from datetime import datetime
     from functools import cached_property
     from typing import cast
 
     from art.unsloth.service import UnslothService
 
-    # Configurable via ART_DEADLOCK_TIMEOUT_S. Default 300s for real training
-    # (normal step 5-15s → 20-60× margin). Stress harness sets 30s for faster
-    # iteration.
-    DEADLOCK_TIMEOUT_S = int(os.environ.get("ART_DEADLOCK_TIMEOUT_S", "300"))
-
-    orig_cached = UnslothService._state
-    # cached_property exposes the underlying function as .func
-    orig_state_func = orig_cached.func  # type: ignore[attr-defined]
-
-    # Log path configurable via ART_DEADLOCK_LOG_PATH. Default keeps legacy
-    # relative path for backward compat.
+    DEADLOCK_TIMEOUT_S = int(os.environ.get("ART_DEADLOCK_TIMEOUT_S", "600"))
+    HARD_CEILING_S = int(os.environ.get("ART_DEADLOCK_HARD_CEILING_S", "1800"))
     LOG_PATH = os.environ.get(
         "ART_DEADLOCK_LOG_PATH", "logs/debug/deadlock_detected.jsonl"
     )
+
+    orig_cached = UnslothService._state
+    orig_state_func = orig_cached.func  # type: ignore[attr-defined]
+
+    def _write_event(record: dict) -> None:
+        try:
+            os.makedirs(os.path.dirname(LOG_PATH) or ".", exist_ok=True)
+            with open(LOG_PATH, "a") as f:
+                import json
+                f.write(json.dumps(record) + "\n")
+        except Exception:
+            pass
 
     def _patched_state_func(self):
         state = orig_state_func(self)
         inputs_queue = state.inputs_queue
         trainer = state.trainer
 
-        def _timeout_prepare_inputs(*_args, **_kwargs):
-            async def _get_with_timeout():
-                try:
-                    return await asyncio.wait_for(
-                        inputs_queue.get(), timeout=DEADLOCK_TIMEOUT_S
-                    )
-                except asyncio.TimeoutError:
-                    # Best-effort step number (may not exist if deadlock pre-train)
-                    step = getattr(getattr(trainer, "state", None), "global_step", None)
-                    ts = datetime.now().isoformat()
-                    record = (
-                        f'{{"ts": "{ts}", "pid": {os.getpid()}, '
-                        f'"step": {step!r}, "timeout_s": {DEADLOCK_TIMEOUT_S}}}'
-                    )
-                    msg = (
-                        f"[ART DEADLOCK] _async_prepare_inputs: inputs_queue.get() "
-                        f"timed out after {DEADLOCK_TIMEOUT_S}s at step={step} "
-                        f"(known race in ART's queue bridge, see PR #429). "
-                        f"Exiting 42; ART will auto-resume from last checkpoint."
-                    )
-                    print(msg, flush=True)
-                    try:
-                        os.makedirs(os.path.dirname(LOG_PATH) or ".", exist_ok=True)
-                        with open(LOG_PATH, "a") as f:
-                            f.write(record + "\n")
-                    except Exception:
-                        pass
-                    # Hard exit — can't safely recover from inside a deadlocked
-                    # nested asyncio loop.
-                    os._exit(42)
+        # Wrap put_nowait to record last-put timestamp. process_train_batch
+        # is the only producer and calls put_nowait (service.py:119).
+        last_put_ts = [time.time()]  # list for closure mutability
+        orig_put_nowait = inputs_queue.put_nowait
 
-            return cast(dict, asyncio.run(_get_with_timeout()))
+        def _tracked_put_nowait(item):
+            last_put_ts[0] = time.time()
+            return orig_put_nowait(item)
+
+        inputs_queue.put_nowait = _tracked_put_nowait  # type: ignore[method-assign]
+
+        def _timeout_prepare_inputs(*_args, **_kwargs):
+            async def _get_with_smart_retry():
+                t_start = time.time()
+                attempt = 0
+                while True:
+                    try:
+                        return await asyncio.wait_for(
+                            inputs_queue.get(), timeout=DEADLOCK_TIMEOUT_S
+                        )
+                    except asyncio.TimeoutError:
+                        attempt += 1
+                        total_waited = time.time() - t_start
+                        since_last_put = time.time() - last_put_ts[0]
+                        qsize = getattr(inputs_queue, "qsize", lambda: -1)()
+                        step = getattr(
+                            getattr(trainer, "state", None), "global_step", None
+                        )
+                        phase, phase_age = "?", None
+                        if _phase_getter is not None:
+                            try:
+                                info = _phase_getter() or {}
+                                phase = info.get("phase", "?")
+                                phase_age = info.get("phase_age_s")
+                            except Exception:
+                                pass
+
+                        # Decide: spurious retry vs real deadlock vs hard ceiling
+                        real_deadlock = (
+                            phase == "model_train"
+                            and (phase_age is not None and phase_age > DEADLOCK_TIMEOUT_S)
+                            and since_last_put > DEADLOCK_TIMEOUT_S
+                        )
+                        over_ceiling = total_waited >= HARD_CEILING_S
+
+                        event = {
+                            "ts": datetime.now().isoformat(),
+                            "pid": os.getpid(),
+                            "event": (
+                                "deadlock_exit" if (real_deadlock or over_ceiling)
+                                else "timeout_retry"
+                            ),
+                            "step": step,
+                            "attempt": attempt,
+                            "timeout_s": DEADLOCK_TIMEOUT_S,
+                            "total_waited_s": round(total_waited, 1),
+                            "since_last_put_s": round(since_last_put, 1),
+                            "qsize": qsize,
+                            "phase": phase,
+                            "phase_age_s": (
+                                round(phase_age, 1) if phase_age is not None else None
+                            ),
+                            "reason": (
+                                "real_deadlock" if real_deadlock
+                                else "hard_ceiling" if over_ceiling
+                                else "spurious_healthy_wait"
+                            ),
+                        }
+                        _write_event(event)
+
+                        if real_deadlock or over_ceiling:
+                            msg = (
+                                f"[ART DEADLOCK] inputs_queue.get() real hang detected: "
+                                f"attempt={attempt} total_waited={total_waited:.0f}s "
+                                f"phase={phase} phase_age={phase_age} "
+                                f"since_last_put={since_last_put:.0f}s reason={event['reason']}. "
+                                f"Exiting 42; wrapper will auto-resume from checkpoint."
+                            )
+                            print(msg, flush=True)
+                            os._exit(42)
+                        else:
+                            msg = (
+                                f"[ART TIMEOUT-RETRY] attempt={attempt} "
+                                f"total_waited={total_waited:.0f}s phase={phase} "
+                                f"phase_age={phase_age} since_last_put={since_last_put:.0f}s "
+                                f"— healthy inter-call wait, retrying get()."
+                            )
+                            print(msg, flush=True)
+                            # loop — re-await with a fresh per-attempt timer
+                            continue
+
+            return cast(dict, asyncio.run(_get_with_smart_retry()))
 
         state.trainer._prepare_inputs = _timeout_prepare_inputs
         return state
 
     new_cached = cached_property(_patched_state_func)
-    # cached_property needs __set_name__ to know the attribute name; by
-    # assigning to a class attr after class creation, we must call it manually.
     new_cached.__set_name__(UnslothService, "_state")
     UnslothService._state = new_cached
-    _log(f"G: _async_prepare_inputs — timeout={DEADLOCK_TIMEOUT_S}s + exit(42) on queue deadlock")
+    _log(
+        f"G(v2): _async_prepare_inputs — per-attempt={DEADLOCK_TIMEOUT_S}s "
+        f"hard-ceiling={HARD_CEILING_S}s smart-retry + structured telemetry"
+    )
 
 
 # ── Patch H: swallow tokenize_trajectory failures ────────────────────

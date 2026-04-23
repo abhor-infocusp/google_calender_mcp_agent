@@ -85,6 +85,27 @@ def set_phase(phase: str, step: int | None = None) -> None:
     print(f"[PHASE] {phase} step={_current_phase.get('step')} t={datetime.now().isoformat()}")
 
 
+def _phase_snapshot() -> dict:
+    """Phase-getter for art_patches.Patch G — lets the timeout handler
+    distinguish healthy inter-call waits from real hangs."""
+    with PHASE_LOCK:
+        snap = dict(_current_phase)
+    return {
+        "phase": snap.get("phase", "?"),
+        "phase_age_s": time.time() - snap.get("phase_start", time.time()),
+        "step": snap.get("step"),
+    }
+
+
+# Register with art_patches if it's been imported (it is — rl_train.py
+# imports calendar_agent.art_patches at module top via set_phase stack).
+try:
+    from calendar_agent import art_patches as _art_patches
+    _art_patches.register_phase_getter(_phase_snapshot)
+except Exception:
+    pass
+
+
 def _heartbeat_loop(interval: int = 30) -> None:
     """Append one JSONL record every `interval` seconds with the current
     phase and how long we've been in it. If training stalls, the last few
@@ -111,6 +132,93 @@ def _heartbeat_loop(interval: int = 30) -> None:
 
 # Start heartbeat thread at import time (daemon = dies with process)
 threading.Thread(target=_heartbeat_loop, args=(30,), daemon=True).start()
+
+
+# ── Run metadata snapshot ──────────────────────────────────────────────
+def _write_run_metadata() -> None:
+    """Append one entry to runs/<run>/metadata.jsonl at every process start.
+    Each entry captures what this run looked like at launch: git sha, env,
+    deps, pid. Never overwrites earlier entries — the jsonl grows with
+    each restart so we can trace the full history of a long experiment."""
+    import json as _json
+    import subprocess as _sub
+    import socket as _sock
+
+    RUN_DIR = os.environ.get("RL_RUN_DIR", "runs/rl_qwen3_14b_20260420")
+    meta_path = os.path.join(RUN_DIR, "metadata.jsonl")
+
+    def _sh(cmd: list[str], default: str = "") -> str:
+        try:
+            return _sub.check_output(cmd, stderr=_sub.DEVNULL, timeout=5).decode().strip()
+        except Exception:
+            return default
+
+    def _pkg_version(name: str) -> str:
+        try:
+            from importlib.metadata import version
+            return version(name)
+        except Exception:
+            return "?"
+
+    entry = {
+        "ts": datetime.now().isoformat(),
+        "pid": os.getpid(),
+        "host": _sock.gethostname(),
+        "script": __file__,
+        "git_commit": _sh(["git", "rev-parse", "HEAD"], "?"),
+        "git_dirty": bool(_sh(["git", "status", "--porcelain"])),
+        "run_dir": RUN_DIR,
+        "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES", ""),
+        "art_deadlock_timeout_s": os.environ.get("ART_DEADLOCK_TIMEOUT_S", "default"),
+        "art_deadlock_hard_ceiling_s": os.environ.get("ART_DEADLOCK_HARD_CEILING_S", "default"),
+        "python_version": sys.version.split()[0],
+        "packages": {
+            pkg: _pkg_version(pkg)
+            for pkg in ["openpipe-art", "unsloth", "trl", "transformers", "vllm", "torch", "peft"]
+        },
+    }
+    try:
+        os.makedirs(os.path.dirname(meta_path) or ".", exist_ok=True)
+        with open(meta_path, "a") as f:
+            f.write(_json.dumps(entry) + "\n")
+        print(f"[metadata] wrote run metadata → {meta_path}")
+    except Exception as e:
+        print(f"[metadata] failed to write: {e}")
+
+
+_write_run_metadata()
+
+
+# ── Heartbeat-stuck alert thread ───────────────────────────────────────
+# Watches _current_phase and logs a LOUD warning if the phase hasn't
+# changed for too long. Cheap supplement to Patch G — catches "soft"
+# stalls (e.g. gather hung on slow external API) that aren't reflected
+# by the inputs_queue.
+def _stuck_alert_loop(check_interval: int = 60, alert_after: int = 600) -> None:
+    last_alerted_phase = None
+    while True:
+        try:
+            with PHASE_LOCK:
+                snap = dict(_current_phase)
+            age = time.time() - snap.get("phase_start", time.time())
+            phase = snap.get("phase", "?")
+            if age >= alert_after:
+                # alert once per stall-event (resets when phase changes)
+                if (phase, snap.get("phase_start")) != last_alerted_phase:
+                    print(
+                        f"[STUCK-ALERT] phase={phase} has been running for "
+                        f"{age:.0f}s (threshold={alert_after}s). step={snap.get('step')}",
+                        flush=True,
+                    )
+                    last_alerted_phase = (phase, snap.get("phase_start"))
+            else:
+                last_alerted_phase = None
+        except Exception:
+            pass
+        time.sleep(check_interval)
+
+
+threading.Thread(target=_stuck_alert_loop, args=(60, 600), daemon=True).start()
 
 
 def dump_pyspy(reason: str) -> str | None:
