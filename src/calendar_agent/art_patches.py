@@ -16,6 +16,7 @@ Usage:
 """
 
 import asyncio
+import re
 from typing import TYPE_CHECKING
 
 import torch
@@ -427,21 +428,63 @@ def _patch_tokenize_safe():
     import art.preprocessing.tokenize as _tok_mod
 
     _orig_tokenize_trajectory = _tok_mod.tokenize_trajectory
-    _fail_count = {"n": 0}
+    _counts = {"repair": 0, "drop": 0}
 
-    def _safe_tokenize_trajectory(*args, **kwargs):
+    EMPTY_THINK_RE = re.compile(r"^\s*(<think>\s*</think>)?\s*$")
+
+    def _get(m, key):
+        if isinstance(m, dict):
+            return m.get(key)
+        return getattr(m, key, None)
+
+    def _set_content(m, value):
+        if isinstance(m, dict):
+            m["content"] = value
+        else:
+            m.content = value
+
+    def _try_repair(trajectory) -> bool:
+        msgs = (
+            getattr(trajectory, "messages_and_choices", None)
+            or getattr(trajectory, "messages", None)
+        )
+        if not msgs:
+            return False
+        for i in range(len(msgs) - 1, -1, -1):
+            m = msgs[i]
+            if _get(m, "role") != "assistant":
+                continue
+            content = _get(m, "content") or ""
+            if EMPTY_THINK_RE.match(content):
+                _set_content(m, " ")
+                return True
+            return False
+        return False
+
+    def _safe_tokenize_trajectory(trajectory, *args, **kwargs):
         try:
-            return _orig_tokenize_trajectory(*args, **kwargs)
+            return _orig_tokenize_trajectory(trajectory, *args, **kwargs)
         except Exception as e:
-            _fail_count["n"] += 1
+            if _try_repair(trajectory):
+                try:
+                    result = _orig_tokenize_trajectory(trajectory, *args, **kwargs)
+                    _counts["repair"] += 1
+                    print(
+                        f"[TOKENIZE REPAIR #{_counts['repair']}] empty-final-think "
+                        f"patched to ' ' — trajectory retained for training"
+                    )
+                    return result
+                except Exception as e2:
+                    e = e2
+            _counts["drop"] += 1
             print(
-                f"[TOKENIZE SKIP #{_fail_count['n']}] {type(e).__name__}: "
-                f"{str(e)[:200]} — dropping trajectory, continuing training"
+                f"[TOKENIZE DROP #{_counts['drop']}] {type(e).__name__}: "
+                f"{str(e)[:200]} — repair failed, dropping trajectory"
             )
             return None
 
     _tok_mod.tokenize_trajectory = _safe_tokenize_trajectory
-    _log("H: tokenize_trajectory — swallow exceptions (skip bad trajectory, continue)")
+    _log("H: tokenize_trajectory — repair empty-final-think, drop only if unrepairable")
 
 
 # ── Apply all patches on import ───────────────────────────────────────
