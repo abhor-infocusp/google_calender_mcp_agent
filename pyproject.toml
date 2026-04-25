@@ -1,24 +1,47 @@
 [project]
-name = "google-calender-mcp-agent"
-version = "0.1.0"
-description = "Agentic calendar assistant using tool-calling to manage Google Calendar events"
+name = "calendar-agent"
+version = "0.2.0"
+description = "Tool-calling RL agent for Google Calendar — SFT + GRPO pipeline on Qwen3-14B."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.11,<3.12"
+license = { text = "Proprietary" }
+
+# Pinned to the versions installed in the `agentic` conda env that produced
+# our working RL runs (verified via metadata.jsonl on 2026-04-25). Bump
+# deliberately; this stack has version-specific patches in art_patches.py.
 dependencies = [
-    "pydantic>=2.12.5",
+    "torch==2.10.0",
+    "vllm==0.19.0",
+    "unsloth==2026.4.4",
+    "transformers==4.57.6",
+    "trl==0.24.0",
+    "peft==0.19.0",
+    "openpipe-art==0.5.17",
+    "nest_asyncio>=1.6.0",
+    "openai>=1.40",
+    "google-cloud-aiplatform>=1.60",
+    "vertexai>=1.60",
+    "matplotlib>=3.7",
+    "numpy",
+    "pandas",
+    "pydantic>=2.0",
+    "tqdm",
+    "safetensors",
 ]
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=9.0.2",
+    "pytest>=8.0",
+    "py-spy>=0.3",
+    "ipython",
 ]
 
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/calendar_agent"]
+[tool.setuptools]
+package-dir = {"" = "src"}
 
-[tool.pytest.ini_options]
-testpaths = ["tests"]
+[tool.setuptools.packages.find]
+where = ["src"]

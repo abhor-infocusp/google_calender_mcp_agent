@@ -32,14 +32,36 @@ sft_data/trajectories_augmented/
 .python-version
 .art/
 .claude/
-CLAUDE.md
 uv.lock
+# CLAUDE.md is intentionally tracked — it's the project's standing instructions.
+
+# Editor / AI agent scratch
+.aider*
+.repomix*
+.context.md
 
 # Utilities
 kill_gpu.sh
 
 # RL run checkpoints (large model files), but track eval/diagnostics/README
 rl_runs/*/checkpoint/
+
+# Per-run output directories — track only metadata, summaries, eval results, READMEs.
+# Large transient artifacts (logs, checkpoints, raw diagnostics) stay out.
+runs/*/checkpoints/
+runs/*/logs/
+runs/*/diagnostics/*.json
+runs/*/diagnostics/*.png
+!runs/*/config.json
+!runs/*/metadata.jsonl
+!runs/*/eval/
+!runs/*/diagnostics/*.csv
+!runs/README.md
+!runs/archive/**
+
+# Standalone debug artifacts at repo root
+heartbeat.jsonl
+deadlock_detected.jsonl
 
 # OS
 .DS_Store
