@@ -344,6 +344,8 @@ def _patch_deadlock_timeout():
                         over_ceiling = total_waited >= HARD_CEILING_S
 
                         event = {
+                            "schema_version": 1,
+                            "patch": "G_v2",
                             "ts": datetime.now().isoformat(),
                             "pid": os.getpid(),
                             "event": (
@@ -487,6 +489,241 @@ def _patch_tokenize_safe():
     _log("H: tokenize_trajectory — repair empty-final-think, drop only if unrepairable")
 
 
+# ── Patch I: threading-queue bridge (opt-in, replaces Patch G) ────────
+
+
+def _patch_threading_bridge():
+    """Replace ART's asyncio.Queue + nest_asyncio bridge with threading queues.
+
+    Eliminates the nest_asyncio + asyncio.Queue lost-wakeup race that causes
+    rare but real multi-hour hangs (e.g. the 57h hang on 2026-04-17; 3 hangs
+    today under external GPU contention).
+
+    Architecture change:
+      - inputs_queue: asyncio.Queue → queue.Queue (plain threading).
+        Producer (process_train_batch, async context) calls put_nowait —
+        thread-safe. Consumer (trainer._prepare_inputs, on the train thread)
+        calls get(timeout=...) — blocking in the thread, not the event loop.
+      - results_queue: asyncio.Queue → BridgeQueue (queue.Queue subclass with
+        coroutine-returning .get()/.join() when called in an asyncio context).
+        Producer (trainer.log, on the train thread) calls put_nowait —
+        thread-safe. Consumers (`await results_queue.get()` in process_train_batch,
+        `await results_queue.join()` in _train_shared) get coroutines via
+        run_in_executor wrappers.
+      - art.unsloth.train.train: monkey-patched to run trainer.train() via
+        `await loop.run_in_executor(None, trainer.train)` instead of calling
+        it synchronously. This moves HF trainer onto a real OS thread so the
+        threading-queue blocking get() doesn't freeze the event loop.
+
+    Timeouts and the smart-retry logic from Patch G v2 are preserved on the
+    consumer side — if threading-queue.get() times out, inspect the registered
+    phase snapshot and decide retry vs real-hang exit.
+
+    OPT-IN: set env var ART_USE_THREADING_BRIDGE=1. Mutually exclusive with
+    Patch G v2 (only one of them patches _state).
+    """
+    import os
+    import queue as _queue_mod
+    import time
+    from datetime import datetime
+    from functools import cached_property
+    from typing import cast
+
+    from art.unsloth.service import UnslothService
+    import art.unsloth.train as _train_mod
+
+    DEADLOCK_TIMEOUT_S = int(os.environ.get("ART_DEADLOCK_TIMEOUT_S", "600"))
+    HARD_CEILING_S = int(os.environ.get("ART_DEADLOCK_HARD_CEILING_S", "1800"))
+    LOG_PATH = os.environ.get(
+        "ART_DEADLOCK_LOG_PATH", "logs/debug/deadlock_detected.jsonl"
+    )
+
+    class BridgeQueue(_queue_mod.Queue):
+        """Thread-safe queue whose .get() and .join() return coroutines when
+        called inside an asyncio event loop, staying sync for thread callers.
+        put_nowait/task_done are inherited unchanged (sync, thread-safe)."""
+
+        async def _async_get(self):
+            loop = asyncio.get_event_loop()
+            return await loop.run_in_executor(None, _queue_mod.Queue.get, self)
+
+        async def _async_join(self):
+            loop = asyncio.get_event_loop()
+            return await loop.run_in_executor(None, _queue_mod.Queue.join, self)
+
+        def get(self, block=True, timeout=None):  # type: ignore[override]
+            # From asyncio context: return a coroutine (await it).
+            # From a non-loop thread: sync blocking get, unchanged.
+            try:
+                running = asyncio._get_running_loop()
+            except Exception:
+                running = None
+            if running is not None and block and timeout is None:
+                return self._async_get()
+            return _queue_mod.Queue.get(self, block, timeout)
+
+        def join(self):  # type: ignore[override]
+            try:
+                running = asyncio._get_running_loop()
+            except Exception:
+                running = None
+            if running is not None:
+                return self._async_join()
+            return _queue_mod.Queue.join(self)
+
+    orig_cached = UnslothService._state
+    orig_state_func = orig_cached.func  # type: ignore[attr-defined]
+
+    def _write_event(record: dict) -> None:
+        try:
+            os.makedirs(os.path.dirname(LOG_PATH) or ".", exist_ok=True)
+            with open(LOG_PATH, "a") as f:
+                import json as _json
+                f.write(_json.dumps(record) + "\n")
+        except Exception:
+            pass
+
+    def _patched_state_func(self):
+        state = orig_state_func(self)
+        # Replace the queues with threading variants.
+        t_inputs: _queue_mod.Queue = _queue_mod.Queue()
+        t_results: BridgeQueue = BridgeQueue()
+        state.inputs_queue = t_inputs
+        state.results_queue = t_results
+        trainer = state.trainer
+
+        # Track last-put timestamp for diagnostics (same as Patch G v2).
+        last_put_ts = [time.time()]
+        orig_put_nowait = t_inputs.put_nowait
+
+        def _tracked_put_nowait(item):
+            last_put_ts[0] = time.time()
+            return orig_put_nowait(item)
+
+        t_inputs.put_nowait = _tracked_put_nowait  # type: ignore[method-assign]
+
+        def _sync_prepare_inputs(*_args, **_kwargs):
+            """Sync blocking read from threading inputs_queue — runs on the
+            trainer thread. On timeout, apply Patch G v2's smart-retry logic."""
+            t_start = time.time()
+            attempt = 0
+            while True:
+                try:
+                    return t_inputs.get(timeout=DEADLOCK_TIMEOUT_S)
+                except _queue_mod.Empty:
+                    pass
+                attempt += 1
+                total_waited = time.time() - t_start
+                since_last_put = time.time() - last_put_ts[0]
+                step = getattr(
+                    getattr(trainer, "state", None), "global_step", None
+                )
+                phase, phase_age = "?", None
+                if _phase_getter is not None:
+                    try:
+                        info = _phase_getter() or {}
+                        phase = info.get("phase", "?")
+                        phase_age = info.get("phase_age_s")
+                    except Exception:
+                        pass
+
+                real_deadlock = (
+                    phase == "model_train"
+                    and (phase_age is not None and phase_age > DEADLOCK_TIMEOUT_S)
+                    and since_last_put > DEADLOCK_TIMEOUT_S
+                )
+                over_ceiling = total_waited >= HARD_CEILING_S
+
+                event = {
+                    "schema_version": 1,
+                    "patch": "I",
+                    "ts": datetime.now().isoformat(),
+                    "pid": os.getpid(),
+                    "event": (
+                        "deadlock_exit" if (real_deadlock or over_ceiling)
+                        else "timeout_retry"
+                    ),
+                    "bridge": "threading",
+                    "step": step,
+                    "attempt": attempt,
+                    "timeout_s": DEADLOCK_TIMEOUT_S,
+                    "total_waited_s": round(total_waited, 1),
+                    "since_last_put_s": round(since_last_put, 1),
+                    "qsize": t_inputs.qsize(),
+                    "phase": phase,
+                    "phase_age_s": (
+                        round(phase_age, 1) if phase_age is not None else None
+                    ),
+                    "reason": (
+                        "real_deadlock" if real_deadlock
+                        else "hard_ceiling" if over_ceiling
+                        else "spurious_healthy_wait"
+                    ),
+                }
+                _write_event(event)
+
+                if real_deadlock or over_ceiling:
+                    print(
+                        f"[ART DEADLOCK(bridge=threading)] real hang: attempt={attempt} "
+                        f"waited={total_waited:.0f}s phase={phase} phase_age={phase_age} "
+                        f"since_put={since_last_put:.0f}s reason={event['reason']}. Exit 42.",
+                        flush=True,
+                    )
+                    os._exit(42)
+                else:
+                    print(
+                        f"[ART TIMEOUT-RETRY(bridge=threading)] attempt={attempt} "
+                        f"waited={total_waited:.0f}s phase={phase} since_put={since_last_put:.0f}s "
+                        f"— healthy wait, retrying get().",
+                        flush=True,
+                    )
+                    # loop continues with a fresh per-attempt timer
+
+        trainer._prepare_inputs = _sync_prepare_inputs
+        return state
+
+    new_cached = cached_property(_patched_state_func)
+    new_cached.__set_name__(UnslothService, "_state")
+    UnslothService._state = new_cached
+
+    # Also patch art.unsloth.train.train to run trainer.train on a real OS
+    # thread so threading-queue blocking get() in _prepare_inputs doesn't
+    # freeze the event loop.
+    _orig_train_fn = _train_mod.train
+
+    async def _thread_bridged_train(trainer, results_queue):
+        from collections import defaultdict
+        _compute_loss = trainer.compute_loss
+        _log = trainer.log
+        trainer.compute_loss = _train_mod.get_compute_loss_fn(trainer)
+        trainer.log = _train_mod.get_log_fn(trainer, results_queue)  # type: ignore[method-assign]
+        try:
+            is_dict = isinstance(getattr(trainer, "_metrics", None), dict)
+            is_train_dict = is_dict and isinstance(
+                trainer._metrics.get("train"), dict
+            )
+        except Exception:
+            is_train_dict = False
+        if not is_train_dict:
+            trainer._metrics = {"train": defaultdict(list)}
+        try:
+            loop = asyncio.get_event_loop()
+            # Run blocking HF trainer.train on the default thread pool. The
+            # event loop stays free to run rollouts / process_train_batch
+            # while the thread is blocked in _sync_prepare_inputs.
+            await loop.run_in_executor(None, trainer.train)
+        finally:
+            trainer.compute_loss = _compute_loss
+            trainer.log = _log  # type: ignore[method-assign]
+
+    _train_mod.train = _thread_bridged_train
+
+    _log(
+        f"I: threading-bridge — inputs_queue=queue.Queue, results_queue=BridgeQueue, "
+        f"trainer.train=on-thread. timeout={DEADLOCK_TIMEOUT_S}s ceiling={HARD_CEILING_S}s"
+    )
+
+
 # ── Apply all patches on import ───────────────────────────────────────
 
 
@@ -497,9 +734,15 @@ def apply_all():
     _patch_calculate_logprobs()
     _patch_done_callback()
     _patch_lora_injection()
-    _patch_deadlock_timeout()
+    # Patch I and Patch G v2 both hook _state — mutually exclusive.
+    use_threading = os.environ.get("ART_USE_THREADING_BRIDGE", "0") == "1"
+    if use_threading:
+        _patch_threading_bridge()
+    else:
+        _patch_deadlock_timeout()
     _patch_tokenize_safe()
     print(f"[art_patches] All {len(_APPLIED)} patches applied successfully")
 
 
+import os  # noqa: E402 — used in apply_all's env check
 apply_all()

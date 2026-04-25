@@ -119,6 +119,7 @@ def _heartbeat_loop(interval: int = 30) -> None:
                 snap = dict(_current_phase)
             now = time.time()
             record = {
+                "schema_version": 1,
                 "ts": datetime.now().isoformat(),
                 "phase": snap["phase"],
                 "step": snap["step"],
@@ -172,6 +173,7 @@ def _write_run_metadata() -> None:
     ])
 
     entry = {
+        "schema_version": 2,  # v2: added isolation knobs + nvidia_smi snapshot
         "ts": datetime.now().isoformat(),
         "pid": os.getpid(),
         "host": _sock.gethostname(),
