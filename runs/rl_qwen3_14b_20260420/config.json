@@ -1,0 +1,42 @@
+{
+  "kind": "rl",
+  "model": "Qwen/Qwen3-14B",
+  "framework": "openpipe-art 0.5.17 (GRPO)",
+  "base_model_init": {
+    "load_in_4bit": true,
+    "max_lora_rank": 64,
+    "max_model_len": 4096,
+    "max_num_seqs": 16,
+    "gpu_memory_utilization": 0.85,
+    "enforce_eager": true,
+    "quantization": "bitsandbytes"
+  },
+  "hparams": {
+    "groups_per_step": 1,
+    "rollouts_per_group": 8,
+    "num_generations": 4,
+    "num_epochs": 20,
+    "learning_rate": 5e-6,
+    "lr_scheduler": "cosine",
+    "optim": "adamw_torch",
+    "per_device_train_batch_size": 4,
+    "gradient_accumulation_steps": 1,
+    "max_grad_norm": 0.1,
+    "max_completion_length": 512,
+    "beta": 0.0,
+    "bf16": true
+  },
+  "data": {
+    "source": "rl_data/",
+    "scenarios": 622,
+    "categories": "all 7 (CATEGORY_FILTER='')",
+    "val_split": 0
+  },
+  "started_at": "2026-04-20T13:37:00",
+  "relaunched_at": "2026-04-20T19:15:00 (after dir reorg)",
+  "last_git_sha_before_reorg": "2a9e26861ed7b78676613585a17f62f2cb91c5c5",
+  "notes": "Restarted after hang at step 2325 on 2026-04-17 (57h stall inside model.train()). Relaunched 2026-04-20 via rl_train_loop.sh with Patch G (300s queue-get timeout + exit 42). ART state symlinked from ./checkpoints. All categories trained jointly.",
+  "art_state_location": ".art/calendar-agent/models/calendar-agent-001/",
+  "mig_slice": "0 (MIG-5dc2f940-5003-58b0-a068-bede55f1d56f)",
+  "last_checkpoint_step_before_reorg": 2816
+}
