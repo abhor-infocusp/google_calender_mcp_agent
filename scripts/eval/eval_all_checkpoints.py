@@ -1,42 +1,52 @@
 #!/usr/bin/env python3
-"""Evaluate SFT checkpoints on RL data: merge LoRA, serve via vLLM, run eval.
+"""Evaluate SFT checkpoints on RL data: peft-merge LoRA, serve via vLLM on MIG slice 2, run eval.
 
-Discovers checkpoints dynamically from sft_output/checkpoint-*.
-Skips already-evaluated ones (checks sft_output/eval/checkpoint-{N}.json).
-Run manually whenever new checkpoints appear from training.
+Discovers checkpoints dynamically from $RUN_DIR/checkpoints/checkpoint-*.
+Skips already-evaluated ones (checks $RUN_DIR/eval/checkpoint-{N}.json).
+Skips already-merged ones (checks $RUN_DIR/eval/merged_tmp_{N}/config.json).
 
 Results:
-    sft_output/eval/checkpoint-{N}.json  — per-checkpoint detailed results
-    sft_output/eval/summary.csv          — one row per checkpoint
+    $RUN_DIR/eval/checkpoint-{N}.json   per-checkpoint detailed results
+    $RUN_DIR/eval/summary.csv           one row per checkpoint
 
 Usage:
     PYTHONPATH=src python scripts/eval/eval_all_checkpoints.py
+    RUN_DIR=runs/sft_v6_qwen3_14b_20260420 PYTHONPATH=src python scripts/eval/eval_all_checkpoints.py
 """
 
 import csv
 import json
 import os
 import re
+import signal
 import subprocess
 import sys
 import time
+import urllib.request
 from collections import defaultdict
 
 sys.stdout.reconfigure(line_buffering=True)
 sys.stderr.reconfigure(line_buffering=True)
 
-from calendar_agent.paths import PROJECT_ROOT, SFT_OUTPUT_DIR
+from calendar_agent.paths import PROJECT_ROOT
 
 PYTHON = sys.executable
 PROJECT = str(PROJECT_ROOT)
-SFT_OUTPUT = str(SFT_OUTPUT_DIR)
-MERGED_DIR = os.path.join(SFT_OUTPUT, "merged_tmp")
-EVAL_DIR = os.path.join(SFT_OUTPUT, "eval")
+RUN_DIR = os.environ.get("RUN_DIR", "runs/sft_v6_qwen3_14b_20260420")
+CKPT_DIR = os.path.join(RUN_DIR, "checkpoints")
+EVAL_SUBDIR = os.environ.get("EVAL_SUBDIR", "eval")
+EVAL_DIR = os.path.join(RUN_DIR, EVAL_SUBDIR)
+LOG_DIR = os.path.join(EVAL_DIR, "logs")
 SUMMARY_CSV = os.path.join(EVAL_DIR, "summary.csv")
-LOSS_CSV = os.path.join(SFT_OUTPUT, "epoch_losses.csv")
-PORT = 8005
+LOSS_CSV = os.path.join(RUN_DIR, "diagnostics", "epoch_losses.csv")
 
-# Short names for summary table columns (same order as sorted full names)
+BASE_MODEL = os.environ.get("BASE_MODEL", "Qwen/Qwen3-14B")
+MIG_UUID = os.environ.get("MIG_UUID", "MIG-dd607cdf-e8cb-531f-b478-417160625a35")
+PORT = int(os.environ.get("EVAL_PORT", "8006"))
+SERVED_NAME = os.environ.get("SERVED_NAME", "ckpt-eval")
+EVAL_MODE = os.environ.get("EVAL_MODE", "rl")  # "rl" | "test"
+NUM_CALENDARS = int(os.environ.get("NUM_CALENDARS", "20"))
+
 CATEGORY_ORDER = [
     "Complex Logic & Conflict (Advanced)",
     "Human Chaos (Edge Cases/Fragments)",
@@ -60,29 +70,26 @@ CATEGORY_SHORT = {
 # ── Discovery & metadata ─────────────────────────────────────
 
 def discover_checkpoints():
-    """Find all checkpoint-* dirs, return sorted list of (step, path)."""
     checkpoints = []
-    for name in os.listdir(SFT_OUTPUT):
+    if not os.path.isdir(CKPT_DIR):
+        return checkpoints
+    for name in os.listdir(CKPT_DIR):
         m = re.match(r"checkpoint-(\d+)$", name)
         if m:
             step = int(m.group(1))
-            path = os.path.join(SFT_OUTPUT, name)
-            checkpoints.append((step, path))
+            checkpoints.append((step, os.path.join(CKPT_DIR, name)))
     return sorted(checkpoints)
 
 
 def get_checkpoint_epoch(ckpt_path):
-    """Read epoch from trainer_state.json."""
     state_path = os.path.join(ckpt_path, "trainer_state.json")
     if os.path.exists(state_path):
         with open(state_path) as f:
-            state = json.load(f)
-        return state.get("epoch", None)
+            return json.load(f).get("epoch", None)
     return None
 
 
 def read_epoch_losses():
-    """Read epoch_losses.csv, return {epoch: (train_loss, eval_loss)}."""
     losses = {}
     if not os.path.exists(LOSS_CSV):
         return losses
@@ -94,22 +101,17 @@ def read_epoch_losses():
             parts = line.split(",")
             if len(parts) >= 3:
                 try:
-                    epoch = int(parts[0])
-                    train_loss = float(parts[1])
-                    eval_loss = float(parts[2])
-                    losses[epoch] = (train_loss, eval_loss)
+                    losses[int(parts[0])] = (float(parts[1]), float(parts[2]))
                 except ValueError:
                     continue
     return losses
 
 
 def is_evaluated(step):
-    """Check if checkpoint already has eval results."""
     return os.path.exists(os.path.join(EVAL_DIR, f"checkpoint-{step}.json"))
 
 
 def load_eval_result(step):
-    """Load saved eval result for a checkpoint."""
     path = os.path.join(EVAL_DIR, f"checkpoint-{step}.json")
     if os.path.exists(path):
         with open(path) as f:
@@ -118,7 +120,6 @@ def load_eval_result(step):
 
 
 def category_breakdown(results):
-    """Compute per-category accuracy from result list."""
     cats = defaultdict(lambda: {"correct": 0, "total": 0})
     for r in results:
         cat = r["category"]
@@ -132,116 +133,165 @@ def category_breakdown(results):
     return breakdown
 
 
-# ── vLLM & eval operations ───────────────────────────────────
+# ── Merge & Serve ─────────────────────────────────────────────
 
-def kill_vllm():
-    """Kill any vLLM process on PORT and free GPU memory."""
-    subprocess.run(f"lsof -ti :{PORT} | xargs -r kill -9", shell=True, capture_output=True)
-    time.sleep(2)
-    result = subprocess.run(
-        "nvidia-smi --query-compute-apps=pid --format=csv,noheader",
-        shell=True, capture_output=True, text=True,
-    )
-    for line in result.stdout.strip().split("\n"):
-        pid = line.strip()
-        if not pid:
-            continue
-        owner = subprocess.run(f"ps -p {pid} -o user=", shell=True, capture_output=True, text=True)
-        if "abhor" in owner.stdout:
-            subprocess.run(f"kill -9 {pid}", shell=True, capture_output=True)
-    time.sleep(3)
+def merged_dir(step):
+    return os.path.join(EVAL_DIR, f"merged_tmp_{step}")
 
 
-def merge_checkpoint(ckpt_num):
-    """Merge LoRA checkpoint into fp16 model."""
-    ckpt_path = os.path.join(SFT_OUTPUT, f"checkpoint-{ckpt_num}")
-    print(f"Merging checkpoint-{ckpt_num}...")
+def merge_checkpoint(step, ckpt_path):
+    """Merge LoRA via peft on CPU, save bf16 fp16 shards."""
+    out = merged_dir(step)
+    if os.path.exists(os.path.join(out, "config.json")):
+        print(f"  merged_tmp_{step} already exists — skipping merge")
+        return True
 
-    merge_script = f"""
-import os
-os.environ["VLLM_WORKER_MULTIPROC_METHOD"] = "spawn"
-from unsloth import FastLanguageModel
+    print(f"  Merging checkpoint-{step} via peft (CPU, bf16)...")
+    script = f"""
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from peft import PeftModel
 
-model, tokenizer = FastLanguageModel.from_pretrained(
-    model_name="{ckpt_path}",
-    max_seq_length=4096,
-    load_in_4bit=True,
+model = AutoModelForCausalLM.from_pretrained(
+    {BASE_MODEL!r}, torch_dtype=torch.bfloat16, device_map="cpu", low_cpu_mem_usage=True,
 )
-output = "{MERGED_DIR}"
-model.save_pretrained_merged(output, tokenizer, save_method="merged_16bit")
+tok = AutoTokenizer.from_pretrained({ckpt_path!r})
+model = PeftModel.from_pretrained(model, {ckpt_path!r}, torch_dtype=torch.bfloat16)
+model = model.merge_and_unload()
+model.save_pretrained({out!r}, safe_serialization=True, max_shard_size="5GB")
+tok.save_pretrained({out!r})
 print("Merge complete")
 """
-    script_path = os.path.join(SFT_OUTPUT, "_merge_tmp.py")
+    script_path = os.path.join(EVAL_DIR, f"_merge_{step}.py")
     with open(script_path, "w") as f:
-        f.write(merge_script)
+        f.write(script)
 
-    result = subprocess.run(
-        [PYTHON, script_path],
-        env={**os.environ, "PYTHONPATH": os.path.join(PROJECT, "src"),
-             "PYTHONUNBUFFERED": "1", "HF_HUB_OFFLINE": "1"},
-        timeout=300,
-    )
+    log_path = os.path.join(LOG_DIR, f"merge_{step}.log")
+    with open(log_path, "w") as log_f:
+        result = subprocess.run(
+            [PYTHON, script_path],
+            env={**os.environ, "CUDA_VISIBLE_DEVICES": "", "PYTHONUNBUFFERED": "1"},
+            stdout=log_f, stderr=subprocess.STDOUT,
+            timeout=600,
+        )
     os.remove(script_path)
 
-    if result.returncode != 0:
-        print(f"MERGE FAILED (exit code {result.returncode})")
+    if result.returncode != 0 or not os.path.exists(os.path.join(out, "config.json")):
+        print(f"  MERGE FAILED (exit={result.returncode}) — see {log_path}")
         return False
-    print("Merge OK")
+    print(f"  Merge OK -> {out}")
     return True
 
 
-def start_vllm():
-    """Start vLLM server and wait for it to be ready."""
-    vllm_log = os.path.join(EVAL_DIR, "vllm.log")
-    print(f"Starting vLLM on port {PORT}... (log: {vllm_log})")
-    vllm_log_fh = open(vllm_log, "w")
+def kill_vllm_on_port():
+    """SIGKILL anything bound to our port AND any lingering VLLM::EngineCore
+    subprocs. Then wait long enough for CUDA to actually release the memory
+    — the vLLM engine core runs as a subprocess and a short sleep isn't
+    enough on a 14B model (seen 23 GiB stranded when sleep was 3s)."""
+    try:
+        r = subprocess.run(f"lsof -ti :{PORT}", shell=True, capture_output=True, text=True)
+        pids = [p for p in r.stdout.strip().split("\n") if p]
+        # Also kill any orphaned VLLM::EngineCore owned by this user — they
+        # are separate subprocesses that outlive their parent's SIGKILL.
+        r2 = subprocess.run("pgrep -u $USER -f 'VLLM::EngineCore' | head -20",
+                            shell=True, capture_output=True, text=True)
+        engine_pids = [p for p in r2.stdout.strip().split("\n") if p]
+        for pid in pids + engine_pids:
+            try:
+                os.kill(int(pid), signal.SIGKILL)
+            except (ProcessLookupError, ValueError):
+                pass
+    except Exception:
+        pass
+    # Poll for processes to exit + CUDA to flush. 60s should be plenty.
+    for _ in range(60):
+        time.sleep(1)
+        try:
+            remaining = subprocess.run(f"lsof -ti :{PORT}", shell=True,
+                                        capture_output=True, text=True).stdout.strip()
+            if not remaining:
+                break
+        except Exception:
+            pass
+    # Belt-and-suspenders: additional wait for CUDA allocator to fully drop.
+    time.sleep(30)
+
+
+def start_vllm(step):
+    """Launch vLLM pinned to MIG slice 2 with fp8 quant, serving merged model."""
+    out = merged_dir(step)
+    launcher = os.path.join(EVAL_DIR, f"_serve_{step}.py")
+    launcher_src = f"""import os, sys
+
+
+def main():
+    os.environ["CUDA_VISIBLE_DEVICES"] = {MIG_UUID!r}
+    sys.argv = [
+        "vllm",
+        "--model", {out!r},
+        "--served-model-name", {SERVED_NAME!r},
+        "--enable-auto-tool-choice",
+        "--tool-call-parser", "hermes",
+        "--max-model-len", "4096",
+        "--gpu-memory-utilization", "0.90",
+        "--enforce-eager",
+        "--quantization", "fp8",
+        "--port", "{PORT}",
+    ]
+    import runpy
+    runpy.run_module("vllm.entrypoints.openai.api_server", run_name="__main__")
+
+
+if __name__ == "__main__":
+    main()
+"""
+    with open(launcher, "w") as f:
+        f.write(launcher_src)
+
+    vllm_log = os.path.join(LOG_DIR, f"vllm_{step}.log")
+    print(f"  Starting vLLM on port {PORT} (slice 2, fp8)... log: {vllm_log}")
+    log_f = open(vllm_log, "w")
     proc = subprocess.Popen(
-        [PYTHON, "-m", "vllm.entrypoints.openai.api_server",
-         "--model", MERGED_DIR,
-         "--served-model-name", "sft-v2",
-         "--enable-auto-tool-choice",
-         "--tool-call-parser", "hermes",
-         "--max-model-len", "4096",
-         "--gpu-memory-utilization", "0.70",
-         "--port", str(PORT)],
-        env={**os.environ, "VLLM_WORKER_MULTIPROC_METHOD": "spawn"},
-        stdout=vllm_log_fh, stderr=subprocess.STDOUT,
+        [PYTHON, launcher],
+        env={**os.environ, "PYTHONUNBUFFERED": "1"},
+        stdout=log_f, stderr=subprocess.STDOUT,
     )
 
-    for i in range(120):
+    for _ in range(180):  # up to 9 minutes
         time.sleep(3)
         try:
-            import urllib.request
-            req = urllib.request.urlopen(f"http://localhost:{PORT}/v1/models", timeout=2)
-            if req.status == 200:
-                print("vLLM ready!")
+            r = urllib.request.urlopen(f"http://localhost:{PORT}/v1/models", timeout=2)
+            if r.status == 200:
+                print(f"  vLLM ready on port {PORT}")
                 return proc
         except Exception:
             pass
         if proc.poll() is not None:
-            vllm_log_fh.close()
-            out = open(vllm_log).read()
-            print(f"vLLM exited early:\n{out[-500:]}")
+            log_f.close()
+            tail = open(vllm_log).read()[-1200:]
+            print(f"  vLLM exited early:\n{tail}")
             return None
 
-    print("vLLM failed to start in 360s")
+    print(f"  vLLM failed to start within timeout")
     proc.kill()
     return None
 
 
-def run_eval(save_path, num_calendars=20):
-    """Run eval_batch.py on RL data (Gemini judge) and return results."""
-    cmd = [PYTHON, "-u", os.path.join(PROJECT, "scripts/eval/eval_batch.py"),
-         "--mode", "rl",
-         "--model", "sft-v2",
-         "--base-url", f"http://localhost:{PORT}/v1",
-         "--num-calendars", str(num_calendars),
-         "--max-queries", "0",
-         "--save", save_path]
+def run_eval(save_path, num_calendars=None):
+    if num_calendars is None:
+        num_calendars = NUM_CALENDARS
+    cmd = [
+        PYTHON, "-u", os.path.join(PROJECT, "scripts/eval/eval_batch.py"),
+        "--mode", EVAL_MODE,
+        "--model", SERVED_NAME,
+        "--base-url", f"http://localhost:{PORT}/v1",
+        "--num-calendars", str(num_calendars),
+        "--max-queries", "0",
+        "--save", save_path,
+    ]
     subprocess.run(
         cmd,
-        env={**os.environ, "PYTHONPATH": os.path.join(PROJECT, "src"),
-             "PYTHONUNBUFFERED": "1"},
+        env={**os.environ, "PYTHONPATH": os.path.join(PROJECT, "src"), "PYTHONUNBUFFERED": "1"},
         timeout=14400,
     )
     if os.path.exists(save_path):
@@ -253,7 +303,6 @@ def run_eval(save_path, num_calendars=20):
 # ── Results I/O ───────────────────────────────────────────────
 
 def write_summary(checkpoints, losses):
-    """Write summary.csv from all evaluated checkpoint JSONs."""
     header = ["checkpoint", "epoch", "train_loss", "eval_loss", "correct", "total", "pct"]
     for cat in CATEGORY_ORDER:
         header.append(CATEGORY_SHORT[cat])
@@ -263,17 +312,15 @@ def write_summary(checkpoints, losses):
         data = load_eval_result(step)
         if not data:
             continue
-        rl = data.get("rl", {})
-        correct = rl.get("correct", 0)
-        total = rl.get("total", 0)
+        rl = data.get(EVAL_MODE, {})
+        correct, total = rl.get("correct", 0), rl.get("total", 0)
         pct = round(correct / total * 100, 1) if total > 0 else 0
         by_cat = rl.get("by_category", {})
-
         row = [step, data.get("epoch", ""), data.get("train_loss", ""),
                data.get("eval_loss", ""), correct, total, pct]
         for cat in CATEGORY_ORDER:
-            cat_data = by_cat.get(cat, {})
-            c, t = cat_data.get("correct", 0), cat_data.get("total", 0)
+            cd = by_cat.get(cat, {})
+            c, t = cd.get("correct", 0), cd.get("total", 0)
             row.append(f"{c}/{t}" if t > 0 else "")
         rows.append(row)
 
@@ -284,10 +331,9 @@ def write_summary(checkpoints, losses):
 
 
 def print_summary(checkpoints, losses):
-    """Print summary table to stdout."""
     print()
     print("=" * 110)
-    print("CHECKPOINT EVAL SUMMARY (RL data, 20 calendars)")
+    print(f"CHECKPOINT EVAL SUMMARY ({EVAL_MODE} data, {NUM_CALENDARS} calendars) — {RUN_DIR}")
     print("=" * 110)
 
     cat_shorts = [CATEGORY_SHORT[c] for c in CATEGORY_ORDER]
@@ -300,13 +346,13 @@ def print_summary(checkpoints, losses):
     for step, ckpt_path in checkpoints:
         epoch = get_checkpoint_epoch(ckpt_path)
         epoch_int = int(epoch) if epoch else "?"
-        tl, el = losses.get(epoch_int, (None, None))
+        tl, el = losses.get(epoch_int if isinstance(epoch_int, int) else -1, (None, None))
         tl_str = f"{tl:.4f}" if tl is not None else "-"
         el_str = f"{el:.4f}" if el is not None else "-"
 
         data = load_eval_result(step)
         if data:
-            rl = data.get("rl", {})
+            rl = data.get(EVAL_MODE, {})
             c, t = rl.get("correct", 0), rl.get("total", 0)
             pct = c / t * 100 if t > 0 else 0
             overall = f"{c}/{t} ({pct:.1f}%)"
@@ -334,18 +380,23 @@ def print_summary(checkpoints, losses):
 
 def main():
     os.makedirs(EVAL_DIR, exist_ok=True)
+    os.makedirs(LOG_DIR, exist_ok=True)
+
+    only = os.environ.get("ONLY_CHECKPOINT")  # e.g. "4659" for single-ckpt runs
 
     checkpoints = discover_checkpoints()
     if not checkpoints:
-        print(f"No checkpoints found in {SFT_OUTPUT}")
+        print(f"No checkpoints found in {CKPT_DIR}")
         return
 
     losses = read_epoch_losses()
 
     to_eval = [(s, p) for s, p in checkpoints if not is_evaluated(s)]
-    n_done = len(checkpoints) - len(to_eval)
+    if only:
+        to_eval = [(s, p) for s, p in to_eval if str(s) == only]
+    n_done = len(checkpoints) - len([s for s, _ in checkpoints if not is_evaluated(s)])
 
-    print(f"Checkpoints: {len(checkpoints)} found, {n_done} evaluated, {len(to_eval)} pending")
+    print(f"Checkpoints: {len(checkpoints)} found, {n_done} evaluated, {len(to_eval)} to run")
     for step, path in checkpoints:
         status = "done" if is_evaluated(step) else "NEW"
         epoch = get_checkpoint_epoch(path)
@@ -359,7 +410,7 @@ def main():
     for step, ckpt_path in to_eval:
         epoch = get_checkpoint_epoch(ckpt_path)
         epoch_int = int(epoch) if epoch else "?"
-        tl, el = losses.get(epoch_int, (None, None))
+        tl, el = losses.get(epoch_int if isinstance(epoch_int, int) else -1, (None, None))
 
         print(f"\n{'='*60}")
         print(f"Checkpoint {step} (epoch {epoch_int})")
@@ -367,66 +418,39 @@ def main():
             print(f"  Train loss: {tl:.4f}, Eval loss: {el:.4f}")
         print(f"{'='*60}")
 
-        # Merge LoRA → fp16
-        kill_vllm()
-        if not merge_checkpoint(step):
+        kill_vllm_on_port()
+        if not merge_checkpoint(step, ckpt_path):
             continue
 
-        # Start vLLM
-        vllm_proc = start_vllm()
+        vllm_proc = start_vllm(step)
         if vllm_proc is None:
             continue
 
-        # Eval on RL data (with vLLM restart on hang)
-        MAX_RETRIES = 3
-        raw = None
-        tmp_path = os.path.join(EVAL_DIR, f"_tmp_{step}.json")
+        tmp_path = os.path.join(EVAL_DIR, f"_tmp_checkpoint-{step}.json")
+        print(f"\n  Evaluating on {EVAL_MODE} data ({NUM_CALENDARS} calendars)...")
+        raw = run_eval(tmp_path)
 
-        for attempt in range(1, MAX_RETRIES + 1):
-            print(f"\n--- Evaluating on RL data (20 calendars) [attempt {attempt}/{MAX_RETRIES}] ---")
-            raw = run_eval(tmp_path, num_calendars=20)
+        try:
+            vllm_proc.kill()
+            vllm_proc.wait(timeout=15)
+        except Exception:
+            pass
+        kill_vllm_on_port()
 
-            n_results = len(raw["rl"].get("results", [])) if raw and "rl" in raw else 0
-            n_expected = raw["rl"].get("total", 280) if raw and "rl" in raw else 280
-            if n_results >= n_expected:
-                break  # Full eval completed
-
-            # Partial or failed — vLLM likely hung
-            if attempt < MAX_RETRIES:
-                n_done = n_results
-                print(f"\n  Partial eval ({n_done}/280) — restarting vLLM for retry...")
-                vllm_proc.kill()
-                vllm_proc.wait()
-                kill_vllm()
-                if os.path.exists(tmp_path):
-                    os.remove(tmp_path)
-                vllm_proc = start_vllm()
-                if vllm_proc is None:
-                    raw = None
-                    break
-            else:
-                print(f"\n  Eval incomplete after {MAX_RETRIES} attempts, using partial results")
-
-        # Shut down vLLM
-        vllm_proc.kill()
-        vllm_proc.wait()
-        kill_vllm()
-
-        if not raw or "rl" not in raw:
-            print(f"Eval FAILED for checkpoint-{step}")
+        if not raw or EVAL_MODE not in raw:
+            print(f"  Eval FAILED for checkpoint-{step}")
             if os.path.exists(tmp_path):
                 os.remove(tmp_path)
             continue
 
-        # Enrich with metadata and category breakdown, save final
-        rl = raw["rl"]
+        rl = raw[EVAL_MODE]
         rl["by_category"] = category_breakdown(rl.get("results", []))
         enriched = {
             "checkpoint": step,
             "epoch": epoch_int,
             "train_loss": tl,
             "eval_loss": el,
-            "rl": rl,
+            EVAL_MODE: rl,
         }
         result_path = os.path.join(EVAL_DIR, f"checkpoint-{step}.json")
         with open(result_path, "w") as f:
@@ -438,10 +462,8 @@ def main():
         pct = c / t * 100 if t > 0 else 0
         print(f"\n>>> Checkpoint {step} (epoch {epoch_int}): {c}/{t} ({pct:.1f}%)")
 
-        # Update summary after each checkpoint
         write_summary(checkpoints, losses)
 
-    # Final summary
     print_summary(checkpoints, losses)
 
 

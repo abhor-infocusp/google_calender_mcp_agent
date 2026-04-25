@@ -13,3 +13,7 @@ SFT_JSON_CALENDAR_DIR = SFT_DATA_DIR / "json_calender"
 SFT_QUERY_DIR = SFT_DATA_DIR / "queries"
 RL_JSON_CALENDAR_DIR = RL_DATA_DIR / "json_calender"
 RL_QUERY_DIR = RL_DATA_DIR / "queries"
+
+TEST_DATA_DIR = PROJECT_ROOT / "test_data"
+TEST_JSON_CALENDAR_DIR = TEST_DATA_DIR / "json_calender"
+TEST_QUERY_DIR = TEST_DATA_DIR / "queries"

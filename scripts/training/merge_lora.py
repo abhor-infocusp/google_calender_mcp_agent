@@ -10,7 +10,6 @@ Usage:
 """
 import os
 
-os.environ["VLLM_WORKER_MULTIPROC_METHOD"] = "spawn"
 
 from unsloth import FastLanguageModel
 

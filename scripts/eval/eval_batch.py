@@ -27,11 +27,11 @@ from calendar_agent.core import (
     dispatch_tool_call, filter_by_days, get_query_now, snapshot_events,
 )
 from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, evaluate_trajectory, format_day_state_text
-from calendar_agent.paths import SFT_DATA_DIR, RL_DATA_DIR, CREDENTIALS_PATH
+from calendar_agent.paths import SFT_DATA_DIR, RL_DATA_DIR, TEST_DATA_DIR, CREDENTIALS_PATH
 from calendar_agent.core import format_tool_result
-from calendar_agent.tools import get_openai_tools_minimal
+from calendar_agent.tools import get_openai_tools_minimal, get_openai_tools
 
-OPENAI_TOOLS = get_openai_tools_minimal()
+OPENAI_TOOLS = get_openai_tools()  # Full descriptions for zero-shot eval
 
 
 # ── Agent loop ───────────────────────────────────────────────
@@ -132,6 +132,24 @@ def get_rl_queries(num_calendars=20):
     return tasks
 
 
+def get_test_queries(num_calendars=50):
+    """Get held-out test data queries for first N calendars."""
+    test_dir = str(TEST_DATA_DIR)
+    query_dir = os.path.join(test_dir, "queries")
+
+    cal_files = sorted(glob.glob(os.path.join(query_dir, "*.txt")),
+                       key=lambda f: int(os.path.basename(f).replace(".txt", "")))
+
+    tasks = []
+    for f in cal_files[:num_calendars]:
+        cal_idx = os.path.basename(f).replace(".txt", "")
+        queries = json.load(open(f))
+        for qi, q in enumerate(queries):
+            tasks.append((cal_idx, qi, q))
+
+    return tasks
+
+
 def load_calendar(base_dir, cal_idx):
     """Load calendar events."""
     cal_path = os.path.join(base_dir, "json_calender", f"{cal_idx}.txt")
@@ -143,7 +161,7 @@ def load_calendar(base_dir, cal_idx):
 def eval_tasks(client, model_name, eval_model, tasks, base_dir, label):
     """Evaluate a list of (cal_idx, query_idx, query_dict) tasks."""
     tools = list(OPENAI_TOOLS)
-    system_prompt = ""
+    system_prompt = "/no_think\nYou are a calendar assistant. Use the provided tools to manage events. Call get_current_time first to know the current date."
 
     results = []
     correct = 0
@@ -259,7 +277,7 @@ def eval_tasks(client, model_name, eval_model, tasks, base_dir, label):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--mode", choices=["sft", "rl", "both"], default="both")
+    parser.add_argument("--mode", choices=["sft", "rl", "test", "both"], default="both")
     parser.add_argument("--model", default="sft-v2")
     parser.add_argument("--base-url", default="http://localhost:8000/v1")
     parser.add_argument("--num-calendars", type=int, default=20, help="Number of RL calendars to eval")
@@ -320,6 +338,21 @@ def main():
             client, args.model, eval_model, tasks, str(RL_DATA_DIR), "RL DATA"
         )
         all_results["rl"] = {"results": results, "correct": correct, "total": total}
+
+    if args.mode == "test":
+        print()
+        print("=" * 60)
+        print(f"TEST DATA EVALUATION (held-out, {args.num_calendars} calendars)")
+        print("=" * 60)
+        tasks = get_test_queries(args.num_calendars)
+        if args.max_queries > 0:
+            tasks = tasks[:args.max_queries]
+        print(f"  {len(tasks)} queries across {len(set(t[0] for t in tasks))} calendars")
+        print()
+        results, correct, total = eval_tasks(
+            client, args.model, eval_model, tasks, str(TEST_DATA_DIR), "TEST DATA"
+        )
+        all_results["test"] = {"results": results, "correct": correct, "total": total}
 
     if args.save:
         with open(args.save, "w") as f:

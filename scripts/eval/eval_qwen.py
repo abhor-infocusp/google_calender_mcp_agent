@@ -277,9 +277,9 @@ def main():
     # OpenAI client for the agent model
     client = OpenAI(base_url=args.base_url, api_key=args.api_key)
 
-    # Build tools (no system prompt — model learns behavior from SFT)
+    # Match SFT training distribution: /no_think + calendar assistant preamble.
     tools = list(OPENAI_TOOLS)
-    system_prompt = ""
+    system_prompt = "/no_think\nYou are a calendar assistant. Use the provided tools to manage events. Call get_current_time first to know the current date."
     if args.with_final_answer:
         tools.append(RETURN_FINAL_ANSWER_TOOL_MINIMAL)
 
@@ -390,7 +390,7 @@ def main():
         )
         print()
         print_separator("·")
-        verdict = evaluate_trajectory(
+        verdict, _reasoning = evaluate_trajectory(
             eval_model,
             query_text,
             final_output,

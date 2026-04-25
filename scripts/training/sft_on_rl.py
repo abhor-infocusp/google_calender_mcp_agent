@@ -14,8 +14,6 @@ import glob
 import os
 import random
 
-os.environ["VLLM_WORKER_MULTIPROC_METHOD"] = "spawn"
-
 from unsloth import FastLanguageModel
 from trl import SFTTrainer, SFTConfig, DataCollatorForCompletionOnlyLM
 from datasets import Dataset
@@ -242,9 +240,9 @@ def main():
         eval_strategy="epoch",
         save_strategy="epoch",
         save_total_limit=2,
-        fp16=True,
-        bf16=False,
-        fp16_full_eval=True,
+        fp16=False,
+        bf16=True,
+        bf16_full_eval=True,
         per_device_eval_batch_size=1,
         eval_accumulation_steps=1,
         optim="paged_adamw_8bit",

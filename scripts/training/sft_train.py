@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
-"""SFT training for 100 epochs with loss masking, per-epoch checkpoints.
+"""SFT training with loss masking, per-epoch checkpoints.
 
-Key improvements over base sft_train.py:
+Writes into runs/<run_name>/ (overridable via SFT_RUN_DIR env var):
+  - checkpoints/           HF Trainer checkpoints
+  - diagnostics/           epoch_losses.csv, training_history.json
+  - logs/                  stdout (written by launcher, not this script)
+
+Key design:
   1. Loss masking — only trains on assistant tokens (tool calls + final answers),
      not system prompt, user queries, or tool results. 10.6% → 100% useful signal.
-  2. LR schedule — cosine_with_restarts (10 cycles) so LR doesn't decay to 0.
+  2. LR schedule — cosine (single decay) over N epochs.
   3. LoRA rank 64 — more capacity for multi-step tool-use patterns.
+  4. /no_think system prompt prepended per trajectory so train/inference match.
 
 Usage:
-    PYTHONPATH=src python scripts/training/sft_train_100ep.py
+    PYTHONPATH=src python scripts/training/sft_train.py
 """
 
 import csv
@@ -17,7 +23,6 @@ import glob
 import os
 import random
 
-os.environ["VLLM_WORKER_MULTIPROC_METHOD"] = "spawn"
 
 from unsloth import FastLanguageModel
 import torch
@@ -27,21 +32,26 @@ from transformers import TrainerCallback
 
 from calendar_agent.core import format_tool_result
 from calendar_agent.tools import get_openai_tools_minimal
-from calendar_agent.paths import SFT_DATA_DIR as _SFT_DATA_DIR, SFT_OUTPUT_DIR as _SFT_OUTPUT_DIR
+from calendar_agent.paths import SFT_DATA_DIR as _SFT_DATA_DIR
 
 random.seed(42)
 
 # ── Paths ──────────────────────────────────────────────────
 SFT_DATA_DIR = str(_SFT_DATA_DIR)
 TRAJ_DIR = str(_SFT_DATA_DIR / "trajectories_augmented")
-OUTPUT_DIR = str(_SFT_OUTPUT_DIR)
-LOSS_CSV = os.path.join(OUTPUT_DIR, "epoch_losses.csv")
+OUTPUT_DIR = os.environ.get("SFT_RUN_DIR", "runs/sft_v6_qwen3_14b_20260420")
+CHECKPOINT_DIR = os.path.join(OUTPUT_DIR, "checkpoints")
+LOSS_CSV = os.path.join(OUTPUT_DIR, "diagnostics", "epoch_losses.csv")
 
 # ── Model Config ───────────────────────────────────────────
-MODEL_NAME = "Qwen/Qwen2.5-1.5B-Instruct"
-MAX_SEQ_LENGTH = 3076
+MODEL_NAME = "Qwen/Qwen3-14B"
+MAX_SEQ_LENGTH = 4096
 LORA_RANK = 64
-NUM_EPOCHS = 10
+NUM_EPOCHS = 5
+
+# System prompt matches RL rollouts (/no_think disables Qwen3 thinking mode).
+# Must be injected at training time so train/inference distributions match.
+SYSTEM_PROMPT = "/no_think\nYou are a calendar assistant. Use the provided tools to manage events. Call get_current_time first to know the current date."
 
 TOOLS = get_openai_tools_minimal()
 
@@ -49,7 +59,7 @@ TOOLS = get_openai_tools_minimal()
 # ── Trajectory to Chat Conversion ─────────────────────────
 
 def trajectory_to_messages(traj: dict) -> list[dict]:
-    messages = []
+    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
     steps = traj["trajectory"]
     i = 0
     while i < len(steps):
@@ -272,10 +282,12 @@ class EpochLossLogger(TrainerCallback):
 
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
+    os.makedirs(CHECKPOINT_DIR, exist_ok=True)
+    os.makedirs(os.path.dirname(LOSS_CSV), exist_ok=True)
 
     # Check for existing checkpoints to resume from
     from transformers.trainer_utils import get_last_checkpoint
-    last_checkpoint = get_last_checkpoint(OUTPUT_DIR)
+    last_checkpoint = get_last_checkpoint(CHECKPOINT_DIR)
     resume = last_checkpoint is not None
     if resume:
         print(f"Resuming from checkpoint: {last_checkpoint}")
@@ -283,7 +295,7 @@ def main():
     print("=" * 60)
     print(f"SFT Training: {MODEL_NAME} — {NUM_EPOCHS} epochs")
     print(f"  Loss masking: assistant-only (pre-computed labels)")
-    print(f"  LR schedule:  cosine_with_restarts (10 cycles)")
+    print(f"  LR schedule:  cosine")
     print(f"  LoRA rank:    {LORA_RANK}")
     print(f"  Output:       {OUTPUT_DIR}")
     if resume:
@@ -334,21 +346,20 @@ def main():
     print(f"Total steps: ~{steps_per_epoch * NUM_EPOCHS}")
 
     training_args = SFTConfig(
-        output_dir=OUTPUT_DIR,
+        output_dir=CHECKPOINT_DIR,
         per_device_train_batch_size=1,
         gradient_accumulation_steps=4,
         num_train_epochs=NUM_EPOCHS,
         learning_rate=2e-4,
-        lr_scheduler_type="cosine_with_restarts",
-        lr_scheduler_kwargs={"num_cycles": 5},
+        lr_scheduler_type="cosine",
         warmup_ratio=0.03,
         logging_steps=5,
         eval_strategy="epoch",
         save_strategy="epoch",
         save_total_limit=NUM_EPOCHS,
-        fp16=True,
-        bf16=False,
-        fp16_full_eval=True,
+        fp16=False,
+        bf16=True,
+        bf16_full_eval=True,
         per_device_eval_batch_size=1,
         eval_accumulation_steps=1,
         optim="paged_adamw_8bit",
@@ -381,13 +392,13 @@ def main():
     trainer.train(resume_from_checkpoint=last_checkpoint)
 
     # Save final model
-    final_dir = os.path.join(OUTPUT_DIR, "final")
+    final_dir = os.path.join(CHECKPOINT_DIR, "final")
     model.save_pretrained(final_dir)
     tokenizer.save_pretrained(final_dir)
     print(f"\nModel saved to {final_dir}")
 
     # Also save the full training history
-    history_path = os.path.join(OUTPUT_DIR, "training_history.json")
+    history_path = os.path.join(OUTPUT_DIR, "diagnostics", "training_history.json")
     with open(history_path, "w") as f:
         json.dump(trainer.state.log_history, f, indent=2)
     print(f"Training history saved to {history_path}")
