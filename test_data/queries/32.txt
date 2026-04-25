@@ -1,0 +1,140 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create a meeting on Wednesday called 'Project Brainstorm' from 3 PM to 4 PM with safety_officer@petroplant.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with the summary 'Project Brainstorm' on January 10, 2024, from 3:00 PM to 4:00 PM with the attendee safety_officer@petroplant.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a dentist appointment for me on Friday from 11 AM to 12 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with the summary 'Dentist Appointment' on January 12, 2024, from 11:00 AM to 12:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy Thursday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Thursday, January 11, 2024, between 12:00 PM and 5:00 PM. Return any events found within that timeframe.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Tuesday look like?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled for Tuesday, January 9, 2024, and return them to the user.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move the Fire Suppression System Inspection on Monday to 9 AM?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Fire Suppression System Inspection' event on Monday, January 8, 2024. Update the start time to 9:00 AM, keeping the duration the same (so it ends at 12:00 PM).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the attendees for the safety regulations meeting on Tuesday to include hazmat_tech1@petroplant.com.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting - Review of New Safety Regulations' event on Tuesday, January 9, 2024. Add hazmat_tech1@petroplant.com to the attendees list.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the Hazardous Material Handling Training on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Hazardous Material Handling Training' event on Thursday, January 11, 2024, and return its start time.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is invited to the Morning Briefing on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Morning Briefing' event on Wednesday, January 10, 2024, and return the list of attendees.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my medical checkup on Thursday to Friday at the same time.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Medical Checkup' event on Thursday, January 11, 2024, then update the event to Friday, January 12, 2024, keeping the same time (2:00 PM to 3:00 PM).",
+        "addressed_days": [
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule the plant-wide fire drill to the same time as the woodworking project.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Plant-Wide Fire Drill' event on Wednesday, January 10, 2024, and the 'Woodworking Project - Building a Birdhouse' event on Tuesday, January 9, 2024. Update the 'Plant-Wide Fire Drill' to Tuesday January 9th 7:00 PM to 8:30 PM.",
+        "addressed_days": [
+            "Wednesday",
+            "Tuesday"
+        ],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule the...",
+        "complexity": "Low",
+        "expected_behavior": "Return a clarification prompt because the query is incomplete.",
+        "addressed_days": [],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "delete meeting",
+        "complexity": "Low",
+        "expected_behavior": "Return a clarification prompt because the query is ambiguous and doesn't specify which meeting to delete.",
+        "addressed_days": [],
+        "current_time": "2024-01-07T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled for today, Monday, January 8, 2024, and return them to the user.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-08T08:30:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any meetings yesterday?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled for yesterday, Sunday, January 7, 2024, and return them to the user.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-01-08T08:30:00"
+    }
+]

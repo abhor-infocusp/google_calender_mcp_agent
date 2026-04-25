@@ -1,0 +1,160 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Band Rehearsal' for Wednesday at 5 PM, lasting one hour.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call create_event with the summary 'Band Rehearsal', start time 2025-11-05T17:00:00, end time 2025-11-05T18:00:00, no attendees, and an empty description.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-11-02T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me in for a guitar lesson this Thursday at 2pm.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call create_event with the summary 'Guitar Lesson', start time 2025-11-06T14:00:00, end time 2025-11-06T15:00:00 (assuming a default duration of one hour), no attendees, and an empty description.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-11-02T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing for dinner this week?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should call list_events with time_min set to 2025-11-03T00:00:00 and time_max set to 2025-11-10T00:00:00, then filter for events with the word 'Dinner' in the event title.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-11-02T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What music related events do I have scheduled?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should call list_events with time_min set to 2025-11-03T00:00:00 and time_max set to 2025-11-10T00:00:00, then filter for events related to 'music', 'songwriting', or 'gig'.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-11-02T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my meeting with the graphic designer to 4pm?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should call list_events to find the meeting with the graphic designer, identify the event_id, then call update_event to change the start time to 2025-11-05T16:00:00 and end time to 2025-11-05T17:00:00.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-11-05T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update the recording session time to 3pm on Saturday.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should call list_events to find the 'Recording Session', identify the event_id, then call update_event to change the start time to 2025-11-08T15:00:00 and end time to 2025-11-08T17:00:00.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-11-08T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my dinner with Sarah?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call list_events, identify the event with Sarah, and then respond with the event's start time, which is 6 PM on Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-11-03T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me the time for my second gig this week.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should call list_events with time_min set to 2025-11-03T00:00:00 and time_max set to 2025-11-10T00:00:00, identify the events with 'Gig' in the title, sort them chronologically, and respond with the start time of the second gig. It is on Friday at 8 PM.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-11-03T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a vocal lesson between my coffee shift and songwriting session on Monday.",
+        "complexity": "High",
+        "expected_behavior": "The agent should call list_events to retrieve the times for the coffee shift and songwriting session on Monday. It should identify a time slot between 1:00 PM and 2:00 PM, and then call create_event with the summary 'Vocal Lesson', start time 2025-11-03T01:00:00, end time 2025-11-03T02:00:00 (assuming a default duration of one hour), no attendees, and an empty description.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-11-03T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to shift my Saturday events back by one hour. Check for any conflicts.",
+        "complexity": "High",
+        "expected_behavior": "The agent should call list_events with time_min set to 2025-11-08T00:00:00 and time_max set to 2025-11-09T00:00:00 to identify all Saturday events. It should then iterate through these events, shifting their start and end times back by one hour. Before committing each change, it should check for overlaps with existing events. If a conflict is found, it should flag it to the user. The agent should update brunch to 10am, recording to 1pm, and birthday party to 7pm.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-11-08T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Abby.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should call list_events to find any events with attendees containing 'art.abby@email.com', then ask the user to specify which event they want to reschedule and what time they want it to happen at. The agent should not reschedule anything without explicit user instruction.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-11-05T11:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel Velvet Room",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call list_events, search for 'Velvet Room', and then ask the user to confirm whether they want to delete the gig at The Velvet Room on Thursday. After confirmation, the agent should call delete_event with the corresponding event ID.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-11-06T12:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call list_events with time_min set to 2025-11-03T00:00:00 and time_max set to 2025-11-04T00:00:00 to retrieve today's events.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-11-03T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call list_events with time_min set to 2025-11-06T00:00:00 and time_max set to 2025-11-07T00:00:00 to retrieve tomorrow's events.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-11-05T15:00:00"
+    }
+]

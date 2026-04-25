@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Meet John' for Wednesday at 3 PM. Attendees should be john@example.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Meet John', start time of 2025-12-24T15:00:00, end time of 2025-12-24T16:00:00, and attendee john@example.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-12-21T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a yoga session for me this Wednesday, from 6 PM to 7 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with the summary 'Yoga Class', start time of 2025-12-24T18:00:00, and end time of 2025-12-24T19:00:00.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-12-21T14:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Tuesday after the meeting with the Library Director?",
+        "complexity": "Medium",
+        "expected_behavior": "First, find the event 'Meeting with Library Director' on Tuesday. Then, check for events scheduled after 12:30 PM on Tuesday.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-12-21T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's happening on Friday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for events scheduled between 9:00 AM and 12:00 PM on Friday.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-12-21T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move the Digital Collection Meeting to 9:30 AM on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Digital Collection Meeting' on Monday and update its start time to 2025-12-22T09:30:00 and end time to 2025-12-22T10:30:00.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-12-21T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update the Accessibility Audit Review attendees to include sarah.chen@library.org.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Accessibility Audit Review' and update the attendees list to include sarah.chen@library.org, accessibility@consultant.com.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-12-21T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the Open Source Project Night on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event 'Open Source Project Night' on Monday and respond with its start time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-12-21T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Budget Planning Meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event 'Budget Planning Meeting' and respond with the attendees list.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-12-21T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my meeting with the Library Director to Wednesday at 11:30 AM, but check if I have any conflicts first.",
+        "complexity": "High",
+        "expected_behavior": "First, find the event 'Meeting with Library Director' on Tuesday. Then, check for any existing events on Wednesday at 11:30 AM. If no conflicts, move the 'Meeting with Library Director' to Wednesday at 11:30 AM.",
+        "addressed_days": [
+            "Tuesday",
+            "Wednesday"
+        ],
+        "current_time": "2025-12-21T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to attend the vendor demo, and I want to schedule a call for Friday at 10:30 with webdev@library.org, please reschedule if needed",
+        "complexity": "High",
+        "expected_behavior": "Check for conflicts between Vendor Demo (Monday at 10:30) and Collaboration with Web Developers (Friday at 10:30). Do nothing if I cannot attend both.",
+        "addressed_days": [
+            "Monday",
+            "Friday"
+        ],
+        "current_time": "2025-12-21T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule meeting...",
+        "complexity": "Low",
+        "expected_behavior": "Respond with a clarification question, such as 'Which meeting are you referring to and what is the new time you would like to schedule?'",
+        "addressed_days": [],
+        "current_time": "2025-12-21T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Delete... Yoga.",
+        "complexity": "Low",
+        "expected_behavior": "Find Yoga class on Wednesday. Delete it.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-12-24T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for all events scheduled for 2025-12-22.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-12-22T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What do I have scheduled for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Check the calendar for all events scheduled for 2025-12-23.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-12-22T15:00:00"
+    }
+]

@@ -1,0 +1,155 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Project Brainstorm' for Wednesday, May 6th, at 3:00 PM, lasting one hour, no attendees, and description is 'Discuss Q3 Project'.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to add 'Project Brainstorm' to the calendar on May 6th from 3:00 PM to 4:00 PM with the description 'Discuss Q3 Project'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-04-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting with John for Friday at 10 AM to discuss the marketing plan. It should last 2 hours, and John's email is john@example.com.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule a meeting on Friday, May 8th, from 10:00 AM to 12:00 PM, with John (john@example.com) as an attendee, and the summary is 'Discuss marketing plan'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-04-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the schedule with department chair?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find any events with the attendees being Michael Davies, then respond to the user with the event details.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-05-05T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing with Susan this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find any events with the attendees being Susan Miller, then respond to the user with the event details.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-05-05T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move the meeting with Alex to 4 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event with Alex. Then, call update_event to change the start time to 4:00 PM on Tuesday, May 5th.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-05-05T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the Historical Society Meeting to 7 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event 'Local Historical Society Meeting'. Then, call update_event to change the start time to 7:00 PM on Monday, May 4th.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-05-04T15:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my book club meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event 'Book Club Meeting at Tom's', then respond to the user with the start time, which is 3:00 PM on Saturday, May 9th.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-05-06T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me about the meeting with Maria.",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event with the attendees being Maria Rodriguez. Then respond to the user with the event details, including the time, which is 2:00 PM on Friday, May 8th, and the summary, which is 'Travel Arrangements for Conference'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-05-08T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I'm free all day Thursday, move the thesis discussion with Ben to Thursday.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the 'Meeting with Ben' event. Then call delete_event to delete the meeting with Ben. Finally, call create_event to schedule the meeting with Ben on Thursday, May 7th, at 4:00 PM. Confirms with the user that is scheduled at 4:00 PM on Thursday.",
+        "addressed_days": [
+            "Wednesday",
+            "Thursday"
+        ],
+        "current_time": "2026-05-06T15:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline the University Curriculum Committee Meeting and tell Sarah I can't make it.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the event 'University Curriculum Committee Meeting'. Call respond_to_event to decline the meeting. Respond to the user that the meeting has been declined, with a suggestion for emailing Sarah.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-05-05T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Book club?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event 'Book Club Meeting at Tom's'. Respond to the user by showing all details about the event on Saturday, May 9th, at 3:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-05-08T16:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Davies meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find any events where the attendee is Michael Davies. Respond to the user by showing the details about the event 'Meeting with Dr. Davies (Department Chair) re: Budget Request' on Monday, May 4th, at 10:30 AM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-05-03T20:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for the entire day of Thursday, May 7th. Respond to the user by showing all meeting details.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-05-07T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What is on for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for the entire day of Wednesday, May 6th. Respond to the user by showing all event details.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-05-05T20:00:00"
+    }
+]

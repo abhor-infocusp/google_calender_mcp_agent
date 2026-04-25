@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please schedule a meeting called 'Project Brainstorm' for Wednesday at 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event named 'Project Brainstorm' on August 5, 2026, from 3:00 PM to 4:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-08-01T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you put 'Dentist Appointment' in my calendar for Thursday at 10:00 AM?",
+        "complexity": "Low",
+        "expected_behavior": "Create an event called 'Dentist Appointment' on August 6, 2026, from 10:00 AM to 11:00 AM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-08-02T14:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I free to meet with John tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for any events on Tuesday, August 4, 2026, and respond whether there are any conflicts.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-08-03T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Saturday look like?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Saturday, August 8, 2026.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-08-01T16:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my meeting with the research coordinator to 11:00 AM on Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the meeting with the research coordinator scheduled for Monday, August 3, 2026, and update its start time to 11:00 AM and end time to 12:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-08-03T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change dinner with friends on Wednesday to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with friends' event on Wednesday, August 5, 2026, and update the start time to 7:30 PM and end time to 9:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-08-04T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my daughter's soccer practice?",
+        "complexity": "Low",
+        "expected_behavior": "Search for an event named 'Daughter's soccer practice' and retrieve its start time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-08-01T18:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What meetings do I have with medical professionals on Tuesday?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events on Tuesday, August 4, 2026, that include 'radiation_oncologist@hospital.org', 'pathologist@hospital.org', 'surgeon@hospital.org', or 'social_worker@hospital.org' in the attendees.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-08-02T20:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move the Immunotherapy treatment on Wednesday to Thursday at the same time. Will that conflict with anything?",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Immunotherapy treatment administration & monitoring' event on Wednesday, August 5, 2026. Check for conflicts on Thursday, August 6, 2026, from 2:30 PM to 4:30 PM. If no conflicts, move the Immunotherapy treatment to Thursday at that time; otherwise, report the conflict.",
+        "addressed_days": [
+            "Wednesday",
+            "Thursday"
+        ],
+        "current_time": "2026-08-03T15:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I'd like to schedule a meeting with the palliative care specialist for one hour. Can you find the first available time slot on Wednesday?",
+        "complexity": "High",
+        "expected_behavior": "Check the calendar on Wednesday, August 5, 2026, for available time slots. Find the first slot that is one hour long and schedule the meeting with the palliative care specialist (palliative_care@hospital.org) at that time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-08-02T11:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... oncologist... Friday...",
+        "complexity": "High",
+        "expected_behavior": "Based on past interactions, attempt to identify the event involving oncology that the user is trying to reschedule on Friday. If the event can be determined, prompt the user for the new time. Otherwise, ask clarifying questions about which event to reschedule.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-08-04T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel baseball.",
+        "complexity": "Medium",
+        "expected_behavior": "Search for an event with 'baseball' in the title. If found, delete that event. If multiple baseball events exist, ask which one to cancel.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-08-08T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Monday, August 3, 2026.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-08-03T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Anything on the agenda for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Wednesday, August 5, 2026.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-08-04T22:00:00"
+    }
+]

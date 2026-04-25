@@ -1,0 +1,173 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please schedule a meeting called 'Client Feedback' for Tuesday at 3 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Client Feedback' on Tuesday at 3 PM. No attendees or description is provided.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-08-27T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add an event to my calendar for Saturday at 10 AM called 'Garage Sale'.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event called 'Garage Sale' on Saturday at 10 AM. No attendees or description is provided.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-08-27T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Monday with the client?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Monday that contain 'client'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-08-28T06:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on for the Fire Department this week?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events this week (Monday to Sunday) that contain 'Fire Department'.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Thursday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2023-08-27T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my dinner with family on Wednesday back an hour?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Dinner with family' on Wednesday and update the start time to 7:00 PM and the end time to 8:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-08-30T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the deck estimate on Monday to 4 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Estimate for new deck project' on Monday and update the start time to 4:00 PM and end time to 6:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-08-28T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the Hazmat Awareness training on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Monday that contain 'Hazmat Awareness'. Extract the start time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-08-28T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is going to the football game on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event 'High School Football Game' on Friday and extract the attendees.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-08-29T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I need to move the cabinet installation on Friday to Wednesday at 2 PM.  Will that conflict with anything?",
+        "complexity": "High",
+        "expected_behavior": "Find the event 'Install cabinets at kitchen renovation' on Friday and move it to Wednesday at 2 PM. Then list any events on Wednesday between 2 PM and 5 PM to check for conflicts.",
+        "addressed_days": [
+            "Friday",
+            "Wednesday"
+        ],
+        "current_time": "2023-08-29T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Schedule a meeting with the lumber supplier for Monday at 8 AM, but only if it doesn't conflict with anything else.",
+        "complexity": "High",
+        "expected_behavior": "List all events on Monday between 8 AM and 9 AM. If no conflicts, create a new event called 'Meeting with lumber supplier' with attendee 'supplier@email.com' on Monday at 8 AM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-08-27T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule meeting... architect... Thursday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Find an event on Thursday involving an architect, and ask for clarification regarding the desired new time.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-08-30T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Lumber supplier... reschedule.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Meeting with lumber supplier' and ask for clarification regarding the desired new time and day.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-08-30T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for today (Monday).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-08-28T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's happening tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for tomorrow (Tuesday).",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-08-28T20:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What was on the schedule yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for yesterday (Monday).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-08-29T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Anything happening this week with family?",
+        "complexity": "Low",
+        "expected_behavior": "List all events this week that includes family.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2023-08-28T07:00:00"
+    }
+]

@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Marketing Meeting' for Tuesday at 3 PM, lasting 1 hour, with attendees pm@consultingfirm.com and da@consultingfirm.com. The description is 'Discuss Q1 strategy'.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the specified details: summary 'Marketing Meeting', start time Tuesday 2025-01-14 15:00:00, end time Tuesday 2025-01-14 16:00:00, attendees pm@consultingfirm.com, da@consultingfirm.com, and description 'Discuss Q1 strategy'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-01-12T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting on Friday at 10 AM to discuss 'Project Kickoff' with Hospital CEO and Department Heads. It should last 90 minutes.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the specified details: summary 'Project Kickoff', start time Friday 2025-01-17 10:00:00, end time Friday 2025-01-17 11:30:00, attendees ceo@hospital.org, Department Heads.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-01-12T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What is my first meeting on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "List events for Wednesday 2025-01-15, find the earliest event, and return its details. In this case the Legal Consultant call.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-01-15T07:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy on Thursday evening?",
+        "complexity": "Medium",
+        "expected_behavior": "List events for Thursday 2025-01-16 between 17:00:00 and 23:59:59 to check for evening commitments. Should see the Dinner with team on Thursday.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-01-16T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the Client Meeting Initial Assessment Presentation on Monday to start at 10:00 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Client Meeting: Initial Assessment Presentation' on Monday 2025-01-13 and update its start time to 10:00:00 and end time to 11:30:00.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-01-13T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the Dinner with Friends on Friday to 8:00 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Dinner with Friends' on Friday 2025-01-17 and update its start time to 20:00:00 and end time to 21:30:00.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-01-17T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my meeting with the Hospital CEO on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "List events for Thursday 2025-01-16, filter for events that contain 'Hospital CEO' in the attendees or summary, and return the start time. Should return 13:00:00.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-01-16T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having dinner with on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "List events for Thursday 2025-01-16, filter for events that contain 'Dinner' in the summary, and return the attendees. Should return Project Manager and Data Analyst.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-01-16T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Move my soccer practice on Tuesday back by half an hour.",
+        "complexity": "High",
+        "expected_behavior": "Find the event 'Teenager's Soccer Practice' on Tuesday 2025-01-14 and update its start time to 19:30:00 and end time to 21:00:00.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-01-14T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make it to the Financial Data Review on Wednesday, decline it.",
+        "complexity": "High",
+        "expected_behavior": "Find the event 'Client Meeting: Financial Data Review' on Wednesday 2025-01-15 and respond to it with DECLINE.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-01-15T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule meeting with legal.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Call with Legal Consultant: Regulatory Compliance' on Wednesday 2025-01-15 and ask for clarification on what new time to set it to.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-01-15T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "cancel Thursday dinner",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Dinner with Team' on Thursday 2025-01-16 and delete it.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-01-16T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Sunday 2025-01-19. Should display the Brunch with Family and Relax/Read events.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2025-01-19T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow's schedule?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Tuesday 2025-01-14. Should display the Team Meeting, Department Head Interviews and Soccer Practice events.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-01-13T20:00:00"
+    }
+]

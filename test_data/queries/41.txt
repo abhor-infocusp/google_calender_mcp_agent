@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please create an event called 'Client Meeting' on Tuesday from 3 PM to 4 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Client Meeting' scheduled for Tuesday, February 7, 2023, from 3:00 PM to 4:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-02-05T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me a dentist appointment on Saturday at 10:00 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Dentist Appointment' scheduled for Saturday, February 11, 2023, at 10:00 AM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-02-05T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the schedule for lunch on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event on Monday, February 6, 2023 that is labelled as 'Lunch'. Display its time and attendees.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-02-06T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled for Wednesday, February 8, 2023, between 12:00 PM and 6:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-02-08T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move the dinner with friends on Friday to 8 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Friends' event on Friday, February 10, 2023, and update its start time to 8:00 PM and its end time to 10:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-02-10T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "The soccer practice on Tuesday will now end at 7:30 PM instead of 7:00 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Kids' Soccer Practice' event on Tuesday, February 7, 2023, and update its end time to 7:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-02-07T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having brunch with on Sunday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Brunch with Family' event on Sunday, February 12, 2023, and list the attendees.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2023-02-12T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What's the phone number for the dental supplier I'm calling on Tuesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Get the 'Call with Dental Supplier' event on Tuesday, February 7, 2023.  Then extract the attendee information rep@dentalsupplies.com and respond with that email address. This assumes an external system is used to determine the phone number from the email address.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-02-07T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline the kids birthday party for Sunday and schedule a family walk for the same time instead.",
+        "complexity": "High",
+        "expected_behavior": "Decline the 'Kids Birthday Party' event on Sunday, February 12, 2023. Then, create a new event named 'Family Walk' scheduled for Sunday, February 12, 2023, from 1:00 PM to 3:00 PM.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2023-02-12T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Delete my yoga class on Monday and reschedule my afternoon appointments by half an hour earlier.",
+        "complexity": "High",
+        "expected_behavior": "Delete the 'Yoga Class' event on Monday, February 6, 2023. Then find all 'Patient Appointments' events on Monday between 1:00 PM and 4:30 PM and move them forward by 30 minutes. For example, an appointment at 1:00 PM will now start at 12:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-02-06T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule dentist.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Children's Dentist Visit' event on Saturday, February 11, 2023. Ask the user what time they would like to reschedule it to, then update the event time accordingly.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-02-11T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Parent teacher thingy?",
+        "complexity": "Low",
+        "expected_behavior": "Get the 'Parent Teacher Conference' event on Thursday, February 9, 2023 and display the summary, start, end and attendees.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-02-09T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Sunday, February 12, 2023.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2023-02-12T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled for Wednesday, February 8, 2023, between 12:00 PM and 6:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-02-07T20:00:00"
+    }
+]

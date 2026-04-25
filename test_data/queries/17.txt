@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Project Brainstorm' on Wednesday at 3 PM for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the title 'Project Brainstorm' on Wednesday, September 10, 2025, at 3 PM lasting one hour. No attendees are specified.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-09-07T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me a meeting for 'Discuss new strategy' this Friday at 11:00 AM with Sarah Miller.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event with the title 'Discuss new strategy' on Friday, September 12, 2025, at 11:00 AM. Add Sarah Miller as an attendee.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-09-07T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Monday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar events scheduled for Monday, September 8, 2025, between 9 AM and 12 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-09-08T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What is on the schedule for Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar events scheduled for Wednesday, September 10, 2025, between 12 PM and 6 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-09-10T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the Client Meeting with Maria Rodriguez on Monday to 3:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Client Meeting - Portfolio Review' with Maria Rodriguez on Monday, September 8, 2025, and update the start time to 3:30 PM. Keep the original duration.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-09-08T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the Yoga Class on Tuesday to 6:00 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Yoga Class' on Tuesday, September 9, 2025, and update the start time to 6:00 PM. Keep the original duration.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-09-09T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having dinner with on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Check the attendees of the 'Dinner with Friends' event on Monday, September 8, 2025.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-09-08T15:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my meeting with Jessica Brown on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event 'Client Meeting - Retirement Planning' with Jessica Brown on Wednesday, September 10, 2025, and return the start time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-09-10T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is there a conflict if I schedule a meeting with John Smith for Tuesday at 1:00 PM?",
+        "complexity": "High",
+        "expected_behavior": "Check the calendar on Tuesday, September 9, 2025, at 1:00 PM for existing events. If no conflict, create a meeting with John Smith at 1:00 PM. If the meeting already exists, do nothing.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-09-08T16:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule the meeting with Tom Williams on Friday so it doesn't overlap with preparing client reports.",
+        "complexity": "High",
+        "expected_behavior": "Find the event 'Client Meeting - Portfolio Review' with Tom Williams on Friday, September 12, 2025. Find the event 'Prepare Client Reports' on Friday, September 12, 2025. Reschedule the 'Client Meeting - Portfolio Review' to a time slot on Friday that does not overlap with the other event.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-09-11T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting with David...",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for any meetings related to 'David' this week. Find the 'Client Meeting - Initial Consultation' with David Lee on Monday, September 8, 2025. Respond by listing the details of the meeting.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-09-08T11:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... um... the thing with Linda...",
+        "complexity": "High",
+        "expected_behavior": "Find the event related to 'Linda' this week. Finds the 'Meeting with Mortgage Lender' with Linda Davis on Wednesday, September 10, 2025. Prompt user for new time and date. Once the user confirms, the event will be rescheduled.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-09-10T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for today, September 8, 2025, and list all events scheduled for today.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-09-08T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for tomorrow, Tuesday, September 9, 2025, and list all events scheduled for that day.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-09-08T18:00:00"
+    }
+]

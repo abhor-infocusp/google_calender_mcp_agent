@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Discuss Leopard patterns' for Tuesday at 4 PM, with friend3@email.com as an attendee, and a description about spots vs rosettes",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event on Tuesday, February 21, 2023, at 4:00 PM with the summary 'Discuss Leopard patterns', attendee friend3@email.com, and the description 'spots vs rosettes'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-02-19T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting on Thursday with the title 'Camera Trap Results', from 2 PM to 3 PM, no attendees, to discuss interesting footage.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event on Thursday, February 23, 2023, from 2:00 PM to 3:00 PM with the summary 'Camera Trap Results', no attendees, and the description 'to discuss interesting footage'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-02-19T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing later on Wednesday with my field assistant?",
+        "complexity": "Medium",
+        "expected_behavior": "First, find the meeting with Field Assistant on Wednesday. Then, return the meeting details.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-02-22T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on my schedule for Saturday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events on Saturday, February 25, 2023, between 12:00 PM and 6:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-02-25T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my Sunday trip planning to 3 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Trip planning and project development' event on Sunday and update the start time to 3:00 PM and the end time to 4:00 PM.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2023-02-19T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time for Photo Editing on Monday to 1 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Photo Editing - Tiger images' event on Monday, February 20, 2023, and update the start time to 1:00 PM and the end time to 3:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-02-20T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my video call with family on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Video call with family' event on Monday, February 20, 2023, and return the start time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-02-20T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Can you tell me who I'm talking to on Friday at 1 PM?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event at 1 PM on Friday, February 24, 2023. Then, return the attendees for that event.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-02-24T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move the location scouting for Bengal tigers to Wednesday at 7 AM. Also, add field_assistant2@email.com to it",
+        "complexity": "High",
+        "expected_behavior": "First, locate the 'Location scouting for Bengal tigers' event on Monday. Then, update the event by changing the date to Wednesday, February 22, 2023 and start time to 7:00 AM, and add field_assistant2@email.com to the attendees",
+        "addressed_days": [
+            "Monday",
+            "Wednesday"
+        ],
+        "current_time": "2023-02-20T11:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline the conservation webinar on Tuesday and create an event at the same time called 'Review Camera Placement' with no attendees.",
+        "complexity": "High",
+        "expected_behavior": "Decline the 'Online Conservation Webinar' event on Tuesday. Create a new event on Tuesday, February 21, 2023, from 7:00 PM to 8:00 PM with the summary 'Review Camera Placement' and no attendees.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-02-21T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "National geographic editor",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event that has National Geographic editor in the attendees and display the event information.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-02-20T14:30:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule the thing with the wilderness group",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event that has wilderness survival group in the attendees. Ask user for the desired day and time to reschedule. Once confirmed, update the event to that new day and time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-02-22T15:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Monday, February 20, 2023.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-02-20T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Wednesday, February 22, 2023.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-02-21T20:00:00"
+    }
+]

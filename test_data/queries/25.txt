@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Board Game Night' for this Friday from 7 PM to 10 PM, with my friends at friends@email.com.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule 'Board Game Night' on Friday, January 16, 2026, from 7 PM to 10 PM, with attendees friends@email.com.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-01-05T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a haircut appointment for me next Saturday at 11 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule 'haircut appointment' on Saturday, January 17, 2026, at 11 AM for an hour, assuming a default duration.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-01-05T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Wednesday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to check what meetings are scheduled on Wednesday, January 14, 2026, between 8 AM and 12 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-01-14T07:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I free to grab coffee with someone Friday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to check what meetings are scheduled on Friday, January 16, 2026, between 12 PM and 5 PM. If no events found, agent replies affirmatively.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-01-16T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my Tuesday appointment with Emily White back by an hour?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event 'Client Session - Emily White' on Tuesday, January 13, 2026. If it finds an event, call update_event to update the start time of the event to 9:30 AM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-01-12T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change my Thursday dinner plans so it starts half an hour later.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find 'Dinner with Friends' on Thursday, January 15, 2026. If the event is found, call update_event to change the start time to 7:30 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-01-15T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me who is attending the team meeting this Monday.",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find 'Team Meeting with Physical Therapists' on Monday, January 12, 2026. Then call get_event to get attendees' names from the meeting details, and respond to the user.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-01-12T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What's the email for David Garcia's appointment on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event 'Client Session - David Garcia' on Tuesday, January 13, 2026. If found, call get_event to get the email address associated with David Garcia for that event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-01-13T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to shift my Monday appointments earlier by 15 minutes. Will that conflict with anything?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find all events on Monday, January 12, 2026. Then, adjust each event's start time back by 15 minutes. Check for overlaps with any other meetings using list_events, and respond to the user about potential conflicts. If no conflict, agent will prompt the user to confirm the move.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-01-12T07:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline the book club meeting on Wednesday and instead schedule dinner with my husband.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find 'Book Club Meeting' on Wednesday, January 14, 2026, and then call respond_to_event to decline. Call create_event to schedule 'Dinner with Husband' on Wednesday, January 14, 2026, at 6:30 PM (assuming that is when the Book Club meeting was scheduled).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-01-14T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... Sarah... Tuesday...",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find an appointment with Sarah Lee on Tuesday, January 13, 2026, then ask the user to provide a new time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-01-13T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Delete... urgent...",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the event 'Client Session - Urgent Case' on Saturday, January 17, 2026, then confirm with user, before deleting the event.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-01-17T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for all events today, Monday, January 12, 2026.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-01-12T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any meetings yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for all events on Saturday, January 17, 2026.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2026-01-18T08:00:00"
+    }
+]

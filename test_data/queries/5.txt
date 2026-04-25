@@ -1,0 +1,152 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Brainstorm' this Wednesday from 1 PM to 2 PM with attendees projectmanager@boutiquefirm.com and networks@boutiquefirm.com and description 'Discuss Q3 strategies'.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call the create_event tool with the summary 'Team Brainstorm', start time '2026-04-08T13:00:00', end time '2026-04-08T14:00:00', attendees '[projectmanager@boutiquefirm.com, networks@boutiquefirm.com]', and description 'Discuss Q3 strategies'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-04-05T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting called 'Client Onboarding' for Friday at 3 PM for one hour, with ceo@clients.com as an attendee and description 'Welcome new client'.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call the create_event tool with the summary 'Client Onboarding', start time '2026-04-10T15:00:00', end time '2026-04-10T16:00:00', attendees '[ceo@clients.com]', and description 'Welcome new client'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-04-05T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Can you schedule a meeting with the sales team this week?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should ask for clarification on the desired day and time for the meeting with the sales team and then use the create_event tool.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-04-07T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I need to reschedule my security follow up.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should use list_events to find the 'Security Audit - Follow Up Interviews' event on Thursday and then ask for clarification on the desired new time before calling update_event.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-04-09T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my Security Protocol Update client meeting to 10:30 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Client Meeting - Security Protocol Update' event on Wednesday and update its start time to 10:30 AM, adjusting the end time accordingly. The agent should call update_event.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-04-08T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the Vendor Demo attendee list to include cloudsec@boutiquefirm.com.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Vendor Demo - New Threat Detection Software' event on Tuesday and update the attendees list to include cloudsec@boutiquefirm.com. The agent should call update_event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-04-06T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the project kickoff meeting on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call the list_events tool with the date 2026-04-06 and return the time of the 'Project Kick-off Meeting'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-04-06T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the dinner with friends on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call the list_events tool with the date 2026-04-11 and return the attendees of the 'Dinner with friends' event, listing friend3@email.com and friend4@email.com.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-04-10T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move the Client Security Audit Initial Assessment to Wednesday at 1 PM. If I am busy, find me another time.",
+        "complexity": "High",
+        "expected_behavior": "The agent should first check the user's calendar on Wednesday at 1 PM using list_events to see if there are any conflicts. If a conflict exists, the agent should suggest an alternative time slot. Once the user confirms a time, the agent should call update_event to reschedule the 'Client Security Audit - Initial Assessment'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-04-06T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Schedule a meeting with the Sales Team for 30 minutes. If there is a conflict, schedule it for Friday at 4 PM.",
+        "complexity": "High",
+        "expected_behavior": "The agent should check the calendar for a 30-minute slot this week with the Sales Team using list_events to check for conflicts. If a suitable slot is not found, the agent should schedule the meeting for Friday at 4 PM using create_event.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2026-04-07T11:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... security... interview?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should ask for clarification, identifying that the user likely wants to reschedule a security interview. The agent should use list_events to find the 'Security Audit - Follow Up Interviews' event on Thursday and then ask for a specific time to reschedule it to before calling update_event.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-04-09T07:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Delete... Vendor Demo...",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use list_events to find the 'Vendor Demo - New Threat Detection Software' event on Tuesday, confirm the user wants to delete it, and then call delete_event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-04-07T15:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the get_current_time to identify the current date, then call the list_events tool to find all events scheduled for that day.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-04-06T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I schedule anything for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the get_current_time to identify the current date, then add one day, and call the list_events tool to find all events scheduled for the next day.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-04-06T20:00:00"
+    }
+]

@@ -1,0 +1,156 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Board Game Night' for this Saturday at 7 PM until 10 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Board Game Night' on 2024-03-23 from 7 PM to 10 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-03-17T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add 'Dentist Appointment' to my calendar for Tuesday at 11 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Dentist Appointment' on 2024-03-19 at 11 AM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-03-17T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after the therapy session on Tuesday?",
+        "complexity": "Medium",
+        "expected_behavior": "First, find the 'Therapy Session' event on Tuesday. Then, list events between 10:00 AM and 12:00 PM on Tuesday to determine the subsequent event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-03-19T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's happening on Saturday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Saturday between 9 AM and 12 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-03-23T07:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move the Lunch with Friends on Saturday to 1 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Lunch with Friends' event on Saturday and update its start time to 1 PM, keeping the duration the same.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-03-23T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time for Kids' Soccer Practice on Tuesday to 5:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Kids' Soccer Practice' event on Tuesday and update its start time to 5:30 PM, keeping the duration the same.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-03-19T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What meetings do I have with the maintenance crew this week?",
+        "complexity": "Medium",
+        "expected_behavior": "List events from Monday to Sunday that include 'maintenance crew' in the attendees or summary.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-03-17T20:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my video call with my parents on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Video call with parents' event on Wednesday and return its start time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-03-20T06:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting with the therapist this week, but not when I have flight simulator training. What times are available?",
+        "complexity": "High",
+        "expected_behavior": "List the 'Flight Simulator Training' event on Tuesday. Then, check the availability with the therapist, excluding that time block on Tuesday.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-03-17T20:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I'm busy on Thursday morning. Remind me what I'm doing.",
+        "complexity": "Medium",
+        "expected_behavior": "List events scheduled for Thursday morning (between 8 AM and 12 PM).",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-03-21T06:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner with husband... change to 7pm",
+        "complexity": "Medium",
+        "expected_behavior": "Find 'Dinner with Husband' and update the start time to 7:00 PM on Thursday.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-03-21T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule medical transport",
+        "complexity": "Low",
+        "expected_behavior": "Identify the next 'On-Call Shift - Medical Transport Service' event and ask for a new time to reschedule. This requires a follow-up question to clarify the new time.",
+        "addressed_days": [
+            "Monday",
+            "Wednesday",
+            "Friday"
+        ],
+        "current_time": "2024-03-20T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on my schedule for today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for today (based on the current_time).",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-03-24T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for tomorrow (based on the current_time).",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-03-21T20:00:00"
+    }
+]

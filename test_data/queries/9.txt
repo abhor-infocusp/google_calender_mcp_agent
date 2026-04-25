@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Discuss Q3 results' for Wednesday at 10 AM with analyst1@ecommerce.com and analyst2@ecommerce.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the title 'Discuss Q3 results' for Wednesday, September 4th at 10 AM, ending at 11 AM, with analyst1@ecommerce.com and analyst2@ecommerce.com as attendees.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-09-01T14:30:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for Friday at 3 PM to brainstorm Q4 marketing strategies with external@consultant.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the title 'Brainstorm Q4 marketing strategies' for Friday, September 6th at 3 PM, ending at 4 PM, with external@consultant.com as an attendee.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-09-01T14:30:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I free to do something fun on Thursday?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for Thursday, September 5th. If there are no events, respond that the user is free. If there are events, list those events and ask if the user wants to schedule around them.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-09-01T14:30:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Monday besides work?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar for Monday, September 2nd. Return the 'Rock Climbing Session with Climbing Buddies'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-09-01T14:30:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move the meeting with the industry expert on Tuesday to 5 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event titled 'Data Silos Solution Brainstorm' and update the event to start at 5:00 PM on Tuesday, September 3rd, and end at 6:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-09-01T14:30:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule my one-on-one with the Marketing Manager on Monday to 3 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event titled 'One-on-One with Marketing Manager' on Monday, September 2nd and update the event to start at 3:00 PM and end at 4:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-09-01T14:30:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What meetings do I have on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Wednesday, September 4th: 'Discuss Qualitative Customer Insights'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-09-01T14:30:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the presentation practice on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event titled 'Presentation Practice with Communication Coach' on Thursday, September 5th and return the attendee: coach@presentation.com.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-09-01T14:30:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting with csr@ecommerce.com on Wednesday from 3 PM to 4 PM, but only if it doesn't conflict with anything already scheduled.",
+        "complexity": "High",
+        "expected_behavior": "Check the calendar for Wednesday, September 4th between 3 PM and 4 PM. Discover a conflict with 'Discuss Qualitative Customer Insights' at 2:00 PM. Inform the user about the conflict and ask if they want to reschedule the existing event or find a different time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-09-01T14:30:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I'd like to move my dinner with my partner on Tuesday so I can attend the data silos brainstorm. Can you check if that's possible and reschedule the dinner if it is?",
+        "complexity": "High",
+        "expected_behavior": "Find the event 'Dinner with Partner' on Tuesday September 3rd, and find the 'Data Silos Solution Brainstorm' event on Tuesday September 3rd. Determine if the dinner conflicts with the meeting. Check the dinner time (7:00 PM - 8:00 PM) and the meeting time (4:30 PM - 5:30 PM). Since the dinner is later, determine if the meeting can be moved to overlap. If not, respond that the dinner cannot be rescheduled without a conflict.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-09-01T14:30:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Presentation feedback?",
+        "complexity": "Medium",
+        "expected_behavior": "Search for an event containing the word 'Presentation' on Thursday. Find 'Post-Presentation Feedback Session' and list the details of that event.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-09-01T14:30:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Move rock climbing.",
+        "complexity": "Medium",
+        "expected_behavior": "Search for the event 'Rock Climbing Session with Climbing Buddies' on Monday, September 2nd and ask user to specify a new time and/or day to move the event to.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-09-01T14:30:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "If today is Monday: List all events for Monday, September 2nd. If today is Tuesday: List all events for Tuesday, September 3rd, and so on.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-09-04T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow's schedule?",
+        "complexity": "Low",
+        "expected_behavior": "If today is Monday: List all events for Tuesday, September 3rd. If today is Tuesday: List all events for Wednesday, September 4th, and so on.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-09-04T08:00:00"
+    }
+]

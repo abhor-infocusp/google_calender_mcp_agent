@@ -1,0 +1,149 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting for Thursday to discuss project updates with John and Jane at 2 PM, lasting one hour. John's email is john@example.com and Jane's is jane@example.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Discuss project updates', start time as Thursday at 2 PM, end time as Thursday at 3 PM, and attendees as john@example.com, jane@example.com.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-03-30T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add an event to my calendar for Saturday at 3 PM for a board game night with Mike and Sarah. Lasts three hours. Mike is mike@email.com and Sarah is sarah@email.com",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Board game night', start time as Saturday at 3 PM, end time as Saturday at 6 PM, and attendees as mike@email.com, sarah@email.com.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-03-30T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Can you schedule something for me for lunch on Wednesday with the health department?",
+        "complexity": "Medium",
+        "expected_behavior": "Create a new event with the summary 'Lunch with Health Department', start time as Wednesday at 12 PM, end time as Wednesday at 1 PM, and attendees as healthdept@county.gov based on matching email.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-03-30T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Please schedule a dinner with my husband this week.",
+        "complexity": "Medium",
+        "expected_behavior": "Create a new event with the summary 'Dinner with Husband', start time as Thursday at 7 PM, end time as Thursday at 8 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-03-30T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule my soccer game on Saturday to 4 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Daughter's Soccer Game' on Saturday and update its start time to 4 PM and its end time to 6 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-03-30T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the IEP meeting on Monday to 2 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'IEP Meeting for Student with Asthma' on Monday and update its start time to 2 PM and its end time to 3 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-03-30T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What meetings do I have on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-03-30T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the vision screening scheduled for?",
+        "complexity": "Low",
+        "expected_behavior": "Find and return the start time of the event 'Vision Screening - 3rd Grade'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-03-30T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my dinner with my family on Monday to Wednesday at the same time.",
+        "complexity": "High",
+        "expected_behavior": "Find the implicit event 'Dinner with Family', delete it from Monday, and create a new event with the summary 'Dinner with Family', start time as Wednesday at 6:30 PM, end time as Wednesday at 7:30 PM.",
+        "addressed_days": [
+            "Monday",
+            "Wednesday"
+        ],
+        "current_time": "2025-03-30T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "List the events for this week where I am meeting with somebody about a student.",
+        "complexity": "High",
+        "expected_behavior": "List the events 'IEP Meeting for Student with Asthma' on Monday and 'Meeting with School Psychologist - Student Behavioral Concerns' on Friday because they contain the word student and could be considered meetings.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-03-30T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting with the pediatrician?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Call with Pediatrician Regarding Student Allergy' on Monday and display the details.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-03-30T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel book club.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'Book Club Meeting' on Tuesday and delete it.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-03-30T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-03-31T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What is on for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Tuesday.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-03-31T23:00:00"
+    }
+]

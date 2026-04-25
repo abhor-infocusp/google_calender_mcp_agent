@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Meeting' for Wednesday at 10 AM for one hour with neighbor1@email.com.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule a 'Team Meeting' on Wednesday, June 21, 2023, from 10:00 AM to 11:00 AM with neighbor1@email.com as an attendee.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-06-18T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a haircut appointment for me on Thursday at 2 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule a 'haircut appointment' on Thursday, June 22, 2023, at 2:00 PM for one hour with no attendees.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-06-18T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy on Wednesday evening?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to check for any events scheduled on Wednesday, June 21, 2023 between 5 PM and 11 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-06-21T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing this Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to check for any events scheduled on Saturday, June 24, 2023.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-06-24T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my doctor appointment to 5:30 PM on Thursday.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Doctor Appointment' on Thursday, June 22, 2023, and update the start time to 5:30 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-06-22T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time for dinner with my son on Monday to 6:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Dinner with Son' event on Monday, June 19, 2023, and then update the start time to 6:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-06-19T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my book club meeting this week?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Book Club Meeting' event scheduled this week (Monday, June 19, 2023 to Sunday, June 25, 2023).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-06-20T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the meeting regarding student behavior on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for Tuesday, June 20, 2023, find the event named 'Meeting Regarding Student Behavior', then call get_event to retrieve the event details and determine the attendees.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-06-20T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the book club this Wednesday. Decline the invitation.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Book Club Meeting' event on Wednesday, June 21, 2023, and then call respond_to_event to decline the invitation.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-06-21T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule my son's basketball game on Saturday to Sunday at the same time.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the 'Son's Basketball Game' event on Saturday, June 24, 2023. Get the start time, then call update_event to change the date to Sunday, June 25, 2023, keeping the same start time.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2023-06-23T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule gardening",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Gardening' event this week. Then ask for clarification about which day to reschedule to.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-06-22T16:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting with school counselor",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events for events with the words 'meeting' and 'school counselor' this week to find the matching event 'Meeting Regarding Student Behavior' on Tuesday and respond to user with the event details.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-06-20T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to check for any events scheduled for today, June 19, 2023 (Monday).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-06-19T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What is on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to check for any events scheduled for tomorrow, June 21, 2023 (Wednesday).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-06-20T15:00:00"
+    }
+]

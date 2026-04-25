@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Meet with John' for Tuesday at 3:00 PM for one hour with attendee john@example.com and description 'Discuss project updates'.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event with the summary 'Meet with John', start time of 2023-09-05T15:00:00, end time of 2023-09-05T16:00:00, attendee john@example.com, and description 'Discuss project updates'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-09-03T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me a slot for 'Marketing Review' this Friday at 2 PM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event with the summary 'Marketing Review', a start time of 2023-09-08T14:00:00, and an end time one hour later at 2023-09-08T15:00:00.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-09-03T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after my lunch meeting on Tuesday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should first find the 'Lunch with Babysitter' event on Tuesday, determine its end time (1:00 PM), and then find any events scheduled after that time on the same day. It should return the 'Image Editing - 456 Oak Ave Photos' event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-09-05T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on after Soccer Practice?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should locate the 'Daughter's Soccer Practice' event on Monday and then identify any subsequent events scheduled for that day. Since no events are scheduled after that, it should respond that there are no further events.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-09-04T16:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the Oak Ave photography session to 10 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the 'Real Estate Photography - 456 Oak Ave' event and update its start time to 2023-09-05T10:00:00, and its end time to 2023-09-05T12:00:00.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-09-05T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my dinner with friends on Saturday back by one hour.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should locate the 'Dinner with Friends' event on Saturday and update its start time to 2023-09-09T17:00:00, and its end time to 2023-09-09T19:00:00.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-09-09T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Main St photography session?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Real Estate Photography - 123 Main St' event and respond with the attendee: John Smith (john.smith@email.com).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-09-04T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is image editing scheduled for on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Image Editing - 789 Pine Ln Photos' event on Wednesday and respond with its start time: 1:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-09-06T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you schedule photography at 456 Oak Ave for 11 AM on Tuesday?",
+        "complexity": "High",
+        "expected_behavior": "The agent should check for conflicts on Tuesday at 11 AM. It should detect a conflict with 'Real Estate Photography - 456 Oak Ave'. The agent should inform the user about the conflict, providing the conflicting event's title and time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-09-04T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my meeting with John to Wednesday at 10 AM, but only if that doesn't conflict with anything.",
+        "complexity": "High",
+        "expected_behavior": "The agent should check for conflicts on Wednesday at 10 AM. It should detect a conflict with 'Real Estate Photography - 789 Pine Ln'. The agent should inform the user about the conflict, providing the conflicting event's title and time. The meeting with John should not be moved.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-09-04T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Photography Elm Street?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should attempt to understand the request and identify that the user is likely referring to the 'Real Estate Photography - 101 Elm St' event. It should then ask for clarification about what action the user wants to perform with this event, such as 'Do you want to know more, reschedule, or cancel this event?'",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-09-07T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner Friday cancel",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should interpret 'Dinner Friday' as a reference to an evening meal scheduled on Friday. Since no dinner event is present, it should respond 'There is no dinner scheduled on Friday. Did you mean Movie Night with Daughter?' If confirmed, proceed to delete the 'Movie Night with Daughter' event.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-09-08T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "If today is Monday, the agent should list all events scheduled for Monday, September 4, 2023.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-09-04T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Am I free tomorrow evening?",
+        "complexity": "Medium",
+        "expected_behavior": "If today is Monday, the agent should check Tuesday evening (after 6 PM) for any scheduled events. It should find 'Dinner with Family' and inform the user they are not free.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-09-04T10:00:00"
+    }
+]

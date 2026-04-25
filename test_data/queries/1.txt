@@ -1,0 +1,140 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please add a meeting to my calendar for tomorrow at 3 PM called 'Project Kickoff' with analyst1@firm.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with summary 'Project Kickoff', start time 2023-04-26 15:00:00, end time 2023-04-26 16:00:00, and attendee analyst1@firm.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-25T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you schedule a lunch with my partner for Saturday at 1 PM?",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with summary 'Lunch with Partner', start time 2023-04-29 13:00:00, and end time 2023-04-29 14:00:00.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-04-23T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing later on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Wednesday after the current time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the agenda for Friday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for Friday.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-04-23T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the yoga class on Wednesday to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the yoga class event on Wednesday and update its start time to 19:30:00 and end time to 20:30:00.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-26T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update the Client Meeting on Thursday to include client10@email.com.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the Client Meeting on Thursday and update the attendees list to include client10@email.com.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-04-23T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is joining the Team Meeting on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the Team Meeting event on Monday and return the attendees list.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-23T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is dinner with the Partner's Family on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the Brunch with Partner's Family event on Saturday and return the start and end times.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-04-23T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting with client1@email.com on Monday at 10 AM but want to make sure it doesn't overlap with anything else.",
+        "complexity": "High",
+        "expected_behavior": "List events for client1@email.com on Monday between 10:00 AM and 11:00 AM. If no conflicts, create a new event with summary 'Meeting with client1@email.com', start time 2023-04-24 10:00:00, end time 2023-04-24 11:00:00, and attendee client1@email.com.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-04-23T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is riskconsultant@consulting.com free on Thursday between 1 and 2 PM?",
+        "complexity": "High",
+        "expected_behavior": "List events for riskconsultant@consulting.com on Thursday between 13:00:00 and 14:00:00. If no events, indicate they are free.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-04-23T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule client meeting...",
+        "complexity": "Medium",
+        "expected_behavior": "Clarify which client meeting to reschedule and what date/time to reschedule it to.",
+        "addressed_days": [],
+        "current_time": "2023-04-23T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "What about Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Assuming previous query asked about Wednesday, list the events scheduled for Thursday.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-04-27T12:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for today.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-04-26T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events scheduled for tomorrow.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-04-24T15:00:00"
+    }
+]

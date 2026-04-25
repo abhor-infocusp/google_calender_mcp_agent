@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Yoga' on Tuesday at 6 PM for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Yoga' on Tuesday, October 8, 2024, from 6:00 PM to 7:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-10-06T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for 'Discuss Budget' on Thursday at 11 AM with IT Manager.",
+        "complexity": "Medium",
+        "expected_behavior": "Create a new event named 'Discuss Budget' on Thursday, October 10, 2024, at 11:00 AM, lasting one hour, with itmanager@clientcompany.com as an attendee.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-10-06T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing for lunch today?",
+        "complexity": "Low",
+        "expected_behavior": "Determine the current day and list any events occurring between 1:00 PM and 2:00 PM that day.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-10-09T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Check my afternoon schedule for Friday.",
+        "complexity": "Low",
+        "expected_behavior": "List events scheduled on Friday, October 11, 2024, between 12:00 PM and 6:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-10-06T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the 'Team Lunch' on Monday to 1:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Team Lunch' event on Monday, October 7, 2024, and update its start time to 1:30 PM. The end time should be updated to 2:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-10-07T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time for the 'Client Presentation' on Tuesday to 2:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Client Presentation' event on Tuesday, October 8, 2024, and update its start time to 2:30 PM. The end time should be updated to 3:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-10-08T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the Project Kickoff Meeting on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Project Kickoff Meeting' event on Monday, October 7, 2024, and return its start time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-10-06T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Vendor Meeting: New Security Software on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Vendor Meeting: New Security Software' event on Wednesday, October 9, 2024, and return the list of attendees.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-10-06T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting with the Project Manager on Wednesday from 4 PM to 5 PM. Check if this conflicts with anything.",
+        "complexity": "High",
+        "expected_behavior": "Check the calendar for any existing events on Wednesday, October 9, 2024, between 4:00 PM and 5:00 PM that include the Project Manager (pm@consultingfirm.com) as an attendee. If a conflict exists, notify the user; otherwise, create the new event.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-10-06T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Book me for an hour for 'Client Follow Up' on Thursday, but avoid 9 AM because I have a meeting.",
+        "complexity": "High",
+        "expected_behavior": "Check for available slots on Thursday, October 10, 2024, for a one-hour 'Client Follow Up' meeting, excluding 9:00 AM. Schedule it in the next available slot and create the meeting.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-10-06T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Tuesday.",
+        "complexity": "Medium",
+        "expected_behavior": "Ask for clarification about which event to reschedule, and to what time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-10-08T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Delete Wednesday.",
+        "complexity": "Medium",
+        "expected_behavior": "Ask for clarification about which event(s) to delete on Wednesday, October 9, 2024.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-10-09T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Determine the current date, then list all events scheduled for the next day.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-10-07T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Determine the current date, then list all events scheduled for the previous day.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-10-08T09:00:00"
+    }
+]

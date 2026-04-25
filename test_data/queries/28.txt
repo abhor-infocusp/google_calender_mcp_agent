@@ -1,0 +1,138 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Discuss Project X' for Tuesday at 3 PM lasting one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule an event named 'Discuss Project X' on Tuesday, January 3, 2023, from 3 PM to 4 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-01-01T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you book me in for a meeting with John this Thursday at 11 AM for half an hour?",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to schedule an event with John on Thursday, January 5, 2023, from 11 AM to 11:30 AM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-01-01T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find all events on Wednesday, January 4, 2023, between 12:00 PM and 6:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-01-04T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Anything happening this Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find all events on Saturday, January 7, 2023.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-01-07T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my 9 AM Team Retrospective on Friday to 11 AM?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Team Retrospective' event on Friday, January 6, 2023. Then, call update_event with the event ID to change the start time to 11 AM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-01-06T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the Hiking Group Planning Call on Tuesday to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Hiking Group Planning Call' event on Tuesday, January 3, 2023. Then, call update_event with the event ID to change the start time to 7:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-01-03T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my meeting with the Head of IT this week?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Meeting with Head of IT' event on Tuesday, January 3, 2023. Then, read out the meeting time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2022-12-31T12:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who will be at the Marketing Data Needs Meeting on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Marketing Data Needs Meeting' event on Monday, January 2, 2023. Then, read out the attendees.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2022-12-31T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to work on the Customer Behavior Analysis Project for two hours on Thursday, but don't schedule over my existing meetings.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find events on Thursday, January 5, 2023. Check for available time slots, then call create_event to schedule 'Work on Customer Behavior Analysis Project' for two hours without conflicting with existing meetings.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2022-12-31T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Block out some time for data visualization on Thursday afternoon, but make sure it's after my meeting.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find events on Thursday, January 5, 2023. Then, call create_event to schedule 'Explore new data visualization tools' on Thursday afternoon (after 4PM) that doesn't overlap any other event.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2022-12-31T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule sales...",
+        "complexity": "Low",
+        "expected_behavior": "The query is too ambiguous. Respond that more information is needed, such as the date and the full name of the event that needs to be rescheduled.",
+        "addressed_days": [],
+        "current_time": "2022-12-31T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Move team meeting",
+        "complexity": "Low",
+        "expected_behavior": "The query is too ambiguous. Respond that more information is needed, such as the date and the full name of the event that needs to be rescheduled.",
+        "addressed_days": [],
+        "current_time": "2022-12-31T12:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find all events on Sunday, January 8, 2023.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2023-01-08T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find all events on Tuesday, January 3, 2023.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-01-02T15:00:00"
+    }
+]

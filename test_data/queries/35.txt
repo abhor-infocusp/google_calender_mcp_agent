@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please schedule a meeting on Tuesday at 3 PM called 'Project Brainstorm'.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Project Brainstorm' for Tuesday, October 20, 2026, from 3:00 PM to 4:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-10-18T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you create an event for Saturday at 2 PM for a chess tournament?",
+        "complexity": "Low",
+        "expected_behavior": "Create an event called 'chess tournament' on Saturday, October 24, 2026, from 2:00 PM to 3:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-10-18T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing for lunch on Tuesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event scheduled on Tuesday, October 20, 2026, between 12:00 PM and 1:00 PM and respond with the event name, which is 'Lunch with Surgical Team'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-10-20T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the calendar for Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event scheduled on Wednesday, October 21, 2026, in the afternoon (between 12:00 PM and 6:00 PM) and respond with the events between 12:00PM-6:00PM, which are 'Lung Transplant - Patient White' and 'Meeting with David'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-10-21T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my dinner with Mark on Monday to 8 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Mark' event on Monday, October 19, 2026, and update its start time to 8:00 PM and end time to 9:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-10-19T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the meeting with David on Wednesday to 3 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event named 'Meeting with David' on Wednesday, October 21, 2026, and update its start time to 3:00 PM and end time to 4:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-10-21T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the hospital admin meeting on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Hospital Admin Meeting' event on Monday, October 19, 2026, and return the attendee list, which includes Sarah (sarah@hospital.com).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-10-19T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is Emily's soccer game on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Emily's soccer game' event on Saturday, October 24, 2026, and return its start time, which is 1:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-10-24T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule a meeting with Dr. Chen for an hour on Monday. Is there a conflict?",
+        "complexity": "High",
+        "expected_behavior": "Check the availability on Monday, October 19, 2026. Check if the consult with Dr. Chen already exists, and if not, check for conflicts. Determine if the time slot from 9:00 AM to 10:00 AM is available and respond that there is no conflict.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-10-18T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can I move Emily's soccer game to Sunday at 1 PM?",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Emily's soccer game' event on Saturday, October 24, 2026. Then check for conflicts at 1 PM on Sunday, October 25, 2026. Then respond that it conflicts with 'Brunch with Mark's family'.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-10-24T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Meeting David Wednesday",
+        "complexity": "Low",
+        "expected_behavior": "Identify that a meeting with David should be scheduled on Wednesday, October 21, 2026. Use current time to determine time. Schedule meeting with David from 10:00-11:00.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-10-18T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule surgery Smith",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event 'CABG Surgery - Patient Smith' and ask for further clarification like new date and time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-10-19T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow morning?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the events scheduled for Tuesday, October 20, 2026, in the morning (between 6:00 AM and 12:00 PM) and respond with 'Morning Patient Rounds' and 'Aortic Valve Replacement - Patient Davis'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-10-19T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any pre-op meetings yesterday?",
+        "complexity": "Medium",
+        "expected_behavior": "Check for events on Sunday, October 18, 2026 that contain 'Pre-Op Meeting' in the summary. Since there aren't any, respond with 'No, you did not have any pre-op meetings yesterday'.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2026-10-19T08:00:00"
+    }
+]

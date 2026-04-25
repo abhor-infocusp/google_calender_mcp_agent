@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Discuss Project Alpha' for Tuesday at 3 PM, lasting one hour, with attendees john.doe@company.com and jane.smith@company.com, and a description 'Review progress and next steps'.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event with the title 'Discuss Project Alpha', scheduled for Tuesday, August 4th, 2026 at 3:00 PM, ending at 4:00 PM. The attendees should be john.doe@company.com and jane.smith@company.com, and the description should read 'Review progress and next steps'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-08-02T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for Friday from 2 PM to 3 PM named 'Strategy Brainstorm' with sarah@email.com, mark@email.com and me. Set the description as 'Discuss Q3 strategies'.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event with the title 'Strategy Brainstorm' on Friday, August 7th, 2026, from 2:00 PM to 3:00 PM, with attendees sarah@email.com, mark@email.com and the user's email. The description should be 'Discuss Q3 strategies'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-08-02T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Monday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should list the events scheduled for Monday between 8:00 AM and 12:00 PM and describe those events.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-08-03T07:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What is on for the weekend?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should list the events scheduled for Saturday and Sunday and then describe them.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-08-02T18:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the 'Team Meeting' on Monday to 10 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the event titled 'Team Meeting' on Monday, August 3rd, 2026 and update its start time to 10:00 AM. The duration remains the same.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-08-03T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update the 'Dinner with Friends' on Friday to start at 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the event titled 'Dinner with Friends' on Friday, August 7th, 2026 and update its start time to 7:30 PM. The duration remains the same.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-08-07T17:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the 'Service Call' scheduled for Monday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the event titled 'Service Call' on Monday, August 3rd, 2026 and respond with its start time (1:00 PM).",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-08-03T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the 'HVAC Tech Training Webinar' on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the event titled 'HVAC Tech Training Webinar' on Thursday, August 6th, 2026 and respond with the attendee: training@hvacinstitute.com.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-08-06T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the 'Parent-Teacher Conference' on Tuesday. Decline it.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should find the event titled 'Parent-Teacher Conference' on Tuesday, August 4th, 2026 and respond with a DECLINE to the event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-08-04T15:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Am I busy Saturday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should look at the calendar from 9:00AM to 12:00PM and determine if there are conflicts. The agent should respond with the events that occur at that time, specifically mentioning the 'On-Call - Potential Emergency Repairs' event.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-08-02T18:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change First Bank",
+        "complexity": "High",
+        "expected_behavior": "The agent should search for events related to 'First Bank' during the week. It should locate the 'Maintenance - Annual Checkup - First Bank' event on Tuesday, August 4th, 2026, and ask the user for clarification on what change they want to make.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-08-05T11:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "No, make it later",
+        "complexity": "High",
+        "expected_behavior": "This query is highly context-dependent. Assuming the previous query was regarding rescheduling the 'Team Meeting' on Monday, the agent should interpret 'it' as the Team Meeting and 'later' as rescheduling to a later time on the same day. The agent should ask the user for a specific time to reschedule the meeting to.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-08-03T11:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should get the current time (Monday) then search for events on Tuesday, August 4th, 2026, and display those events to the user.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-08-03T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should get the current time (Tuesday) then search for events on Monday, August 3rd, 2026, and display those events to the user.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-08-04T08:00:00"
+    }
+]

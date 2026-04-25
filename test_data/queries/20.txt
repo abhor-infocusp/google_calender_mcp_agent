@@ -1,0 +1,144 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Brainstorm' for Wednesday at 2 PM with marketing_stakeholder@ecommerce.com and customer_support_lead@ecommerce.com.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Team Brainstorm', start set to Wednesday at 2 PM, end set to Wednesday at 3 PM (assuming a 1-hour duration), attendees set to marketing_stakeholder@ecommerce.com and customer_support_lead@ecommerce.com, and description set to None.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-10-29T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for me on Friday at 11 AM to discuss 'Yearly Goals' with friend3@email.com.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Yearly Goals', start set to Friday at 11 AM, end set to Friday at 12 PM (assuming a 1-hour duration), attendees set to friend3@email.com, and description set to None.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-10-29T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy on Thursday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to Thursday at 12 PM and time_max set to Thursday at 6 PM. Analyze the events returned to determine if there are any conflicts. Respond to the user based on the presence or absence of events.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-10-29T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the schedule for Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to Saturday at 00:00 AM and time_max set to Saturday at 11:59 PM. Summarize the events returned to the user.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-10-29T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the Design Review: Checkout Flow on Monday to 3 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to Monday at 00:00 AM and time_max set to Monday at 11:59 PM, and extract the event_id of event 'Design Review: Checkout Flow'. Then call update_event with event_id and updates including start time as 3 PM and end time as 4:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-10-29T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the yoga class on Tuesday to 7:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to Tuesday at 00:00 AM and time_max set to Tuesday at 11:59 PM, and extract the event_id of event 'Yoga Class'. Then call update_event with event_id and updates including start time as 7:30 PM and end time as 8:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-10-29T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Product Team Stand-up on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to Wednesday at 9:30 AM and time_max set to Wednesday at 10:00 AM, and extract the event_id of event 'Product Team Stand-up'. Then call get_event with event_id. Respond to the user with the attendee list of the event.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-10-29T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What is the Design System Contribution on Friday about?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to Friday at 2:30 PM and time_max set to Friday at 4:00 PM, and extract the event_id of event 'Design System Contribution - Button Component'. Then call get_event with event_id. Respond to the user with the event description.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-10-29T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you schedule a meeting with the Design System Lead on Monday at 3:30 PM?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min set to Monday at 3:30 PM and time_max set to Monday at 4:30 PM to check for conflicts. It will detect a conflict with the existing 'Meeting with Design System Lead' scheduled for 3:00 PM. Check attendees. Report the conflict to the user. The user can then decide to reschedule/cancel the conflicting event, or choose a different time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-10-29T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my book club meeting on Wednesday to Friday at the same time. Will that work?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min set to Wednesday at 7:00 PM and time_max set to Wednesday at 9:00 PM, and extract the event_id of event 'Book Club Meeting'. Then call list_events with time_min set to Friday at 7:00 PM and time_max set to Friday at 9:00 PM to check for conflicts. If there are no conflicts, call update_event with event_id and updates including the start time and end time on Friday. Respond affirmatively if there are no conflicts. Otherwise report conflicts.",
+        "addressed_days": [
+            "Wednesday",
+            "Friday"
+        ],
+        "current_time": "2023-10-29T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule usability testing",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to Tuesday at 1:00 PM and time_max set to Tuesday at 2:00 PM, and extract the event_id of event 'Usability Testing Session - Prototype A'. Also, call list_events with time_min set to Thursday at 1:00 PM and time_max set to Thursday at 2:00 PM, and extract the event_id of event 'Usability Testing Session - Prototype B'. Ask the user for which day to reschedule the testing to. Once the day has been determined, ask the user for the specific time to reschedule to. Finally, call update_event with event_id and updates including the start time and end time for that day.",
+        "addressed_days": [
+            "Tuesday",
+            "Thursday"
+        ],
+        "current_time": "2023-10-29T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel dinner.",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to Saturday at 7:00 PM and time_max set to Saturday at 9:00 PM, and extract the event_id of event 'Dinner at New Restaurant'. Then call delete_event with event_id.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-10-29T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have today?",
+        "complexity": "Low",
+        "expected_behavior": "Using the current date, call list_events with time_min set to the start of the current day and time_max set to the end of the current day. Respond to the user with the list of events.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-10-30T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Anything happening tomorrow morning?",
+        "complexity": "Low",
+        "expected_behavior": "Using the current date, determine tomorrow's date, and call list_events with time_min set to the start of tomorrow and time_max set to 12 PM tomorrow. Respond to the user with the list of events.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-11-01T08:00:00"
+    }
+]

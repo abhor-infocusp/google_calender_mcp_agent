@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Lunch' on Tuesday at 12:30 PM for 1 hour.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Team Lunch' on Tuesday, July 9, 2024, at 12:30 PM, ending at 1:30 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-07T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for Friday at 11 AM to discuss quarterly reports.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Discuss quarterly reports' on Friday, July 12, 2024, at 11 AM. Assuming a default duration of 1 hour, the event will end at 12 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-07-07T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Can you schedule something for me with the sales engineer?",
+        "complexity": "Medium",
+        "expected_behavior": "Since there's a 'Sales Engineer Meeting' already scheduled for Tuesday at 1 PM, ask the user 'Do you want to schedule another meeting with the Sales Engineer? If so, when?'",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-07T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Reschedule my client meeting.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event called 'Client Meeting' on Wednesday at 10:30 AM, then ask the user, 'To what time would you like to reschedule the client meeting on Wednesday?'",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-07T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the Product Demo Prep to 2 PM on Monday.",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Product Demo Prep' event on Monday and update its start time to 2 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-07T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the Pipeline Review duration to 1.5 hours.",
+        "complexity": "Low",
+        "expected_behavior": "Find the event 'Pipeline Review with Sales Manager' on Wednesday and update its duration from 1 hour to 1.5 hours, so it ends at 10:30 AM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-07T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my yoga class?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Yoga Class' event and respond with 'Your yoga class is on Monday at 6:30 PM'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-07T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Demo with Potential Client on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Demo with Potential Client' event on Wednesday and respond with 'Potential Client - client@company.com, Sales Engineer - salesengineer@company.com'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-07T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move the client call on Thursday to the time when I finalize the report on Friday.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Client Call' event on Thursday and the 'Finalize Report' event on Friday. Determine the time of 'Finalize Report' (1:00 PM - 2:00 PM) and then move the 'Client Call' event on Thursday to Friday at 1:00 PM.",
+        "addressed_days": [
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2024-07-07T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I cannot make dinner with partner's family. Decline it.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Dinner with Partner's Family' event on Saturday and respond with 'Declining the event. Is this correct?' Upon confirmation, decline 'Dinner with Partner's Family'.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-07-07T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule meeting... Wednesday... 3pm",
+        "complexity": "Medium",
+        "expected_behavior": "Asks the user to clarify: 'Which meeting on Wednesday do you want to reschedule and to which time?'",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-07T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Yoga... cancel",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Yoga Class' event on Monday and ask for confirmation. If confirmed, delete the event.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-07T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Tuesday, July 9, 2024.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-08T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Saturday, July 13, 2024.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-07-14T10:00:00"
+    }
+]

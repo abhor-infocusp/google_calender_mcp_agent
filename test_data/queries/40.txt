@@ -1,0 +1,149 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please create an event called 'Team Brainstorm' for Tuesday at 3:00 PM, ending at 4:00 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to create an event named 'Team Brainstorm' on Tuesday, January 20, 2026, from 3:00 PM to 4:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-01-18T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a dentist appointment for me on Wednesday from 1 PM to 2 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event to create an event named 'Dentist Appointment' on Wednesday, January 21, 2026, from 1:00 PM to 2:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-01-18T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Anything happening with the marketing team this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events within a time range that spans the entire week (Monday to Sunday) and also contains the email marketing_specialist@nonprofit.org to filter by the Marketing Team's activities.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-01-18T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What meetings are happening on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to check for any events happening on Thursday, January 22, 2026.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-01-18T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move the content planning session to 1 PM on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Content Planning Session' event using list_events. Then, call update_event to change the start time of the event to 1:00 PM on Monday, January 19, 2026, and adjust the end time accordingly.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-01-18T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the meeting with Local Media Contact on Tuesday to 3 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Local Media Contact' event using list_events. Then, call update_event to change the start time of the event to 3:00 PM on Tuesday, January 20, 2026, and adjust the end time accordingly.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-01-18T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Board Member Meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Board Member Meeting' event on Wednesday, January 21, 2026. Then, call get_event with the event ID to retrieve the attendee list.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-01-18T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is dinner with family?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Dinner with Family' event and get its start time on Monday, January 19, 2026.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-01-18T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I cannot make the meeting with Local Media Contact on Tuesday. Decline it.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting with Local Media Contact' event using list_events. Then, call respond_to_event to decline the event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-01-18T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is there a conflict if I move the Program Manager Collaboration to Friday at 9 AM?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events for Program Manager Collaboration on Thursday to get event id. Then call list_events on Friday at 9 AM and check if there's a conflict. If no conflict then say no conflict. Since there IS a conflict with Fundraising Event Planning on Friday morning, return the conflict.",
+        "addressed_days": [
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2026-01-18T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule board meeting.",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Board Member Meeting' event on Wednesday, January 21, 2026. Ask the user to provide the new date and time for rescheduling.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-01-18T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "cancel yoga",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Yoga Class' event on Wednesday, January 21, 2026. Call delete_event to delete the event.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-01-18T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to check for any events happening today, Monday, January 19, 2026.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-01-19T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on tomorrow's schedule?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to check for any events happening tomorrow, Wednesday, January 21, 2026.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-01-21T08:00:00"
+    }
+]

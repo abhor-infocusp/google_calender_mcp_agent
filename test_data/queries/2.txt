@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a meeting next Tuesday at 1pm called \"Discuss Christmas Menu\". Invite manager@restaurant.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event called \"Discuss Christmas Menu\" on Tuesday, December 24, 2024, from 1:00 PM to 2:00 PM, with manager@restaurant.com as an attendee.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-12-22T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please schedule a brunch for Sunday at 11am with my wife.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event called \"Brunch\" on Sunday, December 29, 2024, from 11:00 AM to 12:00 PM, with wife@email.com as an attendee.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-12-22T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy when the executive chef and I were supposed to meet this week?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the meeting with executivechef@restaurant.com this week, which is scheduled on Monday from 3:00 PM to 4:00 PM. Check if there are any conflicting events during that time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-12-23T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing this weekend to relax?",
+        "complexity": "Medium",
+        "expected_behavior": "Check for any events on Saturday and Sunday. Return the event on Sunday from 2:00 PM to 4:00 PM called \"Relaxing painting session at home.\"",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2024-12-27T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move the sauce tasting on Monday to 10am?",
+        "complexity": "Low",
+        "expected_behavior": "Find the \"Sauce Tasting & Adjustments\" event on Monday, December 23, 2024, and update its start time to 10:00 AM and end time to 11:30 AM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-12-23T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule my dinner with my wife for 8pm on Tuesday.",
+        "complexity": "Low",
+        "expected_behavior": "Find the \"Dinner with wife\" event on Tuesday, December 24, 2024, and update its start time to 8:00 PM and end time to 9:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-12-24T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What meetings do I have on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Wednesday, December 25, 2024.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-12-25T07:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my visit to the farmer's market on Sunday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event \"Visit local farmer's market for inspiration\" on Sunday, December 29, 2024, and return its start and end times.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-12-29T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to push back my meeting with the Executive Chef by one hour.",
+        "complexity": "High",
+        "expected_behavior": "Find the \"Meeting with Executive Chef\" event on Monday, December 23, 2024. Update its start time to 4:00 PM and end time to 5:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-12-23T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Make sure I'm free between 7pm and 9pm on Friday.",
+        "complexity": "High",
+        "expected_behavior": "Check for any conflicting events between 7pm and 9pm on Friday, December 27, 2024. The current event is \"Drinks with Sous Chef\" from 6pm-7pm. Determine there is no direct conflict, but alert that the user should allow travel time if applicable.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-12-26T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "cancel dinner",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event labeled \"Dinner with wife\" on Tuesday, December 24, 2024, and delete the event.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-12-24T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "change supplier meeting",
+        "complexity": "Medium",
+        "expected_behavior": "Find the \"Supplier Meeting\" event on Wednesday, December 25, 2024, and ask for clarification on what the user wants to change (e.g., time, attendees).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-12-25T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for today, Monday, December 23, 2024.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-12-23T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Anything happening tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for tomorrow, Tuesday, December 24, 2024.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-12-23T18:00:00"
+    }
+]

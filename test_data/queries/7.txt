@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Discuss Farm Expansion' for Thursday at 10:00 AM, lasting one hour, with agent@countyextension.gov.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Discuss Farm Expansion', start time '2023-07-06T10:00:00', end time '2023-07-06T11:00:00', attendees 'agent@countyextension.gov'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-07-02T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please add an event to my calendar for Tuesday at 3:00 PM to review the bank loan application. It should last half an hour, and officer@bank.com must be invited.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Review bank loan application', start time '2023-07-04T15:00:00', end time '2023-07-04T15:30:00', attendees 'officer@bank.com'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-02T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing tomorrow morning?",
+        "complexity": "Medium",
+        "expected_behavior": "Call get_current_time to determine the current day, then call list_events to find events for the next day between 6:00 AM and 12:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-03T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What meetings are on the books for Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find events for Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-02T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule my meeting with the Dairy Cooperative Rep on Monday to 2 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event on Monday with Dairy Cooperative Rep, then call update_event with the event id and the new start time of '2023-07-03T14:00:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-03T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the equipment maintenance on Tuesday to 3 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the equipment maintenance event on Tuesday, then call update_event with the event id and the new start time of '2023-07-04T15:00:00'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-04T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my dinner with neighbors on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the dinner with neighbors event on Friday, then extract the start time.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-07-05T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is the vet that I'm calling on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the call with the vet on Thursday, then extract the attendee information.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-07-05T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is there anything happening on Saturday between 9 AM and 11 AM?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find any events scheduled on Saturday between 9:00 AM and 11:00 AM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2023-07-02T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "What events do I have on Wednesday that involve someone from outside the farm?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find all events on Wednesday, then filter the events to include only those with attendees who are not farmhands.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-07-02T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Bank loan... Tuesday...",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find an event related to 'Bank loan' on Tuesday. If found, return the details. If not, indicate that no such event exists.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-04T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dairy coop Monday change to 3pm",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find an event related to 'Dairy coop' on Monday, then call update_event to change the start time to '2023-07-03T15:00:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-03T09:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the schedule for today?",
+        "complexity": "Low",
+        "expected_behavior": "Call get_current_time to determine the current day, then call list_events for events on that day.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-07-03T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "Call get_current_time to determine the current day, then call list_events for events on the previous day.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-07-04T08:00:00"
+    }
+]

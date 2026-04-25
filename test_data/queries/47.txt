@@ -1,0 +1,169 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting with John at 3 PM on Wednesday, April 29th about project proposal.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with summary 'Meeting with John about project proposal' on Wednesday, April 29th from 3:00 PM to 4:00 PM, with attendee John.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-04-26T23:59:59"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you add a doctor's appointment to my calendar for Tuesday at 11 AM?",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with summary 'Doctor's appointment' on Tuesday, April 28th from 11:00 AM to 12:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-04-26T23:59:59"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Tuesday look like?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events on Tuesday, April 28th.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-04-26T23:59:59"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I free Thursday evening?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events on Thursday, April 30th, between 6:00 PM and 11:59 PM to determine if there are any conflicts.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-04-26T23:59:59"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the client meeting on Thursday to 2:30 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Client Meeting - New Investment Strategy' event on Thursday, April 30th and update its start time to 2:30 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2026-04-26T23:59:59"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "I need to cancel my call with the attorney scheduled on Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Call with Estate Planning Attorney - Smith & Jones' event on Monday, April 27th and delete it.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-04-26T23:59:59"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is invited to the Market Briefing on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Market Briefing' event on Monday, April 27th and return the list of attendees: analyst1@firm.com, analyst2@firm.com.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-04-26T23:59:59"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my Investment Committee Meeting on Tuesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Investment Committee Meeting' event on Tuesday, April 28th and return its start time: 10:30 AM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2026-04-26T23:59:59"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule the prospect meeting on Tuesday to Wednesday at the same time.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Prospect Meeting - Tech Startup CEO' event on Tuesday, April 28th, get its start time (9:00 AM), then delete it. Create a new event with the same summary on Wednesday, April 29th from 9:00 AM to 10:00 AM.",
+        "addressed_days": [
+            "Tuesday",
+            "Wednesday"
+        ],
+        "current_time": "2026-04-26T23:59:59"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Move my brunch with family on Sunday to 3 PM and invite friend3@email.com.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Brunch with Family' event on Sunday, May 3rd, update its start time to 3:00 PM, and add friend3@email.com to the attendees list.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2026-04-26T23:59:59"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner Friday, make it 8.",
+        "complexity": "Medium",
+        "expected_behavior": "Create a new event with summary 'Dinner' on Friday, May 1st from 8:00 PM to 9:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2026-04-26T23:59:59"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel Wednesday broker.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meet with Insurance Broker' event on Wednesday, April 29th and delete it.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-04-26T23:59:59"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Monday, April 27th.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2026-04-27T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What is on my calendar for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Wednesday, April 29th.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2026-04-28T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Saturday, May 2nd.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2026-05-03T11:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Is there anything scheduled this week with the word meeting?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events with the word 'meeting' between Monday, April 27th and Sunday, May 3rd.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2026-04-27T09:00:00"
+    }
+]

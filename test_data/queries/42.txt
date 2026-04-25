@@ -1,0 +1,148 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Dentist Appointment' for Wednesday at 3:30 PM, lasting one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event tool to create an event named 'Dentist Appointment' on February 5, 2025, from 3:30 PM to 4:30 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-01-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a meeting to my calendar for Tuesday at 10 AM with Sarah about the new project.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event tool to create an event named 'Meeting with Sarah' on February 4, 2025, at 10:00 AM with Sarah@example.com as attendee.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-01-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy Thursday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events tool to list all events on February 6, 2025, between 12:00 PM and 6:00 PM to determine if there are any conflicts.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-02-06T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing Saturday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events tool to list all events on February 8, 2025, between 8:00 AM and 12:00 PM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-02-08T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my Tuesday meeting with Sarah to 11 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the event 'Meeting with Sarah' on Tuesday. Then call update_event to update the start time to 11:00 AM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-02-04T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of my yoga class on Monday to 7 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the Yoga Class event on Monday. Then call update_event to update the start time to 7:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-02-03T11:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What doctors are involved in the interpretation appointment on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Interpretation appointment' event on Wednesday. Then call get_event to retrieve the event details and identify the doctors involved (jones@example.com).",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-02-05T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I having brunch with on Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Brunch with family' event on Saturday. Then call get_event to retrieve the event details and identify the attendee (sister@example.com).",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-02-08T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to schedule lunch with David this week. Find a free slot.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events for each day this week, looking for a 1-hour slot between 12 PM and 2 PM. If a slot is found, call create_event to schedule 'Lunch with David' with David@example.com as attendee.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-02-03T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline the interpretation appointment with Dr. Lee on Monday and schedule a meeting with Brown instead for an hour.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the 'Interpretation appointment with Dr. Lee' event on Monday. Then call delete_event to delete the event. Then call create_event to create an event named 'Meeting with Brown' on Monday for 1 hour with Brown@example.com as attendee.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-02-03T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Chen pre-op.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Interpret for pre-op consult with Dr. Chen' event. Then prompt the user for the new time, before calling update_event to reschedule the pre-op consult.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-02-04T09:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Movie night?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Bollywood Movie Night' event. Then call get_event to show the event.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-02-05T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow morning?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to list all events on Tuesday, February 4, 2025, between 8:00 AM and 12:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-02-03T14:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What did I do yesterday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to list all events on Tuesday, February 4, 2025.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-02-04T09:00:00"
+    }
+]

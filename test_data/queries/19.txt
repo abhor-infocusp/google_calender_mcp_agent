@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Discuss project proposal' for Wednesday at 1 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary='Discuss project proposal', start='2024-09-04T13:00:00', end='2024-09-04T14:00:00'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-09-01T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting for Friday at 3 PM to finalize the sales strategy.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary='finalize the sales strategy', start='2024-09-06T15:00:00', end='2024-09-06T16:00:00'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-09-01T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Monday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min='2024-09-02T00:00:00', time_max='2024-09-02T23:59:59' to retrieve all events for Monday.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-09-02T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What is on the schedule for Saturday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min='2024-09-07T12:00:00', time_max='2024-09-07T17:00:00'.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-09-01T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the meeting with the Marketing Manager on Monday to 4 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min='2024-09-02T00:00:00', time_max='2024-09-02T23:59:59' to find the 'Meeting with Marketing Manager' event, then call update_event with event_id and updates including start='2024-09-02T16:00:00', end='2024-09-02T17:00:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-09-02T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time of the data science mentoring session on Tuesday to 6 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min='2024-09-03T00:00:00', time_max='2024-09-03T23:59:59' to find the 'Data Science Mentoring Session' event, then call update_event with event_id and updates including start='2024-09-03T18:00:00', end='2024-09-03T19:00:00'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-09-03T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I meeting with on Wednesday at 2 PM?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min='2024-09-04T14:00:00', time_max='2024-09-04T15:00:00' to find the 'Meeting with Product Owner' event and extract the attendees.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-09-04T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What is the team retrospective meeting about on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min='2024-09-06T00:00:00', time_max='2024-09-06T23:59:59' to find the 'Team Retrospective Meeting' event and retrieve the description.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-09-06T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the book club on Monday. Decline the invite.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min='2024-09-02T00:00:00', time_max='2024-09-02T23:59:59' to find the 'Book Club Meeting' event, then call respond_to_event with event_id and attending='DECLINE'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-09-02T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Move my 9 AM data pipeline monitoring on Tuesday to Wednesday at 11 AM.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min='2024-09-03T00:00:00', time_max='2024-09-03T23:59:59' to find the 'Data Pipeline Monitoring & Troubleshooting' event, then call update_event with event_id and updates including start='2024-09-04T11:00:00', end='2024-09-04T12:00:00'.",
+        "addressed_days": [
+            "Tuesday",
+            "Wednesday"
+        ],
+        "current_time": "2024-09-03T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Sales team data, Thursday morning.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min='2024-09-05T00:00:00', time_max='2024-09-05T12:00:00' to find 'Address Data Requests from Sales Team'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-09-05T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Product performance discussion, Wednesday.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min='2024-09-04T00:00:00', time_max='2024-09-04T23:59:59' to find 'Data Analysis for Product Performance'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-09-04T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min='2024-09-04T00:00:00', time_max='2024-09-04T23:59:59'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-09-04T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Anything planned for tomorrow evening?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min='2024-09-05T17:00:00', time_max='2024-09-05T23:59:59'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-09-04T08:00:00"
+    }
+]

@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please schedule a meeting called 'Team Brainstorm' for Tuesday at 3 PM, lasting one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Team Brainstorm' on Tuesday, October 29, 2024 from 3:00 PM to 4:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-10-26T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you create an event on Thursday to discuss the Q3 report? Make it at 11 AM and last for 90 minutes.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event named 'Discuss Q3 Report' on Thursday, October 31, 2024 from 11:00 AM to 12:30 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-10-26T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy when John Smith wants to have dinner?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Monday, October 28, 2024 from 6:30 PM to 8:00 PM. Then, based on conflicting event, respond with 'Yes, you are busy'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-10-27T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Wednesday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Wednesday, October 30, 2024 between 12:00 PM and 6:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-10-29T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my meeting with the City Planning Department to 2 PM on Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Meeting: City Planning Department' event on Monday, October 28, 2024 and update the start time to 2:00 PM and end time to 3:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-10-27T14:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update the Harper Fowlkes House site meeting to start an hour earlier on Tuesday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Site Meeting: Harper Fowlkes House' event on Tuesday, October 29, 2024 and update the start time to 1:00 PM and end time to 3:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-10-27T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my dinner with John Smith?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Dinner with a potential Client, John Smith' event on Monday, October 28, 2024 and respond with the start time of 6:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-10-27T16:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who am I talking to on Thursday morning regarding mortar?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event on Thursday, October 31, 2024, that contains the words 'mortar' and return the attendee, Dr. Emily Carter.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-10-30T14:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can I move my book club to Saturday evening?",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Book Club at the local bookstore' event on Wednesday, October 30, 2024. Then, list events on Saturday, November 2, 2024 from 6:00 PM to 7:30 PM to check for conflicts. If no conflicts, update the book club event to Saturday, October 30, 2024 from 6:00 PM to 7:30 PM. If conflicts, respond that the time is unavailable.",
+        "addressed_days": [
+            "Wednesday",
+            "Saturday"
+        ],
+        "current_time": "2024-10-29T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to push back the Davenport House site visit on Thursday by 2 hours. Will that interfere with dinner?",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Site Visit: Davenport House Restoration (Inspect masonry repairs)' event on Thursday, October 31, 2024. Tentatively update that event to 12:30 PM to 2:30 PM. Then, list events on Thursday, October 31, 2024 from 6:00 PM to 7:00 PM to check for conflicts. If the dinner and potential site visit overlap, then return the conflict. Otherwise, make the update to the Davenport House site visit.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-10-30T15:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Davenport House masonry Thursday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Site Visit: Davenport House Restoration (Inspect masonry repairs)' event on Thursday, October 31, 2024 and respond with event details, i.e. the time.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-10-30T20:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Historical Society",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Meeting: Historical Society Board' event on Wednesday, October 30, 2024. Respond with details and ask for a new time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-10-29T20:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow morning?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Tuesday, October 29, 2024 between 8:00 AM and 12:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-10-28T15:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I talk to Emily Carter yesterday?",
+        "complexity": "Medium",
+        "expected_behavior": "List events on Wednesday, October 30, 2024 that contain the name 'Emily Carter'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-10-31T08:00:00"
+    }
+]

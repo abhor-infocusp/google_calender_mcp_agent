@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Project Meeting' for August 7th at 9 AM for one hour with principal@school.edu attending.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event with the summary 'Project Meeting' on August 7th from 9:00 AM to 10:00 AM, with principal@school.edu as an attendee.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-28T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Can you schedule a dinner with my friend sarahb@friends.com on August 8th at 7:00 PM?",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event called 'Dinner with Sarah' for August 8th at 7:00 PM, with sarahb@friends.com as an attendee. Default to one hour.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-07-28T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy Wednesday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar on Wednesday, August 7th, between 8:00 AM and 12:00 PM and respond whether any events are scheduled during that time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-28T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the schedule for Saturday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "Check the calendar on Saturday, August 10th, between 12:00 PM and 6:00 PM and respond with the scheduled events during that time.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-07-28T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move my meeting with the principal on Wednesday to 2 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event with the Principal on Wednesday August 7 and update its start time to 2:00 PM. Keep the duration the same.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-28T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the dinner with Sarah on Tuesday, August 6th, to 8 PM instead.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with Sarah' event on Tuesday, August 6th, and update its start time to 8:00 PM. Keep the duration the same.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-28T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the yoga class on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Yoga Class' event on Monday, August 5th, and respond with its start time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-28T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the faculty meeting on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Faculty Meeting' event on Friday, August 9th, and respond with the list of attendees.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-07-28T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move the debate club meeting on Thursday to 5:30 PM, but make sure it doesn't conflict with anything else.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Debate Club Meeting' event on Thursday, August 8th. Check for any conflicting events at 5:30 PM. If no conflicts exist, update the event's start time to 5:30 PM. If a conflict is found, inform the user about the conflicting event.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-07-28T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you schedule a meeting with principal@school.edu for 30 minutes on Wednesday and make sure it does not overlap with the standardized test meeting",
+        "complexity": "High",
+        "expected_behavior": "Check the calendar on Wednesday, August 7th, for a 30-minute free slot, ensuring no overlap with the 'Standardized Testing Prep' meeting at 1:00 PM. If found, schedule the meeting with principal@school.edu; otherwise, inform the user about the time conflict.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-07-28T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule yoga.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Yoga Class' event on Monday, August 5th, then ask the user for a new date and time to reschedule it to.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-07-28T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Sarah dinner?",
+        "complexity": "Low",
+        "expected_behavior": "Assuming the user is referring to 'Dinner with Sarah', ask the user to confirm the date they're asking about (Tuesday the 6th). If confirmed, retrieve the event and display the details. If not confirmed, check for other possible events with 'Sarah' in the title or attendees and ask for clarification.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-07-28T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Medium",
+        "expected_behavior": "Determine the current date. Check the calendar for the current date and respond with all events scheduled for that day.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-08-05T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on my calendar tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "Determine tomorrow's date (August 6th). Check the calendar for August 6th and respond with all events scheduled for that day.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-08-05T21:00:00"
+    }
+]

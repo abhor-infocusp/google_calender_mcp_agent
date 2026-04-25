@@ -1,0 +1,147 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Project Brainstorm' for Wednesday at 11 AM with frontendengineer@company.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event named 'Project Brainstorm' on Wednesday, June 25, 2025, at 11:00 AM, lasting for one hour, with frontendengineer@company.com as an attendee.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-06-22T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book me a meeting for dinner with John on Saturday at 7:30 PM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event on Saturday, June 28, 2025, at 7:30 PM called 'Dinner with John,' lasting for 1.5 hours.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-06-22T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy Thursday morning?",
+        "complexity": "Medium",
+        "expected_behavior": "List events scheduled for Thursday, June 26, 2025, between 9:00 AM and 12:00 PM to determine if the user is busy.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-06-22T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What's on the agenda for Friday afternoon?",
+        "complexity": "Medium",
+        "expected_behavior": "List events scheduled for Friday, June 27, 2025, between 12:00 PM and 6:00 PM to determine the agenda.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-06-22T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the Design Review on Monday back by one hour.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event named 'Design Review - E-commerce flow' on Monday, June 23, 2025 and update its start time to 2:00 PM and end time to 3:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-06-22T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the stakeholder meeting time to 4 PM on Monday.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Stakeholder meeting - feedback on wireframes' event on Monday, June 23, 2025, and update its start time to 4:00 PM and end time to 5:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-06-22T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Daily Stand-up Meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event named 'Daily Stand-up Meeting' and return the list of attendees for the event.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2025-06-22T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is dinner with Partner?",
+        "complexity": "Low",
+        "expected_behavior": "Find the event named 'Dinner with Partner' on Monday, June 23, 2025, and return the start time of the event, which is 6:30 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-06-22T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to decline the usability testing prep. Also, schedule an hour-long meeting with the marketing team on Tuesday at the same time.",
+        "complexity": "High",
+        "expected_behavior": "Decline the event named 'Usability Testing Prep' on Tuesday, June 24, 2025. Then, attempt to schedule a new event called 'Meeting with Marketing Team' for Tuesday, June 24, 2025, at 10:30 AM lasting for one hour. If a conflict arises, notify the user of the conflict.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-06-22T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Can you move the meeting with the front-end engineer to Wednesday at 3 PM, and remove frontendengineer@company.com from it?",
+        "complexity": "High",
+        "expected_behavior": "Find the event 'Meeting with Front-End Engineer' on Tuesday, June 24, 2025, reschedule it to Wednesday, June 25, 2025, at 3:00 PM, and remove frontendengineer@company.com from the attendee list.",
+        "addressed_days": [
+            "Tuesday",
+            "Wednesday"
+        ],
+        "current_time": "2025-06-22T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Dinner",
+        "complexity": "Medium",
+        "expected_behavior": "Find the event named 'Dinner with Partner' on Monday, June 23, 2025, and ask the user to specify a new time to reschedule it to.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-06-22T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel hiking.",
+        "complexity": "Low",
+        "expected_behavior": "Find the event named 'Hiking with Friends' on Thursday, June 26, 2025, and delete the event from the calendar.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-06-22T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What meetings do I have tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled for Tuesday, June 24, 2025.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-06-23T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled for Monday, June 23, 2025.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-06-23T08:00:00"
+    }
+]

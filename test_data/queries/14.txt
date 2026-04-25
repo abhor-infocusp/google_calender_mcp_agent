@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Client Meeting' for Wednesday at 2 PM for one hour with attendee test@test.com.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call create_event with summary 'Client Meeting', start set to '2024-11-20T14:00:00', end set to '2024-11-20T15:00:00', and attendees set to 'test@test.com'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-11-17T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a 'Doctor Appointment' for Friday at 10:00 AM lasting 30 minutes.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call create_event with summary 'Doctor Appointment', start set to '2024-11-22T10:00:00', and end set to '2024-11-22T10:30:00'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-11-17T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing tomorrow?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should call list_events for Tuesday, 2024-11-19, to determine the user's schedule for that day.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-11-18T09:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Anything happening this Saturday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call list_events for Saturday, 2024-11-23.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2024-11-17T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the 'Fit Mom's Bootcamp' on Thursday to 9:30 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should call list_events for Thursday to find the event 'Fit Mom's Bootcamp', then call update_event with the event ID and the new start time of '2024-11-21T09:30:00' and end time of '2024-11-21T10:30:00'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-11-21T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the time for 'Family Movie Night' to 7:00 PM on Friday.",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should call list_events for Friday to find the event 'Family Movie Night', then call update_event with the event ID and the new start time of '2024-11-22T19:00:00' and end time '2024-11-22T21:00:00'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-11-22T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is my lunch with Dr. Lee?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call list_events to find an event named 'Networking lunch with Dr. Lee' on Tuesday and then use get_event to retrieve the details including the time.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-11-19T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the team meeting on Friday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should call list_events for Friday to find 'Team Meeting with Part-time Trainers', then call get_event to retrieve the attendees trainer1@studio.com, trainer2@studio.com.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-11-22T07:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Is there anything scheduled between 9 and 11 on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should call list_events with time_min='2024-11-20T09:00:00' and time_max='2024-11-20T11:00:00' to check for events during that time on Wednesday.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-11-17T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "What events do I have scheduled on Friday before noon?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should call list_events with time_min='2024-11-22T00:00:00' and time_max='2024-11-22T12:00:00' to check for events before noon on Friday.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-11-22T07:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Pilates.",
+        "complexity": "High",
+        "expected_behavior": "The agent should call list_events for Monday and Friday to find 'Prenatal Pilates Class' and ask the user for clarification of which day and time they would like to reschedule to.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-11-18T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Cancel movie night",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call list_events for Friday to find 'Family Movie Night' and then call delete_event with the corresponding event ID.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-11-22T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What is on my calendar for today?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call list_events for Monday, 2024-11-18.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-11-18T07:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any appointments yesterday?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should call list_events for Sunday, 2024-11-24.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2024-11-25T07:00:00"
+    }
+]

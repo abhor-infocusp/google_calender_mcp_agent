@@ -1,0 +1,146 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Brainstorming' for Tuesday at 3:00 PM for one hour with attendees brainstorm@company.com and projectlead@company.com and description 'Discuss Q1 Strategy'.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Team Brainstorming', start '2023-01-31T15:00:00', end '2023-01-31T16:00:00', attendees 'brainstorm@company.com, projectlead@company.com', and description 'Discuss Q1 Strategy'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2023-01-29T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a meeting titled 'Client Presentation' for Thursday at 11 AM lasting 90 minutes, including client1@email.com and client2@email.com. The meeting will cover the new product demo.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Client Presentation', start '2023-02-02T11:00:00', end '2023-02-02T12:30:00', attendees 'client1@email.com, client2@email.com', and description 'The meeting will cover the new product demo'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-01-29T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after the program coordinator check-ins on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to '2023-02-01T10:00:00' and time_max '2023-02-01T23:59:59' to identify the 'Data Analysis - Program Impact Report' event.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-02-01T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I busy when my children have soccer practice?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min '2023-02-01T18:00:00' and time_max '2023-02-01T19:30:00' to check for conflicts during the time of 'Children's Soccer Practice'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-02-01T09:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the Site Visit on Monday to 2:00 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Site Visit - After School Program at Lincoln Elementary' event on '2023-01-30'. Then, call update_event with the event ID and updates to start time '2023-01-30T14:00:00' and end time '2023-01-30T15:30:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-01-30T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the dinner with friends from university on Friday back by one hour.",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Dinner with Friends from University' event on '2023-02-03'. Then call update_event with the event ID and updates to start time '2023-02-03T18:00:00' and end time '2023-02-03T20:00:00'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-02-03T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who will be at the budget review on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to '2023-01-30T10:30:00' and time_max '2023-01-30T12:00:00' to identify the 'Budget Review with Executive Director' event. Then call get_event to retrieve the attendees: 'exec_director@communitycenter.org'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-01-30T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What's the purpose of the meeting with the local business owner on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to '2023-02-02T14:00:00' and time_max '2023-02-02T15:30:00' to identify the 'Meeting with Local Business Owner - Partnership Opportunity' event. Then call get_event to retrieve the description: 'Partnership Opportunity'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-02-02T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "What meetings do I have Wednesday afternoon after noon, and which ones involve external people?",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min '2023-02-01T12:00:00' and time_max '2023-02-01T23:59:59'. Then, for each event found, check if any attendee's email address is not from the 'communitycenter.org' domain to determine if it involves external people. The events identified are 'Meeting with Fundraising Consultant'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-02-01T11:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Find me all events that either have youth workers or program coordinators between 9 AM and 11 AM this week.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events with time_min '2023-01-30T09:00:00' and time_max '2023-02-03T11:00:00'. Then, for each event, check if the attendees include 'youth_worker1@communitycenter.org', 'youth_worker2@communitycenter.org', 'program_coordinator1@communitycenter.org', or 'program_coordinator2@communitycenter.org'. The events identified are 'Program Staff Meeting' and 'Program Coordinator Check-ins'.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "current_time": "2023-01-29T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Parent Teacher Conference",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Parent-Teacher Conference' event on '2023-02-02'. Then respond with clarification question: To what time should the event be rescheduled?",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2023-02-02T08:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner on Friday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min '2023-02-03T00:00:00' and time_max '2023-02-03T23:59:59'. Then, identify the 'Dinner with Friends from University' event.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2023-02-03T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to retrieve all events scheduled for '2023-01-30'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2023-01-30T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on the calendar for tomorrow morning?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to '2023-02-01T00:00:00' and time_max '2023-02-01T12:00:00'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2023-01-31T14:00:00"
+    }
+]

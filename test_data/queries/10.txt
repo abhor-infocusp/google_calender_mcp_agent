@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Project Brainstorm' for Tuesday at 2 PM for one hour.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Project Brainstorm', start as '2024-03-19T14:00:00', end as '2024-03-19T15:00:00'. The attendees field can be left empty.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-03-17T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting on Friday to discuss the new marketing campaign at 11:00 AM. Make it 30 minutes long.",
+        "complexity": "Low",
+        "expected_behavior": "Call create_event with summary 'Discuss the new marketing campaign', start as '2024-03-22T11:00:00', end as '2024-03-22T11:30:00'. The attendees field can be left empty.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-03-17T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to '2024-03-20T00:00:00' and time_max set to '2024-03-20T23:59:59'.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-03-20T08:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What does my Thursday look like?",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events with time_min set to '2024-03-21T00:00:00' and time_max set to '2024-03-21T23:59:59'.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-03-21T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Move the Team Meeting on Monday to 9:30 AM.",
+        "complexity": "Medium",
+        "expected_behavior": "First call list_events to find the 'Team Meeting' on Monday. Then, call update_event with the event ID and the update to start time to '2024-03-18T09:30:00' and end time to '2024-03-18T10:30:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-03-18T08:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Change the Data Scientist Interview on Monday to 2 PM.",
+        "complexity": "Medium",
+        "expected_behavior": "First call list_events to find the 'Data Scientist Candidate' interview on Monday. Then, call update_event with the event ID and the update to start time to '2024-03-18T14:00:00' and end time to '2024-03-18T15:00:00'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-03-18T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Team Meeting on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events to find the 'Team Meeting' on Monday. Then, extract the attendees: sarah.jones@company.com, david.lee@company.com",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-03-18T08:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What time is the yoga class?",
+        "complexity": "Low",
+        "expected_behavior": "Call list_events with time_min set to '2024-03-18T00:00:00' and time_max set to '2024-03-18T23:59:59' to find the 'Yoga Class' event. Extract the time: 6:30 PM - 7:30 PM",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-03-18T17:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my Interview Debrief on Tuesday 30 minutes later.",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the 'Interview Debrief' on Tuesday. Then, call update_event with the event ID and the update to start time to '2024-03-19T13:30:00' and end time to '2024-03-19T14:30:00'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-03-19T08:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Change the time of the dinner with friends on Friday to be an hour earlier",
+        "complexity": "High",
+        "expected_behavior": "Call list_events to find the 'Dinner with Friends' on Friday. Then, call update_event with the event ID and the update to start time to '2024-03-22T18:00:00' and end time to '2024-03-22T20:00:00'.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-03-22T12:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule Alice Brown",
+        "complexity": "Medium",
+        "expected_behavior": "Call list_events to find the 'Data Scientist Candidate' interview with Alice Brown on Monday. Since no time is specified, ask for clarification.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-03-18T11:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Move it later",
+        "complexity": "Medium",
+        "expected_behavior": "Since the user input is ambiguous, respond by asking what event should be moved and what is the intended new time.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-03-20T15:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What is on my schedule for today?",
+        "complexity": "Low",
+        "expected_behavior": "If today is Monday, call list_events with time_min set to '2024-03-18T00:00:00' and time_max set to '2024-03-18T23:59:59'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-03-18T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "If today is Monday, call list_events with time_min set to '2024-03-19T00:00:00' and time_max set to '2024-03-19T23:59:59'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-03-18T08:00:00"
+    }
+]

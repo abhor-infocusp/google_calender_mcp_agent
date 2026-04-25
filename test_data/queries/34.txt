@@ -1,0 +1,143 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Meet with accountant' on Wednesday at 3pm for one hour. Invite jane.adams@client.com.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event on Wednesday, January 24, 2024 at 3:00 PM with the summary 'Meet with accountant', ending at 4:00 PM, and invite jane.adams@client.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-21T10:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Book a meeting titled 'Discuss budget' for Friday at 11:00 AM lasting 90 minutes.",
+        "complexity": "Low",
+        "expected_behavior": "Create a new event on Friday, January 26, 2024, at 11:00 AM with the summary 'Discuss budget', ending at 12:30 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-21T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "I'm free after my Individual Tax Planning meeting on Tuesday, schedule a meeting then to discuss the Smith Corp report.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Client Meeting - Individual Tax Planning' event on Tuesday, determine its end time (12:00 PM), and then schedule a new event titled 'Discuss Smith Corp report' immediately after, perhaps at 12:00 PM for an hour.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2024-01-21T10:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "The book club is this week. What time does it start?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Book Club Meeting' on Wednesday and return its start time of 7:00 PM.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-21T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Reschedule the IRS meeting on Thursday to 10 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'IRS Agent Meeting - Clarification on Form 1099' event on Thursday, and update its start time to 10:00 AM, adjusting the end time accordingly (likely 11:30 AM).",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2024-01-21T10:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update the location of the Dinner with Friends on Friday to my house.",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Dinner with Friends' event on Friday and add 'at my house' to the event's description.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-21T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What meetings do I have on Monday?",
+        "complexity": "Low",
+        "expected_behavior": "List all events on Monday, January 22, 2024, showing 'Team Meeting - Tax Law Updates' and 'Client Meeting - Business Tax Return Review'.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-21T10:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the audit preparation meeting on Wednesday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Client Meeting - Audit Preparation' event on Wednesday and return the attendees: acme.corp@email.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-21T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the Client Meeting on Tuesday. Decline the invitation and schedule a similar meeting for Thursday at 4:00 PM.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Client Meeting - Individual Tax Planning' event on Tuesday, decline the invitation (jane.adams@client.com), and then schedule a new event titled 'Client Meeting - Individual Tax Planning' on Thursday, January 25, 2024 at 4:00 PM.",
+        "addressed_days": [
+            "Tuesday",
+            "Thursday"
+        ],
+        "current_time": "2024-01-21T10:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Move the Smith Corp report draft to Wednesday afternoon but make sure I don't have any conflicts.",
+        "complexity": "High",
+        "expected_behavior": "Check the calendar for Wednesday afternoon, find a free slot, and move the 'Draft Client Report - Smith Corp.' to that time. If there's a conflict, suggest alternative times.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-21T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule team meeting",
+        "complexity": "Medium",
+        "expected_behavior": "Find the next upcoming Team Meeting (Tax Law Updates on Monday), and ask 'To what time should the team meeting be rescheduled?'",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-21T10:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Dinner Friday",
+        "complexity": "Low",
+        "expected_behavior": "Find the event called 'Dinner with Friends' on Friday and give me the dinner details.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2024-01-21T10:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing today?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Monday, January 22, 2024.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2024-01-22T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What is on the schedule for tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "List all events for Wednesday, January 24, 2024.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2024-01-23T20:00:00"
+    }
+]

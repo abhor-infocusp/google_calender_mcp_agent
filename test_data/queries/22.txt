@@ -1,0 +1,146 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Create an event called 'Team Meeting' for Thursday from 11:00 AM to 12:00 PM.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should use the create_event tool to create a new event with the summary 'Team Meeting' on 2025-11-06 from 11:00 AM to 12:00 PM.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-11-02T23:59:59"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Schedule a yoga class on Saturday at 10 AM that lasts for 90 minutes.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should create a new event on 2025-11-08 with the summary 'Yoga class' from 10:00 AM to 11:30 AM.",
+        "addressed_days": [
+            "Saturday"
+        ],
+        "current_time": "2025-11-02T23:59:59"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "Am I free for lunch with my business coach this week?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should first determine that the lunch with business coach is on Wednesday at 12:00 PM, then check if there are any conflicting events at that time on Wednesday. If not, respond positively; otherwise, respond negatively. Use list_events to find existing events on Wednesday between 12:00 PM and 1:00 PM and the business coach is jack.bauer@email.com.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-11-02T23:59:59"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing after my morning yoga class on Tuesday?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should first identify the 'Vinyasa Flow Class' at 7:00 AM - 8:00 AM on Tuesday. Then, it should look for the next event after that class. The next event is at 10:00 AM, and is social media content planning. List all events from 2025-11-04 between 08:00:00 and 2025-11-04T23:59:59",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-11-02T23:59:59"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can we move the meeting with the accountant to 10:30 AM?",
+        "complexity": "Medium",
+        "expected_behavior": "The agent should first find the 'Meet with accountant' event on Monday. Then, it should use the update_event tool to change the start time to 10:30 AM and adjust the end time accordingly. Use list_events to find the meeting on 2025-11-03 and then update the event using update_event to update to start 10:30 AM and the accountant is john.doe@email.com.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-11-02T23:59:59"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "I can't make dinner with the yoga teachers on Thursday. Please decline.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should find the 'Dinner with fellow yoga teachers' event on Thursday and then use the respond_to_event tool to decline the invitation. Use list_events to find the dinner on 2025-11-06 and then use respond_to_event.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-11-02T23:59:59"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What workshops do I have planned for the weekend?",
+        "complexity": "Low",
+        "expected_behavior": "The agent should list all events between Saturday and Sunday that are named 'workshop'. First find all events using list_events where time_min is 2025-11-08 and time_max is 2025-11-09.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-11-02T23:59:59"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Tell me who I am having brunch with on Sunday.",
+        "complexity": "Low",
+        "expected_behavior": "The agent should identify the 'Brunch with former mentor' event on Sunday and then extract and display the name or email of the attendee. Use list_events to find events on 2025-11-09. Get the event get_event and check attendees.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2025-11-02T23:59:59"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I want to move my arm balance workshop to Sunday, but I don't want to miss my yoga training. Check for conflicts.",
+        "complexity": "High",
+        "expected_behavior": "The agent should first identify the 'Arm Balance Workshop' on Saturday. Then, it should check for conflicts on Sunday during the time of the Yoga training. Finally, it should inform the user of any conflicts and then either proceed with the move or not, based on the presence of conflicts. Use list_events to find existing events on 2025-11-09. If no events at the same time, update_event. Otherwise reply with a conflict.",
+        "addressed_days": [
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-11-02T23:59:59"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Decline all events with bob.hope@email.com.",
+        "complexity": "High",
+        "expected_behavior": "The agent should first use list_events to find all events with attendee bob.hope@email.com. Then, for each event, use the respond_to_event tool to decline. Respond to each with respond_to_event(event_id, attending='DECLINE').",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-11-02T23:59:59"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule... accountant... next week?",
+        "complexity": "High",
+        "expected_behavior": "This query violates the constraint not to include the next week. The agent should respond by saying that the query violates the constraints about weeks, and suggest an alternate query.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-11-02T23:59:59"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Change lunch to dinner.",
+        "complexity": "High",
+        "expected_behavior": "This query is ambiguous. The agent should ask the user to clarify which lunch event they want to change to dinner and which day. If the user clarifies, proceed with updating the event using the update_event tool. The agent should respond that the query is not complete, and needs the day.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday"
+        ],
+        "current_time": "2025-11-02T23:59:59"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What's on my schedule today?",
+        "complexity": "Low",
+        "expected_behavior": "If today is Monday, the agent should list all events scheduled for Monday, November 3, 2025, using the list_events tool. First get the date for today. Then use list_events to find all events that day.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-11-03T08:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow?",
+        "complexity": "Low",
+        "expected_behavior": "If today is Monday, the agent should list all events scheduled for Tuesday, November 4, 2025, using the list_events tool. First get the date for tomorrow. Then use list_events to find all events that day.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-11-03T08:00:00"
+    }
+]

@@ -1,0 +1,148 @@
+[
+    {
+        "category": "Schedule a Single Event",
+        "query": "Please schedule a meeting called 'Project Brainstorm' for Tuesday at 3:00 PM that lasts one hour, with Sarah Miller as an attendee and the description 'Discuss Q1 goals'.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event on Tuesday, January 28, 2025 from 3:00 PM to 4:00 PM with the summary 'Project Brainstorm', attendee 'sarah.miller@hospital.com' and description 'Discuss Q1 goals'.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-01-26T12:00:00"
+    },
+    {
+        "category": "Schedule a Single Event",
+        "query": "Add a dentist appointment to my calendar for Friday at 9 AM.",
+        "complexity": "Low",
+        "expected_behavior": "Create an event on Friday, January 31, 2025 at 9:00 AM for a dentist appointment.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-01-26T12:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What am I doing on Wednesday?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled for Wednesday, January 29, 2025.",
+        "addressed_days": [
+            "Wednesday"
+        ],
+        "current_time": "2025-01-29T07:00:00"
+    },
+    {
+        "category": "Vague & Contextual (Reasoning Required)",
+        "query": "What meetings do I have with doctors this week?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events between Monday, January 27, 2025 and Sunday, February 2, 2025 that have an attendee with an email address ending in 'hospital.com'.",
+        "addressed_days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+        "current_time": "2025-01-26T12:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Can you move my Yoga Class on Monday to 7:00 PM?",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Yoga Class' event on Monday, January 27, 2025 and update its start time to 7:00 PM and end time to 8:00 PM.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-01-27T11:00:00"
+    },
+    {
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "query": "Update the Pharmacy & Therapeutics Committee Meeting to include Nurse Lee.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Pharmacy & Therapeutics Committee Meeting' event on Monday, January 27, 2025 and add 'lee@hospital.com' to the attendees list.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-01-27T14:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "Who is attending the Cardiology Team Meeting?",
+        "complexity": "Low",
+        "expected_behavior": "Find the 'Cardiology Team Meeting' event on Tuesday, January 28, 2025 and return the list of attendees.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-01-28T09:00:00"
+    },
+    {
+        "category": "Information Retrieval (Querying)",
+        "query": "What's the description for the meeting with the purchasing department on Thursday?",
+        "complexity": "Low",
+        "expected_behavior": "Find the meeting on Thursday, January 30, 2025 with the summary containing 'purchasing department' and return its description.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-01-30T09:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "I can't make the dinner with pharmacy school friends. Decline it.",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with pharmacy school friends' event on Tuesday, January 28, 2025 and decline the invitation.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-01-28T12:00:00"
+    },
+    {
+        "category": "Complex Logic & Conflict (Advanced)",
+        "query": "Reschedule my evening plans on Friday to start half an hour earlier.",
+        "complexity": "High",
+        "expected_behavior": "Find the 'Movie night with friends' event on Friday, January 31, 2025 and update the start time to 7:00 PM and end time to 9:00 PM.",
+        "addressed_days": [
+            "Friday"
+        ],
+        "current_time": "2025-01-31T14:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Reschedule oncology",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Oncology Round' event on Monday, January 27, 2025, and ask the user for a new date and time.",
+        "addressed_days": [
+            "Monday"
+        ],
+        "current_time": "2025-01-27T11:00:00"
+    },
+    {
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "query": "Delete dinner",
+        "complexity": "Medium",
+        "expected_behavior": "Find the 'Dinner with family' event on Thursday, January 30, 2025 and ask the user to confirm if they want to delete the event. If yes, then delete the event.",
+        "addressed_days": [
+            "Thursday"
+        ],
+        "current_time": "2025-01-30T12:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "What am I doing tomorrow evening?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events scheduled for Tuesday, January 28, 2025, after 6:00 PM.",
+        "addressed_days": [
+            "Tuesday"
+        ],
+        "current_time": "2025-01-27T15:00:00"
+    },
+    {
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "query": "Did I have any meetings yesterday?",
+        "complexity": "Medium",
+        "expected_behavior": "List all events that occurred on Saturday, February 1, 2025.",
+        "addressed_days": [
+            "Sunday"
+        ],
+        "current_time": "2025-02-02T09:00:00"
+    }
+]
