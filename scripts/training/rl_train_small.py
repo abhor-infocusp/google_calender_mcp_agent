@@ -68,6 +68,7 @@ random.seed(42)
 
 DEBUG_DIR = os.environ.get("RL_RUN_DIR", "runs/rl_qwen3_14b_20260420") + "/logs/debug"
 os.makedirs(DEBUG_DIR, exist_ok=True)
+CHECKPOINT_KEEP_EVERY = int(os.environ.get("CHECKPOINT_KEEP_EVERY", "500"))
 HEARTBEAT_PATH = os.path.join(DEBUG_DIR, "heartbeat.jsonl")
 PHASE_LOCK = threading.Lock()
 _current_phase = {"phase": "startup", "step": None, "phase_start": time.time()}
@@ -814,7 +815,9 @@ async def main():
         # ── Checkpoint delete + Train ──
         set_phase("checkpoint_delete", step=batch.step)
         step_timer.start("checkpoint_delete_s")
-        await model.delete_checkpoints()
+        is_milestone = batch.step > 0 and batch.step % CHECKPOINT_KEEP_EVERY == 0
+        if not is_milestone:
+            await model.delete_checkpoints(best_checkpoint_metric="train/reward")
         step_timer.stop()
 
         set_phase("gc_empty_cache", step=batch.step)

@@ -67,6 +67,9 @@ random.seed(42)
 # even if the process is killed.
 
 DEBUG_DIR = os.environ.get("RL_RUN_DIR", "runs/rl_qwen3_14b_20260420") + "/logs/debug"
+# Keep every Nth ART checkpoint to allow rollback from interference / collapse.
+# Between milestones, ART still keeps the best-by-reward checkpoint.
+CHECKPOINT_KEEP_EVERY = int(os.environ.get("CHECKPOINT_KEEP_EVERY", "500"))
 os.makedirs(DEBUG_DIR, exist_ok=True)
 HEARTBEAT_PATH = os.path.join(DEBUG_DIR, "heartbeat.jsonl")
 PHASE_LOCK = threading.Lock()
@@ -160,6 +163,14 @@ def _write_run_metadata() -> None:
         except Exception:
             return "?"
 
+    # Snapshot of GPU compute apps at our launch — gives us the full sibling list
+    # for post-mortem audit ("what else was running on this host when we started?").
+    nv_apps = _sh([
+        "nvidia-smi",
+        "--query-compute-apps=pid,gpu_uuid,used_memory",
+        "--format=csv,noheader",
+    ])
+
     entry = {
         "ts": datetime.now().isoformat(),
         "pid": os.getpid(),
@@ -169,8 +180,19 @@ def _write_run_metadata() -> None:
         "git_dirty": bool(_sh(["git", "status", "--porcelain"])),
         "run_dir": RUN_DIR,
         "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES", ""),
+        # Isolation knobs (set by auto_restart.sh / slice_map.sh)
+        "taskset_cpus": os.environ.get("TASKSET_CPUS", ""),
+        "omp_num_threads": os.environ.get("OMP_NUM_THREADS", ""),
+        "mkl_num_threads": os.environ.get("MKL_NUM_THREADS", ""),
+        # Patches
         "art_deadlock_timeout_s": os.environ.get("ART_DEADLOCK_TIMEOUT_S", "default"),
         "art_deadlock_hard_ceiling_s": os.environ.get("ART_DEADLOCK_HARD_CEILING_S", "default"),
+        "art_use_threading_bridge": os.environ.get("ART_USE_THREADING_BRIDGE", "0"),
+        "checkpoint_keep_every": os.environ.get("CHECKPOINT_KEEP_EVERY", str(CHECKPOINT_KEEP_EVERY)),
+        # Sibling GPU processes seen at our launch — empty list if we're alone
+        "nvidia_smi_compute_apps": [
+            line.strip() for line in nv_apps.splitlines() if line.strip()
+        ],
         "python_version": sys.version.split()[0],
         "packages": {
             pkg: _pkg_version(pkg)
@@ -920,9 +942,14 @@ async def main():
               f"judge_errors={gemini_error_count}")
 
         # ── Checkpoint delete + Train ──
+        # Keep every Nth checkpoint as a rollback safety net (default every 500).
+        # Between milestones, also pass best_checkpoint_metric so ART preserves
+        # the highest-reward checkpoint we've seen, not just the most recent.
         set_phase("checkpoint_delete", step=batch.step)
         step_timer.start("checkpoint_delete_s")
-        await model.delete_checkpoints()
+        is_milestone = batch.step > 0 and batch.step % CHECKPOINT_KEEP_EVERY == 0
+        if not is_milestone:
+            await model.delete_checkpoints(best_checkpoint_metric="train/reward")
         step_timer.stop()
 
         set_phase("gc_empty_cache", step=batch.step)
