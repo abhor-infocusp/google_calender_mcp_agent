@@ -46,15 +46,49 @@ kill_gpu.sh
 # RL run checkpoints (large model files), but track eval/diagnostics/README
 rl_runs/*/checkpoint/
 
-# Per-run output directories — track only metadata, summaries, eval results, READMEs.
-# Large transient artifacts (logs, checkpoints, raw diagnostics) stay out.
+# Per-run output directories — track only small structured artifacts
+# (config.json, metadata.jsonl, summary.csv). Large/transient stuff stays out.
+# Match both directories (trailing slash) and symlinks (no trailing slash).
+runs/*/checkpoints
 runs/*/checkpoints/
+runs/*/checkpoint
+runs/*/checkpoint/
+runs/*/adapter_final
+runs/*/adapter_final/
 runs/*/logs/
 runs/*/diagnostics/*.json
 runs/*/diagnostics/*.png
+runs/*/rl_diagnostic.jsonl
+runs/*/runtime_state.json
+runs/*/scenario_tracker.json
+# Per-checkpoint eval JSONs are huge (~12k lines each); summary.csv keeps the scores.
+runs/*/eval/checkpoint-*.json
+runs/*/eval/checkpoint-*.log
+runs/*/eval/art_holdout_ckpt*.json
+runs/*/eval/_serve_*.py
+runs/*/eval/_merge_*.py
+runs/*/eval/merged_tmp_*
+runs/*/eval/merged_tmp_*/
+runs/*/eval/vllm.log
+runs/*/eval/logs/
+runs/*/eval_test/checkpoint-*.json
+runs/*/eval_test/_serve_*.py
+runs/*/eval_test/_merge_*.py
+runs/*/eval_test/merged_tmp_*
+runs/*/eval_test/merged_tmp_*/
+runs/*/eval_test/logs/
+# Top-level catch-alls (analysis outputs, raw logs, baseline runs we never
+# track outputs for). Override with explicit `git add -f` if you really need to.
+runs/analysis/
+runs/dpo/
+runs/logs/
+runs/qwen3_14b_instruct_baseline_*/
+
+# Whitelist: keep these inside the broader exclusions.
 !runs/*/config.json
 !runs/*/metadata.jsonl
-!runs/*/eval/
+!runs/*/eval/summary.csv
+!runs/*/eval_test/summary.csv
 !runs/*/diagnostics/*.csv
 !runs/README.md
 !runs/archive/**
