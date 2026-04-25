@@ -193,7 +193,7 @@ Tool returns are human-readable strings (not JSON dicts), reducing token count:
 ### Critical bug fix during Phase 3
 
 Discovered and fixed `json.dumps()` double-encoding of compact string tool results in 4 downstream files:
-- `scripts/training/sft_train_100ep.py` — training data preparation
+- `scripts/training/sft_train.py` — training data preparation
 - `scripts/eval/eval_qwen.py` — inference-time tool result passing
 - `scripts/eval/eval_batch.py` — batch eval tool result passing
 - `scripts/data_generation/augment_trajectories.py` — summary extraction regex
@@ -251,7 +251,7 @@ Fix: `result if isinstance(result, str) else json.dumps(result, default=str)` �
 
 ### Steps
 
-1. **Train SFT** (`sft_train_100ep.py`)
+1. **Train SFT** (`sft_train.py`)
    - Model: Qwen/Qwen2.5-1.5B-Instruct
    - LoRA rank 64, same config as original
    - NUM_EPOCHS = 10
@@ -264,7 +264,7 @@ Fix: `result if isinstance(result, str) else json.dumps(result, default=str)` �
    - For each checkpoint: merge → serve vLLM → run 280-query eval → record per-category accuracy
    - Pick best checkpoint based on RL data accuracy
 
-**Files:** `scripts/training/sft_train_100ep.py`, `scripts/eval/eval_all_checkpoints.py`
+**Files:** `scripts/training/sft_train.py`, `scripts/eval/eval_all_checkpoints.py`
 
 ---
 

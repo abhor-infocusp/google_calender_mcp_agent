@@ -6,11 +6,8 @@ An agentic calendar assistant that uses tool-calling to manage Google Calendar e
 ## Environment
 - Python env: `/home/abhor/miniconda3/envs/agentic/bin/python` (Python 3.11)
 - Run scripts with: `PYTHONPATH=src /home/abhor/miniconda3/envs/agentic/bin/python scripts/<path>.py`
-- GPU: NVIDIA TITAN X Pascal (12 GiB VRAM, compute 6.1, no bfloat16, no FlashAttention2, fp16 only)
-- Pinned stack: torch 2.5.1+cu124, vLLM 0.7.3 (rebuilt for sm_61), unsloth 2025.2.15, transformers 4.49.0, trl 0.15.2, openpipe-art 0.5.4
-- Set `VLLM_WORKER_MULTIPROC_METHOD=spawn` before importing vLLM (CUDA fork issue)
-- vLLM Punica patched to use PunicaWrapperCPU (Triton LLVM fails on Pascal)
-- vLLM source build backup: `vllm-build/` (for rebuilding `_C.abi3.so` for Pascal sm_61)
+- GPU: NVIDIA RTX PRO 6000 Blackwell (1x MIG slice, ~24 GiB VRAM, compute 12.0, bf16+FA2)
+- Stack: torch 2.10.0+cu128, vLLM 0.19.0, unsloth 2026.4.4, transformers 4.57.6, trl 0.24.0, openpipe-art 0.5.17, peft 0.19.0
 
 ## Project Structure
 
@@ -85,18 +82,17 @@ Uses Gemini as judge model. Compares calendar state before/after against expecte
 `evaluate_trajectory(eval_model, query, final_output, expected, before_days, after_days)` -> "Correct"/"Incorrect"
 
 ## Model Training
-- Base model: Qwen/Qwen2.5-1.5B-Instruct (Qwen3-1.7B incompatible with vLLM 0.7.3)
+- Base model: TBD (was Qwen2.5-1.5B, upgrading to 7B-14B for comprehension gains)
 - LoRA rank 64, targets: q/k/v/o/gate/up/down projections
-- SFT: `scripts/training/sft_train.py` (base config), `sft_train_100ep.py` (100-epoch with loss CSV)
+- SFT: `scripts/training/sft_train.py` (with loss masking + CSV logging)
 - SFT output: written to `sft_output/` (gitignored). Merge with `merge_lora.py`.
-- RL (ART/GRPO): `scripts/training/rl_train.py`. gpu_memory_utilization=0.55, max_model_len=2048, load_in_4bit=True, use_bitsandbytes=False
-- RL critical: must override max_num_batched_tokens and max_num_seqs (Unsloth defaults cause OOM on 12 GiB)
+- RL (ART/GRPO): `scripts/training/rl_train.py`. gpu_memory_utilization=0.90, max_model_len=4096, bf16=True
 - Eval: `scripts/eval/eval_qwen.py` (single calendar), `eval_batch.py` (batch eval with Gemini judge), `eval_all_checkpoints.py` (multi-checkpoint orchestrator)
 
 ## Qwen Evaluation via vLLM
 - **Tool-call parser**: Must use `hermes` (not `qwen3_xml`).
 - Requires a running vLLM server:
 ```
-vllm serve <model_path> --served-model-name <name> --enable-auto-tool-choice --tool-call-parser hermes --max-model-len 3076 --gpu-memory-utilization 0.80
+vllm serve <model_path> --served-model-name <name> --enable-auto-tool-choice --tool-call-parser hermes --max-model-len 4096 --gpu-memory-utilization 0.90
 ```
 - Run eval: `PYTHONPATH=src python scripts/eval/eval_qwen.py <calendar_index> [--query-index N] [--model MODEL] [--sft-data] [--with-final-answer]`
