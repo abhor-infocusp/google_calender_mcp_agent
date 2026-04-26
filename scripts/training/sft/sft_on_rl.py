@@ -6,7 +6,7 @@ trains 1 epoch on the full SFT dataset. Goal: recover from catastrophic
 forgetting on categories that regressed during RL.
 
 Usage:
-    PYTHONPATH=src python scripts/training/sft_on_rl.py
+    PYTHONPATH=src python scripts/training/sft/sft_on_rl.py
 """
 
 import json

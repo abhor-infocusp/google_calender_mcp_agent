@@ -6,7 +6,7 @@
 # we don't drift on isolation/timeout/setsid plumbing across scripts.
 #
 # Required env:
-#   SCRIPT_PATH               python script to launch (e.g. scripts/training/rl_train.py)
+#   SCRIPT_PATH               python script to launch (e.g. scripts/training/rl/rl_train.py)
 #   RUN_DIR                   output dir, e.g. runs/rl_qwen3_14b_20260420
 #   CUDA_VISIBLE_DEVICES      MIG UUID (use slice_map.sh: $(slice_cuda_uuid N))
 #
@@ -27,13 +27,13 @@
 #   CHECKPOINT_KEEP_EVERY=500          Patch K — milestone checkpoints to retain.
 #
 # Usage:
-#   source scripts/training/slice_map.sh
+#   source scripts/training/common/slice_map.sh
 #   SLICE=0
-#   SCRIPT_PATH=scripts/training/rl_train.py \
+#   SCRIPT_PATH=scripts/training/rl/rl_train.py \
 #   RUN_DIR=runs/rl_qwen3_14b_20260420 \
 #   CUDA_VISIBLE_DEVICES=$(slice_cuda_uuid $SLICE) \
 #   TASKSET_CPUS=$(slice_cpu_range $SLICE) \
-#   nohup scripts/training/auto_restart.sh \
+#   nohup scripts/training/common/auto_restart.sh \
 #       > runs/rl_qwen3_14b_20260420/logs/loop.log 2>&1 &
 
 set -u

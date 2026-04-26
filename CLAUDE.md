@@ -84,9 +84,9 @@ Uses Gemini as judge model. Compares calendar state before/after against expecte
 ## Model Training
 - Base model: TBD (was Qwen2.5-1.5B, upgrading to 7B-14B for comprehension gains)
 - LoRA rank 64, targets: q/k/v/o/gate/up/down projections
-- SFT: `scripts/training/sft_train.py` (with loss masking + CSV logging)
+- SFT: `scripts/training/sft/sft_train.py` (with loss masking + CSV logging)
 - SFT output: written to `sft_output/` (gitignored). Merge with `merge_lora.py`.
-- RL (ART/GRPO): `scripts/training/rl_train.py`. gpu_memory_utilization=0.90, max_model_len=4096, bf16=True
+- RL (ART/GRPO): `scripts/training/rl/rl_train.py`. gpu_memory_utilization=0.90, max_model_len=4096, bf16=True
 - Eval: `scripts/eval/eval_qwen.py` (single calendar), `eval_batch.py` (batch eval with Gemini judge), `eval_all_checkpoints.py` (multi-checkpoint orchestrator)
 
 ## Qwen Evaluation via vLLM

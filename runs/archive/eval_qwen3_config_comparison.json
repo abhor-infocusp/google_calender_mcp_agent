@@ -1,0 +1,961 @@
+{
+  "think_no_sys": {
+    "desc": "Thinking ON, no system prompt",
+    "correct": 6,
+    "total": 14,
+    "accuracy": 0.429,
+    "avg_turns": 2.6,
+    "avg_tokens": 5574.0,
+    "avg_time_s": 34.0,
+    "per_query": [
+      {
+        "query": "Create a meeting on Wednesday called 'Team Brainstorm' from 1 PM to 2 PM, with developers@company.com and testers@company.com as attendees.",
+        "category": "Schedule a Single Event",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 8059,
+        "elapsed_s": 51.5,
+        "answer_preview": "The event \"Team Brainstorm\" has been successfully created for **Wednesday, July "
+      },
+      {
+        "query": "Book a doctor's appointment for me next Tuesday at 3:30 PM.",
+        "category": "Schedule a Single Event",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 5214,
+        "elapsed_s": 26.5,
+        "answer_preview": "Your doctor's appointment has been successfully scheduled for **Tuesday, July 7,"
+      },
+      {
+        "query": "What is my first meeting on Monday?",
+        "category": "Vague & Contextual (Reasoning Required)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 4698,
+        "elapsed_s": 19.1,
+        "answer_preview": "Your first meeting on Monday is the **Project Team Stand-up** scheduled from **0"
+      },
+      {
+        "query": "Am I busy on Saturday evening?",
+        "category": "Vague & Contextual (Reasoning Required)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 4315,
+        "elapsed_s": 17.2,
+        "answer_preview": "You don't have any calendar events scheduled for Saturday evening (July 19th, 20"
+      },
+      {
+        "query": "Can we move the Project Planning Meeting on Monday to 10:00 AM?",
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 10170,
+        "elapsed_s": 72.8,
+        "answer_preview": "<think> Okay, let's see. The user wants to move the Project Planning Meeting on "
+      },
+      {
+        "query": "Update the Stakeholder Communication Update to include testers@company.com",
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "verdict": "Incorrect",
+        "turns": 2,
+        "tokens": 6306,
+        "elapsed_s": 41.1,
+        "answer_preview": "<tool_call> {\"name\":"
+      },
+      {
+        "query": "Who is invited to the Casual Friday Team Coffee?",
+        "category": "Information Retrieval (Querying)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 5220,
+        "elapsed_s": 49.5,
+        "answer_preview": "(error: Error code: 400 - {'error': {'message': \"This model's maximum context le"
+      },
+      {
+        "query": "What time is dinner with the spouse on Thursday?",
+        "category": "Information Retrieval (Querying)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 8051,
+        "elapsed_s": 52.7,
+        "answer_preview": "There are no calendar events scheduled for Thursday, July 9, 2026. Would you lik"
+      },
+      {
+        "query": "I want to schedule a meeting with the UX Designer on Tuesday, but make sure it doesn't overlap with anything else.",
+        "category": "Complex Logic & Conflict (Advanced)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 5987,
+        "elapsed_s": 32.6,
+        "answer_preview": "It looks like there are no events scheduled on Tuesday, July 15, 2026. The event"
+      },
+      {
+        "query": "I'm double booked, what conflicts do I have on Friday?",
+        "category": "Complex Logic & Conflict (Advanced)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 6807,
+        "elapsed_s": 41.9,
+        "answer_preview": "The events listed for Friday, July 17, 2026, do not show any overlapping time co"
+      },
+      {
+        "query": "Performance review...",
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "verdict": "Correct",
+        "turns": 1,
+        "tokens": 1133,
+        "elapsed_s": 6.2,
+        "answer_preview": "Your message seems incomplete. Could you please clarify what you need regarding "
+      },
+      {
+        "query": "Cancel that dinner.",
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "verdict": "Correct",
+        "turns": 1,
+        "tokens": 1280,
+        "elapsed_s": 9.8,
+        "answer_preview": "To cancel the dinner event, I need the specific event ID to proceed. Could you p"
+      },
+      {
+        "query": "What am I doing today?",
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 5507,
+        "elapsed_s": 28.6,
+        "answer_preview": "Here's your schedule for today, Thursday, July 16, 2026 (current time: 08:00 AM)"
+      },
+      {
+        "query": "Did I have anything scheduled yesterday?",
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 5286,
+        "elapsed_s": 26.1,
+        "answer_preview": "You had 5 events scheduled on July 15, 2026:  1. **Project Team Stand-up** \u2014 09:"
+      }
+    ]
+  },
+  "think_full_sys": {
+    "desc": "Thinking ON, full system prompt",
+    "correct": 7,
+    "total": 14,
+    "accuracy": 0.5,
+    "avg_turns": 2.9,
+    "avg_tokens": 5974.0,
+    "avg_time_s": 33.3,
+    "per_query": [
+      {
+        "query": "Create a meeting on Wednesday called 'Team Brainstorm' from 1 PM to 2 PM, with developers@company.com and testers@company.com as attendees.",
+        "category": "Schedule a Single Event",
+        "verdict": "Incorrect",
+        "turns": 2,
+        "tokens": 3261,
+        "elapsed_s": 56.0,
+        "answer_preview": "(error: Error code: 400 - {'error': {'message': \"This model's maximum context le"
+      },
+      {
+        "query": "Book a doctor's appointment for me next Tuesday at 3:30 PM.",
+        "category": "Schedule a Single Event",
+        "verdict": "Incorrect",
+        "turns": 4,
+        "tokens": 6391,
+        "elapsed_s": 21.1,
+        "answer_preview": "Your doctor's appointment has been confirmed for **July 8, 2026, at 3:30 PM** (E"
+      },
+      {
+        "query": "What is my first meeting on Monday?",
+        "category": "Vague & Contextual (Reasoning Required)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 5296,
+        "elapsed_s": 20.6,
+        "answer_preview": "Your first meeting on Monday is the **Project Team Stand-up** scheduled from **0"
+      },
+      {
+        "query": "Am I busy on Saturday evening?",
+        "category": "Vague & Contextual (Reasoning Required)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 5182,
+        "elapsed_s": 22.8,
+        "answer_preview": "You have an event scheduled for Saturday evening: \"Dinner with Friends\" from 6:0"
+      },
+      {
+        "query": "Can we move the Project Planning Meeting on Monday to 10:00 AM?",
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 5542,
+        "elapsed_s": 48.6,
+        "answer_preview": "(error: Error code: 400 - {'error': {'message': \"This model's maximum context le"
+      },
+      {
+        "query": "Update the Stakeholder Communication Update to include testers@company.com",
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "verdict": "Incorrect",
+        "turns": 2,
+        "tokens": 3081,
+        "elapsed_s": 51.2,
+        "answer_preview": "(error: Error code: 400 - {'error': {'message': \"This model's maximum context le"
+      },
+      {
+        "query": "Who is invited to the Casual Friday Team Coffee?",
+        "category": "Information Retrieval (Querying)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 8419,
+        "elapsed_s": 21.1,
+        "answer_preview": "<think>  The \"Casual Friday Team Coffee\" event has the following attendees: deve"
+      },
+      {
+        "query": "What time is dinner with the spouse on Thursday?",
+        "category": "Information Retrieval (Querying)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 5689,
+        "elapsed_s": 32.7,
+        "answer_preview": "There is no event scheduled for Thursday in your calendar. Would you like me to "
+      },
+      {
+        "query": "I want to schedule a meeting with the UX Designer on Tuesday, but make sure it doesn't overlap with anything else.",
+        "category": "Complex Logic & Conflict (Advanced)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 10415,
+        "elapsed_s": 69.1,
+        "answer_preview": "<think> Okay, let me process this. The user wants to schedule a meeting with the"
+      },
+      {
+        "query": "I'm double booked, what conflicts do I have on Friday?",
+        "category": "Complex Logic & Conflict (Advanced)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 5014,
+        "elapsed_s": 22.8,
+        "answer_preview": "You have 5 events scheduled on Friday, but no overlapping time conflicts:  1. **"
+      },
+      {
+        "query": "Performance review...",
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "verdict": "Correct",
+        "turns": 2,
+        "tokens": 4581,
+        "elapsed_s": 16.6,
+        "answer_preview": "I see there's an event titled \"Finalize Weekly Performance Reports\" scheduled fo"
+      },
+      {
+        "query": "Cancel that dinner.",
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "verdict": "Incorrect",
+        "turns": 4,
+        "tokens": 9655,
+        "elapsed_s": 27.2,
+        "answer_preview": "I've canceled your \"Dinner with Family\" event scheduled for Monday at 18:00-19:0"
+      },
+      {
+        "query": "What am I doing today?",
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 5457,
+        "elapsed_s": 26.6,
+        "answer_preview": "Here's your schedule for today, July 16, 2026:  1. **09:00-09:30 AM** - Project "
+      },
+      {
+        "query": "Did I have anything scheduled yesterday?",
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 5653,
+        "elapsed_s": 30.1,
+        "answer_preview": "You had 5 events scheduled on **2026-07-15** (Wednesday):  1. **Project Team Sta"
+      }
+    ]
+  },
+  "think_minimal_sys": {
+    "desc": "Thinking ON, minimal system prompt",
+    "correct": 7,
+    "total": 14,
+    "accuracy": 0.5,
+    "avg_turns": 3.1,
+    "avg_tokens": 6322.0,
+    "avg_time_s": 31.0,
+    "per_query": [
+      {
+        "query": "Create a meeting on Wednesday called 'Team Brainstorm' from 1 PM to 2 PM, with developers@company.com and testers@company.com as attendees.",
+        "category": "Schedule a Single Event",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 4399,
+        "elapsed_s": 18.9,
+        "answer_preview": "The event \"Team Brainstorm\" has been successfully created for **Wednesday, July "
+      },
+      {
+        "query": "Book a doctor's appointment for me next Tuesday at 3:30 PM.",
+        "category": "Schedule a Single Event",
+        "verdict": "Incorrect",
+        "turns": 4,
+        "tokens": 7133,
+        "elapsed_s": 29.1,
+        "answer_preview": "Your doctor's appointment has been scheduled for **July 8, 2026, at 3:30 PM**. T"
+      },
+      {
+        "query": "What is my first meeting on Monday?",
+        "category": "Vague & Contextual (Reasoning Required)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 5666,
+        "elapsed_s": 28.8,
+        "answer_preview": "Your first meeting on Monday is the **Project Team Stand-up** scheduled from **0"
+      },
+      {
+        "query": "Am I busy on Saturday evening?",
+        "category": "Vague & Contextual (Reasoning Required)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 4786,
+        "elapsed_s": 23.7,
+        "answer_preview": "You don't have any events scheduled for Saturday evening. Would you like to add "
+      },
+      {
+        "query": "Can we move the Project Planning Meeting on Monday to 10:00 AM?",
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "verdict": "Correct",
+        "turns": 4,
+        "tokens": 11247,
+        "elapsed_s": 57.1,
+        "answer_preview": "The Project Planning Meeting has been successfully rescheduled to **Monday, July"
+      },
+      {
+        "query": "Update the Stakeholder Communication Update to include testers@company.com",
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 5556,
+        "elapsed_s": 51.9,
+        "answer_preview": "(error: Error code: 400 - {'error': {'message': \"This model's maximum context le"
+      },
+      {
+        "query": "Who is invited to the Casual Friday Team Coffee?",
+        "category": "Information Retrieval (Querying)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 8318,
+        "elapsed_s": 25.6,
+        "answer_preview": "The Casual Friday Team Coffee event is inviting the following attendees: - devel"
+      },
+      {
+        "query": "What time is dinner with the spouse on Thursday?",
+        "category": "Information Retrieval (Querying)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 4748,
+        "elapsed_s": 22.4,
+        "answer_preview": "I don't see any events scheduled for Thursday, July 9, 2026. Would you like me t"
+      },
+      {
+        "query": "I want to schedule a meeting with the UX Designer on Tuesday, but make sure it doesn't overlap with anything else.",
+        "category": "Complex Logic & Conflict (Advanced)",
+        "verdict": "Incorrect",
+        "turns": 4,
+        "tokens": 9647,
+        "elapsed_s": 53.2,
+        "answer_preview": "There is already a scheduled meeting with the UX Designer on Tuesday, July 14th,"
+      },
+      {
+        "query": "I'm double booked, what conflicts do I have on Friday?",
+        "category": "Complex Logic & Conflict (Advanced)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 4922,
+        "elapsed_s": 25.6,
+        "answer_preview": "You have 5 events scheduled on Friday, July 17, 2026, but no overlapping time co"
+      },
+      {
+        "query": "Performance review...",
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "verdict": "Correct",
+        "turns": 1,
+        "tokens": 1152,
+        "elapsed_s": 6.1,
+        "answer_preview": "To assist with your performance review, could you please provide the following d"
+      },
+      {
+        "query": "Cancel that dinner.",
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "verdict": "Incorrect",
+        "turns": 4,
+        "tokens": 9740,
+        "elapsed_s": 27.7,
+        "answer_preview": "The dinner with your family on Monday at 6:00 PM has been canceled. Let me know "
+      },
+      {
+        "query": "What am I doing today?",
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 5796,
+        "elapsed_s": 33.2,
+        "answer_preview": "Here's your schedule for today, July 16, 2026:  **9:00-9:30 AM** Project Team St"
+      },
+      {
+        "query": "Did I have anything scheduled yesterday?",
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 5391,
+        "elapsed_s": 30.9,
+        "answer_preview": "You had 5 events scheduled on July 15, 2026 (Wednesday):  1. **Project Team Stan"
+      }
+    ]
+  },
+  "nothink_no_sys": {
+    "desc": "Thinking OFF (/no_think), no real system prompt",
+    "correct": 8,
+    "total": 14,
+    "accuracy": 0.571,
+    "avg_turns": 2.7,
+    "avg_tokens": 3049.0,
+    "avg_time_s": 4.1,
+    "per_query": [
+      {
+        "query": "Create a meeting on Wednesday called 'Team Brainstorm' from 1 PM to 2 PM, with developers@company.com and testers@company.com as attendees.",
+        "category": "Schedule a Single Event",
+        "verdict": "Incorrect",
+        "turns": 2,
+        "tokens": 2213,
+        "elapsed_s": 5.4,
+        "answer_preview": "The event \"Team Brainstorm\" has been successfully created. Here are the details:"
+      },
+      {
+        "query": "Book a doctor's appointment for me next Tuesday at 3:30 PM.",
+        "category": "Schedule a Single Event",
+        "verdict": "Correct",
+        "turns": 2,
+        "tokens": 2148,
+        "elapsed_s": 4.1,
+        "answer_preview": "Your doctor's appointment has been successfully scheduled for next Tuesday at 3:"
+      },
+      {
+        "query": "What is my first meeting on Monday?",
+        "category": "Vague & Contextual (Reasoning Required)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 3234,
+        "elapsed_s": 3.2,
+        "answer_preview": "Your first meeting on Monday is the \"Project Team Stand-up\" scheduled from 09:00"
+      },
+      {
+        "query": "Am I busy on Saturday evening?",
+        "category": "Vague & Contextual (Reasoning Required)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 3021,
+        "elapsed_s": 3.2,
+        "answer_preview": "Yes, you have a movie night with your family scheduled from 6:00 PM to 8:00 PM o"
+      },
+      {
+        "query": "Can we move the Project Planning Meeting on Monday to 10:00 AM?",
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "verdict": "Correct",
+        "turns": 5,
+        "tokens": 6506,
+        "elapsed_s": 7.8,
+        "answer_preview": "The Project Planning Meeting has been successfully moved to 10:00 AM on Monday, "
+      },
+      {
+        "query": "Update the Stakeholder Communication Update to include testers@company.com",
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 3036,
+        "elapsed_s": 3.9,
+        "answer_preview": "It seems there are no events within the specified timeframe. Could you provide m"
+      },
+      {
+        "query": "Who is invited to the Casual Friday Team Coffee?",
+        "category": "Information Retrieval (Querying)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 4481,
+        "elapsed_s": 3.4,
+        "answer_preview": "The event \"Casual Friday Team Coffee\" is scheduled for Friday from 15:00 to 16:0"
+      },
+      {
+        "query": "What time is dinner with the spouse on Thursday?",
+        "category": "Information Retrieval (Querying)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 2994,
+        "elapsed_s": 3.5,
+        "answer_preview": "It seems there are no events scheduled for today, July 10th, 2026. Could you cla"
+      },
+      {
+        "query": "I want to schedule a meeting with the UX Designer on Tuesday, but make sure it doesn't overlap with anything else.",
+        "category": "Complex Logic & Conflict (Advanced)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 3561,
+        "elapsed_s": 3.8,
+        "answer_preview": "It looks like there is already a meeting scheduled with the UX Designer on Tuesd"
+      },
+      {
+        "query": "I'm double booked, what conflicts do I have on Friday?",
+        "category": "Complex Logic & Conflict (Advanced)",
+        "verdict": "Incorrect",
+        "turns": 2,
+        "tokens": 1972,
+        "elapsed_s": 2.6,
+        "answer_preview": "It looks like you don't have any events scheduled for Friday. Maybe you can chec"
+      },
+      {
+        "query": "Performance review...",
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "verdict": "Correct",
+        "turns": 1,
+        "tokens": 938,
+        "elapsed_s": 1.4,
+        "answer_preview": "It seems you mentioned \"Performance review.\" Could you clarify what you need ass"
+      },
+      {
+        "query": "Cancel that dinner.",
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "verdict": "Correct",
+        "turns": 2,
+        "tokens": 1887,
+        "elapsed_s": 1.8,
+        "answer_preview": "It seems I don't have the correct event ID for the dinner. Could you provide mor"
+      },
+      {
+        "query": "What am I doing today?",
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 3358,
+        "elapsed_s": 6.4,
+        "answer_preview": "Here's what you have scheduled today, Thursday, July 16, 2026:  1. **Project Tea"
+      },
+      {
+        "query": "Did I have anything scheduled yesterday?",
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 3338,
+        "elapsed_s": 6.3,
+        "answer_preview": "Yes, you had several events scheduled yesterday. Here's what was on your calenda"
+      }
+    ]
+  },
+  "nothink_full_sys": {
+    "desc": "Thinking OFF, full system prompt",
+    "correct": 8,
+    "total": 14,
+    "accuracy": 0.571,
+    "avg_turns": 3.4,
+    "avg_tokens": 4513.0,
+    "avg_time_s": 4.7,
+    "per_query": [
+      {
+        "query": "Create a meeting on Wednesday called 'Team Brainstorm' from 1 PM to 2 PM, with developers@company.com and testers@company.com as attendees.",
+        "category": "Schedule a Single Event",
+        "verdict": "Correct",
+        "turns": 2,
+        "tokens": 2463,
+        "elapsed_s": 4.6,
+        "answer_preview": "I've created the \"Team Brainstorm\" meeting on Wednesday from 1 PM to 2 PM with d"
+      },
+      {
+        "query": "Book a doctor's appointment for me next Tuesday at 3:30 PM.",
+        "category": "Schedule a Single Event",
+        "verdict": "Incorrect",
+        "turns": 4,
+        "tokens": 4826,
+        "elapsed_s": 5.0,
+        "answer_preview": "I have successfully booked your doctor's appointment for next Tuesday at 3:30 PM"
+      },
+      {
+        "query": "What is my first meeting on Monday?",
+        "category": "Vague & Contextual (Reasoning Required)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 3658,
+        "elapsed_s": 3.2,
+        "answer_preview": "Your first meeting on Monday is the \"Project Team Stand-up\" scheduled from 09:00"
+      },
+      {
+        "query": "Am I busy on Saturday evening?",
+        "category": "Vague & Contextual (Reasoning Required)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 3456,
+        "elapsed_s": 3.3,
+        "answer_preview": "You have an event called \"Movie Night with Family\" scheduled from 6:00 PM to 8:0"
+      },
+      {
+        "query": "Can we move the Project Planning Meeting on Monday to 10:00 AM?",
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "verdict": "Correct",
+        "turns": 5,
+        "tokens": 7198,
+        "elapsed_s": 7.4,
+        "answer_preview": "The Project Planning Meeting has been moved to 10:00 AM on Monday, July 13, and "
+      },
+      {
+        "query": "Update the Stakeholder Communication Update to include testers@company.com",
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "verdict": "Incorrect",
+        "turns": 5,
+        "tokens": 10776,
+        "elapsed_s": 5.9,
+        "answer_preview": "I have successfully updated the \"Stakeholder Communication Update\" event to incl"
+      },
+      {
+        "query": "Who is invited to the Casual Friday Team Coffee?",
+        "category": "Information Retrieval (Querying)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 3407,
+        "elapsed_s": 3.2,
+        "answer_preview": "I couldn't find any events matching \"Casual Friday Team Coffee\" in your calendar"
+      },
+      {
+        "query": "What time is dinner with the spouse on Thursday?",
+        "category": "Information Retrieval (Querying)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 3404,
+        "elapsed_s": 3.1,
+        "answer_preview": "I don't see any events scheduled for Thursday in your calendar. Would you like m"
+      },
+      {
+        "query": "I want to schedule a meeting with the UX Designer on Tuesday, but make sure it doesn't overlap with anything else.",
+        "category": "Complex Logic & Conflict (Advanced)",
+        "verdict": "Incorrect",
+        "turns": 4,
+        "tokens": 5909,
+        "elapsed_s": 5.7,
+        "answer_preview": "I have scheduled your meeting with the UX Designer from Monday, July 13, at 10:0"
+      },
+      {
+        "query": "I'm double booked, what conflicts do I have on Friday?",
+        "category": "Complex Logic & Conflict (Advanced)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 3808,
+        "elapsed_s": 6.6,
+        "answer_preview": "You have the following events scheduled on Friday, July 17, 2026:  1. **Project "
+      },
+      {
+        "query": "Performance review...",
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 3384,
+        "elapsed_s": 3.1,
+        "answer_preview": "I don't see any events scheduled for your performance review in the next 30 minu"
+      },
+      {
+        "query": "Cancel that dinner.",
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 3382,
+        "elapsed_s": 3.0,
+        "answer_preview": "I couldn't find any events at the current time. Would you like me to check for e"
+      },
+      {
+        "query": "What am I doing today?",
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 3769,
+        "elapsed_s": 6.1,
+        "answer_preview": "Today, on Thursday, July 16, 2026, you have the following events scheduled:  1. "
+      },
+      {
+        "query": "Did I have anything scheduled yesterday?",
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 3740,
+        "elapsed_s": 5.2,
+        "answer_preview": "Yes, you had several events scheduled yesterday, July 15, 2026: - Project Team S"
+      }
+    ]
+  },
+  "nothink_minimal_sys": {
+    "desc": "Thinking OFF, minimal system prompt",
+    "correct": 8,
+    "total": 14,
+    "accuracy": 0.571,
+    "avg_turns": 3.3,
+    "avg_tokens": 4138.0,
+    "avg_time_s": 4.7,
+    "per_query": [
+      {
+        "query": "Create a meeting on Wednesday called 'Team Brainstorm' from 1 PM to 2 PM, with developers@company.com and testers@company.com as attendees.",
+        "category": "Schedule a Single Event",
+        "verdict": "Correct",
+        "turns": 2,
+        "tokens": 2233,
+        "elapsed_s": 4.7,
+        "answer_preview": "I've created the \"Team Brainstorm\" meeting on Wednesday from 1 PM to 2 PM with d"
+      },
+      {
+        "query": "Book a doctor's appointment for me next Tuesday at 3:30 PM.",
+        "category": "Schedule a Single Event",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 3181,
+        "elapsed_s": 4.2,
+        "answer_preview": "Your doctor's appointment has been successfully scheduled for next Tuesday, July"
+      },
+      {
+        "query": "What is my first meeting on Monday?",
+        "category": "Vague & Contextual (Reasoning Required)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 3312,
+        "elapsed_s": 3.2,
+        "answer_preview": "Your first meeting on Monday is the \"Project Team Stand-up\" scheduled from 09:00"
+      },
+      {
+        "query": "Am I busy on Saturday evening?",
+        "category": "Vague & Contextual (Reasoning Required)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 3107,
+        "elapsed_s": 3.4,
+        "answer_preview": "You have an event scheduled on Saturday evening titled \"Movie Night with Family\""
+      },
+      {
+        "query": "Can we move the Project Planning Meeting on Monday to 10:00 AM?",
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "verdict": "Correct",
+        "turns": 5,
+        "tokens": 6666,
+        "elapsed_s": 7.7,
+        "answer_preview": "The Project Planning Meeting has been successfully moved to 10:00 AM on Monday, "
+      },
+      {
+        "query": "Update the Stakeholder Communication Update to include testers@company.com",
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 3091,
+        "elapsed_s": 3.5,
+        "answer_preview": "It seems there are no events in the specified time frame. Could you provide more"
+      },
+      {
+        "query": "Who is invited to the Casual Friday Team Coffee?",
+        "category": "Information Retrieval (Querying)",
+        "verdict": "Correct",
+        "turns": 4,
+        "tokens": 7277,
+        "elapsed_s": 4.1,
+        "answer_preview": "The attendees invited to the Casual Friday Team Coffee are: - developers@company"
+      },
+      {
+        "query": "What time is dinner with the spouse on Thursday?",
+        "category": "Information Retrieval (Querying)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 3045,
+        "elapsed_s": 2.9,
+        "answer_preview": "It seems there are no events scheduled for Thursday. Could you provide more deta"
+      },
+      {
+        "query": "I want to schedule a meeting with the UX Designer on Tuesday, but make sure it doesn't overlap with anything else.",
+        "category": "Complex Logic & Conflict (Advanced)",
+        "verdict": "Incorrect",
+        "turns": 4,
+        "tokens": 5435,
+        "elapsed_s": 5.7,
+        "answer_preview": "I have scheduled your meeting with the UX Designer from 10:00 AM to 11:00 AM on "
+      },
+      {
+        "query": "I'm double booked, what conflicts do I have on Friday?",
+        "category": "Complex Logic & Conflict (Advanced)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 3459,
+        "elapsed_s": 6.5,
+        "answer_preview": "You have the following events scheduled on Friday:  1. **Project Team Stand-up**"
+      },
+      {
+        "query": "Performance review...",
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 3045,
+        "elapsed_s": 3.4,
+        "answer_preview": "It seems there are no events scheduled for today, July 5th, 2026. Let me know if"
+      },
+      {
+        "query": "Cancel that dinner.",
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "verdict": "Incorrect",
+        "turns": 4,
+        "tokens": 7214,
+        "elapsed_s": 4.0,
+        "answer_preview": "The dinner event with your family has been successfully canceled. Let me know if"
+      },
+      {
+        "query": "What am I doing today?",
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 3434,
+        "elapsed_s": 6.3,
+        "answer_preview": "Here are your events for today, Thursday, July 16, 2026:  1. **Project Team Stan"
+      },
+      {
+        "query": "Did I have anything scheduled yesterday?",
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 3434,
+        "elapsed_s": 6.6,
+        "answer_preview": "Yes, you had several events scheduled yesterday, July 15, 2026. Here's what was "
+      }
+    ]
+  },
+  "nothink_minimal_tools": {
+    "desc": "Thinking OFF, minimal system prompt, minimal tools",
+    "correct": 5,
+    "total": 14,
+    "accuracy": 0.357,
+    "avg_turns": 4.0,
+    "avg_tokens": 3252.0,
+    "avg_time_s": 5.9,
+    "per_query": [
+      {
+        "query": "Create a meeting on Wednesday called 'Team Brainstorm' from 1 PM to 2 PM, with developers@company.com and testers@company.com as attendees.",
+        "category": "Schedule a Single Event",
+        "verdict": "Incorrect",
+        "turns": 3,
+        "tokens": 2625,
+        "elapsed_s": 7.8,
+        "answer_preview": "The event \"Team Brainstorm\" has been successfully created. Here are the details:"
+      },
+      {
+        "query": "Book a doctor's appointment for me next Tuesday at 3:30 PM.",
+        "category": "Schedule a Single Event",
+        "verdict": "Incorrect",
+        "turns": 4,
+        "tokens": 3242,
+        "elapsed_s": 7.0,
+        "answer_preview": "Your doctor's appointment has been successfully booked for next Tuesday at 3:30 "
+      },
+      {
+        "query": "What is my first meeting on Monday?",
+        "category": "Vague & Contextual (Reasoning Required)",
+        "verdict": "Correct",
+        "turns": 3,
+        "tokens": 2349,
+        "elapsed_s": 3.2,
+        "answer_preview": "Your first meeting on Monday is the \"Project Team Stand-up\" scheduled from 09:00"
+      },
+      {
+        "query": "Am I busy on Saturday evening?",
+        "category": "Vague & Contextual (Reasoning Required)",
+        "verdict": "Incorrect",
+        "turns": 4,
+        "tokens": 3085,
+        "elapsed_s": 4.9,
+        "answer_preview": "Yes, you have an event titled \"Movie Night with Family\" scheduled for Saturday e"
+      },
+      {
+        "query": "Can we move the Project Planning Meeting on Monday to 10:00 AM?",
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "verdict": "Correct",
+        "turns": 5,
+        "tokens": 5061,
+        "elapsed_s": 7.7,
+        "answer_preview": "The Project Planning Meeting has been successfully moved to 10:00 AM on Monday. "
+      },
+      {
+        "query": "Update the Stakeholder Communication Update to include testers@company.com",
+        "category": "Modifier & Correction (Rescheduling/Updates)",
+        "verdict": "Incorrect",
+        "turns": 4,
+        "tokens": 3022,
+        "elapsed_s": 4.7,
+        "answer_preview": "No events were found in the specified date range. Please provide additional deta"
+      },
+      {
+        "query": "Who is invited to the Casual Friday Team Coffee?",
+        "category": "Information Retrieval (Querying)",
+        "verdict": "Incorrect",
+        "turns": 4,
+        "tokens": 2981,
+        "elapsed_s": 4.7,
+        "answer_preview": "It seems there are no events scheduled between April 20 and April 25, 2023. Coul"
+      },
+      {
+        "query": "What time is dinner with the spouse on Thursday?",
+        "category": "Information Retrieval (Querying)",
+        "verdict": "Incorrect",
+        "turns": 4,
+        "tokens": 3038,
+        "elapsed_s": 4.7,
+        "answer_preview": "It seems there are no events scheduled for Thursday. Let me know if you'd like t"
+      },
+      {
+        "query": "I want to schedule a meeting with the UX Designer on Tuesday, but make sure it doesn't overlap with anything else.",
+        "category": "Complex Logic & Conflict (Advanced)",
+        "verdict": "Incorrect",
+        "turns": 4,
+        "tokens": 3101,
+        "elapsed_s": 4.9,
+        "answer_preview": "There are no events scheduled for Tuesday. You can proceed to schedule your meet"
+      },
+      {
+        "query": "I'm double booked, what conflicts do I have on Friday?",
+        "category": "Complex Logic & Conflict (Advanced)",
+        "verdict": "Correct",
+        "turns": 4,
+        "tokens": 3355,
+        "elapsed_s": 7.4,
+        "answer_preview": "You have the following events scheduled on Friday:  1. **Project Team Stand-up**"
+      },
+      {
+        "query": "Performance review...",
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "verdict": "Incorrect",
+        "turns": 4,
+        "tokens": 2943,
+        "elapsed_s": 4.4,
+        "answer_preview": "I found no events scheduled for July 5, 2026. Would you like to create a new eve"
+      },
+      {
+        "query": "Cancel that dinner.",
+        "category": "Human Chaos (Edge Cases/Fragments)",
+        "verdict": "Incorrect",
+        "turns": 5,
+        "tokens": 3898,
+        "elapsed_s": 5.6,
+        "answer_preview": "I couldn't find any events scheduled for today. Let me know if you'd like to che"
+      },
+      {
+        "query": "What am I doing today?",
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "verdict": "Correct",
+        "turns": 4,
+        "tokens": 3402,
+        "elapsed_s": 7.7,
+        "answer_preview": "Here are your events for today:  1. **Project Team Stand-up** \u2014 Thursday, 09:00-"
+      },
+      {
+        "query": "Did I have anything scheduled yesterday?",
+        "category": "Relative Time References (today, tomorrow, yesterday, this week)",
+        "verdict": "Correct",
+        "turns": 4,
+        "tokens": 3419,
+        "elapsed_s": 8.0,
+        "answer_preview": "Yes, you had several events scheduled yesterday, July 15th, 2026. Here's what wa"
+      }
+    ]
+  }
+}

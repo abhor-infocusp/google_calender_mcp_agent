@@ -7,7 +7,7 @@
 # Any other exit code = stop (training done, bug, or user kill).
 #
 # Usage:
-#   nohup scripts/training/rl_train_adaptive_loop.sh \
+#   nohup scripts/training/rl/rl_train_adaptive_loop.sh \
 #     > runs/rl_adaptive_qwen3_14b_20260424/logs/loop.log 2>&1 &
 
 set -u
@@ -55,7 +55,7 @@ while true; do
     ts=$(date +%Y%m%d_%H%M%S)
     LOG="${RUN_DIR}/logs/train_${ts}.log"
     echo "[loop] starting rl_train_adaptive.py (restart #${restarts}) → ${LOG}"
-    setsid /home/abhor/miniconda3/envs/agentic/bin/python scripts/training/rl_train_adaptive.py \
+    setsid /home/abhor/miniconda3/envs/agentic/bin/python scripts/training/rl/rl_train_adaptive.py \
         >> "$LOG" 2>&1 &
     PY_PID=$!
     CURRENT_PGID=$PY_PID

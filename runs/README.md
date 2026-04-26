@@ -30,13 +30,15 @@ Checkpoints and logs are ignored (too large / noisy). See repo `.gitignore`.
 
 ## How scripts use this
 
-- `scripts/training/sft_train.py` writes to `$SFT_RUN_DIR` (default `runs/sft_v6_qwen3_14b_20260420`).
-- `scripts/training/rl_train_loop.sh` writes to `runs/rl_qwen3_14b_20260420/logs/`.
-- `scripts/training/rl_train.py` writes debug dumps to `$RL_RUN_DIR/logs/debug`.
+- `scripts/training/sft/sft_train.py` writes to `$SFT_RUN_DIR` (default `runs/sft_v6_qwen3_14b_20260420`).
+- `scripts/training/common/auto_restart.sh` writes to `$RUN_DIR/logs/` (loop log + train logs).
+- `scripts/training/rl/rl_train.py` writes debug dumps to `$RL_RUN_DIR/logs/debug`.
 
 ## Starting a new run
 
-1. Create `runs/<kind>_<model>_<date>/`.
-2. Write `config.json` capturing hparams + git sha.
-3. Launch training with env var pointing at the run dir.
-4. Logs/checkpoints land under that dir; nothing at project root.
+See `docs/multi_tenant_training.md` for the full launch protocol. Short version:
+
+1. Pick an unused MIG slice; check `nvidia-smi`.
+2. `source scripts/training/common/slice_map.sh`.
+3. Set `CUDA_VISIBLE_DEVICES`, `TASKSET_CPUS`, `SCRIPT_PATH`, `RUN_DIR`.
+4. `nohup scripts/training/common/auto_restart.sh > $RUN_DIR/logs/loop.log 2>&1 &`.

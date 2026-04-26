@@ -1,6 +1,6 @@
 """Stress-test harness for ART 0.5.17 deadlock reproduction.
 
-Mirrors scripts/training/rl_train.py's ART usage (backend, model registration,
+Mirrors scripts/training/rl/rl_train.py's ART usage (backend, model registration,
 rollout + gather + train loop, Patch G) but with:
   - Qwen2.5-0.5B-Instruct instead of Qwen3-14B
   - Random rewards instead of Gemini judge
@@ -32,15 +32,15 @@ from art.utils import iterate_dataset
 from openai import AsyncOpenAI
 
 # ── Config ───────────────────────────────────────────────────
-BASE_MODEL = "Qwen/Qwen2.5-1.5B-Instruct"
-RUN_DIR = Path("runs/rl_stress_qwen25_15b")
+BASE_MODEL = "Qwen/Qwen3-14B"
+RUN_DIR = Path("runs/rl_stress_qwen3_14b")
 RUN_DIR.mkdir(parents=True, exist_ok=True)
 
-# Small synthetic scenario set
+# Same-scale synthetic set; mirror real training config as closely as possible.
 NUM_SCENARIOS = 30
 ROLLOUTS_PER_GROUP = 8            # match real training (async concurrency)
 GROUPS_PER_STEP = 1
-MAX_TOKENS = 128
+MAX_TOKENS = 512                  # longer like real rollouts
 NUM_EPOCHS = 10000  # effectively unbounded — we're measuring deadlock rate
 
 
@@ -79,19 +79,19 @@ async def main():
     print(f"[stress] start pid={os.getpid()} ts={datetime.now().isoformat()}")
 
     model = art.TrainableModel(
-        name="stress-medium-001",
-        project="rl-stress-medium",
+        name="stress-14b-001",
+        project="rl-stress-14b",
         base_model=BASE_MODEL,
         _internal_config=dev.InternalModelConfig(
             init_args=dev.InitArgs(
                 load_in_4bit=True,
-                max_lora_rank=32,
+                max_lora_rank=64,            # match real training
             ),
             engine_args=dev.EngineArgs(
-                max_model_len=1024,
-                max_num_batched_tokens=1024,
-                max_num_seqs=8,
-                gpu_memory_utilization=0.70,
+                max_model_len=4096,          # match real training
+                max_num_batched_tokens=4096,
+                max_num_seqs=16,             # match real training
+                gpu_memory_utilization=0.85, # match real training
                 enforce_eager=True,
                 enable_sleep_mode=True,
                 quantization="bitsandbytes",
@@ -116,7 +116,7 @@ async def main():
     await model.register(
         backend,
         _openai_client_config=OpenAIServerConfig(
-            server_args=ServerArgs(port=8008),
+            server_args=ServerArgs(port=8009),
         ),
     )
 

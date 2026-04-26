@@ -9,11 +9,11 @@ This page is the operational protocol for launching trainings safely.
 
 ## Slice map
 
-`scripts/training/slice_map.sh` is the single source of truth. Run it directly
+`scripts/training/common/slice_map.sh` is the single source of truth. Run it directly
 to print the current mapping:
 
 ```
-$ scripts/training/slice_map.sh
+$ scripts/training/common/slice_map.sh
 Host CPUs: 128, slices: 4, cores/slice: 32
   slice 0  cuda=MIG-5dc2f940-5003-58b0-a068-bede55f1d56f  cpus=0-31
   slice 1  cuda=MIG-abbb3894-4f8c-5e33-b602-6a485436950d  cpus=32-63
@@ -26,18 +26,18 @@ If MIG is reconfigured, regenerate from `nvidia-smi -L` and edit
 
 ## Launching a training (the only correct way)
 
-Always use `scripts/training/auto_restart.sh`. It encapsulates setsid, process-
+Always use `scripts/training/common/auto_restart.sh`. It encapsulates setsid, process-
 group cleanup, deadlock retry (Patch G v2), thread caps, and CPU pinning.
 
 ```bash
-source scripts/training/slice_map.sh
+source scripts/training/common/slice_map.sh
 SLICE=0  # pick an unused slice
 
 CUDA_VISIBLE_DEVICES=$(slice_cuda_uuid $SLICE) \
 TASKSET_CPUS=$(slice_cpu_range $SLICE) \
-SCRIPT_PATH=scripts/training/rl_train.py \
+SCRIPT_PATH=scripts/training/rl/rl_train.py \
 RUN_DIR=runs/rl_qwen3_14b_20260420 \
-nohup scripts/training/auto_restart.sh \
+nohup scripts/training/common/auto_restart.sh \
     > runs/rl_qwen3_14b_20260420/logs/loop.log 2>&1 &
 disown
 ```
@@ -93,22 +93,22 @@ each other down measurably. To verify:
 
 ```bash
 # 1. Solo: launch real-RL on slice 0, watch first 10 STEP SUMMARYs.
-source scripts/training/slice_map.sh
+source scripts/training/common/slice_map.sh
 CUDA_VISIBLE_DEVICES=$(slice_cuda_uuid 0) \
 TASKSET_CPUS=$(slice_cpu_range 0) \
-SCRIPT_PATH=scripts/training/rl_train.py \
+SCRIPT_PATH=scripts/training/rl/rl_train.py \
 RUN_DIR=runs/rl_qwen3_14b_20260420 \
-nohup scripts/training/auto_restart.sh > runs/rl_qwen3_14b_20260420/logs/loop.log 2>&1 &
+nohup scripts/training/common/auto_restart.sh > runs/rl_qwen3_14b_20260420/logs/loop.log 2>&1 &
 # Record mean tps and step wall-time for steps N..N+10.
 
 # 2. Add a second tenant on slice 1.
 mkdir -p runs/rl_small_qwen25_05b/logs/debug
 CUDA_VISIBLE_DEVICES=$(slice_cuda_uuid 1) \
 TASKSET_CPUS=$(slice_cpu_range 1) \
-SCRIPT_PATH=scripts/training/rl_train_small.py \
+SCRIPT_PATH=scripts/training/rl/rl_train_small.py \
 RUN_DIR=runs/rl_small_qwen25_05b \
 MAX_HOURS=1 \
-nohup scripts/training/auto_restart.sh > runs/rl_small_qwen25_05b/logs/loop.log 2>&1 &
+nohup scripts/training/common/auto_restart.sh > runs/rl_small_qwen25_05b/logs/loop.log 2>&1 &
 
 # 3. Watch real-RL's next 10 STEP SUMMARYs. tps and step wall-time should
 #    stay within ~10% of the solo baseline. (Without isolation: 50% drop.)
@@ -116,7 +116,7 @@ nohup scripts/training/auto_restart.sh > runs/rl_small_qwen25_05b/logs/loop.log 
 
 ## Anti-patterns (what NOT to do)
 
-- ❌ `python scripts/training/rl_train.py` directly without setsid. A deadlock
+- ❌ `python scripts/training/rl/rl_train.py` directly without setsid. A deadlock
   leaves orphaned vLLM EngineCore processes consuming GPU memory.
 - ❌ Set `CUDA_VISIBLE_DEVICES=0,1,2,3` or all-slices. Pick exactly one.
 - ❌ Skip `TASKSET_CPUS` "just for one quick run". Threads spread across all

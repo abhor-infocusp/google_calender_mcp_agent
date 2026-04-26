@@ -34,6 +34,6 @@ export DPO_PAIRS="runs/dpo/pairs_from_14b_rl.jsonl"
 export DPO_OUTPUT_DIR="runs/dpo_qwen3_14b_instruct_20260423"
 export DPO_RUN_NAME="dpo_from_instruct"
 
-/home/abhor/miniconda3/envs/agentic/bin/python scripts/training/dpo_train.py
+/home/abhor/miniconda3/envs/agentic/bin/python scripts/training/dpo/dpo_train.py
 
 echo "=== Job finished at $(date) ==="

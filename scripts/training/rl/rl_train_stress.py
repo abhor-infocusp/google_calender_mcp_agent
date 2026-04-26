@@ -1,6 +1,6 @@
 """Stress-test harness for ART 0.5.17 deadlock reproduction.
 
-Mirrors scripts/training/rl_train.py's ART usage (backend, model registration,
+Mirrors scripts/training/rl/rl_train.py's ART usage (backend, model registration,
 rollout + gather + train loop, Patch G) but with:
   - Qwen2.5-0.5B-Instruct instead of Qwen3-14B
   - Random rewards instead of Gemini judge

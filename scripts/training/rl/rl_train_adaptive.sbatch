@@ -1,12 +1,12 @@
 #!/bin/bash
-#SBATCH --job-name=rl-qwen3-14b
+#SBATCH --job-name=rl-adapt-qwen3-14b
 #SBATCH --partition=main
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=64G
 #SBATCH --time=72:00:00
-#SBATCH --output=/home/abhor/google_calender_mcp_agent/logs/rl_train_%j.log
-#SBATCH --error=/home/abhor/google_calender_mcp_agent/logs/rl_train_%j.log
+#SBATCH --output=/home/abhor/google_calender_mcp_agent/logs/rl_train_adaptive_%j.log
+#SBATCH --error=/home/abhor/google_calender_mcp_agent/logs/rl_train_adaptive_%j.log
 
 set -euo pipefail
 
@@ -28,6 +28,11 @@ export PYTHONPATH=src
 export PYTHONUNBUFFERED=1
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
-/home/abhor/miniconda3/envs/agentic/bin/python scripts/training/rl_train.py
+# Separate output directory so this run does not collide with the existing
+# vanilla GRPO run in runs/rl_qwen3_14b_20260420/.
+export RL_RUN_DIR="runs/rl_adaptive_qwen3_14b_20260424"
+mkdir -p "${RL_RUN_DIR}/logs/debug"
+
+/home/abhor/miniconda3/envs/agentic/bin/python scripts/training/rl/rl_train_adaptive.py
 
 echo "=== Job finished at $(date) ==="

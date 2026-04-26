@@ -489,7 +489,7 @@ rollouts_per_group=8, learning_rate=5e-6, beta=0.0
 
 ## Key Files
 - ART patches: `src/calendar_agent/art_patches.py` (import before `art`)
-- RL training: `scripts/training/rl_train.py`
+- RL training: `scripts/training/rl/rl_train.py`
 - Dashboard plot: `scripts/utils/plot_rl_dashboard.py` → `rl_dashboard.png`
 - Reward plot: `scripts/utils/plot_rewards.py` → `reward_curve.png`
 - SFT eval results: `rl_runs/single_category_modifier_correction/eval/eval_sft_baseline_rl.json`

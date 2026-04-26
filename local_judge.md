@@ -1,7 +1,7 @@
 # Local Qwen3-7B Judge — Train + Serve Plan (Phased)
 
 ## Context
-RL training calls Gemini-2.0-flash ~99,200 times per run (12,400 steps × 8 rollouts) at `scripts/training/rl_train.py:411-483` and `rl_train_adaptive.py:439-512` to score trajectories. This is the dominant per-run cost and a frequent timeout source. Goal: train a local Qwen3-7B judge from existing Gemini labels and serve it on one MIG slice (always-on) so RL on the other slices can call it over HTTP at near-zero marginal cost.
+RL training calls Gemini-2.0-flash ~99,200 times per run (12,400 steps × 8 rollouts) at `scripts/training/rl/rl_train.py:411-483` and `rl_train_adaptive.py:439-512` to score trajectories. This is the dominant per-run cost and a frequent timeout source. Goal: train a local Qwen3-7B judge from existing Gemini labels and serve it on one MIG slice (always-on) so RL on the other slices can call it over HTTP at near-zero marginal cost.
 
 User decisions: **Qwen3-7B base**, **reasoning + verdict output** (preserves the existing `_extract_verdict` last-line scan), **RL-only swap** (eval_batch / run_agent / generate_trajectories keep using Gemini), **distill from existing Gemini-labeled eval JSONs**, **launch bare python (Slurm broken)**, **validate via ART GRPO trajectories** (reconstruct judge inputs from scenario, compare local-judge verdict to ART-saved verdict).
 
@@ -26,7 +26,7 @@ Prompt-build and verdict-parse stay **client-side** in RL. The judge is a "no-to
 
 **Goal**: produce a Qwen3-7B LoRA judge checkpoint that hits ≥ 95 % verdict agreement on a held-out set of ART GRPO trajectories. Everything in this phase is local file work + one bare-python training launch on a chosen MIG slice — no RL or serving touched.
 
-### 1.1 Data prep — `scripts/training/judge_data_prep.py`
+### 1.1 Data prep — `scripts/training/judge/judge_data_prep.py`
 
 Source: `runs/**/eval/checkpoint-*.json` — each result row has `query`, `expected`, `final_output`, `before` (already a formatted day-state string), `after` (string), `verdict`, `judge_reasoning`. 15 files, 3,774 pairs total (2,690 Correct / 1,084 Incorrect).
 
@@ -41,9 +41,9 @@ Pipeline:
 
 Reuses: `EVAL_SYSTEM_PROMPT` from `src/calendar_agent/evaluation.py:6-25`.
 
-### 1.2 Training script — `scripts/training/judge_sft_train.py`
+### 1.2 Training script — `scripts/training/judge/judge_sft_train.py`
 
-Fork `scripts/training/sft_train.py`. Reuse unchanged: tokenizer setup, `compute_assistant_labels` (line 105), `AssistantOnlyCollator`, `EpochLossLogger`, LoRA target-modules list, `SFTConfig` skeleton.
+Fork `scripts/training/sft/sft_train.py`. Reuse unchanged: tokenizer setup, `compute_assistant_labels` (line 105), `AssistantOnlyCollator`, `EpochLossLogger`, LoRA target-modules list, `SFTConfig` skeleton.
 
 Changes:
 - `MODEL_NAME = "Qwen/Qwen3-7B"`, `MAX_SEQ_LENGTH = 4096`.
@@ -53,7 +53,7 @@ Changes:
 - `SFTConfig`: bf16, batch 1, accum 4, LR 2e-4 cosine, warmup 3 %, **3 epochs** (smaller dataset than agent SFT), save per-epoch.
 - Output dir: `runs/judge_v1_qwen3_7b_20260425/{checkpoints,diagnostics,logs}/`.
 
-### 1.3 Bare-python launcher — `scripts/training/judge_train_launch.sh`
+### 1.3 Bare-python launcher — `scripts/training/judge/judge_train_launch.sh`
 
 Slurm is broken; launch directly on a chosen MIG slice. Pick an idle slice from `scripts/eval/run_test_evals.sh` (the three pinned MIG UUIDs). Pattern:
 
@@ -69,7 +69,7 @@ export CUDA_VISIBLE_DEVICES=MIG-abbb3894-4f8c-5e33-b602-6a485436950d  # or anoth
 export PYTHONPATH=src
 
 nohup /home/abhor/miniconda3/envs/agentic/bin/python \
-    scripts/training/judge_sft_train.py \
+    scripts/training/judge/judge_sft_train.py \
     > "$LOG" 2>&1 &
 echo "PID $! → $LOG"
 ```
@@ -112,17 +112,17 @@ Output: `runs/judge_v1_qwen3_7b_20260425/eval/art_holdout.json` with per-traject
 If either fails: investigate failure modes from `art_holdout.json` (which class? which category? prompt mismatch?), then either (a) fix the data-prep / training-prompt mismatch, or (b) augment training data by re-judging more ART trajectories with Gemini (Source B fallback). **Do not start Phase 2 until Phase 1 ship gates pass.**
 
 ### Files created in Phase 1
-- `scripts/training/judge_data_prep.py`
-- `scripts/training/judge_sft_train.py`
-- `scripts/training/judge_train_launch.sh`
+- `scripts/training/judge/judge_data_prep.py`
+- `scripts/training/judge/judge_sft_train.py`
+- `scripts/training/judge/judge_train_launch.sh`
 - `scripts/eval/eval_judge_on_art.py`
 - `judge_data/{train,val}.jsonl`
 - `runs/judge_v1_qwen3_7b_20260425/...`
 
 ### Phase 1 verification
 
-1. `PYTHONPATH=src python scripts/training/judge_data_prep.py` → confirm `judge_data/train.jsonl` exists, ~5.4k rows, no scenario leak across train/val (assert in script).
-2. `bash scripts/training/judge_train_launch.sh` → tail log, confirm bf16 + LoRA r=64 logged; wait ~3-6 h for completion.
+1. `PYTHONPATH=src python scripts/training/judge/judge_data_prep.py` → confirm `judge_data/train.jsonl` exists, ~5.4k rows, no scenario leak across train/val (assert in script).
+2. `bash scripts/training/judge/judge_train_launch.sh` → tail log, confirm bf16 + LoRA r=64 logged; wait ~3-6 h for completion.
 3. `PYTHONPATH=src python scripts/eval/eval_judge_on_art.py --checkpoint runs/judge_v1_.../checkpoints/checkpoint-final --num-samples 2000` → prints overall + per-category agreement; assert against gates.
 
 ---
@@ -132,7 +132,7 @@ If either fails: investigate failure modes from `art_holdout.json` (which class?
 **Goal**: stand up a persistent vLLM server on one MIG slice that exposes the judge over OpenAI-compatible HTTP.
 
 ### 2.1 Merge LoRA → fp16
-Reuse `scripts/training/merge_lora.py` (or generate a one-off `_merge.py` mirroring `eval_all_checkpoints.py:142-183`). Output: `runs/judge_v1_qwen3_7b_20260425/checkpoints/checkpoint-final-merged/`.
+Reuse `scripts/training/common/merge_lora.py` (or generate a one-off `_merge.py` mirroring `eval_all_checkpoints.py:142-183`). Output: `runs/judge_v1_qwen3_7b_20260425/checkpoints/checkpoint-final-merged/`.
 
 ### 2.2 Bare-python serving wrapper — `scripts/serving/judge_serve.sh`
 
@@ -196,7 +196,7 @@ async def judge_local(query, final_output, expected, before_days, after_days):
 
 `build_user_prompt` and `_extract_verdict` lifted verbatim from `rl_train.py:425-475`. `EVAL_SYSTEM_PROMPT` re-imported from `src/calendar_agent/evaluation.py`.
 
-### 3.2 Modify `scripts/training/rl_train.py:411-483` and `rl_train_adaptive.py:439-512`
+### 3.2 Modify `scripts/training/rl/rl_train.py:411-483` and `rl_train_adaptive.py:439-512`
 
 - At module import, `JUDGE_BACKEND = os.environ.get("JUDGE_BACKEND", "gemini")`.
 - Keep `format_day_state_text` + prompt-build code untouched.
@@ -213,7 +213,7 @@ async def judge_local(query, final_output, expected, before_days, after_days):
 
 ## Phase 4 — Production rollout
 
-- Flip default `JUDGE_BACKEND=local` in the RL launcher (`scripts/training/rl_train_adaptive_loop.sh`).
+- Flip default `JUDGE_BACKEND=local` in the RL launcher (`scripts/training/rl/rl_train_adaptive_loop.sh`).
 - Add ongoing 1 % Gemini spot-check inside RL (re-judge 1 % of rollouts, log disagreement %); abort RL if > 10 % over a 100-step window.
 - Monitor judge server uptime; restart wrapper handles transient failures.
 
@@ -235,10 +235,10 @@ Confirm fit in Phase 2 with: `vllm serve Qwen/Qwen3-7B --quantization fp8 --max-
 - `src/calendar_agent/evaluation.py:28-44` — `format_day_state_text`.
 - `src/calendar_agent/core.py` — `dispatch_tool_call`, `snapshot_events`, `filter_by_days` (used by Phase-1 ART replay).
 - `src/calendar_agent/environment/environment.py` — `CalendarEnvironment` (Phase-1 replay).
-- `scripts/training/rl_train.py:394-397` — `eval_model` singleton (parallel for `_client`).
-- `scripts/training/rl_train.py:411-483` — async judge body to swap (Phase 3); also the source of `build_user_prompt` / `_extract_verdict`.
-- `scripts/training/rl_train_adaptive.py:439-512` — same swap (Phase 3).
-- `scripts/training/sft_train.py:61-105` — `trajectory_to_messages` / `compute_assistant_labels` (template for Phase 1).
+- `scripts/training/rl/rl_train.py:394-397` — `eval_model` singleton (parallel for `_client`).
+- `scripts/training/rl/rl_train.py:411-483` — async judge body to swap (Phase 3); also the source of `build_user_prompt` / `_extract_verdict`.
+- `scripts/training/rl/rl_train_adaptive.py:439-512` — same swap (Phase 3).
+- `scripts/training/sft/sft_train.py:61-105` — `trajectory_to_messages` / `compute_assistant_labels` (template for Phase 1).
 - `scripts/eval/eval_all_checkpoints.py:142-242` — vLLM merge + serve lifecycle (template for Phase 2).
 - `runs/rl_adaptive_qwen3_14b_20260424/.art/calendar-agent/models/calendar-agent-001/trajectories/train/*.parquet` — ART validation source for Phase 1.
 

@@ -28,7 +28,7 @@ echo "  CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
 echo "  RUN_DIR=$RUN_DIR"
 echo "  LOG=$LOG"
 
-nohup "$PYTHON" scripts/training/judge_sft_train.py \
+nohup "$PYTHON" scripts/training/judge/judge_sft_train.py \
     > "$LOG" 2>&1 &
 
 PID=$!

@@ -27,15 +27,26 @@ src/calendar_agent/         # Installable package — import as calendar_agent.*
 scripts/
   data_generation/            Generate calendars + queries + trajectories via Gemini
   training/
-    rl_train.py                Main RL trainer (Qwen3-14B + ART/GRPO + Gemini judge)
-    rl_train_small.py          Same pipeline, Qwen2.5-0.5B — fast iteration / debug
-    rl_train_adaptive.py       Alternate trainer with best-checkpoint retention
-    sft_train.py               SFT on tool-call trajectories
-    sft_on_rl.py               SFT recovery on top of RL checkpoint (experimental)
-    auto_restart.sh            Centralized launch wrapper — see multi_tenant_training.md
-    slice_map.sh               Host MIG-slice ↔ CUDA UUID ↔ CPU range
-    legacy/                    Archived per-script wrappers (don't use)
-    judge_*.py, dpo_*.py       Active experiment branches (judge SFT, DPO)
+    common/                   Cross-cutting: launch wrapper, slice map, lora merge
+      auto_restart.sh           Centralized launch wrapper — see multi_tenant_training.md
+      slice_map.sh              Host MIG-slice ↔ CUDA UUID ↔ CPU range
+      merge_lora.py             Merge a LoRA adapter into fp16 base for serving
+    rl/                       RL training family
+      rl_train.py               Main RL trainer (Qwen3-14B + ART/GRPO + Gemini judge)
+      rl_train_small.py         Same pipeline, Qwen2.5-0.5B — fast iteration / debug
+      rl_train_adaptive.py      Alternate trainer with best-checkpoint retention
+      rl_train_stress*.py       Synthetic harnesses for ART deadlock isolation
+    sft/                      SFT family
+      sft_train.py              SFT on tool-call trajectories
+      sft_on_rl.py              SFT recovery on top of RL checkpoint (experimental)
+    dpo/                      DPO family
+      dpo_train.py              DPO trainer
+      mine_dpo_pairs.py         Pair mining from existing trajectories
+    judge/                    Local-judge SFT family (replacing Gemini API)
+      judge_data_prep.py        Build train/val jsonl from Gemini rollouts
+      judge_sft_train.py        SFT a smaller judge model
+      judge_train_launch.sh     Launch wrapper specific to judge SFT
+    legacy/                   Archived per-script wrappers (don't use)
   eval/
     eval_qwen.py                Single-calendar eval via vLLM
     eval_batch.py               Batch eval with Gemini judge
@@ -53,13 +64,13 @@ docs/                        Operational docs (multi-tenant launch, upstream iss
 ## Standard launch (single-line copy paste)
 
 ```bash
-source scripts/training/slice_map.sh
+source scripts/training/common/slice_map.sh
 SLICE=0  # pick an unused slice; check `nvidia-smi`
 CUDA_VISIBLE_DEVICES=$(slice_cuda_uuid $SLICE) \
 TASKSET_CPUS=$(slice_cpu_range $SLICE) \
-SCRIPT_PATH=scripts/training/rl_train.py \
+SCRIPT_PATH=scripts/training/rl/rl_train.py \
 RUN_DIR=runs/rl_qwen3_14b_$(date +%Y%m%d) \
-nohup scripts/training/auto_restart.sh \
+nohup scripts/training/common/auto_restart.sh \
     > runs/rl_qwen3_14b_$(date +%Y%m%d)/logs/loop.log 2>&1 &
 disown
 ```

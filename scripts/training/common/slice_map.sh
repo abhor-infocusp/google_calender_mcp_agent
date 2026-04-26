@@ -6,7 +6,7 @@
 # This file maps slice index (0..3) → CUDA UUID + a non-overlapping CPU range.
 # Source it from any script that launches training:
 #
-#   source scripts/training/slice_map.sh
+#   source scripts/training/common/slice_map.sh
 #   SLICE=0
 #   CUDA_VISIBLE_DEVICES=$(slice_cuda_uuid $SLICE) \
 #   TASKSET_CPUS=$(slice_cpu_range $SLICE) \

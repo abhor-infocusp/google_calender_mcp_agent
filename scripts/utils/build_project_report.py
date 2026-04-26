@@ -423,7 +423,7 @@ def main():
         "<code>.art/calendar-agent/models/calendar-agent-001/trajectories/train/</code>. Each "
         "parquet file corresponds to one training step (= one scenario sampled, with 8 rollouts "
         "in a TrajectoryGroup). The mining script "
-        "(<code>scripts/training/mine_dpo_pairs.py</code>) processes each parquet and, when "
+        "(<code>scripts/training/dpo/mine_dpo_pairs.py</code>) processes each parquet and, when "
         "the 8 rollouts include at least one Correct (reward=1.0) and at least one Incorrect "
         "(reward=0.0), emits exactly one pair (random correct as <i>chosen</i>, random incorrect "
         "as <i>rejected</i>) in TRL conversational format."))
@@ -665,7 +665,7 @@ def main():
         "<b>Symptom:</b> first DPO runs trained successfully but on prompts that were 61 tokens "
         "long, not the ~922 tokens that the deployed model serves with. After ~1 hour of "
         "training, <code>review.md</code> was written by manual code review and surfaced this "
-        "discrepancy. The SFT pipeline at <code>scripts/training/sft_train.py:195-197</code> "
+        "discrepancy. The SFT pipeline at <code>scripts/training/sft/sft_train.py:195-197</code> "
         "passes <code>tokenizer.apply_chat_template(messages, tools=TOOLS, ...)</code>, but "
         "<code>dpo_train.py</code> never set <code>tools=</code>. ART rollouts also pass tools at "
         "inference time. The DPO model was therefore being trained to emit tool_calls in a "
@@ -1007,10 +1007,10 @@ def main():
     story.append(h3("12.1 Code"))
     code_paths = [
         ["File", "Purpose"],
-        ["scripts/training/mine_dpo_pairs.py", "Pair mining from RL parquets"],
-        ["scripts/training/dpo_train.py", "DPO training (TRL DPOTrainer + LoRA + bnb)"],
-        ["scripts/training/dpo_from_sft.sbatch", "Slurm template (DPO-from-SFT) — submitted but ran bare"],
-        ["scripts/training/dpo_from_instruct.sbatch", "Slurm template (DPO-from-Instruct) — submitted but ran bare"],
+        ["scripts/training/dpo/mine_dpo_pairs.py", "Pair mining from RL parquets"],
+        ["scripts/training/dpo/dpo_train.py", "DPO training (TRL DPOTrainer + LoRA + bnb)"],
+        ["scripts/training/dpo/dpo_from_sft.sbatch", "Slurm template (DPO-from-SFT) — submitted but ran bare"],
+        ["scripts/training/dpo/dpo_from_instruct.sbatch", "Slurm template (DPO-from-Instruct) — submitted but ran bare"],
         ["scripts/data_generation/generate_test_data.py", "Held-out test set generation"],
         ["scripts/eval/eval_batch.py", "Per-query agent loop + Gemini judge (added --mode test)"],
         ["scripts/eval/eval_all_checkpoints.py", "Multi-checkpoint orchestrator (parameterized for test mode)"],
