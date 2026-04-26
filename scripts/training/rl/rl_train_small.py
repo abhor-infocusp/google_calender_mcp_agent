@@ -69,6 +69,38 @@ random.seed(42)
 DEBUG_DIR = os.environ.get("RL_RUN_DIR", "runs/rl_qwen3_14b_20260420") + "/logs/debug"
 os.makedirs(DEBUG_DIR, exist_ok=True)
 CHECKPOINT_KEEP_EVERY = int(os.environ.get("CHECKPOINT_KEEP_EVERY", "500"))
+
+
+async def _smart_delete_checkpoints(model, current_step: int) -> None:
+    """See rl_train.py for explanation. Keeps latest + best-by-reward + every
+    Nth milestone, using ART's lower-level delete_checkpoints API."""
+    from art.local.checkpoints import delete_checkpoints as _backend_delete
+
+    output_dir = str(model._get_output_dir())
+    keep: set[int] = {current_step}
+    try:
+        import polars as pl
+        best_step = (
+            pl.read_ndjson(f"{output_dir}/history.jsonl")
+            .drop_nulls(subset=["train/reward"])
+            .group_by("step")
+            .mean()
+            .sort("train/reward")
+            .select(pl.col("step").last())
+            .item()
+        )
+        if best_step is not None:
+            keep.add(int(best_step))
+    except Exception:
+        pass
+
+    if CHECKPOINT_KEEP_EVERY > 0:
+        for milestone in range(
+            CHECKPOINT_KEEP_EVERY, current_step + 1, CHECKPOINT_KEEP_EVERY
+        ):
+            keep.add(milestone)
+
+    _backend_delete(output_dir, list(keep))
 HEARTBEAT_PATH = os.path.join(DEBUG_DIR, "heartbeat.jsonl")
 PHASE_LOCK = threading.Lock()
 _current_phase = {"phase": "startup", "step": None, "phase_start": time.time()}
@@ -815,9 +847,7 @@ async def main():
         # ── Checkpoint delete + Train ──
         set_phase("checkpoint_delete", step=batch.step)
         step_timer.start("checkpoint_delete_s")
-        is_milestone = batch.step > 0 and batch.step % CHECKPOINT_KEEP_EVERY == 0
-        if not is_milestone:
-            await model.delete_checkpoints(best_checkpoint_metric="train/reward")
+        await _smart_delete_checkpoints(model, batch.step)
         step_timer.stop()
 
         set_phase("gc_empty_cache", step=batch.step)

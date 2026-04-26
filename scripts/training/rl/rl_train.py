@@ -68,8 +68,53 @@ random.seed(42)
 
 DEBUG_DIR = os.environ.get("RL_RUN_DIR", "runs/rl_qwen3_14b_20260420") + "/logs/debug"
 # Keep every Nth ART checkpoint to allow rollback from interference / collapse.
-# Between milestones, ART still keeps the best-by-reward checkpoint.
+# Plus the latest checkpoint and the best-by-reward checkpoint.
 CHECKPOINT_KEEP_EVERY = int(os.environ.get("CHECKPOINT_KEEP_EVERY", "500"))
+
+
+async def _smart_delete_checkpoints(model, current_step: int) -> None:
+    """Like ART's model.delete_checkpoints, but also retains every Nth
+    milestone checkpoint (CHECKPOINT_KEEP_EVERY).
+
+    ART's stock `model.delete_checkpoints(best_checkpoint_metric=...)` keeps
+    only `[latest, best]` and prunes everything else. So even if we skipped
+    the call on milestone steps, the very next non-milestone step's call
+    would wipe the milestone we just preserved (observed 2026-04-26).
+
+    Bypass that by computing the keep-list ourselves and using ART's
+    lower-level art.local.checkpoints.delete_checkpoints(output_dir, excluding)
+    which accepts an explicit list of step numbers to retain.
+    """
+    from art.local.checkpoints import delete_checkpoints as _backend_delete
+
+    output_dir = str(model._get_output_dir())
+    keep: set[int] = {current_step}  # always keep latest
+
+    # Also keep best-by-reward (from history.jsonl, same logic ART uses).
+    try:
+        import polars as pl
+        best_step = (
+            pl.read_ndjson(f"{output_dir}/history.jsonl")
+            .drop_nulls(subset=["train/reward"])
+            .group_by("step")
+            .mean()
+            .sort("train/reward")
+            .select(pl.col("step").last())
+            .item()
+        )
+        if best_step is not None:
+            keep.add(int(best_step))
+    except Exception:
+        pass  # no history yet / no train/reward column — no big deal
+
+    # Keep every Nth milestone we've ever passed.
+    if CHECKPOINT_KEEP_EVERY > 0:
+        for milestone in range(
+            CHECKPOINT_KEEP_EVERY, current_step + 1, CHECKPOINT_KEEP_EVERY
+        ):
+            keep.add(milestone)
+
+    _backend_delete(output_dir, list(keep))
 os.makedirs(DEBUG_DIR, exist_ok=True)
 HEARTBEAT_PATH = os.path.join(DEBUG_DIR, "heartbeat.jsonl")
 PHASE_LOCK = threading.Lock()
@@ -949,9 +994,7 @@ async def main():
         # the highest-reward checkpoint we've seen, not just the most recent.
         set_phase("checkpoint_delete", step=batch.step)
         step_timer.start("checkpoint_delete_s")
-        is_milestone = batch.step > 0 and batch.step % CHECKPOINT_KEEP_EVERY == 0
-        if not is_milestone:
-            await model.delete_checkpoints(best_checkpoint_metric="train/reward")
+        await _smart_delete_checkpoints(model, batch.step)
         step_timer.stop()
 
         set_phase("gc_empty_cache", step=batch.step)
