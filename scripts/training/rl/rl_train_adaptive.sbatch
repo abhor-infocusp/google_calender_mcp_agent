@@ -5,8 +5,8 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=64G
 #SBATCH --time=72:00:00
-#SBATCH --output=/home/abhor/google_calender_mcp_agent/logs/rl_train_adaptive_%j.log
-#SBATCH --error=/home/abhor/google_calender_mcp_agent/logs/rl_train_adaptive_%j.log
+#SBATCH --output=/home/abhor/google_calender_mcp_agent/runs/rl_adaptive_qwen3_14b_20260424/logs/rl_train_adaptive_%j.log
+#SBATCH --error=/home/abhor/google_calender_mcp_agent/runs/rl_adaptive_qwen3_14b_20260424/logs/rl_train_adaptive_%j.log
 
 set -euo pipefail
 

@@ -152,9 +152,38 @@ while true; do
         "$SCRIPT_PATH" >> "$LOG" 2>&1 &
     PY_PID=$!
     CURRENT_PGID=$PY_PID
+
+    # Mid-run MAX_HOURS enforcer. The top-of-loop check only fires at restart
+    # boundaries — if python never crashes, the budget is never re-evaluated
+    # (small-RL ran 10h past its 2h cap on 2026-04-26 because of this).
+    # Spawn a watcher subshell that signals the python's process group when
+    # the wall-clock deadline passes. Watcher dies via the EXIT trap when the
+    # main loop exits.
+    WATCHER_PID=""
+    if [ "$MAX_HOURS" != "0" ]; then
+        REMAINING=$((MAX_HOURS * 3600 - (now - start_epoch)))
+        if [ $REMAINING -le 0 ]; then REMAINING=1; fi
+        (
+            sleep "$REMAINING"
+            if kill -0 "$PY_PID" 2>/dev/null; then
+                echo "[auto_restart] MAX_HOURS=${MAX_HOURS} elapsed mid-run — terminating PGID $PY_PID"
+                kill -TERM -- -"$PY_PID" 2>/dev/null
+                sleep 5
+                kill -KILL -- -"$PY_PID" 2>/dev/null
+            fi
+        ) &
+        WATCHER_PID=$!
+    fi
+
     wait $PY_PID
     rc=$?
     echo "[auto_restart] process exited rc=${rc} at $(date)"
+
+    # Tear down the watcher (whether it fired or not).
+    [ -n "$WATCHER_PID" ] && kill -TERM "$WATCHER_PID" 2>/dev/null
+    [ -n "$WATCHER_PID" ] && wait "$WATCHER_PID" 2>/dev/null
+    WATCHER_PID=""
+
     cleanup_pgid "$CURRENT_PGID"
     CURRENT_PGID=""
 

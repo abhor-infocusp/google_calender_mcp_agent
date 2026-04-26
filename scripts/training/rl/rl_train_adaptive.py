@@ -94,72 +94,16 @@ CHECKPOINT_MILESTONE_EVERY = 500
 # Everything writes to disk under ./logs/debug/ so we still have evidence
 # even if the process is killed.
 
-DEBUG_DIR = os.environ.get("RL_RUN_DIR", "runs/rl_adaptive_qwen3_14b_20260424") + "/logs/debug"
+RUN_DIR = os.environ.get("RL_RUN_DIR", "runs/rl_adaptive_qwen3_14b_20260424")
+DEBUG_DIR = RUN_DIR + "/logs/debug"
 os.makedirs(DEBUG_DIR, exist_ok=True)
-HEARTBEAT_PATH = os.path.join(DEBUG_DIR, "heartbeat.jsonl")
-PHASE_LOCK = threading.Lock()
-_current_phase = {"phase": "startup", "step": None, "phase_start": time.time()}
 
 
-def set_phase(phase: str, step: int | None = None) -> None:
-    """Mark the current training phase. Called at key transition points so
-    the heartbeat log and any hang-time dump tell us exactly where we were."""
-    with PHASE_LOCK:
-        _current_phase["phase"] = phase
-        _current_phase["phase_start"] = time.time()
-        if step is not None:
-            _current_phase["step"] = step
-    # Also print so it shows up in the main log inline
-    print(f"[PHASE] {phase} step={_current_phase.get('step')} t={datetime.now().isoformat()}")
+# ── Telemetry: phase tracker, heartbeat, metadata, stuck-alerts ─────
+# All four live in calendar_agent.run_telemetry; trainers init once.
+from calendar_agent.run_telemetry import init_telemetry, set_phase, phase_snapshot  # noqa: E402
 
-
-def _phase_snapshot() -> dict:
-    """Phase-getter for art_patches.Patch G — lets the timeout handler
-    distinguish healthy inter-call waits from real hangs."""
-    with PHASE_LOCK:
-        snap = dict(_current_phase)
-    return {
-        "phase": snap.get("phase", "?"),
-        "phase_age_s": time.time() - snap.get("phase_start", time.time()),
-        "step": snap.get("step"),
-    }
-
-
-# Register with art_patches if it's been imported (it is — rl_train.py
-# imports calendar_agent.art_patches at module top via set_phase stack).
-try:
-    from calendar_agent import art_patches as _art_patches
-    _art_patches.register_phase_getter(_phase_snapshot)
-except Exception:
-    pass
-
-
-def _heartbeat_loop(interval: int = 30) -> None:
-    """Append one JSONL record every `interval` seconds with the current
-    phase and how long we've been in it. If training stalls, the last few
-    heartbeats pinpoint where."""
-    while True:
-        try:
-            with PHASE_LOCK:
-                snap = dict(_current_phase)
-            now = time.time()
-            record = {
-                "ts": datetime.now().isoformat(),
-                "phase": snap["phase"],
-                "step": snap["step"],
-                "phase_age_s": round(now - snap["phase_start"], 1),
-                "pid": os.getpid(),
-            }
-            with open(HEARTBEAT_PATH, "a") as f:
-                f.write(json.dumps(record) + "\n")
-        except Exception as e:
-            # Never let heartbeat kill training
-            print(f"[HEARTBEAT ERROR] {e}")
-        time.sleep(interval)
-
-
-# Start heartbeat thread at import time (daemon = dies with process)
-threading.Thread(target=_heartbeat_loop, args=(30,), daemon=True).start()
+init_telemetry(run_dir=RUN_DIR, script_path=__file__)
 
 
 # ── Run metadata snapshot ──────────────────────────────────────────────

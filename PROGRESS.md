@@ -20,8 +20,8 @@ Don't maintain a status table here — it goes stale within hours.
 runs/sft_v6_qwen3_14b_20260420/        SFT v6 — DONE (2026-04-22)
 runs/dpo_qwen3_14b_sft_20260423/       DPO from SFT v6 — DONE, paused
 runs/dpo_qwen3_14b_instruct_20260423/  DPO from Instruct — DONE, paused
-runs/rl_qwen3_14b_20260420/            RL GRPO — paused after queue deadlock at step 2325
-runs/rl_adaptive_qwen3_14b_20260424/   RL adaptive (current focus)
+runs/rl_qwen3_14b_20260420/            RL GRPO — paused at step 9220 after 2026-04-25 cliff
+runs/rl_adaptive_qwen3_14b_20260424/   RL adaptive — paused (interfered with main RL run)
 runs/judge_v1_qwen3_7b_20260425/       Local judge SFT — see local_judge.md
 ```
 
@@ -29,7 +29,34 @@ runs/judge_v1_qwen3_7b_20260425/       Local judge SFT — see local_judge.md
 
 ## Timeline
 
-### 2026-04-26 — RL adaptive in progress
+### 2026-04-26 — Multi-tenant hardening + Patch K v2 verified
+Pipeline-level cleanup and safeguards after the 2026-04-25 reward cliff
+(see [`docs/incidents/2026-04-25_reward_cliff.md`](docs/incidents/2026-04-25_reward_cliff.md)):
+
+- **Patch K v2 (real fix)**: ART's `model.delete_checkpoints` was pruning
+  even our just-saved milestone. New code uses
+  `art.local.checkpoints.delete_checkpoints(output_dir, excluding)` directly
+  with explicit `[latest, best, ...all milestones]` keep-list. Verified
+  end-to-end on small-RL: 6 milestones survived 55 step-cycles.
+- **Multi-tenant isolation**: centralized `scripts/training/common/auto_restart.sh`
+  enforces `OMP_NUM_THREADS=8`, taskset CPU pinning per MIG slice, mid-run
+  `MAX_HOURS` watcher. `slice_map.sh` is the single source of truth for
+  MIG ↔ CUDA UUID ↔ CPU range.
+- **Telemetry shared module** (`src/calendar_agent/run_telemetry.py`):
+  `init_telemetry(run_dir, script_path)` writes metadata, starts heartbeat
+  + stuck-alert daemons, registers Patch G phase-getter. Wired into all 4
+  trainers (rl_train, rl_train_small, rl_train_adaptive, dpo_train).
+- **Repo reorg**: `scripts/training/{rl,sft,dpo,judge,common,legacy}/`,
+  `data/{rl,sft,test,judge}/` with env-var path overrides in
+  `calendar_agent.paths`. Restored `pyproject.toml` + `README.md`.
+- **Skills**: `/rl-stop` (safe single-run kill via `metadata.jsonl`) and
+  `/rl-status` (lnav SQL queries on the 3 JSONL streams). Replaces
+  ~80% of the old grep-based status ritual.
+
+Real-RL is paused at step 9220 (LoRA at `.art/calendar-agent/.../checkpoints/9220/`).
+Resume with the new isolation protocol when ready.
+
+### 2026-04-26 — RL adaptive in progress (earlier today)
 Restarted from sft_v6 ckpt-6212. See `runs/rl_adaptive_qwen3_14b_20260424/`.
 
 ### 2026-04-25 — DPO experiments paused as uninformative

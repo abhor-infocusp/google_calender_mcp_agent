@@ -101,49 +101,14 @@ async def _smart_delete_checkpoints(model, current_step: int) -> None:
             keep.add(milestone)
 
     _backend_delete(output_dir, list(keep))
-HEARTBEAT_PATH = os.path.join(DEBUG_DIR, "heartbeat.jsonl")
-PHASE_LOCK = threading.Lock()
-_current_phase = {"phase": "startup", "step": None, "phase_start": time.time()}
 
 
-def set_phase(phase: str, step: int | None = None) -> None:
-    """Mark the current training phase. Called at key transition points so
-    the heartbeat log and any hang-time dump tell us exactly where we were."""
-    with PHASE_LOCK:
-        _current_phase["phase"] = phase
-        _current_phase["phase_start"] = time.time()
-        if step is not None:
-            _current_phase["step"] = step
-    # Also print so it shows up in the main log inline
-    print(f"[PHASE] {phase} step={_current_phase.get('step')} t={datetime.now().isoformat()}")
+# ── Telemetry: phase tracker, heartbeat, metadata, stuck-alerts ─────
+# All four live in calendar_agent.run_telemetry; trainers init once.
+RUN_DIR = os.environ.get("RL_RUN_DIR", "runs/rl_qwen3_14b_20260420")
+from calendar_agent.run_telemetry import init_telemetry, set_phase, phase_snapshot  # noqa: E402
 
-
-def _heartbeat_loop(interval: int = 30) -> None:
-    """Append one JSONL record every `interval` seconds with the current
-    phase and how long we've been in it. If training stalls, the last few
-    heartbeats pinpoint where."""
-    while True:
-        try:
-            with PHASE_LOCK:
-                snap = dict(_current_phase)
-            now = time.time()
-            record = {
-                "ts": datetime.now().isoformat(),
-                "phase": snap["phase"],
-                "step": snap["step"],
-                "phase_age_s": round(now - snap["phase_start"], 1),
-                "pid": os.getpid(),
-            }
-            with open(HEARTBEAT_PATH, "a") as f:
-                f.write(json.dumps(record) + "\n")
-        except Exception as e:
-            # Never let heartbeat kill training
-            print(f"[HEARTBEAT ERROR] {e}")
-        time.sleep(interval)
-
-
-# Start heartbeat thread at import time (daemon = dies with process)
-threading.Thread(target=_heartbeat_loop, args=(30,), daemon=True).start()
+init_telemetry(run_dir=RUN_DIR, script_path=__file__)
 
 
 def dump_pyspy(reason: str) -> str | None:

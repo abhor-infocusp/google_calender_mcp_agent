@@ -47,6 +47,16 @@ os.makedirs(CKPT_DIR, exist_ok=True)
 os.makedirs(LOG_DIR, exist_ok=True)
 
 
+# ── Telemetry: phase tracker, heartbeat, metadata, stuck-alerts ─────
+# Shared across trainers; lives in calendar_agent.run_telemetry. DPO doesn't
+# have multi-stage phases like RL, but consistent metadata + heartbeats keep
+# stop_run.sh / list_runs.sh / lnav skills uniform across all training kinds.
+from calendar_agent.run_telemetry import init_telemetry, set_phase  # noqa: E402
+
+init_telemetry(run_dir=OUTPUT_DIR, script_path=__file__)
+set_phase("startup")
+
+
 def log(msg: str) -> None:
     ts = datetime.now().strftime("%H:%M:%S")
     print(f"[{ts} dpo_train] {msg}", flush=True)
