@@ -1,98 +1,135 @@
 # Google Calendar MCP Agent
 
-## Project Overview
-An agentic calendar assistant that uses tool-calling to manage Google Calendar events. Includes data generation, benchmarking, SFT training, and RL training pipelines.
+Tool-calling agent for Google Calendar with SFT + RL pipelines on Qwen3-14B.
+
+This file holds **stable facts**: paths, imports, conventions. Anything dated —
+status, results, current best ckpt — lives in `PROGRESS.md`. Per-category
+analysis lives in `docs/categories/`. Cross-session warnings live in auto-memory.
+
+## Where things are
+
+| You want... | Look at |
+|---|---|
+| Pipeline state, recent milestones | `PROGRESS.md` |
+| Per-category performance & targets | `docs/categories/README.md` |
+| Launch protocol (MIG slices, auto_restart) | `docs/multi_tenant_training.md` |
+| Held-out eval results | `runs/analysis/test_eval_summary.md` |
+| Run output layout | `runs/README.md` |
+| ART asyncio deadlock context | `docs/art_asyncio_deadlock_analysis.md` |
+| Local judge plan | `local_judge.md` |
+| Repo overview for newcomers | `README.md` |
 
 ## Environment
-- Python env: `/home/abhor/miniconda3/envs/agentic/bin/python` (Python 3.11)
-- Run scripts with: `PYTHONPATH=src /home/abhor/miniconda3/envs/agentic/bin/python scripts/<path>.py`
-- GPU: NVIDIA RTX PRO 6000 Blackwell (1x MIG slice, ~24 GiB VRAM, compute 12.0, bf16+FA2)
-- Stack: torch 2.10.0+cu128, vLLM 0.19.0, unsloth 2026.4.4, transformers 4.57.6, trl 0.24.0, openpipe-art 0.5.17, peft 0.19.0
+- Python: `/home/abhor/miniconda3/envs/agentic/bin/python` (3.11)
+- Run scripts as: `PYTHONPATH=src /home/abhor/miniconda3/envs/agentic/bin/python scripts/<path>.py`
+- GPU: NVIDIA RTX PRO 6000 Blackwell, MIG-partitioned into 4× ~24 GiB slices, compute 12.0, bf16 + FA2
+- Stack pinned in `pyproject.toml`. Bump deliberately — `art_patches.py` is version-specific.
 
-## Project Structure
+## Package layout (`src/calendar_agent/`)
 
 ```
-src/calendar_agent/           # Installable package (PYTHONPATH=src)
-  __init__.py                 # Re-exports from core + evaluation + tools
-  core.py                     # Tool declarations, dispatch, snapshots, system prompt, colors
-  tools.py                    # OpenAI tool conversion, compact tool results, RETURN_FINAL_ANSWER_TOOL
-  evaluation.py               # EVAL_SYSTEM_PROMPT, evaluate_trajectory, format_day_state_text
-  paths.py                    # PROJECT_ROOT, DATA_DIR, SFT_DATA_DIR, RL_DATA_DIR, etc.
-  prompts.py                  # Prompt templates for data generation
-  environment/
-    __init__.py               # Re-exports CalendarEnvironment, models
-    environment.py            # CalendarEnvironment class with CRUD methods
-    models.py                 # Pydantic data models (User, Attendee, Event, Calendar)
-
-scripts/
-  run_agent.py                # Core agent loop (Gemini + calendar tools)
-  data_generation/
-    generate_data.py           # Generate calendar/persona/query data using Gemini
-    generate_trajectories.py   # Run queries through agent, save correct trajectories
-  training/
-    sft_train.py               # SFT training (Qwen2.5-1.5B, Unsloth + TRL)
-    rl_train.py                # GRPO RL training (ART framework + vLLM)
-    merge_lora.py              # Merge LoRA adapter into fp16 model
-  eval/
-    eval_qwen.py               # Evaluate Qwen via vLLM OpenAI-compatible API
-    eval_batch.py              # Batch eval on SFT/RL data with Gemini judge
-    eval_all_checkpoints.py    # Multi-checkpoint merge → serve → eval orchestrator
-    benchmark_gemini.py        # Benchmark Gemini models on high-complexity queries
-    test_judge.py              # Quick test for eval judge prompt
-  utils/
-    plot_rewards.py            # Plot training/validation reward curves
-    view_results.py            # ART training results viewer
-
-tests/                        # pytest tests
-  test_calendar_env.py         # Unit tests for CalendarEnvironment
-  test_data_integration.py     # Integration tests for data pipeline
-  test_serialization.py        # SFT trajectory serialization tests
-
-data/                         # Raw generation output (not tracked). Not needed if using sft_data/ or rl_data/.
-sft_data/                     # SFT training data (tracked)
-rl_data/                      # RL training data (tracked)
+core.py            Tool declarations, dispatch, system prompt, snapshots, format_tool_result, DAY_NAMES, C
+tools.py           OpenAI tool conversion, RETURN_FINAL_ANSWER_TOOL
+evaluation.py      EVAL_SYSTEM_PROMPT, evaluate_trajectory, format_day_state_text
+paths.py           PROJECT_ROOT, DATA_DIR, SFT_DATA_DIR, RL_DATA_DIR, CREDENTIALS_PATH
+prompts.py         Data-generation prompt templates
+art_patches.py     Runtime monkey-patches for ART 0.5.17 (D, E, G, H, I) — import before `art`
+environment/       CalendarEnvironment + Pydantic models (User, Attendee, Event, Calendar)
 ```
 
-## Key Imports
+## Scripts (`scripts/`)
+
+```
+run_agent.py                    Core agent loop (Gemini + calendar tools)
+data_generation/                generate_data.py, generate_trajectories.py, generate_test_data.py
+training/
+  common/                       auto_restart.sh, slice_map.sh, merge_lora.py
+  sft/sft_train.py              SFT (Unsloth + TRL, loss masking, CSV logging)
+  rl/rl_train.py                GRPO (ART 0.5.17 + vLLM)
+  rl/rl_train_adaptive.py       Variant w/ best-checkpoint retention
+  rl/rl_train_small.py          Qwen2.5-0.5B fast iteration
+  dpo/                          dpo_train.py, mine_dpo_pairs.py (paused — see feedback_dpo_skipped)
+  judge/                        Local judge SFT (Qwen3-7B, in progress)
+  legacy/                       Don't use
+eval/
+  eval_qwen.py                  Single-calendar eval via vLLM
+  eval_batch.py                 Batch eval with Gemini judge
+  eval_all_checkpoints.py       Multi-checkpoint orchestrator
+utils/                          plot_rewards.py, view_results.py
+```
+
+## Key imports
 ```python
-from calendar_agent.core import SYSTEM_PROMPT, TOOL_DECLARATIONS, CALENDAR_TOOL, dispatch_tool_call, format_tool_result, snapshot_events, filter_by_days, compute_fallback_now, DAY_NAMES, C
+from calendar_agent.core import (
+    SYSTEM_PROMPT, TOOL_DECLARATIONS, CALENDAR_TOOL,
+    dispatch_tool_call, format_tool_result, snapshot_events,
+    filter_by_days, compute_fallback_now, DAY_NAMES, C,
+)
 from calendar_agent.tools import get_openai_tools, RETURN_FINAL_ANSWER_TOOL
 from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT, evaluate_trajectory, format_day_state_text
 from calendar_agent.environment import CalendarEnvironment
 from calendar_agent.paths import PROJECT_ROOT, DATA_DIR, SFT_DATA_DIR, RL_DATA_DIR, CREDENTIALS_PATH
 ```
 
-## Tools (7 calendar tools)
-`get_current_time`, `list_events`, `get_event`, `create_event`, `update_event`, `delete_event`, `respond_to_event`
+## Domain conventions
 
-## Trajectory Format
-Each trajectory has steps:
-- `{"role": "user", "content": "..."}` — User query
-- `{"role": "tool_call", "name": "...", "args": {...}, "result": {...}}` — Tool call + result
-- `{"role": "assistant", "content": "..."}` — Final response
+**Tools (7):** `get_current_time`, `list_events`, `get_event`, `create_event`,
+`update_event`, `delete_event`, `respond_to_event`.
+
+**Trajectory step format:**
+- `{"role": "user", "content": "..."}`
+- `{"role": "tool_call", "name": "...", "args": {...}, "result": {...}}`
+- `{"role": "assistant", "content": "..."}`
+
 Consecutive `tool_call` steps = parallel calls from one model turn.
 
-### Tool Result Formatting
-All pipelines (SFT, eval, RL) use `format_tool_result()` from `core.py` to format tool results.
-Environment methods return human-readable strings; `format_tool_result` passes them through.
-This ensures the model always sees the same format it was trained on.
+**Tool result formatting:** all pipelines (SFT, eval, RL) go through
+`format_tool_result()` in `core.py`. Environment methods return human-readable
+strings; `format_tool_result` passes them through. The model always sees the
+same format it was trained on. Don't bypass this.
 
-## Evaluation
-Uses Gemini as judge model. Compares calendar state before/after against expected behavior.
-`evaluate_trajectory(eval_model, query, final_output, expected, before_days, after_days)` -> "Correct"/"Incorrect"
+**Evaluation:** Gemini-as-judge compares calendar state before/after against
+expected behavior. `evaluate_trajectory(...)` → "Correct" / "Incorrect".
 
-## Model Training
-- Base model: TBD (was Qwen2.5-1.5B, upgrading to 7B-14B for comprehension gains)
-- LoRA rank 64, targets: q/k/v/o/gate/up/down projections
-- SFT: `scripts/training/sft/sft_train.py` (with loss masking + CSV logging)
-- SFT output: written to `sft_output/` (gitignored). Merge with `merge_lora.py`.
-- RL (ART/GRPO): `scripts/training/rl/rl_train.py`. gpu_memory_utilization=0.90, max_model_len=4096, bf16=True
-- Eval: `scripts/eval/eval_qwen.py` (single calendar), `eval_batch.py` (batch eval with Gemini judge), `eval_all_checkpoints.py` (multi-checkpoint orchestrator)
+## Model & training
 
-## Qwen Evaluation via vLLM
-- **Tool-call parser**: Must use `hermes` (not `qwen3_xml`).
-- Requires a running vLLM server:
+- **Base:** Qwen3-14B, 4-bit bnb, LoRA r=64 on q/k/v/o + gate/up/down, bf16,
+  `/no_think` system prompt prepended at training time.
+- **SFT:** `scripts/training/sft/sft_train.py`. Output under `runs/<run>/checkpoints/`.
+  Merge with `scripts/training/common/merge_lora.py` (CPU peft merge — *not* unsloth).
+- **RL (GRPO):** `scripts/training/rl/rl_train.py`. `gpu_memory_utilization=0.85`
+  (0.90 OOMs during vLLM profile), `max_model_len=4096`, `enforce_eager=True`,
+  `bf16=True`. Always launch via `scripts/training/common/auto_restart.sh`
+  (handles Patch G deadlock retry) — never bare `python`.
+- **Eval:** `eval_qwen.py` (single calendar), `eval_batch.py` (batch + Gemini
+  judge), `eval_all_checkpoints.py` (orchestrator).
+
+### vLLM serving
+Tool-call parser must be `hermes` (NOT `qwen3_xml`).
+
 ```
-vllm serve <model_path> --served-model-name <name> --enable-auto-tool-choice --tool-call-parser hermes --max-model-len 4096 --gpu-memory-utilization 0.90
+vllm serve <model_path> --served-model-name <name> \
+    --enable-auto-tool-choice --tool-call-parser hermes \
+    --max-model-len 4096 --gpu-memory-utilization 0.85 \
+    --enforce-eager --quantization fp8
 ```
-- Run eval: `PYTHONPATH=src python scripts/eval/eval_qwen.py <calendar_index> [--query-index N] [--model MODEL] [--sft-data] [--with-final-answer]`
+
+For RL adapters: serve via `--enable-lora` — do **NOT** merge an RL LoRA to
+fp16 (produces 0% accuracy; see `feedback_vllm_lora_serving.md`).
+
+## Tests
+
+```bash
+PYTHONPATH=src /home/abhor/miniconda3/envs/agentic/bin/pytest tests/
+```
+
+Files: `test_core.py`, `test_tools.py`, `test_paths.py`, `test_prompts.py`,
+`test_evaluation_offline.py`, `test_evaluation_external.py`, `test_calendar_env.py`,
+`test_data_integration.py`, `test_serialization.py`. Repro: `repro_art_deadlock.py`.
+
+## Cross-session warnings (auto-memory has the details)
+
+- **Never use Gemini Pro models** — burned 20× monthly budget. Use `gemini-2.0-flash-001`.
+- **Never merge RL LoRA to fp16** — serve via `--enable-lora`.
+- **Always use Slurm/sbatch for GPU work** — never bare processes.
+- **Always read `PROGRESS.md` first** — it's the cross-session pipeline state.
