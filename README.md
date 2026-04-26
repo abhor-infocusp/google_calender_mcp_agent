@@ -35,7 +35,6 @@ scripts/
       rl_train.py               Main RL trainer (Qwen3-14B + ART/GRPO + Gemini judge)
       rl_train_small.py         Same pipeline, Qwen2.5-0.5B — fast iteration / debug
       rl_train_adaptive.py      Alternate trainer with best-checkpoint retention
-      rl_train_stress*.py       Synthetic harnesses for ART deadlock isolation
     sft/                      SFT family
       sft_train.py              SFT on tool-call trajectories
       sft_on_rl.py              SFT recovery on top of RL checkpoint (experimental)

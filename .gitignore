@@ -17,8 +17,8 @@ sft_output/
 sft_output_100ep/
 sft_on_rl_output/
 checkpoint_eval_results/
-sft_data/trajectories_backup/
-sft_data/trajectories_augmented/
+data/sft/trajectories_backup/
+data/sft/trajectories_augmented/
 
 # Root-level eval/experiment JSON results (not data subdirectories)
 /*.json
@@ -31,9 +31,15 @@ sft_data/trajectories_augmented/
 .env
 .python-version
 .art/
-.claude/
 uv.lock
 # CLAUDE.md is intentionally tracked — it's the project's standing instructions.
+
+# .claude/ — track only project-level skills + commands; ignore session/agent state.
+.claude/*
+!.claude/skills/
+!.claude/skills/**
+!.claude/commands/
+!.claude/commands/**
 
 # Editor / AI agent scratch
 .aider*

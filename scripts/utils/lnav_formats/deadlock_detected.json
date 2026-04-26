@@ -1,0 +1,65 @@
+{
+  "$schema": "https://lnav.org/schemas/format-v1.schema.json",
+  "_calendar_agent_deadlock": {
+    "title": "calendar-agent deadlock events",
+    "description": "Patch G v2 / Patch I retry/exit events on the ART queue bridge.",
+    "json": true,
+    "file-pattern": "deadlock_detected\\.jsonl$",
+    "timestamp-field": "ts",
+    "level-field": "event",
+    "level": {
+      "warning": "timeout_retry",
+      "error": "deadlock_exit"
+    },
+    "value": {
+      "schema_version": {
+        "kind": "integer"
+      },
+      "patch": {
+        "kind": "string",
+        "identifier": true
+      },
+      "event": {
+        "kind": "string",
+        "identifier": true
+      },
+      "pid": {
+        "kind": "integer",
+        "identifier": true
+      },
+      "step": {
+        "kind": "integer"
+      },
+      "attempt": {
+        "kind": "integer"
+      },
+      "timeout_s": {
+        "kind": "integer"
+      },
+      "total_waited_s": {
+        "kind": "float"
+      },
+      "since_last_put_s": {
+        "kind": "float"
+      },
+      "qsize": {
+        "kind": "integer"
+      },
+      "phase": {
+        "kind": "string",
+        "identifier": true
+      },
+      "phase_age_s": {
+        "kind": "float"
+      },
+      "reason": {
+        "kind": "string",
+        "identifier": true
+      },
+      "bridge": {
+        "kind": "string",
+        "identifier": true
+      }
+    }
+  }
+}

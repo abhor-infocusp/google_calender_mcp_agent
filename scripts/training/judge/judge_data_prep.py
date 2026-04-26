@@ -26,15 +26,17 @@ import sys
 from collections import Counter
 
 # Make calendar_agent importable (script may be run without PYTHONPATH set).
-_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Repo root = parent of scripts/training/judge/judge_data_prep.py = up 4 levels.
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 sys.path.insert(0, os.path.join(_REPO_ROOT, "src"))
 
 from calendar_agent.evaluation import EVAL_SYSTEM_PROMPT  # noqa: E402
+from calendar_agent.paths import JUDGE_DATA_DIR, JUDGE_TRAIN_JSONL, JUDGE_VAL_JSONL  # noqa: E402
 
 EVAL_GLOB = os.path.join(_REPO_ROOT, "runs", "**", "eval", "checkpoint-*.json")
-OUT_DIR = os.path.join(_REPO_ROOT, "judge_data")
-TRAIN_PATH = os.path.join(OUT_DIR, "train.jsonl")
-VAL_PATH = os.path.join(OUT_DIR, "val.jsonl")
+OUT_DIR = str(JUDGE_DATA_DIR)
+TRAIN_PATH = str(JUDGE_TRAIN_JSONL)
+VAL_PATH = str(JUDGE_VAL_JSONL)
 
 VAL_PCT = 5  # 5% val, 95% train
 SEED = 42

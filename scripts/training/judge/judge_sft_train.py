@@ -27,10 +27,11 @@ from transformers import TrainerCallback
 random.seed(42)
 
 # ── Paths ──────────────────────────────────────────────────
-_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-TRAIN_JSONL = os.path.join(_REPO_ROOT, "judge_data", "train.jsonl")
-VAL_JSONL = os.path.join(_REPO_ROOT, "judge_data", "val.jsonl")
-OUTPUT_DIR = os.environ.get("JUDGE_RUN_DIR", "runs/judge_v1_qwen3_7b_20260425")
+from calendar_agent.paths import JUDGE_TRAIN_JSONL, JUDGE_VAL_JSONL, PROJECT_ROOT
+
+TRAIN_JSONL = str(JUDGE_TRAIN_JSONL)
+VAL_JSONL = str(JUDGE_VAL_JSONL)
+OUTPUT_DIR = os.environ.get("JUDGE_RUN_DIR", str(PROJECT_ROOT / "runs/judge_v1_qwen3_7b_20260425"))
 CHECKPOINT_DIR = os.path.join(OUTPUT_DIR, "checkpoints")
 LOSS_CSV = os.path.join(OUTPUT_DIR, "diagnostics", "epoch_losses.csv")
 
