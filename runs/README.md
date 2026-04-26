@@ -20,13 +20,11 @@ Run name: `<kind>_<model_short>_<YYYYMMDD>` — kind ∈ `{sft, rl}`.
 `config.json`, `eval/*.json`, `eval/summary.csv`, `diagnostics/*.csv`, `README.md`.
 Checkpoints and logs are ignored (too large / noisy). See repo `.gitignore`.
 
-## Current runs
+## Live status
 
-| Run | Kind | Model | Status |
-|---|---|---|---|
-| `rl_qwen3_14b_20260420` | RL (GRPO) | Qwen3-14B | relaunched after reorg, MIG 0 |
-| `sft_v6_qwen3_14b_20260420` | SFT | Qwen3-14B | training, MIG 1 |
-| `archive/sft_v5_qwen1.5b` | SFT (archived) | Qwen2.5-1.5B | 74.6% best (ckpt 6152) |
+Don't maintain a current-runs table here — it goes stale fast.
+Each run writes `metadata.jsonl` (process start, git sha, MIG slice, sibling PIDs).
+For pipeline state see `PROGRESS.md`.
 
 ## How scripts use this
 

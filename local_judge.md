@@ -1,5 +1,10 @@
 # Local Qwen3-7B Judge — Train + Serve Plan (Phased)
 
+> **Status:** Phase 1 SFT in progress (`runs/judge_v1_qwen3_7b_20260425/`,
+> checkpoints up to 2970). RL integration (Phase 3) and persistent serving
+> (Phase 2) **not started**. Validation plan (Phase 4) **not started**.
+> **Last reviewed:** 2026-04-26
+
 ## Context
 RL training calls Gemini-2.0-flash ~99,200 times per run (12,400 steps × 8 rollouts) at `scripts/training/rl/rl_train.py:411-483` and `rl_train_adaptive.py:439-512` to score trajectories. This is the dominant per-run cost and a frequent timeout source. Goal: train a local Qwen3-7B judge from existing Gemini labels and serve it on one MIG slice (always-on) so RL on the other slices can call it over HTTP at near-zero marginal cost.
 

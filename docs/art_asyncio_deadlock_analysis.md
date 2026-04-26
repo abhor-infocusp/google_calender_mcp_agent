@@ -1,6 +1,9 @@
-# Draft: GitHub issue for OpenPipe/ART
+# ART asyncio Deadlock — Analysis & Upstream Issue Draft
 
-Post this at https://github.com/OpenPipe/ART/issues/new after any final edits.
+> **Status:** Workaround deployed locally (Patches G/I in `src/calendar_agent/art_patches.py`).
+> Upstream issue **not yet filed** on https://github.com/OpenPipe/ART/issues. The body
+> below is the draft to post when ready.
+> **Last reviewed:** 2026-04-26
 
 ---
 

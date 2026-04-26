@@ -1,7 +1,10 @@
-# SFT Data Enhancement Plan
+# SFT Data Enhancement Plan (v5, Qwen2.5-1.5B) — ARCHIVED
 
+> **Status:** Historical record. Superseded by SFT v6 (Qwen3-14B, see `PROGRESS.md`).
+> Kept for the data-augmentation methodology (Phases 1-4) which describes how
+> `sft_data/trajectories_augmented/` was built — that dataset is still in use.
+> **Archived:** 2026-04-26
 > **Created:** 2026-03-28
-> **Status:** Phases 1-4 complete. 6,947 augmented trajectories from 114 calendars. Phase 5 (SFT training) next.
 
 ---
 

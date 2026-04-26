@@ -10,7 +10,7 @@ on Qwen3-14B (4-bit) using ART/GRPO, vLLM, and Gemini as the reward judge.
 | Understand what's in the repo | this file (below) |
 | Launch RL training (correctly) | [`docs/multi_tenant_training.md`](docs/multi_tenant_training.md) |
 | Recover a corrupted run | [`docs/multi_tenant_training.md#recovery-after-interference`](docs/multi_tenant_training.md#recovery-after-interference) |
-| File an upstream ART bug | [`docs/art_upstream_issue_draft.md`](docs/art_upstream_issue_draft.md) |
+| File an upstream ART bug | [`docs/art_asyncio_deadlock_analysis.md`](docs/art_asyncio_deadlock_analysis.md) |
 | See current pipeline state | `PROGRESS.md` |
 
 ## Repo layout
@@ -37,7 +37,6 @@ scripts/
       rl_train_adaptive.py      Alternate trainer with best-checkpoint retention
     sft/                      SFT family
       sft_train.py              SFT on tool-call trajectories
-      sft_on_rl.py              SFT recovery on top of RL checkpoint (experimental)
     dpo/                      DPO family
       dpo_train.py              DPO trainer
       mine_dpo_pairs.py         Pair mining from existing trajectories
