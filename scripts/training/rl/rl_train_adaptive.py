@@ -708,14 +708,36 @@ class StepTimer:
 
 async def main():
     # ── Model & Backend ──
+    rl_base_model = os.environ.get("RL_BASE_MODEL", "Qwen/Qwen3-14B")
+    rl_project = os.environ.get("RL_PROJECT", "calendar-agent")
+    rl_model_name = os.environ.get("RL_MODEL_NAME", "calendar-agent-001")
+    rl_vllm_port = int(os.environ.get("RL_VLLM_PORT", "8005"))
+    print(f"[rl_train_adaptive] base_model={rl_base_model} project={rl_project} "
+          f"name={rl_model_name} port={rl_vllm_port}")
+
     model = art.TrainableModel(
-        name="calendar-agent-001",
-        project="calendar-agent",
-        base_model="Qwen/Qwen3-14B",
+        name=rl_model_name,
+        project=rl_project,
+        base_model=rl_base_model,
         _internal_config=dev.InternalModelConfig(
             init_args=dev.InitArgs(
                 load_in_4bit=True,
                 max_lora_rank=64,
+            ),
+            # See rl_train.py for rationale. r=16 (Unsloth default + matches
+            # vLLM max_lora_rank default). For SFT-as-base runs, use a merged
+            # post-SFT fp16 model as RL_BASE_MODEL.
+            peft_args=dev.PeftArgs(
+                r=16,
+                lora_alpha=16,
+                target_modules=[
+                    "q_proj", "k_proj", "v_proj", "o_proj",
+                    "gate_proj", "up_proj", "down_proj",
+                ],
+                lora_dropout=0,
+                bias="none",
+                use_gradient_checkpointing="unsloth",
+                random_state=42,
             ),
             engine_args=dev.EngineArgs(
                 max_model_len=4096,
@@ -755,7 +777,7 @@ async def main():
     )
     from art.dev.openai_server import OpenAIServerConfig, ServerArgs
     await model.register(backend, _openai_client_config=OpenAIServerConfig(
-        server_args=ServerArgs(port=8005),
+        server_args=ServerArgs(port=rl_vllm_port),
     ))
 
     # ── Load Data ──
@@ -1105,15 +1127,45 @@ async def main():
                 )
 
         # ── Checkpoint delete + Train ──
-        # Retention: ART keeps `latest + best by train/reward` automatically.
-        # Skip delete on milestone steps so they accumulate (~25 milestones,
-        # ~3.5 GB total at 138 MB/ckpt). Each milestone gets a runtime-state
-        # snapshot below so it can be resumed independently.
+        # Patch K v2: ART's `model.delete_checkpoints(best_checkpoint_metric=...)`
+        # keeps only [latest, best] and prunes everything else — including a
+        # milestone we just saved. Use the lower-level
+        # art.local.checkpoints.delete_checkpoints(output_dir, excluding) with
+        # an explicit keep-list so milestones survive across delete cycles.
         set_phase("checkpoint_delete", step=batch.step)
         step_timer.start("checkpoint_delete_s")
         is_milestone = batch.step > 0 and batch.step % CHECKPOINT_MILESTONE_EVERY == 0
-        if not is_milestone:
-            await model.delete_checkpoints(best_checkpoint_metric="train/reward")
+        try:
+            from art.local.checkpoints import delete_checkpoints as _backend_delete
+            output_dir = str(model._get_output_dir())
+            keep: set[int] = {batch.step}  # latest
+            try:
+                import polars as pl
+                best_step = (
+                    pl.read_ndjson(f"{output_dir}/history.jsonl")
+                    .drop_nulls(subset=["train/reward"])
+                    .group_by("step")
+                    .mean()
+                    .sort("train/reward")
+                    .select(pl.col("step").last())
+                    .item()
+                )
+                if best_step is not None:
+                    keep.add(int(best_step))
+            except Exception:
+                pass  # no history yet
+            # Always retain every-Nth milestones we've passed.
+            if CHECKPOINT_MILESTONE_EVERY > 0:
+                for m in range(CHECKPOINT_MILESTONE_EVERY,
+                               batch.step + 1,
+                               CHECKPOINT_MILESTONE_EVERY):
+                    keep.add(m)
+            _backend_delete(output_dir, list(keep))
+        except Exception as e:
+            print(f"[CHECKPOINT WARN] smart-delete failed ({e}); "
+                  f"falling back to ART's default")
+            if not is_milestone:
+                await model.delete_checkpoints(best_checkpoint_metric="train/reward")
         step_timer.stop()
 
         set_phase("gc_empty_cache", step=batch.step)

@@ -215,15 +215,40 @@ def init_telemetry(
         stuck_alert_after: how long a phase can run before alerting.
 
     Idempotent — safe to call multiple times; the second call is a no-op.
+    Skip if not the actual main process (vLLM workers and multiprocessing-
+    spawn children import our trainer module too; without this guard they'd
+    write extra metadata.jsonl + .run_pid entries that break stop_run.sh).
     """
+    # multiprocessing.parent_process() returns None ONLY for the main
+    # process. Subprocesses (forks AND spawn workers) have a parent_process.
+    # This is a more reliable signal than checking sys.argv[0], because
+    # subprocesses inherit argv from the parent.
+    try:
+        import multiprocessing as _mp
+        if _mp.parent_process() is not None:
+            return
+    except Exception:
+        pass
+
     global _INITIALIZED
     if _INITIALIZED:
         return
     _INITIALIZED = True
 
+    os.makedirs(run_dir, exist_ok=True)
     debug_dir = os.path.join(run_dir, "logs", "debug")
     os.makedirs(debug_dir, exist_ok=True)
     heartbeat_path = os.path.join(debug_dir, "heartbeat.jsonl")
+
+    # Canonical "current python pid for this run" file. Overwritten on every
+    # main-process startup. stop_run.sh reads this — single source of truth,
+    # immune to subprocess metadata pollution.
+    pid_file = os.path.join(run_dir, ".run_pid")
+    try:
+        with open(pid_file, "w") as f:
+            f.write(f"{os.getpid()}\n{script_path}\n")
+    except Exception as e:
+        print(f"[telemetry] couldn't write {pid_file}: {e}")
 
     # Register phase-getter with art_patches so Patch G can read the phase.
     try:

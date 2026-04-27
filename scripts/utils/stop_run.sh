@@ -19,21 +19,32 @@ if [ "$#" -ne 1 ]; then
 fi
 
 RUN_DIR="$1"
+PID_FILE="$RUN_DIR/.run_pid"
 META="$RUN_DIR/metadata.jsonl"
 
-if [ ! -f "$META" ]; then
-    echo "[stop_run] no metadata.jsonl at $META" >&2
+# Preferred source: .run_pid file written by run_telemetry.init_telemetry
+# at every main-process startup. Single canonical pid; immune to vLLM
+# subprocess metadata pollution. Fallback to metadata.jsonl for legacy runs.
+PY_PID=""
+SCRIPT=""
+TS=""
+if [ -f "$PID_FILE" ]; then
+    PY_PID=$(sed -n '1p' "$PID_FILE")
+    SCRIPT=$(sed -n '2p' "$PID_FILE")
+    TS="(.run_pid)"
+    echo "[stop_run] reading $PID_FILE"
+elif [ -f "$META" ]; then
+    LAST=$(tail -1 "$META")
+    PY_PID=$(echo "$LAST" | /home/abhor/miniconda3/envs/agentic/bin/python3 -c "import sys,json; print(json.loads(sys.stdin.read()).get('pid',''))")
+    SCRIPT=$(echo "$LAST" | /home/abhor/miniconda3/envs/agentic/bin/python3 -c "import sys,json; print(json.loads(sys.stdin.read()).get('script',''))")
+    TS=$(echo "$LAST" | /home/abhor/miniconda3/envs/agentic/bin/python3 -c "import sys,json; print(json.loads(sys.stdin.read()).get('ts',''))")
+    echo "[stop_run] no .run_pid, falling back to $META (last entry)"
+else
+    echo "[stop_run] no .run_pid or metadata.jsonl in $RUN_DIR" >&2
     exit 1
 fi
 
-# Last line is the most recent process start.
-LAST=$(tail -1 "$META")
-PY_PID=$(echo "$LAST" | /home/abhor/miniconda3/envs/agentic/bin/python3 -c "import sys,json; print(json.loads(sys.stdin.read()).get('pid',''))")
-SCRIPT=$(echo "$LAST" | /home/abhor/miniconda3/envs/agentic/bin/python3 -c "import sys,json; print(json.loads(sys.stdin.read()).get('script',''))")
-TS=$(echo "$LAST" | /home/abhor/miniconda3/envs/agentic/bin/python3 -c "import sys,json; print(json.loads(sys.stdin.read()).get('ts',''))")
-
-echo "[stop_run] reading $META"
-echo "[stop_run] last entry: pid=$PY_PID  script=$(basename ${SCRIPT})  ts=$TS"
+echo "[stop_run] candidate: pid=$PY_PID  script=$(basename ${SCRIPT})  ts=$TS"
 
 if [ -z "$PY_PID" ]; then
     echo "[stop_run] no pid in metadata; nothing to do"
