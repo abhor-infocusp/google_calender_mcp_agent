@@ -7,6 +7,9 @@
 > Gemini-2.0-flash on the same oracle: 86.67%. See [`docs/judge/`](docs/judge/).
 > **Canonical judge truth:** `runs/judge_baseline_20260430/eval/manual_verdicts.jsonl`
 > (285 hand-labeled ART trajectories, 185 Correct / 100 Incorrect).
+> **Judge-as-a-service:** FastAPI sidecar wrapping vLLM at `:8765`
+> (`src/calendar_agent/judge/`, `scripts/serving/judge_service.sbatch`).
+> RL trainers swapped from Gemini to local judge (no Gemini fallback).
 > **Active work:** Phase 1.5 judge distillation. RL paused — saturated under
 > binary rewards on this dataset (see 2026-05-01 entry).
 
@@ -36,6 +39,40 @@ runs/judge_v1_qwen3_7b_20260425/       Local judge SFT — see local_judge.md
 ---
 
 ## Timeline
+
+### 2026-05-01 — Judge-as-a-service deployed
+Stood up the local judge as an HTTP service so RL can stop calling Gemini and
+also so the verdict prompt logic stops being scattered across eval scripts.
+
+- `src/calendar_agent/judge/` — new package. `prompts.py` lifts
+  `CHECKLIST_V2_SYS`, `FEWSHOT_EXAMPLES_{V1..V4}`, the three winning builders
+  (`build_fewshot`, `build_fewshot_v3`, `build_fewshot_v4_dayfocus`), and
+  `ROUTER_MAP` verbatim from `scripts/eval/judge_prompt_tune.py`. Stamped
+  with `PROMPT_VERSION = "router-v1-20260501"` so reward-signal drift from
+  mid-run prompt edits is detectable.
+- `server.py` — FastAPI sidecar on `127.0.0.1:8765`. POST `/verdict` takes
+  `{cat, query, final, expected, before, after, scenario_id}`, builds the
+  router prompt server-side, calls a local vLLM (`/v1/chat/completions`),
+  generates full reasoning to keep accuracy at 95.44%, and returns only the
+  verdict. Every call is appended to `runs/judge_service_<date>/calls.jsonl`
+  with the full prompt + raw response — that JSONL is also Phase 1.5
+  distillation training data.
+- `client.py` — async client with explicit `JudgeUnavailable`. **No Gemini
+  fallback** — RL trainers `sys.exit(43)` on judge errors so a downed
+  service halts auto-restart instead of silently zeroing the reward signal.
+- `scripts/serving/judge_service.sbatch` — 1× MIG slice, vLLM (Qwen3-14B
+  fp8 + hermes parser, `:8000`) + FastAPI sidecar (`:8765`), taskset/OMP
+  isolation, metadata.jsonl start/stop stamping.
+- Swapped Gemini-based `evaluate_trajectory` in `rl_train.py` and
+  `rl_train_adaptive.py` to call the judge client. `rl_train_small.py`
+  not migrated yet.
+
+**Tested:** end-to-end `/verdict` with 10 manual-oracle samples → 10/10
+agreement. Trainer-side integration test (importing the swapped
+`evaluate_trajectory` and calling it) passed both the happy path (Correct
+verdict) and the hard-fail path (`JUDGE_URL=:9` → `SystemExit(43)`).
+Smoke scripts: `scripts/eval/judge_service_smoke.py`,
+`scripts/eval/judge_rl_integration_smoke.py`.
 
 ### 2026-05-01 — RL paused: dataset saturated under binary rewards
 After ~3 days of training across 3 concurrent runs, halting RL for now and
