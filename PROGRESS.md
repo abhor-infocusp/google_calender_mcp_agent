@@ -1,9 +1,14 @@
 # Training Pipeline Progress
 
-> **Last updated:** 2026-04-26
-> **Best model:** SFT v6 ckpt-4659 (ep 3) — **80.1%** on `test_data/` (held-out, canonical).
+> **Last updated:** 2026-05-01
+> **Best agent model:** SFT v6 ckpt-4659 (ep 3) — **80.1%** on `test_data/` (held-out, canonical).
 > Older RL-data benchmark winner is ckpt-6212 (ep 4) at 82.5%; different ckpts win on different sets.
-> **Active work:** RL adaptive run on Qwen3-14B (see `runs/rl_adaptive_qwen3_14b_20260424/`).
+> **Best local judge:** Qwen3-14B fp8 + router prompt — **95.44%** on the manual oracle.
+> Gemini-2.0-flash on the same oracle: 86.67%. See [`docs/judge/`](docs/judge/).
+> **Canonical judge truth:** `runs/judge_baseline_20260430/eval/manual_verdicts.jsonl`
+> (285 hand-labeled ART trajectories, 185 Correct / 100 Incorrect).
+> **Active work:** Phase 1.5 judge distillation. RL paused — saturated under
+> binary rewards on this dataset (see 2026-05-01 entry).
 
 For per-category breakdowns, failure modes, and improvement targets see
 [`docs/categories/`](docs/categories/). For 1.5B-era history (SFT v3/v5, RL1-3 on
@@ -22,12 +27,109 @@ runs/dpo_qwen3_14b_sft_20260423/       DPO from SFT v6 — DONE, paused
 runs/dpo_qwen3_14b_instruct_20260423/  DPO from Instruct — DONE, paused
 runs/rl_qwen3_14b_20260420/            RL GRPO — paused at step 9220 after 2026-04-25 cliff
 runs/rl_adaptive_qwen3_14b_20260424/   RL adaptive — paused (interfered with main RL run)
+runs/rl_grpo_qwen3_14b_base_20260426/      RL GRPO from base — paused at step 5077 / 12440 (40%)
+runs/rl_grpo_qwen3_14b_sft4659_20260426/   RL GRPO from SFT v6 ckpt-4659 — paused at step 4952 / 12440 (39%)
+runs/rl_adaptive_qwen3_14b_base_20260426/  RL adaptive (AR3PO) — paused at step 3496 / 12440 (28%)
 runs/judge_v1_qwen3_7b_20260425/       Local judge SFT — see local_judge.md
 ```
 
 ---
 
 ## Timeline
+
+### 2026-05-01 — RL paused: dataset saturated under binary rewards
+After ~3 days of training across 3 concurrent runs, halting RL for now and
+moving to other phases (judge distillation, harder data, shaped rewards).
+
+**What was running:**
+| run | starting LoRA | last step / 12440 | mean reward (recent 500) |
+|---|---|---|---|
+| `rl_grpo_qwen3_14b_base_20260426` | Qwen3-14B base | 5077 (40%) | ~0.85 |
+| `rl_grpo_qwen3_14b_sft4659_20260426` | SFT v6 ckpt-4659 | 4952 (39%) | ~0.84 |
+| `rl_adaptive_qwen3_14b_base_20260426` | Qwen3-14B base | 3496 (28%) | ~0.65 |
+
+**Skip-rate fix on adaptive (2026-04-28).** The original adaptive sampler
+was producing 70% skipped steps because the per-scenario weight had a 0.65
+floor and a 3× retest boost on *easy* scenarios. Replaced with the analytic
+non-skip probability `1 − pᴳ − (1−p)ᴳ`, plus AR3PO's two recovery
+mechanisms (multi-stage rollout + per-scenario response-reuse buffer).
+Skip rate dropped to ~28% within 50 steps. See
+`src/calendar_agent/scenario_tracker.py` and `tests/test_scenario_tracker.py`.
+
+**Why we're stopping anyway.** The fix worked, but reward stopped climbing.
+Inspecting the live tracker after ~3500 post-fix steps:
+
+| pass-rate band | n scenarios |
+|---|---|
+| p > 0.95 (saturated solved) | 441 |
+| 0.30 ≤ p ≤ 0.70 (productive) | ~35 |
+| p < 0.05 (model has memorized failure) | 49 |
+
+So **91% of the 622-scenario pool is at one of the two saturated extremes**
+under the current Qwen3-14B + binary-reward regime. The "real" training set
+is the ~35 scenarios in the productive middle, which by themselves can't
+drive further headline gains. Multi-stage rollout dutifully extends groups
+on the 49 dead-hard cases to 24 rollouts each — gradient signal is weak
+because the policy has memorized the failure mode (no exploration pressure
+since `temperature=1.0`, `beta=0.0`).
+
+**Implications going forward** (none scheduled for this round):
+1. Shaped/partial rewards would re-populate the productive band.
+2. KL anchor (`beta>0`) against base/SFT to prevent collapse on saturated easy.
+3. Higher rollout temperature on hard bucket to break memorized failures.
+4. Fresh harder training scenarios — the existing 622 are chewed through.
+5. Evaluate the latest checkpoints on `test_data/` to see if the off-policy
+   gains are real even when headline reward is flat.
+
+**What ships in this commit batch:**
+- `scripts/training/rl/rl_grpo_base.sbatch`, `rl_grpo_sft4659.sbatch`,
+  `rl_adaptive_base.sbatch` — three slurm submitters wired to
+  `auto_restart.sh`.
+- `src/calendar_agent/scenario_tracker.py` — new sample_weight semantics
+  (deletes RETEST_BOOST + WEIGHT_FLOOR-0.65 ad-hoc heuristics).
+- `scripts/training/rl/rl_train_adaptive.py` — multi-stage rollout +
+  response-reuse buffer; on-policy filtering for headline metrics.
+- `tests/test_scenario_tracker.py` — 12 unit tests including a
+  production-shape simulation.
+
+### 2026-05-01 — Judge prompt tuning + latency budget
+- 19 prompt variants on Qwen3-14B fp8. Best is `router` (per-category dispatch
+  to specialised few-shot prompts): **95.44%** on the manual oracle, **+8.8 pp
+  over Gemini**. Full leaderboard: [`docs/judge/prompt_tuning.md`](docs/judge/prompt_tuning.md).
+- 4 manual labels relabeled (cases #8, #39, #65, #280) — empty-diff +
+  claimed-success cases that were originally lenient. New oracle: 185/100
+  Correct/Incorrect. Originals saved to `manual_verdicts_v1.jsonl`.
+- Latency benchmark vs Gemini-2.0-flash (extracted from RL production logs,
+  6,213 calls): Gemini p50 = 0.46s, our 14B fp8 router p50 at concurrency=16
+  = 0.83s, p50 at concurrency=1 = 9.77s. Cudagraphs and AWQ gave ~0 speedup
+  on Blackwell+fp8 (decode is memory-bandwidth bound). Speculative decoding
+  hurts at concurrency≥4. Verdict-only output without training drops accuracy
+  to 71.93%. See [`docs/judge/latency.md`](docs/judge/latency.md).
+- Conclusion: **prompt engineering is at its frontier** for this stack; the
+  remaining latency gap to Gemini requires distillation (verdict-only target)
+  rather than prompt tricks. See [`docs/judge/plan.md`](docs/judge/plan.md).
+
+### 2026-04-30 — Judge baseline + canonical manual labels
+Sampled 286 trajectories from the RL adaptive ART hold-out and ran three
+base-model judges (Qwen3-8B, 14B, 32B) plus the existing Gemini gt label.
+Then hand-labeled all 285 (one trajectory had no scenario record) to create
+a canonical truth set:
+
+`runs/judge_baseline_20260430/eval/manual_verdicts.jsonl` — **the verdict
+oracle going forward**. Distribution: 187 Correct / 98 Incorrect.
+
+Accuracy vs manual: **Gemini 86.7%**, 32B base 82.1%, 14B base 79.0%, 8B base
+71.9%. Gemini is still the best judge but only by ~4.5 pp over 32B base, and
+14B base actually beats Gemini on Human Chaos (82.6% vs 76.1%) — Gemini is
+too lenient when the agent hedges/asks for clarification on fragmentary
+queries. 32B beats Gemini on Modifier (90.2% vs 85.4%).
+
+**Implication for RL:** the existing GRPO runs train against a 86.7%-accurate
+reward signal — ~13% of trajectories are mis-rewarded, capping how well any
+RL run can do. A trained local judge has real headroom to match or beat
+Gemini on the hard categories.
+
+Full breakdown: [`runs/judge_baseline_20260430/eval/SUMMARY.md`](runs/judge_baseline_20260430/eval/SUMMARY.md).
 
 ### 2026-04-26 — Multi-tenant hardening + Patch K v2 verified
 Pipeline-level cleanup and safeguards after the 2026-04-25 reward cliff
@@ -116,8 +218,12 @@ Numbers from `runs/analysis/test_eval_summary.md`. Update when a new ckpt wins.
 
 ## Open threads
 
-- **Local judge** (Qwen3-7B): replaces ~99k Gemini API calls per RL run.
-  Status + design: [`local_judge.md`](local_judge.md).
+- **Local judge** — see [`docs/judge/`](docs/judge/) for everything.
+  - Today: 14B fp8 + router prompt at 95.44% (Phase 0.5 done).
+  - Next: Phase 1.5 distillation (router → small model with verdict-only
+    output) for the latency win. The previous 7B-on-Gemini-labels run is
+    superseded.
+  - Phase 3 (RL integration) plan in [`docs/judge/rl_integration.md`](docs/judge/rl_integration.md).
 - **ART asyncio deadlock**: workaround deployed (Patch G/I) but upstream not filed.
   Analysis: [`docs/art_asyncio_deadlock_analysis.md`](docs/art_asyncio_deadlock_analysis.md).
 - **RL beyond GRPO+binary rewards**: RFT/expert iteration, Dr. GRPO, non-zero β.

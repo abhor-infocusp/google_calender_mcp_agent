@@ -70,6 +70,21 @@ USE_ADAPTIVE_BUDGET = True    # vary rollouts_per_group by bucket
 # variance estimate above its noise floor.
 ROLLOUTS_PER_BUCKET = {"cold": 8, "hard": 8, "mid": 8, "easy": 4}
 
+# ── AR3PO recovery for all-fail groups ────────────────────────────────
+# When the initial rollout produces zero correct trajectories, GRPO has no
+# advantage signal and the step is wasted. AR3PO (arxiv 2509.25808) addresses
+# this two ways:
+#   (1) Multi-stage rollout — keep generating extra rollouts on the same
+#       prompt until at least one succeeds, up to a cap.
+#   (2) Response reuse — when even multi-stage fails, splice in a previously
+#       generated correct trajectory for that scenario from a small per-
+#       scenario buffer so the group has at least one positive example.
+# Together they push the empirical skip rate well below what the per-scenario
+# weighting alone would deliver.
+MAX_EXTRA_STAGES = 2          # at most 2 extra rounds beyond the initial one
+EXTRA_STAGE_ROLLOUTS = 8      # rollouts per extra stage (matches hard/mid budget)
+RESPONSE_REUSE_PER_SCENARIO = 4  # max correct trajectories cached per scenario
+
 # How often (in steps) to flush diagnostic_log + tracker JSON to disk.
 TRACKER_FLUSH_EVERY = 25
 
@@ -337,47 +352,20 @@ def load_all_scenarios() -> list[CalendarScenario]:
 
 OPENAI_TOOLS = get_openai_tools()
 
-# ── Evaluation (uses Gemini judge via Vertex AI) ──────────
+# ── Evaluation (local judge service — see src/calendar_agent/judge/) ──
+#
+# RL POSTs to the FastAPI sidecar; the judge builds the router prompt,
+# generates reasoning server-side (95.44% on manual oracle), and returns
+# only the verdict. No Gemini fallback — if the judge is down we exit
+# rc=43 so the auto_restart wrapper stops and the user can intervene.
 
-# Load Google credentials from file
-CREDENTIALS_PATH = str(CREDENTIALS_PATH)
+from calendar_agent.judge.client import verdict as _judge_verdict, JudgeUnavailable
 
-_gcp_credentials = None
-if os.path.exists(CREDENTIALS_PATH):
-    from google.oauth2.credentials import Credentials as OAuth2Credentials
-
-    with open(CREDENTIALS_PATH) as _f:
-        _cred_data = json.load(_f)
-    _gcp_credentials = OAuth2Credentials(
-        token=None,
-        refresh_token=_cred_data["refresh_token"],
-        client_id=_cred_data["client_id"],
-        client_secret=_cred_data["client_secret"],
-        token_uri="https://oauth2.googleapis.com/token",
-    )
-
-# Initialize Vertex AI for the Gemini evaluator
-vertexai.init(
-    project=os.environ.get("GCP_PROJECT", "internal-ml-exp"),
-    location=os.environ.get("GCP_LOCATION", "us-central1"),
-    credentials=_gcp_credentials,
-)
-
-eval_model = GenerativeModel(
-    "gemini-2.0-flash-001",
-    system_instruction=[EVAL_SYSTEM_PROMPT],
-)
-
-
-# Counters for observability — printed in rollout summary / step logs.
-# Vertex AI's gRPC generate_content has no built-in timeout and will block
-# indefinitely when Gemini stops responding, so we wrap each call in
-# asyncio.wait_for(timeout=30) and retry up to 3 times.
-GEMINI_TIMEOUT_SECS = 30
-GEMINI_MAX_ATTEMPTS = 3
-gemini_timeout_count = 0   # single 30s timeout (across all attempts)
-gemini_giveup_count = 0    # all attempts timed out — fell back to Incorrect
-gemini_error_count = 0     # non-timeout exceptions — fell back to Incorrect
+# Counters retained for log-line compatibility (referenced in step summary).
+# In the local-judge era these all count judge service errors of one kind.
+gemini_timeout_count = 0   # transport timeouts
+gemini_giveup_count = 0    # gave up after retries
+gemini_error_count = 0     # non-transport judge errors
 
 
 async def evaluate_trajectory(
@@ -386,73 +374,38 @@ async def evaluate_trajectory(
     expected: str,
     before_days: dict,
     after_days: dict,
+    *,
+    category: str,
+    scenario_id: str | int | None = None,
 ) -> str:
-    """Ask Gemini to evaluate whether the trajectory was correct.
+    """POST to the local judge service and return 'Correct'/'Incorrect'.
 
-    Returns one of: 'Correct', 'Incorrect'. Falls back to 'Incorrect' on
-    exhausted timeouts or non-timeout errors.
+    Hard-fails (sys.exit(43)) on JudgeUnavailable rather than silently
+    returning Incorrect — a down judge would otherwise zero out the reward
+    signal and make the run silently useless. rc=43 stops auto_restart.
     """
-    global gemini_timeout_count, gemini_giveup_count, gemini_error_count
+    global gemini_error_count
 
     before_text = format_day_state_text(before_days)
     after_text = format_day_state_text(after_days)
 
-    prompt = f"""\
-Query: {query}
+    try:
+        resp = await _judge_verdict(
+            cat=category,
+            query=query,
+            final=final_output or "",
+            expected=expected or "",
+            before=before_text,
+            after=after_text,
+            scenario_id=scenario_id,
+        )
+    except JudgeUnavailable as e:
+        gemini_error_count += 1
+        print(f"[JUDGE DOWN] {e} — exiting rc=43; restart the judge service and resume.")
+        sys.stdout.flush()
+        sys.exit(43)
 
-Response: {final_output if final_output else '(no response)'}
-
-Expected: {expected if expected else '(not specified)'}
-
-Before:
-{before_text}
-
-After:
-{after_text}
-
-Was the task completed correctly? End with one word: Correct or Incorrect."""
-
-    for attempt in range(1, GEMINI_MAX_ATTEMPTS + 1):
-        try:
-            response = await asyncio.wait_for(
-                asyncio.to_thread(eval_model.generate_content, prompt),
-                timeout=GEMINI_TIMEOUT_SECS,
-            )
-        except asyncio.TimeoutError:
-            gemini_timeout_count += 1
-            print(
-                f"[EVAL TIMEOUT] attempt {attempt}/{GEMINI_MAX_ATTEMPTS} "
-                f"({GEMINI_TIMEOUT_SECS}s) — total timeouts so far: {gemini_timeout_count}"
-            )
-            continue
-        except Exception as e:
-            gemini_error_count += 1
-            print(f"[EVAL ERROR] {type(e).__name__}: {e} — total errors: {gemini_error_count}")
-            return "Incorrect"
-
-        verdict_text = response.text.strip()
-        lines = [l.strip() for l in verdict_text.splitlines() if l.strip()]
-        # Scan from last line for exact verdict
-        for line in reversed(lines):
-            line_lower = line.lower()
-            for token in ("Incorrect", "Correct"):
-                if line_lower == token.lower():
-                    return token
-        # Fallback: substring scan
-        for line in reversed(lines):
-            line_lower = line.lower()
-            for token in ("Incorrect", "Correct"):
-                if token.lower() in line_lower:
-                    return token
-        return "Incorrect"
-
-    # All attempts timed out
-    gemini_giveup_count += 1
-    print(
-        f"[EVAL TIMEOUT GIVEUP] all {GEMINI_MAX_ATTEMPTS} attempts timed out — "
-        f"total give-ups: {gemini_giveup_count}"
-    )
-    return "Incorrect"
+    return resp["verdict"]
 
 
 # ── Rollout ────────────────────────────────────────────────
@@ -616,6 +569,8 @@ async def rollout(
             expected=scenario.expected_behavior,
             before_days=before_days,
             after_days=after_days,
+            category=scenario.category,
+            scenario_id=scenario.id,
         )
         judge_latency_s = round(time.monotonic() - judge_start, 2)
 
@@ -835,9 +790,37 @@ async def main():
         f"buckets={ROLLOUTS_PER_BUCKET}"
     )
 
+    # ── AR3PO response-reuse buffer ──
+    # Per-scenario rolling cache of recent correct trajectories. Used as a
+    # last-resort splice when multi-stage rollout still produces all-fail.
+    # In-memory only — buffer warms up within ~50 steps of fresh start.
+    from collections import Counter, deque
+
+    response_buffer: dict[str, deque] = {}
+
+    def _buffer_correct(group_trajectories) -> None:
+        for t in group_trajectories:
+            if t.metrics.get("correct", 0.0) != 1.0:
+                continue
+            sid = t.metadata.get("scenario_id")
+            if not sid:
+                continue
+            buf = response_buffer.setdefault(
+                sid, deque(maxlen=RESPONSE_REUSE_PER_SCENARIO)
+            )
+            buf.append(t)
+
+    def _splice_from_buffer(scenario_id: str):
+        buf = response_buffer.get(scenario_id)
+        if not buf:
+            return None
+        # Pop oldest so each cached response gets reused at most once before
+        # it's replaced by a fresher correct trajectory. Keeps the buffer
+        # rotating rather than re-using the same stale completion forever.
+        return buf.popleft()
+
     # ── Diagnostic Log ──
     diagnostic_log: list[dict] = []
-    from collections import Counter, deque
 
     # Rolling per-category reward window for forgetting alerts.
     cat_recent: dict[str, deque] = {}
@@ -911,10 +894,19 @@ async def main():
 
         # ── Pick scenarios for this step ──
         # Shadow mode (USE_ADAPTIVE_SAMPLER=False): keep batch.items so behavior
-        # matches vanilla rl_train.py exactly. Adaptive mode: sample from the
-        # full pool weighted by tracker.sample_weight.
+        # matches vanilla rl_train.py exactly. Adaptive mode: weight each
+        # scenario by P(non-skip group) — see ScenarioTracker.sample_weight.
+        # Weight depends on the group size we'd assign that scenario, so we
+        # pass a callable that resolves bucket → budget.
+        default_rollouts = training_config["rollouts_per_group"]
+
+        def _budget_for(sid: str) -> int:
+            if USE_ADAPTIVE_BUDGET:
+                return ROLLOUTS_PER_BUCKET[tracker.get_bucket(sid)]
+            return default_rollouts
+
         if USE_ADAPTIVE_SAMPLER:
-            weights = tracker.sample_weights(batch.step)
+            weights = tracker.sample_weights(_budget_for)
             ids = list(weights.keys())
             ws = [weights[i] for i in ids]
             n_pick = len(batch.items)  # respect groups_per_step
@@ -923,16 +915,9 @@ async def main():
         else:
             step_scenarios = list(batch.items)
 
-        # Per-group intended rollout count (logged either way; used only if
-        # USE_ADAPTIVE_BUDGET is True).
-        default_rollouts = training_config["rollouts_per_group"]
-        intended_group_sizes = []
-        for s in step_scenarios:
-            if USE_ADAPTIVE_BUDGET:
-                bucket = tracker.get_bucket(s.id)
-                intended_group_sizes.append(ROLLOUTS_PER_BUCKET[bucket])
-            else:
-                intended_group_sizes.append(default_rollouts)
+        # Per-group intended rollout count for the *initial* stage. Multi-stage
+        # rollout below may add EXTRA_STAGE_ROLLOUTS more on all-fail groups.
+        intended_group_sizes = [_budget_for(s.id) for s in step_scenarios]
 
         # Shadow what the bucket sizes WOULD have been (for telemetry even when
         # the budget flag is off).
@@ -940,29 +925,84 @@ async def main():
             ROLLOUTS_PER_BUCKET[tracker.get_bucket(s.id)] for s in step_scenarios
         ]
 
-        # ── Rollouts ──
+        # ── Rollouts (AR3PO multi-stage + response reuse) ──
+        # Stage 1: initial groups at bucket-determined budget.
+        # Stage 2..S: only re-roll the all-fail subset, append to its group.
+        # Stage final: if still all-fail, splice in a buffered correct response.
         set_phase("rollouts", step=batch.step)
         step_timer.start("rollout_generation_s")
 
-        train_groups = []
-        for scenario, n_rollouts in zip(step_scenarios, intended_group_sizes):
-            train_groups.append(
+        def _correct_count(group) -> int:
+            return sum(
+                1 for t in group.trajectories
+                if t.metrics.get("correct", 0.0) == 1.0
+            )
+
+        async def _gather_stage(scenarios_and_sizes):
+            groups = [
                 art.TrajectoryGroup(
                     (
                         rollout(
                             model,
-                            CalendarRolloutInput(step=batch.step, scenario=scenario),
+                            CalendarRolloutInput(step=batch.step, scenario=sc),
                         )
-                        for _ in range(n_rollouts)
+                        for _ in range(n)
                     )
                 )
+                for sc, n in scenarios_and_sizes
+            ]
+            return await art.gather_trajectory_groups(
+                groups,
+                pbar_desc="gather",
+                max_exceptions=sum(n for _, n in scenarios_and_sizes),
             )
 
-        finished_train_groups = await art.gather_trajectory_groups(
-            train_groups,
-            pbar_desc="gather",
-            max_exceptions=sum(intended_group_sizes),
+        # Stage 1
+        finished_train_groups = list(
+            await _gather_stage(list(zip(step_scenarios, intended_group_sizes)))
         )
+
+        # Capture any correct trajectories from stage 1 into the reuse buffer.
+        for g in finished_train_groups:
+            _buffer_correct(g.trajectories)
+
+        # Stages 2..S — regen only the all-fail subset.
+        multi_stage_extras = 0
+        for stage_idx in range(MAX_EXTRA_STAGES):
+            failing_indices = [
+                i for i, g in enumerate(finished_train_groups)
+                if _correct_count(g) == 0
+            ]
+            if not failing_indices:
+                break
+            extra = await _gather_stage([
+                (step_scenarios[i], EXTRA_STAGE_ROLLOUTS) for i in failing_indices
+            ])
+            multi_stage_extras += sum(len(g.trajectories) for g in extra)
+            for j, idx in enumerate(failing_indices):
+                merged = list(finished_train_groups[idx].trajectories) + list(
+                    extra[j].trajectories
+                )
+                finished_train_groups[idx] = art.TrajectoryGroup(merged)
+                _buffer_correct(extra[j].trajectories)
+
+        # Final fallback: response reuse from the buffer.
+        reused_responses = 0
+        for idx, g in enumerate(finished_train_groups):
+            if _correct_count(g) > 0:
+                continue
+            sid = step_scenarios[idx].id
+            spliced = _splice_from_buffer(sid)
+            if spliced is None:
+                continue
+            # Tag so the tracker excludes it from on-policy pass-rate EMA —
+            # the reused trajectory was generated under an older policy, so
+            # counting it as a current pass would bias the EMA upward and
+            # cause scenarios we keep rescuing to drift out of "hard".
+            spliced.metrics["from_reuse_buffer"] = 1.0
+            merged = list(g.trajectories) + [spliced]
+            finished_train_groups[idx] = art.TrajectoryGroup(merged)
+            reused_responses += 1
         step_timer.stop()
 
         gpu_after_rollouts = gpu_snapshot("after rollouts")
@@ -984,12 +1024,12 @@ async def main():
 
             actual_size = len(group.trajectories)
             actual_group_sizes.append(actual_size)
-            # Sanity: actual rollouts should match what we asked for. If ART
-            # silently drops a rollout (e.g., tokenize repair fail), surface
-            # it but don't crash — variable group sizes are tolerated.
-            if actual_size != intended_size:
+            # Sanity: only flag a *shortfall* (lost rollouts). Multi-stage
+            # rollout + response reuse legitimately grow groups past the
+            # initial intended budget, so actual > intended is expected.
+            if actual_size < intended_size:
                 print(
-                    f"  [GROUP-SIZE MISMATCH] scenario={scenario_id} "
+                    f"  [GROUP-SIZE SHORTFALL] scenario={scenario_id} "
                     f"intended={intended_size} actual={actual_size}"
                 )
 
@@ -998,15 +1038,23 @@ async def main():
             if skipped:
                 skip_count += 1
 
-            # Update tracker (always, regardless of feature flags).
+            # Update tracker (always, regardless of feature flags). Exclude
+            # spliced reuse-buffer trajectories from pass-rate EMA — they're
+            # off-policy and would bias the difficulty signal.
             if scenario_id != "?" and group.trajectories:
-                rollout_correct = [
-                    t.metrics.get("correct", 0.0) == 1.0 for t in group.trajectories
+                on_policy_trajs = [
+                    t for t in group.trajectories
+                    if t.metrics.get("from_reuse_buffer", 0.0) != 1.0
                 ]
-                tracker.update(scenario_id, rollout_correct, batch.step)
-                # Feed per-category rolling reward.
-                for r in group_rewards:
-                    _update_cat_recent(category, r)
+                if on_policy_trajs:
+                    rollout_correct = [
+                        t.metrics.get("correct", 0.0) == 1.0
+                        for t in on_policy_trajs
+                    ]
+                    tracker.update(scenario_id, rollout_correct, batch.step)
+                # Feed per-category rolling reward (on-policy only).
+                for t in on_policy_trajs:
+                    _update_cat_recent(category, t.reward)
 
             group_details.append({
                 "scenario_id": scenario_id,
@@ -1019,8 +1067,13 @@ async def main():
                 "verdicts": group_verdicts,
             })
 
-            all_rewards.extend(group_rewards)
+            # Headline reward / accuracy / token stats reflect on-policy
+            # rollouts only — spliced reuse-buffer trajectories are training
+            # signal, not a measurement of current model performance.
             for t in group.trajectories:
+                if t.metrics.get("from_reuse_buffer", 0.0) == 1.0:
+                    continue
+                all_rewards.append(t.reward)
                 all_traj_metrics.append(t.metrics)
 
         correct_count = sum(1 for r in all_rewards if r == 1.0)
@@ -1062,7 +1115,6 @@ async def main():
         bucket_counts = tracker.bucket_counts()
         migrations = tracker.pop_migrations()
         visit_stats = tracker.visit_stats()
-        retest_count = tracker.retest_count(batch.step)
         per_cat_recent = _cat_recent_means()
         sampled_buckets_counter: Counter = Counter(g["bucket"] for g in group_details)
 
@@ -1095,9 +1147,11 @@ async def main():
             f"  [ADAPTIVE step={batch.step}] "
             f"buckets all={bucket_counts['hard']}H/{bucket_counts['mid']}M/{bucket_counts['easy']}E/{bucket_counts['cold']}C "
             f"sampled={dict(sampled_buckets_counter)} "
-            f"migrate={sum(migrations.values())} retest={retest_count} "
+            f"migrate={sum(migrations.values())} "
             f"visits={visit_stats['min']}/{visit_stats['p50']}/{visit_stats['max']} (ratio={visit_stats['ratio']:.2f}) "
             f"group_sizes={actual_group_sizes} (vs baseline {baseline_total_rollouts}) "
+            f"multistage_extras={multi_stage_extras} reused={reused_responses} "
+            f"buf_size={sum(len(b) for b in response_buffer.values())} "
             f"ent_proxy={entropy_proxy:.1f}"
         )
 
@@ -1247,7 +1301,14 @@ async def main():
                 "migrations": migrations,
                 "visit_stats": visit_stats,
                 "n_observations_dist": tracker.n_observations_dist(),
-                "retest_fired": retest_count,
+            },
+            "ar3po_recovery": {
+                "multi_stage_extra_rollouts": multi_stage_extras,
+                "reused_responses": reused_responses,
+                "buffer_size_total": sum(len(b) for b in response_buffer.values()),
+                "buffer_scenarios_covered": sum(
+                    1 for b in response_buffer.values() if b
+                ),
             },
             "adaptive_rollouts": {
                 "feature_flag": USE_ADAPTIVE_BUDGET,

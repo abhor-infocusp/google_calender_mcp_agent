@@ -1,15 +1,26 @@
-"""Per-scenario rolling pass-rate tracker for difficulty-targeted GRPO sampling.
+"""Per-scenario rolling pass-rate tracker for adaptive GRPO sampling.
 
 Tracks how often each scenario is solved (EMA of correct/incorrect verdicts),
-buckets scenarios by difficulty, and exposes sampling weights that bias toward
-mid-difficulty (pass-rate near 0.5) — where GRPO's group-relative advantage
-gives the strongest gradient signal.
+buckets scenarios by difficulty, and exposes sampling weights proportional to
+the *expected probability of producing a non-skipped GRPO group*. With binary
+rewards and group size G, that probability is
+
+    P(non-skip | p) = 1 - p**G - (1 - p)**G
+
+which peaks at p=0.5 and drops to zero as p→0 or p→1. Sampling proportional
+to this drives the sampler toward scenarios that yield a usable advantage
+signal and naturally away from saturated easy ones — keeping the GRPO skip
+rate low without ad-hoc retest boosts.
 
 References:
-- AR3PO (arxiv 2509.25808): adaptive rollout + bucket allocation
-- DOTS (arxiv 2506.05316): difficulty-targeted online data selection
+- AR3PO (arxiv 2509.25808): adaptive rollout + response reuse for the all-fail
+  case. Multi-stage rollout and the replay buffer live in the training script
+  (rl_train_adaptive.py); this module supplies the difficulty signal.
+- DOTS (arxiv 2506.05316): difficulty-targeted online data selection.
 - "Hard Examples Are All You Need" (arxiv 2508.14094): never permanently drop
-  hard scenarios — they retain the most learning potential.
+  hard scenarios — they retain the most learning potential. Response reuse in
+  rl_train_adaptive.py keeps unreachable hard scenarios in the curriculum even
+  when their on-policy pass-rate hits zero.
 """
 
 from __future__ import annotations
@@ -17,8 +28,8 @@ from __future__ import annotations
 import json
 import math
 import os
-from dataclasses import asdict, dataclass, field
-from typing import Iterable, Literal
+from dataclasses import asdict, dataclass
+from typing import Callable, Iterable, Literal
 
 Bucket = Literal["cold", "hard", "mid", "easy"]
 
@@ -26,9 +37,11 @@ DEFAULT_ALPHA = 0.3
 COLD_START_OBS = 8
 HARD_THRESHOLD = 0.3
 EASY_THRESHOLD = 0.7
-RETEST_STEP_GAP = 50
-RETEST_BOOST = 3.0
-WEIGHT_FLOOR = 1.0 - 0.7 * 0.5  # = 0.65, never zero
+# Tiny floor so a scenario whose EMA has decayed to ~0 (or ~1) can still be
+# rediscovered occasionally — multi-stage rollout + response reuse will rescue
+# it. Without this floor, a scenario that hit pass_rate_ema=0 once is permanently
+# dropped, which contradicts the "Hard Examples" principle above.
+WEIGHT_FLOOR = 0.02
 
 
 @dataclass
@@ -129,26 +142,50 @@ class ScenarioTracker:
 
     # ── sampling weights ──────────────────────────────────────────────
 
-    def sample_weight(self, scenario_id: str, current_step: int) -> float:
+    def sample_weight(self, scenario_id: str, group_size: int) -> float:
+        """Probability this scenario produces a non-skipped GRPO group.
+
+        For binary rewards, a group of `group_size` rollouts is skipped iff
+        all rollouts agree (all-pass or all-fail). Under an iid Bernoulli(p)
+        model with p = pass_rate_ema, that probability is
+
+            P(skip)     = p**G + (1-p)**G
+            P(non-skip) = 1 - p**G - (1-p)**G
+
+        Sampling weight ∝ P(non-skip) routes compute toward scenarios that
+        actually yield a learning signal. Cold scenarios (insufficient data
+        to estimate p) get uniform weight 1.0 so warmup is unbiased.
+        """
         s = self.stats[scenario_id]
         if s.n_observations < self.cold_start_n:
-            # Cold-start: uniform-ish, pull every scenario through warmup.
+            # Cold-start: uniform, pull every scenario through warmup.
             return 1.0
-        # Triangular peak at 0.5; floor 0.65 at extremes (0/1).
-        w = 1.0 - 0.7 * abs(s.pass_rate_ema - 0.5)
-        # Forced retest of graduated easy scenarios — catches forgetting.
-        if (
-            self._bucket(s) == "easy"
-            and s.last_step >= 0
-            and current_step - s.last_step > RETEST_STEP_GAP
-        ):
-            w *= RETEST_BOOST
-        return w
+        if group_size < 2:
+            # Single-rollout groups can never produce a non-trivial advantage.
+            return WEIGHT_FLOOR
+        p = s.pass_rate_ema
+        w = 1.0 - p**group_size - (1.0 - p) ** group_size
+        return max(w, WEIGHT_FLOOR)
 
-    def sample_weights(self, current_step: int) -> dict[str, float]:
-        return {
-            sid: self.sample_weight(sid, current_step) for sid in self.stats
-        }
+    def sample_weights(
+        self,
+        group_size_fn: Callable[[str], int] | int,
+    ) -> dict[str, float]:
+        """Per-scenario weight map.
+
+        group_size_fn: either a constant int (group size used for every
+        scenario) or a callable scenario_id -> int (lets the caller couple
+        weight to per-bucket budget). Passing a callable matters when the
+        budget varies by bucket — e.g. easy=4 vs hard=8 — because P(non-skip)
+        depends on G, not just p.
+        """
+        if callable(group_size_fn):
+            return {
+                sid: self.sample_weight(sid, group_size_fn(sid))
+                for sid in self.stats
+            }
+        g = int(group_size_fn)
+        return {sid: self.sample_weight(sid, g) for sid in self.stats}
 
     # ── observability ─────────────────────────────────────────────────
 
@@ -181,17 +218,6 @@ class ScenarioTracker:
         m = self._migrations_this_call
         self._migrations_this_call = {}
         return m
-
-    def retest_count(self, current_step: int) -> int:
-        n = 0
-        for s in self.stats.values():
-            if (
-                self._bucket(s) == "easy"
-                and s.last_step >= 0
-                and current_step - s.last_step > RETEST_STEP_GAP
-            ):
-                n += 1
-        return n
 
     # ── persistence ───────────────────────────────────────────────────
 

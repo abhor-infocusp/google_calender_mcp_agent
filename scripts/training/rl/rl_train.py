@@ -270,47 +270,20 @@ def load_all_scenarios() -> list[CalendarScenario]:
 
 OPENAI_TOOLS = get_openai_tools()
 
-# ── Evaluation (uses Gemini judge via Vertex AI) ──────────
+# ── Evaluation (local judge service — see src/calendar_agent/judge/) ──
+#
+# RL POSTs to the FastAPI sidecar; the judge builds the router prompt,
+# generates reasoning server-side (95.44% on manual oracle), and returns
+# only the verdict. No Gemini fallback — if the judge is down we exit
+# rc=43 so the auto_restart wrapper stops and the user can intervene.
 
-# Load Google credentials from file
-CREDENTIALS_PATH = str(CREDENTIALS_PATH)
+from calendar_agent.judge.client import verdict as _judge_verdict, JudgeUnavailable
 
-_gcp_credentials = None
-if os.path.exists(CREDENTIALS_PATH):
-    from google.oauth2.credentials import Credentials as OAuth2Credentials
-
-    with open(CREDENTIALS_PATH) as _f:
-        _cred_data = json.load(_f)
-    _gcp_credentials = OAuth2Credentials(
-        token=None,
-        refresh_token=_cred_data["refresh_token"],
-        client_id=_cred_data["client_id"],
-        client_secret=_cred_data["client_secret"],
-        token_uri="https://oauth2.googleapis.com/token",
-    )
-
-# Initialize Vertex AI for the Gemini evaluator
-vertexai.init(
-    project=os.environ.get("GCP_PROJECT", "internal-ml-exp"),
-    location=os.environ.get("GCP_LOCATION", "us-central1"),
-    credentials=_gcp_credentials,
-)
-
-eval_model = GenerativeModel(
-    "gemini-2.0-flash-001",
-    system_instruction=[EVAL_SYSTEM_PROMPT],
-)
-
-
-# Counters for observability — printed in rollout summary / step logs.
-# Vertex AI's gRPC generate_content has no built-in timeout and will block
-# indefinitely when Gemini stops responding, so we wrap each call in
-# asyncio.wait_for(timeout=30) and retry up to 3 times.
-GEMINI_TIMEOUT_SECS = 30
-GEMINI_MAX_ATTEMPTS = 3
-gemini_timeout_count = 0   # single 30s timeout (across all attempts)
-gemini_giveup_count = 0    # all attempts timed out — fell back to Incorrect
-gemini_error_count = 0     # non-timeout exceptions — fell back to Incorrect
+# Counters retained for log-line compatibility (referenced in step summary).
+# In the local-judge era these all count judge service errors of one kind.
+gemini_timeout_count = 0   # transport timeouts
+gemini_giveup_count = 0    # gave up after retries
+gemini_error_count = 0     # non-transport judge errors
 
 
 async def evaluate_trajectory(
@@ -319,73 +292,38 @@ async def evaluate_trajectory(
     expected: str,
     before_days: dict,
     after_days: dict,
+    *,
+    category: str,
+    scenario_id: str | int | None = None,
 ) -> str:
-    """Ask Gemini to evaluate whether the trajectory was correct.
+    """POST to the local judge service and return 'Correct'/'Incorrect'.
 
-    Returns one of: 'Correct', 'Incorrect'. Falls back to 'Incorrect' on
-    exhausted timeouts or non-timeout errors.
+    Hard-fails (sys.exit(43)) on JudgeUnavailable rather than silently
+    returning Incorrect — a down judge would otherwise zero out the reward
+    signal and make the run silently useless. rc=43 stops auto_restart.
     """
-    global gemini_timeout_count, gemini_giveup_count, gemini_error_count
+    global gemini_error_count
 
     before_text = format_day_state_text(before_days)
     after_text = format_day_state_text(after_days)
 
-    prompt = f"""\
-Query: {query}
+    try:
+        resp = await _judge_verdict(
+            cat=category,
+            query=query,
+            final=final_output or "",
+            expected=expected or "",
+            before=before_text,
+            after=after_text,
+            scenario_id=scenario_id,
+        )
+    except JudgeUnavailable as e:
+        gemini_error_count += 1
+        print(f"[JUDGE DOWN] {e} — exiting rc=43; restart the judge service and resume.")
+        sys.stdout.flush()
+        sys.exit(43)
 
-Response: {final_output if final_output else '(no response)'}
-
-Expected: {expected if expected else '(not specified)'}
-
-Before:
-{before_text}
-
-After:
-{after_text}
-
-Was the task completed correctly? End with one word: Correct or Incorrect."""
-
-    for attempt in range(1, GEMINI_MAX_ATTEMPTS + 1):
-        try:
-            response = await asyncio.wait_for(
-                asyncio.to_thread(eval_model.generate_content, prompt),
-                timeout=GEMINI_TIMEOUT_SECS,
-            )
-        except asyncio.TimeoutError:
-            gemini_timeout_count += 1
-            print(
-                f"[EVAL TIMEOUT] attempt {attempt}/{GEMINI_MAX_ATTEMPTS} "
-                f"({GEMINI_TIMEOUT_SECS}s) — total timeouts so far: {gemini_timeout_count}"
-            )
-            continue
-        except Exception as e:
-            gemini_error_count += 1
-            print(f"[EVAL ERROR] {type(e).__name__}: {e} — total errors: {gemini_error_count}")
-            return "Incorrect"
-
-        verdict_text = response.text.strip()
-        lines = [l.strip() for l in verdict_text.splitlines() if l.strip()]
-        # Scan from last line for exact verdict
-        for line in reversed(lines):
-            line_lower = line.lower()
-            for token in ("Incorrect", "Correct"):
-                if line_lower == token.lower():
-                    return token
-        # Fallback: substring scan
-        for line in reversed(lines):
-            line_lower = line.lower()
-            for token in ("Incorrect", "Correct"):
-                if token.lower() in line_lower:
-                    return token
-        return "Incorrect"
-
-    # All attempts timed out
-    gemini_giveup_count += 1
-    print(
-        f"[EVAL TIMEOUT GIVEUP] all {GEMINI_MAX_ATTEMPTS} attempts timed out — "
-        f"total give-ups: {gemini_giveup_count}"
-    )
-    return "Incorrect"
+    return resp["verdict"]
 
 
 # ── Rollout ────────────────────────────────────────────────
@@ -549,6 +487,8 @@ async def rollout(
             expected=scenario.expected_behavior,
             before_days=before_days,
             after_days=after_days,
+            category=scenario.category,
+            scenario_id=scenario.id,
         )
         judge_latency_s = round(time.monotonic() - judge_start, 2)
 
@@ -641,14 +581,41 @@ class StepTimer:
 
 async def main():
     # ── Model & Backend ──
+    # Env-var-configurable so the same script can run multiple concurrent
+    # experiments (different bases, different ART projects). Defaults match
+    # the original 2026-04-20 run for backward compat.
+    rl_base_model = os.environ.get("RL_BASE_MODEL", "Qwen/Qwen3-14B")
+    rl_project = os.environ.get("RL_PROJECT", "calendar-agent")
+    rl_model_name = os.environ.get("RL_MODEL_NAME", "calendar-agent-001")
+    rl_vllm_port = int(os.environ.get("RL_VLLM_PORT", "8005"))
+    print(f"[rl_train] base_model={rl_base_model} project={rl_project} "
+          f"name={rl_model_name} port={rl_vllm_port}")
+
     model = art.TrainableModel(
-        name="calendar-agent-001",
-        project="calendar-agent",
-        base_model="Qwen/Qwen3-14B",
+        name=rl_model_name,
+        project=rl_project,
+        base_model=rl_base_model,
         _internal_config=dev.InternalModelConfig(
             init_args=dev.InitArgs(
                 load_in_4bit=True,
                 max_lora_rank=64,
+            ),
+            # Explicit LoRA rank/alpha + target_modules. r=16 is the standard
+            # OSS-RL convention (Unsloth default, matches vLLM's default
+            # max_lora_rank=16). For runs starting from an SFT LoRA, merge the
+            # SFT into base first (post-SFT fp16 model) and pass that as
+            # RL_BASE_MODEL — no rank-mismatch issue.
+            peft_args=dev.PeftArgs(
+                r=16,
+                lora_alpha=16,
+                target_modules=[
+                    "q_proj", "k_proj", "v_proj", "o_proj",
+                    "gate_proj", "up_proj", "down_proj",
+                ],
+                lora_dropout=0,
+                bias="none",
+                use_gradient_checkpointing="unsloth",
+                random_state=42,
             ),
             engine_args=dev.EngineArgs(
                 max_model_len=4096,
@@ -678,7 +645,7 @@ async def main():
     backend = LocalBackend(in_process=True)
     from art.dev.openai_server import OpenAIServerConfig, ServerArgs
     await model.register(backend, _openai_client_config=OpenAIServerConfig(
-        server_args=ServerArgs(port=8005),
+        server_args=ServerArgs(port=rl_vllm_port),
     ))
 
     # ── Load Data ──

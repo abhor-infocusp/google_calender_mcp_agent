@@ -3,11 +3,24 @@
 
 Single combined figure: overall reward, overall reward slope, per-category
 reward, per-category reward slope, skip rate.
+
+Usage:
+    # Plot any run by run-dir (auto-finds .art/<project>/models/<name>/):
+    plot_rewards.py --run-dir runs/rl_grpo_qwen3_14b_base_20260426
+    plot_rewards.py --run-dir runs/rl_grpo_qwen3_14b_base_20260426 \
+                    --output ./out.png --title "GRPO from base"
+
+    # Direct ART model path:
+    plot_rewards.py --art-dir .art/grpo-base-20260426/models/qwen3-14b-base
+
+    # No args: legacy default (the original 2026-04-20 calendar-agent run).
 """
 
+import argparse
 import json
 import glob
 import os
+import sys
 from collections import defaultdict
 
 import numpy as np
@@ -18,12 +31,75 @@ import matplotlib.pyplot as plt
 
 from calendar_agent.paths import PROJECT_ROOT
 
-ART_DIR = str(PROJECT_ROOT / ".art" / "calendar-agent" / "models" / "calendar-agent-001")
-TRAJ_DIR = os.path.join(ART_DIR, "trajectories", "train")
-HISTORY_PATH = os.path.join(ART_DIR, "history.jsonl")
-
 WINDOW = 300  # MA window for reward smoothing
 DERIV_SMOOTH = 200  # Second MA pass on the derivative
+
+
+def find_art_model_dir(run_dir: str) -> str:
+    """Locate the ART model dir for a run.
+
+    ART writes to `.art/<project>/models/<name>/`. Depending on cwd at launch,
+    this may be at the repo root OR nested inside `<run_dir>/.art/...`.
+    Read the trainer's startup log line for the exact project + name so we
+    don't mis-match across concurrent runs that share the repo `.art/`.
+    """
+    import re
+    # Find project + name from the trainer's startup log.
+    train_logs = sorted(glob.glob(os.path.join(run_dir, "logs", "train_*.log")))
+    project = None
+    name = None
+    pat = re.compile(r"project=(\S+)\s+name=(\S+)")
+    for log in reversed(train_logs):
+        try:
+            with open(log) as f:
+                # The "[rl_train] base_model=... project=... name=..." line
+                # is in the first ~50 lines after vLLM startup banner.
+                for _ in range(2000):
+                    line = f.readline()
+                    if not line:
+                        break
+                    m = pat.search(line)
+                    if m:
+                        project, name = m.group(1), m.group(2)
+                        break
+            if project:
+                break
+        except Exception:
+            continue
+
+    candidates = []
+    if project and name:
+        for base in [run_dir, str(PROJECT_ROOT)]:
+            cand = os.path.join(base, ".art", project, "models", name)
+            candidates.append(cand)
+    else:
+        # Fallback: glob and pick the most recently-modified one (best-effort).
+        for base in [run_dir, str(PROJECT_ROOT)]:
+            for p in sorted(glob.glob(os.path.join(base, ".art/*/models/*/"))):
+                candidates.append(p.rstrip("/"))
+
+    for c in candidates:
+        if os.path.exists(os.path.join(c, "history.jsonl")):
+            return c
+    raise FileNotFoundError(
+        f"no .art/<project>/models/<name>/history.jsonl found for {run_dir} "
+        f"(tried project={project!r} name={name!r})"
+    )
+
+
+def parse_args():
+    p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    p.add_argument("--run-dir", help="runs/<run>/ dir; auto-finds ART model dir")
+    p.add_argument("--art-dir", help="explicit path to .art/<project>/models/<name>/")
+    p.add_argument("--output", help="output PNG path (default: <run-dir>/reward_curve.png or ./reward_curve.png)")
+    p.add_argument("--title", help="plot title (default: derived from run-dir)")
+    return p.parse_args()
+
+
+# Default values for legacy invocation (no args). Resolved at runtime in main().
+ART_DIR = ""
+TRAJ_DIR = ""
+HISTORY_PATH = ""
 
 CATEGORY_SHORT = {
     "Complex Logic & Conflict (Advanced)": "Complex",
@@ -88,6 +164,41 @@ def smooth_derivative(y, ma_window=DERIV_SMOOTH, scale=100):
 
 
 def main():
+    global ART_DIR, TRAJ_DIR, HISTORY_PATH
+    args = parse_args()
+
+    if args.art_dir:
+        ART_DIR = args.art_dir.rstrip("/")
+    elif args.run_dir:
+        ART_DIR = find_art_model_dir(args.run_dir)
+    else:
+        # Legacy default — the 2026-04-20 main RL run.
+        ART_DIR = str(PROJECT_ROOT / ".art" / "calendar-agent" / "models" / "calendar-agent-001")
+    TRAJ_DIR = os.path.join(ART_DIR, "trajectories", "train")
+    HISTORY_PATH = os.path.join(ART_DIR, "history.jsonl")
+
+    if args.output:
+        output_path = args.output
+    elif args.run_dir:
+        output_path = os.path.join(args.run_dir, "reward_curve.png")
+    else:
+        output_path = "reward_curve.png"
+
+    if args.title:
+        title = args.title
+    elif args.run_dir:
+        title = f"RL Training — {os.path.basename(args.run_dir.rstrip('/'))}"
+    else:
+        title = "RL Training — Qwen3-14B GRPO"
+
+    print(f"ART_DIR: {ART_DIR}")
+    print(f"output:  {output_path}")
+    print(f"title:   {title}")
+
+    if not os.path.exists(HISTORY_PATH):
+        print(f"ERROR: history.jsonl not found at {HISTORY_PATH}", file=sys.stderr)
+        sys.exit(1)
+
     history = load_history(HISTORY_PATH)
     print(f"Loaded {len(history)} steps from history.jsonl")
 
@@ -139,7 +250,7 @@ def main():
         5, 1, figsize=(14, 16), sharex=True,
         gridspec_kw={"height_ratios": [3, 2, 3, 2, 1.5]},
     )
-    fig.suptitle("RL Training — Qwen3-14B GRPO", fontsize=15, fontweight="bold")
+    fig.suptitle(title, fontsize=15, fontweight="bold")
 
     # 1) Overall reward
     ax = axes[0]
@@ -227,8 +338,9 @@ def main():
              bbox=dict(boxstyle="round", facecolor="wheat", alpha=0.5))
 
     plt.tight_layout(rect=[0, 0.02, 1, 0.97])
-    plt.savefig("reward_curve.png", dpi=150, bbox_inches="tight")
-    print("Saved reward_curve.png")
+    os.makedirs(os.path.dirname(output_path) or ".", exist_ok=True)
+    plt.savefig(output_path, dpi=150, bbox_inches="tight")
+    print(f"Saved {output_path}")
 
     # Summary table
     print(f"\n{'Category':<12s} {'Rollouts':>9s} {'Accuracy':>9s}")

@@ -26,9 +26,15 @@ if TYPE_CHECKING:
 
 _APPLIED: set[str] = set()
 
-# Set this before importing art to inject RL LoRA weights into the fresh adapter.
+# Set this before importing art to inject LoRA weights from a non-ART
+# checkpoint into the fresh adapter (e.g. starting RL from an SFT LoRA).
 # Path should point to a directory with adapter_model.safetensors.
-INJECT_LORA_CHECKPOINT: str | None = None
+# Configurable via ART_INJECT_LORA_CHECKPOINT env var so concurrent runs can
+# each set their own without editing the file.
+import os as _os_for_inject  # noqa: F401  (intentional alias to avoid shadowing later)
+INJECT_LORA_CHECKPOINT: str | None = _os_for_inject.environ.get(
+    "ART_INJECT_LORA_CHECKPOINT"
+) or None
 
 
 def _log(name: str) -> None:
