@@ -1,0 +1,64 @@
+============================================================
+TIER 1 — eval.jsonl (n=110, gold)
+============================================================
+
+  RUN1 per-judge accuracy:
+    base    90.9% [ 84.1,  95.0]  n=110
+    sft     91.8% [ 85.2,  95.6]  n=110
+    gem     94.5% [ 88.6,  97.5]  n=110
+
+  RUN2 per-judge accuracy:
+    base    91.8% [ 85.2,  95.6]  n=110
+    sft     93.6% [ 87.4,  96.9]  n=110
+    gem     93.6% [ 87.4,  96.9]  n=110
+
+  RUN1 vs RUN2 jitter:
+    base   flip=0.9%  acc1=90.9%  acc2=91.8%  Δ=+0.9pp
+    sft    flip=1.8%  acc1=91.8%  acc2=93.6%  Δ=+1.8pp
+
+  RUN1 silver-filter candidates (P(label wrong | agree)):
+    base∧gem    coverage= 90.9%  noise= 3.00% [ 1.03,  8.45]  n_agree=100
+    sft∧gem    coverage= 91.8%  noise= 2.97% [ 1.02,  8.37]  n_agree=101
+    base∧sft    coverage= 91.8%  noise= 4.95% [ 2.13, 11.07]  n_agree=101
+
+  RUN2 silver-filter candidates:
+    base∧gem    coverage= 94.5%  noise= 4.81% [ 2.07, 10.76]  n_agree=104
+    sft∧gem    coverage= 94.5%  noise= 3.85% [ 1.51,  9.47]  n_agree=104
+    base∧sft    coverage= 92.7%  noise= 3.92% [ 1.54,  9.65]  n_agree=102
+
+  RUN1 3-way agreement (base ∧ sft ∧ gem):
+    coverage=87.3%  noise=3.12% [1.07, 8.79]  n_agree=96
+
+============================================================
+TIER 2 — disagreements.jsonl (n=85, hard cases, gold)
+============================================================
+
+  per-judge accuracy:
+    base    56.5% [ 45.9,  66.5]  n=85
+    sft     52.9% [ 42.4,  63.2]  n=85
+    gem     50.6% [ 40.2,  61.0]  n=85
+
+  silver-filter candidates:
+    base∧gem    coverage= 28.2%  noise=37.50% [21.16, 57.29]  n_agree=24
+    sft∧gem    coverage= 48.2%  noise=46.34% [32.06, 61.25]  n_agree=41
+    base∧sft    coverage= 61.2%  noise=42.31% [29.87, 55.81]  n_agree=52
+
+============================================================
+POOL 500 — distribution-shift check (no gold labels)
+============================================================
+
+  joined rows (have base+sft+qwen-v2+gem): 500/500
+
+  pairwise agreement rates (no gold, just consistency):
+    base     vs qwen_v2    96.8%
+    base     vs sft        87.4%
+    base     vs gem        88.8%
+    sft      vs gem        83.4%
+    sft      vs qwen_v2    88.2%
+    qwen_v2  vs gem        90.4%
+
+  filter triggered AND remaining judge disagrees (noise-proxy %):
+    base∧gem      (3rd=sft) coverage= 88.8%  3rd-disagrees=10.14% [ 7.66, 13.29]  n=444
+    sft∧gem      (3rd=base) coverage= 83.4%  3rd-disagrees= 4.32% [ 2.75,  6.72]  n=417
+    base∧sft      (3rd=gem) coverage= 87.4%  3rd-disagrees= 8.70% [ 6.40, 11.71]  n=437
+    qwen_v2∧gem      (3rd=sft) coverage= 90.4%  3rd-disagrees=10.40% [ 7.91, 13.55]  n=452

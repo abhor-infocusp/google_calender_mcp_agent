@@ -1,0 +1,64 @@
+====================================================================================================
+PER-PROMPT MEAN ACCURACY ± STDEV (across 3 runs)
+====================================================================================================
+prompt                                                     tier1                           tier2
+router_qwen_v2_DEPLOYED           91.52% ± 1.05  (90.9/90.9/92.7)  54.90% ± 1.80  (55.3/52.9/56.5)
+fewshot_v3                        91.52% ± 1.05  (90.9/90.9/92.7)  54.51% ± 0.68  (54.1/55.3/54.1)
+router_v1                         91.52% ± 0.52  (90.9/91.8/91.8)  60.39% ± 1.36  (61.2/58.8/61.2)
+
+====================================================================================================
+PAIRED PER-ROW: rows where prompt A correct more often than prompt B
+====================================================================================================
+
+--- tier1 ---
+common rows: 82
+  fewshot_v3               > router_qwen_v2_DEPLOYED      :   1  | tied  80 | < 1    (sign-test p=1.000)
+  router_v1                > router_qwen_v2_DEPLOYED      :   2  | tied  77 | < 3    (sign-test p=1.000)
+  fewshot_v3               > router_v1                    :   2  | tied  78 | < 2    (sign-test p=1.000)
+
+--- tier2 ---
+common rows: 68
+  fewshot_v3               > router_qwen_v2_DEPLOYED      :   1  | tied  65 | < 2    (sign-test p=1.000)
+  router_v1                > router_qwen_v2_DEPLOYED      :   7  | tied  59 | < 2    (sign-test p=0.180)
+  fewshot_v3               > router_v1                    :   2  | tied  59 | < 7    (sign-test p=0.180)
+
+====================================================================================================
+PER-CATEGORY ACCURACY (3 runs concat, headroom cats only)
+====================================================================================================
+
+  Complex Logic & Conflict (Advanced)
+    prompt                               tier1+tier2 combined (3 runs concat)
+    router_qwen_v2_DEPLOYED           81/135 = 60.00% [51.6,67.9]
+    fewshot_v3                        80/135 = 59.26% [50.8,67.2]
+    router_v1                         93/135 = 68.89% [60.6,76.1]
+
+  Human Chaos (Edge Cases/Fragments)
+    prompt                               tier1+tier2 combined (3 runs concat)
+    router_qwen_v2_DEPLOYED           61/87  = 70.11% [59.8,78.7]
+    fewshot_v3                        59/87  = 67.82% [57.4,76.7]
+    router_v1                         60/87  = 68.97% [58.6,77.7]
+
+  Information Retrieval (Querying)
+    prompt                               tier1+tier2 combined (3 runs concat)
+    router_qwen_v2_DEPLOYED           75/90  = 83.33% [74.3,89.6]
+    fewshot_v3                        75/90  = 83.33% [74.3,89.6]
+    router_v1                         75/90  = 83.33% [74.3,89.6]
+
+  Schedule a Single Event
+    prompt                               tier1+tier2 combined (3 runs concat)
+    router_qwen_v2_DEPLOYED           49/69  = 71.01% [59.4,80.4]
+    fewshot_v3                        50/69  = 72.46% [61.0,81.6]
+    router_v1                         51/69  = 73.91% [62.5,82.8]
+
+  Vague & Contextual (Reasoning Required)
+    prompt                               tier1+tier2 combined (3 runs concat)
+    router_qwen_v2_DEPLOYED           53/66  = 80.30% [69.2,88.1]
+    fewshot_v3                        54/66  = 81.82% [70.9,89.3]
+    router_v1                         57/66  = 86.36% [76.1,92.7]
+
+====================================================================================================
+OVERALL (tier1 + tier2, 3 runs concat — n≈585 per prompt)
+====================================================================================================
+  router_qwen_v2_DEPLOYED           442/585 = 75.56% [71.91,78.86]
+  fewshot_v3                        441/585 = 75.38% [71.74,78.70]
+  router_v1                         456/585 = 77.95% [74.41,81.12]

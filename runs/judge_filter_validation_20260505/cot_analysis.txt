@@ -1,0 +1,42 @@
+Loaded 50 rows
+
+Length (chars):
+  base  {'n': 50, 'mean': 1051, 'median': 1011, 'p10': 815, 'p90': 1422, 'min': 628, 'max': 1592}
+  sft   {'n': 50, 'mean': 179, 'median': 26, 'p10': 26, 'p90': 500, 'min': 26, 'max': 918}
+
+Average structural signals:
+  metric                     base      sft
+  lines                     15.00     5.72
+  bullets                    0.00     0.00
+  step_kw                    0.18     0.10
+  before_after_ref           1.26     0.00
+
+Verdict agreement: 46/50 = 92.0%
+
+Disagreements: 4/50
+
+  --- sid=cal_41_q_10 cat=Human Chaos (Edge Cases/Fragments) label=Incorrect base=Correct sft=Incorrect
+  BASE (1093c): '<think>\n\n</think>\n\n(A) The user\'s query is vague ("Reschedule... the kale... thing?") but the calendar context provides enough information to act. The event "Harvesting mature kale" on Tuesday is clearly identifiable. The assistant did not ask for clarification, but it is acceptable in this case sin'
+  SFT  (497c): '<think>\n\n</think>\n\nIncorrect\n\nThe user asked to reschedule "the kale thing", which refers to "Harvesting mature kale" on Tuesday from 9:30 AM to 11:00 AM. The assistant rescheduled the event to Wednesday, December 2nd, from 10:00 AM to 11:30 AM. However, the assistant did not ask the user for clarif'
+
+  --- sid=cal_22_q_10 cat=Human Chaos (Edge Cases/Fragments) label=Incorrect base=Correct sft=Incorrect
+  BASE (935c): '<think>\n\n</think>\n\n(A) The user\'s query is incomplete and ambiguous. The assistant correctly asked for clarification, as the query "Meeting Miller divorce..." lacks sufficient detail to determine the exact event or action the user wants. The assistant\'s response is appropriate in this context.\n\n(B) '
+  SFT  (404c): '<think>\n\n</think>\n\nIncorrect\n\nThe user\'s query was about a meeting related to a divorce case with Miller. The assistant\'s response was to ask for more details, but the calendar shows two relevant events: "Client Meeting - Divorce Case" and "Call with Financial Advisor - Miller Divorce". The assistan'
+
+  --- sid=cal_18_q_8 cat=Complex Logic & Conflict (Advanced) label=Correct base=Correct sft=Incorrect
+  BASE (997c): '<think>\n\n</think>\n\n(A) The user\'s query is clear: they cannot make the "tax compliance review on Thursday" and want to decline it. The information is sufficient to act without clarification.\n\n(B) The calendar state changed correctly. The "Tax compliance review" event on Thursday from 13:00-15:00 was'
+  SFT  (232c): '<think>\n\n</think>\n\nIncorrect\n\nThe assistant\'s response claims to have declined the "Tax compliance review" on Thursday. However, the calendar diff shows that the event was removed, not declined. The decline action was not performed.'
+
+  --- sid=cal_20_q_9 cat=Complex Logic & Conflict (Advanced) label=Correct base=Correct sft=Incorrect
+  BASE (1015c): '<think>\n\n</think>\n\n(A) The user\'s query provided enough information to act. The assistant needed to check for a conflict with the "farm finances" event on Thursday. The query is not ambiguous, and the assistant correctly identified the event to move and the condition to check.\n\n(B) The calendar stat'
+  SFT  (423c): 'Okay, I\'ll check the calendar for Thursday. First, I\'ll list all the events to make sure I have the right dates.\n</think>\n\nI\'ve listed the events for Thursday. Now, I\'ll check for the "Meeting with Restaurant Owner" and the "Farm Finances and Invoicing" to ensure there are no conflicts.\n</think>\n\nI\''
+
+--- agree samples ---
+
+  sid=cal_40_q_7 verdict=Correct (label=Correct)
+  BASE (858c): '<think>\n\n</think>\n\n(A) The user\'s query is clear: they want to know who is attending the safety meeting on Monday. The calendar contains a "Safety Meeting" event on Monday with attendees listed. No clarification is needed.\n\n(B) The calendar state did not change. The user asked for information, not f'
+  SFT  (26c): '<think>\n\n</think>\n\nCorrect'
+
+  sid=cal_17_q_8 verdict=Correct (label=Correct)
+  BASE (1085c): '<think>\n\n</think>\n\n(A) The user\'s query provides enough information to act. They specify the event name ("Dialogue Revision - Act 2, Scene 4"), the original date (Monday), and the new date (Wednesday at the same time). No clarification is needed.\n\n(B) The calendar state changed correctly. The event '
+  SFT  (26c): '<think>\n\n</think>\n\nCorrect'
