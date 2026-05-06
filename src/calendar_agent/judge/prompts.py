@@ -441,8 +441,63 @@ def build_fewshot_v4_dayfocus(rec: dict) -> tuple[str, str, dict]:
 
 
 # ─────────────────────────────────────────────────────────────
-# Router: per-category dispatch (per-category bests from the
-# 2026-04-30 prompt-tuning sweep — see docs/judge/prompt_tuning.md).
+# CoT-checklist (no few-shot) — used by Gemini RelTime in v2 router.
+# ─────────────────────────────────────────────────────────────
+def build_cot_checklist_v2(rec: dict) -> tuple[str, str, dict]:
+    q = rec["query"]; final = rec["final"]; exp = rec.get("expected") or ""
+    diff = diff_states(rec["before"], rec["after"])
+    user = (
+        f"User query: {q}\n\n"
+        f"Assistant's user-facing response: {final if final else '(no response)'}\n\n"
+        f"Expected behavior (hint): {exp if exp else '(not specified)'}\n\n"
+        f"Calendar diff (+ added, - removed, ~ modified):\n{diff}\n\n"
+        f"Full BEFORE state:\n{rec['before']}\n\n"
+        f"Full AFTER state:\n{rec['after']}\n\n"
+        "End with Correct or Incorrect on the last line."
+    )
+    return CHECKLIST_V2_SYS, user, {"max_tokens": 512}
+
+
+# ─────────────────────────────────────────────────────────────
+# Lenient addendum — appended to a builder's system prompt to bias toward
+# Correct on borderline cases. Helps cats where the judge over-flags
+# false-negatives (notably Vague/Chaos on Gemini, Chaos on Qwen).
+# ─────────────────────────────────────────────────────────────
+LENIENT_ADDENDUM = """\
+
+CRITICAL: Default toward Correct on borderline cases. Only call Incorrect when at least one of these is clearly true:
+1. Agent claimed success but calendar didn't change (and a state change was clearly required).
+2. Agent modified, deleted, or rescheduled a DIFFERENT event than the one asked about.
+3. Agent fabricated an EVENT (title + day + time window) not in BEFORE or AFTER.
+4. Wrong duration when the user explicitly stated the duration.
+5. Response denies an event that exists in BEFORE on the day asked about.
+6. Tool calls broken/garbled, or agent flipped to an unrelated topic.
+If none of (1)-(6) apply, output Correct."""
+
+
+def _lenient(builder):
+    def f(rec: dict) -> tuple[str, str, dict]:
+        s, u, o = builder(rec)
+        return s + LENIENT_ADDENDUM, u, o
+    f.__name__ = builder.__name__ + "_lenient"
+    return f
+
+
+build_fewshot_v3_lenient          = _lenient(build_fewshot_v3)
+build_fewshot_v4_dayfocus_lenient = _lenient(build_fewshot_v4_dayfocus)
+
+
+# ─────────────────────────────────────────────────────────────
+# Router: per-category dispatch.
+#
+# ROUTER_MAP — original v1 from 2026-04-30 sweep (95.44% in-sample, 93.33%
+# live, 92.4% held-out CV). Kept for reproducing the historical service.
+#
+# ROUTER_MAP_QWEN_V2 — picked by 5-fold stratified CV on (oracle ∖ holdout)
+# ∪ (manual_v2_agent ∖ holdout) = 313 records, 2026-05-02 sweep.
+#
+# ROUTER_MAP_GEMINI_V2 — same pool, divergent variant choices to reduce
+# correlated-error risk in the agreement filter.
 # ─────────────────────────────────────────────────────────────
 ROUTER_MAP = {
     "Complex Logic & Conflict (Advanced)":              build_fewshot,            # 92.86
@@ -454,8 +509,42 @@ ROUTER_MAP = {
     "Vague & Contextual (Reasoning Required)":          build_fewshot_v4_dayfocus,  # 97.37
 }
 
+# Qwen3-14B fp8 + /no_think + max_tokens=512.  CV mean ± stdev shown.
+ROUTER_MAP_QWEN_V2 = {
+    "Complex Logic & Conflict (Advanced)":              build_fewshot_v3,                 # 78.46 ± 11.41
+    "Human Chaos (Edge Cases/Fragments)":               build_fewshot_v3_lenient,         # 89.56 ± 7.10
+    "Information Retrieval (Querying)":                 build_fewshot_v3,                 # carried (out of scope)
+    "Modifier & Correction (Rescheduling/Updates)":     build_fewshot_v3,                 # carried (out of scope)
+    "Relative Time References (today, tomorrow, yesterday, this week)": build_fewshot_v3, # 93.33 ± 6.09
+    "Schedule a Single Event":                          build_fewshot_v3,                 # carried (out of scope)
+    "Vague & Contextual (Reasoning Required)":          build_fewshot_v3,                 # 92.00 ± 8.37
+}
+
+# Gemini-2.0-flash, temperature=0. CV mean ± stdev shown.
+ROUTER_MAP_GEMINI_V2 = {
+    "Complex Logic & Conflict (Advanced)":              build_fewshot_v4_dayfocus_lenient,  # 80.00 ± 13.97 (divergent from Qwen on same cat)
+    "Human Chaos (Edge Cases/Fragments)":               build_fewshot_v4_dayfocus_lenient,  # 91.78 ± 8.45
+    "Information Retrieval (Querying)":                 build_fewshot,                      # carried (out of scope)
+    "Modifier & Correction (Rescheduling/Updates)":     build_cot_checklist_v2,             # carried (out of scope, was strong)
+    "Relative Time References (today, tomorrow, yesterday, this week)": build_cot_checklist_v2,  # 93.33 ± 9.94
+    "Schedule a Single Event":                          build_cot_checklist_v2,             # carried (out of scope, was strong)
+    "Vague & Contextual (Reasoning Required)":          build_fewshot_v4_dayfocus,          # 87.56 ± 8.94
+}
+
 
 def build_router(rec: dict) -> tuple[str, str, dict]:
-    """Per-category dispatch to the variant that scored best on that category."""
+    """v1: per-category dispatch to the variant that scored best in 2026-04-30 sweep."""
     builder = ROUTER_MAP.get(rec["cat"], build_fewshot_v3)
+    return builder(rec)
+
+
+def build_router_qwen_v2(rec: dict) -> tuple[str, str, dict]:
+    """v2: re-tuned per-category dispatch for Qwen3-14B fp8 (+ /no_think)."""
+    builder = ROUTER_MAP_QWEN_V2.get(rec["cat"], build_fewshot_v3)
+    return builder(rec)
+
+
+def build_router_gemini_v2(rec: dict) -> tuple[str, str, dict]:
+    """v2: re-tuned per-category dispatch for Gemini-2.0-flash (temp=0)."""
+    builder = ROUTER_MAP_GEMINI_V2.get(rec["cat"], build_fewshot_v3)
     return builder(rec)

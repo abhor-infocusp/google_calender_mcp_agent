@@ -132,6 +132,56 @@ def load_scenario_index() -> dict[str, dict]:
 
 
 # ── Trajectory replay ──────────────────────────────────────
+#
+# IDs are *not* stable across env loads: CalendarEnvironment.load_json_calendar
+# generates fresh `evt_<uuid>` ids on every load, so the agent's original
+# update_event(event_id=...) / delete_event(event_id=...) calls reference IDs
+# that don't exist in our fresh env, dispatch fails silently, and Before==After.
+#
+# We fix this by harvesting (orig_id → signature) pairs from prior tool-result
+# messages in the trajectory, matching each signature to a current-env event,
+# and remapping the event_id argument before dispatch.
+
+import re
+
+# list_events / format_summary line:
+#   "id: evt_xxx | <summary> — <Day> HH:MM-HH:MM"
+# Use lazy match for summary because summaries can contain spaces and dashes.
+_FMT_SUMMARY_RE = re.compile(
+    r"id:\s*(evt_[0-9a-f]+)\s*\|\s*(.+?)\s+—\s+([A-Za-z]{3})\s+(\d{2}:\d{2})-(\d{2}:\d{2})"
+)
+# format_detail block:
+#   "<summary>\n  ID: evt_xxx\n  Time: <Day> Mon DD, HH:MM - HH:MM"
+_FMT_DETAIL_RE = re.compile(
+    r"^(.+?)\n\s*ID:\s*(evt_[0-9a-f]+)\s*\n\s*Time:\s*([A-Za-z]{3})[^,]*,\s*(\d{2}:\d{2})\s*-\s*(\d{2}:\d{2})",
+    re.M,
+)
+
+
+def _harvest_signatures(text: str):
+    """Return [(orig_id, summary, day_short, start_hm, end_hm), ...] from a tool result."""
+    if not text:
+        return []
+    out = []
+    for m in _FMT_SUMMARY_RE.finditer(text):
+        eid, summ, day, sh, eh = m.groups()
+        out.append((eid, summ.strip(), day, sh, eh))
+    for m in _FMT_DETAIL_RE.finditer(text):
+        summ, eid, day, sh, eh = m.groups()
+        out.append((eid, summ.strip(), day, sh, eh))
+    return out
+
+
+def _find_env_event_id(env, summary: str, day_short: str, sh: str, eh: str):
+    """Return current id of env event matching the given signature, or None."""
+    for e in env.calendar.events:
+        if (e.summary == summary
+                and e.start.strftime("%a") == day_short
+                and e.start.strftime("%H:%M") == sh
+                and e.end.strftime("%H:%M") == eh):
+            return e.id
+    return None
+
 
 def reconstruct_state(scenario: dict, messages: list[dict]) -> tuple[str, str, str] | None:
     """Returns (final_output, before_text, after_text) or None if reconstruction fails."""
@@ -142,11 +192,27 @@ def reconstruct_state(scenario: dict, messages: list[dict]) -> tuple[str, str, s
     before_snap = snapshot_events(env)
     before_days = filter_by_days(before_snap, scenario["addressed_days"])
 
+    # Maps original (training-time) event_id → current env event_id.
+    # Built incrementally from tool result messages as we walk the trajectory.
+    id_remap: dict[str, str] = {}
+
     final_output = None
-    # Replay tool calls in message order. Skip system/user/tool messages —
-    # only assistant messages drive state changes (via their tool_calls list).
     for msg in messages:
         role = msg.get("role")
+
+        # Tool results carry the original event ids alongside their human-readable
+        # signature. Use them to populate id_remap so subsequent assistant calls
+        # can be remapped to current-env ids.
+        if role == "tool":
+            content = msg.get("content") or ""
+            for orig_id, summ, day, sh, eh in _harvest_signatures(content):
+                if orig_id in id_remap:
+                    continue
+                cur_id = _find_env_event_id(env, summ, day, sh, eh)
+                if cur_id:
+                    id_remap[orig_id] = cur_id
+            continue
+
         if role != "assistant":
             continue
         tcs_field = msg.get("tool_calls")
@@ -175,6 +241,10 @@ def reconstruct_state(scenario: dict, messages: list[dict]) -> tuple[str, str, s
                     args = json.loads(args_str) if args_str else {}
                 except Exception:
                     args = {}
+                # Remap stale event_ids to current-env ids when we have a mapping.
+                orig_eid = args.get("event_id")
+                if orig_eid and orig_eid in id_remap:
+                    args = {**args, "event_id": id_remap[orig_eid]}
                 try:
                     dispatch_tool_call(env, name, args)
                 except Exception:
@@ -255,14 +325,27 @@ def stratified_sample(trajs: list[dict], n: int, seed: int = 42) -> list[dict]:
 # ── Judge inference (transformers in-process) ──────────────
 
 class LocalJudge:
-    def __init__(self, checkpoint: str | None, base_model: str = BASE_MODEL):
+    def __init__(self, checkpoint: str | None, base_model: str = BASE_MODEL,
+                 load_in_4bit: bool = False):
         self.tokenizer = AutoTokenizer.from_pretrained(base_model)
         if not getattr(self.tokenizer, "chat_template", None):
             sys.exit("Tokenizer has no chat_template — cannot proceed")
-        print(f"Loading base model {base_model} (bf16)…")
-        self.model = AutoModelForCausalLM.from_pretrained(
-            base_model, torch_dtype=torch.bfloat16, device_map="auto",
-        )
+        if load_in_4bit:
+            from transformers import BitsAndBytesConfig
+            print(f"Loading base model {base_model} (4-bit nf4 / bf16 compute)…")
+            bnb = BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_compute_dtype=torch.bfloat16,
+                bnb_4bit_quant_type="nf4",
+            )
+            self.model = AutoModelForCausalLM.from_pretrained(
+                base_model, quantization_config=bnb, device_map="auto",
+            )
+        else:
+            print(f"Loading base model {base_model} (bf16)…")
+            self.model = AutoModelForCausalLM.from_pretrained(
+                base_model, torch_dtype=torch.bfloat16, device_map="auto",
+            )
         if checkpoint:
             print(f"Loading LoRA adapter from {checkpoint}…")
             from peft import PeftModel
@@ -296,12 +379,14 @@ class LocalJudge:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--checkpoint", required=True,
-                    help="LoRA checkpoint dir (e.g. runs/judge_v1_.../checkpoints/checkpoint-final)")
+                    help="LoRA checkpoint dir, or '' to evaluate the base model with no adapter")
     ap.add_argument("--base-model", default=BASE_MODEL)
     ap.add_argument("--parquet-glob", default=DEFAULT_PARQUET_GLOB)
     ap.add_argument("--num-samples", type=int, default=2000)
     ap.add_argument("--output", default=DEFAULT_OUTPUT)
     ap.add_argument("--seed", type=int, default=42)
+    ap.add_argument("--load-in-4bit", action="store_true",
+                    help="Load base model in 4-bit nf4 (needed for 14B on a 24 GiB MIG slice)")
     args = ap.parse_args()
 
     print("=" * 60)
@@ -329,7 +414,8 @@ def main():
     print(f"Scenario index entries: {len(scen_idx)}")
 
     # 4. Load judge.
-    judge = LocalJudge(args.checkpoint, base_model=args.base_model)
+    judge = LocalJudge(args.checkpoint, base_model=args.base_model,
+                       load_in_4bit=args.load_in_4bit)
 
     # 5. Score.
     per_traj = []
@@ -363,17 +449,35 @@ def main():
             after_text=after_text,
         )
         pred, raw = judge.judge(EVAL_SYSTEM_PROMPT, user_prompt)
+        agree = pred == t["gt_verdict"]
         per_traj.append({
             "scenario_id": sid,
             "category": t["category"],
             "gt_verdict": t["gt_verdict"],
             "pred_verdict": pred,
-            "agree": pred == t["gt_verdict"],
+            "agree": agree,
+            "query": query,
+            "final_output": final_output,
+            "expected": scen["expected"],
+            "before_text": before_text,
+            "after_text": after_text,
+            "user_prompt": user_prompt,
             "raw": raw,
         })
+        # Per-trajectory debug print so we can inspect prompt/reasoning/verdict
+        # live and after the fact (sbatch log captures stdout).
+        marker = "✓" if agree else "✗"
+        print(f"\n{'=' * 80}")
+        print(f"[{i+1}/{len(sampled)}] {sid}  category={t['category']}")
+        print(f"  gt={t['gt_verdict']}  pred={pred}  {marker}")
+        print(f"--- USER PROMPT ---")
+        print(user_prompt)
+        print(f"--- MODEL RAW ---")
+        print(raw)
+        print(f"{'=' * 80}", flush=True)
         if (i + 1) % 50 == 0:
             agree_so_far = sum(1 for r in per_traj if r["agree"]) / len(per_traj) * 100
-            print(f"  [{i+1}/{len(sampled)}] running agreement: {agree_so_far:.1f}%")
+            print(f"  [{i+1}/{len(sampled)}] running agreement: {agree_so_far:.1f}%", flush=True)
 
     # 6. Aggregate.
     n = len(per_traj)

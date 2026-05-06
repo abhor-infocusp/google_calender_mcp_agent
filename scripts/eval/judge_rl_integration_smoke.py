@@ -1,6 +1,6 @@
 """End-to-end test of the RL → judge integration.
 
-Loads rl_train_adaptive.evaluate_trajectory via importlib (avoids running
+Loads rl_ar3po.evaluate_trajectory via importlib (avoids running
 training) and exercises both paths:
 
   A. Happy path: live judge → returns "Correct" or "Incorrect".
@@ -18,13 +18,13 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-TRAINER = REPO / "scripts/training/rl/rl_train_adaptive.py"
+TRAINER = REPO / "scripts/training/rl/rl_ar3po.py"
 
 
 def load_trainer():
-    spec = importlib.util.spec_from_file_location("rl_train_adaptive", TRAINER)
+    spec = importlib.util.spec_from_file_location("rl_ar3po", TRAINER)
     mod = importlib.util.module_from_spec(spec)
-    sys.modules["rl_train_adaptive"] = mod
+    sys.modules["rl_ar3po"] = mod
     spec.loader.exec_module(mod)
     return mod
 
@@ -71,7 +71,7 @@ async def test_hard_fail(mod):
 
 
 async def main():
-    print("loading rl_train_adaptive (this triggers art/torch/art_patches imports) …")
+    print("loading rl_ar3po (this triggers art/torch/art_patches imports) …")
     mod = load_trainer()
     await test_happy(mod)
     await test_hard_fail(mod)

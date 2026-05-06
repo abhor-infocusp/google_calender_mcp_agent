@@ -2,8 +2,14 @@
 
 Wraps a local vLLM OpenAI-compatible server (Qwen3-14B fp8) with the
 canonical router prompt. RL training POSTs `{cat, query, final, expected,
-before, after}`; we build the prompt server-side, generate full reasoning
-to keep accuracy at 95.44%, and return only the verdict.
+before, after}`; we build the prompt server-side and return only the
+verdict.
+
+Live-measured accuracy on the 285-traj manual oracle: 93.33% (held-out
+CV ~92.4%). Decoding is greedy with /no_think + max_tokens=512 to avoid
+the truncated-thinking bias documented in 2026-05-02 analysis (6.2% of
+calls were hitting a 1024-token cap mid-think and returning biased
+keyword-substring matches).
 
 Every call is appended to JSONL so the corpus doubles as Phase 1.5
 distillation training data.
@@ -13,6 +19,8 @@ Environment:
   VLLM_MODEL      served-model-name registered with vLLM (default 'judge')
   JUDGE_LOG_DIR   directory for calls.jsonl (default runs/judge_service_<date>/)
   JUDGE_PORT      bind port (default 8765)
+  JUDGE_MAX_TOKENS cap on completion tokens (default 512)
+  JUDGE_NO_THINK  if "1" (default), append /no_think to system prompt
 
 Runs as: PYTHONPATH=src python -m calendar_agent.judge.server
 """
@@ -33,12 +41,26 @@ from pydantic import BaseModel
 from calendar_agent.judge.prompts import (
     PROMPT_VERSION,
     build_router,
+    build_router_qwen_v2,
+    build_router_gemini_v2,
     extract_verdict,
 )
+
+_ROUTERS = {
+    "router":     build_router,
+    "qwen_v2":    build_router_qwen_v2,
+    "gemini_v2":  build_router_gemini_v2,
+}
+JUDGE_ROUTER = os.environ.get("JUDGE_ROUTER", "router")
+if JUDGE_ROUTER not in _ROUTERS:
+    raise ValueError(f"unknown JUDGE_ROUTER={JUDGE_ROUTER!r}; choose one of {list(_ROUTERS)}")
+_BUILD_ROUTER = _ROUTERS[JUDGE_ROUTER]
 
 VLLM_BASE = os.environ.get("VLLM_BASE", "http://127.0.0.1:8000/v1")
 VLLM_MODEL = os.environ.get("VLLM_MODEL", "judge")
 JUDGE_PORT = int(os.environ.get("JUDGE_PORT", "8765"))
+JUDGE_MAX_TOKENS = int(os.environ.get("JUDGE_MAX_TOKENS", "512"))
+JUDGE_NO_THINK = os.environ.get("JUDGE_NO_THINK", "1") == "1"
 
 _default_log_dir = (
     Path(__file__).resolve().parents[3]
@@ -127,7 +149,9 @@ async def verdict(req: VerdictRequest) -> VerdictResponse:
         "before": req.before,
         "after": req.after,
     }
-    sys_prompt, user_prompt, opts = build_router(rec)
+    sys_prompt, user_prompt, opts = _BUILD_ROUTER(rec)
+    if JUDGE_NO_THINK:
+        sys_prompt = sys_prompt + "\n\n/no_think"
 
     payload: dict[str, Any] = {
         "model": VLLM_MODEL,
@@ -135,7 +159,7 @@ async def verdict(req: VerdictRequest) -> VerdictResponse:
             {"role": "system", "content": sys_prompt},
             {"role": "user", "content": user_prompt},
         ],
-        "max_tokens": opts.get("max_tokens", 1024),
+        "max_tokens": opts.get("max_tokens", JUDGE_MAX_TOKENS),
         "temperature": req.temperature if req.temperature is not None else 0.0,
     }
 

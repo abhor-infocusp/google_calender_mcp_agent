@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Bare-python launcher for the local judge SFT (Slurm broken — see CLAUDE.md).
+# Bare-python launcher for the local judge SFT.
+# Prefer sbatch for new judge runs — Slurm is fixed as of 2026-04-30.
+# Retained for ad-hoc launches on a specific MIG slice.
 # Pick an idle MIG slice that no RL/eval job is using; confirm with:
 #   nvidia-smi -L | grep MIG
 #   ps -ef | grep python
