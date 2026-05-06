@@ -1,17 +1,16 @@
 # Training Pipeline Progress
 
-> **Last updated:** 2026-05-01
+> **Last updated:** 2026-05-02
 > **Best agent model:** SFT v6 ckpt-4659 (ep 3) — **80.1%** on `test_data/` (held-out, canonical).
 > Older RL-data benchmark winner is ckpt-6212 (ep 4) at 82.5%; different ckpts win on different sets.
-> **Best local judge:** Qwen3-14B fp8 + router prompt — **95.44%** on the manual oracle.
-> Gemini-2.0-flash on the same oracle: 86.67%. See [`docs/judge/`](docs/judge/).
-> **Canonical judge truth:** `runs/judge_baseline_20260430/eval/manual_verdicts.jsonl`
-> (285 hand-labeled ART trajectories, 185 Correct / 100 Incorrect).
-> **Judge-as-a-service:** FastAPI sidecar wrapping vLLM at `:8765`
-> (`src/calendar_agent/judge/`, `scripts/serving/judge_service.sbatch`).
+> **Deployed local judge (2026-05-06):** `rl_grpo_qwen3_14b_sft4659 @ step 4952` (LoRA on SFT v6 ckpt-4659 merged base) with `JUDGE_ROUTER=router JUDGE_NO_THINK=1`. Tier-1 ~92%, **Tier-2 ~60%**, median latency 670ms. The SFT-on-calendar-trajectories side-effect of producing terse correct judge outputs was the unlock; RL on top of SFT did NOT compound on the judge side (sweep across all 11 grpo-sft ckpts is flat). Prompt is `router_v1` (the original 2026-04-30 per-cat dispatch); `router_qwen_v2` was tuned for Qwen3-14B base and over-fits — `router_v1` adds **+5.5pp tier-2 / +8.9pp Complex** at 4σ across 3 runs on rl-sft-4952, with no tier-1 cost. See `docs/judge/student_sft.md`.
+> **Re-tuned per-judge maps (v2, retired):** `ROUTER_MAP_QWEN_V2` / `ROUTER_MAP_GEMINI_V2` in `src/calendar_agent/judge/prompts.py` — kept around for offline relabeling but no longer the served path.
+> Gemini-2.0-flash + EVAL_SYSTEM_PROMPT (incumbent): 86.67%. See [`docs/judge/`](docs/judge/).
+> **Canonical judge truth:** `runs/judge_baseline_20260430/eval/manual_verdicts.jsonl` (285 hand-labeled ART trajectories, 185 Correct / 100 Incorrect). 30% stratified holdout locked at `data/judge/v2_20260502/holdout_sids.json`.
+> **Curated v2 dataset:** `data/judge/v2_20260502/{train.jsonl (744), eval.jsonl (110), disagreements.jsonl (85)}`. Supersedes v1 `data/judge/{train,val}.jsonl` (built on 86.7% Gemini labels).
+> **Judge-as-a-service:** FastAPI sidecar wrapping vLLM at `:8765` (`src/calendar_agent/judge/`, `scripts/serving/judge_service.sbatch`).
 > RL trainers swapped from Gemini to local judge (no Gemini fallback).
-> **Active work:** Phase 1.5 judge distillation. RL paused — saturated under
-> binary rewards on this dataset (see 2026-05-01 entry).
+> **Active work:** Phase 1.5 judge distillation **CANCELLED 2026-05-05**. RL ckpt `rl_grpo_qwen3_14b_sft4659 @ step 4952` (LoRA on top of SFT v6 ckpt-4659) shipped as the judge: tier-1 ~93%, median 670ms, 26-char output for Correct verdicts, 3.6% noise vs Gemini on the candidate pool (vs 10.2% for the deployed Qwen-v2 router). Sweep across all 11 grpo-sft4659 ckpts shows flat judge accuracy — judge ability comes from the SFT stage; RL on top does not compound on the judge side. Updated `scripts/serving/judge_service.sbatch` to support LoRA serving. See `docs/judge/student_sft.md` "Direction shift".
 
 For per-category breakdowns, failure modes, and improvement targets see
 [`docs/categories/`](docs/categories/). For 1.5B-era history (SFT v3/v5, RL1-3 on
@@ -34,11 +33,26 @@ runs/rl_grpo_qwen3_14b_base_20260426/      RL GRPO from base — paused at step 
 runs/rl_grpo_qwen3_14b_sft4659_20260426/   RL GRPO from SFT v6 ckpt-4659 — paused at step 4952 / 12440 (39%)
 runs/rl_adaptive_qwen3_14b_base_20260426/  RL adaptive (AR3PO) — paused at step 3496 / 12440 (28%)
 runs/judge_v1_qwen3_7b_20260425/       Local judge SFT — see local_judge.md
+runs/sft_qwen3_8b_20260502/            SFT Qwen3-8B — RUNNING (slurm 89)
+runs/sft_qwen3_4b_20260502/            SFT Qwen3-4B — RUNNING (slurm 90)
 ```
 
 ---
 
 ## Timeline
+
+### 2026-05-02 — Smaller-model SFT sweep launched (8B + 4B)
+Mirroring SFT v6 hyperparams (5 epochs, LoRA r=64 on q/k/v/o + gate/up/down,
+LR 2e-4 cosine, bs=1×grad_accum=4, bf16, 4-bit, max_seq_len=4096,
+paged_adamw_8bit, same `sft_data/trajectories_augmented/`) on smaller bases
+to see whether 14B is over- or under-sized for this task before more RL spend.
+
+- `Qwen/Qwen3-8B` → `runs/sft_qwen3_8b_20260502/` (slurm 89)
+- `Qwen/Qwen3-4B` → `runs/sft_qwen3_4b_20260502/` (slurm 90)
+- 1.7B deferred — only 2 free MIG slices (judge service holds the third).
+- Parameterized launcher: `scripts/training/sft/sft_train.sbatch`
+  driven by `SFT_MODEL_NAME`/`SFT_RUN_DIR`/`SLICE`. `sft_train.py`
+  now reads `SFT_MODEL_NAME` from env (default unchanged: Qwen3-14B).
 
 ### 2026-05-01 — Judge-as-a-service deployed
 Stood up the local judge as an HTTP service so RL can stop calling Gemini and

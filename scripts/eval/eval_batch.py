@@ -217,10 +217,20 @@ def eval_tasks(client, model_name, eval_model, tasks, base_dir, label):
                     (s["content"] for s in reversed(trajectory) if s["role"] == "assistant"), ""
                 )
 
-                verdict, reasoning = evaluate_trajectory(eval_model, query_text, final_output, expected, before_days, after_days)
-
                 before_text = format_day_state_text(before_days)
                 after_text = format_day_state_text(after_days)
+
+                if eval_model is None:  # local judge mode
+                    import httpx
+                    r = httpx.post(f"{os.environ.get('JUDGE_URL','http://127.0.0.1:8765')}/verdict",
+                                   json={"cat": category, "query": query_text, "final": final_output,
+                                         "expected": expected, "before": before_text, "after": after_text},
+                                   timeout=180.0)
+                    r.raise_for_status()
+                    body = r.json()
+                    verdict, reasoning = body["verdict"], body.get("prompt_version", "")
+                else:
+                    verdict, reasoning = evaluate_trajectory(eval_model, query_text, final_output, expected, before_days, after_days)
 
                 if verdict == "Correct":
                     correct += 1
@@ -283,6 +293,8 @@ def main():
     parser.add_argument("--num-calendars", type=int, default=20, help="Number of RL calendars to eval")
     parser.add_argument("--save", type=str, default=None)
     parser.add_argument("--max-queries", type=int, default=0, help="Max queries per mode (0=all)")
+    parser.add_argument("--judge", choices=["gemini", "local"], default="local",
+                        help="Which judge to use. 'local' = FastAPI service at $JUDGE_URL.")
     args = parser.parse_args()
 
     from openai import Timeout
@@ -292,20 +304,28 @@ def main():
         max_retries=0,
     )
 
-    # Init Gemini eval judge
-    import vertexai
-    from vertexai.generative_models import GenerativeModel
-    from google.oauth2.credentials import Credentials as OAuth2Credentials
+    # Init judge: local FastAPI service (default) or Gemini
+    if args.judge == "local":
+        import httpx
+        judge_url = os.environ.get("JUDGE_URL", "http://127.0.0.1:8765")
+        # Hard-fail if the judge isn't reachable — no silent fallback.
+        httpx.get(f"{judge_url}/health", timeout=5.0).raise_for_status()
+        print(f"Using local judge at {judge_url}")
+        eval_model = None
+    else:
+        import vertexai
+        from vertexai.generative_models import GenerativeModel
+        from google.oauth2.credentials import Credentials as OAuth2Credentials
 
-    with open(str(CREDENTIALS_PATH)) as f:
-        cd = json.load(f)
-    creds = OAuth2Credentials(
-        token=None, refresh_token=cd["refresh_token"],
-        client_id=cd["client_id"], client_secret=cd["client_secret"],
-        token_uri="https://oauth2.googleapis.com/token",
-    )
-    vertexai.init(project="internal-ml-exp", location="us-central1", credentials=creds)
-    eval_model = GenerativeModel("gemini-2.0-flash-001", system_instruction=[EVAL_SYSTEM_PROMPT])
+        with open(str(CREDENTIALS_PATH)) as f:
+            cd = json.load(f)
+        creds = OAuth2Credentials(
+            token=None, refresh_token=cd["refresh_token"],
+            client_id=cd["client_id"], client_secret=cd["client_secret"],
+            token_uri="https://oauth2.googleapis.com/token",
+        )
+        vertexai.init(project="internal-ml-exp", location="us-central1", credentials=creds)
+        eval_model = GenerativeModel("gemini-2.0-flash-001", system_instruction=[EVAL_SYSTEM_PROMPT])
 
     all_results = {}
 

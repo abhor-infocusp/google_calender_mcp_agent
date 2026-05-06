@@ -16,7 +16,7 @@ analysis lives in `docs/categories/`. Cross-session warnings live in auto-memory
 | Held-out eval results | `runs/analysis/test_eval_summary.md` |
 | Run output layout | `runs/README.md` |
 | ART asyncio deadlock context | `docs/art_asyncio_deadlock_analysis.md` |
-| Local judge plan | `local_judge.md` |
+| Local judge — current state, plan, integration | [`docs/judge/`](docs/judge/) |
 | Repo overview for newcomers | `README.md` |
 
 ## Environment
