@@ -44,7 +44,7 @@ CHECKPOINT_DIR = os.path.join(OUTPUT_DIR, "checkpoints")
 LOSS_CSV = os.path.join(OUTPUT_DIR, "diagnostics", "epoch_losses.csv")
 
 # ── Model Config ───────────────────────────────────────────
-MODEL_NAME = "Qwen/Qwen3-14B"
+MODEL_NAME = os.environ.get("SFT_MODEL_NAME", "Qwen/Qwen3-14B")
 MAX_SEQ_LENGTH = 4096
 LORA_RANK = 64
 NUM_EPOCHS = 5
