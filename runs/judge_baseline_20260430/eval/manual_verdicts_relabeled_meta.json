@@ -1,0 +1,30 @@
+{
+  "based_on": "manual_verdicts.jsonl",
+  "version": "v2 \u2014 tool-audited 2026-05-07",
+  "n_flipped": 3,
+  "flipped": {
+    "cal_8_q_8": {
+      "idx": 35,
+      "old": "Correct",
+      "new": "Incorrect",
+      "reason": "Tool-audit confirmed: meeting exists at queried Wed 19:30-21:00 with both neighbor attendees. Agent's 'no meeting' was wrong."
+    },
+    "cal_19_q_8": {
+      "idx": 188,
+      "old": "Correct",
+      "new": "Incorrect",
+      "reason": "Tool-audit confirmed: 'Study Group' is not on Tuesday. Agent hallucinated event for dinner-overlap question."
+    },
+    "cal_22_q_2": {
+      "idx": 265,
+      "old": "Incorrect",
+      "new": "Correct",
+      "reason": "Tool-audit confirmed: agent did create the event matching the user's actual ask. The 'Susan' attendee is in expected but not in the user's words."
+    }
+  },
+  "reverted_after_tool_audit": {
+    "cal_32_q_7": "Tool-audit: 'Dinner with Family' has NO attendees in source data; agent was correct to say 'not listed'. Reverting flip.",
+    "cal_19_q_1": "Tool-audit: agent appropriately flagged the 8AM-12PM Lifeguard Duty conflict with user's 9AM dentist request; this is correct conflict handling, not failed booking. Reverting flip."
+  },
+  "method": "Initial flips selected via 4-judge unanimous disagreement against gt; audited via tool-using Gemini (judge_tool_sim.py) which queries the calendar directly rather than reading state dumps. Reverted flips where tool-audit agreed with original gt (4 context-fed judges had collectively hallucinated)."
+}

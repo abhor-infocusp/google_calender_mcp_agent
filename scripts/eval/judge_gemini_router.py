@@ -29,6 +29,7 @@ from vertexai.generative_models import GenerationConfig, GenerativeModel
 GEN_CFG = GenerationConfig(temperature=0.0, top_p=1.0, max_output_tokens=2048)
 
 from calendar_agent.judge.prompts import build_router, extract_verdict
+from calendar_agent.judge.structured_prompts import build_router_structured
 from calendar_agent.paths import CREDENTIALS_PATH
 
 
@@ -121,17 +122,41 @@ def build_router_gemini_targeted(rec: dict):
     return sys_p, user_p, opts
 
 
+CHECKLIST_ADDENDUM = """\
+
+OUTPUT FORMAT (REQUIRED): Structure your reasoning as a 5-point checklist
+before the verdict. Use this exact form, with each line starting with the
+letter in parentheses:
+
+(A) <Is the user query clear, or does it need clarification?>
+(B) <Did the calendar state change as the user wanted? Reference the BEFORE/AFTER diff.>
+(C) <Is this a pure information query (no state change expected)?>
+(D) <Is there hallucination — does the response reference an event by title+day+time that does not exist in BEFORE or AFTER?>
+(E) <Are there hard failures — broken tool calls, refusal, off-topic response, or missing information that the agent should have produced?>
+
+Then on the very last line, output exactly one word: Correct or Incorrect.
+"""
+
+
+def build_router_checklist(rec: dict):
+    sys_p, user_p, opts = build_router(rec)
+    return sys_p + CHECKLIST_ADDENDUM, user_p, opts
+
+
 VARIANTS = {
     "router":            build_router,
     "router_lenient":    build_router_gemini_v1,
     "router_lenient_v2": build_router_gemini_v2,
     "router_targeted":   build_router_gemini_targeted,
+    "router_checklist":  build_router_checklist,
+    "router_structured": build_router_structured,
 }
 
+import os as _os
 REPO = Path(__file__).resolve().parents[2]
 EVAL_DIR = REPO / "runs/judge_baseline_20260430/eval"
 INPUT_JSONL = EVAL_DIR / "manual_review_input.jsonl"
-TRUTH_JSONL = EVAL_DIR / "manual_verdicts.jsonl"
+TRUTH_JSONL = Path(_os.environ.get("TRUTH_JSONL", str(EVAL_DIR / "manual_verdicts.jsonl")))
 
 MODEL = "gemini-2.0-flash-001"
 CONCURRENCY = 16
@@ -215,13 +240,21 @@ def main() -> int:
             if i % 25 == 0 or i == len(recs):
                 print(f"  {i}/{len(recs)} done in {time.time()-t0:.1f}s")
 
-    # Overall + per-category
-    by_cat = defaultdict(lambda: {"n": 0, "right": 0})
+    # Overall + per-category (also track checklist-format compliance)
+    import re as _re
+    _checklist = _re.compile(r"\([A-E]\)")
+    by_cat = defaultdict(lambda: {"n": 0, "right": 0, "fmt": 0, "fmt_right": 0})
     for r in results:
         c = r["cat"]
+        is_fmt = bool(_checklist.search(r.get("raw", "")))
+        r["used_checklist"] = is_fmt
         by_cat[c]["n"] += 1
         if r["pred"] == r["gt"]:
             by_cat[c]["right"] += 1
+        if is_fmt:
+            by_cat[c]["fmt"] += 1
+            if r["pred"] == r["gt"]:
+                by_cat[c]["fmt_right"] += 1
     total = sum(d["n"] for d in by_cat.values())
     total_right = sum(d["right"] for d in by_cat.values())
     errors = sum(1 for r in results if not r["ok"])
@@ -229,13 +262,23 @@ def main() -> int:
     p50 = lats[len(lats) // 2] if lats else 0
     p90 = lats[int(0.9 * len(lats))] if lats else 0
 
-    print(f"\n=== gemini-2.0-flash + router prompt vs manual oracle ===")
+    total_fmt = sum(d["fmt"] for d in by_cat.values())
+    total_fmt_right = sum(d["fmt_right"] for d in by_cat.values())
+    total_nofmt = total - total_fmt
+    total_nofmt_right = total_right - total_fmt_right
+    print(f"\n=== gemini-2.0-flash + {args.variant} prompt vs manual oracle ===")
     print(f"overall: {total_right}/{total} = {100*total_right/total:.2f}%   errors={errors}")
+    print(f"checklist format compliance: {total_fmt}/{total} = {100*total_fmt/max(total,1):.1f}%")
+    if total_fmt:
+        print(f"  acc when checklist used:      {total_fmt_right}/{total_fmt} = {100*total_fmt_right/total_fmt:.2f}%")
+    if total_nofmt:
+        print(f"  acc when checklist NOT used:  {total_nofmt_right}/{total_nofmt} = {100*total_nofmt_right/total_nofmt:.2f}%")
     print(f"latency p50={p50:.2f}s  p90={p90:.2f}s\n")
-    print(f"{'category':<55} {'acc':>7} {'right/total':>14}")
+    print(f"{'category':<55} {'acc':>7} {'right/total':>14} {'fmt%':>6}")
     for c, d in sorted(by_cat.items(), key=lambda kv: -kv[1]["right"] / max(kv[1]["n"], 1)):
         acc = 100 * d["right"] / max(d["n"], 1)
-        print(f"{c:<55} {acc:>6.2f}% {d['right']:>5}/{d['n']:<5}")
+        fmt_pct = 100 * d["fmt"] / max(d["n"], 1)
+        print(f"{c:<55} {acc:>6.2f}% {d['right']:>5}/{d['n']:<5} {fmt_pct:>5.1f}%")
 
     with open(summary_path, "w", newline="") as f:
         w = csv.writer(f)

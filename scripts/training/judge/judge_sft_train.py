@@ -29,17 +29,17 @@ random.seed(42)
 # ── Paths ──────────────────────────────────────────────────
 from calendar_agent.paths import JUDGE_TRAIN_JSONL, JUDGE_VAL_JSONL, PROJECT_ROOT
 
-TRAIN_JSONL = str(JUDGE_TRAIN_JSONL)
-VAL_JSONL = str(JUDGE_VAL_JSONL)
+TRAIN_JSONL = os.environ.get("JUDGE_TRAIN_JSONL", str(JUDGE_TRAIN_JSONL))
+VAL_JSONL = os.environ.get("JUDGE_VAL_JSONL", str(JUDGE_VAL_JSONL))
 OUTPUT_DIR = os.environ.get("JUDGE_RUN_DIR", str(PROJECT_ROOT / "runs/judge_v1_qwen3_7b_20260425"))
 CHECKPOINT_DIR = os.path.join(OUTPUT_DIR, "checkpoints")
 LOSS_CSV = os.path.join(OUTPUT_DIR, "diagnostics", "epoch_losses.csv")
 
 # ── Model Config ───────────────────────────────────────────
-MODEL_NAME = "Qwen/Qwen3-8B"
-MAX_SEQ_LENGTH = 4096
-LORA_RANK = 64
-NUM_EPOCHS = 3
+MODEL_NAME = os.environ.get("JUDGE_MODEL_NAME", "Qwen/Qwen3-8B")
+MAX_SEQ_LENGTH = int(os.environ.get("JUDGE_MAX_SEQ_LENGTH", "4096"))
+LORA_RANK = int(os.environ.get("JUDGE_LORA_RANK", "64"))
+NUM_EPOCHS = int(os.environ.get("JUDGE_NUM_EPOCHS", "3"))
 
 
 # ── JSONL → tokenized dataset ─────────────────────────────
@@ -224,7 +224,8 @@ def main():
         ],
         lora_alpha=LORA_RANK,
         lora_dropout=0,
-        use_gradient_checkpointing="unsloth",
+        use_gradient_checkpointing=(False if os.environ.get("JUDGE_GRAD_CKPT", "unsloth").lower() in ("false", "0", "off")
+                                    else os.environ.get("JUDGE_GRAD_CKPT", "unsloth")),
     )
 
     train_dataset = build_split_dataset(tokenizer, TRAIN_JSONL, "train")
@@ -239,8 +240,8 @@ def main():
 
     training_args = SFTConfig(
         output_dir=CHECKPOINT_DIR,
-        per_device_train_batch_size=1,
-        gradient_accumulation_steps=4,
+        per_device_train_batch_size=int(os.environ.get("JUDGE_PER_DEV_BS", "1")),
+        gradient_accumulation_steps=int(os.environ.get("JUDGE_GRAD_ACCUM", "4")),
         num_train_epochs=NUM_EPOCHS,
         learning_rate=2e-4,
         lr_scheduler_type="cosine",
