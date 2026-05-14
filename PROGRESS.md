@@ -1,9 +1,10 @@
 # Training Pipeline Progress
 
-> **Last updated:** 2026-05-02
-> **Best agent model:** SFT v6 ckpt-4659 (ep 3) — **80.1%** on `test_data/` (held-out, canonical).
-> Older RL-data benchmark winner is ckpt-6212 (ep 4) at 82.5%; different ckpts win on different sets.
-> **Deployed local judge (2026-05-06):** `rl_grpo_qwen3_14b_sft4659 @ step 4952` (LoRA on SFT v6 ckpt-4659 merged base) with `JUDGE_ROUTER=router JUDGE_NO_THINK=1`. Tier-1 ~92%, **Tier-2 ~60%**, median latency 670ms. The SFT-on-calendar-trajectories side-effect of producing terse correct judge outputs was the unlock; RL on top of SFT did NOT compound on the judge side (sweep across all 11 grpo-sft ckpts is flat). Prompt is `router_v1` (the original 2026-04-30 per-cat dispatch); `router_qwen_v2` was tuned for Qwen3-14B base and over-fits — `router_v1` adds **+5.5pp tier-2 / +8.9pp Complex** at 4σ across 3 runs on rl-sft-4952, with no tier-1 cost. See `docs/judge/student_sft.md`.
+> **Last updated:** 2026-05-14
+> **Best agent model:** ORPO ckpt-600 — **84.25%** on `test_data/` (held-out, canonical), +4.1 pp over SFT v6 ckpt-4659 (80.1%). ckpt-427 ties at 84.2%. See `runs/rl_orpo_qwen3_14b_20260508_0625/`.
+> Older RL-data benchmark winner is SFT v6 ckpt-6212 (ep 4) at 82.5%; different ckpts win on different sets.
+> **Production judge (2026-05-08):** **Gemini-2.0-flash + `router_structured`** at **92.98%** on the tool-audited 285-trajectory oracle. Served via `scripts/serving/judge_service_gemini.sbatch` (no GPU; calls Vertex AI; same `/verdict` + `/health` API on `:8765`). Smoke p50 ~2.2–2.5s. Local v3 / rl-sft-4952 service is parked but preserved.
+> **Previous local-judge deployment (2026-05-06, parked):** `rl_grpo_qwen3_14b_sft4659 @ step 4952` (LoRA on SFT v6 ckpt-4659 merged base) with `JUDGE_ROUTER=router JUDGE_NO_THINK=1`. Tier-1 ~92%, Tier-2 ~60%, p50 670ms. Superseded by Gemini-structured.
 > **Re-tuned per-judge maps (v2, retired):** `ROUTER_MAP_QWEN_V2` / `ROUTER_MAP_GEMINI_V2` in `src/calendar_agent/judge/prompts.py` — kept around for offline relabeling but no longer the served path.
 > Gemini-2.0-flash + EVAL_SYSTEM_PROMPT (incumbent): 86.67%. See [`docs/judge/`](docs/judge/).
 > **Canonical judge truth:** `runs/judge_baseline_20260430/eval/manual_verdicts.jsonl` (285 hand-labeled ART trajectories, 185 Correct / 100 Incorrect). 30% stratified holdout locked at `data/judge/v2_20260502/holdout_sids.json`.
@@ -40,6 +41,142 @@ runs/sft_qwen3_4b_20260502/            SFT Qwen3-4B — RUNNING (slurm 90)
 ---
 
 ## Timeline
+
+### 2026-05-14 — ORPO trainer ran end-to-end; new RL baseline at +4.1 pp held-out
+
+First successful preference-RL run on Qwen3-14B. **ORPO ckpt-600 hits 84.25%
+on `test_data/` (+4.1 pp over SFT v6 ckpt-4659 baseline of 80.1%)**;
+ckpt-427 ties at 84.2%. New best agent ckpt.
+
+**Run.** `runs/rl_orpo_qwen3_14b_20260508_0625/`. Trainer
+`scripts/training/rl/rl_orpo.py` (design in `docs/orpo/design.md`).
+Initial weights: SFT v6 ckpt-4659 *merged into base*
+(`runs/sft_v6_qwen3_14b_20260420/eval_test/merged_tmp_4659`); ORPO LoRA
+fresh r=8. Config: β=0.1, λ=1.0, LR=5e-6, K_HARD=8 / K_EASY=4,
+N_QUERIES_PER_STEP=20, BUFFER_PER_SCENARIO=4, per_device_bs=1,
+grad_accum=16. 622/622 steps (20 epochs) completed. Wall-clock ~3 days
++ ~36 h resume = ~4.5 days total.
+
+**Resume bugs (now patched).** First resume after 72 h slurm timeout
+crashed: optimizer Adam moments saved on CPU but params re-loaded on GPU
+— fixed in `orpo_train_step` (move opt state to param device after
+`reload_to_gpu`). Buffer was not persisted across the first restart and
+re-warmed cold (cost ~150 steps); added `ReuseBuffer.save/load`
+(`src/calendar_agent/orpo/reuse_buffer.py`) and persistence hooks in
+`rl_orpo.py` for future resumes.
+
+**Held-out trajectory (Gemini-structured judge, `test_data/`):**
+
+| ckpt | overall | notes |
+|---|---|---|
+| SFT v6 ckpt-4659 (baseline) | 80.1% | |
+| 50 | 79.9% | ≈ SFT |
+| 100 | 80.6% | |
+| 150 | 80.5% | |
+| 200 | 83.1% | first breakthrough |
+| 250–400 | 82.1–82.8% | |
+| **427** | **84.2%** | tied peak |
+| 450 | 82.2% | post-resume regress |
+| 475–525 | 82.95–83.8% | |
+| 550 | skipped (eval retry produced 0%) | |
+| 575 | 82.8% | |
+| **600** | **84.25%** | tied peak, new best |
+| 620 | 83.1% | |
+| 621 | in flight | |
+
+**Per-category at ckpt-600 vs ckpt-50 (≈ SFT):** Vague 74.5 → 85.7
+(+11.2), Schedule 79.6 → 87.8 (+8.2), Complex 59.2 → 66.3 (+7.1, still
+the bottleneck), Chaos 81.6 → 84.7 (+3.1), RelTime 83.7 → 86.5 (+2.8),
+IR 93.9 → 93.9 (0), Modifier 86.7 → 84.7 (−2.0, small forgetting).
+
+**vs prior GRPO run (`rl_grpo_qwen3_14b_sft4659 @ 4952`).** GRPO ~3.5 d
+active for +5 pp / ~40k rollouts; ORPO ~3 d active for +4.1 pp / ~51k
+rollouts. Per wall-clock roughly tied. ORPO trained on ~30k preference
+pairs vs GRPO's 4,952 advantage updates → **~6× more signal-dense per
+rollout**.
+
+**Algorithm notes worth keeping.**
+- Difficulty sampler `1 − pᴳ − (1−p)ᴳ` worked at margins (mid bucket
+  29× over-sampled vs uniform) but couldn't escape easies as pool
+  composition skewed to 574 easy / 1 mid by step 621.
+- Adaptive-k cut rollout cost: k=8 share 67% → 5%; step time 819s →
+  275s (−66%).
+- Buffer rescue hit 88% peak hit-rate; reset on first resume cost
+  ~150 steps re-warm.
+- Late-training waste: skip_easy 8.7 → 16/20 per step; pair-producing
+  scenarios collapsed 272 → 34.
+- Margin grew 0.14 → 1.19 peak, rew_acc 0.59 → 0.71; no likelihood
+  displacement (logp_chosen rose monotonically toward 0).
+
+**Followups.** Promote ckpt-600; update
+`runs/analysis/test_eval_summary.md` and the per-category table below
+when re-eval lands. Next iteration (separate experiment, see
+`docs/orpo/design.md` "Postmortem / v2 plan"): replace static
+difficulty weighting with DAPO-style dynamic sampling
+(oversample → filter std=0 → accumulate); raise β to 0.3; LoRA rank → 16.
+
+### 2026-05-08 — Judge v3 SFT, structured prompts, oracle re-audit, Gemini-structured shipped
+
+One session, four connected milestones. Net result: **production judge moves
+from local rl-sft-4952 to Gemini-flash + `router_structured` at 92.98%** on
+the tool-audited oracle.
+
+**1. Judge v3 SFT (Qwen3-14B base + LoRA r=64, 1 epoch).** Combined corpus
+from existing reasoning-bearing sources (v1 eval-JSON 7,482 + v2 Gemini
+relabel 13,520), deduped to 10,481 → 9,915 train / 566 val. Working config
+after speed iterations (slurm 152→155): bs=4, seq=1024, grad_ckpt=off,
+~2h21m on one MIG slice. Train loss 0.389, eval loss 0.375. Output:
+`runs/judge_v3_qwen3_14b_20260507/checkpoints/final` (996 MB LoRA).
+Builders: `scripts/data_generation/build_judge_v3.py`,
+`data/judge/v3_20260507/{train.jsonl,val.jsonl,metadata.json}`.
+
+v3 on the (then) 285 manual oracle: **87.02%**. Per-cat: Modifier 95.12,
+Schedule 94.74, IR 90.48, RelTime 89.47, Vague 86.84, Chaos 84.78,
+**Complex 71.43**. Generation analysis: 25.3% of v3 outputs spontaneously
+emitted an (A)–(E) checklist (inherited from corpus); that subset hit 94.4%.
+Forcing checklist via prompt didn't transfer — selection bias confirmed.
+
+**2. Structured prompts (per-cat).** `src/calendar_agent/judge/{features.py,
+structured_prompts.py}` replaces raw before/after dumps with pre-computed
+DIFF (with explicit MOVED detection for cross-day relocations),
+RESPONSE_CITATIONS, AGENT_ACTION, EXPECTED_ANSWER_TYPE, RESPONSE_WELL_FORMED.
+Tailored prompts for Modifier, Chaos, Complex, IR, RelTime; Schedule and
+Vague fall back to plain `router`. Variant `router_structured` lives in
+`scripts/eval/judge_gemini_router.py`. With Gemini-flash on the 285:
+plain router 89.47% → structured 90.88% → after fixes (MOVED diff,
+EXPECTED_ANSWER_TYPE, hard-fail RESPONSE_WELL_FORMED, IR + RelTime added)
+**93.33%** on the relabeled oracle.
+
+**3. Oracle re-audit — 2 of 5 prior flips were wrong.** The 2026-05-01
+relabel (5 flips from "4-judge unanimous disagreement with gt") had errors.
+Tool-using Gemini (`scripts/eval/judge_tool_sim.py`,
+`scripts/eval/judge_tool_eval.py`) re-audited each flip with access to ask
+for source state instead of being fed it. Result: **3 confirmed**
+(cal_8_q_8, cal_19_q_8, cal_22_q_2), **2 reverted** (cal_32_q_7,
+cal_19_q_1). The 2 bad flips were cases where 4 context-fed judges all
+hallucinated the same wrong fact (e.g. assumed "Dinner with Family" had
+attendees when source data had none); the tool-using judge had to look it
+up and so didn't fall in. Canonical file:
+`runs/judge_baseline_20260430/eval/manual_verdicts_relabeled.jsonl`
+(3 flips, audit log in `..._meta.json`).
+
+**4. Final scores on tool-audited relabeled gt:**
+
+| judge | overall | notes |
+|---|---|---|
+| Local v3 | 88.07% | Complex 71.43% — capacity-limited |
+| Gemini router (plain) | 91.93% | |
+| **Gemini structured** | **92.98%** | shipped |
+| Gemini tool-using | 85.96% | 4× cost, +44% latency; only wins Complex (95.24 vs 92.86) |
+
+Tool-using judge underperformed overall — useful as an audit tool, not as
+a production judge.
+
+**5. Production switch.** Built `src/calendar_agent/judge/server_gemini.py`
+(drop-in for `server.py`) + `scripts/serving/judge_service_gemini.sbatch`
+(no GPU, Vertex AI). Same `/verdict` and `/health` on `:8765`. Smoke p50
+2.2–2.5s. RL trainers unchanged (still hard-fail rc=43 on judge errors).
+Local v3 / rl-sft-4952 service preserved for offline relabeling.
 
 ### 2026-05-02 — Smaller-model SFT sweep launched (8B + 4B)
 Mirroring SFT v6 hyperparams (5 epochs, LoRA r=64 on q/k/v/o + gate/up/down,
@@ -269,11 +406,12 @@ Numbers from `runs/analysis/test_eval_summary.md`. Update when a new ckpt wins.
 
 ## Open threads
 
-- **Local judge** — see [`docs/judge/`](docs/judge/) for everything.
-  - Today: 14B fp8 + router prompt at 95.44% (Phase 0.5 done).
-  - Next: Phase 1.5 distillation (router → small model with verdict-only
-    output) for the latency win. The previous 7B-on-Gemini-labels run is
-    superseded.
+- **Judge** — see [`docs/judge/`](docs/judge/) for everything.
+  - Production: Gemini-flash + `router_structured` at 92.98% on tool-audited
+    oracle. Served via `judge_service_gemini.sbatch`.
+  - Local v3 (Qwen3-14B SFT, 87.02% / 88.07%) parked; Complex remains the
+    weakest category (71.43%) and is the natural next target if a local
+    judge is revisited.
   - Phase 3 (RL integration) plan in [`docs/judge/rl_integration.md`](docs/judge/rl_integration.md).
 - **ART asyncio deadlock**: workaround deployed (Patch G/I) but upstream not filed.
   Analysis: [`docs/art_asyncio_deadlock_analysis.md`](docs/art_asyncio_deadlock_analysis.md).
